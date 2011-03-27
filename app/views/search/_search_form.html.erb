@@ -1,0 +1,5 @@
+﻿<%= form_tag("/search", :method => "get", :class => "search_box") do %>
+  <%= label_tag(:phrase, "Search: ") %>
+  <%= text_field_tag(:phrase, phrase) %>
+  <%= submit_tag("Go", :name => nil) %>
+<% end %> 

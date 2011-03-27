@@ -1,0 +1,7 @@
+<h1>Add a verb</h1>
+
+<%= form_for :verb, :url => verbs_path do |f| -%>
+	<p><%= f.label :name %><br/>
+	<%= f.text_field :name %> (note: should be in past tense, eg "lived")</p>
+	<p><%= f.submit "Add" %></p>
+<% end %>

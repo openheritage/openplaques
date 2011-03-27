@@ -1,0 +1,12 @@
+<% @page_title = "Photographers" %>
+<h1><%= @page_title %></h1>
+
+<p><%= pluralize(@photographers.size, "photographer") %></p>
+
+<ul>
+<% for photographer in @photographers.sort_by { |p| 1 - p[1] } %>
+  <% if photographer[0] != nil %>
+  <li><%= link_to(photographer[0], photographer_url(photographer[0].gsub(/\./,'_'))) %> - <%= pluralize(photographer[1], "photo") %></li>
+  <% end %>
+<% end %>
+</ul>

@@ -1,0 +1,11 @@
+﻿<h1>To do lists</h1>
+<ul>
+  <li><%= link_to(pluralize(@photographed_not_coloured_plaques_count, "plaque") +  " with photos but no colour identified", todo_path('colours_from_photos')) %></li>
+  <li><%= link_to(pluralize(@geo_no_location_plaques_count, "geolocated plaque") +  " with no location name assigned", todo_path('locations_from_geolocations')) %></li>
+  <li><%= link_to(pluralize(@location_no_area_plaques_count.to_i, "location") +  " with no area", todo_path('areas_from_locations')) %></li> 
+  <li><%= link_to(pluralize(@plaques_to_add_count, "plaque") +  " to add from external sources", todo_path('plaques_to_add')) %></li>
+<% # <li><%= link_to(pluralize(@detailed_address_no_geo_count, "plaque") +  " with detailed location but no latitude / longitude", todo_path('detailed_address_no_geo')) </li> %>
+  <li><%= link_to(pluralize(@no_connection_count, "plaque") +  " with no connections", todo_path('no_connection')) %></li>
+  <li><%= link_to(pluralize(@partial_inscription_photo_count, "plaque") +  " with photos needing full inscription" , todo_path('partial_inscription_photo')) %></li>
+  <li><%= link_to(pluralize(@partial_inscription_count, "plaque") +  " needing full inscription" , todo_path('partial_inscription')) %></li>
+</ul>

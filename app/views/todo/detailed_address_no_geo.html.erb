@@ -1,0 +1,16 @@
+﻿<h1>To do: Plaques with a detailed address but no geolocation</h1>
+<p><%= link_to("All to-do lists", "/todo") %></p>
+
+
+<% if @plaques.size > 0 %>
+	<p>These plaques have a detailed address, but have not been geolocated:
+	<ul>
+	  <% @plaques.each do |plaque| %>
+		<li><%= link_to(plaque.first_person || "Plaque #" + plaque.id.to_s, "/plaques/" + plaque.id.to_s + "/location/edit")  %> Find <%= plaque.location.name %> on <a href="http://maps.google.co.uk/maps?q=<%= plaque.location.name %>&z=18">google maps</a></li>
+	  <% end %>
+	</ul>
+	</p>
+<% else %>	
+	<p>No plaques with detailed address that have not been geolocated.</p>
+<% end %>	
+<p class="clear"><%= link_to("All to-do lists", "/todo") %></p>

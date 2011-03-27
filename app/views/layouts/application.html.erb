@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+   xmlns:foaf="http://xmlns.com/foaf/0.1/"
+   xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
+   xmlns:owl="http://www.w3.org/2002/07/owl#"
+   xmlns:dbpprop="http://dbpedia.org/property/"
+   xmlns:op="http://openplaques.org/ontology/"
+   xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+   xmlns:sioc="http://rdfs.org/sioc/ns#"
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title><%= @page_title + " - " if @page_title %>Open Plaques</title>
+  <%= stylesheet_link_tag 'default' %>
+  <%#= stylesheet_link_tag 'jquery-ui-1.8.11.custom' %>
+  <%= javascript_include_tag 'application' %>
+  <%= javascript_include_tag 'http://openlayers.org/dev/OpenLayers.js' if @map %>
+  <%= javascript_include_tag 'jquery-1.5.1.min.js' %>
+  <%= javascript_include_tag 'jquery-ui-1.8.11.custom.min.js' %>
+  <%= tag("link", :rel => "shortcut icon", :href => image_path("openplaques-icon.png"))%>
+  <%= csrf_meta_tag %>
+</head>
+<body>
+  <%= content_tag("div", "This is a staging version of Open Plaques with out-of-date data. ".html_safe + link_to("Visit the live site", "http://www.openplaques.org".html_safe) + "", :class => "staging") if ::Rails.env == "staging" %>
+  <%= content_tag("div", "This is a development environment. Don't add good data here!", :class => "development") if ::Rails.env == "development" %>
+	<div id="page">
+
+		<div id="header">
+			<%= user_menu %>
+			<div class="site_name"><%= navigation_link_to(image_tag("openplaques.png"), root_path) %><%= " ".html_safe + content_tag("span",SITE_STATUS, {:class => "status"}) if SITE_STATUS != "" %></div>
+			
+			<%= content_tag("ul", :class => :menu) do %>
+				<%= navigation_list_link_to "People", people_path %>
+				<%= navigation_list_link_to "Places", countries_path %>
+				<%= navigation_list_link_to "Organisations", organisations_path %>
+				<%#= navigation_list_link_to "To do lists", "/todo" if logged_in? %>
+			<% end %>
+			<%= render :partial => "/search/search_form", :locals => { :phrase => "" } %>
+
+		</div>
+		<div id="body"> 
+			<p class="notice"><%= notice %></p>
+	       	<p class="alert"><%= alert %></p>
+			<%= yield  %>
+		</div>
+		<div id="footer">
+			<%= content_tag("ul") do %>
+				<%#= list_link_to("About", about_path) +
+				list_link_to("Contact", contact_path) + 
+				list_link_to("The data", about_data_path)  +
+				list_link_to("Blog", "http://blog.openplaques.org")
+				%>
+			<% end %>
+			<% if defined?(SITE_VERSION)%>
+			<p class="version">
+			  <% if defined?(SITE_VERSION_URL) %>
+			  <%=link_to "Version " + SITE_VERSION, SITE_VERSION_URL %>
+			  <% else %>
+			  Version <%= SITE_VERSION %>
+			  <% end %>
+			</p><% end%>
+			<p class="rattle">Hosted by <%= link_to(image_tag("rattle.gif", {:class => "rattle"}), "http://www.rattlecentral.com")%></p>
+		</div>
+	</div>
+<% if ::Rails.env == "production" %>	
+  <%= google_analytics_code(GOOGLE_ANALYTICS_ID) if defined?(GOOGLE_ANALYTICS_ID) %>
+<% end %>
+</body>
+</html>
+

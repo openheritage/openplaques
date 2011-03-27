@@ -1,0 +1,20 @@
+<h1>Editing role</h1>
+
+<%= form_for(@role) do |f| %>
+
+  <p>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :slug %>
+    <%= f.text_field :slug %>
+  </p>
+
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @role %> |
+<%= link_to 'Back', roles_path %>

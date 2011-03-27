@@ -1,0 +1,12 @@
+<h1>Countries</h1>
+
+<%= content_tag("ul") do %>
+	<% @countries.each do |country| %>
+		<%= content_tag("li") do %>
+			<%= link_to country.name, country %>
+      <%= " - " + pluralize(country.plaques.size, "plaque") %>
+      <% end %>
+	<% end %>
+<% end %>
+
+<%= content_tag("p", link_to("Add country", new_country_path)) if current_user %>

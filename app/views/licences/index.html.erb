@@ -1,0 +1,12 @@
+<% @page_title = "Licences" %>
+<h1><%= @page_title %></h1>
+
+<p><%= pluralize(@licences.size, "licence") %></p>
+
+<ul>
+<% for licence in @licences %>
+  <li><%= link_to(licence.name, licence_url(licence)) %>
+   - <%= pluralize(licence.photos.count, link_to("photo",photos_url)) %>
+   </li>
+<% end %>
+</ul>

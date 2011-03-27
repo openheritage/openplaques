@@ -1,0 +1,12 @@
+<% @page_title = "Pages" %>
+<h1>Pages</h1>
+
+<ul>
+	<% @pages.each do |page| %>
+		<% content_tag("li") do %>
+			<%= link_to page.name, {:action => :show, :id => page.slug} %>. Last updated <%= page.updated_at.to_s(:long) %> <%= link_to "[Edit]", edit_page_path(page.slug) %>
+		<% end %>
+	<% end %>
+</ul>
+
+<%= link_to "Add new page", new_page_path %>

@@ -1,0 +1,10 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+lived:
+    name: lived
+    
+worked:
+    name: worked
+
+played:
+    name: played

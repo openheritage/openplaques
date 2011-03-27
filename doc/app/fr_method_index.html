@@ -1,0 +1,196 @@
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!--
+
+    Methods
+
+  -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Methods</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" href="rdoc-style.css" type="text/css" />
+  <base target="docwin" />
+</head>
+<body>
+<div id="index">
+  <h1 class="section-bar">Methods</h1>
+  <div id="index-entries">
+    <a href="classes/AuthenticatedSystem.html#M000130">access_denied (AuthenticatedSystem)</a><br />
+    <a href="classes/ApplicationHelper.html#M000152">address (ApplicationHelper)</a><br />
+    <a href="classes/User.html#M000025">authenticate (User)</a><br />
+    <a href="classes/AuthenticatedSystem.html#M000129">authorisation_required (AuthenticatedSystem)</a><br />
+    <a href="classes/AuthenticatedTestHelper.html#M000123">authorize_as (AuthenticatedTestHelper)</a><br />
+    <a href="classes/AuthenticatedSystem.html#M000127">authorized? (AuthenticatedSystem)</a><br />
+    <a href="classes/ApplicationHelper.html#M000143">block_tag (ApplicationHelper)</a><br />
+    <a href="classes/ApplicationHelper.html#M000157">circa_tag (ApplicationHelper)</a><br />
+    <a href="classes/ApplicationHelper.html#M000147">colour_if_known (ApplicationHelper)</a><br />
+    <a href="classes/PlaquesController.html#M000108">create (PlaquesController)</a><br />
+    <a href="classes/UsersController.html#M000036">create (UsersController)</a><br />
+    <a href="classes/PeopleController.html#M000094">create (PeopleController)</a><br />
+    <a href="classes/OrganisationsController.html#M000013">create (OrganisationsController)</a><br />
+    <a href="classes/AreasController.html#M000046">create (AreasController)</a><br />
+    <a href="classes/ColoursController.html#M000020">create (ColoursController)</a><br />
+    <a href="classes/RolesController.html#M000054">create (RolesController)</a><br />
+    <a href="classes/SesssionsController.html#M000098">create (SesssionsController)</a><br />
+    <a href="classes/PersonalRolesController.html#M000032">create (PersonalRolesController)</a><br />
+    <a href="classes/AuthenticatedSystem.html#M000125">current_user (AuthenticatedSystem)</a><br />
+    <a href="classes/AuthenticatedSystem.html#M000126">current_user= (AuthenticatedSystem)</a><br />
+    <a href="classes/ApplicationHelper.html#M000160">dated_person (ApplicationHelper)</a><br />
+    <a href="classes/PeopleHelper.html#M000115">dated_role (PeopleHelper)</a><br />
+    <a href="classes/ApplicationHelper.html#M000161">dated_roled_person (ApplicationHelper)</a><br />
+    <a href="classes/PeopleHelper.html#M000116">dates (PeopleHelper)</a><br />
+    <a href="classes/PeopleController.html#M000096">destroy (PeopleController)</a><br />
+    <a href="classes/SesssionsController.html#M000099">destroy (SesssionsController)</a><br />
+    <a href="classes/PhotosController.html#M000089">destroy (PhotosController)</a><br />
+    <a href="classes/PersonalConnectionsController.html#M000084">destroy (PersonalConnectionsController)</a><br />
+    <a href="classes/PlaquesController.html#M000110">destroy (PlaquesController)</a><br />
+    <a href="classes/PersonalRolesController.html#M000034">destroy (PersonalRolesController)</a><br />
+    <a href="classes/RolesController.html#M000056">destroy (RolesController)</a><br />
+    <a href="classes/AreasController.html#M000047">destroy (AreasController)</a><br />
+    <a href="classes/PlaqueLocationController.html#M000042">edit (PlaqueLocationController)</a><br />
+    <a href="classes/PlaqueColourController.html#M000083">edit (PlaqueColourController)</a><br />
+    <a href="classes/PlaqueGeolocationController.html#M000082">edit (PlaqueGeolocationController)</a><br />
+    <a href="classes/PlaqueInscriptionController.html#M000060">edit (PlaqueInscriptionController)</a><br />
+    <a href="classes/OrganisationsController.html#M000014">edit (OrganisationsController)</a><br />
+    <a href="classes/PlaqueErectedController.html#M000009">edit (PlaqueErectedController)</a><br />
+    <a href="classes/LocationsController.html#M000065">edit (LocationsController)</a><br />
+    <a href="classes/RolesController.html#M000053">edit (RolesController)</a><br />
+    <a href="classes/PlaquesController.html#M000105">edit (PlaquesController)</a><br />
+    <a href="classes/PersonalRolesController.html#M000031">edit (PersonalRolesController)</a><br />
+    <a href="classes/PeopleController.html#M000093">edit (PeopleController)</a><br />
+    <a href="classes/AreasController.html#M000048">edit (AreasController)</a><br />
+    <a href="classes/ColoursController.html#M000021">edit (ColoursController)</a><br />
+    <a href="classes/User.html#M000027">email= (User)</a><br />
+    <a href="classes/Plaque.html#M000075">erected_at_string (Plaque)</a><br />
+    <a href="classes/Plaque.html#M000076">erected_at_string= (Plaque)</a><br />
+    <a href="classes/ApplicationHelper.html#M000163">erected_information (ApplicationHelper)</a><br />
+    <a href="classes/ApplicationController.html#M000073">fetch_photos (ApplicationController)</a><br />
+    <a href="classes/ApplicationController.html#M000071">find_mean (ApplicationController)</a><br />
+    <a href="classes/Person.html#M000004">find_or_create_by_name_and_dates (Person)</a><br />
+    <a href="classes/Person.html#M000005">find_or_create_by_name_and_dates_and_roles (Person)</a><br />
+    <a href="classes/Verb.html#M000023">find_or_create_by_past_tense_name (Verb)</a><br />
+    <a href="classes/Person.html#M000006">find_or_create_roles (Person)</a><br />
+    <a href="classes/Plaque.html#M000081">first_person (Plaque)</a><br />
+    <a href="classes/ApplicationHelper.html#M000155">geo_microformat (ApplicationHelper)</a><br />
+    <a href="classes/Plaque.html#M000078">geolocated? (Plaque)</a><br />
+    <a href="classes/ApplicationHelper.html#M000151">geolocation_if_known (ApplicationHelper)</a><br />
+    <a href="classes/ApplicationController.html#M000072">get_flickr_api_url (ApplicationController)</a><br />
+    <a href="classes/SearchController.html#M000041">get_search_results (SearchController)</a><br />
+    <a href="classes/ApplicationHelper.html#M000145">google_analytics_code (ApplicationHelper)</a><br />
+    <a href="classes/AuthenticatedSystem.html#M000140">handle_remember_cookie! (AuthenticatedSystem)</a><br />
+    <a href="classes/ApplicationHelper.html#M000146">html_safe (ApplicationHelper)</a><br />
+    <a href="classes/UsersHelper.html#M000117">if_authorized? (UsersHelper)</a><br />
+    <a href="classes/AuthenticatedSystem.html#M000133">included (AuthenticatedSystem)</a><br />
+    <a href="classes/VerbsController.html#M000067">index (VerbsController)</a><br />
+    <a href="classes/PeopleByIndexController.html#M000111">index (PeopleByIndexController)</a><br />
+    <a href="classes/HomepageController.html#M000016">index (HomepageController)</a><br />
+    <a href="classes/RolesController.html#M000050">index (RolesController)</a><br />
+    <a href="classes/ColoursController.html#M000017">index (ColoursController)</a><br />
+    <a href="classes/LocationsController.html#M000064">index (LocationsController)</a><br />
+    <a href="classes/PeopleController.html#M000090">index (PeopleController)</a><br />
+    <a href="classes/PhotosController.html#M000087">index (PhotosController)</a><br />
+    <a href="classes/AreasController.html#M000043">index (AreasController)</a><br />
+    <a href="classes/OrganisationsController.html#M000010">index (OrganisationsController)</a><br />
+    <a href="classes/PlaqueErectedYearsController.html#M000061">index (PlaqueErectedYearsController)</a><br />
+    <a href="classes/SearchController.html#M000039">index (SearchController)</a><br />
+    <a href="classes/PlaquesController.html#M000102">index (PlaquesController)</a><br />
+    <a href="classes/PeopleBornOnController.html#M000085">index (PeopleBornOnController)</a><br />
+    <a href="classes/UsersController.html#M000037">index (UsersController)</a><br />
+    <a href="classes/PersonalRolesController.html#M000028">index (PersonalRolesController)</a><br />
+    <a href="classes/PeopleDiedOnController.html#M000057">index (PeopleDiedOnController)</a><br />
+    <a href="classes/PhotoPhotographersController.html#M000001">index (PhotoPhotographersController)</a><br />
+    <a href="classes/AuthenticatedSystem.html#M000141">kill_remember_cookie! (AuthenticatedSystem)</a><br />
+    <a href="classes/ApplicationHelper.html#M000148">link_to_colour (ApplicationHelper)</a><br />
+    <a href="classes/UsersHelper.html#M000120">link_to_current_user (UsersHelper)</a><br />
+    <a href="classes/UsersHelper.html#M000119">link_to_login_with_IP (UsersHelper)</a><br />
+    <a href="classes/ApplicationHelper.html#M000153">link_to_osm (ApplicationHelper)</a><br />
+    <a href="classes/UsersHelper.html#M000118">link_to_user (UsersHelper)</a><br />
+    <a href="classes/ApplicationHelper.html#M000158">linked_birth_date (ApplicationHelper)</a><br />
+    <a href="classes/ApplicationHelper.html#M000159">linked_death_date (ApplicationHelper)</a><br />
+    <a href="classes/ApplicationHelper.html#M000167">linked_inscription (ApplicationHelper)</a><br />
+    <a href="classes/ApplicationHelper.html#M000166">linked_personal_connection (ApplicationHelper)</a><br />
+    <a href="classes/ApplicationHelper.html#M000165">linked_personal_connections (ApplicationHelper)</a><br />
+    <a href="classes/ApplicationHelper.html#M000164">list_link_to (ApplicationHelper)</a><br />
+    <a href="classes/ApplicationHelper.html#M000149">location_if_known (ApplicationHelper)</a><br />
+    <a href="classes/Plaque.html#M000074">location_string (Plaque)</a><br />
+    <a href="classes/AuthenticatedSystem.html#M000124">logged_in? (AuthenticatedSystem)</a><br />
+    <a href="classes/AuthenticatedTestHelper.html#M000122">login_as (AuthenticatedTestHelper)</a><br />
+    <a href="classes/AuthenticatedSystem.html#M000135">login_from_basic_auth (AuthenticatedSystem)</a><br />
+    <a href="classes/AuthenticatedSystem.html#M000136">login_from_cookie (AuthenticatedSystem)</a><br />
+    <a href="classes/AuthenticatedSystem.html#M000134">login_from_session (AuthenticatedSystem)</a><br />
+    <a href="classes/AuthenticatedSystem.html#M000128">login_required (AuthenticatedSystem)</a><br />
+    <a href="classes/AuthenticatedSystem.html#M000137">logout_keeping_session! (AuthenticatedSystem)</a><br />
+    <a href="classes/AuthenticatedSystem.html#M000138">logout_killing_session! (AuthenticatedSystem)</a><br />
+    <a href="classes/User.html#M000024">make_admin (User)</a><br />
+    <a href="classes/PlaquesController.html#M000101">map (PlaquesController)</a><br />
+    <a href="classes/ApplicationHelper.html#M000168">navigation_link_to (ApplicationHelper)</a><br />
+    <a href="classes/ApplicationHelper.html#M000169">navigation_list_link_to (ApplicationHelper)</a><br />
+    <a href="classes/PlaquesController.html#M000104">new (PlaquesController)</a><br />
+    <a href="classes/ColoursController.html#M000019">new (ColoursController)</a><br />
+    <a href="classes/OrganisationsController.html#M000012">new (OrganisationsController)</a><br />
+    <a href="classes/PersonalRolesController.html#M000030">new (PersonalRolesController)</a><br />
+    <a href="classes/SesssionsController.html#M000097">new (SesssionsController)</a><br />
+    <a href="classes/UsersController.html#M000035">new (UsersController)</a><br />
+    <a href="classes/PeopleController.html#M000092">new (PeopleController)</a><br />
+    <a href="classes/AreasController.html#M000044">new (AreasController)</a><br />
+    <a href="classes/RolesController.html#M000052">new (RolesController)</a><br />
+    <a href="classes/ApplicationController.html#M000069">not_found (ApplicationController)</a><br />
+    <a href="classes/SesssionsController.html#M000100">note_failed_signin (SesssionsController)</a><br />
+    <a href="classes/ApplicationHelper.html#M000154">osm_iframe (ApplicationHelper)</a><br />
+    <a href="classes/PlaquesController.html#M000106">parse_inscription (PlaquesController)</a><br />
+    <a href="classes/Plaque.html#M000077">parse_inscription (Plaque)</a><br />
+    <a href="classes/ApplicationHelper.html#M000162">past_tense (ApplicationHelper)</a><br />
+    <a href="classes/PhotosHelper.html#M000121">photo_img (PhotosHelper)</a><br />
+    <a href="classes/Plaque.html#M000079">photographed? (Plaque)</a><br />
+    <a href="classes/ApplicationHelper.html#M000144">plaque_list (ApplicationHelper)</a><br />
+    <a href="classes/ApplicationHelper.html#M000170">pluralize_with_no (ApplicationHelper)</a><br />
+    <a href="classes/AuthenticatedSystem.html#M000132">redirect_back_or_default (AuthenticatedSystem)</a><br />
+    <a href="classes/SearchController.html#M000040">results (SearchController)</a><br />
+    <a href="classes/PeopleHelper.html#M000114">roles_list (PeopleHelper)</a><br />
+    <a href="classes/AuthenticatedSystem.html#M000142">send_remember_cookie! (AuthenticatedSystem)</a><br />
+    <a href="classes/ApplicationController.html#M000070">server_error (ApplicationController)</a><br />
+    <a href="classes/PlaquesMapController.html#M000008">show (PlaquesMapController)</a><br />
+    <a href="classes/LocationsController.html#M000063">show (LocationsController)</a><br />
+    <a href="classes/PeopleBornOnController.html#M000086">show (PeopleBornOnController)</a><br />
+    <a href="classes/PhotosController.html#M000088">show (PhotosController)</a><br />
+    <a href="classes/AllPlaquesController.html#M000003">show (AllPlaquesController)</a><br />
+    <a href="classes/RolesController.html#M000051">show (RolesController)</a><br />
+    <a href="classes/ErrorsController.html#M000002">show (ErrorsController)</a><br />
+    <a href="classes/PeopleDiedOnController.html#M000058">show (PeopleDiedOnController)</a><br />
+    <a href="classes/AreasController.html#M000045">show (AreasController)</a><br />
+    <a href="classes/OrganisationsController.html#M000011">show (OrganisationsController)</a><br />
+    <a href="classes/PeopleController.html#M000091">show (PeopleController)</a><br />
+    <a href="classes/RolesByIndexController.html#M000059">show (RolesByIndexController)</a><br />
+    <a href="classes/VerbsController.html#M000068">show (VerbsController)</a><br />
+    <a href="classes/PlaquesController.html#M000103">show (PlaquesController)</a><br />
+    <a href="classes/ColoursController.html#M000018">show (ColoursController)</a><br />
+    <a href="classes/PeopleByIndexController.html#M000112">show (PeopleByIndexController)</a><br />
+    <a href="classes/PlaqueErectedYearsController.html#M000062">show (PlaqueErectedYearsController)</a><br />
+    <a href="classes/PersonalRolesController.html#M000029">show (PersonalRolesController)</a><br />
+    <a href="classes/UsersController.html#M000038">show (UsersController)</a><br />
+    <a href="classes/AuthenticatedSystem.html#M000131">store_location (AuthenticatedSystem)</a><br />
+    <a href="classes/PlaquesHelper.html#M000113">title (PlaquesHelper)</a><br />
+    <a href="classes/ApplicationHelper.html#M000150">unknown (ApplicationHelper)</a><br />
+    <a href="classes/Plaque.html#M000080">unparse_inscription (Plaque)</a><br />
+    <a href="classes/PlaquesController.html#M000107">unparse_inscription (PlaquesController)</a><br />
+    <a href="classes/AreasController.html#M000049">update (AreasController)</a><br />
+    <a href="classes/OrganisationsController.html#M000015">update (OrganisationsController)</a><br />
+    <a href="classes/PeopleController.html#M000095">update (PeopleController)</a><br />
+    <a href="classes/PlaquesController.html#M000109">update (PlaquesController)</a><br />
+    <a href="classes/LocationsController.html#M000066">update (LocationsController)</a><br />
+    <a href="classes/PersonalRolesController.html#M000033">update (PersonalRolesController)</a><br />
+    <a href="classes/RolesController.html#M000055">update (RolesController)</a><br />
+    <a href="classes/ColoursController.html#M000022">update (ColoursController)</a><br />
+    <a href="classes/ApplicationHelper.html#M000156">user_menu (ApplicationHelper)</a><br />
+    <a href="classes/User.html#M000026">username= (User)</a><br />
+    <a href="classes/AuthenticatedSystem.html#M000139">valid_remember_cookie? (AuthenticatedSystem)</a><br />
+    <a href="classes/Person.html#M000007">wikipedia_summary (Person)</a><br />
+  </div>
+</div>
+</body>
+</html>

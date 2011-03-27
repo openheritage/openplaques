@@ -1,0 +1,11 @@
+<h1>Languages</h1>
+
+<% if @languages.size > 0 %>
+	<%= content_tag("ul") do %>
+		<% @languages.each do |language| %>
+			<%= content_tag("li", link_to(language.name, language_path(language))) %>
+		<% end %>
+	<% end %>
+<% end %>
+
+<%= link_to("New language", new_language_path) if current_user %>

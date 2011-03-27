@@ -1,0 +1,537 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: PlaquesController</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">PlaquesController</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../files/app/controllers/plaques_controller_rb.html">
+                app/controllers/plaques_controller.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                <a href="ApplicationController.html">
+                ApplicationController
+               </a>
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000108">create</a>&nbsp;&nbsp;
+      <a href="#M000110">destroy</a>&nbsp;&nbsp;
+      <a href="#M000105">edit</a>&nbsp;&nbsp;
+      <a href="#M000102">index</a>&nbsp;&nbsp;
+      <a href="#M000101">map</a>&nbsp;&nbsp;
+      <a href="#M000104">new</a>&nbsp;&nbsp;
+      <a href="#M000106">parse_inscription</a>&nbsp;&nbsp;
+      <a href="#M000103">show</a>&nbsp;&nbsp;
+      <a href="#M000107">unparse_inscription</a>&nbsp;&nbsp;
+      <a href="#M000109">update</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000108" class="method-detail">
+        <a name="M000108"></a>
+
+        <div class="method-heading">
+          <a href="#M000108" class="method-signature">
+          <span class="method-name">create</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+POST /plaques POST /plaques.xml
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000108-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000108-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/controllers/plaques_controller.rb, line 87</span>
+ 87:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create</span>
+ 88:     
+ 89:     <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:plaques_file</span>])
+ 90:       
+ 91:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:plaques</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:plaques</span>][<span class="ruby-identifier">:organisation</span>].<span class="ruby-identifier">blank?</span> <span class="ruby-operator">==</span> <span class="ruby-keyword kw">false</span>
+ 92:         <span class="ruby-ivar">@organisation</span> = <span class="ruby-constant">Organisation</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:plaques</span>][<span class="ruby-identifier">:organisation</span>])
+ 93:       <span class="ruby-keyword kw">end</span>
+ 94:       <span class="ruby-ivar">@plaques_file</span> = <span class="ruby-constant">YAML</span><span class="ruby-operator">::</span><span class="ruby-identifier">load</span>(<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:plaques_file</span>].<span class="ruby-identifier">read</span>)
+ 95:       
+ 96:       <span class="ruby-ivar">@plaques</span> = <span class="ruby-value">0</span>
+ 97:       
+ 98:       <span class="ruby-ivar">@plaques_file</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">plaque</span><span class="ruby-operator">|</span>
+ 99:         <span class="ruby-identifier">inscription</span> = <span class="ruby-value str">&quot;&quot;</span>
+100:         <span class="ruby-identifier">location</span> = <span class="ruby-value str">&quot;&quot;</span>
+101:         <span class="ruby-identifier">erected_at</span> = <span class="ruby-value str">&quot;&quot;</span>
+102:         <span class="ruby-identifier">organisation</span> = <span class="ruby-keyword kw">nil</span>
+103:         <span class="ruby-identifier">notes</span> = <span class="ruby-value str">&quot;&quot;</span>
+104:         <span class="ruby-identifier">plaque</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
+105:           <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">key</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;inscription&quot;</span>)
+106:             <span class="ruby-identifier">inscription</span> = <span class="ruby-identifier">value</span>
+107:           <span class="ruby-keyword kw">end</span>
+108:           <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">key</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;location&quot;</span>)
+109:             <span class="ruby-identifier">location</span> = <span class="ruby-identifier">value</span>
+110:           <span class="ruby-keyword kw">end</span>
+111:           <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">key</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;organisation&quot;</span>)
+112:             <span class="ruby-identifier">organisation</span> = <span class="ruby-constant">Organisation</span>.<span class="ruby-identifier">find_or_create_by_name</span>(<span class="ruby-identifier">value</span>)
+113:           <span class="ruby-keyword kw">end</span>
+114:           <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">key</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;notes&quot;</span>)
+115:             <span class="ruby-identifier">notes</span> = <span class="ruby-identifier">value</span>
+116:           <span class="ruby-keyword kw">end</span>          
+117:           <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">key</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;erected_at&quot;</span>)
+118:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">4</span>
+119:               <span class="ruby-identifier">erected_at</span> = <span class="ruby-constant">Date</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">value</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;-01-01&quot;</span>)
+120:             <span class="ruby-keyword kw">else</span>
+121:               <span class="ruby-identifier">erected_at</span> = <span class="ruby-identifier">value</span>
+122:             <span class="ruby-keyword kw">end</span>
+123:           <span class="ruby-keyword kw">end</span>
+124:         <span class="ruby-keyword kw">end</span>
+125:         <span class="ruby-identifier">organisation</span> = <span class="ruby-ivar">@organisation</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">organisation</span> <span class="ruby-operator">==</span> <span class="ruby-keyword kw">nil</span>
+126:         <span class="ruby-ivar">@plaque</span> = <span class="ruby-constant">Plaque</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">:inscription</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">inscription</span>, <span class="ruby-identifier">:erected_at</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">erected_at</span>, <span class="ruby-identifier">:notes</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">notes</span>)
+127:         <span class="ruby-ivar">@location</span> = <span class="ruby-constant">Location</span>.<span class="ruby-identifier">find_or_create_by_name</span>(<span class="ruby-identifier">location</span>)
+128:         <span class="ruby-ivar">@plaque</span>.<span class="ruby-identifier">location</span> = <span class="ruby-ivar">@location</span>
+129:         <span class="ruby-ivar">@plaque</span>.<span class="ruby-identifier">organisation</span> = <span class="ruby-identifier">organisation</span>
+130:         <span class="ruby-ivar">@plaque</span>.<span class="ruby-identifier">save!</span>
+131:         <span class="ruby-ivar">@plaques</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+132:         
+133:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:parse_inscriptions</span>] <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;1&quot;</span>
+134:           <span class="ruby-ivar">@plaque</span>.<span class="ruby-identifier">parse_inscription</span>
+135:         <span class="ruby-keyword kw">end</span>
+136: 
+137:       <span class="ruby-keyword kw">end</span>
+138: 
+139: 
+140: 
+141:     <span class="ruby-keyword kw">else</span>
+142:       <span class="ruby-ivar">@plaque</span> = <span class="ruby-constant">Plaque</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:plaque</span>])
+143:     
+144:       <span class="ruby-ivar">@location</span> = <span class="ruby-constant">Location</span>.<span class="ruby-identifier">find_or_create_by_name</span>(<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:location</span>])
+145: 
+146:       <span class="ruby-ivar">@plaque</span>.<span class="ruby-identifier">location</span> = <span class="ruby-ivar">@location</span>
+147:       <span class="ruby-ivar">@plaque</span>.<span class="ruby-identifier">user</span> = <span class="ruby-identifier">current_user</span>
+148:       
+149:       <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+150:         <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@plaque</span>.<span class="ruby-identifier">save</span>
+151:           <span class="ruby-identifier">flash</span>[<span class="ruby-identifier">:notice</span>] = <span class="ruby-value str">'Plaque was successfully created.'</span>
+152:           <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-ivar">@plaque</span>) }
+153:           <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-identifier">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@plaque</span>, <span class="ruby-identifier">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:created</span>, <span class="ruby-identifier">:location</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@plaque</span> }
+154:         <span class="ruby-keyword kw">else</span>
+155:           <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;new&quot;</span> }
+156:           <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-identifier">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@plaque</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:unprocessable_entity</span> }
+157:         <span class="ruby-keyword kw">end</span>
+158:       <span class="ruby-keyword kw">end</span>
+159:     <span class="ruby-keyword kw">end</span>
+160:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000110" class="method-detail">
+        <a name="M000110"></a>
+
+        <div class="method-heading">
+          <a href="#M000110" class="method-signature">
+          <span class="method-name">destroy</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+DELETE /plaques/1 DELETE /plaques/1.xml
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000110-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000110-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/controllers/plaques_controller.rb, line 201</span>
+201:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">destroy</span>
+202:     <span class="ruby-ivar">@plaque</span> = <span class="ruby-constant">Plaque</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:id</span>])
+203:     <span class="ruby-ivar">@plaque</span>.<span class="ruby-identifier">destroy</span>
+204: 
+205:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+206:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-identifier">plaques_url</span>) }
+207:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">head</span> <span class="ruby-identifier">:ok</span> }
+208:     <span class="ruby-keyword kw">end</span>
+209:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000105" class="method-detail">
+        <a name="M000105"></a>
+
+        <div class="method-heading">
+          <a href="#M000105" class="method-signature">
+          <span class="method-name">edit</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+GET /plaques/1/edit
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000105-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000105-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/controllers/plaques_controller.rb, line 67</span>
+67:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">edit</span>
+68:     <span class="ruby-ivar">@plaque</span> = <span class="ruby-constant">Plaque</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:id</span>])
+69:     <span class="ruby-ivar">@organisations</span> = <span class="ruby-constant">Organisation</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">:all</span>, <span class="ruby-identifier">:order</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:name</span>)    
+70:           <span class="ruby-ivar">@possible_photos</span> = <span class="ruby-identifier">fetch_photos</span> <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:id</span>]
+71:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000102" class="method-detail">
+        <a name="M000102"></a>
+
+        <div class="method-heading">
+          <a href="#M000102" class="method-signature">
+          <span class="method-name">index</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000102-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000102-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/controllers/plaques_controller.rb, line 14</span>
+14:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">index</span>
+15:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+16:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> {
+17:         <span class="ruby-ivar">@plaques</span> = <span class="ruby-constant">Plaque</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">:all</span>, <span class="ruby-identifier">:order</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:inscription</span>, <span class="ruby-identifier">:include</span> =<span class="ruby-operator">&gt;</span> [{<span class="ruby-identifier">:personal_connections</span> =<span class="ruby-operator">&gt;</span> [{<span class="ruby-identifier">:person</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:roles</span>}, <span class="ruby-identifier">:verb</span>, <span class="ruby-identifier">:location</span>]}, <span class="ruby-identifier">:organisation</span>, <span class="ruby-identifier">:location</span>])
+18:         <span class="ruby-ivar">@page_title</span> = <span class="ruby-value str">&quot;Plaques&quot;</span>
+19:         <span class="ruby-ivar">@centre</span> = <span class="ruby-identifier">find_mean</span>(<span class="ruby-ivar">@plaques</span>)
+20:         <span class="ruby-ivar">@zoom</span> = <span class="ruby-value">7</span>
+21:       }
+22:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">bp</span> {
+23:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value str">&quot;_search_location_lat&quot;</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value str">&quot;_search_location_lon&quot;</span>]
+24:           
+25:           <span class="ruby-ivar">@plaques</span> = <span class="ruby-constant">Plaque</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">:all</span>, <span class="ruby-identifier">:conditions</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-value str">&quot;latitude &gt; ? and latitude &lt; ? and longitude &gt; ? and longitude &lt; ?&quot;</span>, (<span class="ruby-identifier">params</span>[<span class="ruby-value str">&quot;_search_location_lat&quot;</span>].<span class="ruby-identifier">to_f</span> <span class="ruby-operator">-</span> <span class="ruby-value">0</span><span class="ruby-value">.1</span>).<span class="ruby-identifier">to_s</span>, (<span class="ruby-identifier">params</span>[<span class="ruby-value str">&quot;_search_location_lat&quot;</span>].<span class="ruby-identifier">to_f</span> <span class="ruby-operator">+</span> <span class="ruby-value">0</span><span class="ruby-value">.1</span>).<span class="ruby-identifier">to_s</span>, (<span class="ruby-identifier">params</span>[<span class="ruby-value str">&quot;_search_location_lon&quot;</span>].<span class="ruby-identifier">to_f</span> <span class="ruby-operator">+</span> <span class="ruby-value">0</span><span class="ruby-value">.1</span>).<span class="ruby-identifier">to_s</span>, (<span class="ruby-identifier">params</span>[<span class="ruby-value str">&quot;_search_location_lat&quot;</span>].<span class="ruby-identifier">to_f</span> <span class="ruby-operator">-</span> <span class="ruby-value">0</span><span class="ruby-value">.1</span>).<span class="ruby-identifier">to_s</span>], <span class="ruby-identifier">:limit</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">20</span>)
+26:         <span class="ruby-keyword kw">end</span>        
+27:       }
+28:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">rss</span> {
+29:         <span class="ruby-ivar">@plaques</span> = <span class="ruby-constant">Plaque</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">:all</span>, <span class="ruby-identifier">:conditions</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-value str">&quot;latitude IS NOT NULL&quot;</span>])
+30:       }
+31:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">kml</span> {
+32:         <span class="ruby-ivar">@plaques</span> = <span class="ruby-constant">Plaque</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">:all</span>, <span class="ruby-identifier">:conditions</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-value str">&quot;latitude IS NOT NULL&quot;</span>])
+33:       }
+34:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">yaml</span> {
+35:         <span class="ruby-ivar">@plaques</span> = <span class="ruby-constant">Plaque</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">:all</span>)
+36:       }
+37:     <span class="ruby-keyword kw">end</span>
+38:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000101" class="method-detail">
+        <a name="M000101"></a>
+
+        <div class="method-heading">
+          <a href="#M000101" class="method-signature">
+          <span class="method-name">map</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000101-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000101-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/controllers/plaques_controller.rb, line 5</span>
+ 5:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">map</span>
+ 6:     <span class="ruby-ivar">@plaques</span> = <span class="ruby-constant">Plaque</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">:all</span>, <span class="ruby-identifier">:conditions</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-value str">&quot;latitude IS NOT NULL&quot;</span>])
+ 7:     <span class="ruby-ivar">@centre</span> = <span class="ruby-identifier">find_mean</span>(<span class="ruby-ivar">@plaques</span>)
+ 8:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+ 9:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span>
+10:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">rss</span>
+11:     <span class="ruby-keyword kw">end</span>
+12:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000104" class="method-detail">
+        <a name="M000104"></a>
+
+        <div class="method-heading">
+          <a href="#M000104" class="method-signature">
+          <span class="method-name">new</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+GET /plaques/new GET /plaques/new.xml
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000104-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000104-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/controllers/plaques_controller.rb, line 55</span>
+55:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">new</span>
+56:     <span class="ruby-ivar">@plaque</span> = <span class="ruby-constant">Plaque</span>.<span class="ruby-identifier">new</span>
+57:     <span class="ruby-ivar">@colours</span> = <span class="ruby-constant">Colour</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">:all</span>)    
+58:     <span class="ruby-ivar">@organisations</span> = <span class="ruby-constant">Organisation</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">:all</span>, <span class="ruby-identifier">:order</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:name</span>)
+59: 
+60:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+61:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment cmt"># new.html.erb</span>
+62:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-identifier">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@plaque</span> }
+63:     <span class="ruby-keyword kw">end</span>
+64:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000106" class="method-detail">
+        <a name="M000106"></a>
+
+        <div class="method-heading">
+          <a href="#M000106" class="method-signature">
+          <span class="method-name">parse_inscription</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000106-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000106-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/controllers/plaques_controller.rb, line 73</span>
+73:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">parse_inscription</span>
+74:     <span class="ruby-ivar">@plaque</span> = <span class="ruby-constant">Plaque</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:id</span>])
+75:     <span class="ruby-ivar">@plaque</span>.<span class="ruby-identifier">parse_inscription</span>
+76:     <span class="ruby-identifier">redirect_to</span> <span class="ruby-ivar">@plaque</span>
+77:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000103" class="method-detail">
+        <a name="M000103"></a>
+
+        <div class="method-heading">
+          <a href="#M000103" class="method-signature">
+          <span class="method-name">show</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+GET /plaques/1 GET /plaques/1.xml
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000103-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000103-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/controllers/plaques_controller.rb, line 42</span>
+42:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">show</span>
+43:     <span class="ruby-ivar">@plaque</span> = <span class="ruby-constant">Plaque</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:id</span>])
+44:     <span class="ruby-ivar">@page_title</span> = <span class="ruby-value str">&quot;Plaque \#&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@plaque</span>.<span class="ruby-identifier">id</span>.<span class="ruby-identifier">to_s</span>
+45:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+46:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment cmt"># show.html.erb</span>
+47:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>
+48:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">yaml</span>
+49:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">bp</span>
+50:     <span class="ruby-keyword kw">end</span>
+51:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000107" class="method-detail">
+        <a name="M000107"></a>
+
+        <div class="method-heading">
+          <a href="#M000107" class="method-signature">
+          <span class="method-name">unparse_inscription</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000107-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000107-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/controllers/plaques_controller.rb, line 79</span>
+79:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">unparse_inscription</span>
+80:     <span class="ruby-ivar">@plaque</span> = <span class="ruby-constant">Plaque</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:id</span>])
+81:     <span class="ruby-ivar">@plaque</span>.<span class="ruby-identifier">unparse_inscription</span>
+82:     <span class="ruby-identifier">redirect_to</span> <span class="ruby-ivar">@plaque</span>
+83:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000109" class="method-detail">
+        <a name="M000109"></a>
+
+        <div class="method-heading">
+          <a href="#M000109" class="method-signature">
+          <span class="method-name">update</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+PUT /plaques/1 PUT /plaques/1.xml
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000109-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000109-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/controllers/plaques_controller.rb, line 164</span>
+164:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">update</span>
+165:     <span class="ruby-ivar">@plaque</span> = <span class="ruby-constant">Plaque</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:id</span>])
+166: 
+167:     <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@plaque</span>.<span class="ruby-identifier">location</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:location</span>] <span class="ruby-operator">==</span> <span class="ruby-ivar">@plaque</span>.<span class="ruby-identifier">location</span>.<span class="ruby-identifier">name</span>
+168:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@plaque</span>.<span class="ruby-identifier">location</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@plaque</span>.<span class="ruby-identifier">location</span>.<span class="ruby-identifier">plaques_count</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
+169:         <span class="ruby-ivar">@plaque</span>.<span class="ruby-identifier">location</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-identifier">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:location</span>])
+170:       <span class="ruby-keyword kw">else</span>
+171:         <span class="ruby-ivar">@location</span> = <span class="ruby-constant">Location</span>.<span class="ruby-identifier">find_or_create_by_name</span>(<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:location</span>])
+172:         <span class="ruby-ivar">@plaque</span>.<span class="ruby-identifier">location</span> = <span class="ruby-ivar">@location</span>
+173:       <span class="ruby-keyword kw">end</span>
+174:     <span class="ruby-keyword kw">end</span>
+175:         
+176:         <span class="ruby-comment cmt"># Store the selected photo (if any)</span>
+177:         <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:photo</span>] <span class="ruby-operator">!=</span> <span class="ruby-keyword kw">nil</span>)
+178:                 <span class="ruby-identifier">fetch_photos</span>(<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:id</span>]).<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">photo</span><span class="ruby-operator">|</span>
+179:                         <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">photo</span>.<span class="ruby-identifier">url</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:photo</span>])
+180:                                 <span class="ruby-identifier">photo</span>.<span class="ruby-identifier">id</span> = <span class="ruby-keyword kw">nil</span>
+181:                                 <span class="ruby-identifier">photo</span>.<span class="ruby-identifier">plaque</span> = <span class="ruby-ivar">@plaque</span>
+182:                                 <span class="ruby-identifier">photo</span>.<span class="ruby-identifier">save!</span>
+183:                         <span class="ruby-keyword kw">end</span>
+184:                 <span class="ruby-keyword kw">end</span>
+185:         <span class="ruby-keyword kw">end</span>
+186:     
+187:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+188:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@plaque</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:plaque</span>])
+189:         <span class="ruby-identifier">flash</span>[<span class="ruby-identifier">:notice</span>] = <span class="ruby-value str">'Plaque was successfully updated.'</span>
+190:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-ivar">@plaque</span>) }
+191:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">head</span> <span class="ruby-identifier">:ok</span> }
+192:       <span class="ruby-keyword kw">else</span>
+193:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;edit&quot;</span> }
+194:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-identifier">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@plaque</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:unprocessable_entity</span> }
+195:       <span class="ruby-keyword kw">end</span>
+196:     <span class="ruby-keyword kw">end</span>
+197:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

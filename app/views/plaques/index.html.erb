@@ -1,0 +1,9 @@
+<h1>Plaques</h1>
+
+<% if @plaques.size > 0 %>
+
+    <%= render :partial => 'map.html.erb' %>
+
+<% else %>
+	<%= content_tag("p", "No plaques yet.")%>
+<% end %>

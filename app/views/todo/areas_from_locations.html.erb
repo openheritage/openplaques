@@ -1,0 +1,21 @@
+﻿<h1>To do: Locations not in an area</h1>
+<p><%= link_to("All to-do lists", "/todo") %></p>
+
+<%= @locations.size.to_s %>
+
+<% if @locations.size > 0 %>
+
+	<p>These locations should be given an area, so they can show up in an area's map:
+	<ul>
+	  <% @locations.each do |location| %>
+		<li><%= link_to(location.name, "/locations/" + location.id.to_s + "/edit") %></li>
+	  <% end %>
+	</ul>
+	</p>
+
+<% else %>
+	
+	<p>No locations with no areas.</p>
+
+<% end %>
+<p class="clear"><%= link_to("All to-do lists", "/todo") %></p>

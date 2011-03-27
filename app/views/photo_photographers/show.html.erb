@@ -1,0 +1,13 @@
+<% @page_title = "Photos by " + @photographer %>
+<h1><%= @page_title %></h1>
+
+<p><%= pluralize(@photos.size,"photo") %></p>
+
+<% content_tag("ul", :class => "photographer_photos") do %>
+  <% @photos.each do |photo| %>
+    <% content_tag("li") do %>
+      <%= link_to(image_tag(photo.file_url), photo) %>
+	  <%= link_to(photo.plaque.first_person || "Plaque #" + photo.plaque.id.to_s, photo.plaque)  %>
+    <% end %>
+  <% end %>
+<% end %>

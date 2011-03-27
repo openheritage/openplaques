@@ -1,0 +1,19 @@
+<% @page_title = "Edit description for plaque \#" + @plaque.id.to_s %>
+<h1>Edit inscription for <%= link_to("plaque \#" + @plaque.id.to_s, @plaque)%></h1>
+
+<div class="info inscription">
+  <%= link_to "Edit", edit_plaque_inscription_path(@plaque), {:class => :edit, :title => "Edit inscription"} if logged_in?%>
+  <%= content_tag("p", new_linked_inscription(@plaque), {:class => "inscription"}) %>
+</div>
+
+
+<% form_for(@plaque) do |f| %>
+  <%= f.error_messages %>
+
+	<%= f.label :description %><br>
+	<%= f.text_area :description, :class => :description %>
+	
+  <p>
+   	<%= f.submit "Save" %>
+  </p>
+<% end %>

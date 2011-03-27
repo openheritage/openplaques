@@ -1,0 +1,38 @@
+<% @page_title = "Edit " + @organisation.name + "" %>
+<h1>Edit <%= link_to(h(@organisation.name), @organisation) %></h1>
+
+<% form_for(@organisation) do |f| %>
+  <%= f.error_messages %>
+
+	<p>
+		<%= f.label :name %>
+		<%= f.text_field :name %>
+	</p>
+
+	<p>
+		<%= f.label :slug %>
+		<%= f.text_field :slug %>
+	</p>
+
+	<p>
+		<%= f.label :website %>
+		<%= f.text_field :website %>
+	</p>
+
+	<p>
+		<%= f.label :description %>
+		<%= f.text_area :description %>
+	</p>
+
+	<p>
+		<%= f.label :notes %>
+		<%= f.text_area :notes %>
+	</p>
+
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @organisation %> |
+<%= link_to 'Back', organisations_path %>

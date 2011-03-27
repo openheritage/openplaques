@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+innovation_centre:
+  name: "Innovation Centre, Portobello"
+  area: sheffield
+  
+cabinet_war_rooms:
+  name: Cabinet War Rooms
+  area: london

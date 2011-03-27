@@ -1,0 +1,21 @@
+<% @page_title = "Search results for '" + @phrase + "'"  %>
+<h1>Search results for &quot;<%= @phrase %>&quot;</h1>
+
+<% @search_results.each do |result| %> 
+  <div class="result">
+		
+		<p> <%= link_to(marked_text(title(result), @phrase), result, :class => :title) %> <%= link_to(result.location.area.name, result.location.area, :class => :location) if result.location && result.location.area %>			
+		<br>
+		<%= marked_text(search_snippet(result.inscription, @phrase), @phrase) %>
+		</p>
+	</div>
+<% end %>  
+
+<% if params[:from] && params[:from] == "submission" %>
+
+	<p>Plaque not listed? <%= link_to "Add it", new_plaque_path(:checked => true) %>.</p>
+
+<% else %>
+	<%= render :partial => "search_form", :locals => { :phrase => @phrase } %>
+<% end %>
+

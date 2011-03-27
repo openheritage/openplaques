@@ -1,0 +1,24 @@
+﻿<h1>To do: Plaques to be added</h1>
+<p><%= link_to("All to-do lists", "/todo") %></p>
+<p>These plaques have been found on the internet, <%= link_to("and need adding to the site", new_plaque_path) %>
+<ul class="todo_add">
+  <% @plaques_to_add.each do |item| %>
+	<li>
+		<% if item.image_url == nil %>
+			<%= link_to(item.description, item.url) %>
+			<% else %>
+			<%= link_to(image_tag(item.image_url, {:alt => item.description}), item.url) %>
+		<% end  %>
+		
+		<%= button_to("Delete", todo_path(item), {:method => :delete, :class => :delete}) if authorized? %>
+		
+	</li>
+  <% end %>
+</ul>
+</p>
+<p>
+  <%= link_to("Add new plaque", new_plaque_path) %>
+  <%= link_to("Fetch more from Flickr", "/todo/fetch_from_flickr") %>
+  </p>
+
+<p class="clear"><%= link_to("All to-do lists", "/todo") %></p>

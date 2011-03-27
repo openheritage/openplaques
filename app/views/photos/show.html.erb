@@ -1,0 +1,15 @@
+<% @page_title = "Photo \#" + @photo.id.to_s  %>
+<h1><%= @page_title %></h1>
+
+<div class="info">
+  <%= link_to("Edit", edit_photo_path(@photo), {:class => :edit, :title => "edit photo"}) if logged_in? %>
+  <%= content_tag("p", link_to(image_tag(@photo.file_url), @photo.url)) %>
+</div>
+
+<%= content_tag("p", "Taken on " + @photo.taken_at.to_s(:long)) unless @photo.taken_at.blank? %>
+<%= content_tag("p", "Photographer: " + link_to(@photo.photographer, photographer_url(@photo.photographer))) %>
+<%= content_tag("p", "Licence: " + link_to(@photo.licence.name, @photo.licence)) %>
+<%= content_tag("p", "Commercial use: " + @photo.licence.allows_commercial_use.to_s) %>
+<%= content_tag("p", link_to("Plaque #" + @photo.plaque.id.to_s, @photo.plaque) + " " + @photo.plaque.inscription)%>
+
+<%= link_to("Delete", photo_path(@photo), {:method => :delete}) if authorized? %>

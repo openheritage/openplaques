@@ -1,0 +1,26 @@
+
+<%= content_tag("div", {:class => "home_information"}) do %>
+	<img style="float: right;" src="http://chart.apis.google.com/chart?cht=bvg&amp;chd=t:100,<%= @geolocated_plaques_percent %>,<%= @photographed_plaques_percent %>,<%= @coloured_plaques_percent %>&amp;chs=150x100&amp;chl=All|Geo|Photo|Colour&amp;chco=8E56FF|FF4489|20D832|E8C917" alt="Chart of recorded plaques" />
+	<p>Open Plaques is a service that aims to find and provide data about <%= link_to("all", "/plaques/all") %> the commemorative 'plaques' (often blue and round) that can be found across the UK and worldwide.</p>
+	<% if @plaques_count > 0 %>
+		<p>This website knows about <%= pluralize(@plaques_count, "plaque") %>, of which 
+		<%= @geolocated_plaques_percent + "%" %> have been geolocated,
+		<%= @photographed_plaques_percent + "%" %> have been <%= link_to("photographed", "photographers") %>
+		and <%= @coloured_plaques_percent + "%" %> have a <%= link_to("colour", "colours") %> identified. </p>
+	<% end %>
+<% end %>
+
+
+<%= content_tag("div", {:class => "home_photos"}) do %>
+  <h2>Recently photographed</h2>
+  
+  <% @recent_photos.each do |photo| %>
+    <% if photo.plaque %>
+      <%= content_tag("div", :class => :photo) do %>
+  	    <%= link_to(image_tag(photo.file_url, {:alt => ""}), photo.plaque) %>
+        <%= content_tag("p", link_to(truncate(photo.plaque.inscription, {:length => 25}), photo.plaque)) %>
+      <% end %>
+    <% end %>
+  <% end %>
+  <br class="clear" />
+<% end unless @recent_photos.size == 0%>

@@ -1,0 +1,18 @@
+<% @page_title = "People who were born in"  %>
+<h1>born in</h1>
+
+<p>We have records of when <%=pluralize(Person.count(:born_on), "person") %> were born.
+<% if Person.count(:born_on) == Person.count(:died_on) %>
+  All
+<% else %>
+  <%= Person.count(:died_on) %> 
+<% end %>
+of them are now <a href="/people/died_on/">dead</a>.</p>
+<ul>
+<% for count in @counts %>
+  <% if count[0] != nil %>
+  <li><%= link_to(count[0].to_s[0,4], people_born_on_path(count[0].to_s[0,4]), {:class => "bday"}) %>
+   - <%= pluralize(count[1], "person") %></li>
+  <% end %>
+<% end %>
+</ul>

@@ -1,0 +1,15 @@
+# This class represents an organisation entity which has been responsible for erecting 
+# commemorative plaques. Famous examples include 'English Heritage' - other examples may be
+# civic societies or local councils.
+# === Attributes
+# * +name+ - The official name of the organisation
+# * +slug+ - An identifier for the organisation, usually equivalent to its name in lower case, with spaces replaced by underscores. Used in URLs.
+# === Associations
+# * Plaques - plaques erected by this organisation.
+class Organisation < ActiveRecord::Base
+
+  validates_presence_of :name, :slug
+  validates_uniqueness_of :slug
+
+  has_many :plaques
+end

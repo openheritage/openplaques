@@ -1,0 +1,471 @@
+table.plaques {width: 100%;}
+	
+table tr td, table, table tr th {
+	border-collapse: collapse;
+	border: 1px solid black;
+	margin: 0;
+	padding: 0.5em;
+}
+table.plaque_list, table.plaque_list td, table.plaque_list img{
+	border-width: 0px;
+}
+table.plaque_list tr{
+	vertical-align: top;
+}
+table.plaque_list .photo img{
+	margin-top: -4px;
+}
+table.plaque_list .geo img{
+	margin-top: 4px;
+}
+
+ol.index_navigation {text-align: center;}
+
+ol.index_navigation li { font-size: 1em; }
+
+ol.index_navigation,
+div#footer ul {display: block; padding-left: 0;}
+ol.index_navigation li,
+div#footer ul li {display: inline; list-style-type: none;}
+
+ol.index_navigation li a,
+ol.index_navigation li span {padding: 0em .5em .1em .5em;}
+
+ol.index_navigation li a {text-decoration: none;}
+
+ol.index_navigation li a,
+ol.index_navigation li span {border: 1px solid #666; -moz-border-radius: 1em;}
+
+ol.index_navigation li a {background-color: #EEE; border-color: #666; color: #333;}
+ol.index_navigation li span {background-color: #999; border-color: #999; color: #FFF;}
+ol.index_navigation li a:hover {background-color:#555; color: #CCC;}
+
+
+div#body ol.years {list-style-type: none; margin-left: 0; padding-left: 0;}
+
+p.inscription {font-size: 2em;}
+
+	ul.roles {list-style-type: none; text-align: center; display: block; padding-left: 0;}
+	ul.roles li {display: inline;}
+	ul.roles li:before {content: ", ";}
+	ul.roles li:first-child:before {content: "";}
+
+/* Font size */
+
+	/* Absolute font size, from which all else is positioned relatively */
+	body { font-size: 16px; }   
+
+	div#body h1 {font-size: 1.4em;}
+
+	div#body h2 {font-size: 1.2em;}
+
+	div#header div.site_name {font-size: 1.8em;}
+	div#header div.site_name span.status {font-size: .5em;}
+	
+	#header ul.menu {font-size: 1.5em; line-height: 3.8em;}
+
+	div#body {line-height: 1.4em;}
+	
+	div#page p.inscription {line-height: 1.2em;}
+	div#page form textarea.inscription {font-size: 1.4em;}
+	
+	div#page div.photo {font-size: .8em;}
+	div#page div.popup_photo {font-size: .8em;}
+
+	div#body ol.years li a {font-size: 1.2em; line-height: 2em;}
+	div#body p.area {font-size: 1.1em;}
+
+	#footer p.version {font-size: .9em; line-height: 1.8em;}
+
+	.error_plaque {
+		font-size: 1.85em; 
+		text-align: center;
+	}
+	.error_plaque .title {
+		font-size: 2em;
+		line-height: 1.2em;
+	}
+	.error_organisation {
+		font-size: 0.5em;
+	}
+/* Font family, weight, variant */
+	
+	body {font-family: 'Baskerville', 'Times', serif;}
+
+	#header ul.menu {font-family: 'Gill Sans', 'Helvetica', 'Arial', sans-serif;}	
+
+	div#body h1 {font-weight: normal;}
+	div#body table th {font-weight: normal; font-style: italic;}
+	ol.index_navigation li span {font-weight: normal;}
+	div#header div.site_name span.status {font-variant: small-caps; font-style: italic;}
+
+	div#header div.site_name span.status {vertical-align: top;}
+
+	.error_plaque .title {
+		text-transform: uppercase;		
+		letter-spacing: 0.2em;
+		font-weight: bold;
+	}
+
+/* Colours, background colours and background images */
+
+	body { background-color: #fff; color: #333;}
+
+	a { color: #000; }
+	a:visited { color: #666; }
+	a:hover { color: #fff; background-color:#000; }
+	a:visited:hover { color: #fff; background-color:#666; }
+
+	a img:hover {background-color: #FFF;}
+	
+	.site_name a:hover { background-color: #fff;} 
+
+	.fieldWithErrors {
+	  background-color: red;
+	}
+
+	.error_plaque {
+		border: solid #777;
+		border-top-color: #DDD;
+		border-left-color: #DDD;
+		
+	}
+
+	.error_plaque p{
+		background-color: #3F66B2;
+		border: solid #DDD;
+		border-top-color: #777;
+		border-left-color: #777;
+		color: #FFF;
+	}
+	
+
+	.error_organisation a {
+		color:#fff;
+	}
+	.error_organisation a:hover {
+		background-color: inherit;
+	}
+	
+	#body p.inscription {color: #000;}
+	
+	#header ul.menu {}
+	#header ul.menu li a,
+	#header ul.menu li a:visited {color: white; background-color: #3F66B2;}
+	#header ul.menu li a:hover {color: white; background-color: black;}
+	#header ul.menu li span {color: black; background-color: #CCC;}
+ 
+	
+	/* Default colours (blue) */
+	#body p.inscription a, a.blue,
+	#body p.inscription a:visited, a.blue:visited {color: #00A;}
+	#body p.inscription a:hover, a.blue:hover {background-color: #00A; color: white;}
+
+	/* Red plaque */
+	#body div.redplaque p.inscription a, a.red,
+	#body div.redplaque p.inscription a:visited, a.red:visited {color: #A00;}
+	#body div.redplaque p.inscription a:hover, a.red:hover {background-color: #A00; color: white;}
+
+	/* Black plaque */
+	#body div.blackplaque p.inscription a, a.black,
+	#body div.blackplaque p.inscription a:visited, a.black:visited {color: #333;}
+	#body div.blackplaque p.inscription a:hover, a.black:hover {background-color: #333; color: white;}
+
+	/* Green plaque */
+	#body div.greenplaque p.inscription a, a.green,
+	#body div.greenplaque p.inscription a:visited, a.green:visited {color: #0A0;}
+	#body div.greenplaque p.inscription a:hover, a.green:hover {background-color: #0A0; color: white;}
+	
+	
+	span.unknown {color: #777;}
+
+	div#footer {border-color: #444;}
+	div#footer ul li {border-color: #888;}
+	iframe.osm {border-color: #444;}
+
+	#footer p.rattle a:hover {background-color: #fff;}
+	ol.index_navigation li a,
+	ol.index_navigation li span {border-color: #666;}	
+	
+	#footer p.version,
+	#footer p.version a {color: #AAA;}
+	
+	form.button-to input.delete {color: red;}
+
+/* Text decoration */
+
+	#header ul.menu a {text-decoration: none;}
+	#body p.inscription a {text-decoration: none;}
+	#footer p.version a {text-decoration: none;}
+
+/* Margin, padding and border sizes. Floats, widths and clears. */
+
+	body {padding: 2em 4em 2em 4em; margin: 0; border: 0;}
+	
+	#header div.site_name {float: left; padding-right: 1em;}
+	
+	#header ul.menu {display: block;}
+	#header ul.menu li {display: block; float: left;}	
+	#header ul.menu li a,
+	#header ul.menu li span {padding: .5em .6em; display: inline; margin-right: .5em;}
+	
+	#body {clear: left;}
+	
+	p.inscription abbr {border-bottom: 0;}
+	div#body {padding: 0 0 3em 0;}	
+	div#footer {border-width: 1px 0 0 0; padding: 1em 0 0 0;}
+	#footer p.rattle a img,
+	#header div.site_name a img {border-width: 0;}
+	ol.index_navigation li a,
+	ol.index_navigation li span {border-width: 1px;}
+
+	div#page div.photo {margin-bottom: 1em; width: 240px;}
+
+	div#page div.photo img {border-width: 0; height: 180px;}
+	div#page div.photo img:hover {border-width: 0;}	
+	div#page div.photo * {margin: 0;}
+	div#page div.photo {float: right; clear: right;}
+	div#page div.photo p {margin-top: .5em;}
+	
+	div#page form.login label {float: left; width: 100px;}
+	div#page form textarea.inscription {width: 30em; height: 4.5em; margin-left: auto; margin-right: auto; display: block; padding: 0.5em;}
+	
+	form textarea.notes,
+	form textarea.description	 {width: 60em; height: 10em;}
+	
+	div#body ol.years li a {margin-right: .5em;}
+	
+	div#body div.photos {float: right; padding: 0; margin: 0;}
+	div#body div.photos h2 {padding: 0; margin: 0;}
+
+	
+	div#footer {clear: both; padding-top: 2em;}	
+	div#footer ul {float: left;}
+	div#footer ul li a {padding: 0 .5em 0 .5em;}
+	div#footer ul li:first-child {border-width: 0;}
+	div#footer ul li {border-width: 0 0 0 1px;}
+	div#footer p.rattle {float: right;}
+	iframe.osm {border-width: 1px;}
+	
+	a.edit {display: none;}
+	div.info:hover {margin-left: -2.5em;}
+	div.info:hover p {margin-left: 2.5em;}
+	div.info:hover p.inscription {margin-left: 1.25em;}
+	div.info:hover h1 {margin-left: 1.7857em;} /* 40 / (1.4 * 16) */
+
+	div.inscription a.edit {margin-top: 0.5em;}
+
+	div.info:hover a.edit {float: left; display: inline;}
+	
+	#footer p.version {float: left; margin-left: 1em;}	
+	
+	.error_plaque {
+		width: 20em;
+		border-width: 1px 3px 3px 1px;
+		padding: 6px;
+		margin: 1em auto;
+	}
+	
+	.error_plaque span {
+		padding: 0.5em;
+	}
+	
+	.error_plaque p {
+		border-width: 3px;
+		padding: 1em 1em 0 1em;
+		margin: 0;
+	}
+	.error_organisation {
+		margin-top: 3em;
+		padding-bottom: 0;
+	}
+	
+		form.button-to input.delete {float: right;}
+
+	
+/* Text alignment */
+
+	div#page div.photo {text-align: right;}
+	div#page div.photos {text-align: right;}
+	div#body h1 {text-align: center;}
+	table tr th.id {text-align: left;}
+	table.plaques tr td.colour {text-align: center;}
+	div#footer p.rattle {text-align: right;}
+
+	div#header p.user_info {text-align: right;}
+	div#header div.site_name {text-align: left;}
+	
+	div#page form textarea.inscription {text-align: center;}
+	
+	div#body div.person,
+	div#body div.location {text-align: center;}
+	
+	.error_plaque span {
+		display: block;
+	}
+	
+
+/* Border styles and radiuses */
+
+	body div#footer,
+	div#footer ul li,
+	iframe.osm {border-style: solid;}
+	ol.index_navigation li a,
+	ol.index_navigation li span {border-style: solid; -moz-border-radius: 1em; -webkit-border-radius: 10px;}
+
+
+/* Footer */
+
+#footer p.rattle img {line-height: 6em; vertical-align: middle; margin-top: -16px; margin-left: .5em;}
+
+#footer img.rattle {display: inline;}
+
+
+
+body div.staging {text-align: center; background-color: #FF8; padding: .5em; border: 2px solid #F88;}
+body div.development {text-align: center; background-color: #F88; padding: .5em; border: 2px solid #D00;}
+
+#map {
+    height: 512px;
+}
+
+/* Edit Plaque */
+.new_plaque #plaque_latitude, 
+.new_plaque #plaque_longitude, 
+.edit_plaque #plaque_latitude, 
+.edit_plaque #plaque_longitude 
+{
+    width: 100px;
+}
+                               
+.like_button {
+    text-align:right;
+}
+
+.photographer_photos {
+    list-style-type: none;
+}                               
+.photographer_photos li{
+    float: left;
+    border: 1px solid #bbb;
+    padding: 10px;
+    margin: 10px;
+}                               
+.photographer_photos li img{
+    border: 1px solid #bbb;
+    height: 150px;
+}                               
+.photographer_photos li img:hover{
+    border: 1px solid #888;
+}                               
+.photographer_photos a{
+    display: block;
+    text-align: center;
+    margin-top: 5px;    
+}
+/* Home Page */
+.home_information {
+    padding-top: 1em;
+    clear: both;
+}
+div#page .home_photos{
+    clear: both;
+    padding-bottom: 20px;
+}
+div#page .home_photos .photo{
+    width: auto;
+    border:1px solid #BBBBBB;
+    float:left;
+    margin:10px;
+    padding:10px;
+    text-align: center;
+}
+div#page .home_photos .photo img{
+    border: 1px solid #bbb;
+    height: 180px;
+} 
+div#page .home_photos .photo a:hover img{
+    border: 1px solid #555;
+    height: 180px;
+} 
+.clear {
+    clear:both;
+}
+
+/* To do lists */
+.todo_add li {
+    list-style-type: disc;
+    padding-left: 1em;
+}
+.todo_add img {
+    display:block;
+    border: solid 1px #bbb;
+    height: 80px;
+    margin-bottom: 5px 0;
+}
+.geo a:hover, .geo a:visited:hover { 
+	background-color: inherit; 
+}
+#header .search_box {
+	font-size: 0.9em;
+	float:right;
+}
+#header .search_box input{
+	font-size: 0.9em;
+}
+
+
+/* Jquery UI theming */
+
+
+
+
+.ui-widget-content .ui-state-hover, 
+.ui-widget-content .ui-state-focus { border: 1px solid #999999; background: #dadada; font-weight: normal; color: #212121; }
+
+.ui-state-hover a, .ui-state-hover a:hover { color: #212121; text-decoration: none; }
+
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { border: 1px solid #aaaaaa; background: #ffffff url(images/ui-bg_glass_65_ffffff_1x400.png) 50% 50% repeat-x; font-weight: normal; color: #212121; }
+
+.ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited { color: #212121; text-decoration: none; }
+.ui-widget :active { outline: none; }
+
+
+.ui-widget-content { border: 1px solid #aaaaaa; background: #ffffff; color: #222222; }
+
+.ui-menu {
+	list-style:none;
+	padding: 0px;
+	margin: 0;
+	display:block;
+	float: left;
+}
+.ui-menu .ui-menu {
+	margin-top: -3px;
+}
+.ui-menu .ui-menu-item {
+	margin:0;
+	padding: 0;
+	zoom: 1;
+	float: left;
+	clear: left;
+	width: 100%;
+}
+.ui-menu .ui-menu-item a {
+	text-decoration:none;
+	display:block;
+	padding: .2em .4em;
+	zoom:1;
+	cursor: pointer;
+}
+.ui-menu .ui-menu-item a.ui-state-hover,
+.ui-menu .ui-menu-item a.ui-state-active {
+	font-weight: normal;
+	margin: -1px;
+}
+
+
+.result .title {color: blue;}
+.result .title:hover, .result .location:hover {color: #FFF;}
+.result .location {color: #777; text-decoration: none;}
+.result mark {background-color: #FF9; font-weight: bold;}

@@ -1,0 +1,16 @@
+<% @page_title = @location.name  %>
+<div class="location" typeof="geo:Point">
+	<h1><%= @location.name %><% if @location.area %>, <%= link_to @location.area.name, @location.area %><% end %></h1>
+</div>	
+
+	<p>There <%= pluralize_is_or_are(@location.plaques.size, "plaque") %> at this location:</p>
+	
+	<ul>
+		<% @location.plaques.each do |plaque| %>
+			<li><%= link_to("#" + plaque.id.to_s, plaque_path(plaque)) %>: "<%= plaque.inscription %>"</li>
+		<% end %>
+	</ul>
+
+	
+<%= content_tag("p", link_to("Edit", edit_location_path(@location))) if authorized? %>
+	

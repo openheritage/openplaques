@@ -1,0 +1,43 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix wgs84: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix op: <http://openplaques.org/ontology/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# Plaques
+
+op:Plaque a owl:Class;
+  rdfs:label "Plaque"@en;
+  rdfs:comment "A commemorative plaque affixed at a particular geographical location, often of a person."@en
+.
+
+op:inscription a owl:DatatypeProperty;
+  rdfs:label "Inscription"@en;
+  rdfs:comment "A textual inscription on a physical object."@en;
+  rdfs:range xsd:string;
+  rdfs:domain op:Plaque, owl:Thing
+.
+
+
+# Colors
+
+op:hasPrimaryColour a owl:ObjectProperty;
+  rdfs:label "has primary colour"@en;
+  rdfs:comment "The primary visible colour of a physical object."@en;
+  rdfs:domain op:Plaque, owl:Thing;
+  rdfs:range op:Colour
+.
+
+op:primaryColourOf a owl:ObjectProperty;
+  rdfs:label "primary colour of"@en;
+  owl:inverseOf op:hasPrimaryColour;
+  rdfs:domain op:Colour;
+  rdfs:range op:Plaque, owl:Thing
+.
+
+op:Colour a owl:Class;
+  rdfs:label "Colour"@en;
+  rdfs:comment "A conceptually distinct colour."@en
+.

@@ -1,0 +1,14 @@
+frankie:
+  name: Frankie Roberto
+  index: f
+    
+jez:
+  name: Jez Nicholson
+  index: j
+
+    
+winston_churchill:
+  name: Winston Churchill
+  dbpedia_uri: http://dbpedia.org/resource/Winston_Churchill
+  wikipedia_url: http://en.wikipedia.org/wiki/Winston_Churchill
+  index: w

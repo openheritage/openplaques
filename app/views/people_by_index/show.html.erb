@@ -1,0 +1,17 @@
+<% @page_title = "People - " + @index  %>
+<h1>People - <%= @index %></h1>
+
+<%= content_tag("ol", :class => "index_navigation") do %>
+	<% for letter in "a".."z" %>
+		<%= content_tag("li", navigation_link_to(letter, people_by_index_path(letter))) %>
+	<% end %>
+<% end %>
+
+<%= content_tag("ul") do %>
+	<% @people.each do |person| %>
+		<%= content_tag("li") do %>
+			<%= link_to dated_roled_person(person) %>
+			<%= " - " + pluralize(person.plaques.size, "plaque") unless person.plaques.size <= 1 %>
+		<% end %>
+	<% end %>
+<% end %>

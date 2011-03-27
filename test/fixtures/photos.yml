@@ -1,0 +1,15 @@
+one:
+  user_id: 1
+  photographer: Gwynhafyr
+  url: http://www.flickr.com/photos/14298302@N07/2389548064/
+  file_url: http://farm4.static.flickr.com/3129/2389548064_22547c4fbb_m.jpg
+  plaque_id: 1
+  licence_id: 1
+
+fourtwosix:
+  user_id: 1
+  photographer: Gwynhafyr
+  url: http://www.flickr.com/photos/70323761@N00/301450561/
+  file_url: http://farm1.static.flickr.com/100/301450561_14cb36eb45_m.jpg
+  plaque_id: 426
+  licence_id: 1

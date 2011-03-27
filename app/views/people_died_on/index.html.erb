@@ -1,0 +1,12 @@
+<% @page_title = "People who died in"  %>
+<h1>died in</h1>
+
+<p>We have records of when <%=pluralize(Person.count(:died_on), "person") %> died</p>
+<ul>
+<% for count in @counts %>
+  <% if count[0] != nil %>
+  <li><%= link_to(count[0].to_s[0,4], people_died_on_path(count[0].to_s[0,4]), {:class => "bday"}) %>
+   - <%= pluralize(count[1], "person") %></li>
+  <% end %>
+<% end %>
+</ul>

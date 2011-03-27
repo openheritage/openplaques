@@ -1,0 +1,76 @@
+<%  @page_title = title(@plaque) %>
+<div class="like_button">
+	<iframe src="http://www.facebook.com/plugins/like.php?href=<%= request.url %>&amp;layout=button_count&amp;show_faces=false&amp;width=260&amp;action=like&amp;font&amp;colorscheme=light&amp;height=35" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:60px; height:35px; text-align:right;" allowTransparency="true"></iframe>
+</div>
+
+<div<%= " class=\"" + @plaque.colour.name + "plaque\"" if @plaque.colour %> about="#this" typeof="op:Plaque">
+  <div class="info">
+    <%= link_to "Edit", edit_plaque_path(@plaque), {:class => :edit, :title => "Edit plaque"} if current_user %>
+	<h1>Plaque #<%= @plaque.id %></h1>
+  </div>
+
+  <div class="info inscription">
+      <%= link_to "Edit", edit_plaque_inscription_path(@plaque), {:class => :edit, :title => "Edit inscription"} if current_user %>
+      <%= content_tag "p", "Partial inscription" if @plaque.inscription_is_stub %>
+      <%= content_tag("p", new_linked_inscription(@plaque), {:class => "inscription", :property => "op:inscription"}) %>
+    </div>
+  
+	<div class="photo">
+		
+		<% if @plaque.photos.size > 0 %>
+			<% photo = @plaque.photos.first %>
+			<%= link_to(image_tag(photo.file_url, {:alt => "Photo of plaque", :rel => "foaf:depiction"}), photo.url) %>
+			<p>Photographer: <%= link_to(photo.photographer, photo.photographer_url) %>. Licence:&#160;<%= link_to(photo.licence.name, photo.licence.url) %>.</p>
+		<% else %>
+			<%= image_tag("/images/NoPhoto.gif", {:alt => "Awaiting Photograph"}) %>
+			<p>To add one, upload your Creative Commons licenced photo to <a href="http://www.flickr.com">Flickr</a>
+			(preferably geocoded) and tag it with <kbd><%= machine_tag(@plaque) %></kbd>. 
+			It will then appear here within 24 hours. <br/>
+			</p>
+		<% end %>
+		
+		<%#= button_to("Find on Flickr", flickr_search_plaque_path()) if current_user %>
+	</div>	
+
+  <% unless @plaque.description.blank? %>
+	  <div class="info">
+	    <%= link_to "Edit", edit_plaque_description_path(@plaque), {:class => :edit, :title => "Edit plaque description"} if current_user %>
+	      <div class="description" id="description">
+					<%= simple_format(h(@plaque.description)) %>
+	      </div>
+	  </div>
+  <% end %>
+
+  <div class="info">
+    <%= link_to "Edit", edit_plaque_erected_path(@plaque), {:class => :edit, :title => "Edit erected information"} if current_user %>
+	  <%= erected_information(@plaque) %>
+	</div>
+
+  <div class="info">
+    <%= link_to "Edit", edit_plaque_location_path(@plaque), {:class => :edit, :title => "edit location"} if current_user %>
+	  <%= content_tag("p", "Location: ".html_safe + location_if_known(@plaque) + ".") %>
+  </div>
+	
+	<% if @plaque.geolocated? %>
+
+    <%= osm_iframe(@plaque.latitude,@plaque.longitude) %>
+  
+	  <% end %>
+		<div class="info">
+			<%= link_to "Edit", edit_plaque_geolocation_path(@plaque), {:class => :edit, :title => "Edit geolocation"} if current_user %>
+			<p rel="geo:based_near" resource="#plaque_location">Co-ordinates:  <%= geolocation_if_known(@plaque) %>. 
+				<%= "Google: ".html_safe + google_map_if_known("map", @plaque) + ", " + google_streetview_if_known("street view", @plaque) + ", " + google_earth_if_known("earth", @plaque) if @plaque.geolocated? %>
+		</div>
+
+	<div class="info">
+    <%= link_to "Edit", edit_plaque_colour_path(@plaque), {:class => :edit, :title => "edit plaque's colour"} if current_user %>	  
+	  <%= content_tag("p", "Colour: ".html_safe + colour_if_known(@plaque) + ".") %>
+  </div>
+
+	<div class="info">
+    <%= link_to "Edit", edit_plaque_language_path(@plaque), {:class => :edit, :title => "edit plaque's language"} if current_user %>	  
+	  <%= content_tag("p", "Language: ".html_safe + language_if_known(@plaque) + ".") %>
+  </div>
+  
+
+</div>

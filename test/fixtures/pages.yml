@@ -1,0 +1,16 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+about_page:
+  name: About
+  slug: about
+  body: This is the about page.
+
+contact_page:
+  name: Contact Us
+  slug: contact
+  body: Get in touch!
+  
+about_the_data_page:
+  name: About the Data
+  slug: data
+  body: It's all public domain...

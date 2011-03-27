@@ -1,0 +1,26 @@
+<h1>Editing <%= link_to("Plaque #" + @plaque.id.to_s, plaque_path(@plaque))%></h1>
+
+<div class="info inscription">
+  <%= link_to "Edit", edit_plaque_inscription_path(@plaque), {:class => :edit, :title => "Edit inscription"} if logged_in?%>
+  <%= content_tag("p", new_linked_inscription(@plaque), {:class => "inscription"}) %>
+</div>
+
+
+<div class="info">
+	<p>First added by <%= link_to @plaque.user.username, user_path(@plaque.user) %> on <%= @plaque.created_at.to_s(:long) %>. <%= "Last updated: " + @plaque.updated_at.to_s(:long) + "." if @plaque.created_at != @plaque.updated_at %></p>	
+</div>	
+
+<% form_for(@plaque) do |f| %>
+  <%= f.error_messages %>
+	
+	<p><b><%= f.label :notes %></b>: (these are for internal use, and aren't displayed publicly)<br>
+	<%= f.text_area :notes, :class => :notes %></p>
+	
+  <p>
+    <%= f.submit "Save" %>
+  </p>
+<% end %>
+
+<%= button_to("Delete plaque", plaque_path(@plaque.id), {:method => :delete, :class => :delete}) if authorized? %>
+
+

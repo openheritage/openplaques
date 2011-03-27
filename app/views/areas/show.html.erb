@@ -1,0 +1,13 @@
+<% @page_title = @area.name %>
+
+<h1><%= @page_title %><%= (", ".html_safe + link_to(@area.country.name, @area.country)) if @area.country %></h1>
+
+<%= render :partial => 'plaques/map.html.erb' %>
+
+<%= plaque_list(@plaques) %>
+
+<p>See <%= link_to "unphotographed plaques", {:controller => :unphotographed_plaques_by_area, :country_id => @area.country.alpha2, :area_id => @area.slug, :action => :show} %>.</p>
+
+
+<%= link_to "Edit", edit_area_path(@area) if current_user && current_user.is_admin? %>
+

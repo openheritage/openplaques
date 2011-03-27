@@ -1,0 +1,14 @@
+<% @page_title = "Edit erected information for plaque \#" + @plaque.id.to_s %>
+<h1>Edit erected information for <%= link_to("plaque \#" + @plaque.id.to_s, @plaque)%></h1>
+
+<% form_for(@plaque) do |f| %>
+  <%= f.error_messages %>
+
+	<div><%= f.label :erected_at_string, "Erected in" %>: <%= f.text_field :erected_at_string, {:include_blank => true} %> <%= f.label :organisation_id, "by" %> <%= f.collection_select :organisation_id, @organisations, :id, :name, {:include_blank => true} %> <%= f.submit "Update" %>
+  </div>
+
+  <p>
+  </p>
+<% end %>
+
+<%= content_tag("p", link_to("Add new organisation", new_organisation_path)) if authorized? %>

@@ -1,0 +1,10 @@
+<% @page_title = "Locations" %>
+<h1><%= @page_title %></h1>
+
+<% content_tag("ul") do %>
+  <% @locations.each do |location| %>
+    <% content_tag("li") do %>
+      <%= link_to( location.name, location) %><% if location.area %>, <%= link_to location.area.name, location.area %><% end %>
+    <% end %>
+  <% end %>
+<% end %>

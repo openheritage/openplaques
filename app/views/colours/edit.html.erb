@@ -1,0 +1,14 @@
+<% @page_title = "Rename '" + @colour.name + "'" %>
+<h1><%= @page_title %></h1>
+
+<%= form_for @colour, :url => colour_path(@colour) do |colour| %>
+	<%= colour.label :name, "Name" %>
+	<%= colour.text_field :name %>
+
+	<p>
+		<%= colour.label :dbpedia_uri %>
+		<%= colour.text_field :dbpedia_uri %>
+	</p>	
+	
+	<%= colour.submit "Save" %>
+<% end %>

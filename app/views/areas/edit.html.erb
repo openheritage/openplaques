@@ -1,0 +1,30 @@
+<% @page_title = "Edit " + @area.name + "" %>
+<h1>Edit <%= link_to(h(@area.name), @area) %></h1>
+
+<%= form_for(@area) do |f| %>
+
+	<p>
+		<%= f.label :name %>
+		<%= f.text_field :name %>
+	</p>
+
+	<p>
+		<%= f.label :slug %>
+		<%= f.text_field :slug %> (must be lowercase with underscores)
+	</p>
+
+
+	<p>
+		<%= f.label :country_id, "Country" %>
+		<%= f.collection_select :country_id, @countries, :id, :name %>
+	</p>
+
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= button_to("DELETE AREA", area_path(@area), {:method => :delete}) %>
+
+<%= link_to 'Show', @area %> |
+<%= link_to 'Back', country_areas_path(@country.alpha2) %>

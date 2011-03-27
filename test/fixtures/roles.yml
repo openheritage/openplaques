@@ -1,0 +1,16 @@
+
+geek:
+  name: "geek"
+  slug: "geek"
+    
+technologist:
+  name: "technologist"
+  slug: "technologist"
+
+web_developer:
+  name: "web developer"
+  slug: "web_developer"
+    
+prime_minister:
+  name: "Prime Minister"
+  slug: "prime_minister"

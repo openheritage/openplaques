@@ -1,0 +1,12 @@
+<% @page_title = "Colours" %>
+<h1><%= @page_title %></h1>
+
+<p><%= pluralize(@colours.size, "colour") %></p>
+
+<ul>
+<% for colour in @colours %>
+  <li><%= link_to_colour(colour) %> - <%= pluralize(colour.plaques_count, "plaque")%></li>
+<% end %>
+</ul>
+
+<%= content_tag("p", link_to("Add new colour", new_colour_path)) if current_user && current_user.is_admin %>

@@ -1,0 +1,57 @@
+<h1>Geocoding Plaque #<%= link_to(@plaque.id, @plaque) %></h1>
+
+<% form_for(@plaque) do |f| %>
+  <%= f.error_messages %>
+	
+	<% unless @plaque.geolocated? || @geocodes.length == 0%>
+		<p>
+			<strong>Geocodes from Flickr</strong><br/>
+			<% @geocodes.each do |geocode| %>
+			<%= geocode[0] %>, <%= geocode[1] %> (<%= geocode[2] %>)<br />
+			<% end %>
+		</p>
+	<% end %>
+		
+
+    <div class="edit_lat_long">
+      <p><%= f.label :latitude, "Lat" %>/<%= f.label :longitude, "Long" %>: <%= f.text_field :latitude %>,<%= f.text_field :longitude %> </p>
+      <p><%= f.label :accuracy, "Accuracy" %>: <%= f.text_field :accuracy %></p>
+      <p><%= f.submit "Update" %></p>
+   </div>
+    <% if @plaque.geolocated? %>
+      <%= osm_iframe(@plaque.latitude.to_f,@plaque.longitude.to_f) %>
+	<% end %>
+		
+	<% if @plaque.location != nil %>
+	
+    <div class="info">
+      <%= link_to "Edit", edit_plaque_location_path(@plaque), {:class => :edit, :title => "edit location"} if authorized?%>
+	  <%= content_tag("p", "Location: " + address(@plaque.location) + ".") if @plaque.location %>
+    </div>
+    
+    <% if @yahoo_geo %>  
+    	<p>
+    		<a href="http://developer.yahoo.com/maps/rest/V1/geocode.html">Yahoo! Geocoding API</a> says that 
+    		to a '<%= @yahoo_geo.precision %>' level precision
+    		the location "<%= @yahoo_geo.location %>" is:<br/>
+    		addr: <%= @yahoo_geo.address %>, 
+    		city: <%= @yahoo_geo.city %>, 
+    		state: <%= @yahoo_geo.state %>, 
+    		zip: <%= @yahoo_geo.zip %>, 
+    		country: <%= @yahoo_geo.country %><br/>
+    		[<%= @yahoo_geo.latitude %>,<%= @yahoo_geo.longitude %>]
+    	</p>
+        <%= osm_iframe(@yahoo_geo.latitude.to_f,@yahoo_geo.longitude.to_f) %>
+    
+    <% end %>
+	
+	<% end %>
+  <p>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @plaque %> |
+<%= link_to 'Back', plaques_path %>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js" language="javascript" type="text/javascript"></script>
+<script src="/javascripts/plaque_edit.js" language="javascript" type="text/javascript"></script>

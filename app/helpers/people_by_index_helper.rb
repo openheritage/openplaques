@@ -1,0 +1,2 @@
+module PeopleByIndexHelper
+end

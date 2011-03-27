@@ -1,0 +1,21 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+frankie_sheffield_plaque:
+  inscription: "Frankie Roberto (1984-), web developer, worked here"
+  location: innovation_centre
+  colour: blue
+  organisation: open_plaques
+  plaque_erected_year: y2k
+
+churchill_daleks:
+  inscription: "Winston Churchill, prime minister, defeated the daleks from here"
+  colour: red
+  location: cabinet_war_rooms
+  
+jez_plaque:
+  inscription: "Jez Nicholson, technologist, worked here"
+  colour: red
+  
+geolocated_plaque:
+  latitude: 0.55
+  longitude: 0.33

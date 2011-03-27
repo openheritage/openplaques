@@ -1,0 +1,8 @@
+<% @page_title = "People who died in " + @year.year.to_s  %>
+<h1><%=pluralize(@people.size, "person") %> <a href="/people/died_on/">died in</a> <%= @year.year.to_s %></h1>
+
+<ul>
+<% @people.each do |person| %>
+	<li><%= link_to dated_roled_person(person) %></li>
+<% end %>
+</ul>

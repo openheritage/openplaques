@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+english:
+  name: English
+  alpha2: en
+
+french:
+  name: French
+  alpha2: fr

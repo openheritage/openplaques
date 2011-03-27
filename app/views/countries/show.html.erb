@@ -1,0 +1,21 @@
+<h1><%= @country.name %></h1>
+
+<%= render :partial => 'plaques/map.html.erb' %>
+
+<% if @areas.size > 0 %>
+	<h2>Areas:</h2>
+
+	<%= content_tag("ul") do %>
+		<% @areas.each do |area| %>
+  		<%= content_tag("li") do %>
+	  		<%= link_to area.name, area %>
+        <%= " - " + pluralize(area.plaques.size, "plaque") %>
+        <% end %>
+      <% end %>
+	<% end %>
+<% end %>
+
+<%= content_tag("p", link_to("Add new area", new_country_area_path(@country.alpha2))) if current_user && current_user.is_admin? %>
+  
+<p>See <%= link_to "unphotographed plaques", country_unphotographed_path(@country) %>.</p>
+

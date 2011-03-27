@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+frankie_worked:
+    plaque: frankie_sheffield_plaque
+    person: frankie
+    verb: worked
+    location: innovation_centre
+
+    

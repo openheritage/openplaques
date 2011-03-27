@@ -1,0 +1,11 @@
+<% @page_title = "Years in which plaques were erected" %>
+<h1><%= @page_title %></h1>
+
+<%= content_tag("ol", {:class => "years"}) do %>
+	<% @plaque_erected_years.each do |plaque_erected_year| %>
+		<%= content_tag("li") do %>
+			<%= link_to plaque_erected_year.name, plaque_erected_year_path(plaque_erected_year.name) %>
+			<%= pluralize(plaque_erected_year.plaques.size, "plaque") %>
+		<% end %>
+	<% end %>
+<% end %>

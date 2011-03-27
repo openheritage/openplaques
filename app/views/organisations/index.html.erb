@@ -1,0 +1,15 @@
+<% @page_title = "Organisations" %>
+<h1><%= @page_title %></h1>
+
+<p><%= pluralize(@organisations.size, "organisation") %></p>
+
+<ul>
+<% @organisations.each do |organisation| %>	
+	<%= content_tag("li") do %>
+		<%= link_to(h(organisation.name), organisation) %>
+		<%= " - " + pluralize(organisation.plaques.size.to_s, "plaque") if organisation.plaques.size > 0 %>
+	<% end %>
+<% end %>
+</ul>
+
+<%#= content_tag("p", link_to("Add new organisation", new_organisation_path)) if authorized? %>

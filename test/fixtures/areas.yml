@@ -1,0 +1,16 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+london:
+  name: London
+  slug: london
+  country: gb
+  
+sheffield:
+  name: Sheffield
+  slug: sheffield
+  country: gb
+  
+brighton:
+  name: Brighton
+  slug: brighton
+  country: gb  

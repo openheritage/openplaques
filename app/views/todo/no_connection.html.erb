@@ -1,0 +1,14 @@
+﻿<h1>To do: Plaques with no connections</h1>
+<p><%= link_to("All to-do lists", "/todo") %></p>
+
+<% if @plaques.size > 0 %>
+	<p>These plaques have no connections:</p>
+	<ul>
+	  <% @plaques.each do |plaque| %>
+		<li><%= link_to(plaque.first_person || "Plaque #" + plaque.id.to_s, "/plaques/" + plaque.id.to_s + "/connections/new")  %> <%= plaque.inscription %></li>
+	  <% end %>
+	</ul>
+<% else %>
+	<p>There aren't any plaques with no connections...</p>
+<% end %>
+<p class="clear"><%= link_to("All to-do lists", "/todo") %></p>

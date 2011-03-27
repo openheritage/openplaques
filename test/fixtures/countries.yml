@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+gb:
+  name: "United Kingdom"
+  alpha2: gb
+
+france:
+  name: "France"
+  alpha2: fr

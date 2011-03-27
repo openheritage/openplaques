@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+english_heritage:
+  name: English Heritage
+  slug: English_Heritage
+
+glc:
+  name: Greater London Council
+  slug: Greater_London_Council
+  
+mcc:
+  name: Manchester City Council
+  slug: Manchester_City_Council
+  
+open_plaques:
+  name: Open Plaques
+  slug: openplaques

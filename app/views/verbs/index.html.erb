@@ -1,0 +1,8 @@
+<% @page_title = "Verbs" %>
+<h1>Verbs</h1>
+
+<ul>
+<% @verbs.each do |verb| %>
+	<%=content_tag("li", link_to(verb.name, verb_path(verb)))%>
+<% end %>
+</ul>

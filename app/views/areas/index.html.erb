@@ -1,0 +1,17 @@
+<% @page_title = "Areas" %>
+<h1><%= @page_title %></h1>
+
+<p><%= pluralize(@areas.size, "area") %></p>
+
+<% if @areas.size > 0 %>
+	<%= content_tag("ul") do %>
+		<% @areas.each do |area| %>
+			<%= content_tag("li") do %>
+				<%= link_to area.name, area %>
+				<%= "(" + pluralize(area.plaques.size, "plaque") + ")" %>
+			<% end %>
+		<% end %>
+	<% end %>
+<% end %>
+
+<%= content_tag("p", link_to("Add new area", new_country_area_path(@country.alpha2))) if current_user && current_user.admin? %>

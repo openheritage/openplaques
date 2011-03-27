@@ -1,0 +1,15 @@
+<% @page_title = @colour.name.capitalize + " plaques" %>
+<div typeof="op:Colour">
+<h1 property="rdfs:label" xml:lang="en" lang="en"><%= @page_title %></h1>
+
+<% unless @colour.dbpedia_uri.blank? %>
+<p>
+  <a href="<%= @colour.dbpedia_uri.gsub("dbpedia.org/resource/", "en.wikipedia.org/wiki/") %>">wikipedia</a>
+  <a href="<%= @colour.dbpedia_uri %>" rel="owl:sameAs">dbpedia.org</a>
+</div>
+<% end %>
+
+<%= render :partial => 'plaques/map.html.erb' %>
+
+<%= plaque_list(@plaques, :colour) %>
+</div>
