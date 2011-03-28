@@ -208,9 +208,31 @@ class PlaquesController < ApplicationController
           @user.is_verified = false
           @user.save!
         end 
-      
+        
+        country = Country.find(params[:plaque][:country])
+        
+        if params[:locaton] && !params[:location].blank?
+          if params[:area_id] && !params[:area_id].blank?
+            area = Area.find(params[:area_id])
+            raise "ERROR" if area.country_id != country.id and return
+          elsif params[:area] && !params[:area].blank?
+            area = country.areas.find_by_name(params[:area])
+             unless area
+               area = country.areas.create!(:name => params[:area], :slug => params[:area].downcase.gsub(" ", "_"))
+             end
+          end
+                
+          if area
+            location = area.locations.find_by_name(params[:location])          
+            unless location
+              location = area.locations.create!(:name => params[:location])
+            end
+          end
+        end
+        
         @plaque = @user.plaques.new
         @plaque.inscription = params[:plaque][:inscription]
+        @plaque.location = location if location
       
         if @plaque.save
       

@@ -1,6 +1,5 @@
 <script>
 	$(function() {
-		var availableTags = [{"label": "test", "value": "1"}];		
 		$( "#area" ).autocomplete({
 			source: '/areas.json' ,
 			select: function(event, ui){
@@ -24,12 +23,12 @@
 		
 		<div>
 		<label for="location">Street Address: </label>
-		<input id="location">
+			<%= text_field_tag :location %>
 		</div>
 				
 		<div class="ui-widget">
 			<label for="area">City/Town: </label>
-			<input id="area">
+			<%= text_field_tag :area %>
 		</div>
 
 		<div>
@@ -38,7 +37,6 @@
 		</div>
 		
 			<%= hidden_field_tag :area_id %>
-			<%= hidden_field_tag :country_id %>
 		
 		<h2>About you</h2>
 
