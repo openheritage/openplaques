@@ -1,11 +1,6 @@
 .bundle
 db/*.sqlite3
+db/schema.rb
 log/*.log
 tmp/**/*
-.svn/*
-*/.svn/*
-*/*/.svn/*
-*/*/*/.svn/*
-*/*/*/*/.svn/*
-*/*/*/*/*/.svn/*
-*/*/*/*/*/*/.svn/*
+config/database.yml
