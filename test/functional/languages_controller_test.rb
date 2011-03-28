@@ -16,6 +16,11 @@ class LanguagesControllerTest < ActionController::TestCase
         
     should respond_with :success
     should render_template :index
+    
+    should "have a meaningful page title" do
+      assert_select 'h1', 'Languages'
+    end
+    
   end
 
   context "when vieiwng a language page" do
