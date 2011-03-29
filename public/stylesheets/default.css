@@ -469,3 +469,8 @@ div#page .home_photos .photo a:hover img{
 .result .title:hover, .result .location:hover {color: #FFF;}
 .result .location {color: #777; text-decoration: none;}
 .result mark {background-color: #FF9; font-weight: bold;}
+
+.field_with_errors {display: inline;} /* Fix for stupid divs inserted by Rails */
+
+.field_with_errors label {color: red;}
+.field_with_errors input {border: red 1px solid;}
