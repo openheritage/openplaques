@@ -28,10 +28,16 @@ class OrganisationsControllerTest < ActionController::TestCase
   end
   
   
-  should "be redirected" do
-    get(:show, {:id => organisations(:english_heritage).id})
-    assert_response(301)
-    assert_redirected_to({:id => organisations(:english_heritage).slug})      
-  end
+  context "when requesting an organisation page using its id" do
 
+    setup do
+      @organisation = organisations(:english_heritage)
+      get(:show, {:id => @organisation.id})
+    end
+
+    should respond_with :moved_permanently
+    should redirect_to("page using slug") {organisation_path(@organisation.slug)}
+
+  end
+  
 end
