@@ -1,8 +1,7 @@
 <% @page_title = "Edit " + @organisation.name + "" %>
 <h1>Edit <%= link_to(h(@organisation.name), @organisation) %></h1>
 
-<% form_for(@organisation) do |f| %>
-  <%= f.error_messages %>
+<%= form_for(@organisation) do |f| %>
 
 	<p>
 		<%= f.label :name %>
@@ -33,6 +32,3 @@
     <%= f.submit "Update" %>
   </p>
 <% end %>
-
-<%= link_to 'Show', @organisation %> |
-<%= link_to 'Back', organisations_path %>

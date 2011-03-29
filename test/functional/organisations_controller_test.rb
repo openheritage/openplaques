@@ -53,6 +53,74 @@ class OrganisationsControllerTest < ActionController::TestCase
       should render_template :new
       
     end
+    
+    context "when submitting a valid new organisation" do
+      setup do
+        @organisation_slug = "red_robin_society"
+        post :create, :organisation => {:name => "Red Robin Society", :slug => @organisation_slug} 
+      end
+      
+      should redirect_to("the page for the new organisation") { organisation_path(@organisation_slug) }
+    end
+
+    context "when submitting an invalid new organisation" do
+      setup do
+        post :create, :organisation => {} 
+      end
+      
+      should assign_to :organisation
+      should render_template :new
+    end
+
+    context "when viewing the edit organisation page" do
+      
+      setup { get :edit, :id => organisations(:english_heritage).slug }
+      
+      should respond_with :success
+      should assign_to :organisation
+      
+    end
+    
+    context "when requesting the edit page for a non-existant organisation" do
+
+      should "raise a not-found error" do
+        assert_raises(ActiveRecord::RecordNotFound) do      
+          get(:edit, {:id => "fictional_organisation"})
+        end
+      end  
+    end
+    
+    context "when updating an organisation with valid new attributes" do
+      
+      setup do
+        @organisation = organisations(:english_heritage)
+        put :update, :id => @organisation.slug, :organisation => {:name => @organisation.name, :slug => @organisation.slug, :notes => "Test"}
+      end
+      
+      should redirect_to("the page for the organisation") { organisation_path(@organisation.slug) }
+      
+    end
+
+    context "when updating an organisation with invalid attributes" do
+      
+      setup do
+        @organisation = organisations(:english_heritage)
+        put :update, :id => @organisation.slug, :organisation => {:name => "", :slug => ""}
+      end
+      
+      should render_template :edit
+      should assign_to :organisation
+      
+    end
+
+    context "when updating a non-existant organisation" do
+
+      should "raise a not-found error" do
+        assert_raises(ActiveRecord::RecordNotFound) do      
+          put(:update, {:id => "fictional_organisation", :organisation => {}})
+        end
+      end  
+    end
 
 
   end

@@ -44,27 +44,28 @@ class OrganisationsController < ApplicationController
     @organisation = Organisation.new(params[:organisation])
     
     if @organisation.save
-      redirect_to @organisation    
+      redirect_to organisation_path(@organisation.slug)
     else
       render :action => :new
     end
   end
 
   def edit
-    @organisation = Organisation.find_by_slug(params[:id])
+    @organisation = Organisation.find_by_slug!(params[:id])
   end
 
   def update
-    @organisation = Organisation.find_by_slug(params[:id])
+    @organisation = Organisation.find_by_slug!(params[:id])
+    old_slug = @organisation.slug
 
-    if @organisation
-      if @organisation.update_attributes(params[:organisation])
-        flash[:notice] = 'Organisation was successfully updated.'
-        redirect_to organisation_path(@organisation)
-      else
-        render :action => "edit"
-      end
+    if @organisation.update_attributes(params[:organisation])
+      flash[:notice] = 'Updates to organisation saved.'
+      redirect_to organisation_path(@organisation.slug)
+    else
+      @organisation.slug = old_slug
+      render :action => "edit"
     end
+
   end
 
 end
