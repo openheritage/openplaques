@@ -1,11 +1,16 @@
 <% @page_title = "Add Organisation" %>
 <h1><%= @page_title %></h1>
 
+<p>This form allows you to add an organisation responsible for erecting plaques. Please check the organisation hasn't already been added.</p>
+
 <%= form_for @organisation do |f| %>
-	<%= f.label :name %> <%= f.text_field :name %>
-	<p><%= f.label :slug %> <%= f.text_field :slug %></p>
-	<p><%= f.label :website %><%= f.text_field :website %></p>
-	<p><%= f.label :description %><%= f.text_area :description %></p>
-	<p><%= f.label :notes %> <%= f.text_area :notes %></p>
-	<p><%= f.submit "save" %></p>
+
+	<p><%= f.label :name %> * <%= f.text_field :name %> (Note: please don't include the word 'The' unless it is absolutely an indivisible part of the name.)</p>
+	<p><%= f.label :slug %> * <%= f.text_field :slug %> (Should only contain lowercase letters and underscores for spaces.)</p>
+	<p><%= f.label :website %> <%= f.text_field :website %></p>
+	<p><%= f.label :description %><%= f.text_area :description %> (Displayed on the page)</p>
+	<p><%= f.label :notes %> <%= f.text_area :notes %> (Internal use only)</p>
+	<p><%= f.submit "Save" %></p>
 <% end %>
+
+<p><small>* Non-optional fields</small></p>
