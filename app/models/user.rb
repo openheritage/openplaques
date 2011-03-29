@@ -24,9 +24,9 @@ class User < ActiveRecord::Base
 #  include Authentication::ByPassword
 #  include Authentication::ByCookieToken
 
-#  validates_presence_of     :username
+  validates_presence_of     :username
 #  validates_length_of       :username,    :within => 3..40
-#  validates_uniqueness_of   :username
+  validates_uniqueness_of   :username
 #  validates_format_of       :username,    :with => Authentication.login_regex, :message => Authentication.bad_login_message
 
 #  validates_format_of       :name,     :with => Authentication.name_regex,  :message => Authentication.bad_name_message, :allow_nil => true
