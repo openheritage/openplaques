@@ -1,6 +1,6 @@
 class OrganisationsController < ApplicationController
 
-  before_filter :authorisation_required, :except => [:index, :show]
+  before_filter :authenticate_user!, :except => [:index, :show]
 
   def index
     @organisations = Organisation.find(:all, :order => :name)

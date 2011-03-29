@@ -39,5 +39,33 @@ class OrganisationsControllerTest < ActionController::TestCase
     should redirect_to("page using slug") {organisation_path(@organisation.slug)}
 
   end
+
+  context "when signed in as a user" do
+  
+    setup { sign_in users(:frankieroberto) }
+      
+    context "when viewing the add organisation page" do
+      
+      setup { get :new }
+
+      should respond_with :success
+      should assign_to :organisation
+      should render_template :new
+      
+    end
+
+
+  end
+
+
+  context "when not signed in" do
+    
+    context "when viewing the add organisation page" do      
+      setup { get :new }      
+      should redirect_to("login page") {new_user_session_path}      
+    end
+    
+    
+  end
   
 end

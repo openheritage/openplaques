@@ -1,8 +1,7 @@
 <% @page_title = "Add Organisation" %>
 <h1><%= @page_title %></h1>
 
-<% form_for @organisation do |f| %>
-	<%= f.error_messages %>
+<%= form_for @organisation do |f| %>
 	<%= f.label :name %> <%= f.text_field :name %>
 	<p><%= f.label :slug %> <%= f.text_field :slug %></p>
 	<p><%= f.label :website %><%= f.text_field :website %></p>
