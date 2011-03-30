@@ -71,8 +71,8 @@ Openplaques::Application.routes.draw do
   # People based resources:
   scope "/people" do
     resources "a-z", :controller => "people_by_index", :as => "people_by_index"
-    resources :born_on, :controller => :people_born_on, :as => "people_born_on"
-    resources :died_on, :controller => :people_died_on, :as => "people_died_on"
+    resources :born_on, :controller => :people_born_on, :as => "people_born_on", :only => [:index, :show]
+    resources :died_on, :controller => :people_died_on, :as => "people_died_on", :only => [:index, :show]
   end
   resources :people
 
