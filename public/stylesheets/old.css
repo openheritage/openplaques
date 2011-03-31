@@ -6,6 +6,18 @@ table tr td, table, table tr th {
 	margin: 0;
 	padding: 0.5em;
 }
+table.plaque_list, table.plaque_list td, table.plaque_list img{
+	border-width: 0px;
+}
+table.plaque_list tr{
+	vertical-align: top;
+}
+table.plaque_list .photo img{
+	margin-top: -4px;
+}
+table.plaque_list .geo img{
+	margin-top: 4px;
+}
 
 ol.index_navigation {text-align: center;}
 
@@ -105,6 +117,8 @@ p.inscription {font-size: 2em;}
 	a:visited:hover { color: #fff; background-color:#666; }
 
 	a img:hover {background-color: #FFF;}
+	
+	.site_name a:hover { background-color: #fff;} 
 
 	.fieldWithErrors {
 	  background-color: red;
@@ -137,7 +151,7 @@ p.inscription {font-size: 2em;}
 	
 	#header ul.menu {}
 	#header ul.menu li a,
-	#header ul.menu li a:visited {color: white; background-color: #00A;}
+	#header ul.menu li a:visited {color: white; background-color: #3F66B2;}
 	#header ul.menu li a:hover {color: white; background-color: black;}
 	#header ul.menu li span {color: black; background-color: #CCC;}
  
@@ -175,6 +189,8 @@ p.inscription {font-size: 2em;}
 	
 	#footer p.version,
 	#footer p.version a {color: #AAA;}
+	
+	form.button-to input.delete {color: red;}
 
 /* Text decoration */
 
@@ -205,7 +221,7 @@ p.inscription {font-size: 2em;}
 
 	div#page div.photo {margin-bottom: 1em; width: 240px;}
 
-	div#page div.photo img {border-width: 0;}
+	div#page div.photo img {border-width: 0; height: 180px;}
 	div#page div.photo img:hover {border-width: 0;}	
 	div#page div.photo * {margin: 0;}
 	div#page div.photo {float: right; clear: right;}
@@ -213,6 +229,9 @@ p.inscription {font-size: 2em;}
 	
 	div#page form.login label {float: left; width: 100px;}
 	div#page form textarea.inscription {width: 30em; height: 4.5em; margin-left: auto; margin-right: auto; display: block; padding: 0.5em;}
+	
+	form textarea.notes,
+	form textarea.description	 {width: 60em; height: 10em;}
 	
 	div#body ol.years li a {margin-right: .5em;}
 	
@@ -232,6 +251,7 @@ p.inscription {font-size: 2em;}
 	div.info:hover {margin-left: -2.5em;}
 	div.info:hover p {margin-left: 2.5em;}
 	div.info:hover p.inscription {margin-left: 1.25em;}
+	div.info:hover h1 {margin-left: 1.7857em;} /* 40 / (1.4 * 16) */
 
 	div.inscription a.edit {margin-top: 0.5em;}
 
@@ -259,6 +279,8 @@ p.inscription {font-size: 2em;}
 		margin-top: 3em;
 		padding-bottom: 0;
 	}
+	
+		form.button-to input.delete {float: right;}
 
 	
 /* Text alignment */
@@ -315,3 +337,140 @@ body div.development {text-align: center; background-color: #F88; padding: .5em;
 {
     width: 100px;
 }
+                               
+.like_button {
+    text-align:right;
+}
+
+.photographer_photos {
+    list-style-type: none;
+}                               
+.photographer_photos li{
+    float: left;
+    border: 1px solid #bbb;
+    padding: 10px;
+    margin: 10px;
+}                               
+.photographer_photos li img{
+    border: 1px solid #bbb;
+    height: 150px;
+}                               
+.photographer_photos li img:hover{
+    border: 1px solid #888;
+}                               
+.photographer_photos a{
+    display: block;
+    text-align: center;
+    margin-top: 5px;    
+}
+/* Home Page */
+.home_information {
+    padding-top: 1em;
+    clear: both;
+}
+div#page .home_photos{
+    clear: both;
+    padding-bottom: 20px;
+}
+div#page .home_photos .photo{
+    width: auto;
+    border:1px solid #BBBBBB;
+    float:left;
+    margin:10px;
+    padding:10px;
+    text-align: center;
+}
+div#page .home_photos .photo img{
+    border: 1px solid #bbb;
+    height: 180px;
+} 
+div#page .home_photos .photo a:hover img{
+    border: 1px solid #555;
+    height: 180px;
+} 
+.clear {
+    clear:both;
+}
+
+/* To do lists */
+.todo_add li {
+    list-style-type: disc;
+    padding-left: 1em;
+}
+.todo_add img {
+    display:block;
+    border: solid 1px #bbb;
+    height: 80px;
+    margin-bottom: 5px 0;
+}
+.geo a:hover, .geo a:visited:hover { 
+	background-color: inherit; 
+}
+#header .search_box {
+	font-size: 0.9em;
+	float:right;
+}
+#header .search_box input{
+	font-size: 0.9em;
+}
+
+
+/* Jquery UI theming */
+
+
+
+
+.ui-widget-content .ui-state-hover, 
+.ui-widget-content .ui-state-focus { border: 1px solid #999999; background: #dadada; font-weight: normal; color: #212121; }
+
+.ui-state-hover a, .ui-state-hover a:hover { color: #212121; text-decoration: none; }
+
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { border: 1px solid #aaaaaa; background: #ffffff url(images/ui-bg_glass_65_ffffff_1x400.png) 50% 50% repeat-x; font-weight: normal; color: #212121; }
+
+.ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited { color: #212121; text-decoration: none; }
+.ui-widget :active { outline: none; }
+
+
+.ui-widget-content { border: 1px solid #aaaaaa; background: #ffffff; color: #222222; }
+
+.ui-menu {
+	list-style:none;
+	padding: 0px;
+	margin: 0;
+	display:block;
+	float: left;
+}
+.ui-menu .ui-menu {
+	margin-top: -3px;
+}
+.ui-menu .ui-menu-item {
+	margin:0;
+	padding: 0;
+	zoom: 1;
+	float: left;
+	clear: left;
+	width: 100%;
+}
+.ui-menu .ui-menu-item a {
+	text-decoration:none;
+	display:block;
+	padding: .2em .4em;
+	zoom:1;
+	cursor: pointer;
+}
+.ui-menu .ui-menu-item a.ui-state-hover,
+.ui-menu .ui-menu-item a.ui-state-active {
+	font-weight: normal;
+	margin: -1px;
+}
+
+
+.result .title {color: blue;}
+.result .title:hover, .result .location:hover {color: #FFF;}
+.result .location {color: #777; text-decoration: none;}
+.result mark {background-color: #FF9; font-weight: bold;}
+
+.field_with_errors {display: inline;} /* Fix for stupid divs inserted by Rails */
+
+.field_with_errors label {color: red;}
+.field_with_errors input {border: red 1px solid;}
