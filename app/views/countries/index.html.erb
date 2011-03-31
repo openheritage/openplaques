@@ -1,10 +1,12 @@
-<h1>Countries</h1>
+<div class="panel clearfix">
+	<h1>Countries</h1>
+</div>
 
-<%= content_tag("ul") do %>
+<%= content_tag("ol", :class => "search_results") do %>
 	<% @countries.each do |country| %>
 		<%= content_tag("li") do %>
-			<%= link_to country.name, country %>
-      <%= " - " + pluralize(country.plaques.size, "plaque") %>
+			<p><%= link_to country.name, country %></p>
+      	<p class="count"><%= pluralize(country.plaques.size, "plaque") %></p>
       <% end %>
 	<% end %>
 <% end %>

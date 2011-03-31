@@ -1,13 +1,21 @@
 <% @page_title = "People - " + @index  %>
-<h1>People - <%= @index %></h1>
 
-<%= content_tag("ol", :class => "index_navigation") do %>
-	<% for letter in "a".."z" %>
-		<%= content_tag("li", navigation_link_to(letter, people_by_index_path(letter))) %>
-	<% end %>
-<% end %>
+<div class="panel clearfix">
+	<h1>People - <%= @index %></h1>
 
-<%= content_tag("ul") do %>
+	
+	<nav class="alphabet">
+		<%= content_tag("ol") do %>
+			<% for letter in "A".."Z" %>
+				<%= content_tag("li", navigation_link_to(letter, people_by_index_path(letter))) %>
+			<% end %>
+		<% end %>
+		
+	</nav>
+</div>
+
+
+<%= content_tag("ol", :class => "search_results") do %>
 	<% @people.each do |person| %>
 		<%= content_tag("li") do %>
 			<%= link_to dated_roled_person(person) %>
