@@ -21,23 +21,26 @@
 
 		<div><p><%= f.label :inscription, "Please type in the transcription on the plaque" %>:</p> <%= f.text_area :inscription %></div>
 		
-		<div>
-		<label for="location">Street Address: </label>
-			<%= text_field_tag :location %>
-		</div>
+		<fieldset>
+			<h2>Location</h2>
+			<div>
+			<label for="location">Street and number: </label>
+				<%= text_field_tag :location, "", {:placeholder => "221B Baker Street"} %>
+			</div>
 				
-		<div class="ui-widget">
-			<label for="area">City/Town: </label>
-			<%= text_field_tag :area %>
-		</div>
+			<div class="ui-widget">
+				<label for="area">City/Town: </label>
+				<%= text_field_tag :area, "", :placeholder => "London" %>
+			</div>
 
-		<div>
-			<%= f.label :country %>
-			<%= f.collection_select :country, @countries, :id, :name %>
-		</div>
+			<div>
+				<%= f.label :country %>
+				<%= f.collection_select :country, @countries, :id, :name %>
+			</div>
 		
 			<%= hidden_field_tag :area_id %>
-		
+		</fieldset>
+			
 		<h2>About you</h2>
 
 		<%= f.fields_for :user do |g| %>
