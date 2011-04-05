@@ -118,6 +118,7 @@ class PlaquesController < ApplicationController
       end
     else
       @countries = Country.all(:order => :name)    
+      @organisations = Organisation.all(:order => :name)    
 
       @user = User.new
       
@@ -232,6 +233,11 @@ class PlaquesController < ApplicationController
         
         @plaque = @user.plaques.new
         @plaque.inscription = params[:plaque][:inscription]
+        if params[:plaque][:organisation_id] && !params[:plaque][:organisation_id].blank?
+          organisation = Organisation.find(params[:plaque][:organisation_id])
+          @plaque.organisation = organisation
+        end  
+        
         @plaque.location = location if location
       
         if @plaque.save

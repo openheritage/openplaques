@@ -3,7 +3,11 @@ class OrganisationsController < ApplicationController
   before_filter :authenticate_user!, :except => [:index, :show]
 
   def index
-    @organisations = Organisation.find(:all, :order => :name)
+    if params[:name_starts_with]
+      @organisations = Organisation.name_starts_with(params[:name_starts_with]).most_plaques_order
+    else      
+      @organisations = Organisation.all(:order => :name)
+    end
     respond_to do |format|
       format.html
       format.kml {

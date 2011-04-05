@@ -10,6 +10,32 @@
 			delay: 10
 		});
 	});
+	
+	$(function() {
+		
+		$( "#plaque_organisation_name" ).autocomplete({
+			source: function(request, response) {
+				$.ajax({
+					url: "/organisations",
+					dataType: "json",
+					data: {
+						name_starts_with: request.term
+					},
+					success: function(data) {
+						response($.map(data, function(item) {
+							return {
+								label: item.organisation.name,
+								id: item.organisation.id
+							}
+						}));
+					}
+				});
+			},
+			select: function(event, ui) {
+				$('#plaque_organisation_id').val(ui.item.id);
+			}
+		});
+	});
 	</script>
 
 
@@ -40,6 +66,20 @@
 		
 			<%= hidden_field_tag :area_id %>
 		</fieldset>
+			
+		<fieldset>
+			<h2>Who erected the plaque, and when?</h2>
+
+			<%= f.fields_for :organisation do |g| %>
+				<div>
+					<%= g.label :name, "Organisation" %>
+					<%= g.text_field :name, {:placeholder => "English Heritage"} %>
+					<%= f.hidden_field :organisation_id %>
+				</div>
+								
+			<% end %>
+
+		</fieldset>			
 			
 		<h2>About you</h2>
 
