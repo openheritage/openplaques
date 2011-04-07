@@ -49,8 +49,8 @@
 			<h2>What does the plaque say?</h2>
 			<div><p><%= f.label :inscription, "Please type in the transcription on the plaque" %>:</p> <%= f.text_area :inscription, {:placeholder => "Joe Bloggs lived here"} %></div>
 				
-				<%= f.label :language %>
-				<%= f.collection_select :language, @languages, :id, :name %>
+				<%= f.label :language_id %>
+				<%= f.collection_select :language_id, @languages, :id, :name %>
 		</fieldset>
 		<fieldset>
 			<h2>Location</h2>
