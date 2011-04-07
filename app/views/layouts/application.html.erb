@@ -52,15 +52,6 @@
 				list_link_to("Blog", "http://blog.openplaques.org")
 				%>
 			<% end %>
-			<% if defined?(SITE_VERSION)%>
-			<p class="version">
-			  <% if defined?(SITE_VERSION_URL) %>
-			  <%=link_to "Version " + SITE_VERSION, SITE_VERSION_URL %>
-			  <% else %>
-			  Version <%= SITE_VERSION %>
-			  <% end %>
-			</p><% end%>
-			<p class="rattle">Hosted by <%= link_to(image_tag("rattle.gif", {:class => "rattle"}), "http://www.rattlecentral.com")%></p>
 		</div>
 	</div>
 <% if ::Rails.env == "production" %>	
