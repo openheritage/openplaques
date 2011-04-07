@@ -1,6 +1,6 @@
 class LanguagesController < ApplicationController
 
-  before_filter :authorisation_required, :except => [:index, :show]
+  before_filter :authenticate_user!, :except => [:index, :show]
 
   def show
     begin
@@ -28,7 +28,7 @@ class LanguagesController < ApplicationController
     @language = Language.new(params[:language])
     
     if @language.save
-      redirect_to language_path(@language)
+      redirect_to language_path(@language.alpha2)
     end
   end
   

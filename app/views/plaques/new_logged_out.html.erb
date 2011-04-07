@@ -13,7 +13,7 @@
 	
 	$(function() {
 		
-		$( "#plaque_organisation_name" ).autocomplete({
+		$( "#organisation_name" ).autocomplete({
 			source: function(request, response) {
 				$.ajax({
 					url: "/organisations",
@@ -45,8 +45,13 @@
 
 	<%= form_for(@plaque) do |f| %>
 
-		<div><p><%= f.label :inscription, "Please type in the transcription on the plaque" %>:</p> <%= f.text_area :inscription %></div>
-		
+		<fieldset>
+			<h2>What does the plaque say?</h2>
+			<div><p><%= f.label :inscription, "Please type in the transcription on the plaque" %>:</p> <%= f.text_area :inscription, {:placeholder => "Joe Bloggs lived here"} %></div>
+				
+				<%= f.label :language %>
+				<%= f.collection_select :language, @languages, :id, :name %>
+		</fieldset>
 		<fieldset>
 			<h2>Location</h2>
 			<div>
@@ -72,10 +77,13 @@
 
 			<%= f.fields_for :organisation do |g| %>
 				<div>
-					<%= g.label :name, "Organisation" %>
-					<%= g.text_field :name, {:placeholder => "English Heritage"} %>
+					<%= label_tag :organisation_name, "Organisation" %>
+					<%= text_field_tag :organisation_name, "", {:placeholder => "English Heritage"} %>
 					<%= f.hidden_field :organisation_id %>
 				</div>
+				
+					<%= f.label :erected_at, "Year or date erected" %>
+					<%= f.date_select :erected_at, :include_blank => true %>
 								
 			<% end %>
 
@@ -85,13 +93,13 @@
 
 		<%= f.fields_for :user do |g| %>
 			<p>
-				<%= g.label :name %>
-				<%= g.text_field :name %>
+				<%= label_tag :user_name, "Name" %>
+				<%= text_field_tag :user_name %>
 			</p>
 
 			<p>
-				<%= g.label :email %>
-				<%= g.text_field :email %>
+				<%= label_tag :user_email, "E-mail address" %>
+				<%= text_field_tag :user_email %>
 			</p>
 			
 		<% end %>

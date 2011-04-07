@@ -119,6 +119,7 @@ class PlaquesController < ApplicationController
     else
       @countries = Country.all(:order => :name)    
       @organisations = Organisation.all(:order => :name)    
+      @languages = Language.all(:order => :name)
 
       @user = User.new
       
@@ -192,7 +193,9 @@ class PlaquesController < ApplicationController
   
     else
 
-      @user = User.find_by_email(params[:plaque][:user][:email])
+      user_email = params[:user_email]
+      user_name = params[:user_name]
+      @user = User.find_by_email(user_email)
 
       if @user && @user.is_verified
           flash[:notice] = "You are a proper user - you should login first."
@@ -201,8 +204,8 @@ class PlaquesController < ApplicationController
 
         unless @user
           @user = User.new
-          @user.email = params[:plaque][:user][:email]
-          @user.name = params[:plaque][:user][:name]
+          @user.email = user_email
+          @user.name = user_name
           @user.username = Time.now.to_i.to_s
           @user.password = @user.username
           @user.password_confirmation = @user.password
@@ -212,7 +215,7 @@ class PlaquesController < ApplicationController
         
         country = Country.find(params[:plaque][:country])
         
-        if params[:locaton] && !params[:location].blank?
+        if params[:location] && !params[:location].blank?
           if params[:area_id] && !params[:area_id].blank?
             area = Area.find(params[:area_id])
             raise "ERROR" if area.country_id != country.id and return
@@ -231,12 +234,11 @@ class PlaquesController < ApplicationController
           end
         end
         
-        @plaque = @user.plaques.new
-        @plaque.inscription = params[:plaque][:inscription]
+        @plaque = @user.plaques.new(params[:plaque])
         if params[:plaque][:organisation_id] && !params[:plaque][:organisation_id].blank?
           organisation = Organisation.find(params[:plaque][:organisation_id])
           @plaque.organisation = organisation
-        end  
+        end          
         
         @plaque.location = location if location
       
