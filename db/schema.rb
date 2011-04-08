@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(:version => 20110408132557) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "dbpedia_uri"
-    t.boolean  "common",        :default => false
+    t.boolean  "common",        :default => false, :null => false
   end
 
   create_table "connections", :force => true do |t|
