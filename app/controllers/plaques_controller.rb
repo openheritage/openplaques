@@ -104,32 +104,16 @@ class PlaquesController < ApplicationController
   # GET /plaques/new.xml
   def new
     
-    if current_user
-      @plaque = Plaque.new
-      @colours = Colour.all(:order => :name)
-      @organisations = Organisation.all(:order => :name)    
-      @areas = Area.all(:order => :name)
-      @languages = Language.all(:order => :name)
+    @plaque = Plaque.new
 
+    @countries = Country.all(:order => :name)    
+    @organisations = Organisation.all(:order => :name)    
+    @languages = Language.all(:order => :name)
 
-      respond_to do |format|
-        format.html # new.html.erb
-        format.xml  { render :xml => @plaque }
-      end
-    else
-      @countries = Country.all(:order => :name)    
-      @organisations = Organisation.all(:order => :name)    
-      @languages = Language.all(:order => :name)
-
+    if !current_user        
       @user = User.new
-      
-      @plaque = Plaque.new
-
-      respond_to do |format|
-        format.html {render :new_logged_out}
-      end
-      
     end
+
   end
 
   # GET /plaques/1/edit
