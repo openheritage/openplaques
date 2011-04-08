@@ -474,3 +474,26 @@ div#page .home_photos .photo a:hover img{
 
 .field_with_errors label {color: red;}
 .field_with_errors input {border: red 1px solid;}
+
+form.new_plaque {border: 4px solid #3F66B2; padding: 0; background-color: #EEE; min-height: 400px; }
+form.new_plaque fieldset {border: 0; width: 50%; float: left; margin: 0 0 1em 0; padding: 0;}
+form.new_plaque fieldset h2,
+form.new_plaque fieldset p,
+form.new_plaque fieldset div {padding: 0 10px;}
+form.new_plaque fieldset p {margin: 0 0 10px 0;}
+form.new_plaque fieldset textarea {margin: 10px 0 0 0px ; height: 100px; clear:left; display:block;}
+form.new_plaque fieldset div {clear: left; margin-bottom: .5em;}
+form.new_plaque fieldset div label {float: left; width: 30%;}
+
+form.new_plaque fieldset div input[type=text],
+form.new_plaque input,
+form.new_plaque select#plaque_country { width: 40%; height: 1.4em; }
+
+form.new_plaque textarea,
+form.new_plaque input,
+form.new_plaque select {font-size: 1em; font-family: "Baskerville", serif;  padding: 0 .5em; border: 2px solid #555; border-radius: 0; margin: 0;}
+form.new_plaque textarea {padding: .5em;}
+
+
+form.new_plaque fieldset div label[for=plaque_inscription] {float: none; width: auto;}
+form.new_plaque input[type=submit] {clear: left; float:none; margin-right: auto; margin-left: auto; position: relative; display: block; margin-bottom: 1em; font-size: 1.5em; color: #333; padding:  .2em 1em; width: auto; height: auto;}

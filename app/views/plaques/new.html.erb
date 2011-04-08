@@ -47,10 +47,14 @@
 
 		<fieldset>
 			<h2>What does the plaque say?</h2>
-			<div><p><%= f.label :inscription, "Please type in the transcription on the plaque" %>:</p> <%= f.text_area :inscription, {:placeholder => "Joe Bloggs lived here"} %></div>
+			<div><%= f.label :inscription, "Please type in the transcription on the plaque" %>: 
+				<%= f.text_area :inscription, {:placeholder => "Joe Bloggs lived here"} %>
+			</div>
 				
-				<%= f.label :language_id %>
-				<%= f.collection_select :language_id, @languages, :id, :name %>
+				<p>
+					<%= f.label :language_id %>
+					<%= f.collection_select :language_id, @languages, :id, :name %>
+				</p>
 		</fieldset>
 		<fieldset>
 			<h2>Location</h2>
@@ -82,29 +86,32 @@
 					<%= f.hidden_field :organisation_id %>
 				</div>
 				
+				<div>
 					<%= f.label :erected_at, "Year or date erected" %>
 					<%= f.date_select :erected_at, :include_blank => true %>
-								
+				</div>				
 			<% end %>
 
 		</fieldset>			
 			
 		<% unless current_user %>	
+		<fieldset>
 			<h2>About you</h2>
 
 			<%= f.fields_for :user do |g| %>
-				<p>
+				<div>
 					<%= label_tag :user_name, "Name" %>
 					<%= text_field_tag :user_name %>
-				</p>
+				</div>
 
-				<p>
+				<div>
 					<%= label_tag :user_email, "E-mail address" %>
 					<%= text_field_tag :user_email %>
-				</p>
-			
+				</div>			
 			<% end %>
+		</fieldset>
 		<% end %>
+		
 		<%= f.submit "Save" %>
 
 	<% end %>
