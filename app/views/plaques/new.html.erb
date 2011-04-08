@@ -1,4 +1,19 @@
 <script>
+
+	$(function() {
+		
+		$('#other_colour_id').attr('disabled', 'disabled');
+		$('input[name="plaque[colour_id]"]').change(function() {
+				var val = $('input[name="plaque[colour_id]"]:radio:checked"').val();
+				if (val == "other") {
+					$('#other_colour_id').attr('disabled', '');	
+				} else {
+					$('#other_colour_id').attr('disabled', 'disabled');					
+				}
+		});
+	});
+
+
 	$(function() {
 		$( "#area" ).autocomplete({
 			source: '/areas.json' ,
@@ -94,6 +109,32 @@
 
 		</fieldset>			
 			
+		<%= fieldset do %>	
+			<%= content_tag("h2", "What does it look like?") %>
+			
+			<div><%= f.label :colour_id, "Colour" %>
+				
+				<div class="colour_options">
+				<% @common_colours.each do |colour| %>
+					<span>
+						<%= f.radio_button :colour_id, colour.id %>
+						<%= f.label "colour_id_" + colour.id.to_s, colour.name, :class => colour.name.downcase %>
+					</span>
+				<% end %>
+				<span>
+					<%= f.radio_button :colour_id, "nil", :checked => true %>
+					<%= f.label :colour_id_nil, "unknown" %>
+				</span>
+
+					<span class="other">
+						<%= f.radio_button :colour_id, "other" %>
+						<%= f.label :colour_id_other, "other:" %>
+						<%= select_tag :other_colour_id, options_from_collection_for_select(@other_colours, :id, :name) %>
+					<span>
+				</div>
+			</div>
+		<% end %>	
+		
 		<% unless current_user %>	
 		<fieldset>
 			<h2>About you</h2>

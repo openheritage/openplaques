@@ -158,12 +158,14 @@ p.inscription {font-size: 2em;}
 	
 	/* Default colours (blue) */
 	#body p.inscription a, a.blue,
-	#body p.inscription a:visited, a.blue:visited {color: #00A;}
+	#body p.inscription a:visited, a.blue:visited,
+	label.blue {color: #00A;}
 	#body p.inscription a:hover, a.blue:hover {background-color: #00A; color: white;}
 
 	/* Red plaque */
 	#body div.redplaque p.inscription a, a.red,
-	#body div.redplaque p.inscription a:visited, a.red:visited {color: #A00;}
+	#body div.redplaque p.inscription a:visited, a.red:visited,
+	label.red {color: #A00;}
 	#body div.redplaque p.inscription a:hover, a.red:hover {background-color: #A00; color: white;}
 
 	/* Black plaque */
@@ -173,7 +175,8 @@ p.inscription {font-size: 2em;}
 
 	/* Green plaque */
 	#body div.greenplaque p.inscription a, a.green,
-	#body div.greenplaque p.inscription a:visited, a.green:visited {color: #0A0;}
+	#body div.greenplaque p.inscription a:visited, a.green:visited,
+	label.green {color: #0A0;}
 	#body div.greenplaque p.inscription a:hover, a.green:hover {background-color: #0A0; color: white;}
 	
 	
@@ -497,3 +500,12 @@ form.new_plaque textarea {padding: .5em;}
 
 form.new_plaque fieldset div label[for=plaque_inscription] {float: none; width: auto;}
 form.new_plaque input[type=submit] {clear: left; float:none; margin-right: auto; margin-left: auto; position: relative; display: block; margin-bottom: 1em; font-size: 1.5em; color: #333; padding:  .2em 1em; width: auto; height: auto;}
+
+form.new_plaque div.colour_options {margin: 0; padding: .5em 0 0 0;}
+form.new_plaque div.colour_options span {display: block; width: 30%; float: left; margin-bottom: 1em;}
+form.new_plaque div.colour_options span input {float: left; margin: 0; padding: 0; width: auto;}
+form.new_plaque div.colour_options span label {display: block; float: left; margin-left: 10px;}
+form.new_plaque div.colour_options span.other {clear: left; width: 100%; margin: 0; padding: 0; display: block;}
+form.new_plaque div.colour_options span.other label {display: inline; width: auto;}
+form.new_plaque div.colour_options span.other input {display: inline; width: auto; margin: 0; padding: 0;}
+form.new_plaque div.colour_options span.other select {float: left; margin-left: 20px;}

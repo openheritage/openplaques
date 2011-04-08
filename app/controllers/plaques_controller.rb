@@ -109,6 +109,8 @@ class PlaquesController < ApplicationController
     @countries = Country.all(:order => :name)    
     @organisations = Organisation.all(:order => :name)    
     @languages = Language.all(:order => :name)
+    @common_colours = Colour.common(:order => :name)
+    @other_colours = Colour.other(:order => :name)
 
     if !current_user        
       @user = User.new
@@ -173,6 +175,12 @@ class PlaquesController < ApplicationController
         @user.save!
         @plaque.user = @user
       end      
+    end
+    
+    if @plaque.colour.nil? && params[:other_colour_id]
+
+      @plaque.colour = Colour.find(params[:other_colour_id])
+      
     end
 
     country = Country.find(params[:plaque][:country])

@@ -11,5 +11,8 @@ class Colour < ActiveRecord::Base
   validates_uniqueness_of :name
   
   has_many :plaques
+  
+  scope :common, where(:common => true)
+  scope :other, where(:common => false)
 
 end
