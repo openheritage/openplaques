@@ -5,6 +5,11 @@
 	<%= colour.label :name, "Name" %>
 	<%= colour.text_field :name %>
 
+	<div>
+		<%= colour.label :slug, "URL slug (lowercase and underscores only)" %>
+		<%= colour.text_field :slug %>
+	</div>
+
 	<p>
 		<%= colour.label :dbpedia_uri %>
 		<%= colour.text_field :dbpedia_uri %>

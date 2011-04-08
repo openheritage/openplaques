@@ -2,6 +2,15 @@
 
 red:
   name: red
+  slug: red
+  common: false
 
 blue:
   name: blue
+  slug: blue
+  common: true
+
+bluey_green:
+  name: bluey-green
+  slug: bluey_green
+  common: false
