@@ -508,4 +508,16 @@ form.new_plaque div.colour_options span label {display: block; float: left; marg
 form.new_plaque div.colour_options span.other {clear: left; width: 100%; margin: 0; padding: 0; display: block;}
 form.new_plaque div.colour_options span.other label {display: inline; width: auto;}
 form.new_plaque div.colour_options span.other input {display: inline; width: auto; margin: 0; padding: 0;}
-form.new_plaque div.colour_options span.other select {float: left; margin-left: 20px;}
+form.new_plaque div.colour_options span.other select {float: left; margin-left: 20px; border-radius: 0; }
+
+
+form.new_plaque div.photo_options div {margin: 0 0 0 0; padding: .5em 0 0 0 ; clear: left;}
+form.new_plaque div.photo_options div input[type=radio] {display: inline; float: left; width:auto;}
+form.new_plaque div.photo_options div label {display: inline; float: left; width: 25%; margin-left: 10px; }
+
+form.new_plaque span.coming_soon {color: #F88; font-variant: small-caps; margin-left: 10px;}
+
+label.disabled {color: #888;}
+form.new_plaque input[disabled],
+form.new_plaque select[disabled] {background-color: #DDD; color: #777; border: 2px solid #BBB;}
+form.new_plaque div.photo_options div input[type=file][disabled] {border: 0; color: #888;}

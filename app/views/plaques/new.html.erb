@@ -1,6 +1,18 @@
 <script>
 
 	$(function() {
+			$('#photo_url').attr('disabled', 'disabled');
+			$('input[name="photo"]').change(function() {
+				var val = $('input[name="photo"]:radio:checked"').val();
+				if (val == "web") {
+					$('#photo_url').attr('disabled', '');
+				} else {
+					$('#photo_url').attr('disabled', 'disabled');
+				}
+			});				
+	});
+
+	$(function() {
 		
 		$('#other_colour_id').attr('disabled', 'disabled');
 		$('input[name="plaque[colour_id]"]').change(function() {
@@ -71,6 +83,30 @@
 					<%= f.collection_select :language_id, @languages, :id, :name %>
 				</p>
 		</fieldset>
+		
+		<%= fieldset do %>
+			<h2>Have you taken a photo of it?</h2>
+
+			<div class="photo_options">
+				<div>
+					<%= radio_button_tag :photo, "nil", true %>			
+					<%= label_tag :photo_nil, "Not yet" %>
+				</div>
+			
+				<div>
+					<%= radio_button_tag :photo, :web %>						
+					<%= label_tag :photo_web, "Yes, it's here:" %>
+					<%= text_field_tag :photo_url, "", :placeholder => "Photo or webpage URL" %>
+				</div>
+			
+				<div>
+					<%= radio_button_tag :photo, :upload, false, :disabled => true %>						
+					<%= label_tag :photo_upload, "Yes, I'll upload:", :class => :disabled %>
+					<%= file_field_tag :photo, :disabled => :disabled %>
+					<%= content_tag("span", "coming soon", :class => :coming_soon) %>
+				</div>
+			</div>
+		<% end %>
 		<fieldset>
 			<h2>Location</h2>
 			<div>
@@ -123,7 +159,7 @@
 				<% end %>
 				<span>
 					<%= f.radio_button :colour_id, "nil", :checked => true %>
-					<%= f.label :colour_id_nil, "unknown" %>
+					<%= f.label :colour_id_nil, "Unknown" %>
 				</span>
 
 					<span class="other">
