@@ -89,19 +89,21 @@
 
 		</fieldset>			
 			
-		<h2>About you</h2>
+		<% unless current_user %>	
+			<h2>About you</h2>
 
-		<%= f.fields_for :user do |g| %>
-			<p>
-				<%= label_tag :user_name, "Name" %>
-				<%= text_field_tag :user_name %>
-			</p>
+			<%= f.fields_for :user do |g| %>
+				<p>
+					<%= label_tag :user_name, "Name" %>
+					<%= text_field_tag :user_name %>
+				</p>
 
-			<p>
-				<%= label_tag :user_email, "E-mail address" %>
-				<%= text_field_tag :user_email %>
-			</p>
+				<p>
+					<%= label_tag :user_email, "E-mail address" %>
+					<%= text_field_tag :user_email %>
+				</p>
 			
+			<% end %>
 		<% end %>
 		<%= f.submit "Save" %>
 

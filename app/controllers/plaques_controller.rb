@@ -151,98 +151,67 @@ class PlaquesController < ApplicationController
   # POST /plaques.xml
   def create
     
+    @plaque = Plaque.new(params[:plaque])
+    
     if current_user
-    
-      @plaque = Plaque.new(params[:plaque])
-
-      if params[:location] && params[:area] && !params[:area][:id].blank? 
-        @area = Area.find(params[:area][:id])
-      
-        @location = Location.find_or_create_by_name_and_area_id(params[:location], @area.id)
-        @plaque.location = @location    
-      end
-    
       @plaque.user = current_user
-      
-      respond_to do |format|
-        if @plaque.save
-          flash[:notice] = 'Plaque was successfully created.'
-          format.html { redirect_to(@plaque) }
-          format.xml  { render :xml => @plaque, :status => :created, :location => @plaque }
-        else
-          format.html { render :action => "new" }
-          format.xml  { render :xml => @plaque.errors, :status => :unprocessable_entity }
-        end
-      end
-  
     else
-
       user_email = params[:user_email]
       user_name = params[:user_name]
       @user = User.find_by_email(user_email)
-
       if @user && @user.is_verified
-          flash[:notice] = "You are a proper user - you should login first."
-          redirect_to login_path
+        flash[:notice] = "You are a proper user - you should login first."
+        redirect_to login_path and return
       else
-
-        unless @user
-          @user = User.new
-          @user.email = user_email
-          @user.name = user_name
-          @user.username = Time.now.to_i.to_s
-          @user.password = @user.username
-          @user.password_confirmation = @user.password
-          @user.is_verified = false
-          @user.save!
-        end 
-        
-        country = Country.find(params[:plaque][:country])
-        
-        if params[:location] && !params[:location].blank?
-          if params[:area_id] && !params[:area_id].blank?
-            area = Area.find(params[:area_id])
-            raise "ERROR" if area.country_id != country.id and return
-          elsif params[:area] && !params[:area].blank?
-            area = country.areas.find_by_name(params[:area])
-             unless area
-               area = country.areas.create!(:name => params[:area], :slug => params[:area].downcase.gsub(" ", "_"))
-             end
-          end
-                
-          if area
-            location = area.locations.find_by_name(params[:location])          
-            unless location
-              location = area.locations.create!(:name => params[:location])
-            end
-          end
-        end
-        
-        @plaque = @user.plaques.new(params[:plaque])
-        if params[:plaque][:organisation_id] && !params[:plaque][:organisation_id].blank?
-          organisation = Organisation.find(params[:plaque][:organisation_id])
-          @plaque.organisation = organisation
-        end          
-        
-        @plaque.location = location if location
-      
-        if @plaque.save
-      
-          PlaqueMailer.new_plaque_email(@plaque).deliver
-        
-          flash[:notice] = "Thanks for adding this plaque."
-          redirect_to plaque_path(@plaque)
-        else
-          
-          render :new
-          
-        end
-      
-      end  
-  
+        @user = User.new
+        @user.email = user_email
+        @user.name = user_name
+        @user.username = Time.now.to_i.to_s
+        @user.password = @user.username
+        @user.password_confirmation = @user.password
+        @user.is_verified = false
+        @user.save!
+        @plaque.user = @user
+      end      
     end
-  
 
+    country = Country.find(params[:plaque][:country])
+    
+    if params[:location] && !params[:location].blank?
+      if params[:area_id] && !params[:area_id].blank?
+        area = Area.find(params[:area_id])
+        raise "ERROR" if area.country_id != country.id and return
+      elsif params[:area] && !params[:area].blank?
+        area = country.areas.find_by_name(params[:area])
+         unless area
+           area = country.areas.create!(:name => params[:area], :slug => params[:area].downcase.gsub(" ", "_"))
+         end
+      end
+            
+      if area
+        location = area.locations.find_by_name(params[:location])          
+        unless location
+          location = area.locations.create!(:name => params[:location])
+        end
+      end
+    end
+
+    @plaque.location = location if location
+        
+    if params[:plaque][:organisation_id] && !params[:plaque][:organisation_id].blank?
+      organisation = Organisation.find(params[:plaque][:organisation_id])
+      @plaque.organisation = organisation
+    end          
+        
+    if @plaque.save
+
+      PlaqueMailer.new_plaque_email(@plaque).deliver
+      flash[:notice] = "Thanks for adding this plaque."
+      redirect_to plaque_path(@plaque)
+    else  
+      render :new    
+    end
+      
   end
 
   # PUT /plaques/1

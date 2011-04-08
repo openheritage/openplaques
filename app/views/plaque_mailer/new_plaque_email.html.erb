@@ -5,7 +5,15 @@
   </head>
   <body>
     <h1>New plaque added to website: #<%=h @plaque.id.to_s %></h1>
-    <p>"<%= h @plaque.user.name %>" (<%= h @plaque.user.email %>) had added a plaque to the website.</p>
+
+		<p>
+		<% if @plaque.user.is_verified? %>
+			Verified user <strong><%= @plaque.user.name %></strong> (<%= @plaque.user.username %>) has added a plaque:
+		<% else %>
+			New user <strong><%= @plaque.user.name %></strong> (<%= @plaque.user.email %>) has added a plaque:			
+		<% end %>
+    </p>
+
     <p>Inscription:</p> 
 
 		<p style="color: #333; font-size: 1.2em;"><%= h @plaque.inscription %></p>
