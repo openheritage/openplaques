@@ -490,7 +490,7 @@ form.new_plaque fieldset div label {float: left; width: 30%;}
 
 form.new_plaque fieldset div input[type=text],
 form.new_plaque input,
-form.new_plaque select#plaque_country { width: 40%; height: 1.4em; }
+form.new_plaque select#plaque_country { width: 40%; height: 1.6em; }
 
 form.new_plaque textarea,
 form.new_plaque input,

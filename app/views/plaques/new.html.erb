@@ -121,7 +121,7 @@
 
 			<div>
 				<%= f.label :country %>
-				<%= f.collection_select :country, @countries, :id, :name %>
+				<%= f.collection_select :country, @countries, :id, :name, :include_blank => true %>
 			</div>
 		
 			<%= hidden_field_tag :area_id %>
