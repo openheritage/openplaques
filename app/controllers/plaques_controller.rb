@@ -183,9 +183,9 @@ class PlaquesController < ApplicationController
       
     end
 
-    country = Country.find(params[:plaque][:country])
-    
+
     if params[:location] && !params[:location].blank?
+      country = Country.find(params[:plaque][:country])
       if params[:area_id] && !params[:area_id].blank?
         area = Area.find(params[:area_id])
         raise "ERROR" if area.country_id != country.id and return
@@ -209,7 +209,11 @@ class PlaquesController < ApplicationController
     if params[:plaque][:organisation_id] && !params[:plaque][:organisation_id].blank?
       organisation = Organisation.find(params[:plaque][:organisation_id])
       @plaque.organisation = organisation
-    end          
+    end    
+    
+    if params[:photo_url] && !params[:photo_url].blank?
+            
+    end      
         
     if @plaque.save
 
