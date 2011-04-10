@@ -157,13 +157,15 @@ class PlaquesController < ApplicationController
     
     if current_user
       @plaque.user = current_user
-    else
+    elsif !params[:user_email].blank? && !params[:user_name].blank?
       user_email = params[:user_email]
       user_name = params[:user_name]
       @user = User.find_by_email(user_email)
-      if @user && @user.is_verified
-        flash[:notice] = "You are a proper user - you should login first."
-        redirect_to login_path and return
+      if @user 
+        if @user.is_verified
+          flash[:notice] = "You are a proper user - you should login first."
+          redirect_to login_path and return
+        end
       else
         @user = User.new
         @user.email = user_email
@@ -173,8 +175,8 @@ class PlaquesController < ApplicationController
         @user.password_confirmation = @user.password
         @user.is_verified = false
         @user.save!
-        @plaque.user = @user
       end      
+      @plaque.user = @user
     end
     
     if @plaque.colour.nil? && params[:other_colour_id]
@@ -205,12 +207,7 @@ class PlaquesController < ApplicationController
     end
 
     @plaque.location = location if location
-        
-    if params[:plaque][:organisation_id] && !params[:plaque][:organisation_id].blank?
-      organisation = Organisation.find(params[:plaque][:organisation_id])
-      @plaque.organisation = organisation
-    end    
-    
+            
     if params[:photo_url] && !params[:photo_url].blank?
             
     end      
@@ -221,7 +218,14 @@ class PlaquesController < ApplicationController
       flash[:notice] = "Thanks for adding this plaque."
       redirect_to plaque_path(@plaque)
     else  
-      render :new    
+      params[:checked] = "true"
+      @countries = Country.all(:order => :name)    
+      @organisations = Organisation.all(:order => :name)    
+      @languages = Language.all(:order => :name)
+      @common_colours = Colour.common.all(:order => "plaques_count DESC")
+      @other_colours = Colour.other.all(:order => :name)
+      
+      render :new 
     end
       
   end
@@ -241,20 +245,6 @@ class PlaquesController < ApplicationController
         end
       end
 	  end
-  	# Store the selected photo (if any)
-  	# TODO this doesn't work yet..
-#  	if (params[:photo] != nil)
-#  		fetch_photos(params[:id]).each do |p|
-#  			if (p.url == params[:photo])
-#  				@photo = Photo.new		
-#  				@photo.plaque = @plaque
-#          @photo.file_url = photo.url		
-#          @photo.url = photo_url
-#        		
-#  				@photo.save!
-#  			end
-#  		end
-#  	end
     
     if params[:plaque] && params[:plaque][:colour_id]
       @colour = Colour.find(params[:plaque][:colour_id])
