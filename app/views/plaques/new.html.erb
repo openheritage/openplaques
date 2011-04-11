@@ -113,14 +113,14 @@
 		</div>
 		<div class="secondary">		
 			<fieldset>
-				<h2>Location</h2>
+				<h2>Where is it?</h2>
 				<div>
-				<label for="location">Street and number: </label>
+				<label for="location">Street and number </label>
 					<%= text_field_tag :location, "", {:placeholder => "221B Baker Street"} %>
 				</div>
 				
 				<div class="ui-widget">
-					<label for="area">City/Town: </label>
+					<label for="area">City/Town </label>
 					<%= text_field_tag :area, "", :placeholder => "London" %>
 				</div>
 
@@ -142,23 +142,22 @@
 					</div>
 				
 					<div>
-						<%= f.label :erected_at, "Year" %>
-						<%= f.date_select :erected_at, :discard_month => true, :discard_day => true, :include_blank => true, :start_year => Time.now.year, :end_year => 1950 %>
+						<div class="date_labels">
+							<%= f.label :erected_at_1i, "Year" %>
+							<%= f.label :erected_at_3i, "Date" %>
+						</div>
+						<%= f.date_select :erected_at, :include_blank => true, :start_year => Time.now.year, :end_year => 1950, :field_name => :plaque_erected_at_year, :order => [:year, :day, :month] %>
 					</div>				
 
-					<div>
-						<%= f.label :erected_at, "Date" %>
-						<%= f.date_select :erected_at, :order => [:day, :month], :include_blank => true %>
-					</div>				
 
 				<% end %>
 
 			</fieldset>			
 			
 			<%= fieldset do %>	
-				<%= content_tag("h2", "What does it look like?") %>
+				<%= content_tag("h2", "What colour is it?") %>
 			
-				<div><%= f.label :colour_id, "Colour" %>
+				<div>
 				
 					<div class="colour_options">
 					<% @common_colours.each do |colour| %>
@@ -197,11 +196,17 @@
 						<%= label_tag :user_email, "E-mail address" %>
 						<%= text_field_tag :user_email %>
 					</div>			
+
+					<div>
+						<%= label_tag :user_email_opt_in, "Please keep me informed about the project" %>
+						<%= check_box_tag :user_email_opt_in %>
+					</div>
+					
 				<% end %>
 			</fieldset>
 		<% end %>
 		
-		<%= f.submit "Save" %>
+		<%= f.submit "Add your plaque" %>
 
 	<% end %>
 
