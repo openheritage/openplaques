@@ -65,128 +65,140 @@
 	});
 	</script>
 
+<h1>Tell us about the plaque</h1>
 
-<p>Thanks for spotting a plaque!</p>
+<p>Thanks for identifying a plaque that's not already on this website. Please tell us as much about the plaque as you can. Anything you don't know can be left blank.</p>
 
 <% if params[:checked] && params[:checked] == "true" %>
 
 	<%= form_for(@plaque) do |f| %>
 
-		<fieldset>
-			<h2>What does the plaque say?</h2>
-			<div><%= f.label :inscription, "Please type in the transcription on the plaque" %>: 
-				<%= f.text_area :inscription, {:placeholder => "Joe Bloggs lived here"} %>
-			</div>
+		<div class="primary">
+			<fieldset>
+				<h2>What does the plaque say?</h2>
+				<div><%= f.label :inscription, "Please type in the description on the plaque" %>: 
+					<%= f.text_area :inscription, {:placeholder => "Joe Bloggs lived here"} %>
+				</div>
 				
-				<p>
-					<%= f.label :language_id %>
-					<%= f.collection_select :language_id, @languages, :id, :name %>
-				</p>
-		</fieldset>
+					<p>
+						<%= f.label :language_id, "What language is it in?" %>
+						<%= f.collection_select :language_id, @languages, :id, :name %>
+					</p>
+			</fieldset>
 		
-		<%= fieldset do %>
-			<h2>Have you taken a photo of it?</h2>
+			<%= fieldset do %>
+				<h2>Have you taken a photo of it?</h2>
 
-			<div class="photo_options">
-				<div>
-					<%= radio_button_tag :photo, "nil", true %>			
-					<%= label_tag :photo_nil, "Not yet" %>
-				</div>
+				<div class="photo_options">
+					<div>
+						<%= radio_button_tag :photo, "nil", true %>			
+						<%= label_tag :photo_nil, "Not yet" %>
+					</div>
 			
-				<div>
-					<%= radio_button_tag :photo, :web %>						
-					<%= label_tag :photo_web, "Yes, it's here:" %>
-					<%= text_field_tag :photo_url, "", :placeholder => "Photo or webpage URL" %>
-				</div>
+					<div>
+						<%= radio_button_tag :photo, :web %>						
+						<%= label_tag :photo_web, "Yes, it's here:" %>
+						<%= text_field_tag :photo_url, "", :placeholder => "Photo or webpage URL" %>
+					</div>
 			
-				<div>
-					<%= radio_button_tag :photo, :upload, false, :disabled => true %>						
-					<%= label_tag :photo_upload, "Yes, I'll upload:", :class => :disabled %>
-					<%= file_field_tag :photo, :disabled => :disabled %>
-					<%= content_tag("span", "coming soon", :class => :coming_soon) %>
+					<div>
+						<%= radio_button_tag :photo, :upload, false, :disabled => true %>						
+						<%= label_tag :photo_upload, "Yes, I'll upload:", :class => :disabled %>
+						<%= file_field_tag :photo, :disabled => :disabled %>
+						<%= content_tag("span", "coming soon", :class => :coming_soon) %>
+					</div>
 				</div>
-			</div>
-		<% end %>
-		<fieldset>
-			<h2>Location</h2>
-			<div>
-			<label for="location">Street and number: </label>
-				<%= text_field_tag :location, "", {:placeholder => "221B Baker Street"} %>
-			</div>
-				
-			<div class="ui-widget">
-				<label for="area">City/Town: </label>
-				<%= text_field_tag :area, "", :placeholder => "London" %>
-			</div>
-
-			<div>
-				<%= f.label :country %>
-				<%= f.collection_select :country, @countries, :id, :name, :include_blank => true %>
-			</div>
-		
-			<%= hidden_field_tag :area_id %>
-		</fieldset>
-			
-		<fieldset>
-			<h2>Who erected the plaque, and when?</h2>
-
-			<%= f.fields_for :organisation do |g| %>
-				<div>
-					<%= label_tag :organisation_name, "Organisation" %>
-					<%= text_field_tag :organisation_name, "", {:placeholder => "English Heritage"} %>
-					<%= f.hidden_field :organisation_id %>
-				</div>
-				
-				<div>
-					<%= f.label :erected_at, "Year or date erected" %>
-					<%= f.date_select :erected_at, :include_blank => true %>
-				</div>				
 			<% end %>
 
-		</fieldset>			
-			
-		<%= fieldset do %>	
-			<%= content_tag("h2", "What does it look like?") %>
-			
-			<div><%= f.label :colour_id, "Colour" %>
+		</div>
+		<div class="secondary">		
+			<fieldset>
+				<h2>Location</h2>
+				<div>
+				<label for="location">Street and number: </label>
+					<%= text_field_tag :location, "", {:placeholder => "221B Baker Street"} %>
+				</div>
 				
-				<div class="colour_options">
-				<% @common_colours.each do |colour| %>
-					<span>
-						<%= f.radio_button :colour_id, colour.id %>
-						<%= f.label "colour_id_" + colour.id.to_s, colour.name, :class => colour.name.downcase %>
-					</span>
+				<div class="ui-widget">
+					<label for="area">City/Town: </label>
+					<%= text_field_tag :area, "", :placeholder => "London" %>
+				</div>
+
+				<div>
+					<%= f.label :country %>
+					<%= f.collection_select :country, @countries, :id, :name, :include_blank => true %>
+				</div>
+		
+				<%= hidden_field_tag :area_id %>
+			</fieldset>
+			<fieldset>
+				<h2>Who put the plaque up, and when?</h2>
+
+				<%= f.fields_for :organisation do |g| %>
+					<div>
+						<%= label_tag :organisation_name, "Name of organisation" %>
+						<%= text_field_tag :organisation_name, "", {:placeholder => "English Heritage"} %>
+						<%= f.hidden_field :organisation_id %>
+					</div>
+				
+					<div>
+						<%= f.label :erected_at, "Year" %>
+						<%= f.date_select :erected_at, :discard_month => true, :discard_day => true, :include_blank => true, :start_year => Time.now.year, :end_year => 1950 %>
+					</div>				
+
+					<div>
+						<%= f.label :erected_at, "Date" %>
+						<%= f.date_select :erected_at, :order => [:day, :month], :include_blank => true %>
+					</div>				
+
 				<% end %>
-				<span>
-					<%= f.radio_button :colour_id, "nil", :checked => true %>
-					<%= f.label :colour_id_nil, "Unknown" %>
-				</span>
 
-					<span class="other">
-						<%= f.radio_button :colour_id, "other" %>
-						<%= f.label :colour_id_other, "other:" %>
-						<%= select_tag :other_colour_id, options_from_collection_for_select(@other_colours, :id, :name) %>
+			</fieldset>			
+			
+			<%= fieldset do %>	
+				<%= content_tag("h2", "What does it look like?") %>
+			
+				<div><%= f.label :colour_id, "Colour" %>
+				
+					<div class="colour_options">
+					<% @common_colours.each do |colour| %>
+						<span>
+							<%= f.radio_button :colour_id, colour.id %>
+							<%= f.label "colour_id_" + colour.id.to_s, colour.name, :class => colour.name.downcase %>
+						</span>
+					<% end %>
 					<span>
-				</div>
+						<%= f.radio_button :colour_id, "nil", :checked => true %>
+						<%= f.label :colour_id_nil, "Unknown" %>
+					</span>
+
+						<span class="other">
+							<%= f.radio_button :colour_id, "other" %>
+							<%= f.label :colour_id_other, "other:" %>
+							<%= select_tag :other_colour_id, options_from_collection_for_select(@other_colours, :id, :name) %>
+						<span>
+					</div>
+				<% end %>	
 			</div>
-		<% end %>	
 		
-		<% unless current_user %>	
-		<fieldset>
-			<h2>About you</h2>
+		</div>
+		
+		<% unless current_user %>			
+			<fieldset class="user">
+				<h2>About you</h2>
 
-			<%= f.fields_for :user do |g| %>
-				<div>
-					<%= label_tag :user_name, "Name" %>
-					<%= text_field_tag :user_name %>
-				</div>
+				<%= f.fields_for :user do |g| %>
+					<div>
+						<%= label_tag :user_name, "Name" %>
+						<%= text_field_tag :user_name %>
+					</div>
 
-				<div>
-					<%= label_tag :user_email, "E-mail address" %>
-					<%= text_field_tag :user_email %>
-				</div>			
-			<% end %>
-		</fieldset>
+					<div>
+						<%= label_tag :user_email, "E-mail address" %>
+						<%= text_field_tag :user_email %>
+					</div>			
+				<% end %>
+			</fieldset>
 		<% end %>
 		
 		<%= f.submit "Save" %>
