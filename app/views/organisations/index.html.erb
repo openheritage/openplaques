@@ -7,7 +7,10 @@
 <% @organisations.each do |organisation| %>	
 	<%= content_tag("li") do %>
 		<p><%= link_to(h(organisation.name), organisation) %></p>
-		<p class="count"><%= pluralize(organisation.plaques.size.to_s, "plaque") if organisation.plaques.size > 0 %></p>
+		<p class="count">
+		<%= if organisation.plaques.size > 0 pluralize(organisation.plaques.size.to_s, "plaque") ? "No plaques yet" %>
+		<%#= pluralize(organisation.plaques.size.to_s, "plaque") if organisation.plaques.size > 0 %>
+		</p>
 	<% end %>
 <% end %>
 </ul>
