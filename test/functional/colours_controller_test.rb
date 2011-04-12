@@ -15,7 +15,7 @@ class ColoursControllerTest < ActionController::TestCase
 
   context "when viewing a colour page" do
     setup do
-      get :show, {:id => colours(:blue).name}
+      get :show, {:id => colours(:blue).slug}
     end
     
     should respond_with :success
@@ -43,36 +43,71 @@ class ColoursControllerTest < ActionController::TestCase
     end
   end
 
-  context "when vieing the new colour page" do
+  context "when signed in" do
     
-    context "when signed in" do
-      
-      setup do
-        sign_in users(:frankieroberto)
-        get :new
-      end
+    setup do
+      sign_in users(:frankieroberto)
+    end
+
+    context "when viewing the new colour page" do
+      setup { get :new }
       
       should respond_with :success
       should assign_to :colour
-      
     end
     
+    context "when viewing the edit colour page" do
+      setup { get :edit, :id => colours(:blue).name }
+      
+      should respond_with :success
+      should assign_to :colour      
+    end
+    
+    context "when submitting a valid new colour" do
+
+      setup do
+        @slug = "purple"
+        post :create, :colour => {:slug => @slug, :name => "purple"}
+      end
+
+      should redirect_to("the page for the new colour") { colour_path(@slug) }
+
+    end
+
+    context "when submitting an invalid new colour" do
+
+      setup do
+        post :create, :colour => {}
+      end
+
+      should assign_to :colour
+      should render_template :new
+
+    end
+    
+    context "when updating a colour with valid new attributes" do
+
+      setup do
+        @slug = "blue_new"
+        put :update, :id => colours(:blue).slug, :colour => {:slug => @slug, :name => "new blue"}
+      end
+      
+      should redirect_to("the page for the new colour") { colour_path(@slug) }      
+      
+    end
+
+    context "when updating a colour with invalid new attributes" do
+
+      setup do
+        put :update, :id => colours(:blue).slug, :colour => {:slug => ""}
+      end
+      
+      should assign_to :colour
+      should render_template :edit
+      
+    end
+
   end
 
-  context "when vieing the edit colour page" do
-    
-    context "when signed in" do
-      
-      setup do
-        sign_in users(:frankieroberto)
-        get :edit, :id => colours(:blue).name
-      end
-      
-      should respond_with :success
-      should assign_to :colour
-      
-    end
-    
-  end
 
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110308175704) do
+ActiveRecord::Schema.define(:version => 20110408164949) do
 
   create_table "areas", :force => true do |t|
     t.string   "name"
@@ -29,7 +29,11 @@ ActiveRecord::Schema.define(:version => 20110308175704) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "dbpedia_uri"
+    t.boolean  "common",        :default => false, :null => false
+    t.string   "slug"
   end
+
+  add_index "colours", ["slug"], :name => "index_colours_on_slug"
 
   create_table "connections", :force => true do |t|
     t.string   "name"

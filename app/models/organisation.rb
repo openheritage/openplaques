@@ -12,4 +12,12 @@ class Organisation < ActiveRecord::Base
   validates_uniqueness_of :slug
 
   has_many :plaques
+
+  scope :name_starts_with, lambda {|term| where(["lower(name) LIKE ?", term.downcase + "%"]) }
+  scope :most_plaques_order, order("plaques_count DESC")
+  
+  def as_json(options={})
+    super(:only => [:name, :id])
+  end
+  
 end

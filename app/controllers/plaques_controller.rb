@@ -104,30 +104,18 @@ class PlaquesController < ApplicationController
   # GET /plaques/new.xml
   def new
     
-    if current_user
-      @plaque = Plaque.new
-      @colours = Colour.all(:order => :name)
-      @organisations = Organisation.all(:order => :name)    
-      @areas = Area.all(:order => :name)
-      @languages = Language.all(:order => :name)
+    @plaque = Plaque.new
 
+    @countries = Country.all(:order => :name)    
+    @organisations = Organisation.all(:order => :name)    
+    @languages = Language.all(:order => :name)
+    @common_colours = Colour.common.all(:order => "plaques_count DESC")
+    @other_colours = Colour.other.all(:order => :name)
 
-      respond_to do |format|
-        format.html # new.html.erb
-        format.xml  { render :xml => @plaque }
-      end
-    else
-      @countries = Country.all(:order => :name)    
-
+    if !current_user        
       @user = User.new
-      
-      @plaque = Plaque.new
-
-      respond_to do |format|
-        format.html {render :new_logged_out}
-      end
-      
     end
+
   end
 
   # GET /plaques/1/edit
@@ -165,92 +153,81 @@ class PlaquesController < ApplicationController
   # POST /plaques.xml
   def create
     
+    @plaque = Plaque.new(params[:plaque])
+    
     if current_user
-    
-      @plaque = Plaque.new(params[:plaque])
-
-      if params[:location] && params[:area] && !params[:area][:id].blank? 
-        @area = Area.find(params[:area][:id])
-      
-        @location = Location.find_or_create_by_name_and_area_id(params[:location], @area.id)
-        @plaque.location = @location    
-      end
-    
       @plaque.user = current_user
+    elsif !params[:user_email].blank? && !params[:user_name].blank?
+      user_email = params[:user_email]
+      user_name = params[:user_name]
+      @user = User.find_by_email(user_email)
+      if @user 
+        if @user.is_verified
+          flash[:notice] = "You are a proper user - you should login first."
+          redirect_to login_path and return
+        end
+      else
+        @user = User.new
+        @user.email = user_email
+        @user.name = user_name
+        @user.username = Time.now.to_i.to_s
+        @user.password = @user.username
+        @user.password_confirmation = @user.password
+        @user.is_verified = false
+        @user.save!
+      end      
+      @plaque.user = @user
+    end
+    
+    if @plaque.colour.nil? && params[:other_colour_id]
+
+      @plaque.colour = Colour.find(params[:other_colour_id])
       
-      respond_to do |format|
-        if @plaque.save
-          flash[:notice] = 'Plaque was successfully created.'
-          format.html { redirect_to(@plaque) }
-          format.xml  { render :xml => @plaque, :status => :created, :location => @plaque }
-        else
-          format.html { render :action => "new" }
-          format.xml  { render :xml => @plaque.errors, :status => :unprocessable_entity }
+    end
+
+
+    if params[:location] && !params[:location].blank?
+      country = Country.find(params[:plaque][:country])
+      if params[:area_id] && !params[:area_id].blank?
+        area = Area.find(params[:area_id])
+        raise "ERROR" if area.country_id != country.id and return
+      elsif params[:area] && !params[:area].blank?
+        area = country.areas.find_by_name(params[:area])
+         unless area
+           area = country.areas.create!(:name => params[:area], :slug => params[:area].downcase.gsub(" ", "_"))
+         end
+      end
+            
+      if area
+        location = area.locations.find_by_name(params[:location])          
+        unless location
+          location = area.locations.create!(:name => params[:location])
         end
       end
-  
-    else
-
-      @user = User.find_by_email(params[:plaque][:user][:email])
-
-      if @user && @user.is_verified
-          flash[:notice] = "You are a proper user - you should login first."
-          redirect_to login_path
-      else
-
-        unless @user
-          @user = User.new
-          @user.email = params[:plaque][:user][:email]
-          @user.name = params[:plaque][:user][:name]
-          @user.username = Time.now.to_i.to_s
-          @user.password = @user.username
-          @user.password_confirmation = @user.password
-          @user.is_verified = false
-          @user.save!
-        end 
-        
-        country = Country.find(params[:plaque][:country])
-        
-        if params[:locaton] && !params[:location].blank?
-          if params[:area_id] && !params[:area_id].blank?
-            area = Area.find(params[:area_id])
-            raise "ERROR" if area.country_id != country.id and return
-          elsif params[:area] && !params[:area].blank?
-            area = country.areas.find_by_name(params[:area])
-             unless area
-               area = country.areas.create!(:name => params[:area], :slug => params[:area].downcase.gsub(" ", "_"))
-             end
-          end
-                
-          if area
-            location = area.locations.find_by_name(params[:location])          
-            unless location
-              location = area.locations.create!(:name => params[:location])
-            end
-          end
-        end
-        
-        @plaque = @user.plaques.new
-        @plaque.inscription = params[:plaque][:inscription]
-        @plaque.location = location if location
-      
-        if @plaque.save
-      
-          PlaqueMailer.new_plaque_email(@plaque).deliver
-        
-          flash[:notice] = "Thanks for adding this plaque."
-          redirect_to plaque_path(@plaque)
-        else
-          
-          render :new
-          
-        end
-      
-      end  
-  
     end
-  
 
+    @plaque.location = location if location
+            
+    if params[:photo_url] && !params[:photo_url].blank?
+            
+    end      
+        
+    if @plaque.save
+
+      PlaqueMailer.new_plaque_email(@plaque).deliver
+      flash[:notice] = "Thanks for adding this plaque."
+      redirect_to plaque_path(@plaque)
+    else  
+      params[:checked] = "true"
+      @countries = Country.all(:order => :name)    
+      @organisations = Organisation.all(:order => :name)    
+      @languages = Language.all(:order => :name)
+      @common_colours = Colour.common.all(:order => "plaques_count DESC")
+      @other_colours = Colour.other.all(:order => :name)
+      
+      render :new 
+    end
+      
   end
 
   # PUT /plaques/1
@@ -268,20 +245,6 @@ class PlaquesController < ApplicationController
         end
       end
 	  end
-  	# Store the selected photo (if any)
-  	# TODO this doesn't work yet..
-#  	if (params[:photo] != nil)
-#  		fetch_photos(params[:id]).each do |p|
-#  			if (p.url == params[:photo])
-#  				@photo = Photo.new		
-#  				@photo.plaque = @plaque
-#          @photo.file_url = photo.url		
-#          @photo.url = photo_url
-#        		
-#  				@photo.save!
-#  			end
-#  		end
-#  	end
     
     if params[:plaque] && params[:plaque][:colour_id]
       @colour = Colour.find(params[:plaque][:colour_id])

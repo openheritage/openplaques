@@ -9,7 +9,14 @@ class Colour < ActiveRecord::Base
 
   validates_presence_of :name
   validates_uniqueness_of :name
+
+  validates_presence_of :slug
+  validates_uniqueness_of :slug
+
   
   has_many :plaques
+  
+  scope :common, where(:common => true)
+  scope :other, where(:common => false)
 
 end

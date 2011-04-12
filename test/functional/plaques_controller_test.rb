@@ -152,4 +152,20 @@ class PlaquesControllerTest < ActionController::TestCase
     end
   end  
 
+
+  context "when not signed in as user" do
+  
+    context "when submitting an invalid new plaque" do
+      
+      setup do
+        post :create, :plaque => {}        
+      end
+
+      should assign_to :plaque
+      should render_template :new
+      
+    end
+    
+  end
+  
 end
