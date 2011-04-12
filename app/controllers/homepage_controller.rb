@@ -1,6 +1,6 @@
 class HomepageController < ApplicationController
 
-  layout "v1"
+  # layout "v1"
   
   def index
     @recent_photos = Photo.find(:all, :order => "created_at DESC", :limit => 4)
