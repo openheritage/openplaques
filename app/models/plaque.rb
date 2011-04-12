@@ -38,7 +38,7 @@ class Plaque < ActiveRecord::Base
   
 #  has_many :plaque_connections
   has_many :personal_connections #, :through => :plaque_connections
-  has_many :photos
+  has_many :photos, :inverse_of => :plaque
   has_many :verbs, :through => :personal_connections
 
   before_save :set_erected_year
@@ -57,10 +57,11 @@ class Plaque < ActiveRecord::Base
 
   attr_accessor :country
 
+  accepts_nested_attributes_for :photos, :reject_if => :all_blank
+  
   include ApplicationHelper
  # validates_presence_of :latitude, :longtitude
 
- 
   def to_csv
    [self.id, self.inscription_csv, self.organisation_name, self.erected_at_string, self.language_name, self.colour_name, self.location_name, self.area_name, self.country_name, "\"" + self.coordinates + "\""].join(",")
   end 

@@ -518,6 +518,9 @@ form.new_plaque div.colour_options span.other label {display: inline; width: aut
 form.new_plaque div.colour_options span.other input {display: inline; width: auto; margin: 0; padding: 0;}
 form.new_plaque div.colour_options span.other select {float: left; margin-left: 20px; border-radius: 0; }
 
+form.new_plaque  div.photo_options div.confirmation {margin-top: 1em;}
+form.new_plaque div.confirmation input {float: left; width: auto;}
+form.new_plaque  div.photo_options div.confirmation label {float: none; display: block; width: auto; margin-left: 5%; font-size: .8em}
 
 form.new_plaque div.photo_options div {margin: 0 0 0 0; padding: .5em 0 0 0 ; clear: left;}
 form.new_plaque div.photo_options div input[type=radio] {display: inline; float: left; width:auto;}

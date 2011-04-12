@@ -2,9 +2,9 @@ require 'test_helper'
 
 class PhotoTest < ActiveSupport::TestCase
 
-  should validate_presence_of(:plaque_id)
+  should validate_presence_of(:plaque)
   should validate_presence_of(:file_url)
-  should validate_presence_of(:licence_id)
+  should validate_presence_of(:licence)
 
   should belong_to :plaque
   should belong_to :licence

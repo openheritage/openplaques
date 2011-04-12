@@ -14,11 +14,12 @@ class Photo < ActiveRecord::Base
   belongs_to :plaque, :counter_cache => true
   belongs_to :licence, :counter_cache => true
 
-  validates_presence_of :plaque_id, :file_url, :licence_id
+  validates_presence_of :file_url, :plaque, :licence
   
-  attr_writer :photo_url
+  attr_accessor :photo_url, :accept_cc_by_licence
   
   after_initialize :assign_from_photo_url
+  before_validation :assign_licence_if_cc_by_accepted
   
   def assign_from_photo_url
     if @photo_url
@@ -28,6 +29,13 @@ class Photo < ActiveRecord::Base
         self.file_url = @photo_url
       end
     end            
+  end
+  
+  def assign_licence_if_cc_by_accepted
+    if @accept_cc_by_licence && @licence_id.blank?
+      self.licence = Licence.find_or_create_by_name_and_url("Attribution License", "http://creativecommons.org/licenses/by/3.0/")
+      self.photographer = self.plaque.user.name
+    end
   end
   
 

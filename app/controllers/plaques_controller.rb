@@ -106,6 +106,8 @@ class PlaquesController < ApplicationController
     
     @plaque = Plaque.new
 
+    @plaque.photos.build
+    
     @countries = Country.all(:order => :name)    
     @organisations = Organisation.all(:order => :name)    
     @languages = Language.all(:order => :name)
