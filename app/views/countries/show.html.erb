@@ -16,6 +16,7 @@
 <% end %>
 
 <%= content_tag("p", link_to("Add new area", new_country_area_path(@country.alpha2))) if current_user && current_user.is_admin? %>
-  
-<p>See <%= link_to "unphotographed plaques", country_unphotographed_path(@country) %>.</p>
 
+
+<!--TODO: Turn these off when it doesnt make sense-->  
+<p>See <%= link_to "unphotographed plaques", country_unphotographed_path(@country) %>.</p>

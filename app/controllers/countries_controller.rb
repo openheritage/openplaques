@@ -1,5 +1,7 @@
 class CountriesController < ApplicationController
 
+  layout "v1"
+
   before_filter :authenticate_user!, :except => [:index, :show]
 
   def index

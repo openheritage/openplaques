@@ -1,0 +1,390 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html { overflow-y: scroll; }
+
+body {
+	background: #BBB;
+	font-family: "Baskerville", Georgia, serif;
+}
+
+
+a:link, a:visited {
+	color: #4f7cbf;
+}
+
+a:hover {
+	background: #4f7cbf;
+	color: #FFF;
+}
+
+#content {
+	background: #EEE;
+/*	margin-top: 148px;*/
+}
+
+/***/
+
+.development {
+	background: rgba(255,255,0,.8);
+	border: dashed 2px rgba(0,0,0,0.5);
+	display: none; /*temporary for dev! */
+	color: #000;
+	font-weight: bold;
+	padding: 8px;
+	z-index: 10;
+}
+
+/***/
+
+header {
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(#FFF), to(#EEE));
+	background: -moz-linear-gradient(top, #FFF, #EEE);
+	border-top: solid 10px #454a51;
+	display: block;
+	padding: 16px 0;
+/*	position: absolute; top: 0; height: 110px;*/
+	width: 100%;
+	position: relative;
+}
+
+header .container {
+	min-height: 100px; _height: 100px;
+	position: relative;
+}
+
+header .user_info {
+	position: absolute; top: 0; right: 0;
+}
+
+header .search_box {
+	background: rgba(255,255,255,.5);
+	border-radius: 8px; -moz-border-radius: 8px;
+	position: absolute; bottom: 15px; right: 0;
+	padding: 8px;
+}
+
+header .search_box:hover {
+	background: #FFF;
+	
+}
+	
+ header .search_box label {
+	position: absolute; left: -9999px;
+}
+
+.js header .search_box input[type="submit"] {
+	position: absolute; left: -9999px;
+}
+
+header .search_box #phrase {
+	color: #999;
+	font-family: "Baskerville";
+	font-size: 18px;
+	width: 260px;
+}
+
+header .search_box #phrase:hover {
+	color: #000;
+}
+
+
+.branding {
+	float: left;
+	position: absolute; top: 0; left: 0;
+}
+
+.branding img {
+	border: none;
+	display: block;
+}
+
+.branding a:hover img {
+	-moz-transform: rotate(-20deg);
+	-webkit-transform: rotate(-20deg);
+	-webkit-transition-duration: 0.3s;
+	
+}
+
+.site_name {
+	display: block;
+	color: #454A51;
+	font-size: 40px;
+	text-shadow: 1px 1px 1px #CCCCCC, -1px -1px 1px #FFFFFF;
+	text-transform: uppercase;
+	padding-left: 116px;
+	padding-top: 4px;
+}
+
+
+.site_name .small-caps {
+	font-size: 34px;
+}
+
+
+nav {}
+
+nav ul {
+	list-style-type: none;
+	padding-top: 10px;
+	padding-left: 116px;
+}
+
+nav ul li {
+	float: left;
+	margin-right: 8px;
+}
+
+nav ul li a:hover,
+nav ul li span {
+	border-radius: 8px; -moz-border-radius: 8px;
+	background: none repeat scroll 0 0 #FFFFFF;
+	color: #4F7CBF;
+}
+
+nav ul li a {
+	color: #1D3861;
+	text-decoration: none;
+}
+
+nav ul li a,
+nav ul li span {
+	font-size: 20px;
+	padding: 8px;
+	text-transform: uppercase;
+}
+
+nav ul li span {
+	color: #333;
+} 
+
+
+
+/******/
+
+
+.container {
+	margin: 0 auto;
+	width: 80%;	
+}
+
+
+#content .container {
+	background: rgba(255,255,255,.6);
+	border-radius: 16px; -moz-border-radius: 16px;
+	border-radius: 16px;
+
+}
+
+footer {
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(#EEE), to(#BBB));
+	background: -moz-linear-gradient(top, #EEE, #BBB);
+	display: block;
+	padding: 16px 0 50px;
+}
+
+
+
+.panel {
+	padding: 16px 5%;
+	position: relative;
+}
+
+.panel h1 {
+	float: left;
+}
+
+.explore_by, 
+.sorted_by {
+	float: right;
+	margin: 8px 0 0 40px;
+	text-align: right;
+}
+
+.explore_by .selected, 
+.sorted_by .selected {
+	font-weight: bold;
+}
+
+.sorted_by a, 
+.explore_by a {
+	color: #4F7CBF;
+}
+
+.sorted_by a:hover, 
+.explore_by a:hover {
+	background: #4F7CBF;
+	color: #FFF;
+}
+
+
+nav.alphabet {
+	clear: both;
+	display: block;
+	padding-top: 16px;
+}
+
+nav.alphabet ol {
+/*	border-top: solid 1px #DDD;
+	border-bottom: solid 1px #DDD;*/
+	background: #EEE;
+	-moz-border-radius: 10px; border-radius: 10px;	
+	list-style-type: none;
+	text-align: center;
+	padding: 12px 0;
+}
+
+nav.alphabet ol li {
+	display: inline-block;
+}
+
+nav.alphabet ol li a {
+	color: #454a51;
+	text-decoration: none;
+	padding: 4px 6px;
+}
+
+nav.alphabet ol li.selected a {
+	cursor: default;
+	-moz-box-shadow: 0 0 5px #999;
+	-webkit-box-shadow: 0 0 5px #999;
+	box-shadow: 0 0 5px #999;
+}
+
+nav.alphabet ol li a:hover,
+nav.alphabet ol li.selected a {
+	background: #FFF;
+	color: #4f7cbf;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+}
+
+
+.search_results {
+	padding: 0 5% 32px;
+	list-style-type: none;
+}
+
+@media screen and (min-width: 850px) {
+	.search_results {
+		-moz-column-gap: 40px; -webkit-column-gap: 40px; column-gap: 40px;
+		-moz-column-rule: solid 1px #EEE; -webkit-column-rule: solid 1px #EEE; column-rule: solid 1px #EEE;
+	}
+}
+
+/* 45% March */
+@media screen and (min-width: 850px) and (max-width: 1300px) { 
+	.search_results {
+		-moz-column-count: 2; -webkit-column-count: 2; column-count: 2;
+	}
+}
+
+/* 17% March */
+@media screen and (min-width: 1300px) and (max-width: 1500px) {
+	.search_results {	
+		-moz-column-count: 3; -webkit-column-count: 3; column-count: 3;
+	}
+}
+
+/* 17%+ March */
+@media screen and (min-width: 1500px) { 
+	.search_results {
+		-moz-column-count: 4; -webkit-column-count: 4; column-count: 4;
+	}
+}
+
+.search_results li {
+	background: url('../images/bullet-blue.gif') no-repeat left 10px; padding-left: 16px;
+	padding-bottom: 16px;
+}
+
+
+.search_results li a {
+	color: #000;
+	text-decoration: none;
+}
+
+.search_results .count,
+.search_results li a.location {
+	color: #999;
+	display: inline-block;
+}
+
+.search_results li a.attribute {
+	border-bottom :dotted 1px #CCC;
+}
+
+
+.search_results li a:hover {
+	background: #4f7cbf;
+	color: #FFF;
+}
+
+
+
+.search_results strong {
+	font-weight: normal;
+}
+
+.search_results span {
+	text-transform: uppercase;
+}
+
+
+/*********/
+
+
+.visuallyhidden {
+	position: absolute !important;    
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+section {
+	border: solid 1px #000;
+	display: block;
+	margin: 8px;
+}
+
+.row {
+	background: rgba(0,0,0,.1);
+	margin: 8px;
+}
+
+
+/* >> The Magnificent CLEARFIX: Updated to prevent margin-collapsing on child elements << j.mp/bestclearfix */
+.clearfix:before, .clearfix:after {
+  content: "\0020"; display: block; height: 0; visibility: hidden;	
+} 
+
+.clearfix:after { clear: both; }
+/* Fix clearfix: blueprintcss.lighthouseapp.com/projects/15318/tickets/5-extra-margin-padding-bottom-of-page */
+.clearfix { zoom: 1; }
+
+
+/* 3%+ March */
+@media screen and (min-width: 400px) and (max-width: 700px) { 
+
+}
+
+/* 15% March 1024x768 */
+@media screen and (min-width: 700px) and (max-width: 1100px) { 
+
+}
+
+/* 30% March 1280 x 800/1024 */
+@media screen and (min-width: 1100px) and (max-width: 1300px) { 
+
+}
+
+/* 17% March 1366x768 + 1440x900 */
+@media screen and (min-width: 1300px) and (max-width: 1500px) { 
+
+}
+
+/* 17%+ March 1600,1680,1920 */
+@media screen and (min-width: 1500px) { 
+
+}
