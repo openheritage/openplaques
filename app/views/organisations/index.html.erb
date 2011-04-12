@@ -3,11 +3,11 @@
 
 <p><%= pluralize(@organisations.size, "organisation") %></p>
 
-<ul>
+<ul class="search_results">
 <% @organisations.each do |organisation| %>	
 	<%= content_tag("li") do %>
-		<%= link_to(h(organisation.name), organisation) %>
-		<%= " - " + pluralize(organisation.plaques.size.to_s, "plaque") if organisation.plaques.size > 0 %>
+		<p><%= link_to(h(organisation.name), organisation) %></p>
+		<p class="count"><%= pluralize(organisation.plaques.size.to_s, "plaque") if organisation.plaques.size > 0 %></p>
 	<% end %>
 <% end %>
 </ul>
