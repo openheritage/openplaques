@@ -1,5 +1,6 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 ccby:
-  name: Creative Commons Attribution
+  name: Attribution License
   allows_commercial_use: true
+  url: http://creativecommons.org/licenses/by/3.0/
