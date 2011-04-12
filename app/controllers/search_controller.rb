@@ -1,4 +1,7 @@
 class SearchController < ApplicationController
+
+  layout "v1"
+
   def index
 	@phrase = params[:phrase]
 	if @phrase != nil && @phrase != ""
