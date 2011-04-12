@@ -17,7 +17,7 @@
   <% @recent_photos.each do |photo| %>
     <% if photo.plaque %>
       <%= content_tag("div", :class => :photo) do %>
-  	    <%= link_to(image_tag(photo.file_url, {:alt => ""}), photo.plaque) %>
+  	    <%= link_to(image_tag(photo.file_url, {:alt => "", :width => 300}), photo.plaque) %>
         <%= content_tag("p", link_to(truncate(photo.plaque.inscription, {:length => 25}), photo.plaque)) %>
       <% end %>
     <% end %>
