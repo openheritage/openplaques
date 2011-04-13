@@ -1,10 +1,17 @@
 <% @page_title = @area.name %>
 
-<h1><%= @page_title %><%= (", ".html_safe + link_to(@area.country.name, @area.country)) if @area.country %></h1>
+<div class="panel clearfix">
+	<h1><%= @page_title %><%= (", ".html_safe + link_to(@area.country.name, @area.country)) if @area.country %></h1>
+</div>
 
-<%= render :partial => 'plaques/map.html.erb' %>
+<div class="map_results_container">
+	<%= render :partial => 'plaques/map.html.erb' %>
+	
+	<%= plaque_list(@plaques) %>
+	
+</div>
 
-<%= plaque_list(@plaques) %>
+
 
 <p>See <%= link_to "unphotographed plaques", {:controller => :unphotographed_plaques_by_area, :country_id => @area.country.alpha2, :area_id => @area.slug, :action => :show} %>.</p>
 

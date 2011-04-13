@@ -6,29 +6,24 @@
 
 <div class="map_results_container">
 	
+	<%= render :partial => 'plaques/map.html.erb' %>
 	
-	
-	
-	
-	
+	<% if @areas.size > 0 %>
+
+		<%= content_tag("ul", :class => "search_results") do %>
+			<% @areas.each do |area| %>
+	  		<%= content_tag("li") do %>
+				<p><%= link_to area.name, area %></p>
+				<p class="count"><%= pluralize(area.plaques.size, "plaque") %></p>
+	        <% end %>
+	      <% end %>
+		<% end %>
+	<% end %>
 	
 	
 	
 </div>
 
-<%= render :partial => 'plaques/map.html.erb' %>
-
-<% if @areas.size > 0 %>
-
-	<%= content_tag("ul") do %>
-		<% @areas.each do |area| %>
-  		<%= content_tag("li") do %>
-			<p><%= link_to area.name, area %></p>
-			<p class="count"><%= pluralize(area.plaques.size, "plaque") %></p>
-        <% end %>
-      <% end %>
-	<% end %>
-<% end %>
 
 <%= content_tag("p", link_to("Add new area", new_country_area_path(@country.alpha2))) if current_user && current_user.is_admin? %>
 
