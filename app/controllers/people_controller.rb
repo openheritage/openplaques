@@ -1,7 +1,9 @@
 class PeopleController < ApplicationController
-
+  
+  layout "v1"
+  
   before_filter :authorisation_required, :except => [:index, :show]
-
+  
   def index
     @people = Person.find(:all)
     respond_to do |format|
