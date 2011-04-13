@@ -12,8 +12,8 @@
 	0. TEMP DEVELOPMENT
 */
 
-#map {
-	display: none;
+.map_results_container {
+	padding: 0 5%;
 }
 
 /**
@@ -212,7 +212,7 @@ footer {
 	background: -webkit-gradient(linear, 0 0, 0 100%, from(#EEE), to(#BBB));
 	background: -moz-linear-gradient(top, #EEE, #BBB);
 	display: block;
-	padding: 16px 0 50px;
+	padding: 16px 0 125px;
 }
 
 

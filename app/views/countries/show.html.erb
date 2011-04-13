@@ -4,16 +4,27 @@
 	<h1><%= @country.name %></h1>
 </div>
 
+<div class="map_results_container">
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</div>
+
 <%= render :partial => 'plaques/map.html.erb' %>
 
 <% if @areas.size > 0 %>
-	<h2>Areas:</h2>
 
 	<%= content_tag("ul") do %>
 		<% @areas.each do |area| %>
   		<%= content_tag("li") do %>
-	  		<%= link_to area.name, area %>
-        <%= " - " + pluralize(area.plaques.size, "plaque") %>
+			<p><%= link_to area.name, area %></p>
+			<p class="count"><%= pluralize(area.plaques.size, "plaque") %></p>
         <% end %>
       <% end %>
 	<% end %>
