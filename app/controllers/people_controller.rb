@@ -1,6 +1,5 @@
 class PeopleController < ApplicationController
   
-  layout "v1"
   
   before_filter :authorisation_required, :except => [:index, :show]
   
