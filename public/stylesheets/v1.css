@@ -342,6 +342,7 @@ nav.alphabet ol li.selected a {
 	display: inline-block;
 }
 
+.search_results li a.role,
 .search_results li a.attribute {
 	border-bottom :dotted 1px #CCC;
 }
