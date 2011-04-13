@@ -1,4 +1,8 @@
-<h1><%= @country.name %></h1>
+<% @page_title = @country.name  %>
+
+<div class="panel clearfix">
+	<h1><%= @country.name %></h1>
+</div>
 
 <%= render :partial => 'plaques/map.html.erb' %>
 

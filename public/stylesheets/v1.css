@@ -1,9 +1,36 @@
+/**
+	OPEN PLAQUES v1 CORE STYLESHEET
+
+	0. TEMP DEVELOPMENT
+	1. RESET
+	2. CORE
+		2.1 Development elements
+	
+*/
+
+/**
+	0. TEMP DEVELOPMENT
+*/
+
+#map {
+	display: none;
+}
+
+/**
+	1. RESET
+*/
+
 * {
 	margin: 0;
 	padding: 0;
 }
 
 html { overflow-y: scroll; }
+
+/**
+	2. CORE
+*/
+
 
 body {
 	background: #BBB;
@@ -25,7 +52,10 @@ a:hover {
 /*	margin-top: 148px;*/
 }
 
-/***/
+
+/**
+	2.1 Development elements
+*/
 
 .development {
 	background: rgba(255,255,0,.8);
