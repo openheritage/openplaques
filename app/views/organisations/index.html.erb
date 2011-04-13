@@ -15,5 +15,6 @@
 <% end %>
 </ul>
 
-<!-- TODO: MB: Tidy this section -->
-<%= content_tag("p", link_to("Add new organisation", new_organisation_path)) if authorized? %>
+<!-- FIXME: Seems the authorized? is throwing an error  -->
+
+<%#= content_tag("p", link_to("Add new organisation", new_organisation_path)) if authorized? %>
