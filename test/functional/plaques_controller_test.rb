@@ -155,6 +155,28 @@ class PlaquesControllerTest < ActionController::TestCase
 
   context "when not signed in as user" do
   
+    context "when submitting a valid new plaque and user name and e-mail address" do
+
+      setup do
+        post :create, :plaque => {:inscription => "Test" }, :user_name => "Test", :user_email => "test@test.com"
+      end
+
+      should assign_to :plaque
+      should redirect_to("the page for the new plaque") { plaque_path(assigns(:plaque)) }
+      
+    end
+  
+    context "when submitting a valid new plaque with no user name or e-mail address" do
+
+      setup do
+        post :create, :plaque => {:inscription => "Test" }
+      end
+
+      should assign_to :plaque
+      should render_template :new
+      
+    end  
+  
     context "when submitting an invalid new plaque" do
       
       setup do
