@@ -233,7 +233,7 @@ footer {
 	text-align: right;
 }
 
-.explore_by .selected, 
+.explore_by .selected , 
 .sorted_by .selected {
 	font-weight: bold;
 }
@@ -270,13 +270,14 @@ nav.alphabet ol li {
 	display: inline-block;
 }
 
-nav.alphabet ol li a {
+nav.alphabet ol li a,
+nav.alphabet ol li span {
 	color: #454a51;
 	text-decoration: none;
 	padding: 4px 6px;
 }
 
-nav.alphabet ol li.selected a {
+nav.alphabet ol li span {
 	cursor: default;
 	-moz-box-shadow: 0 0 5px #999;
 	-webkit-box-shadow: 0 0 5px #999;
@@ -284,7 +285,7 @@ nav.alphabet ol li.selected a {
 }
 
 nav.alphabet ol li a:hover,
-nav.alphabet ol li.selected a {
+nav.alphabet ol li span {
 	background: #FFF;
 	color: #4f7cbf;
 	-moz-border-radius: 6px;

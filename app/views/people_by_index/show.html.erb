@@ -1,13 +1,13 @@
 <% @page_title = "People - " + @index  %>
 
 <div class="panel clearfix">
-	<h1>People - <%= @index %></h1>
+	<h1>People - <%= @index.upcase %></h1>
 
 	<!-- TODO: Give the current letter a class of .selected -->
 	<nav class="alphabet">
 		<%= content_tag("ol") do %>
 			<% for letter in "A".."Z" %>
-				<%= content_tag("li", navigation_link_to(letter, people_by_index_path(letter))) %>
+				<%= content_tag("li", navigation_link_to(letter, people_by_index_path(letter.downcase))) %>
 			<% end %>
 		<% end %>
 		
