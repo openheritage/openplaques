@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :username
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :username, :name
   
   has_many :plaques
   
@@ -24,11 +24,20 @@ class User < ActiveRecord::Base
 
   belongs_to :todo_item
 
+  before_validation :generate_username_and_password_if_not_logged_in
   
   def make_admin
     self.is_admin = true
     self.save!
   end
   
+  def generate_username_and_password_if_not_logged_in
+    if !self.name.blank? && !self.email.blank? && self.username.blank?
+      self.username = Time.now.to_i.to_s
+      self.password = self.username
+      self.password_confirmation = self.password
+      self.is_verified = false
+    end
+  end
 
 end

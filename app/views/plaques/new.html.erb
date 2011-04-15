@@ -71,6 +71,8 @@
 
 <% if params[:checked] && params[:checked] == "true" %>
 
+	<%= @plaque.errors.full_messages %>
+
 	<%= form_for(@plaque) do |f| %>
 
 		<div class="primary">
@@ -196,13 +198,13 @@
 
 				<%= f.fields_for :user do |g| %>
 					<div>
-						<%= label_tag :user_name, "Name" %>
-						<%= text_field_tag :user_name %>
+						<%= g.label :name, "Name" %>
+						<%= g.text_field :name %>
 					</div>
 
 					<div>
-						<%= label_tag :user_email, "E-mail address" %>
-						<%= text_field_tag :user_email %>
+						<%= g.label :email, "E-mail address" %>
+						<%= g.text_field :email %>
 					</div>			
 
 					<div>

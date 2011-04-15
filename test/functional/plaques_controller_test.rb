@@ -158,7 +158,7 @@ class PlaquesControllerTest < ActionController::TestCase
     context "when submitting a valid new plaque and user name and e-mail address" do
 
       setup do
-        post :create, :plaque => {:inscription => "Test" }, :user_name => "Test", :user_email => "test@test.com"
+        post :create, :plaque => {:inscription => "Test", :user_attributes => {:name => "Test", :email => "test@test.com"}}  
       end
 
       should assign_to :plaque

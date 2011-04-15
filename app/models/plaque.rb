@@ -57,8 +57,9 @@ class Plaque < ActiveRecord::Base
 
   attr_accessor :country
 
-  accepts_nested_attributes_for :photos, :reject_if => :all_blank
-  
+  accepts_nested_attributes_for :photos, :reject_if => proc { |attributes| attributes['photo_url'].blank? }
+  accepts_nested_attributes_for :user, :reject_if => :all_blank
+ 
   include ApplicationHelper
  # validates_presence_of :latitude, :longtitude
 

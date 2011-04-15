@@ -105,7 +105,7 @@ class PlaquesController < ApplicationController
   def new
     
     @plaque = Plaque.new
-
+    @plaque.build_user
     @plaque.photos.build
     
     @countries = Country.all(:order => :name)    
@@ -156,30 +156,10 @@ class PlaquesController < ApplicationController
   def create
     
     @plaque = Plaque.new(params[:plaque])
-    
+
     if current_user
       @plaque.user = current_user
-    elsif !params[:user_email].blank? && !params[:user_name].blank?
-      user_email = params[:user_email]
-      user_name = params[:user_name]
-      @user = User.find_by_email(user_email)
-      if @user 
-        if @user.is_verified
-          flash[:notice] = "You are a proper user - you should login first."
-          redirect_to login_path and return
-        end
-      else
-        @user = User.new
-        @user.email = user_email
-        @user.name = user_name
-        @user.username = Time.now.to_i.to_s
-        @user.password = @user.username
-        @user.password_confirmation = @user.password
-        @user.is_verified = false
-        @user.save!
-      end      
-      @plaque.user = @user
-    end
+    end    
     
     if @plaque.colour.nil? && params[:other_colour_id]
 
@@ -226,7 +206,7 @@ class PlaquesController < ApplicationController
       @languages = Language.all(:order => :name)
       @common_colours = Colour.common.all(:order => "plaques_count DESC")
       @other_colours = Colour.other.all(:order => :name)
-      
+            
       render :new 
     end
       
