@@ -2,7 +2,7 @@ require 'test_helper'
 
 class PlaqueTest < ActiveSupport::TestCase
 
-  should validate_presence_of :user_id
+  should validate_presence_of :user
 
   should belong_to :location
   should belong_to :colour

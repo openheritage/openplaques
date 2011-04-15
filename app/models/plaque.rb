@@ -23,7 +23,7 @@
 # * Verbs - The verbs used on the plaque's inscription.
 class Plaque < ActiveRecord::Base
 
-  validates_presence_of :user_id
+  validates_presence_of :user
   
 
   belongs_to :location, :counter_cache => true
