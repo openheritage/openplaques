@@ -208,8 +208,8 @@
 					</div>			
 
 					<div>
-						<%= label_tag :user_email_opt_in, "Please keep me informed about the project" %>
-						<%= check_box_tag :user_email_opt_in %>
+						<%= g.label :opted_in, "Please keep me informed about the project" %>
+						<%= g.check_box :opted_in %>
 					</div>
 					
 				<% end %>
