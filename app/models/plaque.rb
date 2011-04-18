@@ -41,7 +41,7 @@ class Plaque < ActiveRecord::Base
   has_many :photos, :inverse_of => :plaque
   has_many :verbs, :through => :personal_connections
 
-  before_save :set_erected_year
+  before_save :set_erected_year, :use_other_colour_id
 
   scope :geolocated, :conditions => ["latitude IS NOT NULL"]
   scope :ungeolocated, :conditions => {:latitude => nil}
@@ -55,7 +55,7 @@ class Plaque < ActiveRecord::Base
   scope :partial_inscription, :conditions => {:inscription_is_stub => true }
   scope :partial_inscription_photo, :conditions => {:photos_count => 1..99999, :inscription_is_stub => true}
 
-  attr_accessor :country
+  attr_accessor :country, :other_colour_id
 
   accepts_nested_attributes_for :photos, :reject_if => proc { |attributes| attributes['photo_url'].blank? }
   accepts_nested_attributes_for :user, :reject_if => :all_blank
@@ -306,6 +306,12 @@ class Plaque < ActiveRecord::Base
   end   
    
   private
+  
+    def use_other_colour_id
+      if !self.colour && self.other_colour_id
+        self.colour_id = self.other_colour_id
+      end
+    end
   
     def set_erected_year
       if self.erected_at?

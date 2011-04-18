@@ -184,7 +184,7 @@
 						<span class="other">
 							<%= f.radio_button :colour_id, "other" %>
 							<%= f.label :colour_id_other, "other:" %>
-							<%= select_tag :other_colour_id, options_from_collection_for_select(@other_colours, :id, :name) %>
+							<%= f.collection_select :other_colour_id, @other_colours, :id, :name, :include_blank => true %>
 						<span>
 					</div>
 				<% end %>	

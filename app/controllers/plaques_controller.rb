@@ -160,13 +160,6 @@ class PlaquesController < ApplicationController
     if current_user
       @plaque.user = current_user
     end    
-    
-    if @plaque.colour.nil? && params[:other_colour_id]
-
-      @plaque.colour = Colour.find(params[:other_colour_id])
-      
-    end
-
 
     if params[:location] && !params[:location].blank?
       country = Country.find(params[:plaque][:country])
