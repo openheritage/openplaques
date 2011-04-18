@@ -182,11 +182,7 @@ class PlaquesController < ApplicationController
     end
 
     @plaque.location = location if location
-            
-    if params[:photo_url] && !params[:photo_url].blank?
-            
-    end      
-        
+                    
     if @plaque.save
 
       PlaqueMailer.new_plaque_email(@plaque).deliver
