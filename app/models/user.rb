@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
   def generate_username_and_password_if_not_logged_in
     if !self.name.blank? && !self.email.blank? && self.username.blank?
       self.username = Time.now.to_i.to_s
-      self.password = self.username
+      self.password = rand(99999999999)
       self.password_confirmation = self.password
       self.is_verified = false
     end
