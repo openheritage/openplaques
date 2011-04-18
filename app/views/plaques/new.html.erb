@@ -19,13 +19,13 @@
 
 	$(function() {
 		
-		$('#other_colour_id').attr('disabled', 'disabled');
+		$('#plaque_other_colour_id').attr('disabled', 'disabled');
 		$('input[name="plaque[colour_id]"]').change(function() {
 				var val = $('input[name="plaque[colour_id]"]:radio:checked"').val();
 				if (val == "other") {
-					$('#other_colour_id').attr('disabled', '');	
+					$('#plaque_other_colour_id').attr('disabled', '');	
 				} else {
-					$('#other_colour_id').attr('disabled', 'disabled');					
+					$('#plaque_other_colour_id').attr('disabled', 'disabled');					
 				}
 		});
 	});
@@ -181,16 +181,19 @@
 							<%= f.label "colour_id_" + colour.id.to_s, colour.name, :class => colour.name.downcase %>
 						</span>
 					<% end %>
-					<span>
-						<%= f.radio_button :colour_id, "nil", :checked => true %>
-						<%= f.label :colour_id_nil, "Unknown" %>
-					</span>
 
 						<span class="other">
 							<%= f.radio_button :colour_id, "other" %>
 							<%= f.label :colour_id_other, "other:" %>
 							<%= f.collection_select :other_colour_id, @other_colours, :id, :name, :include_blank => true %>
-						<span>
+						</span>
+
+						<span class="unknown">
+							<%= f.radio_button :colour_id, "nil", :checked => true %>
+							<%= f.label :colour_id_nil, "unknown" %>
+						</span>
+
+
 					</div>
 				<% end %>	
 			</div>

@@ -513,10 +513,11 @@ form.new_plaque div.colour_options {margin: 0; padding: .5em 0 0 0;}
 form.new_plaque div.colour_options span {display: block; width: 30%; float: left; margin-bottom: 1em;}
 form.new_plaque div.colour_options span input {float: left; margin: 0; padding: 0; width: auto;}
 form.new_plaque div.colour_options span label {display: block; float: left; margin-left: 10px;}
-form.new_plaque div.colour_options span.other {clear: left; width: 100%; margin: 0; padding: 0; display: block;}
+form.new_plaque div.colour_options span.other {clear: left; width: 100%; margin: 0 0 1em 0; padding: 0; display: block;}
 form.new_plaque div.colour_options span.other label {display: inline; width: auto;}
 form.new_plaque div.colour_options span.other input {display: inline; width: auto; margin: 0; padding: 0;}
 form.new_plaque div.colour_options span.other select {float: left; margin-left: 20px; border-radius: 0; }
+form.new_plaque div.colour_options span.unknown {clear: both; width: 100%; margin: 0; padding: 0; display: block; float: none;}
 
 form.new_plaque  div.photo_options div.confirmation {margin-top: 1em;}
 form.new_plaque div.confirmation input {float: left; width: auto;}
