@@ -1,13 +1,18 @@
 <script>
 
 	$(function() {
-			$('#photo_url').attr('disabled', 'disabled');
+			$('#plaque_photos_attributes_0_photo_url').attr('disabled', 'disabled');
+			$('#plaque_photos_attributes_0_accept_cc_by_licence').attr('disabled', 'disabled');			
+			
 			$('input[name="photo"]').change(function() {
 				var val = $('input[name="photo"]:radio:checked"').val();
 				if (val == "web") {
-					$('#photo_url').attr('disabled', '');
+					$('#plaque_photos_attributes_0_photo_url').attr('disabled', '');
+					$('#plaque_photos_attributes_0_accept_cc_by_licence').attr('disabled', '');			
+					
 				} else {
-					$('#photo_url').attr('disabled', 'disabled');
+					$('#plaque_photos_attributes_0_photo_url').attr('disabled', 'disabled');
+					$('#plaque_photos_attributes_0_accept_cc_by_licence').attr('disabled', 'disabled');								
 				}
 			});				
 	});
@@ -105,12 +110,12 @@
 
 					</div>
 			
-					<div>
-						<%= radio_button_tag :photo, :upload, false, :disabled => true %>						
-						<%= label_tag :photo_upload, "Yes, I'll upload:", :class => :disabled %>
-						<%= file_field_tag :photo, :disabled => :disabled %>
-						<%= content_tag("span", "coming soon", :class => :coming_soon) %>
-					</div>
+			<!--		<div>
+						<%#= radio_button_tag :photo, :upload, false, :disabled => true %>						
+						<%#= label_tag :photo_upload, "Yes, I'll upload:", :class => :disabled %>
+						<%#= file_field_tag :photo, :disabled => :disabled %>
+						<%#= content_tag("span", "coming soon", :class => :coming_soon) %>
+					</div>-->
 					
 					<div class="confirmation">
 						<%= p.check_box(:accept_cc_by_licence) %>
