@@ -63,6 +63,21 @@ class Plaque < ActiveRecord::Base
   include ApplicationHelper
  # validates_presence_of :latitude, :longtitude
 
+  def user_attributes=(user_attributes)
+    
+    if user_attributes.has_key?("email")
+      user = User.find_by_email(user_attributes["email"])
+      if user
+        self.user = user
+      end
+    end
+
+    if !self.user
+      self.build_user(user_attributes)
+    end  
+    
+  end
+    
   def to_csv
    [self.id, self.inscription_csv, self.organisation_name, self.erected_at_string, self.language_name, self.colour_name, self.location_name, self.area_name, self.country_name, "\"" + self.coordinates + "\""].join(",")
   end 

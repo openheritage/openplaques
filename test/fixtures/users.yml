@@ -3,6 +3,7 @@ frankieroberto:
   username: frankieroberto
   email: frankie@frankieroberto.com
   name: Frankie Roberto
+  is_verified: true
 
 quentin:
   username: quentin
@@ -11,3 +12,9 @@ quentin:
 aaron:
   username: aaron
   email: aaron@example.com
+
+jason:
+  username: anon4545645645
+  name: Jason
+  email: jason@jason.com
+  is_verified: false

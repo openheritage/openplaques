@@ -165,6 +165,18 @@ class PlaquesControllerTest < ActionController::TestCase
       should redirect_to("the page for the new plaque") { plaque_path(assigns(:plaque)) }
       
     end
+
+    context "when submitting a valid new plaque with an existing unverified user's name and e-mail address" do
+
+      setup do
+        post :create, :plaque => {:inscription => "Test", :user_attributes => {:name => users(:jason).name, :email => users(:jason).email}}  
+      end
+
+      should assign_to :plaque
+      should redirect_to("the page for the new plaque") { plaque_path(assigns(:plaque)) }
+      
+    end
+
   
     context "when submitting a valid new plaque with no user name or e-mail address" do
 
