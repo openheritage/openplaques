@@ -177,6 +177,15 @@ class PlaquesControllerTest < ActionController::TestCase
       
     end
 
+    context "when submitting a valid new plaque with an existing verified user's name and e-mail address" do
+
+      should "raise an error" do
+        assert_raises(RuntimeError) do
+          post :create, :plaque => {:inscription => "Test", :user_attributes => {:name => users(:frankieroberto).name, :email => users(:frankieroberto).email}}  
+        end
+      end
+
+    end
   
     context "when submitting a valid new plaque with no user name or e-mail address" do
 

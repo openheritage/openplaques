@@ -68,6 +68,7 @@ class Plaque < ActiveRecord::Base
     if user_attributes.has_key?("email")
       user = User.find_by_email(user_attributes["email"])
       if user
+        raise "Attempting To Post Plaque As Existing Verified User" and return if user.is_verified?        
         self.user = user
       end
     end
