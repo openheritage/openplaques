@@ -14,7 +14,7 @@
 				<% end %>
 			<% end %>
 				<% content_tag("li") do %>
-					<%= dated_person(person) %><%= " (also " + @other_roles.to_sentence + ")" if person.roles.size > 1 %>
+					<%= dated_person(person) %><%= " (also ".html_safe + @other_roles.to_sentence + ")" if person.roles.size > 1 %>
 					<% for plaque in person.plaques %>
 						<%= link_to("\#" + plaque.id.to_s, plaque) %>
 					<% end %>
