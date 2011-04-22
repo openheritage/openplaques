@@ -3,6 +3,7 @@
 
 <div class="panel clearfix">
 	<h1 property="dc:title rdfs:label foaf:name" about="#this"><%= h @organisation.name %></h1>
+	<%= content_tag("p", link_to(h(@organisation.website),@organisation.website), {:rel => "foaf:homepage vcard:url"}) unless @organisation.website.blank? %>
 </div>
 
 <div typeof="foaf:Organization">
