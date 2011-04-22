@@ -14,8 +14,12 @@
 <ul class="search_results one_destination_results">
 <% @organisations.each do |organisation| %>	
 	<%= content_tag("li") do %>
-		<p><%= link_to(h(organisation.name), organisation) %></p>
-		<p class="count"><%= pluralize(organisation.plaques.size.to_s, "plaque") if organisation.plaques.size > 0 %></p>
+
+		<a href="<%= url_for(organisation) %>">
+			<p class="result"><%= organisation.name %></p>
+			<p class="count"><%= pluralize(organisation.plaques.size.to_s, "plaque") if organisation.plaques.size > 0 %></p>
+		</a>
+
 	<% end %>
 <% end %>
 </ul>

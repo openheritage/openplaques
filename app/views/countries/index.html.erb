@@ -1,3 +1,5 @@
+<% @page_title = "Countries" %>
+
 <div class="panel clearfix">
 	<h1>Countries</h1>
 </div>
@@ -5,12 +7,10 @@
 <%= content_tag("ol", :class => "search_results one_destination_results") do %>
 	<% @countries.each do |country| %>
 		<%= content_tag("li") do %>
-			<!-- <p><%= link_to country.name, country %></p>
-			      	<p class="count"><%= pluralize(country.plaques.size, "plaque") %></p> -->
-			<a href="#">
-				<p class="result"><%= country.name %></p>
-				<p class="count"><%= pluralize(country.plaques.size, "plaque") %></p>
-			</a>
+				<a href="<%= url_for(country) %>">
+					<p class="result"><%= country.name %></p>
+					<p class="count"><%= pluralize(country.plaques.size, "plaque") %></p>
+				</a> 
       <% end %>
 	<% end %>
 <% end %>
