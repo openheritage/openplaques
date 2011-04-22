@@ -44,7 +44,6 @@ h1, h2, h3, h4 {
 p {
 	font-size: 16px;
 	line-height: 24px;
-	margin-bottom: 16px;
 }
 
 a:link, a:visited {
@@ -310,6 +309,10 @@ nav.alphabet ol li span {
 #organisation_info,
 form.new_plaque {
 	padding: 0 5% 32px;
+}
+
+#organisation_info p {
+	margin-bottom: 16px;	
 }
 
 form.new_plaque h2 {
