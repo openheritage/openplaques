@@ -206,17 +206,17 @@
 					<h2>About you</h2>
 
 					<%= f.fields_for :user do |g| %>
-						<div>
+						<div class="row">
 							<%= g.label :name, "Name" %>
 							<%= g.text_field :name %>
 						</div>
 
-						<div>
+						<div class="row">
 							<%= g.label :email, "E-mail address" %>
 							<%= g.text_field :email %>
 						</div>			
 
-						<div>
+						<div class="row">
 							<%= g.label :opted_in, "Please keep me informed about the project" %>
 							<%= g.check_box :opted_in %>
 						</div>
