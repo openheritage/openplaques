@@ -44,6 +44,7 @@ h1, h2, h3, h4 {
 p {
 	font-size: 16px;
 	line-height: 24px;
+	margin-bottom: 16px;
 }
 
 a:link, a:visited {
@@ -400,26 +401,17 @@ form.new_plaque .confirmation {
 	margin-left: 120px;
 }
 
-/****/
+/* TODO: Revamp this section */
 
-table.plaque_list {
-}
-
-table.plaque_list tr {
-}
-
+table.plaque_list {}
+table.plaque_list tr {}
 table.plaque_list td {
+	padding: 8px;
 }
+table.plaque_list td.photo {}
+table.plaque_list td.geo {}
 
-table.plaque_list td.photo {
-	
-}
-table.plaque_list td.geo {
-	
-}
-
-
-
+/***/
 
 .search_results {
 	padding: 0 5% 32px;
