@@ -437,6 +437,10 @@ form.new_plaque .confirmation {
 .search_results li {
 	background: url('../images/bullet-blue.gif') no-repeat left 10px; padding-left: 16px;
 	padding-bottom: 16px;
+	
+	-moz-column-break-before:always;
+	-webkit-column-break-before:always; 
+	column-break-before:always;
 }
 
 .search_results li a {
@@ -471,6 +475,21 @@ form.new_plaque .confirmation {
 	text-transform: uppercase;
 }
 
+
+/*******/
+
+.one_destination_results .count {
+	display: block;
+}
+
+.one_destination_results li a {
+	display: block;
+}
+.one_destination_results li a:hover {
+	background: #EEE;
+	border-radius: 8px;
+	color: #000;
+}
 
 /*********/
 

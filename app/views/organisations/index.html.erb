@@ -11,7 +11,7 @@
 <p><%= pluralize(@organisations.size, "organisation") %></p>
 
 <!-- TODO: Make it say "'0 plaques' for the results < 0" -->
-<ul class="search_results">
+<ul class="search_results one_destination_results">
 <% @organisations.each do |organisation| %>	
 	<%= content_tag("li") do %>
 		<p><%= link_to(h(organisation.name), organisation) %></p>
