@@ -37,6 +37,14 @@ body {
 	font-family: "Baskerville", Georgia, serif;
 }
 
+h1, h2, h3, h4 {
+	font-weight: 600;
+}
+
+p {
+	font-size: 16px;
+	line-height: 24px;
+}
 
 a:link, a:visited {
 	color: #4f7cbf;
@@ -141,7 +149,7 @@ header .search_box #phrase:hover {
 .site_name {
 	display: block;
 	color: #454A51;
-	font-size: 40px;
+	font-size: 34px; /*40px*/
 	text-shadow: 1px 1px 1px #CCCCCC, -1px -1px 1px #FFFFFF;
 	text-transform: uppercase;
 	padding-left: 116px;
@@ -150,7 +158,7 @@ header .search_box #phrase:hover {
 
 
 .site_name .small-caps {
-	font-size: 34px;
+	font-size: 27px; /*34px*/
 }
 
 
@@ -223,9 +231,16 @@ footer {
 }
 
 .panel h1 {
-	float: left;
+	/*float: left;*/
+	border-bottom: solid 1px #CCC;
+	font-weight: 600;
+	padding: 0 0 8px;
 }
 
+.panel p {
+	margin-top: 16px;
+	padding-right: 30%;
+}
 .explore_by, 
 .sorted_by {
 	float: right;
@@ -288,8 +303,72 @@ nav.alphabet ol li a:hover,
 nav.alphabet ol li span {
 	background: #FFF;
 	color: #4f7cbf;
-	-moz-border-radius: 6px;
 	border-radius: 6px;
+}
+
+
+form.new_plaque {
+	padding: 0 5% 32px;
+}
+
+form.new_plaque h2 {
+	margin-bottom: 16px;
+}
+form.new_plaque fieldset {
+	background: -moz-linear-gradient(top, rgba(0,0,0,.01), rgba(0,0,0,.0) 8%);  
+	background: -webkit-gradient(linear, 0 0, 0 8%, from(rgba(0,0,0,.01)), to(rgba(0,0,0,.0)));
+	border: solid 1px #EEE;
+	border-radius: 16px;
+	box-shadow: 0px 0px 4px #FFF;
+	margin-bottom: 16px;
+	padding: 16px;
+	
+	
+}
+
+form.new_plaque .row {
+	margin-bottom: 16px;
+}
+
+form.new_plaque .row:last-child {
+	margin-bottom: 0;
+}
+
+form.new_plaque .row input {
+	font-size: 16px;
+	font-family: "Baskerville", "Georgia";
+	padding: 4px;
+}
+
+form.new_plaque .row label {
+	cursor: pointer;
+	display: block;
+	margin-bottom: 8px;
+}
+
+form.new_plaque .radio label,
+form.new_plaque .checkbox label {
+	display: inline;
+	padding: 0 8px;
+}
+
+form.new_plaque .row textarea {
+	color: #CCC;
+	font: 16px/16px "Baskerville", "Georgia";
+	padding: 8px;
+}
+
+form.new_plaque .row textarea:focus {
+	color: #333;
+}
+
+form.new_plaque .row select {
+	font: 16px/16px "Baskerville", "Georgia";
+	padding-right: 8px;
+}
+
+form.new_plaque .confirmation {
+	margin-left: 120px;
 }
 
 
@@ -330,7 +409,6 @@ nav.alphabet ol li span {
 	background: url('../images/bullet-blue.gif') no-repeat left 10px; padding-left: 16px;
 	padding-bottom: 16px;
 }
-
 
 .search_results li a {
 	color: #000;
@@ -379,12 +457,6 @@ section {
 	display: block;
 	margin: 8px;
 }
-
-.row {
-	background: rgba(0,0,0,.1);
-	margin: 8px;
-}
-
 
 /* >> The Magnificent CLEARFIX: Updated to prevent margin-collapsing on child elements << j.mp/bestclearfix */
 .clearfix:before, .clearfix:after {

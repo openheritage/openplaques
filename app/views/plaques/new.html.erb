@@ -70,9 +70,12 @@
 	});
 	</script>
 
-<h1>Tell us about the plaque</h1>
+<div class="panel">
+	<h1>Tell us about the plaque</h1>
 
-<p>Thanks for identifying a plaque that's not already on this website. Please tell us as much about the plaque as you can. Anything you don't know can be left blank.</p>
+	<p>Thanks for identifying a plaque that's not already on this website. Please tell us as much about the plaque as you can. <em>Anything you don't know can be left blank</em>.</p>
+</div>
+
 
 <% if params[:checked] && params[:checked] == "true" %>
 
@@ -83,31 +86,30 @@
 		<div class="primary">
 			<fieldset>
 				<h2>What does the plaque say?</h2>
-				<div><%= f.label :inscription, "Please type in the description on the plaque" %>: 
-					<%= f.text_area :inscription, {:placeholder => "Joe Bloggs lived here"} %>
+				<div class="row">
+					<%= f.label :inscription, "Please type in the description on the plaque" %>
+					<%= f.text_area :inscription, {:placeholder => "Joe Bloggs lived here", :rows => "6", :cols => "50"} %>
 				</div>
 				
-					<p>
+				<div class="row">
 						<%= f.label :language_id, "What language is it in?" %>
 						<%= f.collection_select :language_id, @languages, :id, :name %>
-					</p>
+				</div>
 			</fieldset>
 		
 			<%= fieldset do %>
 				<h2>Have you taken a photo of it?</h2>
 
-				<div class="photo_options">
-					<div>
+					<div class="row radio">
 						<%= radio_button_tag :photo, "nil", true %>			
 						<%= label_tag :photo_nil, "Not yet" %>
 					</div>
 			
-					<div>
+					<div class="row radio">
 						<%= radio_button_tag :photo, :web %>						
 						<%= label_tag :photo_web, "Yes, it's here:" %>
 						<%= f.fields_for :photos do |p| %>
 							<%= p.text_field :photo_url, :placeholder => "Photo URL" %>
-
 					</div>
 			
 			<!--		<div>
@@ -117,57 +119,58 @@
 						<%#= content_tag("span", "coming soon", :class => :coming_soon) %>
 					</div>-->
 					
-					<div class="confirmation">
+					<div class="row checkbox confirmation">
 						<%= p.check_box(:accept_cc_by_licence) %>
 						<%= p.label(:accept_cc_by_licence, "I took this photo and agree to release it under a ".html_safe + link_to("Creative Commons Attribution licence", "http://creativecommons.org/licenses/by/3.0/") + ".")%>
 					</div>
 					<% end %>
-				</div>
+				
 			<% end %>
 
 		</div>
 		<div class="secondary">		
 			<fieldset>
 				<h2>Where is it?</h2>
-				<div>
-				<label for="location">Street and number </label>
+				
+				<div class="row">
+					<label for="location">Street and number </label>
 					<%= text_field_tag :location, "", {:placeholder => "221B Baker Street"} %>
 				</div>
 				
-				<div class="ui-widget">
+				<div class="row ui-widget">
 					<label for="area">City/Town </label>
 					<%= text_field_tag :area, "", :placeholder => "London" %>
 				</div>
 
-				<div>
+				<div class="row">
 					<%= f.label :country %>
 					<%= f.collection_select :country, @countries, :id, :name, :include_blank => true %>
 				</div>
 		
 				<%= hidden_field_tag :area_id %>
 			</fieldset>
+			
 			<fieldset>
 				<h2>Who put the plaque up, and when?</h2>
 
 				<%= f.fields_for :organisation do |g| %>
-					<div>
+					<div class="row">
 						<%= label_tag :organisation_name, "Name of organisation" %>
 						<%= text_field_tag :organisation_name, "", {:placeholder => "English Heritage"} %>
 						<%= f.hidden_field :organisation_id %>
 					</div>
 				
-					<div>
+					<div class="row">
 						<div class="date_labels">
 							<%= f.label :erected_at_1i, "Year" %>
 							<%= f.label :erected_at_3i, "Date" %>
 						</div>
 						<%= f.date_select :erected_at, :include_blank => true, :start_year => Time.now.year, :end_year => 1950, :field_name => :plaque_erected_at_year, :order => [:year, :day, :month] %>
-					</div>				
-
+					</div>
 
 				<% end %>
 
-			</fieldset>			
+			</fieldset>
 			
 			<%= fieldset do %>	
 				<%= content_tag("h2", "What colour is it?") %>
@@ -198,37 +201,38 @@
 				<% end %>	
 			</div>
 		
-		</div>
-		
-		<% unless current_user %>			
-			<fieldset class="user">
-				<h2>About you</h2>
+			<% unless current_user %>			
+				<fieldset class="user">
+					<h2>About you</h2>
 
-				<%= f.fields_for :user do |g| %>
-					<div>
-						<%= g.label :name, "Name" %>
-						<%= g.text_field :name %>
-					</div>
+					<%= f.fields_for :user do |g| %>
+						<div>
+							<%= g.label :name, "Name" %>
+							<%= g.text_field :name %>
+						</div>
 
-					<div>
-						<%= g.label :email, "E-mail address" %>
-						<%= g.text_field :email %>
-					</div>			
+						<div>
+							<%= g.label :email, "E-mail address" %>
+							<%= g.text_field :email %>
+						</div>			
 
-					<div>
-						<%= g.label :opted_in, "Please keep me informed about the project" %>
-						<%= g.check_box :opted_in %>
-					</div>
-					
-				<% end %>
-			</fieldset>
+						<div>
+							<%= g.label :opted_in, "Please keep me informed about the project" %>
+							<%= g.check_box :opted_in %>
+						</div>
+
+					<% end %>
+				</fieldset>
+			<% end %>
+			
+			<%= f.submit "Add your plaque" %>
+			
 		<% end %>
+			
+	</div>
 		
-		<%= f.submit "Add your plaque" %>
-
-	<% end %>
-
 <% else %>
+
 	<p>First, let's just make sure it's not already in our database. Who or what is it about?</p>
 
 	<%= form_tag("/search", :method => "get") do %>

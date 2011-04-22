@@ -1,5 +1,7 @@
 class PlaquesController < ApplicationController
   
+  layout "v1"
+  
   before_filter :authenticate_user!, :except => [:index, :show, :map, :new, :create]
 
   def map
