@@ -238,9 +238,10 @@ footer {
 }
 
 .panel p {
-	margin-top: 16px;
-	padding-right: 30%;
+/*	margin-top: 16px;
+	padding-right: 30%; */
 }
+
 .explore_by, 
 .sorted_by {
 	float: right;
