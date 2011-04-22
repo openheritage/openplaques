@@ -321,9 +321,27 @@ form.new_plaque fieldset {
 	border-radius: 16px;
 	box-shadow: 0px 0px 4px #FFF;
 	margin-bottom: 16px;
-	padding: 16px;
-	
-	
+	padding: 16px;	
+}
+
+form.new_plaque .date_labels {
+	overflow: hidden; _zoom: 1;
+}
+
+form.new_plaque .date_labels label {
+	float: left;
+	margin-right: 2.7em;
+}
+
+.colour_options {
+	width: 60%;
+}
+
+.colour_options span {
+	display: block;
+	float: left;
+	margin-right: 5%;
+	width: 25%;
 }
 
 form.new_plaque .row {
@@ -343,7 +361,7 @@ form.new_plaque .row input {
 form.new_plaque .row label {
 	cursor: pointer;
 	display: block;
-	margin-bottom: 8px;
+	margin-bottom: 4px;
 }
 
 form.new_plaque .radio label,
