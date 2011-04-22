@@ -5,7 +5,7 @@
 
 <ul>
 <% for colour in @colours %>
-  <li><%= link_to_colour(colour) %> - <%= pluralize(colour.plaques_count, "plaque")%></li>
+  <li><%= link_to_colour(colour) %> - <%= pluralize(colour.plaques.size, "plaque")%></li>
 <% end %>
 </ul>
 
