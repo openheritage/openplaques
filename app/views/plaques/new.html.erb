@@ -174,9 +174,7 @@
 			
 			<%= fieldset do %>	
 				<%= content_tag("h2", "What colour is it?") %>
-			
-				<div>
-				
+
 					<div class="colour_options">
 					<% @common_colours.each do |colour| %>
 						<div class="row radio">
@@ -199,7 +197,6 @@
 
 					</div>
 				<% end %>	
-			</div>
 		
 			<% unless current_user %>			
 				<fieldset class="user">
