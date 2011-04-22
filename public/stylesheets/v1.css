@@ -238,8 +238,7 @@ footer {
 }
 
 .panel p {
-/*	margin-top: 16px;
-	padding-right: 30%; */
+	margin-bottom: 0;
 }
 
 .explore_by, 
@@ -400,6 +399,26 @@ form.new_plaque .row select {
 form.new_plaque .confirmation {
 	margin-left: 120px;
 }
+
+/****/
+
+table.plaque_list {
+}
+
+table.plaque_list tr {
+}
+
+table.plaque_list td {
+}
+
+table.plaque_list td.photo {
+	
+}
+table.plaque_list td.geo {
+	
+}
+
+
 
 
 .search_results {
