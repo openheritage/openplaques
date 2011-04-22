@@ -3,20 +3,14 @@
 
 <div class="panel clearfix">
 	<h1 property="dc:title rdfs:label foaf:name" about="#this"><%= h @organisation.name %></h1>
+	<%= link_to("Edit", edit_organisation_path(@organisation), {:class => :edit, :title => "edit location"}) if current_user %>
 	<%= content_tag("p", link_to(h(@organisation.website),@organisation.website), {:rel => "foaf:homepage vcard:url"}) unless @organisation.website.blank? %>
 </div>
 
-<div typeof="foaf:Organization">
+<div id="organisation_info" typeof="foaf:Organization">
 
-<div class="info">
   <%= link_to("Edit", edit_organisation_path(@organisation), {:class => :edit, :title => "edit location"}) if current_user %>
 	<%= simple_format(@organisation.description) if @organisation.description %>
-</div>
-
-<div class="info">
-  <%= link_to("Edit", edit_organisation_path(@organisation), {:class => :edit, :title => "edit location"}) if current_user %>
-	<%= content_tag("p", "Website: ".html_safe + link_to(h(@organisation.website),@organisation.website), {:rel => "foaf:homepage vcard:url"}) unless @organisation.website.blank? %>
-</div>
 
 <%= render :partial => 'plaques/map.html.erb' %>
 
