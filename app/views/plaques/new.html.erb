@@ -179,22 +179,22 @@
 				
 					<div class="colour_options">
 					<% @common_colours.each do |colour| %>
-						<span>
+						<div class="row radio">
 							<%= f.radio_button :colour_id, colour.id %>
 							<%= f.label "colour_id_" + colour.id.to_s, colour.name, :class => colour.name.downcase %>
-						</span>
+						</div>
 					<% end %>
 
-						<span class="other">
+						<div class="row radio other">
 							<%= f.radio_button :colour_id, "other" %>
 							<%= f.label :colour_id_other, "other:" %>
 							<%= f.collection_select :other_colour_id, @other_colours, :id, :name, :include_blank => true %>
-						</span>
+						</div>
 
-						<span class="unknown">
+						<div class="row radio unknown">
 							<%= f.radio_button :colour_id, "nil", :checked => true %>
 							<%= f.label :colour_id_nil, "unknown" %>
-						</span>
+						</div>
 
 
 					</div>
