@@ -522,7 +522,7 @@ table.plaque_list td.geo {}
 	border: solid 1px #CCC;
 	border-radius: 16px;
 	padding: 16px;
-	float: right;
+	/*float: right;*/
 	
 }
 
@@ -530,7 +530,11 @@ table.plaque_list td.geo {}
 	font-size: 16px;
 }
 
-.plaque_info_panel img {
+.plaque_info_panel .photo a {
+	display: block;
+}
+
+.plaque_info_panel .photo a img {
 	border: solid 2px #666;
 }
 
