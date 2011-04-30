@@ -4,11 +4,14 @@
 	<h1>Search results for &quot;<%= @phrase %>&quot;</h1>
 </div>
 
-<% if @search_results %>
+<% if !@search_results.empty? %>
 	<ol class="search_results">
 		<% @search_results.each do |result| %> 
 		<li>
-			<p class="result"><%= link_to(marked_text(title(result), @phrase), result, :class => :title) %> <%= link_to(result.location.area.name, result.location.area, :class => :location) if result.location && result.location.area %></p>
+			<p class="result">
+				<%= link_to(marked_text(title(result), @phrase), result, :class => :title) %>
+				<%= link_to(result.location.area.name, result.location.area, :class => :location) if result.location && result.location.area %>
+			</p>
 			<p class="snippet"><%= marked_text(search_snippet(result.inscription, @phrase), @phrase) %></p>
 		</li>
 		<% end %>
