@@ -8,8 +8,7 @@
 	<ol class="search_results">
 		<% @search_results.each do |result| %> 
 		<li>
-			<p class="result"><%= link_to(marked_text(title(result), @phrase), result, :class => :title) %></p>
-			<p class="location"><%= link_to(result.location.area.name, result.location.area, :class => :location) if result.location && result.location.area %></p>
+			<p class="result"><%= link_to(marked_text(title(result), @phrase), result, :class => :title) %> <%= link_to(result.location.area.name, result.location.area, :class => :location) if result.location && result.location.area %></p>
 			<p class="snippet"><%= marked_text(search_snippet(result.inscription, @phrase), @phrase) %></p>
 		</li>
 		<% end %>

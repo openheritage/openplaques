@@ -6,7 +6,7 @@
 </div>
 
 <!-- TODO: Make it say "'0 plaques' for the results < 0" -->
-<ul class="search_results one_destination_results">
+<ul id="organisations_results" class="one_destination_results">
 <% @organisations.each do |organisation| %>	
 	<%= content_tag("li") do %>
 
