@@ -538,10 +538,14 @@ table.plaque_list td.geo {}
 	width: 100%;
 }
 
-.plaque_details th {
+.plaque_details th,
+.photo_details th {
 	padding-right: 16px;
 }
-.plaque_details th, td {
+.plaque_details th,
+.plaque_details td,
+.photo_details th,
+.photo_details td {
 	border-top: dotted 1px #CCC;
 	font-style: italic;
 	font-weight: normal;

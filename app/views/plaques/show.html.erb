@@ -22,21 +22,31 @@
 
 	<section class="plaque_info_panel">
 		
-		<h1>Plaque #<%= @plaque.id %></h1>
+		<!--h1>Plaque #<%= @plaque.id %></h1-->
 
 		<div class="photo">
 
 			<% if @plaque.photos.size > 0 %>
 				<% photo = @plaque.photos.first %>
 				<%= link_to(image_tag(photo.file_url, {:alt => "Photo of plaque", :rel => "foaf:depiction"}), photo.url) %>			
-				<p>Photographer: 
-					<% if photo.photographer_url %>
-						<%= link_to(photo.photographer, photo.photographer_url) %>.
-					<% else %>	
-						<%= photo.photographer %>.
-					<% end %> 
-					Licence:&#160;<%= link_to(photo.licence.name, photo.licence.url) %>.
-				</p>
+			
+				<table class="photo_details" cellspacing="0" summary="Photo details">
+					<tr>
+						<th>Photographer</th>
+						<td>
+							<% if photo.photographer_url %>
+								<%= link_to(photo.photographer, photo.photographer_url) %>.
+							<% else %>	
+								<%= photo.photographer %>.
+							<% end %>
+						</td>
+					</tr>
+					<tr>
+						<th>Licence</th>
+						<td><%= link_to(photo.licence.name, photo.licence.url) %></td>
+					</tr>
+				</table>
+			
 			<% else %>
 				<%= image_tag("/images/NoPhoto.gif", {:alt => "Awaiting Photograph"}) %>
 				<p>To add one, upload your Creative Commons licenced photo to <a href="http://www.flickr.com">Flickr</a>
@@ -48,6 +58,8 @@
 			<%#= button_to("Find on Flickr", flickr_search_plaque_path()) if current_user %>
 		</div>
 		
+		
+		
 		<table class="plaque_details" cellspacing="0" summary="Plaque details for #<%= @plaque.id %>">
 			<tr>
 				<th>Erected by</th>
@@ -57,10 +69,10 @@
 				<th>Language</th>
 				<td><%= language_if_known(@plaque) %></td>
 			</tr>
-			<tr>
+			<!--tr>
 				<th>Co-ordinates</th>
 				<td><%= geolocation_if_known(@plaque) %></td>
-			</tr>
+			</tr-->
 			<tr>
 				<th>Colour</th>
 				<td><%= colour_if_known(@plaque) %></td>
