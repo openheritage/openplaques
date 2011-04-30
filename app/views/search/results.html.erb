@@ -1,15 +1,21 @@
 <% @page_title = "Search results for '" + @phrase + "'"  %>
-<h1>Search results for &quot;<%= @phrase %>&quot;</h1>
 
-<% @search_results.each do |result| %> 
-  <div class="result">
-		
-		<p> <%= link_to(marked_text(title(result), @phrase), result, :class => :title) %> <%= link_to(result.location.area.name, result.location.area, :class => :location) if result.location && result.location.area %>			
-		<br>
-		<%= marked_text(search_snippet(result.inscription, @phrase), @phrase) %>
-		</p>
-	</div>
-<% end %>  
+<div class="panel clearfix">
+	<h1>Search results for &quot;<%= @phrase %>&quot;</h1>
+</div>
+
+<% if @search_results %>
+	<ol class="search_results">
+		<% @search_results.each do |result| %> 
+		<li>
+			<p class="result"><%= link_to(marked_text(title(result), @phrase), result, :class => :title) %></p>
+			<p class="location"><%= link_to(result.location.area.name, result.location.area, :class => :location) if result.location && result.location.area %></p>
+			<p class="snippet"><%= marked_text(search_snippet(result.inscription, @phrase), @phrase) %></p>
+		</li>
+		<% end %>
+	</ol>
+<% end %>
+
 
 <% if params[:from] && params[:from] == "submission" %>
 
