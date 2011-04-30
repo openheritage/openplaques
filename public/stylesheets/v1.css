@@ -517,6 +517,35 @@ table.plaque_list td.geo {}
 
 /*********/
 
+.plaque_info_panel {
+	background: #EEE;
+	border: solid 1px #CCC;
+	border-radius: 16px;
+	padding: 16px;
+	float: right;
+	
+}
+
+
+.plaque_info_panel img {
+	border: solid 2px #666;
+}
+
+.plaque_details {
+	width: 100%;
+}
+
+.plaque_details th {
+	padding-right: 16px;
+}
+.plaque_details th, td {
+	border-top: dotted 1px #CCC;
+	font-style: italic;
+	font-weight: normal;
+	text-align: left;
+	padding-top: 4px;
+	padding-bottom: 4px;
+}
 
 .visuallyhidden {
 	position: absolute !important;    
