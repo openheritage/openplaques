@@ -541,7 +541,9 @@ table.plaque_list td.geo {}
 .plaque_details th,
 .photo_details th {
 	padding-right: 16px;
+	width: 34%;
 }
+
 .plaque_details th,
 .plaque_details td,
 .photo_details th,
