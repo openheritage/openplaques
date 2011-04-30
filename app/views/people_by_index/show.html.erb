@@ -15,7 +15,7 @@
 </div>
 
 
-<%= content_tag("ol", :id => "people_results") do %>
+<%= content_tag("ol", :class => "results", :id => "people_results") do %>
 	<% @people.each do |person| %>
 		<%= content_tag("li") do %>
 			<%= link_to dated_roled_person(person) %>

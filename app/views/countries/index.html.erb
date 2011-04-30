@@ -4,7 +4,7 @@
 	<h1>Countries</h1>
 </div>
 
-<%= content_tag("ol", :id => "places_results", :class => "one_destination_results") do %>
+<%= content_tag("ol", :id => "places_results", :class => "results one_destination_results") do %>
 	<% @countries.each do |country| %>
 		<%= content_tag("li") do %>
 				<a href="<%= url_for(country) %>">

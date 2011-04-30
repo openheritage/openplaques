@@ -475,27 +475,27 @@ table.plaque_list td.geo {}
 	text-decoration: none;
 }
 
-.search_results .count,
-.search_results li a.location {
+.results .count,
+.results li a.location {
 	color: #999;
 	display: inline-block;
 }
 
-.search_results li a.role,
-.search_results li a.attribute {
+.results li a.role,
+.results li a.attribute {
 	border-bottom :dotted 1px #CCC;
 }
 
-.search_results li a:hover {
+.results li a:hover {
 	background: #4f7cbf;
 	color: #FFF;
 }
 
-.search_results strong {
+.results strong {
 	font-weight: normal;
 }
 
-.search_results span {
+.results span {
 	text-transform: uppercase;
 }
 

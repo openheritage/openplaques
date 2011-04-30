@@ -5,7 +5,7 @@
 </div>
 
 <% if !@search_results.empty? %>
-	<ol class="search_results">
+	<ol id="search_results" class="results">
 		<% @search_results.each do |result| %> 
 		<li>
 			<p class="result">
@@ -26,4 +26,3 @@
 <% else %>
 	<%= render :partial => "search_form", :locals => { :phrase => @phrase } %>
 <% end %>
-
