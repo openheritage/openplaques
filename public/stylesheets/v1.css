@@ -526,6 +526,9 @@ table.plaque_list td.geo {}
 	
 }
 
+.plaque_info_panel h1 {
+	font-size: 16px;
+}
 
 .plaque_info_panel img {
 	border: solid 2px #666;
