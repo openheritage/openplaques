@@ -1,13 +1,17 @@
-<%  @page_title = title(@plaque) %>
+<% @page_title = title(@plaque) %>
+
+<div class="panel clearfix">
+	<%= link_to "Edit", edit_plaque_path(@plaque), {:class => :edit, :title => "Edit plaque"} if current_user %>
+	<h1>Plaque #<%= @plaque.id %></h1>
+</div>
+
+
 <div class="like_button">
 	<iframe src="http://www.facebook.com/plugins/like.php?href=<%= request.url %>&amp;layout=button_count&amp;show_faces=false&amp;width=260&amp;action=like&amp;font&amp;colorscheme=light&amp;height=35" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:60px; height:35px; text-align:right;" allowTransparency="true"></iframe>
 </div>
 
 <div<%= " class=\"" + @plaque.colour.name + "plaque\"" if @plaque.colour %> about="#this" typeof="op:Plaque">
-  <div class="info">
-    <%= link_to "Edit", edit_plaque_path(@plaque), {:class => :edit, :title => "Edit plaque"} if current_user %>
-	<h1>Plaque #<%= @plaque.id %></h1>
-  </div>
+ 
 
   <div class="info inscription">
       <%= link_to "Edit", edit_plaque_inscription_path(@plaque), {:class => :edit, :title => "Edit inscription"} if current_user %>
