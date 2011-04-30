@@ -20,6 +20,52 @@
  
 
 
+
+
+ 
+	
+
+  <% unless @plaque.description.blank? %>
+	  <div class="info">
+	    <%= link_to "Edit", edit_plaque_description_path(@plaque), {:class => :edit, :title => "Edit plaque description"} if current_user %>
+	      <div class="description" id="description">
+					<%= simple_format(h(@plaque.description)) %>
+	      </div>
+	  </div>
+  <% end %>
+
+  <div class="info">
+    <%= link_to "Edit", edit_plaque_erected_path(@plaque), {:class => :edit, :title => "Edit erected information"} if current_user %>
+	  <%= erected_information(@plaque) %>
+	</div>
+
+  <div class="info">
+    <%= link_to "Edit", edit_plaque_location_path(@plaque), {:class => :edit, :title => "edit location"} if current_user %>
+	  <%= content_tag("p", "Location: ".html_safe + location_if_known(@plaque) + ".") %>
+  </div>
+	
+	<% if @plaque.geolocated? %>
+
+    <%= osm_iframe(@plaque.latitude,@plaque.longitude) %>
+  
+	  <% end %>
+		<div class="info">
+			<%= link_to "Edit", edit_plaque_geolocation_path(@plaque), {:class => :edit, :title => "Edit geolocation"} if current_user %>
+			<p rel="geo:based_near" resource="#plaque_location">Co-ordinates:  <%= geolocation_if_known(@plaque) %>. 
+				<%= "Google: ".html_safe + google_map_if_known("map", @plaque) + ", " + google_streetview_if_known("street view", @plaque) + ", " + google_earth_if_known("earth", @plaque) if @plaque.geolocated? %>
+		</div>
+
+	<div class="info">
+    <%= link_to "Edit", edit_plaque_colour_path(@plaque), {:class => :edit, :title => "edit plaque's colour"} if current_user %>	  
+	  <%= content_tag("p", "Colour: ".html_safe + colour_if_known(@plaque) + ".") %>
+  </div>
+
+	<div class="info">
+    <%= link_to "Edit", edit_plaque_language_path(@plaque), {:class => :edit, :title => "edit plaque's language"} if current_user %>	  
+	  <%= content_tag("p", "Language: ".html_safe + language_if_known(@plaque) + ".") %>
+  </div>
+
+
 	<section class="plaque_info_panel">
 		
 		<!--h1>Plaque #<%= @plaque.id %></h1-->
@@ -35,7 +81,7 @@
 						<th>Photographer</th>
 						<td>
 							<% if photo.photographer_url %>
-								<%= link_to(photo.photographer, photo.photographer_url) %>.
+								<%= link_to(photo.photographer, photo.photographer_url) %>
 							<% else %>	
 								<%= photo.photographer %>.
 							<% end %>
@@ -89,49 +135,6 @@
 		
 	</section>
 
-
- 
-	
-
-  <% unless @plaque.description.blank? %>
-	  <div class="info">
-	    <%= link_to "Edit", edit_plaque_description_path(@plaque), {:class => :edit, :title => "Edit plaque description"} if current_user %>
-	      <div class="description" id="description">
-					<%= simple_format(h(@plaque.description)) %>
-	      </div>
-	  </div>
-  <% end %>
-
-  <div class="info">
-    <%= link_to "Edit", edit_plaque_erected_path(@plaque), {:class => :edit, :title => "Edit erected information"} if current_user %>
-	  <%= erected_information(@plaque) %>
-	</div>
-
-  <div class="info">
-    <%= link_to "Edit", edit_plaque_location_path(@plaque), {:class => :edit, :title => "edit location"} if current_user %>
-	  <%= content_tag("p", "Location: ".html_safe + location_if_known(@plaque) + ".") %>
-  </div>
-	
-	<% if @plaque.geolocated? %>
-
-    <%= osm_iframe(@plaque.latitude,@plaque.longitude) %>
-  
-	  <% end %>
-		<div class="info">
-			<%= link_to "Edit", edit_plaque_geolocation_path(@plaque), {:class => :edit, :title => "Edit geolocation"} if current_user %>
-			<p rel="geo:based_near" resource="#plaque_location">Co-ordinates:  <%= geolocation_if_known(@plaque) %>. 
-				<%= "Google: ".html_safe + google_map_if_known("map", @plaque) + ", " + google_streetview_if_known("street view", @plaque) + ", " + google_earth_if_known("earth", @plaque) if @plaque.geolocated? %>
-		</div>
-
-	<div class="info">
-    <%= link_to "Edit", edit_plaque_colour_path(@plaque), {:class => :edit, :title => "edit plaque's colour"} if current_user %>	  
-	  <%= content_tag("p", "Colour: ".html_safe + colour_if_known(@plaque) + ".") %>
-  </div>
-
-	<div class="info">
-    <%= link_to "Edit", edit_plaque_language_path(@plaque), {:class => :edit, :title => "edit plaque's language"} if current_user %>	  
-	  <%= content_tag("p", "Language: ".html_safe + language_if_known(@plaque) + ".") %>
-  </div>
 
 
 </div>
