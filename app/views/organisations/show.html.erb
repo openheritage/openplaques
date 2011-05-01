@@ -1,6 +1,5 @@
 <% @page_title = @organisation.name  %>
 
-
 <div class="panel clearfix">
 	<h1 property="dc:title rdfs:label foaf:name" about="#this"><%= h @organisation.name %></h1>
 	<%= link_to("Edit", edit_organisation_path(@organisation), {:class => :edit, :title => "edit location"}) if current_user %>
@@ -8,11 +7,7 @@
 </div>
 
 <div id="organisation_info" typeof="foaf:Organization">
-
-  <%= link_to("Edit", edit_organisation_path(@organisation), {:class => :edit, :title => "edit location"}) if current_user %>
+	<%= link_to("Edit", edit_organisation_path(@organisation), {:class => :edit, :title => "edit location"}) if current_user %>
 	<%= simple_format(@organisation.description) if @organisation.description %>
-
-<%= render :partial => 'plaques/map.html.erb' %>
-
-<%= plaque_list(@plaques, :organisation) %>
+	<%= plaque_list(@plaques, :organisation) %>
 </div>
