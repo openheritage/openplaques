@@ -5,8 +5,7 @@ module RolesHelper
   end
 
   def role_url(role, options = {})
-    role_path(area, options.merge!(:only_path => false))
+    role_path(role, options.merge!(:only_path => false))
   end
-
 
 end
