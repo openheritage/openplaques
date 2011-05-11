@@ -1,6 +1,6 @@
-  class RolesController < ApplicationController
+class RolesController < ApplicationController
 
-    before_filter :authenticate_user!, :except => [:index, :show]
+  before_filter :authenticate_user!, :except => [:index, :show]
 
   def index
     respond_to do |format|
@@ -16,12 +16,17 @@
     end
   end
 
-  # GET /roles/1
-  # GET /roles/1.xml
+  # GET /roles/artist
+  # GET /roles/artist.xml
   def show
-
-    @role = Role.find_by_slug!(params[:id])
+    @role = Role.find_by_slug(params[:id].downcase)
+    if @role == nil # create a dummy role for display purposes
+      @role = Role.new
+      @role.name = params[:id].downcase
+    end
+    
     @related_roles = []  # TODO: add this as an instance method.
+    
     for person in @role.people
       if person # HACK: for some reason, the person is sometimes Nil
         if (@plaques == nil)
