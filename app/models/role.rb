@@ -17,7 +17,11 @@ class Role < ActiveRecord::Base
 
   before_save :update_index, :filter_name
   
-
+  
+  def related_roles
+    Role.find(:all, :conditions => 
+      ['(name LIKE ? and name != ?) or (name LIKE ? and name != ?) or (name LIKE ? and name != ?)', "#{name} %", name, "% #{name} %", name, "% #{name}", name])
+  end
 
   private
   
