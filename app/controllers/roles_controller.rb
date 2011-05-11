@@ -25,10 +25,10 @@ class RolesController < ApplicationController
       @role.name = params[:id].downcase
     end
     
-    @related_roles = []  # TODO: add this as an instance method.
+    @related_roles = @role.related_roles()
     
     for person in @role.people
-      if person # HACK: for some reason, the person is sometimes Nil
+      if person # a role record may exist that no longer has a person joined to it
         if (@plaques == nil)
           @plaques = person.plaques          
         else
