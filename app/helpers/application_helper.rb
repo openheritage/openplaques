@@ -138,7 +138,7 @@ module ApplicationHelper
         link_to("logout", destroy_user_session_path)
       ), {:class => "user_info"})
     else
-      content_tag("p", link_to("login", new_user_session_path), {:class => "user_info"})
+      content_tag("p", link_to("Login", new_user_session_path), {:class => "user_info"})
     end
   end
 
