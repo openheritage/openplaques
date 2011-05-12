@@ -1,7 +1,10 @@
 <% @page_title = @country.name  %>
 
 <div class="panel clearfix">
-	<h1><%= @country.name %></h1>
+	<h1>
+  <%= @country.name %>
+  <a href="http://en.wikipedia.org/wiki/<%= @country.name.gsub(" ", "_") %>"><img src="/images/wikipedia-20.png" /></a>
+  </h1>
 </div>
 
 <div class="map_results_container">

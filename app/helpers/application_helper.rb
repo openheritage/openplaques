@@ -166,7 +166,7 @@ module ApplicationHelper
       verbs = []
       personal_connections.each do |personal_connection|
         if personal_connection.location == location
-          verbs << link_to(personal_connection.verb.name, verb_path(personal_connection.verb))
+#          verbs << link_to(personal_connection.verb.name, verb_path(personal_connection.verb))
         end
       end
       ret += verbs.to_sentence + " at " + link_to(location.name, location)
@@ -185,7 +185,12 @@ module ApplicationHelper
     connections = plaque.personal_connections.all(:select => "personal_connections.person_id", :group => "personal_connections.person_id")
     if connections.size > 0
       connections.each do |connection|
-        inscription = inscription.gsub(connection.person.name, link_to(connection.person.name, person_path(connection.person))).html_safe
+        if inscription.index(connection.person.name) != nil
+          inscription = inscription.gsub(connection.person.name, link_to(connection.person.name, person_path(connection.person))).html_safe
+        else
+          search_for = connection.person.name[0,connection.person.name.rindex(" ")]
+          inscription = inscription.gsub(search_for, link_to(search_for, person_path(connection.person))).html_safe
+        end
       end
     end
     return inscription

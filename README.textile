@@ -20,4 +20,4 @@ To run the website, you will need to do the following first:
 # Copy environment.example.rb to environment.rb in the config/ folder. You won't need to edit anything to get started, though in order to use the Flickr import feature or geolocation features, you'll have to register with the different services and copy in your API keys.
 # From the command line, run <tt>rake gems:install</tt> (you may need to run it with <tt>sudo</tt>) to install a few required ruby gems.
 # From the command line, run <tt>rake db:setup</tt> in order to set up your database and setup initial data.
-# From the command line, run <tt>script/server</tt> in order to start the web server (Mongrel will be used by default). You should then be able to see the website at http://0.0.0.0:3000 (or whichever URL is specified at the command line).
+# From the command line, run <tt>rails server</tt> in order to start the web server (Mongrel will be used by default). You should then be able to see the website at http://0.0.0.0:3000 (or whichever URL is specified at the command line).
