@@ -264,7 +264,17 @@
 			
 		</div>
 		
+		<% if @plaque.geolocated? %>
+
+	    <%= osm_iframe(@plaque.latitude,@plaque.longitude) %>
+
+		<% else %>
+		
 		<img src="http://b.tile.openstreetmap.org/16/32359/21202.png" />
+		
+		  <% end %>
+		
+		
 		
 		
 		<table class="section_details" cellspacing="0" summary="Plaque details for #<%= @plaque.id %>">
