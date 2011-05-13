@@ -4,6 +4,7 @@ frankieroberto:
   email: frankie@frankieroberto.com
   name: Frankie Roberto
   is_verified: true
+  is_admin: true
 
 quentin:
   username: quentin

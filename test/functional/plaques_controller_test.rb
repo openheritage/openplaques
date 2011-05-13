@@ -220,4 +220,39 @@ class PlaquesControllerTest < ActionController::TestCase
 
   end
   
+  context "when signed in as a user" do
+    
+    setup { sign_in users(:quentin) }
+    
+    context "when attempting to delete a plaque" do
+      
+      setup { delete :destroy, :id => plaques(:frankie_sheffield_plaque).id }
+      
+      should respond_with :forbidden
+      
+    end    
+    
+  end
+
+  context "when signed in as an admin user" do
+    
+    setup { sign_in users(:frankieroberto) }
+
+    context "when submitting a request to delete a plaque" do
+      
+      setup do
+        @previous_plaque_count = Plaque.count
+        delete :destroy, :id => plaques(:frankie_sheffield_plaque).id
+      end
+      
+      should "have deleted that record" do
+        assert_equal(@previous_plaque_count - 1, Plaque.count)
+      end
+      
+      should redirect_to("the plaques page") { plaques_path }      
+      
+    end    
+    
+  end
+
 end
