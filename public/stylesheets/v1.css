@@ -139,7 +139,7 @@ header .search_box #phrase {
 	color: #999;
 	font-family: "Baskerville";
 	font-size: 18px;
-	width: 260px;
+	/*width: 260px;*/ width: 345px;
 }
 
 header .search_box #phrase:hover {
