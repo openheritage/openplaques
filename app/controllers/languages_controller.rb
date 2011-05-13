@@ -1,5 +1,6 @@
 class LanguagesController < ApplicationController
 
+  before_filter :authenticate_admin!, :only => :destroy
   before_filter :authenticate_user!, :except => [:index, :show]
 
   def show

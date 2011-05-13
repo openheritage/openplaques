@@ -1,5 +1,6 @@
 class PhotosController < ApplicationController
 
+  before_filter :authenticate_admin!, :only => :destroy
   before_filter :authorisation_required, :except => [:index, :show]
 
   def index

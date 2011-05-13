@@ -1,5 +1,6 @@
 class PersonalRolesController < ApplicationController
 
+  before_filter :authenticate_admin!, :only => :destroy
   before_filter :authorisation_required
 
   def index
