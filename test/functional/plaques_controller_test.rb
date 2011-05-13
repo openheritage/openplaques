@@ -209,6 +209,15 @@ class PlaquesControllerTest < ActionController::TestCase
       
     end
     
+
+    context "when attempting to delete a plaque" do
+      
+      setup { delete :destroy, :id => plaques(:frankie_sheffield_plaque).id }
+      
+      should respond_with :forbidden
+      
+    end
+
   end
   
 end

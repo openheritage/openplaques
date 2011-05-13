@@ -2,7 +2,8 @@ class PlaquesController < ApplicationController
   
   layout "v1"
   
-  before_filter :authenticate_user!, :except => [:index, :show, :map, :new, :create]
+  before_filter :authenticate_user!, :only => :update
+  before_filter :authenticate_admin!, :only => :destroy
 
   def map
     @plaques = Plaque.find(:all, :conditions => ["latitude IS NOT NULL"])
