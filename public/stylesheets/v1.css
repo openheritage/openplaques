@@ -537,7 +537,6 @@ table.plaque_list td.geo {}
 
 .plaque_info_panel {
 	background: #EEE;
-	border: solid 1px #CCC;
 	border-radius: 16px;
 	padding: 16px;
 	/*float: right;*/
@@ -556,21 +555,18 @@ table.plaque_list td.geo {}
 	border: solid 2px #666;
 }
 
-.plaque_details {
+.section_details {
 	width: 100%;
 }
 
-.plaque_details th,
-.photo_details th {
+.section_details th {
 	padding-right: 16px;
 	width: 34%;
 }
 
-.plaque_details th,
-.plaque_details td,
-.photo_details th,
-.photo_details td {
-	border-top: dotted 1px #CCC;
+.section_details th,
+.section_details td {
+	border-bottom: dotted 1px #CCC;
 	font-style: italic;
 	font-weight: normal;
 	text-align: left;
@@ -585,9 +581,9 @@ table.plaque_list td.geo {}
 }
 
 section {
-	border: solid 1px #000;
+/*	border: solid 1px #000;
 	display: block;
-	margin: 8px;
+	margin: 8px;*/
 }
 
 /* >> The Magnificent CLEARFIX: Updated to prevent margin-collapsing on child elements << j.mp/bestclearfix */

@@ -1,6 +1,8 @@
 <% @page_title = title(@plaque) %>
 
 <div class="panel clearfix">
+	<!-- <p id="plaque_number"><span>~ Plaque 2 of <a href="#" title="View all plaques">3879</a> ~</span></p> -->
+	
 	<%= link_to "Edit plaque path", edit_plaque_path(@plaque), {:class => :edit, :title => "Edit plaque"} if current_user %>
 	<%= link_to "Edit inscription", edit_plaque_inscription_path(@plaque), {:class => :edit, :title => "Edit inscription"} if current_user %>
 	<%= content_tag "h1", "Partial inscription" if @plaque.inscription_is_stub %>
@@ -8,19 +10,308 @@
 
 </div>
 
+<style type="text/css">
+
+	h1.inscription {
+		text-align: center;
+	}
+	
+	#plaque_number {
+		display: block;
+		margin: 0 auto;
+		color: #999;
+		font-style: italic;
+		font-size: 12px;
+		text-align: center;
+	}
+	
+	#plaque_number span {
+		padding: 2px 0;
+		border-top: solid 1px #EEE;
+		border-bottom: solid 1px #EEE;
+	}
+	
+	#plaque_number a {
+		color: #999;
+	}
+	
+	#plaque_number a:hover {
+		color: #FFF;
+	}
+	
+	
+	h1.inscription:after {
+		content: " and other things which are important for test purposes. There is no real effective way of making this look good.";
+	}
+	
+	#t-container {
+		xbackground: rgba(255,0,0,.3);
+		padding: 16px 5%;
+		overflow: hidden; _zoom: 1;
+	}
+	
+	#plaque_single_image {
+		xbackground: rgba(255,0,0,.3);
+	}
+	
+	#plaque_multiple_images {
+		xbackground: rgba(0,0,255,.3);
+	}	
+
+	
+	.plaque_image a img {
+		border: solid 10px #EEE;
+		display: block;
+	}
+	
+	.plaque_image a:hover {
+		background: none;
+	}
+	.plaque_image a:hover img {
+		border: solid 10px #FFF;
+		box-shadow: 0 0 10px #999;
+		-moz-transition-duration: 0.3s;	
+		-webkit-transition-duration: 0.3s;		
+	}
+	
+	#plaque_single_image img {
+		width: 480px;
+		height: 360px;		
+	}
+	
+	#plaque_multiple_images {
+		position: relative;
+	}
+	
+	#plaque_multiple_images #primary_image {
+		display: block;
+		margin-left: 120px;
+	}
+	
+	#plaque_multiple_images #primary_image img {
+		width: 360px;
+		height: 270px;
+	}
+
+	#plaque_multiple_images #secondary_images {
+
+		position: absolute; top: 0; left: 0;
+		width: 104px;
+	}	
+	
+	#plaque_multiple_images #secondary_images a {
+		display: block;
+		margin-bottom: 16px;
+	}
+	
+	#plaque_multiple_images #secondary_images a:hover img {
+		border: solid 4px #FFF;
+		box-shadow: 0 0 10px #999;	
+		-moz-transition-duration: 0.3s;	
+		-webkit-transition-duration: 0.3s;		
+	}
+	
+	#plaque_multiple_images #secondary_images img {
+		border: solid 4px #EEE;
+		width: 96px;
+		height: 72px;
+	}
+	
+	.plaque_image {
+		xbackground: rgba(255,0,0,.4);
+		width: 510px;
+		float: left;
+	}
+		
+	#plaque_identifier {
+		xbackground: yellow;
+		float: right;
+		margin: 0;
+		width: 300px;
+	}
+	
+	#plaque_identifier section {
+		margin: 0;
+	}
+	
+	#plaque_identifier img {
+		border: 1px solid rgba(255, 255, 255, 0.5);
+		margin: 8px 0 0;
+		width: 300px;
+	}
+		
+	#plaque_identifier aside {
+		margin-top: 20px;
+	}
+	
+	#plaque_identifier aside h2 {
+		font-size: 16px;
+		margin-bottom: 4px;
+	}
+	
+	#plaque_identifier aside ul {
+		list-style-type: none;
+	}
+	#plaque_identifier aside ul li {
+		background: url('../images/bullet-blue.gif') no-repeat left 10px;
+		padding-left: 16px;
+	}
+
+	#plaque_identifier aside ul li p {
+		font-size: 13px;
+		line-height: 20px;
+	}
+	
+	#plaque_identifier .header {
+		background: rgba(255,0,0,.5);
+	}
+	
+	#plaque_identifier .header h1 {
+		float: left;
+		/*text-align: center;*/
+	}
+	
+	#plaque_identifier .header h1 a {
+		color: #000;
+		text-decoration: none;
+		border-bottom: dotted 1px #999;
+	}
+	
+	#plaque_identifier .header h1 a:hover {
+		color: #FFF;
+	}
+	
+	#plaque_identifier .header .like_button {
+		float: right;
+	}
+
+	
+</style>
 
 
+<!-- TODO: Step by step instructions on how to do flickr -->
 
 
-<div class="like_button">
-	<iframe src="http://www.facebook.com/plugins/like.php?href=<%= request.url %>&amp;layout=button_count&amp;show_faces=false&amp;width=260&amp;action=like&amp;font&amp;colorscheme=light&amp;height=35" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:60px; height:35px; text-align:right;" allowTransparency="true"></iframe>
+<div id="t-container">
+	
+	
+	
+
+	<div class="plaque_image" id="plaque_single_image">
+		
+		<% if @plaque.photos.size > 0 %>
+			<% photo = @plaque.photos.first %>
+			<%= link_to(image_tag(photo.file_url, {:alt => "Photo of plaque", :rel => "foaf:depiction"}), photo.url) %>			
+		
+			<table class="photo_details" cellspacing="0" summary="Photo details">
+				<tr>
+					<th>Photographer</th>
+					<td>
+						<% if photo.photographer_url %>
+							<%= link_to(photo.photographer, photo.photographer_url) %>
+						<% else %>	
+							<%= photo.photographer %>.
+						<% end %>
+					</td>
+				</tr>
+				<tr>
+					<th>Licence</th>
+					<td><%= link_to(photo.licence.name, photo.licence.url) %></td>
+				</tr>
+			</table>
+		
+		<% else %>
+			<a href="#"><%= image_tag("/images/NoPhoto.gif", {:alt => "Awaiting Photograph"}) %></a>
+			<p>To add one, upload your Creative Commons licenced photo to <a href="http://www.flickr.com">Flickr</a>
+			(preferably geocoded) and tag it with <kbd><%= machine_tag(@plaque) %></kbd>. 
+			It will then appear here within 24 hours. <br/>
+			</p>
+		<% end %>
+		
+	</div>	
+
+<!--
+	<div class="plaque_image" id="plaque_multiple_images">
+		
+		<a id="primary_image" href="#"><img src="/images/NoPhoto.gif" /></a>
+		<div id="secondary_images">
+			<a href="">
+				<img src="/images/NoPhoto.gif"></img>
+			</a>
+			<a href="">
+				<img src="/images/NoPhoto.gif"></img>
+			</a>
+			<a href="">
+				<img src="/images/NoPhoto.gif"></img>
+			</a>
+		</div>
+
+	</div>
+-->
+
+	<section id="plaque_identifier" class="plaque_info_panel">
+
+		<div class="header">
+			<h1>Plaque 2 of <a href="#">2424</a></h1>
+			
+			
+			
+			<div class="like_button">
+				<iframe src="http://www.facebook.com/plugins/like.php?href=<%= request.url %>&amp;layout=button_count&amp;show_faces=false&amp;width=260&amp;action=like&amp;font&amp;colorscheme=light&amp;height=35" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:48px; height:20px; text-align:right;" allowTransparency="true"></iframe>
+			</div>
+
+
+			
+		</div>
+		
+		<img src="http://b.tile.openstreetmap.org/16/32359/21202.png" />
+		
+		
+		<table class="section_details" cellspacing="0" summary="Plaque details for #<%= @plaque.id %>">
+			<tr>
+				<th>Erected by</th>
+				<td><%= erected_information(@plaque) %></td>
+			</tr>
+			<tr>
+				<th>Language</th>
+				<td><%= language_if_known(@plaque) %></td>
+			</tr>
+			<!--tr>
+				<th>Co-ordinates</th>
+				<td><%= geolocation_if_known(@plaque) %></td>
+			</tr-->
+			<tr>
+				<th>Colour</th>
+				<td><%= colour_if_known(@plaque) %></td>
+			</tr>
+			<tr>
+				<th>Location</th>
+				<td><%= location_if_known(@plaque) %></td>
+			</tr>
+		</table>
+
+		<aside>
+			<h2>Contributor details</h2>
+			<ul>
+				<li><p>Inscription added by <a href="#">Simon Harriyott</a></p></li>
+				<li><p>Photographs added by <a href="#">Simon Harriyott</a>, <a href="#">Frankie Roberto</a> &amp; <a href="#">myf</a></p></li>
+				<li><p>Further edits contributed from <a href="#">Jez Nicholson</a></p></li>
+			</ul>
+			
+			
+		</aside>
+
+	</section>
+
+
+	<div id="plaques_nearby"></div>
+	
+	
 </div>
+
 
 <div<%= " class=\"" + @plaque.colour.name + "plaque\"" if @plaque.colour %> about="#this" typeof="op:Plaque">
  
-
-
-
 
  
 	
@@ -66,7 +357,9 @@
   </div>
 
 
-	<section class="plaque_info_panel">
+	<hr />
+	
+	
 		
 		<!--h1>Plaque #<%= @plaque.id %></h1-->
 
@@ -133,8 +426,6 @@
 		</table>
 		
 		
-	</section>
-
 
 
 </div>
