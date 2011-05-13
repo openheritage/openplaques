@@ -186,6 +186,19 @@
 		float: right;
 	}
 
+	.photo_credit, .photo_licence {
+		background: #FFF;
+		padding: 0 16px;
+		font-size: 13px;
+	}
+	
+	.photo_credit {
+		float: left;
+	}
+	
+	.photo_licence {
+		float: right;
+	}
 	
 </style>
 
@@ -202,15 +215,17 @@
 		
 		<% if @plaque.photos.size > 0 %>
 			<% photo = @plaque.photos.first %>
-			<%= link_to(image_tag(photo.file_url, {:alt => "Photo of plaque", :rel => "foaf:depiction"}), photo.url) %>			
+			<%= link_to(image_tag(photo.file_url, {:alt => "Photo of plaque", :rel => "foaf:depiction"}), photo.url) %>
 			
-			<p class="photo_credit">Photograpghed by <% if photo.photographer_url %>
-				<%= link_to(photo.photographer, photo.photographer_url) %>
-			<% else %>	
-				<%= photo.photographer %>.
-			<% end %></p>
-			<p class="photo_licence"><%= link_to(photo.licence.name, photo.licence.url) %></p>
-	
+			<div id="photo_information" class="clearfix">
+				<p class="photo_credit">Photographed by <% if photo.photographer_url %>
+					<%= link_to(photo.photographer, photo.photographer_url) %>
+				<% else %>	
+					<%= photo.photographer %>.
+				<% end %></p>
+				<p class="photo_licence"><%= link_to(photo.licence.name, photo.licence.url) %></p>
+			</div>
+
 
 		<% else %>
 			<a href="#"><%= image_tag("/images/NoPhoto.gif", {:alt => "Awaiting Photograph"}) %></a>
