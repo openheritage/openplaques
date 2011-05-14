@@ -5,6 +5,7 @@
 	1. RESET
 	2. CORE
 		2.1 Development elements
+	3. PLAQUE PAGE
 	
 */
 
@@ -75,7 +76,214 @@ a:hover {
 	z-index: 10;
 }
 
+
+/**
+	3. PLAQUE PAGE
+*/
+
+h1.inscription {
+	text-align: center;
+}
+
+#plaque_number {
+	display: block;
+	margin: 0 auto;
+	color: #999;
+	font-style: italic;
+	font-size: 12px;
+	text-align: center;
+}
+
+#plaque_number span {
+	padding: 2px 0;
+	border-top: solid 1px #EEE;
+	border-bottom: solid 1px #EEE;
+}
+
+#plaque_number a {
+	color: #999;
+}
+
+#plaque_number a:hover {
+	color: #FFF;
+}
+
+
+h1.inscription:after {
+/* Just for testing		content: " and other things which are important for test purposes. There is no real effective way of making this look good.";*/
+}
+
+#t-container {
+	xbackground: rgba(255,0,0,.3);
+	padding: 16px 5%;
+	overflow: hidden; _zoom: 1;
+}
+
+#plaque_single_image {
+	xbackground: rgba(255,0,0,.3);
+}
+
+#plaque_multiple_images {
+	xbackground: rgba(0,0,255,.3);
+}	
+
+
+.plaque_image a img {
+	border: solid 10px #EEE;
+	display: block;
+}
+
+.plaque_image a:hover img {
+	border: solid 10px #FFF;
+	box-shadow: 0 0 10px #999;
+	-moz-transition-duration: 0.3s;	
+	-webkit-transition-duration: 0.3s;		
+}
+
+#plaque_single_image img {
+	width: 480px;
+	height: 360px;		
+}
+
+.photo_credit, .photo_licence {
+	padding: 0 16px;
+	font-size: 13px;
+}
+
+#photo_information {
+	margin: 8px 0;
+/*	opacity: 0.7;*/
+}
+
+.photo_credit {
+	float: left;
+}
+
+.photo_licence {
+	float: right;
+}
+
+
+
+#plaque_multiple_images {
+	position: relative;
+}
+
+#plaque_multiple_images #primary_image {
+	display: block;
+	margin-left: 120px;
+}
+
+#plaque_multiple_images #primary_image img {
+	width: 360px;
+	height: 270px;
+}
+
+#plaque_multiple_images #secondary_images {
+
+	position: absolute; top: 0; left: 0;
+	width: 104px;
+}	
+
+#plaque_multiple_images #secondary_images a {
+	display: block;
+	margin-bottom: 16px;
+}
+
+#plaque_multiple_images #secondary_images a:hover img {
+	border: solid 4px #FFF;
+	box-shadow: 0 0 10px #999;	
+	-moz-transition-duration: 0.3s;	
+	-webkit-transition-duration: 0.3s;		
+}
+
+#plaque_multiple_images #secondary_images img {
+	border: solid 4px #EEE;
+	width: 96px;
+	height: 72px;
+}
+
+.plaque_image {
+	xbackground: rgba(255,0,0,.4);
+	width: 510px;
+	float: left;
+}
+	
+#plaque_identifier {
+	xbackground: yellow;
+	float: right;
+	margin: 0;
+	width: 300px;
+}
+
+#plaque_identifier section {
+	margin: 0;
+}
+
+#plaque_identifier img,
+#plaque_identifier iframe.osm {
+	border: 1px solid rgba(255, 255, 255, 0.5);
+	margin: 8px 0 0;
+	width: 300px;
+}
+	
+#plaque_identifier aside {
+	margin-top: 20px;
+}
+
+#plaque_identifier aside h2 {
+	font-size: 16px;
+	margin-bottom: 4px;
+}
+
+#plaque_identifier aside ul {
+	list-style-type: none;
+}
+#plaque_identifier aside ul li {
+	background: url('../images/bullet-blue.gif') no-repeat left 10px;
+	padding-left: 16px;
+}
+
+#plaque_identifier aside ul li p {
+	font-size: 13px;
+	line-height: 20px;
+}
+
+#plaque_identifier .header {
+	background: rgba(255,0,0,.5);
+}
+
+#plaque_identifier .header h1 {
+	float: left;
+	margin-right: 8px;
+	/*text-align: center;*/
+}
+
+#plaque_identifier .header h1 a {
+	color: #000;
+	text-decoration: none;
+	border-bottom: dotted 1px #999;
+}
+
+#plaque_identifier .header h1 a:hover {
+	color: #FFF;
+}
+
+#plaque_identifier .header .like_button {
+	float: left;
+}
+
+
+
+
+
+
+
 /***/
+
+
+
+
 
 header {
 	background: -webkit-gradient(linear, 0 0, 0 100%, from(#FFF), to(#EEE));
