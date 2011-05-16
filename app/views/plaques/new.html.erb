@@ -230,6 +230,8 @@
 		
 <% else %>
 
+<div class="panel">
+
 	<p>First, let's just make sure it's not already in our database. Who or what is it about?</p>
 
 	<%= form_tag("/search", :method => "get") do %>
@@ -238,4 +240,5 @@
 		<%= hidden_field_tag(:from, :submission)%>
 	  <%= submit_tag("Go", :name => nil) %>
 	<% end %>
+</div>
 <% end %>
