@@ -302,7 +302,7 @@ class Plaque < ActiveRecord::Base
    
   def as_json(options={})
     # this example ignores the user's options
-    super(:only => [:id, :inscription, :reference, :latitude, :longitude, :erected_at, :created_at, :updated_at], :include => {:photos => {:only => :url}, :colour => {:only => :name}, :language => {:only => [:name, :alpha2]}, :location => {:only => :name, :include => {:area => {:only => :name, :include => {:country => {:only => [:name, :alpha2]}}}}}, :organisation => {:only => :name}})
+    super(:only => [:id, :inscription, :reference, :latitude, :longitude, :erected_at, :created_at, :updated_at], :include => {:colour => {:only => :name}, :language => {:only => [:name, :alpha2]}, :location => {:only => :name, :include => {:area => {:only => :name, :include => {:country => {:only => [:name, :alpha2]}}}}}, :organisation => {:only => :name}})
   end   
    
   private

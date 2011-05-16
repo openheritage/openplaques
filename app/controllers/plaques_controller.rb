@@ -5,6 +5,8 @@ class PlaquesController < ApplicationController
   before_filter :authenticate_user!, :only => :update
   before_filter :authenticate_admin!, :only => :destroy
 
+  respond_to :html, :xml, :json, :kml, :poi, :rss, :csv, :yaml
+
   def map
     @plaques = Plaque.find(:all, :conditions => ["latitude IS NOT NULL"])
 #    @centre = find_mean(@plaques)
@@ -28,6 +30,8 @@ class PlaquesController < ApplicationController
   # GET /plaques.poi
   def index
     conditions = {}
+    
+    # Bounding-box query
     if params["box"]
       # Should really do some validation here...
       coords = params["box"][1,params["box"].length-2].split("],[")
@@ -37,6 +41,7 @@ class PlaquesController < ApplicationController
       conditions[:longitude] = top_left[1].to_s..bottom_right[1].to_s
     end
     
+    # Since query
     if params[:since]
       since = DateTime.parse(params[:since])
       now = DateTime.now
@@ -46,39 +51,16 @@ class PlaquesController < ApplicationController
       end
     end
     
-    respond_to do |format|
-      format.html {
-        @plaques = Plaque.find(:all, :conditions => conditions, :order => :inscription, :include => [{:personal_connections => [{:person => :roles}, :verb, :location]}, :organisation, :location])
-        @page_title = "Plaques"
-#        @centre = find_mean(@plaques)
-        @zoom = 7
-      }
-      format.kml {
-        @plaques = Plaque.geolocated.find(:all, :conditions => conditions)
-      }
-      format.yaml {
-        @plaques = Plaque.find(:all, :conditions => conditions)
-      }
-      format.xml {
-        @plaques = Plaque.find(:all, :conditions => conditions)
-      }
-      format.json {
-        @plaques = Plaque.find(:all, :include => [:language, {:location => {:area => :country}}, :photos, :colour, :organisation], :conditions => conditions)
-        render :json => @plaques
-      }
-      format.bp {
-        @plaques = Plaque.geolocated.find(:all, :conditions => conditions, :limit => 20)
-      }
-      format.rss {
-        @plaques = Plaque.geolocated.find(:all, :conditions => conditions)
-      }
-      format.csv {
-        @plaques = Plaque.find(:all, :conditions => conditions)
-      }
-      format.poi {
-        @plaques = Plaque.geolocated.find(:all, :conditions => conditions)
-      }
+    if params[:limit] && params[:limit].to_i < 100
+      limit = params[:limit]
+    else
+      limit = 20
     end
+    
+    @plaques = Plaque.all(:conditions => conditions, :order => "created_at DESC", :limit => limit, :include => [:language, :organisation, :colour, [:location => [:area => :country]]])
+        
+    respond_with @plaques
+    
   end
 
   # GET /plaques/1
