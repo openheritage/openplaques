@@ -79,7 +79,9 @@
 
 <% if params[:checked] && params[:checked] == "true" %>
 
-	<%= @plaque.errors.full_messages %>
+	<% if @plaque.errors.size > 0 %>
+		<p>There was an error adding your plaque. Please correct it below.</p>
+	<% end %>
 
 	<%= form_for(@plaque) do |f| %>
 
