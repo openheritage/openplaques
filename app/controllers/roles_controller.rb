@@ -1,5 +1,7 @@
 class RolesController < ApplicationController
 
+  layout "v1"
+
   before_filter :authenticate_admin!, :only => :destroy
   before_filter :authenticate_user!, :except => [:index, :show]
 

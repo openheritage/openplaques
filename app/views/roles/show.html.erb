@@ -1,48 +1,14 @@
-<% @page_title = @role.name %>
-<h1><%=pluralize(@role.people.size, @role.name) %></h1>
+<% @page_title = "Plaques commemorating " + @role.name.pluralize %>
 
-<%= render :partial => 'plaques/map.html.erb' %>
+<div class="panel">
+	<h1><%= @role.name.pluralize.capitalize %></h1>
 
-<% if @role.people.size > 0 %>
-	<% content_tag("ul") do %>
-		<% for person in @role.people %>
-		<% if person%>
-			<% if person.roles.size > 1 %>
-				<% @other_roles = Array.new %>
-				<% person.roles.each do |role| %>
-					<% @other_roles << a_or_an(role.name, false) + " " + link_to(role.name, role_path(role)) unless role == @role %>			
-				<% end %>
-			<% end %>
-				<% content_tag("li") do %>
-					<%= dated_person(person) %><%= " (also ".html_safe + @other_roles.to_sentence.html_safe + ")" if person.roles.size > 1 %>
-					<% for plaque in person.plaques %>
-						<%= link_to("\#" + plaque.id.to_s, plaque) %>
-					<% end %>
-				<% end %>
-			<% end %>
-		<% end%>
-	<% end %>
-<% end %>
+	<% @role.people.each do |person| %>
 
-<% if @related_roles.size > 0 %>
-  <h2>Related Roles</h2>
-  <ul>
-    <% for related_role in @related_roles %>
-      <li><%= link_to pluralize(related_role.personal_roles_count, related_role.name), role_path(related_role) %></li>
-	    <ul>
-  		<% for person in related_role.people %>
-  		  <% if person.roles.size > 1 %>
-    			<% @other_roles = Array.new %>
-    			<% person.roles.each do |role| %>
-    				<% @other_roles << a_or_an(role.name, false) + " " + link_to( role.name, role_path(role)) unless role == related_role %>			
-    			<% end %>
-					<% other_roles = "(also " + @other_roles.to_sentence + ")" %>
-				<% end %>
-        <% content_tag("li") do %>
-          <%= dated_person(person) %> <%= other_roles if other_roles %>
-        <% end %>
-  		<% end %>
-  	  </ul>
-    <% end %>
-  </ul>
-<% end %>
+	<h2><%= link_to person.name, person %> <%= dates(person) %></h2>
+	
+		<p><%= link_to pluralize(person.plaques.size, "plaque"), person %> in <%= list_of_area_links(person.areas) %></p>
+
+	<% end%>
+
+</div>

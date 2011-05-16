@@ -37,6 +37,16 @@ class Person < ActiveRecord::Base
   DATE_REGEX = /c?[\d]{4}/
   DATE_RANGE_REGEX = /(?:\(#{DATE_REGEX}-#{DATE_REGEX}\)|#{DATE_REGEX}-#{DATE_REGEX})/
     
+  def areas
+    areas = []
+    locations.each do |location|
+      if location.area
+        areas << location.area unless areas.include?(location.area)
+      end
+    end
+    return areas
+  end  
+    
   def self.find_or_create_by_name_and_dates(string)
     name_and_dates_regex = /\A(.*)\s\(?(c?)([\d]{4})-(c?)([\d]{4})\)?\Z/
     if string =~ name_and_dates_regex

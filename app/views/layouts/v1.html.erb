@@ -95,27 +95,6 @@
 		</div>
 		<footer>
 			
-			
-			
-			<%= content_tag("ul") do %>
-				<%#= list_link_to("About", about_path) +
-				list_link_to("Contact", contact_path) + 
-				list_link_to("The data", about_data_path)  +
-				list_link_to("Blog", "http://blog.openplaques.org")
-				%>
-			<% end %>
-			<% if defined?(SITE_VERSION)%>
-			<p class="version">
-			  <% if defined?(SITE_VERSION_URL) %>
-			  <%=link_to "Version " + SITE_VERSION, SITE_VERSION_URL %>
-			  <% else %>
-			  Version <%= SITE_VERSION %>
-			  <% end %>
-			</p><% end %>
-			
-			
-			
-			
 		</footer>
 	
  
