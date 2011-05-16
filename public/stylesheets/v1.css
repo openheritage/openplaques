@@ -76,6 +76,11 @@ a:hover {
 	z-index: 10;
 }
 
+p.intro {
+  font-size: 1.8em;
+  line-height: 1.4em;
+}
+
 
 /**
 	3. PLAQUE PAGE
