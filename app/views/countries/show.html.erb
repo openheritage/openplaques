@@ -5,25 +5,22 @@
   <%= @country.name %>
   <a href="http://en.wikipedia.org/wiki/<%= @country.name.gsub(" ", "_") %>"><img src="/images/wikipedia-20.png" /></a>
   </h1>
+
+	<%= pluralize @country.plaques.size, "plaque" %>
 </div>
 
-<div class="map_results_container">
-	
-	<%= render :partial => 'plaques/map.html.erb' %>
-	
 	<% if @areas.size > 0 %>
-
-		<%= content_tag("ul", :class => "search_results") do %>
+	
+		<%= content_tag("ol", :class => "results", :id => "people_results") do %>
 			<% @areas.each do |area| %>
-	  		<%= content_tag("li") do %>
-				<p><%= link_to area.name, area %></p>
-				<p class="count"><%= pluralize(area.plaques.size, "plaque") %></p>
-	        <% end %>
-	      <% end %>
+				<%= content_tag("li") do %>
+					<p class="result"><%= link_to area.name, area %></p>
+					<p class="count"><%= pluralize(area.plaques.size.to_s, "plaque") %></p>
+				<% end %>
+			<% end %>
 		<% end %>
+
 	<% end %>
-	
-	
 	
 </div>
 

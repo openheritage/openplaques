@@ -1,13 +1,16 @@
-<% @page_title = @area.name %>
+<% @page_title = "Plaques in " + @area.name %>
 
 <div class="panel clearfix">
-	<h1><%= @page_title %><%= (", ".html_safe + link_to(@area.country.name, @area.country)) if @area.country %></h1>
-</div>
-
-<div class="map_results_container">
-	<%= render :partial => 'plaques/map.html.erb' %>
+	<%= link_to(@area.country.name, @area.country) if @area.country %>
+	<h1><%= @area.name %></h1>
 	
-	<%= plaque_list(@plaques) %>
+	<% @plaques.each do |plaque| %>
+		
+		<h2><%= link_to title(plaque), plaque %></h2>
+		
+		<p><%= plaque.inscription %></p>
+		
+	<% end %>	
 	
 </div>
 

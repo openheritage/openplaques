@@ -17,6 +17,5 @@ class Country < ActiveRecord::Base
   has_many :areas
   has_many :locations, :through => :areas
   has_many :plaques, :through => :locations
-  
 
 end

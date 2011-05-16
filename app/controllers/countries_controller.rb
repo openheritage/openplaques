@@ -31,14 +31,7 @@ class CountriesController < ApplicationController
       redirect_to(country_url(@country.alpha2), :status => :moved_permanently)
     end
 
-      
-    @areas = @country.areas.all(:order => :name)
-  
-    @plaques = @country.plaques
-#    @centre = find_mean(@plaques)
-    @zoom = 11
-
-
+    @areas = @country.areas.all(:order => :name, :include => :country)
 
   end
   
