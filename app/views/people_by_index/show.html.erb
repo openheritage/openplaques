@@ -18,8 +18,8 @@
 <%= content_tag("ol", :class => "results", :id => "people_results") do %>
 	<% @people.each do |person| %>
 		<%= content_tag("li") do %>
-			<%= link_to dated_roled_person(person) %>
-			<%= " - " + pluralize(person.plaques.size, "plaque") unless person.plaques.size <= 1 %>
+			<p class="result"><%= link_to dated_roled_person(person) %></p>
+			<p class="count"><%= pluralize(person.plaques.size, "plaque") %> <%= "in ".html_safe + list_of_area_links(person.areas) unless person.areas.size == 0 %></p>
 		<% end %>
 	<% end %>
 <% end %>

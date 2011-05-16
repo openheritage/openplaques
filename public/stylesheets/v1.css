@@ -712,6 +712,10 @@ table.plaque_list td.geo {}
 	display: inline-block;
 }
 
+#people_results .count a {
+  color: #999;
+}
+
 .results li a.role,
 .results li a.attribute {
 	border-bottom :dotted 1px #CCC;
