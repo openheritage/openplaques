@@ -109,7 +109,7 @@ class PlaquesController < ApplicationController
   def edit
     @plaque = Plaque.find(params[:id])
     @organisations = Organisation.find(:all, :order => :name)    
-	  @possible_photos = fetch_photos params[:id]
+	 # @possible_photos = fetch_photos params[:id]
   end
 
   def parse_inscription

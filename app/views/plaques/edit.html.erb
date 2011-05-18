@@ -11,7 +11,6 @@
 </div>	
 
 <% form_for(@plaque) do |f| %>
-  <%= f.error_messages %>
 	
 	<p><b><%= f.label :notes %></b>: (these are for internal use, and aren't displayed publicly)<br>
 	<%= f.text_area :notes, :class => :notes %></p>
