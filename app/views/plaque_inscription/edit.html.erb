@@ -31,7 +31,7 @@
 		<% end %>
 	</table>
 	
-<% if authorized? %>
+<% if current_user.try(:is_admin?) %>
 
 	<p><%= link_to "Add connection", new_personal_connection_path(@plaque) %></p>
 

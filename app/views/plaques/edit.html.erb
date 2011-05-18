@@ -1,7 +1,7 @@
 <h1>Editing <%= link_to("Plaque #" + @plaque.id.to_s, plaque_path(@plaque))%></h1>
 
 <div class="info inscription">
-  <%= link_to "Edit", edit_plaque_inscription_path(@plaque), {:class => :edit, :title => "Edit inscription"} if logged_in?%>
+  <%= link_to "Edit", edit_plaque_inscription_path(@plaque), {:class => :edit, :title => "Edit inscription"} %>
   <%= content_tag("p", new_linked_inscription(@plaque), {:class => "inscription"}) %>
 </div>
 
@@ -21,6 +21,6 @@
   </p>
 <% end %>
 
-<%= button_to("Delete plaque", plaque_path(@plaque.id), {:method => :delete, :class => :delete}) if authorized? %>
+<%= button_to("Delete plaque", plaque_path(@plaque.id), {:method => :delete, :class => :delete}) if current_user.try(:is_admin?) %>
 
 
