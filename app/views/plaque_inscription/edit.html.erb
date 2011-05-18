@@ -2,7 +2,6 @@
 <h1>Edit inscription for <%= link_to("plaque \#" + @plaque.id.to_s, @plaque)%></h1>
 
 <% form_for(@plaque) do |f| %>
-  <%= f.error_messages %>
 
 	<%= f.label :inscription %><br>
 	<%= f.text_area :inscription, :class => :inscription %>
