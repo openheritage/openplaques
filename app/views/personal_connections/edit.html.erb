@@ -4,15 +4,25 @@
 	<p><%= f.label :person_id, "Person" %>:
 		<%= f.collection_select :person_id, @people, :id, :name %> <%= link_to("Add person", "/people/new") %>
 	</p>
-	<%= content_tag("p", link_to("Add new person", new_person_path)) if authorized? %>
+	<%= content_tag("p", link_to("Add new person", new_person_path)) %>
 	
 	<p><%= f.label :verb_id, "Verb" %>
 		<%= f.collection_select :verb_id, @verbs, :id, :name %>
 	</p>
-	<%= content_tag("p", link_to("Add new verb", new_verb_path)) if authorized? %>
+	<%= content_tag("p", link_to("Add new verb", new_verb_path)) %>
 	
 	<p><%= f.label :location_id, "Location" %>
 		<%= f.collection_select :location_id, @locations, :id, :name %>
+	</p>
+	
+	<p>
+		<%= f.label :started_at, "From" %>	
+		<%= f.text_field :started_at %>
+	</p>
+
+	<p>
+		<%= f.label :ended_at, "To" %>	
+		<%= f.text_field :ended_at %>
 	</p>
 	
 	<%= f.submit "Update" %>
