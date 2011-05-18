@@ -70,7 +70,27 @@
 		
 		
 		<% if @plaque.geolocated? %>
-			<%= image_tag(google_maps_path(@plaque.latitude, @plaque.longitude, {:zoom => 16})) %>
+			<%= image_tag(google_maps_path(@plaque.latitude, @plaque.longitude, {:zoom => 16, :styles => 
+				{
+					:road => 
+						{:all => 
+							{:lightness => "30"}
+						},
+				 	"road.arterial" => 
+						{:all => 
+							{:hue => "0x003bff"}
+						},
+					:poi => 
+						{:all => 
+							{:visibility => :simplified}
+						},
+					:landscape => 
+						{:all =>
+							{:hue => "0x003bff"}
+						}
+				}
+			}	
+				)) %>
 		<% end %>
 		
 		
