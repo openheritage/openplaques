@@ -209,7 +209,14 @@ class PlaquesControllerTest < ActionController::TestCase
       
     end
     
-
+    context "when attempting to view the edit plaque page" do
+      
+      setup { get :edit, :id => plaques(:frankie_sheffield_plaque).id }
+      
+      should redirect_to("login page") {new_user_session_path}      
+      
+    end
+    
     context "when attempting to delete a plaque" do
       
       setup { delete :destroy, :id => plaques(:frankie_sheffield_plaque).id }
@@ -232,6 +239,15 @@ class PlaquesControllerTest < ActionController::TestCase
       
     end    
     
+    context "when viewing the edit plaque page" do
+      
+      setup { get :edit, :id => plaques(:frankie_sheffield_plaque).id }
+      
+      should respond_with :success
+      should render_template :edit
+      should assign_to :plaque
+      
+    end    
   end
 
   context "when signed in as an admin user" do

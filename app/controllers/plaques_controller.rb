@@ -2,7 +2,7 @@ class PlaquesController < ApplicationController
   
   layout "v1"
   
-  before_filter :authenticate_user!, :only => :update
+  before_filter :authenticate_user!, :only => [:update, :edit]
   before_filter :authenticate_admin!, :only => :destroy
 
   respond_to :html, :xml, :json, :kml, :poi, :rss, :csv, :yaml
@@ -108,8 +108,6 @@ class PlaquesController < ApplicationController
   # GET /plaques/1/edit
   def edit
     @plaque = Plaque.find(params[:id])
-    @organisations = Organisation.find(:all, :order => :name)    
-	 # @possible_photos = fetch_photos params[:id]
   end
 
   def parse_inscription

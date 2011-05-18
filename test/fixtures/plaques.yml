@@ -6,16 +6,20 @@ frankie_sheffield_plaque:
   colour: blue
   organisation: open_plaques
   plaque_erected_year: y2k
+  user: frankieroberto
 
 churchill_daleks:
   inscription: "Winston Churchill, prime minister, defeated the daleks from here"
   colour: red
   location: cabinet_war_rooms
+  user: quentin
   
 jez_plaque:
   inscription: "Jez Nicholson, technologist, worked here"
   colour: red
+  user: quentin
   
 geolocated_plaque:
   latitude: 0.55
   longitude: 0.33
+  user: quentin
