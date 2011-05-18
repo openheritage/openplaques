@@ -9,7 +9,6 @@
 </ul>
 
 <% form_for(@person) do |f| %>
-  <%= f.error_messages %>
   <p><%= f.label :name %> <%= f.text_field :name %></p>
   <p><%= f.label :born_on, "Born" %> <%= text_field_tag :born_on, @born_on, {:maxlength => "4"} %> <%= f.label :died_on, "Died" %> <%= text_field_tag :died_on, @died_on, {:maxlength => "4"} %></p>
   <div id="wikipedia">

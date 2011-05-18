@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110418191837) do
+ActiveRecord::Schema.define(:version => 20110512074751) do
 
   create_table "areas", :force => true do |t|
     t.string   "name"
@@ -112,7 +112,11 @@ ActiveRecord::Schema.define(:version => 20110418191837) do
     t.string   "wikipedia_url"
     t.string   "dbpedia_uri"
     t.string   "wikipedia_paras"
+    t.string   "surname_starts_with"
   end
+
+  add_index "people", ["index"], :name => "index_people_on_index"
+  add_index "people", ["surname_starts_with"], :name => "index_people_on_surname_starts_with"
 
   create_table "personal_connections", :force => true do |t|
     t.integer  "person_id"

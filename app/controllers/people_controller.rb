@@ -1,7 +1,7 @@
 class PeopleController < ApplicationController
   
   before_filter :authenticate_admin!, :only => :destroy  
-#  before_filter :authorisation_required, :except => [:index, :show]
+  before_filter :authenticate_user!, :except => [:index, :show]
   
   def index
     @people = Person.find(:all)
