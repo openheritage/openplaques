@@ -4,6 +4,7 @@
   <%= f.error_messages %>
 
   <p><%= f.label :name %> <%= f.text_field :name %></p>
+  <p><%= f.label :surname_starts_with, "Surname starts with" %> <%= f.text_field :surname_starts_with %></p>
   <p><%= f.label :born_on, "Born in" %> <%= text_field_tag :born_on, "", {:maxlength => "4"} %></p>
   <p><%= f.label :died_on, "Died in" %> <%= text_field_tag :died_on, "", {:maxlength => "4"} %></p>
   <p><%= f.label :wikipedia_url, "Wikipedia link" %> <%= f.text_field :wikipedia_url %></p>

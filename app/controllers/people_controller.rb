@@ -1,7 +1,7 @@
 class PeopleController < ApplicationController
   
   before_filter :authenticate_admin!, :only => :destroy  
-  before_filter :authorisation_required, :except => [:index, :show]
+#  before_filter :authorisation_required, :except => [:index, :show]
   
   def index
     @people = Person.find(:all)
@@ -15,7 +15,6 @@ class PeopleController < ApplicationController
       format.xml { render :xml => @people }
       format.json { render :json => @people }
     end
-    
   end
 
   # GET /people/1

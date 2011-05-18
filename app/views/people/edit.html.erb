@@ -19,6 +19,7 @@
     "<%= wikipedia_summary_p(@person) %>"</p>
   </div>
   <p><%= f.label :dbpedia_uri %> <%= f.text_field :dbpedia_uri %></p>
+  <p><%= f.label :surname_starts_with %> <%= f.text_field :surname_starts_with %></p>
   <p><%= f.submit "Update" %></p>
 <% end %>
 
@@ -33,4 +34,4 @@
     <%= f.submit "Add" %>
   <% end %>
 </p>
-<%= content_tag("p", link_to("Add new role", new_role_path)) if authorized? %>
+<%= content_tag("p", link_to("Add new role", new_role_path)) if current_user.try(:is_admin?) %>

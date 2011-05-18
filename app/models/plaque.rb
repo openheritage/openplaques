@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 # This class represents a physical commemorative plaque, which is either currently installed, or
 # was once installed on a building, site or monument. Our definition of plaques is quite wide,
 # encompassing 'traditional' blue plaques that commemorate a historic person's connection to a

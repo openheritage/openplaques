@@ -1,5 +1,4 @@
 require 'rubygems'
-require 'hpricot'
 require 'open-uri'
 
 # This class represents a human who has been commemorated on a plaque.
@@ -23,8 +22,8 @@ class Person < ActiveRecord::Base
   validates_presence_of :name
 
   validates_uniqueness_of :wikipedia_url, :allow_nil => true, :allow_blank => true
-  validates_uniqueness_of :dbpedia_uri, :allow_nil => true, :allow_blank => true
-
+  validates_uniqueness_of :dbpedia_uri, :allow_nil => true, :allow_blank => true  
+  
   has_many :roles, :through => :personal_roles
   has_many :personal_roles
   has_many :personal_connections
@@ -108,6 +107,10 @@ class Person < ActiveRecord::Base
   
     def update_index
       self.index = self.name[0,1].downcase
+      if self.surname_starts_with.blank?
+        self.surname_starts_with = self.name[self.name.rindex(" ") ? self.name.rindex(" ") + 1 : 0,1].downcase
+      end
+      self.surname_starts_with.downcase!
     end
   
 end

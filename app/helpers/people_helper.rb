@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module PeopleHelper
   
   def roles_list(person)
