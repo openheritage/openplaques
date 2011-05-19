@@ -2,7 +2,7 @@
 <h1>Edit inscription for <%= link_to("plaque \#" + @plaque.id.to_s, @plaque)%></h1>
 
 <div class="info inscription">
-  <%= link_to "Edit", edit_plaque_inscription_path(@plaque), {:class => :edit, :title => "Edit inscription"} if logged_in?%>
+  <%= link_to "Edit", edit_plaque_inscription_path(@plaque), {:class => :edit, :title => "Edit inscription"} if current_user %>
   <%= content_tag("p", new_linked_inscription(@plaque), {:class => "inscription"}) %>
 </div>
 

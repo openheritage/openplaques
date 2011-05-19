@@ -28,10 +28,10 @@ Openplaques::Application.routes.draw do
     end
     resource :location, :controller => "PlaqueLocation", :only => [:edit]
     resource :erected, :controller => "PlaqueErected", :only => [:edit]
-    resource :colour, :controller => "PlaqueColour", :only => [:edit]
+    resource :colour, :controller => :plaque_colour, :only => [:edit]
     resource :geolocation, :controller => "PlaqueGeolocation", :only => [:edit]
     resource :inscription, :controller => "PlaqueInscription", :only => [:edit]
-    resource :description, :controller => "PlaqueDescription", :only => [:edit, :show]
+    resource :description, :controller => :plaque_description, :only => [:edit, :show]
     resource :language, :controller => "PlaqueLanguage", :only => [:edit]
     resources :personal_connections, :controller => "PersonalConnections", :as => :connections
   end
