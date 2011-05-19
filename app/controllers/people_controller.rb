@@ -1,5 +1,7 @@
 class PeopleController < ApplicationController
   
+  layout "v1"
+  
   before_filter :authenticate_admin!, :only => :destroy  
   before_filter :authenticate_user!, :except => [:index, :show]
   
@@ -22,8 +24,6 @@ class PeopleController < ApplicationController
   def show
     @person = Person.find(params[:id])
     @plaques = @person.plaques
-#    @centre = find_mean(@plaques)
-    @zoom = 12
     respond_to do |format|
       format.html
       format.kml { render :template => "plaques/show" }

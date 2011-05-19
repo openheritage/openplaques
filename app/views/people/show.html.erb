@@ -1,43 +1,19 @@
 <% @page_title = @person.name  %>
+
+<div class="panel">
 <div class="vcard person" typeof="<%= if (@person.person?) then "foaf:Person" else "foaf:Agent" end %> vcard:VCard" about="#person">
+	
 <h1><%= dated_person(@person, {:links => :none}) %></h1>
 
-<%= render :partial => 'plaques/map.html.erb' %>
+<p>Commemorated on <%= pluralize(@person.plaques.size, "plaque") %>:</p>
 
-<%= roles_list(@person) %>
+<% @plaques.each do |plaque| %>
+	<h2><%= link_to plaque.location.name + ", " + plaque.area.name, plaque %></h2>
 
-<% if @person.plaques.size == 1 %>
+	<p><%= plaque.inscription %></p>
 
-  <%= linked_personal_connections(@person.personal_connections) %>
-
-  <%= content_tag("p", "According to ".html_safe + link_to("plaque \#" + @person.plaques.first.id.to_s, @person.plaques.first) + ".")%>
-
-<% elsif @person.plaques.size > 1 %>
-  <% phrases = [] %>
-	<% @person.locations.each do |location| %>
-
-		<% @personal_connections = PersonalConnection.find(:all, :conditions => {:person_id => @person.id, :location_id => location.id}) %>
-		<% @verbs = [] %>
-		<% @personal_connections.each do |personal_connection| %>
-			<% @verbs << link_to(personal_connection.verb.name, personal_connection.verb) %>
-		
-		<% end %>
-		<% phrases << @verbs.to_sentence + " at " + link_to(location.name, location) %>
-
-	<% end %>
-	<%= phrases.to_sentence.html_safe %>
-	<% @person.plaques.each do |plaque| %>
-		<%= link_to("\#" + plaque.id.to_s, plaque) %>
-	<% end %>
-<% else %>	
-  <p>This person isn't associated with any plaques.</p>
 <% end %>
 
-  <% @wiki = wikipedia_summary_p(@person) %>
-  <% if @wiki != nil %>
-    <div id="wikipedia">
-      <p>"<%= @wiki %>...", according to Wikipedia. See <a href="<%= wikipedia_url(@person) %>" resource="<%= wikipedia_url(@person).gsub(/en\.wikipedia\.org\/wiki\//, "dbpedia.org/resource/") %>" rel="owl:sameAs">full article</a> for more. Content reused under <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution ShareAlike</a> licence.</p>
-    </div>
-  <% end %>
 </div>
 <%= content_tag("p", link_to("Edit", edit_person_path(@person))) if current_user && current_user.is_admin? %>
+</div>
