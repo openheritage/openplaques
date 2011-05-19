@@ -25,7 +25,7 @@
 		<% phrases << @verbs.to_sentence + " at " + link_to(location.name, location) %>
 
 	<% end %>
-	<%= phrases.to_sentence %>
+	<%= phrases.to_sentence.html_safe %>
 	<% @person.plaques.each do |plaque| %>
 		<%= link_to("\#" + plaque.id.to_s, plaque) %>
 	<% end %>
