@@ -36,7 +36,7 @@ Openplaques::Application.routes.draw do
     resources :personal_connections, :controller => "PersonalConnections", :as => :connections
   end
 
-  resources :areas, :controller => :all_areas
+  resource :areas, :controller => :all_areas, :only => [:show]
 
   # These are the gazeteer (places) model based paths. They might change to become nested in future.
   resources :places, :controller => :countries, :as => :countries do

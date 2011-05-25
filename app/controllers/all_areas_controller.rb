@@ -2,7 +2,7 @@ class AllAreasController < ApplicationController
   
   respond_to :json
   
-  def index
+  def show
     if params[:term]
       @areas = Area.all(:conditions => ["lower(name) LIKE ?", params[:term].downcase + "%"], :limit => 10, :order => "locations_count DESC", :include => :country)
     else
