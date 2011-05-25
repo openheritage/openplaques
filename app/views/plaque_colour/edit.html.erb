@@ -1,7 +1,7 @@
 <% @page_title = "Edit colour of plaque \#" + @plaque.id.to_s %>
 <h1>Edit colour of <%= link_to "Plaque #" + @plaque.id.to_s, @plaque %></h1>
 
-<% form_for @plaque do |f| %>
+<%= form_for @plaque do |f| %>
 	<%= f.label :colour_id, "Colour" %>
 	<%= f.collection_select :colour_id, @colours, :id, :name, {:include_blank => true} %>
   	<%= f.submit "Save" %>
@@ -11,4 +11,4 @@
 	<%= image_tag(@plaque.photos.first.file_url) %>
 <% end unless @plaque.photos.count == 0  %>
 
-<%= content_tag("p", "Or " + link_to("add new colour", new_colour_path) + ".") %>
+<%= content_tag("p", "Or ".html_safe + link_to("add new colour", new_colour_path) + ".") %>
