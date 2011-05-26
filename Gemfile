@@ -1,6 +1,9 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.3'
+gem 'rails', '3.0.7'
+gem 'rake', '~> 0.8.7'  # Version 0.9.0 doesn't work with Rails yet.
+
+gem 'mail', '2.2.15' # 2.2.19 seems to have a bug/incompatibility with ruby 1.8.7
 
 gem 'hpricot'
 
