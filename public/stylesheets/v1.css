@@ -17,6 +17,8 @@
 	background: rgba(255,0,0,.5);
 }
 
+html.no-rgba .dev {background: #F00;}
+
 /**
 	1. RESET
 */
@@ -230,17 +232,14 @@ h1.inscription:after {
 }
 
 #t-container {
-	xbackground: rgba(255,0,0,.3);
 	padding: 16px 5%;
 	overflow: hidden; _zoom: 1;
 }
 
 #plaque_single_image {
-	xbackground: rgba(255,0,0,.3);
 }
 
 #plaque_multiple_images {
-	xbackground: rgba(0,0,255,.3);
 }	
 
 
@@ -320,7 +319,6 @@ h1.inscription:after {
 }
 
 .plaque_image {
-	xbackground: rgba(255,0,0,.4);
 	width: 510px;
 	float: left;
 }
@@ -342,6 +340,10 @@ h1.inscription:after {
 	margin: 8px 0 0;
 	width: 300px;
 }
+
+html.no-rgba #plaque_identifier img,
+html.no-rgba #plaque_identifier iframe.osm {border: solid 1px #FFF;}
+
 	
 #plaque_identifier aside {
 	margin-top: 20px;
@@ -368,6 +370,7 @@ h1.inscription:after {
 #plaque_identifier .header {
 	background: rgba(255,0,0,.5);
 }
+
 
 #plaque_identifier .header h1 {
 	float: left;
@@ -427,6 +430,9 @@ header .search_box {
 	position: absolute; bottom: 15px; right: 0;
 	padding: 8px 8px 8px 54px;
 }
+
+html.no-rgba header .search_box {background: #FFF;}
+
 
 header .search_box:hover {
 	background: #FFF;
@@ -555,8 +561,10 @@ nav ul li span {
 	background: rgba(255,255,255,.6);
 	border-radius: 16px; -moz-border-radius: 16px;
 	border-radius: 16px;
-
 }
+
+html.no-rgba #content .container {background: #FFF;}
+
 
 footer {
 	background: -webkit-gradient(linear, 0 0, 0 100%, from(#EEE), to(#BBB));
@@ -670,6 +678,8 @@ form.new_plaque fieldset {
 	padding: 16px;	
 }
 
+html.no-rgba form.new_plaque fieldset {background: #FFF;}
+
 form.new_plaque .date_labels {
 	overflow: hidden; _zoom: 1;
 }
@@ -761,6 +771,7 @@ form.new_plaque .confirmation {
 	border-bottom: dotted 1px #CCC;
 }
 
+html.no-rgba .ui-autocomplete .ui-menu-item {background: #FFF;}
 
 .ui-autocomplete .ui-menu-item a {
 	display: block;
