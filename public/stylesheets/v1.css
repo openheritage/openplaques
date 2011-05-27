@@ -752,9 +752,8 @@ form.new_plaque .confirmation {
 
 .ui-autocomplete {
 	list-style-type: none;
-	width: auto;
-	border-right: solid 1px #FFF;
-	border-bottom: solid 1px #FFF;
+	width: -moz-fit-content;
+	width: 300px;
 }
 
 .ui-autocomplete .ui-menu-item {
