@@ -752,13 +752,13 @@ form.new_plaque .confirmation {
 
 .ui-autocomplete {
 	list-style-type: none;
-	width: 300px;
+	width: auto;
+	border-right: solid 1px #FFF;
+	border-bottom: solid 1px #FFF;
 }
 
 .ui-autocomplete .ui-menu-item {
-	background: -webkit-gradient(linear, 0 0, 0 100%, from(#FFC), to(#FFF));
-	background: -moz-linear-gradient(top, #FFC, #FFF);
-		
+	background: rgba(255,255,255,.95);	
 	border-bottom: dotted 1px #CCC;
 }
 
