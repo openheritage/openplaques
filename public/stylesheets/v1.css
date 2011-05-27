@@ -761,6 +761,12 @@ form.new_plaque .confirmation {
 	border-bottom: dotted 1px #CCC;
 }
 
+.ui-autocomplete .ui-active-menuitem {
+	background: #CCC;
+	border-bottom: dotted 1px #CCC;
+	color: #FFF;
+}
+
 .ui-autocomplete .ui-menu-item a {
 	display: block;
 	font-size: 14px;
