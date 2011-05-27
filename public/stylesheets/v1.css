@@ -756,17 +756,19 @@ form.new_plaque .confirmation {
 }
 
 .ui-autocomplete .ui-menu-item {
-	background: rgba(255,255,255,.8);
+	background: rgba(235,235,235,.9);
 	padding: 4px;
 	border-bottom: dotted 1px #CCC;
 }
 
 .ui-autocomplete .ui-menu-item a {
+	display: block;
 	font-size: 14px;
 	color: #333;
 }
 
 .ui-autocomplete .ui-menu-item a.ui-state-hover {
+	color: #FFF;
 	cursor: pointer;
 }
 
