@@ -76,10 +76,121 @@ a:hover {
 	z-index: 10;
 }
 
-p.intro {
-  font-size: 1.8em;
-  line-height: 1.4em;
+
+
+/**
+	3. HOMEPAGE
+*/
+
+#homepage_content {
+	float: left;
+	width: 70%;
 }
+
+#homepage_content p.intro {
+  font-size: 1.5em;
+  line-height: 1.4em;
+	margin-bottom: 16px;
+}
+
+
+
+
+
+/*
+
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(#FFF), to(#EEE));
+	background: -moz-linear-gradient(top, #FFF, #EEE);
+*/
+
+
+#recent_photographed_plaques {
+	background: #EEE;
+	border-radius: 16px; -moz-border-radius: 16px;
+
+	float: right;
+	list-style-type: none;
+	overflow: hidden; _zoom: 1; /*Cleafix */
+	width: 236px;
+}
+
+#recent_photographed_plaques li {
+/*	float: left;*/
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-bottom: 10px;
+	width: 216px;
+	/*margin-right: 10px;*/
+}
+
+#recent_photographed_plaques li.first {
+	padding-top: 10px;
+}
+
+
+#recent_photographed_plaques li a {
+	font-size: 0;
+	display: block;
+}
+
+#recent_photographed_plaques li a {
+	border: solid 8px #EEE;
+	text-decoration: none;	
+	
+}
+
+#recent_photographed_plaques li.option_two a {
+	position: relative;
+} 
+
+
+#recent_photographed_plaques li a:hover {
+	-moz-transition-duration: 0.3s;
+	border: 8px solid #FFF;
+	box-shadow: 0 0 10px #999;
+	
+}
+
+#recent_photographed_plaques li a .info {
+	padding: 8px 0;
+}
+
+#recent_photographed_plaques li.option_two a .info {
+	position: absolute; bottom: 0;
+	display: none;
+}
+
+#recent_photographed_plaques li a:hover .info {
+	display: block;
+}
+
+
+#recent_photographed_plaques li a .info p {
+	font-size: 12px;
+	line-height: 16px;
+	text-align: center;
+}
+
+#recent_photographed_plaques li.option_two a .info p {
+	text-shadow: 1px 1px #333;
+}
+	
+
+/***/
+
+#homepage_modules {
+	list-style-type: none;
+	overflow: hidden; _zoom: 1;
+}
+
+#homepage_modules li {
+	background: #EEE;
+	border-radius: 16px; -moz-border-radius: 16px;
+	padding: 16px;
+	margin-bottom: 16px;
+}
+
+
 
 
 /**
