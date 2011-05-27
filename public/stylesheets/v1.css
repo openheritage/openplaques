@@ -756,8 +756,9 @@ form.new_plaque .confirmation {
 }
 
 .ui-autocomplete .ui-menu-item {
-	background: rgba(235,235,235,.9);
-	padding: 4px;
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(#FFC), to(#FFF));
+	background: -moz-linear-gradient(top, #FFC, #FFF);
+		
 	border-bottom: dotted 1px #CCC;
 }
 
@@ -765,6 +766,7 @@ form.new_plaque .confirmation {
 	display: block;
 	font-size: 14px;
 	color: #333;
+	padding: 8px;
 }
 
 .ui-autocomplete .ui-menu-item a.ui-state-hover {
