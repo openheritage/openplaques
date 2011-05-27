@@ -746,20 +746,26 @@ form.new_plaque .confirmation {
 	margin-left: 120px;
 }
 
+/*
+	Autocomplete
+*/
 
-.ui_autocomplete {
-	background: red;
+.ui-autocomplete {}
+
+.ui-autocomplete .ui-menu-item {
+	backgorund: rgba(255,255,255,.8);
+	padding: 4px;
+	border-bottom: dotted 1px #CCC;
 }
 
-.ui_autocomplete .ui-menu-item {
-	list-style-type: none;
+.ui-autocomplete .ui-menu-item a {}
+
+.ui-autocomplete .ui-menu-item a.ui-state-hover {
+	cursor: pointer;
 }
 
-.ui_autocomplete .ui-menu-item a {
-	text-transform: uppercase;
-}
 
-
+/***/
 
 /* TODO: Revamp this section */
 
