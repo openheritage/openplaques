@@ -775,7 +775,8 @@ form.new_plaque .confirmation {
 }
 
 .ui-autocomplete .ui-menu-item a#ui-active-menuitem {
-	background: #CCC;
+	background: #EEE;
+	text-shadow: 1px 1px #999;
 }
 
 
