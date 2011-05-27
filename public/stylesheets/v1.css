@@ -750,15 +750,21 @@ form.new_plaque .confirmation {
 	Autocomplete
 */
 
-.ui-autocomplete {}
+.ui-autocomplete {
+	list-style-type: none;
+	width: 300px;
+}
 
 .ui-autocomplete .ui-menu-item {
-	backgorund: rgba(255,255,255,.8);
+	background: rgba(255,255,255,.8);
 	padding: 4px;
 	border-bottom: dotted 1px #CCC;
 }
 
-.ui-autocomplete .ui-menu-item a {}
+.ui-autocomplete .ui-menu-item a {
+	font-size: 14px;
+	color: #333;
+}
 
 .ui-autocomplete .ui-menu-item a.ui-state-hover {
 	cursor: pointer;
