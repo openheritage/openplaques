@@ -1,7 +1,9 @@
 <% @page_title = @page.name %>
 
-<h1><%= @page_title %></h1>
+<div class="panel clearfix">
+	<h1><%= @page_title %></h1>
+</div>
 
-<div id="body">
+<div class="body">
 	<%= simple_format(@page.body) %>
 </div>

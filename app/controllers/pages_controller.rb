@@ -2,6 +2,8 @@ class PagesController < ApplicationController
 
   before_filter :authenticate_admin!, :only => :destroy
   before_filter :authenticate_user!, :except => [:show]
+  
+  layout "v1"
 
 	def about
 		@organisations_count = Organisation.count

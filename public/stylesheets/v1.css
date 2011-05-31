@@ -656,11 +656,13 @@ nav.alphabet ol li span {
 	border-radius: 6px;
 }
 
+.body,
 #organisation_info,
 form.new_plaque {
 	padding: 0 5% 32px;
 }
 
+.body p,
 #organisation_info p {
 	margin-bottom: 16px;	
 }
