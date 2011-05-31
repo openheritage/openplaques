@@ -88,21 +88,14 @@ Openplaques::Application.routes.draw do
   match 'search' => "search#index"
   match 'search/:phrase' => "search#results"
 
-  # Convenience paths for pages:
-  
-  # FIXME: not sure how to do a named path for a specific ID in Rails 3
-  # match "contact"  => "pages#show", :as => :contact
+  # Convenience resources for important pages:  
+  resource :about, :controller => :pages, :id => "about", :only => :show
+  resource :contact, :controller => :pages, :id => "contact", :only => :show
+  scope "/about" do
+    resource :data, :controller => :pages, :id => "data", :as => "about_the_data", :only => :show
+  end
 
-  # FIXME: not sure how to do a named path for a specific ID in Rails 3
-  # about_data "/about/data" => "pages#show", :as => :about_data
-
-  # FIXME: not sure how to do a named path for a specific ID in Rails 3
-  # match "media_coverage" => "pages#show", :as => :media_coverage
-
-  # FIXME: not sure how to do a named path for a specific ID in Rails 3
-  # match  "about" => "pages#show", :as => :about 
-
-
+  # Generic resource for all pages
   resources :pages
 
   # Convenience paths for login/logout/register:
