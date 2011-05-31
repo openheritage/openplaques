@@ -133,7 +133,8 @@ module ApplicationHelper
   def user_menu
     if user_signed_in?
       content_tag("p", ("You are logged in as ".html_safe + 
-        link_to(current_user.email, edit_user_registration_path) + 
+        current_user.email +
+#        link_to(current_user.email, edit_user_registration_path) + 
         ". " +
         link_to("logout", destroy_user_session_path)
       ), {:class => "user_info"})

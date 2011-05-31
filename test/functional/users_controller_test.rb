@@ -2,43 +2,48 @@ require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
 
-  context "when viewing a user page" do
-    setup { get :show, :id => users(:frankieroberto).username }
+  context "when logged in as an admin" do
 
-    should respond_with :success
-    should render_template :show
-    should assign_to :user
+    setup { sign_in users(:frankieroberto) }
 
-  end
+    context "when viewing a user page" do
+      setup { get :show, :id => users(:frankieroberto).username }
+
+      should respond_with :success
+      should render_template :show
+      should assign_to :user
+
+    end
   
-  context "when viewing a non-existant user's page" do
+    context "when viewing a non-existant user's page" do
 
-    should "raise a not-found error" do
-      assert_raises(ActiveRecord::RecordNotFound) { get :show, :id => "xxxxx" }
-    end    
+      should "raise a not-found error" do
+        assert_raises(ActiveRecord::RecordNotFound) { get :show, :id => "xxxxx" }
+      end    
 
-  end  
+    end  
 
 
-  context "when viewing the page listing users" do
+    context "when viewing the page listing users" do
 
-    setup { get :index }
+      setup { get :index }
 
-    should respond_with :success
-    should render_template :index
-    should assign_to :users    
+      should respond_with :success
+      should render_template :index
+      should assign_to :users    
     
-  end
+    end
 
-  context "when viewing the page listing ALL users" do
+    context "when viewing the page listing ALL users" do
 
-    setup { get :index, :all => "yes" }
+      setup { get :index, :all => "yes" }
 
-    should respond_with :success
-    should render_template :index
-    should assign_to :users    
+      should respond_with :success
+      should render_template :index
+      should assign_to :users    
     
-  end
+    end
 
+  end
   
 end

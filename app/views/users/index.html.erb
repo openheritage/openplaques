@@ -4,7 +4,8 @@
 <%= content_tag("ul") do %>
 	<% @users.each do |user|%>
 		<%= content_tag("li") do %>
-			<%= link_to(user.name, user_path(user)) %>
+			<%= user.username %>
+			<%#= link_to(user.name, user_path(user))  %>
 			(<%= user.name %>)
 			- added <%= pluralize(user.plaques.size, "plaque") %>
 		<% end %>
