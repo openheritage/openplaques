@@ -1,7 +1,7 @@
 class PersonalRolesController < ApplicationController
 
   before_filter :authenticate_admin!, :only => :destroy
-  before_filter :authorisation_required
+  before_filter :authenticate_user!
 
   def index
     @personal_roles = PersonalRole.find(:all)

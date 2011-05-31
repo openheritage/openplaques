@@ -40,18 +40,18 @@ Openplaques::Application.routes.draw do
 
   # These are the gazeteer (places) model based paths. They might change to become nested in future.
   resources :places, :controller => :countries, :as => :countries do
-    resource :unphotographed, :controller => :unphotographed_plaques_by_country    
+    resource :unphotographed, :controller => :unphotographed_plaques_by_country, :only => :show    
     resources :areas do
-      resource :unphotographed, :controller => :unphotographed_plaques_by_area, :only => [:show]
-      resource :ungeolocated, :controller => :area_ungeolocated_plaques, :only => [:show]
+      resource :unphotographed, :controller => :unphotographed_plaques_by_area, :only => :show
+      resource :ungeolocated, :controller => :area_ungeolocated_plaques, :only => :show
     end
   end
-  resources :locations
+  resources :locations, :only => [:show, :index, :edit, :update]
 
   # These are all to do with the photos.
   resources :photos
-  resources :photographers, :controller => "PhotoPhotographers"
-  resources :licences
+  resources :photographers, :controller => "PhotoPhotographers", :only => [:index, :show]
+  resources :licences, :only => [:index, :show]
 
   # These are the organisations:
   resources :organisations
@@ -61,16 +61,15 @@ Openplaques::Application.routes.draw do
   
   
   scope "/roles" do
-    resources "a-z", :as => "roles_by_index", :controller => :roles_by_index    
+    resources "a-z", :as => "roles_by_index", :controller => :roles_by_index, :only => [:show, :index]
   end
   
   resources :roles
-  resources :connections
   resources :personal_roles
 
   # People based resources:
   scope "/people" do
-    resources "a-z", :controller => "people_by_index", :as => "people_by_index"
+    resources "a-z", :controller => "people_by_index", :as => "people_by_index", :only => :show
     resources :born_on, :controller => :people_born_on, :as => "people_born_on", :only => [:index, :show]
     resources :died_on, :controller => :people_died_on, :as => "people_died_on", :only => [:index, :show]
   end
