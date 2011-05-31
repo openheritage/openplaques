@@ -392,9 +392,13 @@ html.no-rgba #plaque_identifier iframe.osm {border: solid 1px #FFF;}
 	float: left;
 }
 
+footer nav {
+  padding-left: 106px;
+}
 
-
-
+footer nav a {
+  margin-right: 1em;
+}
 
 
 
@@ -573,6 +577,10 @@ footer {
 	padding: 16px 0 125px;
 }
 
+footer nav {
+  margin: 0 auto;
+  width: 80%;
+}
 
 
 .panel {
