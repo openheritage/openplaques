@@ -8,9 +8,11 @@ class AddSurnameStartsWithToPerson < ActiveRecord::Migration
     add_index :people, :surname_starts_with
     add_index :people, :index
 
-    Person.find(:all).each do |person|
-      person.surname_starts_with = person.name[person.name.rindex(" ") ? person.name.rindex(" ") + 1 : 0,1].downcase
-      person.save!
+    say_with_time("Adding surname indexes to people") do
+      Person.find(:all).each do |person|
+        person.surname_starts_with = person.name[person.name.rindex(" ") ? person.name.rindex(" ") + 1 : 0,1].downcase
+        person.save!
+      end
     end
   end
 

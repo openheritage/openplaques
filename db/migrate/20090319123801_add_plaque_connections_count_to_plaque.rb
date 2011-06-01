@@ -2,10 +2,11 @@ class AddPlaqueConnectionsCountToPlaque < ActiveRecord::Migration
   def self.up
     add_column :plaques, :plaque_connections_count, :integer
 
-    Plaque.find(:all).each do |plaque|
-      Plaque.update_counters(plaque.id, :plaque_connections_count => Plaque.find(plaque.id).plaque_connections.size)
+    say_with_time("Setting plaque_connections_count counter on existing plaques") do
+      Plaque.find(:all).each do |plaque|
+        Plaque.update_counters(plaque.id, :plaque_connections_count => Plaque.find(plaque.id).plaque_connections.size)
+      end
     end
-
 
   end
 

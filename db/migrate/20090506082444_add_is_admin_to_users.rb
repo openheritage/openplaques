@@ -1,9 +1,11 @@
 class AddIsAdminToUsers < ActiveRecord::Migration
   def self.up
     add_column :users, :is_admin, :boolean
-    @users = User.find(:all)
-    @users.each do |user|
-      user.make_admin
+
+    say_with_time("Making all existing users admin") do
+      User.find_each do |user|
+        user.make_admin
+      end
     end
   end
 

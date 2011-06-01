@@ -3,11 +3,12 @@ class AddUserIdToPlaques < ActiveRecord::Migration
     add_column :plaques, :user_id, :integer
     add_column :users, :plaques_count, :integer
     
-    @plaques = Plaque.find(:all)
-    @user = User.find(:first)
-    @plaques.each do |plaque|
-      plaque.user = @user
-      plaque.save
+    say_with_time("Assigning a user id to plaques") do
+      @user = User.find(:first)
+      Plaque.find_each do |plaque|
+        plaque.user = @user
+        plaque.save
+      end
     end
   end
 

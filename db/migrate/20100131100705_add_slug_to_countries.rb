@@ -1,10 +1,12 @@
 class AddSlugToCountries < ActiveRecord::Migration
   def self.up
     add_column :areas, :slug, :string
-    areas = Area.all
-    areas.each do |area|
-      area.slug = area.name.downcase.gsub!(" ", "_")
-      area.save
+
+    say_with_time("Assigning slugs to areas") do
+      Area.find_each do |area|
+        area.slug = area.name.downcase.gsub!(" ", "_")
+        area.save
+      end
     end
   end
 

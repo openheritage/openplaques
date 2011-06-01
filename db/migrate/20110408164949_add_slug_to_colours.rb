@@ -5,11 +5,12 @@ class AddSlugToColours < ActiveRecord::Migration
     add_column :colours, :slug, :string
     add_index :colours, :slug
     
-    Colour.find_each do |colour|      
-      slug = colour.name.downcase.gsub(" ", "_").gsub(/[\,\.]/, "")
-      colour.update_attribute(:slug, slug)
+    say_with_time("Assigning URL slugs to colours") do
+      Colour.find_each do |colour|      
+        slug = colour.name.downcase.gsub(" ", "_").gsub(/[\,\.]/, "")
+        colour.update_attribute(:slug, slug)
+      end
     end
-    
     
   end
 
