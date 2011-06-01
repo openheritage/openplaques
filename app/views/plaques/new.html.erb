@@ -51,7 +51,8 @@
 					url: "/organisations",
 					dataType: "json",
 					data: {
-						name_starts_with: request.term
+						name_starts_with: request.term,
+						limit: 10
 					},
 					success: function(data) {
 						response($.map(data, function(item) {

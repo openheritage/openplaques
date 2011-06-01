@@ -7,7 +7,8 @@ class OrganisationsController < ApplicationController
 
   def index
     if params[:name_starts_with]
-      @organisations = Organisation.name_starts_with(params[:name_starts_with]).most_plaques_order
+      limit = params[:limit] ? params[:limit] : 5
+      @organisations = Organisation.name_starts_with(params[:name_starts_with]).limit(limit).most_plaques_order
     else      
       @organisations = Organisation.all(:order => :name)
     end
