@@ -49,7 +49,7 @@ class AreasController < ApplicationController
     @area = @country.areas.new(params[:area])
     
     if @area.save
-      redirect_to country_area_path(@area.country.alpha2, @area.slug)
+      redirect_to country_area_path(@area.country_alpha2, @area.slug)
     else
       render :new
     end

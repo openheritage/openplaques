@@ -19,6 +19,8 @@ class Area < ActiveRecord::Base
 
   
   belongs_to :country, :counter_cache => true
+  delegate :alpha2, :to => :country, :prefix => true  
+  
   has_many :locations
   has_many :plaques, :through => :locations
   
