@@ -5,6 +5,8 @@ class PlaquesController < ApplicationController
   before_filter :authenticate_user!, :only => [:update, :edit]
   before_filter :authenticate_admin!, :only => :destroy
 
+  before_filter :find_plaque, :only => [:show, :parse_inscription, :unparse_inscription, :flickr_search, :flickr_search_all, :update, :destroy, :edit]
+
   respond_to :html, :xml, :json, :kml, :poi, :rss, :csv, :yaml
 
   def map
@@ -70,8 +72,6 @@ class PlaquesController < ApplicationController
   # GET /plaques/1.json
   # GET /plaques/1.bp
   def show
-    @plaque = Plaque.find(params[:id])
-    
     @plaques = [@plaque]
     respond_to do |format|
       format.html # show.html.erb
@@ -105,31 +105,22 @@ class PlaquesController < ApplicationController
 
   end
 
-  # GET /plaques/1/edit
-  def edit
-    @plaque = Plaque.find(params[:id])
-  end
-
   def parse_inscription
-    @plaque = Plaque.find(params[:id])
     @plaque.parse_inscription
     redirect_to edit_plaque_inscription_path(@plaque)
   end
   
   def unparse_inscription
-    @plaque = Plaque.find(params[:id])
     @plaque.unparse_inscription
     redirect_to @plaque
   end
   
   def flickr_search
-    @plaque = Plaque.find(params[:id])
     help.find_photo_by_machinetag(@plaque)
     redirect_to @plaque
   end
   
   def flickr_search_all
-    @plaque = Plaque.find(params[:id])
     help.find_photo_by_machinetag(nil)
     redirect_to @plaque
   end
@@ -187,8 +178,6 @@ class PlaquesController < ApplicationController
   # PUT /plaques/1
   # PUT /plaques/1.xml
   def update
-    @plaque = Plaque.find(params[:id])
-
     if params[:location]
       unless @plaque.location && params[:location] == @plaque.location.name
         if @plaque.location && @plaque.location.plaques_count == 1
@@ -222,7 +211,6 @@ class PlaquesController < ApplicationController
   # DELETE /plaques/1
   # DELETE /plaques/1.xml
   def destroy
-    @plaque = Plaque.find(params[:id])
     @plaque.destroy
 
     respond_to do |format|
@@ -239,5 +227,11 @@ class PlaquesController < ApplicationController
     include Singleton
     include PlaquesHelper
   end 
+  
+  protected
+  
+    def find_plaque
+      @plaque = Plaque.find(params[:id])
+    end
    
 end

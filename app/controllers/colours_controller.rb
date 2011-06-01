@@ -3,6 +3,8 @@ class ColoursController < ApplicationController
   before_filter :authenticate_admin!, :only => :destroy
   before_filter :authenticate_user!, :except => [:index, :show]
 
+  before_filter :find_colour, :only => [:edit, :update]
+
   def index
     @colours = Colour.all
     respond_to do |format|
@@ -51,13 +53,8 @@ class ColoursController < ApplicationController
       render :new
     end
   end
-  
-  def edit
-    @colour = Colour.find_by_slug!(params[:id])
-  end
-  
+    
   def update
-    @colour = Colour.find_by_slug!(params[:id])
     old_slug = @colour.slug
     
     if @colour.update_attributes(params[:colour]) 
@@ -69,5 +66,10 @@ class ColoursController < ApplicationController
 
   end
 
+  protected
+  
+    def find_colour
+      @colour = Colour.find_by_slug!(params[:id])
+    end
 
 end

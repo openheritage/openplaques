@@ -5,6 +5,8 @@ class CountriesController < ApplicationController
   before_filter :authenticate_admin!, :only => :destroy
   before_filter :authenticate_user!, :except => [:index, :show]
 
+  before_filter :find_country, :only => [:edit, :update]
+
   def index
     @countries = Country.all(:order => :name)
   end
@@ -34,13 +36,8 @@ class CountriesController < ApplicationController
     @areas = @country.areas.all(:order => :name, :include => :country)
 
   end
-  
-  def edit
-    @country = Country.find_by_alpha2(params[:id])
-  end
-      
+        
   def update
-    @country = Country.find_by_alpha2(params[:id])
     
     if @country.update_attributes(params[:country])
       redirect_to country_path(@country)
@@ -48,5 +45,11 @@ class CountriesController < ApplicationController
       render :edit
     end
   end
+
+  protected
+  
+    def find_country
+      @country = Country.find_by_alpha2!(params[:id])
+    end
 
 end

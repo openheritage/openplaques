@@ -5,6 +5,8 @@ class OrganisationsController < ApplicationController
   before_filter :authenticate_admin!, :only => :destroy
   before_filter :authenticate_user!, :except => [:index, :show]
 
+  before_filter :find_organisation, :only => [:edit, :update]
+
   def index
     if params[:name_starts_with]
       limit = params[:limit] ? params[:limit] : 5
@@ -58,12 +60,7 @@ class OrganisationsController < ApplicationController
     end
   end
 
-  def edit
-    @organisation = Organisation.find_by_slug!(params[:id])
-  end
-
   def update
-    @organisation = Organisation.find_by_slug!(params[:id])
     old_slug = @organisation.slug
 
     if @organisation.update_attributes(params[:organisation])
@@ -75,5 +72,11 @@ class OrganisationsController < ApplicationController
     end
 
   end
+  
+  protected
+
+    def find_organisation
+      @organisation = Organisation.find_by_slug!(params[:id])
+    end
 
 end

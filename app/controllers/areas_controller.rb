@@ -5,8 +5,10 @@ class AreasController < ApplicationController
   before_filter :authenticate_admin!, :only => :destroy  
   before_filter :authenticate_user!, :except => [:index, :show]
 
+  before_filter :find_country, :only => [:index, :new, :show, :create, :edit, :update]
+  before_filter :find_area, :only => [:show, :edit, :update]
+
   def index
-    @country = Country.find_by_alpha2!(params[:country_id])
     @areas = @country.areas.all(:order => :name)
     respond_to do |format|
       format.html
@@ -21,14 +23,11 @@ class AreasController < ApplicationController
   end
 
   def new
-    @country = Country.find_by_alpha2!(params[:country_id])   
     @area = @country.areas.new
   end
   
   def show
     
-    @country = Country.find_by_alpha2!(params[:country_id])
-    @area = @country.areas.find_by_slug!(params[:id])
     @plaques = @area.plaques
     if @plaques
       #  @centre = find_mean(@plaques)
@@ -45,7 +44,6 @@ class AreasController < ApplicationController
   end
   
   def create
-    @country = Country.find_by_alpha2!(params[:country_id])
     @area = @country.areas.new(params[:area])
     
     if @area.save
@@ -66,14 +64,10 @@ class AreasController < ApplicationController
   end
 
   def edit
-    @country = Country.find_by_alpha2(params[:country_id])
-    @area = @country.areas.find_by_slug(params[:id])
     @countries = Country.find(:all)
   end
 
   def update
-    @country = Country.find_by_alpha2(params[:country_id])
-    @area = @country.areas.find_by_slug(params[:id])
     
     if @area.update_attributes(params[:area])
       flash[:notice] = 'Area was successfully updated.'
@@ -83,5 +77,15 @@ class AreasController < ApplicationController
       render "edit"
     end
   end
+  
+  protected
+  
+    def find_country
+      @country = Country.find_by_alpha2!(params[:country_id])
+    end
+    
+    def find_area
+      @area = @country.areas.find_by_slug!(params[:id])
+    end
 
 end

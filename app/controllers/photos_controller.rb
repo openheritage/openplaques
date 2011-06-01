@@ -3,22 +3,14 @@ class PhotosController < ApplicationController
   before_filter :authenticate_admin!, :only => :destroy
   before_filter :authorisation_required, :except => [:index, :show]
 
+  before_filter :find_photo, :only => [:destroy, :edit, :show, :update]
+
   def index
     @photos = Photo.find(:all, :limit => 10, :order => "created_at DESC", :offset => params[:offset])
 	  @photographer_count = Photo.all(:group => "photographer").count
   end
-  
-  def show
-    @photo = Photo.find(params[:id])
-  end
-
-  def edit
-    @photo = Photo.find(params[:id])
-  end
-  
+    
   def update
-    @photo = Photo.find(params[:id])
-
     respond_to do |format|
       if @photo.update_attributes(params[:photo])
         flash[:notice] = 'Photo was successfully updated.'
@@ -47,11 +39,16 @@ class PhotosController < ApplicationController
   end
   
   def destroy
-    @photo = Photo.find(params[:id])
     @plaque = @photo.plaque
     
     @photo.destroy
     redirect_to plaque_path(@plaque)
   end
+  
+  protected
+  
+    def find_photo
+      @photo = Photo.find(params[:id])      
+    end
   
 end

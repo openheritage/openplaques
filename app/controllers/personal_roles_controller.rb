@@ -3,6 +3,8 @@ class PersonalRolesController < ApplicationController
   before_filter :authenticate_admin!, :only => :destroy
   before_filter :authenticate_user!
 
+  before_filter :find_personal_role, :only => [:destroy, :update, :edit, :show]
+
   def index
     @personal_roles = PersonalRole.find(:all)
 
@@ -15,11 +17,9 @@ class PersonalRolesController < ApplicationController
   # GET /personal_roles/1
   # GET /personal_roles/1.xml
   def show
-    @personal_roles = PersonalRole.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @personal_roles }
+      format.xml  { render :xml => @personal_role }
     end
   end
 
@@ -34,10 +34,6 @@ class PersonalRolesController < ApplicationController
     end
   end
 
-  # GET /personal_roles/1/edit
-  def edit
-    @personal_role = PersonalRole.find(params[:id])
-  end
 
   # POST /personal_roles
   # POST /personal_roles.xml
@@ -79,9 +75,7 @@ class PersonalRolesController < ApplicationController
 
   # PUT /personal_roles/1
   # PUT /personal_roles/1.xml
-  def update
-    @personal_role = PersonalRole.find(params[:id])
-    
+  def update    
     started_at = params[:personal_role][:started_at]
     if started_at =~/\d{4}/
       started_at = Date.parse(started_at + "-01-01")
@@ -107,7 +101,6 @@ class PersonalRolesController < ApplicationController
   # DELETE /personal_roles/1
   # DELETE /personal_roles/1.xml
   def destroy
-    @personal_role = PersonalRole.find(params[:id])
     @person = @personal_role.person
     @personal_role.destroy
 
@@ -116,4 +109,11 @@ class PersonalRolesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  protected
+  
+    def find_personal_role
+      @personal_role = PersonalRole.find(params[:id])      
+    end
+    
 end

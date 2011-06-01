@@ -3,6 +3,8 @@ class LanguagesController < ApplicationController
   before_filter :authenticate_admin!, :only => :destroy
   before_filter :authenticate_user!, :except => [:index, :show]
 
+  before_filter :find_language, :only => [:edit, :update]
+
   def show
     begin
       @language = Language.find_by_alpha2!(params[:id])
@@ -33,18 +35,18 @@ class LanguagesController < ApplicationController
     end
   end
   
-  def edit
-    @language = Language.find_by_alpha2(params[:id])
-  end
-
-  def update
-    @language = Language.find_by_alpha2(params[:id])
-    
+  def update    
     if @language.update_attributes(params[:language])
       redirect_to language_path(@language)
     else
       render :edit
     end
   end
+  
+  protected
+  
+    def find_language
+      @language = Language.find_by_alpha2!(params[:id])
+    end
 
 end

@@ -5,6 +5,8 @@ class PeopleController < ApplicationController
   before_filter :authenticate_admin!, :only => :destroy  
   before_filter :authenticate_user!, :except => [:index, :show]
   
+  before_filter :find_person, :only => [:show, :edit, :update, :destroy]
+  
   def index
     @people = Person.find(:all)
     respond_to do |format|
@@ -22,7 +24,6 @@ class PeopleController < ApplicationController
   # GET /people/1
   # GET /people/1.xml
   def show
-    @person = Person.find(params[:id])
     @plaques = @person.plaques
     respond_to do |format|
       format.html
@@ -46,7 +47,6 @@ class PeopleController < ApplicationController
 
   # GET /people/1/edit
   def edit
-    @person = Person.find(params[:id])
     @roles = Role.all(:order => :name)
     @personal_role = PersonalRole.new
     @died_on = @person.died_on.year if @person.died_on
@@ -85,8 +85,6 @@ class PeopleController < ApplicationController
   # PUT /people/1
   # PUT /people/1.xml
   def update
-    @person = Person.find(params[:id])
-    
     if params[:born_on].blank?
       @person.born_on = nil
     else
@@ -114,7 +112,6 @@ class PeopleController < ApplicationController
   # DELETE /people/1
   # DELETE /people/1.xml
   def destroy
-    @person = Person.find(params[:id])
     @person.destroy
 
     respond_to do |format|
@@ -122,4 +119,11 @@ class PeopleController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  protected
+  
+    def find_person
+      @person = Person.find(params[:id])      
+    end
+  
 end

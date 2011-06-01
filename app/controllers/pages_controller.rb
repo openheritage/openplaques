@@ -3,18 +3,14 @@ class PagesController < ApplicationController
   before_filter :authenticate_admin!, :only => :destroy
   before_filter :authenticate_user!, :except => [:show]
   
+  before_filter :find_page, :only => [:show, :edit, :update]
+  
   layout "v1"
 
 	def about
 		@organisations_count = Organisation.count
 	end
 
-  def show
-    @page = Page.find_by_slug(params[:id])
-    raise ActiveRecord::RecordNotFound unless @page
-
-  end
-  
   def index
     @pages = Page.all(:order => :slug)
   end
@@ -33,18 +29,15 @@ class PagesController < ApplicationController
   end
   
   def update
-    @page = Page.find_by_slug(params[:id])
-    raise ActiveRecord::RecordNotFound unless @page
-    
     if @page.update_attributes(params[:page])
       redirect_to :action => :show, :id => @page.slug
     end
+  end
     
-  end
-  
-  def edit
-    @page = Page.find_by_slug(params[:id])
-    raise ActiveRecord::RecordNotFound unless @page
-  end
+  protected
+    
+    def find_page
+      @page = Page.find_by_slug!(params[:id])      
+    end
 
 end

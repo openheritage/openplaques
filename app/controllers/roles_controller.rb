@@ -5,6 +5,8 @@ class RolesController < ApplicationController
   before_filter :authenticate_admin!, :only => :destroy
   before_filter :authenticate_user!, :except => [:index, :show]
 
+  before_filter :find_role, :only => [:show, :edit, :update, :destroy]
+
   def index
     respond_to do |format|
       format.html { redirect_to(roles_by_index_path) }
@@ -22,7 +24,6 @@ class RolesController < ApplicationController
   # GET /roles/artist
   # GET /roles/artist.xml
   def show
-    @role = Role.find_by_slug(params[:id].downcase)
     if @role == nil # create a dummy role for display purposes
       @role = Role.new
       @role.name = params[:id].downcase
@@ -61,11 +62,6 @@ class RolesController < ApplicationController
     end
   end
 
-  # GET /roles/1/edit
-  def edit
-    @role = Role.find_by_slug(params[:id])
-  end
-
   # POST /roles
   # POST /roles.xml
   def create
@@ -86,8 +82,6 @@ class RolesController < ApplicationController
   # PUT /roles/1
   # PUT /roles/1.xml
   def update
-    @role = Role.find_by_slug(params[:id])
-
     respond_to do |format|
       if @role.update_attributes(params[:role])
         flash[:notice] = 'Role was successfully updated.'
@@ -103,7 +97,6 @@ class RolesController < ApplicationController
   # DELETE /roles/1
   # DELETE /roles/1.xml
   def destroy
-    @role = Role.find_by_slug(params[:id])
     @role.destroy
 
     respond_to do |format|
@@ -111,4 +104,11 @@ class RolesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  protected
+  
+    def find_role
+      @role = Role.find_by_slug!(params[:id])
+    end
+  
 end
