@@ -19,7 +19,7 @@ class CountriesController < ApplicationController
     if @country.save
       redirect_to country_path(@country)
     else
-      render :action => :new
+      render :new
     end
   end
   
@@ -45,7 +45,7 @@ class CountriesController < ApplicationController
     if @country.update_attributes(params[:country])
       redirect_to country_path(@country)
     else
-      render :action => :edit
+      render :edit
     end
   end
 

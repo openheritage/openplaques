@@ -23,7 +23,7 @@ class LocationsController < ApplicationController
     if @location.update_attributes(params[:location])
       redirect_to location_path(@location)
     else
-      render :action => :edit
+      render :edit
     end
 
   end

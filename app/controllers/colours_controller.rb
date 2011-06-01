@@ -9,7 +9,7 @@ class ColoursController < ApplicationController
       format.html
       format.kml {
         @parent = @colours
-        render :template => "colours/index" 
+        render "colours/index" 
       }
       format.yaml
       format.xml { render :xml => @colours }
@@ -30,7 +30,7 @@ class ColoursController < ApplicationController
       @zoom = 9
       respond_to do |format|
         format.html
-        format.kml { render :template => "plaques/show" }
+        format.kml { render "plaques/show" }
         format.yaml
         format.xml  { render :xml => @colour }
         format.json { render :json => @colour }
@@ -48,7 +48,7 @@ class ColoursController < ApplicationController
     if @colour.save
       redirect_to colour_path(@colour.slug)
     else
-      render :action => :new
+      render :new
     end
   end
   
@@ -64,7 +64,7 @@ class ColoursController < ApplicationController
       redirect_to colour_path(@colour.slug)
     else
       @colour.slug = old_slug
-      render :action => :edit
+      render :edit
     end
 
   end

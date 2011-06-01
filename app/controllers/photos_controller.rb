@@ -25,7 +25,7 @@ class PhotosController < ApplicationController
         format.html { redirect_to(@photo) }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
+        format.html { render "edit" }
         format.xml  { render :xml => @photo.errors, :status => :unprocessable_entity }
       end
     end
@@ -42,7 +42,7 @@ class PhotosController < ApplicationController
     if @photo.save
       redirect_to photo_path(@photo)
     else
-      render :action => :new
+      render :new
     end
   end
   

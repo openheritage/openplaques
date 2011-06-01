@@ -11,7 +11,7 @@ class PeopleController < ApplicationController
       format.html { redirect_to(:controller => :people_by_index, :action => "show", :id => "a") }
       format.kml {
         @parent = @people
-        render :template => "colours/index" 
+        render "colours/index" 
       }
       format.yaml
       format.xml { render :xml => @people }
@@ -26,7 +26,7 @@ class PeopleController < ApplicationController
     @plaques = @person.plaques
     respond_to do |format|
       format.html
-      format.kml { render :template => "plaques/show" }
+      format.kml { render "plaques/show" }
       format.yaml
       format.xml  { render :xml => @person }
       format.json { render :json => @person }
@@ -76,7 +76,7 @@ class PeopleController < ApplicationController
         format.html { redirect_to(@person) }
         format.xml  { render :xml => @person, :status => :created, :location => @person }
       else        
-        format.html { render :action => "new" }
+        format.html { render "new" }
         format.xml  { render :xml => @person.errors, :status => :unprocessable_entity }
       end
     end
@@ -105,7 +105,7 @@ class PeopleController < ApplicationController
         format.html { redirect_to(@person) }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
+        format.html { render "edit" }
         format.xml  { render :xml => @person.errors, :status => :unprocessable_entity }
       end
     end

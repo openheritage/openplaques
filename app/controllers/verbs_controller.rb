@@ -26,7 +26,7 @@ class VerbsController < ApplicationController
     if @verb.save
       redirect_to verb_path(@verb.name)
     else
-      render :action => :new
+      render :new
     end
   end
 

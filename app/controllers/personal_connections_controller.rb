@@ -24,7 +24,7 @@ class PersonalConnectionsController < ApplicationController
     if @personal_connection.update_attributes(params[:personal_connection])
       redirect_to edit_plaque_inscription_path(@plaque.id)
     else
-      render :action => :edit
+      render :edit
     end
 
   end
@@ -46,7 +46,7 @@ class PersonalConnectionsController < ApplicationController
       @people = Person.all(:order => :name)
       @verbs = Verb.all(:order => :name)
       @locations = Location.all(:order => :name)    
-      render :action => :new      
+      render :new      
     end
   end
 

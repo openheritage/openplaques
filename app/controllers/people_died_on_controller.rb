@@ -9,7 +9,7 @@ class PeopleDiedOnController < ApplicationController
     @people = Person.find(:all, :conditions => {:died_on => @year}, :order => :born_on)
     respond_to do |format|
       format.html
-      format.kml { render :template => "plaques/show" }
+      format.kml { render "plaques/show" }
       format.yaml
       format.xml { render :xml => @people }
       format.json { render :json => @people }

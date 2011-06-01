@@ -213,7 +213,7 @@ class PlaquesController < ApplicationController
         format.html { redirect_to(@plaque) }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
+        format.html { render "edit" }
         format.xml  { render :xml => @plaque.errors, :status => :unprocessable_entity }
       end
     end

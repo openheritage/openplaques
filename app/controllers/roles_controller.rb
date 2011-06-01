@@ -11,7 +11,7 @@ class RolesController < ApplicationController
       @roles = Role.find(:all, :order => :name)
       format.kml {
         @parent = @roles
-        render :template => "colours/index" 
+        render "colours/index" 
       }
       format.yaml
       format.xml { render :xml => @roles }
@@ -43,7 +43,7 @@ class RolesController < ApplicationController
     @zoom = 7  
     respond_to do |format|
       format.html
-      format.kml { render :template => "plaques/show" }
+      format.kml { render "plaques/show" }
       format.yaml
       format.xml
       format.json { render :json => @role }
@@ -77,7 +77,7 @@ class RolesController < ApplicationController
         format.html { redirect_to(role_path(@role.slug)) }
         format.xml  { render :xml => @role, :status => :created, :location => @role }
       else
-        format.html { render :action => "new" }
+        format.html { render "new" }
         format.xml  { render :xml => @role.errors, :status => :unprocessable_entity }
       end
     end
@@ -94,7 +94,7 @@ class RolesController < ApplicationController
         format.html { redirect_to(role_path(@role.slug)) }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
+        format.html { render "edit" }
         format.xml  { render :xml => @role.errors, :status => :unprocessable_entity }
       end
     end

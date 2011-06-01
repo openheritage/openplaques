@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   end
   
   def unauthorised
-    render :file => "public/403.html", :status => :forbidden
+    render "public/403.html", :status => :forbidden
   end
   
     

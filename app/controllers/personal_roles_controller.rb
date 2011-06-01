@@ -72,7 +72,7 @@ class PersonalRolesController < ApplicationController
     else
       @roles = Role.all(:order => :name)
       
-      render :template => "people/edit"
+      render "people/edit"
     end
 
   end
@@ -99,7 +99,7 @@ class PersonalRolesController < ApplicationController
     if @personal_role.update_attributes(:started_at => started_at, :ended_at => ended_at)
       redirect_to(edit_person_path(@personal_role.person))
     else
-      render :action => :edit
+      render :edit
     end
 
   end

@@ -43,7 +43,7 @@ class LanguagesController < ApplicationController
     if @language.update_attributes(params[:language])
       redirect_to language_path(@language)
     else
-      render :action => :edit
+      render :edit
     end
   end
 

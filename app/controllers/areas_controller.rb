@@ -12,7 +12,7 @@ class AreasController < ApplicationController
       format.html
       format.kml {
         @parent = @areas
-        render :template => "colours/index" 
+        render "colours/index" 
       }
       format.yaml
       format.xml { render :xml => @areas }
@@ -37,7 +37,7 @@ class AreasController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.kml { render :template => "plaques/show" }
+      format.kml { render "plaques/show" }
       format.yaml
       format.xml { render :xml => @area }
       format.json { render :json => @area }
@@ -51,7 +51,7 @@ class AreasController < ApplicationController
     if @area.save
       redirect_to country_area_path(@area.country.alpha2, @area.slug)
     else
-      render :action => :new
+      render :new
     end
   end
   
@@ -80,7 +80,7 @@ class AreasController < ApplicationController
       redirect_to(country_area_path(@area.country.alpha2, @area.slug))
     else
       @countries = Country.all
-      render :action => "edit"
+      render "edit"
     end
   end
 

@@ -16,7 +16,7 @@ class OrganisationsController < ApplicationController
       format.html
       format.kml {
         @parent = @organisations
-        render :template => "colours/index" 
+        render "colours/index" 
       }
       format.yaml
       format.xml { render :xml => @organisations }
@@ -37,7 +37,7 @@ class OrganisationsController < ApplicationController
       @zoom = 13
       respond_to do |format|
         format.html
-        format.kml { render :template => "plaques/show" }
+        format.kml { render "plaques/show" }
         format.yaml
         format.xml { render :xml => @organisation }
         format.json { render :json => @organisation }
@@ -54,7 +54,7 @@ class OrganisationsController < ApplicationController
     if @organisation.save
       redirect_to organisation_path(@organisation.slug)
     else
-      render :action => :new
+      render :new
     end
   end
 
@@ -71,7 +71,7 @@ class OrganisationsController < ApplicationController
       redirect_to organisation_path(@organisation.slug)
     else
       @organisation.slug = old_slug
-      render :action => "edit"
+      render "edit"
     end
 
   end

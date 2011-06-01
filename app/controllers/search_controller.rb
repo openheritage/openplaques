@@ -6,7 +6,7 @@ class SearchController < ApplicationController
 	@phrase = params[:phrase]
 	if @phrase != nil && @phrase != ""
 	    @search_results = get_search_results(@phrase)
-		render :action => "results" 
+		render "results" 
 	end
   end
 
