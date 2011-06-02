@@ -81,7 +81,12 @@
 <% if params[:checked] && params[:checked] == "true" %>
 
 	<% if @plaque.errors.size > 0 %>
-		<p>There was an error adding your plaque. Please correct it below.</p>
+		<div class="error_alert">
+			<p>There was an error adding your plaque. Please correct it below.</p>
+		</div>
+		
+		
+		
 	<% end %>
 
 	<%= form_for(@plaque) do |f| %>

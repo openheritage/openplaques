@@ -63,9 +63,19 @@ a:hover {
 /*	margin-top: 148px;*/
 }
 
+/**
+	2.1 Reuseable elements
+*/
+
+.notice {
+	color: #0D0;
+	margin: 0 auto;
+	text-align: center;
+	padding: 16px 0;
+}
 
 /**
-	2.1 Development elements
+	2.2 Development elements
 */
 
 .development {
@@ -77,6 +87,7 @@ a:hover {
 	padding: 8px;
 	z-index: 10;
 }
+
 
 
 
@@ -766,13 +777,30 @@ form.new_plaque .confirmation {
 	margin-left: 120px;
 }
 
+.error_alert {
+	background: rgba(255,0,0,.1);
+	border-radius: 8px;
+	color: #D00;
+	margin: 16px 5%;
+	border: solid 1px red;
+	padding: 8px 16px;
+}
+
+#new_plaque .row .field_with_errors label {
+	color: #D00;
+}
+
+#new_plaque .row .field_with_errors input {
+	background: rgba(255,0,0,.1);
+}
+
+
 /*
 	Autocomplete
 */
 
 .ui-autocomplete {
 	list-style-type: none;
-	width: -moz-fit-content;
 	width: 300px;
 }
 
