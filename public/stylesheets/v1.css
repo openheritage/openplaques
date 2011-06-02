@@ -744,6 +744,12 @@ form.new_plaque .row input {
 	font-size: 16px;
 	font-family: "Baskerville", "Georgia";
 	padding: 4px;
+	width: 400px;
+}
+
+form.new_plaque .radio input,
+form.new_plaque .checkbox input {
+	width: auto;
 }
 
 form.new_plaque .row label {
