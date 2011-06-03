@@ -752,6 +752,10 @@ form.new_plaque .row label {
 	margin-bottom: 4px;
 }
 
+form.new_plaque .checkbox {
+  margin-top: 16px;
+}
+
 form.new_plaque .radio label,
 form.new_plaque .checkbox label {
 	display: inline;

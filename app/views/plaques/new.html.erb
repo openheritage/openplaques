@@ -118,21 +118,13 @@
 						<%= label_tag :photo_web, "Yes, it's here:" %>
 						<%= f.fields_for :photos do |p| %>
 							<%= p.text_field :photo_url, :placeholder => "Photo URL" %>
-					</div>
-			
-			<!--		<div>
-						<%#= radio_button_tag :photo, :upload, false, :disabled => true %>						
-						<%#= label_tag :photo_upload, "Yes, I'll upload:", :class => :disabled %>
-						<%#= file_field_tag :photo, :disabled => :disabled %>
-						<%#= content_tag("span", "coming soon", :class => :coming_soon) %>
-					</div>-->
-					
-					<div class="row checkbox confirmation">
-						<%= p.check_box(:accept_cc_by_licence) %>
-						<%= p.label(:accept_cc_by_licence, "I took this photo and agree to release it under a ".html_safe + link_to("Creative Commons Attribution licence", "http://creativecommons.org/licenses/by/3.0/") + ".")%>
-					</div>
+							<div class="checkbox confirmation">
+								<%= p.check_box(:accept_cc_by_licence) %>
+								<%= p.label(:accept_cc_by_licence, "I took this photo and agree to release it under a ".html_safe + link_to("Creative Commons Attribution licence", "http://creativecommons.org/licenses/by/3.0/") + ".")%>
+							</div>
 					<% end %>
-				
+					</div>
+					
 			<% end %>
 
 		</div>

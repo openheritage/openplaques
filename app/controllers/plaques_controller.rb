@@ -164,6 +164,8 @@ class PlaquesController < ApplicationController
       redirect_to plaque_path(@plaque)
     else  
       params[:checked] = "true"
+      @plaque.photos.build if @plaque.photos.size == 0
+      
       @countries = Country.all(:order => :name)    
       @organisations = Organisation.all(:order => :name)    
       @languages = Language.all(:order => :name)
