@@ -6,42 +6,9 @@ require 'rexml/document'
 
 namespace "photos" do 
   
-  
-  desc "Find licenses on Flickr"
-  task :get_licenses => [:environment] do
-
-    key = "86c115028094a06ed5cd19cfe72e8f8b"
-    flickr_url = "http://api.flickr.com/services/rest/"
-    method = "flickr.photos.licenses.getInfo"  
-
-    url = flickr_url +  "?api_key=" + key + "&method=" + method
-    puts url
-
-    response = open(url)
-    doc = REXML::Document.new(response.read)
-    doc.elements.each('//rsp/licenses/license') do |license|
-      if license.attributes["url"] != ""
-        @licence = Licence.find_by_url(license.attributes["url"])
-        
-        if @licence 
-          puts "License already known about."
-        else
-          @licence = Licence.new(:url => license.attributes["url"], :name => license.attributes["name"])
-          if @licence.save
-            puts "Saved new license"
-          else
-            puts "Error saving license"
-          end
-        end
-      end
-    end
-    
-  end
-  
   desc "Find photos on Flickr"
   task :find => [:environment] do
     key = "86c115028094a06ed5cd19cfe72e8f8b"
-    secret = "d371b9edd648fa19"
     content_type = "1" # Photos only
     machine_tag_key = "openplaques:id"
   
