@@ -1,5 +1,7 @@
 .bundle
-doc/*
+doc/app
+doc/api
+doc/guides
 db/*.sqlite3
 log/*.log
 tmp/**/*
