@@ -10,8 +10,7 @@ namespace "photos" do
   desc "Find licenses on Flickr"
   task :get_licenses => [:environment] do
 
-    key = FLICKR_KEY
-    secret = FLICKR_SECRET
+    key = "86c115028094a06ed5cd19cfe72e8f8b"
     flickr_url = "http://api.flickr.com/services/rest/"
     method = "flickr.photos.licenses.getInfo"  
 
