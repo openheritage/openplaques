@@ -6,7 +6,7 @@
 <ul>
 <% for licence in @licences %>
   <li><%= link_to(licence.name, licence_url(licence)) %>
-   - <%= pluralize(licence.photos.count, link_to("photo",photos_url)) %>
+   - <%= pluralize(licence.photos.count, link_to("photo", photos_url).to_str) %>
    </li>
 <% end %>
 </ul>
