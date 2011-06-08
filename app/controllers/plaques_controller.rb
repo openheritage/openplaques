@@ -1,7 +1,5 @@
 class PlaquesController < ApplicationController
 
-  layout "v1"
-
   before_filter :authenticate_user!, :only => [:update, :edit]
   before_filter :authenticate_admin!, :only => :destroy
 

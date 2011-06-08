@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
 
   include Exceptions
 
+  layout "v1"
+
   protect_from_forgery
 
   rescue_from UnAuthorised, :with => :unauthorised

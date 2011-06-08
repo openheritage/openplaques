@@ -5,8 +5,6 @@ class PagesController < ApplicationController
 
   before_filter :find_page, :only => [:show, :edit, :update]
 
-  layout "v1"
-
   def about
     @organisations_count = Organisation.count
   end

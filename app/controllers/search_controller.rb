@@ -1,7 +1,5 @@
 class SearchController < ApplicationController
 
-  layout "v1"
-
   before_filter :set_phrase, :only => [:index, :results]
 
   def index

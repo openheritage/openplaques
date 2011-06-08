@@ -1,7 +1,5 @@
 class PeopleByIndexController < ApplicationController
 
-  layout "v1"
-
   def index
   end
 
