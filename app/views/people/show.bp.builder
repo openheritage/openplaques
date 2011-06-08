@@ -17,7 +17,7 @@ xml.page {
       roles << role.name
       end
       xml.block({:halign => "center"}, roles.to_sentence)
-      
+
       if @person.born_on?
         xml.placard(:layout => "template") {
           xml.tag!("template-items", :format => "title-value") {
@@ -48,7 +48,7 @@ xml.page {
          }
          xml.tag!("load-page", :event => "activate", :page => "plaques/" + plaque.id.to_s + ".bp")
         }
-      end      
+      end
     end
     }
   }

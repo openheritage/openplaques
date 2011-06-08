@@ -1,7 +1,7 @@
 # This class represents 'areas', which are the largest commonly identified region of
 # residence  below a country level. By this, we mean the place that people would normally
 # name in answer to the question of 'where do you live?' In most cases, this will be either
-# a city (eg 'London'), town (eg 'Margate'), or village. It should not normally be either a 
+# a city (eg 'London'), town (eg 'Margate'), or village. It should not normally be either a
 # state, county, district or other administrative region.
 #
 # === Attributes
@@ -17,15 +17,15 @@ class Area < ActiveRecord::Base
   validates_uniqueness_of :slug, :scope => :country_id
   validates_format_of :slug, :with => /^[a-z\_]+$/, :message => "can only contain lowercase letters and underscores"
 
-  
+
   belongs_to :country, :counter_cache => true
-  delegate :alpha2, :to => :country, :prefix => true  
-  
+  delegate :alpha2, :to => :country, :prefix => true
+
   has_many :locations
   has_many :plaques, :through => :locations
-  
+
   def as_json(options={})
     {:label => name, :value => name, :id => id, :country_id => country.id, :country_name => country.name}
   end
-  
+
 end

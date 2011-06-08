@@ -22,20 +22,20 @@ class Person < ActiveRecord::Base
   validates_presence_of :name
 
   validates_uniqueness_of :wikipedia_url, :allow_nil => true, :allow_blank => true
-  validates_uniqueness_of :dbpedia_uri, :allow_nil => true, :allow_blank => true  
-  
+  validates_uniqueness_of :dbpedia_uri, :allow_nil => true, :allow_blank => true
+
   has_many :roles, :through => :personal_roles
   has_many :personal_roles
   has_many :personal_connections
   has_many :locations, :through => :personal_connections, :uniq => true
   has_many :verbs, :through => :personal_connections
   has_many :plaques, :through => :personal_connections, :uniq => true
-  
+
   before_save :update_index
-  
+
   DATE_REGEX = /c?[\d]{4}/
   DATE_RANGE_REGEX = /(?:\(#{DATE_REGEX}-#{DATE_REGEX}\)|#{DATE_REGEX}-#{DATE_REGEX})/
-    
+
   def areas
     areas = []
     locations.each do |location|
@@ -44,8 +44,8 @@ class Person < ActiveRecord::Base
       end
     end
     return areas
-  end  
-    
+  end
+
   def self.find_or_create_by_name_and_dates(string)
     name_and_dates_regex = /\A(.*)\s\(?(c?)([\d]{4})-(c?)([\d]{4})\)?\Z/
     if string =~ name_and_dates_regex
@@ -66,12 +66,12 @@ class Person < ActiveRecord::Base
       find_or_create_by_name(string)
     end
   end
-  
-  def self.find_or_create_by_name_and_dates_and_roles(string)    
-    
+
+  def self.find_or_create_by_name_and_dates_and_roles(string)
+
     name_dates_roles_regex = /\A(.*\s#{DATE_RANGE_REGEX}),?\s?(.*)?\Z/
     name_roles_re = /\A([A-Z][a-zA-Z\.,]+(\s(([A-Z][a-z]+|[A-Z]\.|de))|\,\sEarl\sof\s[A-Z][a-z]+)*)((\s|,\s)(.*?))?\Z/
-    
+
     if string =~ name_dates_roles_regex
       person = find_or_create_by_name_and_dates(string[name_dates_roles_regex, 1])
       person.find_or_create_roles(string[name_dates_roles_regex, 2])
@@ -83,7 +83,7 @@ class Person < ActiveRecord::Base
     end
     return person
   end
-  
+
   def find_or_create_roles(roles)
     if roles
       roles = roles.split(/,?\sand\s|,?\s\&\s|,\s/)
@@ -96,15 +96,15 @@ class Person < ActiveRecord::Base
     end
     return self
   end
-  
+
   def person?
     false if roles.member?(Role.find_by_name("dog"))
     true
     # TODO: add 'not human' property to role and abstract.
   end
-  
+
   private
-  
+
     def update_index
       self.index = self.name[0,1].downcase
       if self.surname_starts_with.blank?
@@ -112,5 +112,5 @@ class Person < ActiveRecord::Base
       end
       self.surname_starts_with.downcase!
     end
-  
+
 end

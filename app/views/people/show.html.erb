@@ -2,15 +2,15 @@
 
 <div class="panel">
 <div class="vcard person" typeof="<%= if (@person.person?) then "foaf:Person" else "foaf:Agent" end %> vcard:VCard" about="#person">
-	
+
 <h1><%= dated_person(@person, {:links => :none}) %></h1>
 
 <p>Commemorated on <%= pluralize(@person.plaques.size, "plaque") %>:</p>
 
 <% @plaques.each do |plaque| %>
-	<h2><%= link_to plaque.location.name + ", " + plaque.area.name, plaque %></h2>
+  <h2><%= link_to plaque.location.name + ", " + plaque.area.name, plaque %></h2>
 
-	<p><%= plaque.inscription %></p>
+  <p><%= plaque.inscription %></p>
 
 <% end %>
 

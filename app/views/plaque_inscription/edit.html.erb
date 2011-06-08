@@ -3,57 +3,57 @@
 
 <% form_for(@plaque) do |f| %>
 
-	<%= f.label :inscription %><br>
-	<%= f.text_area :inscription, :class => :inscription %>
-	<%= f.check_box :inscription_is_stub %>
-	<%= f.label :inscription_is_stub %>
-	  <%= content_tag("p", new_linked_inscription(@plaque), {:class => "inscription"}) %>
-	
-	  <p>
+  <%= f.label :inscription %><br>
+  <%= f.text_area :inscription, :class => :inscription %>
+  <%= f.check_box :inscription_is_stub %>
+  <%= f.label :inscription_is_stub %>
+    <%= content_tag("p", new_linked_inscription(@plaque), {:class => "inscription"}) %>
+
+    <p>
     <%= f.submit "Update" %>
     </p>
 
-	<% content_tag("div", :class => :photo) do %>
-		<%= image_tag(@plaque.photos.first.file_url) %>
-	<% end unless @plaque.photos.count == 0  %>
+  <% content_tag("div", :class => :photo) do %>
+    <%= image_tag(@plaque.photos.first.file_url) %>
+  <% end unless @plaque.photos.count == 0  %>
 
 <% end %>
 
-	<h2>Connections</h2>
+  <h2>Connections</h2>
 
-	<table>
-		<tr>
-			<th>Person</th>
-			<th>Verb</th>
-			<th>Location</th>
-			<th>From</th>
-			<th>To</th>
-			<th></th>
-		</tr>
-		<% @plaque.personal_connections.each do |pc| %>
-			<tr>
-			  <td><%= link_to pc.person.name, person_path(pc.person) %></td> 
-			  <td><%= link_to pc.verb.name, verb_path(pc.verb) %></td>
-			  <td><%= link_to pc.location.name, location_path(pc.location) %> <%= "(here)" if pc.location == @plaque.location %></td>
-			  <td><%= pc.from %></td>
-			  <td><%= pc.to %></td>
-			  <td><%= link_to "Edit", edit_personal_connection_path(pc) %> <%= link_to("Delete", personal_connection_path(pc), :method => :delete)%></td>
-			</tr>
-		<% end %>
-	</table>
-	
+  <table>
+    <tr>
+      <th>Person</th>
+      <th>Verb</th>
+      <th>Location</th>
+      <th>From</th>
+      <th>To</th>
+      <th></th>
+    </tr>
+    <% @plaque.personal_connections.each do |pc| %>
+      <tr>
+        <td><%= link_to pc.person.name, person_path(pc.person) %></td>
+        <td><%= link_to pc.verb.name, verb_path(pc.verb) %></td>
+        <td><%= link_to pc.location.name, location_path(pc.location) %> <%= "(here)" if pc.location == @plaque.location %></td>
+        <td><%= pc.from %></td>
+        <td><%= pc.to %></td>
+        <td><%= link_to "Edit", edit_personal_connection_path(pc) %> <%= link_to("Delete", personal_connection_path(pc), :method => :delete)%></td>
+      </tr>
+    <% end %>
+  </table>
+
 <% if current_user.try(:is_admin?) %>
 
-	<p><%= link_to "Add connection", new_personal_connection_path(@plaque) %></p>
+  <p><%= link_to "Add connection", new_personal_connection_path(@plaque) %></p>
 
-	<% if @plaque.personal_connections.size == 0 %>
+  <% if @plaque.personal_connections.size == 0 %>
 
-	<%= button_to("Parse inscription!", parse_inscription_plaque_path(@plaque))%>
+  <%= button_to("Parse inscription!", parse_inscription_plaque_path(@plaque))%>
 
-	<% else %>
+  <% else %>
 
-	<%= button_to("Un-parse inscription!", unparse_inscription_plaque_path(@plaque))%>
+  <%= button_to("Un-parse inscription!", unparse_inscription_plaque_path(@plaque))%>
 
-	<% end %>
+  <% end %>
 <% end %>
 

@@ -7,9 +7,9 @@ class PhotosController < ApplicationController
 
   def index
     @photos = Photo.find(:all, :limit => 10, :order => "created_at DESC", :offset => params[:offset])
-	  @photographer_count = Photo.all(:group => "photographer").count
+    @photographer_count = Photo.all(:group => "photographer").count
   end
-    
+
   def update
     respond_to do |format|
       if @photo.update_attributes(params[:photo])
@@ -22,33 +22,33 @@ class PhotosController < ApplicationController
       end
     end
   end
-  
+
   def new
     @photo = Photo.new
     @licences = Licence.all(:order => :name)
   end
-  
+
   def create
     @photo = Photo.new(params[:photo])
-    
+
     if @photo.save
       redirect_to photo_path(@photo)
     else
       render :new
     end
   end
-  
+
   def destroy
     @plaque = @photo.plaque
-    
+
     @photo.destroy
     redirect_to plaque_path(@plaque)
   end
-  
+
   protected
-  
+
     def find_photo
-      @photo = Photo.find(params[:id])      
+      @photo = Photo.find(params[:id])
     end
-  
+
 end

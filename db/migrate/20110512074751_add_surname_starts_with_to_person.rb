@@ -1,8 +1,8 @@
 class AddSurnameStartsWithToPerson < ActiveRecord::Migration
-  
+
   class Person < ActiveRecord::Base
   end
-  
+
   def self.up
     add_column :people, :surname_starts_with, :string
     add_index :people, :surname_starts_with

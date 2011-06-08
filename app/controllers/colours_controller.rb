@@ -11,21 +11,21 @@ class ColoursController < ApplicationController
       format.html
       format.kml {
         @parent = @colours
-        render "colours/index" 
+        render "colours/index"
       }
       format.yaml
       format.xml { render :xml => @colours }
       format.json { render :json => @colours }
     end
   end
-  
+
   def show
     begin
       @colour = Colour.find_by_slug!(params[:id])
     rescue
       @colour = Colour.find(params[:id])
       redirect_to(colour_url(@colour.name), :status => :moved_permanently) and return
-    end      
+    end
 
       @plaques = @colour.plaques
 #      @centre = find_mean(@plaques)
@@ -36,28 +36,28 @@ class ColoursController < ApplicationController
         format.yaml
         format.xml  { render :xml => @colour }
         format.json { render :json => @colour }
-      end      
+      end
 
   end
-  
+
   def new
     @colour = Colour.new
   end
-  
+
   def create
     @colour = Colour.new(params[:colour])
-    
+
     if @colour.save
       redirect_to colour_path(@colour.slug)
     else
       render :new
     end
   end
-    
+
   def update
     old_slug = @colour.slug
-    
-    if @colour.update_attributes(params[:colour]) 
+
+    if @colour.update_attributes(params[:colour])
       redirect_to colour_path(@colour.slug)
     else
       @colour.slug = old_slug
@@ -67,7 +67,7 @@ class ColoursController < ApplicationController
   end
 
   protected
-  
+
     def find_colour
       @colour = Colour.find_by_slug!(params[:id])
     end

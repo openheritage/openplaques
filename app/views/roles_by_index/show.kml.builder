@@ -4,7 +4,7 @@ xml.kml(:xmlns=>"http://www.opengis.net/kml/2.2","xmlns:atom"=>"http://www.w3.or
     xml.name "OpenPlaques.org"
     xml.atom :link, "href"=>"http://openplaques.org"
     xml.description "Commemorative plaques around the world"
-    
+
     xml.Style(:id=>"plaqueIcon") do
       xml.IconStyle do
         xml.Icon do

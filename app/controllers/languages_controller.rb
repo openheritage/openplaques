@@ -11,40 +11,40 @@ class LanguagesController < ApplicationController
     rescue
       @language = Language.find(params[:id])
       redirect_to(language_url(@language.alpha2), :status => :moved_permanently) and return
-    end      
+    end
 
       @plaques = @language.plaques
 #      @centre = find_mean(@plaques)
       @zoom = 11
-      
+
   end
-  
+
   def index
     @languages = Language.all
   end
-  
+
   def new
     @language = Language.new
   end
-  
+
   def create
     @language = Language.new(params[:language])
-    
+
     if @language.save
       redirect_to language_path(@language.alpha2)
     end
   end
-  
-  def update    
+
+  def update
     if @language.update_attributes(params[:language])
       redirect_to language_path(@language)
     else
       render :edit
     end
   end
-  
+
   protected
-  
+
     def find_language
       @language = Language.find_by_alpha2!(params[:id])
     end

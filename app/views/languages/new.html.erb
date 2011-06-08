@@ -2,10 +2,10 @@
 
 <% form_for @language do |f| %>
 
-	<p><%= f.label :name %> <%= f.text_field :name %></p>
+  <p><%= f.label :name %> <%= f.text_field :name %></p>
 
-	<p><%= f.label :alpha2, "Alpha-2 code" %> <%= f.text_field :alpha2 %></p>
-		
-	<%= f.submit "Add" %>
-	
+  <p><%= f.label :alpha2, "Alpha-2 code" %> <%= f.text_field :alpha2 %></p>
+
+  <%= f.submit "Add" %>
+
 <% end %>

@@ -6,7 +6,7 @@ class LicencesController < ApplicationController
   def index
     @licences = Licence.find(:all)
   end
-  
+
   def show
     @licence = Licence.find(params[:id])
   end

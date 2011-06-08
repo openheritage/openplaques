@@ -43,7 +43,7 @@ class PersonalRolesController < ApplicationController
     @personal_role.role = @role
     @person = Person.find(params[:personal_role][:person_id])
     @personal_role.person = @person
-    
+
     if params[:personal_role][:started_at] > ""
       started_at = params[:personal_role][:started_at]
       if started_at =~/\d{4}/
@@ -61,13 +61,13 @@ class PersonalRolesController < ApplicationController
       ended_at = Date.parse(ended_at)
       @personal_role.ended_at = ended_at
     end
-    
+
     if @personal_role.save
       flash[:notice] = 'PersonalRole was successfully created.'
       redirect_to(edit_person_path(@personal_role.person))
     else
       @roles = Role.all(:order => :name)
-      
+
       render "people/edit"
     end
 
@@ -75,7 +75,7 @@ class PersonalRolesController < ApplicationController
 
   # PUT /personal_roles/1
   # PUT /personal_roles/1.xml
-  def update    
+  def update
     started_at = params[:personal_role][:started_at]
     if started_at =~/\d{4}/
       started_at = Date.parse(started_at + "-01-01")
@@ -109,11 +109,11 @@ class PersonalRolesController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  
+
   protected
-  
+
     def find_personal_role
-      @personal_role = PersonalRole.find(params[:id])      
+      @personal_role = PersonalRole.find(params[:id])
     end
-    
+
 end

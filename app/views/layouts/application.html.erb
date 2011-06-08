@@ -24,37 +24,37 @@
 <body>
   <%= content_tag("div", "This is a staging version of Open Plaques with out-of-date data. ".html_safe + link_to("Visit the live site", "http://www.openplaques.org".html_safe) + "", :class => "staging") if ::Rails.env == "staging" %>
   <%= content_tag("div", "This is a development environment. Don't add good data here!", :class => "development") if ::Rails.env == "development" %>
-	<div id="page">
+  <div id="page">
 
-		<div id="header">
-			<%= user_menu %>
-			<div class="site_name"><%= navigation_link_to(image_tag("openplaques.png"), root_path) %><%= " ".html_safe + content_tag("span",SITE_STATUS, {:class => "status"}) if SITE_STATUS != "" %></div>
-			
-			<%= content_tag("ul", :class => :menu) do %>
-				<%= navigation_list_link_to "People", people_path %>
-				<%= navigation_list_link_to "Places", countries_path %>
-				<%= navigation_list_link_to "Organisations", organisations_path %>
-				<%#= navigation_list_link_to "To do lists", "/todo" if logged_in? %>
-			<% end %>
-			<%= render :partial => "/search/search_form", :locals => { :phrase => "" } %>
+    <div id="header">
+      <%= user_menu %>
+      <div class="site_name"><%= navigation_link_to(image_tag("openplaques.png"), root_path) %><%= " ".html_safe + content_tag("span",SITE_STATUS, {:class => "status"}) if SITE_STATUS != "" %></div>
 
-		</div>
-		<div id="body"> 
-			<p class="notice"><%= notice %></p>
-	       	<p class="alert"><%= alert %></p>
-			<%= yield  %>
-		</div>
-		<div id="footer">
-			<%= content_tag("ul") do %>
-				<%#= list_link_to("About", about_path) +
-				list_link_to("Contact", contact_path) + 
-				list_link_to("The data", about_data_path)  +
-				list_link_to("Blog", "http://blog.openplaques.org")
-				%>
-			<% end %>
-		</div>
-	</div>
-<% if ::Rails.env == "production" %>	
+      <%= content_tag("ul", :class => :menu) do %>
+        <%= navigation_list_link_to "People", people_path %>
+        <%= navigation_list_link_to "Places", countries_path %>
+        <%= navigation_list_link_to "Organisations", organisations_path %>
+        <%#= navigation_list_link_to "To do lists", "/todo" if logged_in? %>
+      <% end %>
+      <%= render :partial => "/search/search_form", :locals => { :phrase => "" } %>
+
+    </div>
+    <div id="body">
+      <p class="notice"><%= notice %></p>
+          <p class="alert"><%= alert %></p>
+      <%= yield  %>
+    </div>
+    <div id="footer">
+      <%= content_tag("ul") do %>
+        <%#= list_link_to("About", about_path) +
+        list_link_to("Contact", contact_path) +
+        list_link_to("The data", about_data_path)  +
+        list_link_to("Blog", "http://blog.openplaques.org")
+        %>
+      <% end %>
+    </div>
+  </div>
+<% if ::Rails.env == "production" %>
   <%= google_analytics_code(GOOGLE_ANALYTICS_ID) if defined?(GOOGLE_ANALYTICS_ID) %>
 <% end %>
 </body>

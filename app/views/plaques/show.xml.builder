@@ -1,4 +1,4 @@
-xml.instruct! :xml, :version=>"1.0" 
+xml.instruct! :xml, :version=>"1.0"
 xml.openplaques(){
   xml.plaque(:id => plaque_url(@plaque), :created_at => @plaque.created_at.xmlschema, :updated_at => @plaque.updated_at.xmlschema){
     xml.inscription {
@@ -31,7 +31,7 @@ xml.openplaques(){
       xml.organisation(:link => organisation_url(@plaque.organisation.id)) {
         xml.name @plaque.organisation.name
       }
-    end  
+    end
     if @plaque.colour
       xml.colour(:link => colour_url(@plaque.colour)) {
         xml.name @plaque.colour.name

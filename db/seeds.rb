@@ -8,7 +8,7 @@
 
   licenses = Licence.create(
     [
-      {:name => "Attribution License", :url =>"http://creativecommons.org/licenses/by/2.0/", :allows_commercial_use => nil}, 
+      {:name => "Attribution License", :url =>"http://creativecommons.org/licenses/by/2.0/", :allows_commercial_use => nil},
       {:name => "Attribution-NoDerivs License", :url =>"http://creativecommons.org/licenses/by-nd/2.0/", :allows_commercial_use => nil},
       {:name => "Attribution-NonCommercial-NoDerivs License", :url =>"http://creativecommons.org/licenses/by-nc-nd/2.0/", :allows_commercial_use => nil},
       {:name => "Attribution-NonCommercial License", :url =>"http://creativecommons.org/licenses/by-nc/2.0/", :allows_commercial_use => nil},
@@ -18,8 +18,8 @@
       {:name => "United States Government Work", :url =>"http://www.usa.gov/copyright.shtml", :allows_commercial_use => nil}
     ]
   )
-  
-  
+
+
   countries = Country.create(
     [
       {:name => "Afghanistan", :alpha2 => "af"},
@@ -270,7 +270,7 @@
       {:name => "Yemen", :alpha2 => "ye"},
       {:name => "Zambia", :alpha2 => "zm"},
       {:name => "Zimbabwe", :alpha2 => "zw"}
-   
-    
+
+
     ]
   )

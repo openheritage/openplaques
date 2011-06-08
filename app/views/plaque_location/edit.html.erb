@@ -5,7 +5,7 @@
   <%= f.error_messages %>
 
   <%= f.label :location %>
-  
+
   <%= text_field_tag :location, @plaque.location_string %>
   <p>
     <%= f.submit "Update" %>
@@ -13,8 +13,8 @@
 <% end %>
 
 <% if @plaque.geolocated? %>
-	<%= osm_iframe(@plaque.latitude,@plaque.longitude) %>
-	<div class="info">
-		<p>Co-ordinates:  <%= geolocation_if_known(@plaque) %>. <%= "Google: " + google_map_if_known("map", @plaque) + ", " + google_streetview_if_known("street view", @plaque) if @plaque.geolocated? %>
-	</div>
+  <%= osm_iframe(@plaque.latitude,@plaque.longitude) %>
+  <div class="info">
+    <p>Co-ordinates:  <%= geolocation_if_known(@plaque) %>. <%= "Google: " + google_map_if_known("map", @plaque) + ", " + google_streetview_if_known("street view", @plaque) if @plaque.geolocated? %>
+  </div>
 <% end %>

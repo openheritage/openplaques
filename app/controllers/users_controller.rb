@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
-  before_filter :authenticate_admin!  
-  
+  before_filter :authenticate_admin!
+
   def index
     if params[:all]
       @users = User.all
@@ -9,7 +9,7 @@ class UsersController < ApplicationController
       @users = User.find(:all, :conditions => {:is_verified => true})
     end
   end
-  
+
   def show
     @user = User.find_by_username!(params[:id])
   end

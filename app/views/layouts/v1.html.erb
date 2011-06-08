@@ -10,102 +10,102 @@
    xmlns:sioc="http://rdfs.org/sioc/ns#"
    xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
 
-	<head>
-  	<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-	  <title><%= @page_title + " - " if @page_title %>Open Plaques</title>
-	  
-		<%= stylesheet_link_tag 'v1' %>
-	  <%#= stylesheet_link_tag 'jquery-ui-1.8.11.custom' %>
-	  
-		<%= javascript_include_tag 'application' %>
-	  <%= javascript_include_tag 'http://openlayers.org/dev/OpenLayers.js' if @map %>
-		<%= javascript_include_tag 'jquery-1.5.1.min.js' %>
-	  <%= javascript_include_tag 'jquery-ui-1.8.11.custom.min.js' %>
-	
-	<%= javascript_include_tag 'lib/modernizr-1.7.min.js' %>
-	  
-		<%= tag("link", :rel => "shortcut icon", :href => image_path("openplaques-icon.png"))%>
-	  <%= csrf_meta_tag %>
-	</head>
-	
-	<body>
-		
-		<%= content_tag("div", "This is a staging version of Open Plaques with out-of-date data. ".html_safe + link_to("Visit the live site", "http://www.openplaques.org".html_safe) + "", :class => "staging") if ::Rails.env == "staging" %>
-	  <%= content_tag("div", "This is a development environment. Don't add good data here!", :class => "development") if ::Rails.env == "development" %>
-	
-		<header>
-			
-			<div class="container">
-				
-				<div class="branding">
-					<%= navigation_link_to(image_tag("openplaques.png"), root_path, :class => "logo") %>
-				</div>
-				
-				<span class="site_name">
-					O<span class="small-caps">pen</span> P<span class="small-caps">laques</span>
-				</span>
-				
-				<nav>
-					<%= content_tag("ul", :class => "clearfix") do %>
-						<%= navigation_list_link_to "People", people_path %>
-						<%= navigation_list_link_to "Places", countries_path %>
-						<%= navigation_list_link_to "Organisations", organisations_path %>
-						<%#= navigation_list_link_to "To do lists", "/todo" if logged_in? %>
-						<%#= navigation_list_link_to "Explore", "#" %>
-						<%#= navigation_list_link_to "Contribute", "#" %>
-						<%#= navigation_list_link_to "About", "#" %>
-						
-					<% end %>
-				</nav>
-		
-				<%= user_menu %>
-		
-				<%#= " ".html_safe + content_tag("span",SITE_STATUS, {:class => "status"}) if SITE_STATUS != "" %>
-				
-				<%= form_tag(search_path, :method => "get", :class => "search_box") do %>
-					<span id="magnifying_glass"></span>
-					<%= label_tag(:phrase, "Search: ") %>
-					<%= text_field_tag(:phrase, params[:phrase], :placeholder => "Search for a person, place or organisation...") %>
-					<%= submit_tag("Go", :name => nil) %>
-				<% end %>
-				
-			</div>
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <title><%= @page_title + " - " if @page_title %>Open Plaques</title>
 
-		</header>
-		<div id="content">
-			
-			<% if notice %>
-				<p class="notice">
-					<%= notice %>
-				</p>
-			<% end %>
-			
-			<% if alert %>
-				<p class="alert">
-					<%= alert %>
-				</p>
-			<% end %>
-			
-			<div class="container">
-				
-				<%= yield  %>
-				
-			</div>
-			
-		</div>
-		<footer>
-			<nav>
-				<%= link_to "About", about_path %>
-				<%= link_to "Contact", contact_path %>
-				<%= link_to "The data", about_the_data_path %>
-				<%= link_to "Blog", "http://blog.openplaques.org/" %>
-				<%= link_to "Twitter", "http://twitter.com/openplaques" %>
-			</nav>
-		</footer>
-	
- 
+    <%= stylesheet_link_tag 'v1' %>
+    <%#= stylesheet_link_tag 'jquery-ui-1.8.11.custom' %>
 
-<% if ::Rails.env == "production" %>	
+    <%= javascript_include_tag 'application' %>
+    <%= javascript_include_tag 'http://openlayers.org/dev/OpenLayers.js' if @map %>
+    <%= javascript_include_tag 'jquery-1.5.1.min.js' %>
+    <%= javascript_include_tag 'jquery-ui-1.8.11.custom.min.js' %>
+
+  <%= javascript_include_tag 'lib/modernizr-1.7.min.js' %>
+
+    <%= tag("link", :rel => "shortcut icon", :href => image_path("openplaques-icon.png"))%>
+    <%= csrf_meta_tag %>
+  </head>
+
+  <body>
+
+    <%= content_tag("div", "This is a staging version of Open Plaques with out-of-date data. ".html_safe + link_to("Visit the live site", "http://www.openplaques.org".html_safe) + "", :class => "staging") if ::Rails.env == "staging" %>
+    <%= content_tag("div", "This is a development environment. Don't add good data here!", :class => "development") if ::Rails.env == "development" %>
+
+    <header>
+
+      <div class="container">
+
+        <div class="branding">
+          <%= navigation_link_to(image_tag("openplaques.png"), root_path, :class => "logo") %>
+        </div>
+
+        <span class="site_name">
+          O<span class="small-caps">pen</span> P<span class="small-caps">laques</span>
+        </span>
+
+        <nav>
+          <%= content_tag("ul", :class => "clearfix") do %>
+            <%= navigation_list_link_to "People", people_path %>
+            <%= navigation_list_link_to "Places", countries_path %>
+            <%= navigation_list_link_to "Organisations", organisations_path %>
+            <%#= navigation_list_link_to "To do lists", "/todo" if logged_in? %>
+            <%#= navigation_list_link_to "Explore", "#" %>
+            <%#= navigation_list_link_to "Contribute", "#" %>
+            <%#= navigation_list_link_to "About", "#" %>
+
+          <% end %>
+        </nav>
+
+        <%= user_menu %>
+
+        <%#= " ".html_safe + content_tag("span",SITE_STATUS, {:class => "status"}) if SITE_STATUS != "" %>
+
+        <%= form_tag(search_path, :method => "get", :class => "search_box") do %>
+          <span id="magnifying_glass"></span>
+          <%= label_tag(:phrase, "Search: ") %>
+          <%= text_field_tag(:phrase, params[:phrase], :placeholder => "Search for a person, place or organisation...") %>
+          <%= submit_tag("Go", :name => nil) %>
+        <% end %>
+
+      </div>
+
+    </header>
+    <div id="content">
+
+      <% if notice %>
+        <p class="notice">
+          <%= notice %>
+        </p>
+      <% end %>
+
+      <% if alert %>
+        <p class="alert">
+          <%= alert %>
+        </p>
+      <% end %>
+
+      <div class="container">
+
+        <%= yield  %>
+
+      </div>
+
+    </div>
+    <footer>
+      <nav>
+        <%= link_to "About", about_path %>
+        <%= link_to "Contact", contact_path %>
+        <%= link_to "The data", about_the_data_path %>
+        <%= link_to "Blog", "http://blog.openplaques.org/" %>
+        <%= link_to "Twitter", "http://twitter.com/openplaques" %>
+      </nav>
+    </footer>
+
+
+
+<% if ::Rails.env == "production" %>
   <%= google_analytics_code(GOOGLE_ANALYTICS_ID) if defined?(GOOGLE_ANALYTICS_ID) %>
 <% end %>
 </body>

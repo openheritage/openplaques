@@ -1,7 +1,7 @@
 class PlaquesController < ApplicationController
-  
+
   layout "v1"
-  
+
   before_filter :authenticate_user!, :only => [:update, :edit]
   before_filter :authenticate_admin!, :only => :destroy
 
@@ -17,7 +17,7 @@ class PlaquesController < ApplicationController
       format.rss
     end
   end
-  
+
   # box = [52.34,-1.23],[50.00,-1.00]
   # box = top_left, bottom_right
   # e.g. http://0.0.0.0:3000/plaques?box=[52.00,-1],[50.00,0.01]
@@ -32,7 +32,7 @@ class PlaquesController < ApplicationController
   # GET /plaques.poi
   def index
     conditions = {}
-    
+
     # Bounding-box query
     if params["box"]
       # Should really do some validation here...
@@ -42,7 +42,7 @@ class PlaquesController < ApplicationController
       conditions[:latitude] = bottom_right[0].to_s..top_left[0].to_s
       conditions[:longitude] = top_left[1].to_s..bottom_right[1].to_s
     end
-    
+
     # Since query
     if params[:since]
       since = DateTime.parse(params[:since])
@@ -52,17 +52,17 @@ class PlaquesController < ApplicationController
         conditions[:updated_at] = since..DateTime.now
       end
     end
-    
+
     if params[:limit] && params[:limit].to_i < 100
       limit = params[:limit]
     else
       limit = 20
     end
-    
+
     @plaques = Plaque.all(:conditions => conditions, :order => "created_at DESC", :limit => limit, :include => [:language, :organisation, :colour, [:location => [:area => :country]]])
-        
+
     respond_with @plaques
-    
+
   end
 
   # GET /plaques/1
@@ -88,18 +88,18 @@ class PlaquesController < ApplicationController
   # GET /plaques/new
   # GET /plaques/new.xml
   def new
-    
+
     @plaque = Plaque.new
     @plaque.build_user
     @plaque.photos.build
-    
-    @countries = Country.all(:order => :name)    
-    @organisations = Organisation.all(:order => :name)    
+
+    @countries = Country.all(:order => :name)
+    @organisations = Organisation.all(:order => :name)
     @languages = Language.all(:order => :name)
     @common_colours = Colour.common.all(:order => "plaques_count DESC")
     @other_colours = Colour.other.all(:order => :name)
 
-    if !current_user        
+    if !current_user
       @user = User.new
     end
 
@@ -109,17 +109,17 @@ class PlaquesController < ApplicationController
     @plaque.parse_inscription
     redirect_to edit_plaque_inscription_path(@plaque)
   end
-  
+
   def unparse_inscription
     @plaque.unparse_inscription
     redirect_to @plaque
   end
-  
+
   def flickr_search
     help.find_photo_by_machinetag(@plaque)
     redirect_to @plaque
   end
-  
+
   def flickr_search_all
     help.find_photo_by_machinetag(nil)
     redirect_to @plaque
@@ -128,12 +128,12 @@ class PlaquesController < ApplicationController
   # POST /plaques
   # POST /plaques.xml
   def create
-    
+
     @plaque = Plaque.new(params[:plaque])
 
     if current_user
       @plaque.user = current_user
-    end    
+    end
 
     if params[:location] && !params[:location].blank?
       country = Country.find(params[:plaque][:country])
@@ -146,9 +146,9 @@ class PlaquesController < ApplicationController
            area = country.areas.create!(:name => params[:area], :slug => params[:area].downcase.gsub(" ", "_"))
          end
       end
-            
+
       if area
-        location = area.locations.find_by_name(params[:location])          
+        location = area.locations.find_by_name(params[:location])
         unless location
           location = area.locations.create!(:name => params[:location])
         end
@@ -156,25 +156,25 @@ class PlaquesController < ApplicationController
     end
 
     @plaque.location = location if location
-                    
+
     if @plaque.save
 
       PlaqueMailer.new_plaque_email(@plaque).deliver
       flash[:notice] = "Thanks for adding this plaque."
       redirect_to plaque_path(@plaque)
-    else  
+    else
       params[:checked] = "true"
       @plaque.photos.build if @plaque.photos.size == 0
-      
-      @countries = Country.all(:order => :name)    
-      @organisations = Organisation.all(:order => :name)    
+
+      @countries = Country.all(:order => :name)
+      @organisations = Organisation.all(:order => :name)
       @languages = Language.all(:order => :name)
       @common_colours = Colour.common.all(:order => "plaques_count DESC")
       @other_colours = Colour.other.all(:order => :name)
-            
-      render :new 
+
+      render :new
     end
-      
+
   end
 
   # PUT /plaques/1
@@ -189,8 +189,8 @@ class PlaquesController < ApplicationController
           @plaque.location = @location
         end
       end
-	  end
-    
+    end
+
     if params[:plaque] && params[:plaque][:colour_id]
       @colour = Colour.find(params[:plaque][:colour_id])
       if @plaque.colour_id != @colour.id
@@ -220,20 +220,20 @@ class PlaquesController < ApplicationController
       format.xml  { head :ok }
     end
   end
- 
+
   def help
     Helper.instance
-  end 
+  end
 
   class Helper
     include Singleton
     include PlaquesHelper
-  end 
-  
+  end
+
   protected
-  
+
     def find_plaque
       @plaque = Plaque.find(params[:id])
     end
-   
+
 end

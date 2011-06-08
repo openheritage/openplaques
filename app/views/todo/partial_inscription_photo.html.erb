@@ -3,13 +3,13 @@
 
 <% if @plaques.size > 0 %>
 
-	<p>These plaques have partial inscriptions which need transcribing from their photos:</p>
-	<ul>
-	  <% @plaques.each do |plaque| %>
-		<li><%= link_to(plaque.first_person || "Plaque #" + plaque.id.to_s, "/plaques/" + plaque.id.to_s + "/inscription/edit")  %> <%= plaque.inscription %></li>
-	  <% end %>
-	</ul>
+  <p>These plaques have partial inscriptions which need transcribing from their photos:</p>
+  <ul>
+    <% @plaques.each do |plaque| %>
+    <li><%= link_to(plaque.first_person || "Plaque #" + plaque.id.to_s, "/plaques/" + plaque.id.to_s + "/inscription/edit")  %> <%= plaque.inscription %></li>
+    <% end %>
+  </ul>
 <% else %>
-	<p>No plaques found with partial inscriptions and photos.</p>
+  <p>No plaques found with partial inscriptions and photos.</p>
 <% end %>
 <p class="clear"><%= link_to("All to-do lists", "/todo") %></p>

@@ -1,21 +1,21 @@
 <% @page_title = "Organisations" %>
 
 <div class="panel clearfix">
-	<h1><%= @page_title %></h1>
-	<p><%= pluralize(@organisations.size, "organisation") %></p>	
+  <h1><%= @page_title %></h1>
+  <p><%= pluralize(@organisations.size, "organisation") %></p>
 </div>
 
 <!-- TODO: Make it say "'0 plaques' for the results < 0" -->
 <ul id="organisations_results" class="results one_destination_results">
-<% @organisations.each do |organisation| %>	
-	<%= content_tag("li") do %>
+<% @organisations.each do |organisation| %>
+  <%= content_tag("li") do %>
 
-		<a href="<%= url_for(organisation) %>">
-			<p class="result"><%= organisation.name %></p>
-			<p class="count"><%= pluralize(organisation.plaques.size.to_s, "plaque") if organisation.plaques.size > 0 %></p>
-		</a>
+    <a href="<%= url_for(organisation) %>">
+      <p class="result"><%= organisation.name %></p>
+      <p class="count"><%= pluralize(organisation.plaques.size.to_s, "plaque") if organisation.plaques.size > 0 %></p>
+    </a>
 
-	<% end %>
+  <% end %>
 <% end %>
 </ul>
 

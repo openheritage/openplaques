@@ -2,9 +2,9 @@
 <h1>Edit language of <%= link_to "Plaque #" + @plaque.id.to_s, @plaque %></h1>
 
 <% form_for @plaque do |f| %>
-	<%= f.label :language_id, "Language" %>
-	<%= f.collection_select :language_id, @languages, :id, :name %>
-  	<%= f.submit "Save" %>
+  <%= f.label :language_id, "Language" %>
+  <%= f.collection_select :language_id, @languages, :id, :name %>
+    <%= f.submit "Save" %>
 <% end %>
 
 <%= content_tag("p", "Or " + link_to("add new language", new_language_path) + ".") %>

@@ -11,7 +11,7 @@ class PersonalConnectionsController < ApplicationController
     @personal_connection.destroy
     redirect_to edit_plaque_inscription_path(@plaque)
   end
-  
+
   def edit
     @people = Person.all(:order => :name)
     @verbs = Verb.all(:order => :name)
@@ -27,12 +27,12 @@ class PersonalConnectionsController < ApplicationController
     end
 
   end
-  
+
   def new
     @personal_connection = @plaque.personal_connections.new
     @people = Person.all(:order => :name)
     @verbs = Verb.all(:order => :name)
-    @locations = Location.all(:order => :name)    
+    @locations = Location.all(:order => :name)
   end
 
   def create
@@ -42,17 +42,17 @@ class PersonalConnectionsController < ApplicationController
     else
       @people = Person.all(:order => :name)
       @verbs = Verb.all(:order => :name)
-      @locations = Location.all(:order => :name)    
-      render :new      
+      @locations = Location.all(:order => :name)
+      render :new
     end
   end
-  
+
   protected
-  
+
     def find_plaque
-      @plaque = Plaque.find(params[:plaque_id])      
+      @plaque = Plaque.find(params[:plaque_id])
     end
-    
+
     def find_personal_connection
       @personal_connection = @plaque.personal_connections.find(params[:id])
     end

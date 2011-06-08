@@ -1,23 +1,23 @@
 Openplaques::Application.routes.draw do
-  
-  
+
+
   devise_for :users
   resources :users, :only => [:index, :show]
-  
-  
+
+
   # This site is designed to be RESTful, so most of the routes are defined here as resources.
 
   # These ones are related to plaques, but only in general, not a single plaque, and so use plaques as a prefix in the path. These have to be defined BEFORE the plaques resource.
-  
+
   scope "/plaques" do
-  
+
     resources :erected_in, :controller => :plaque_erected_years, :as => :plaque_erected_years, :only => [:index, :show]
     resource :all, :controller => :all_plaques, :as => :all_plaques, :only => [:show]
     resource :map, :as => :map, :controller => :plaques_map, :only => [:show]
     resource :latest, :as => :latest, :controller => :plaques_latest, :only => [:show]
 
   end
-  
+
   # Main PLAQUE resources, and sub-resources
   resources :plaques do
     member do
@@ -40,7 +40,7 @@ Openplaques::Application.routes.draw do
 
   # These are the gazeteer (places) model based paths. They might change to become nested in future.
   resources :places, :controller => :countries, :as => :countries do
-    resource :unphotographed, :controller => :unphotographed_plaques_by_country, :only => :show    
+    resource :unphotographed, :controller => :unphotographed_plaques_by_country, :only => :show
     resources :areas do
       resource :unphotographed, :controller => :unphotographed_plaques_by_area, :only => :show
       resource :ungeolocated, :controller => :area_ungeolocated_plaques, :only => :show
@@ -58,12 +58,12 @@ Openplaques::Application.routes.draw do
 
   # Verbs, roles and their connections to the plaques
   resources :verbs
-  
-  
+
+
   scope "/roles" do
     resources "a-z", :as => "roles_by_index", :controller => :roles_by_index, :only => [:show, :index]
   end
-  
+
   resources :roles
   resources :personal_roles
 
@@ -82,12 +82,12 @@ Openplaques::Application.routes.draw do
 
   resources :todo
 
- 
+
   # Convenience paths for search:
   match 'search' => "search#index"
   match 'search/:phrase' => "search#results"
 
-  # Convenience resources for important pages:  
+  # Convenience resources for important pages:
   resource :about, :controller => :pages, :id => "about", :only => :show
   resource :contact, :controller => :pages, :id => "contact", :only => :show
   scope "/about" do

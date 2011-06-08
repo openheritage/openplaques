@@ -1,7 +1,7 @@
 class OrganisationsController < ApplicationController
 
   layout "v1"
-  
+
   before_filter :authenticate_admin!, :only => :destroy
   before_filter :authenticate_user!, :except => [:index, :show]
 
@@ -11,29 +11,29 @@ class OrganisationsController < ApplicationController
     if params[:name_starts_with]
       limit = params[:limit] ? params[:limit] : 5
       @organisations = Organisation.name_starts_with(params[:name_starts_with]).limit(limit).most_plaques_order
-    else      
+    else
       @organisations = Organisation.all(:order => :name)
     end
     respond_to do |format|
       format.html
       format.kml {
         @parent = @organisations
-        render "colours/index" 
+        render "colours/index"
       }
       format.yaml
       format.xml { render :xml => @organisations }
       format.json { render :json => @organisations }
     end
   end
-  
+
   def show
-    begin    
+    begin
       @organisation = Organisation.find_by_slug!(params[:id])
     rescue
       @organisation = Organisation.find(params[:id])
       redirect_to(organisation_path(@organisation.slug), :status => :moved_permanently) and return
-    end  
-      
+    end
+
       @plaques = @organisation.plaques
 #      @centre = find_mean(@plaques)
       @zoom = 13
@@ -45,14 +45,14 @@ class OrganisationsController < ApplicationController
         format.json { render :json => @organisation }
       end
   end
-  
+
   def new
     @organisation = Organisation.new
   end
-  
+
   def create
     @organisation = Organisation.new(params[:organisation])
-    
+
     if @organisation.save
       redirect_to organisation_path(@organisation.slug)
     else
@@ -72,7 +72,7 @@ class OrganisationsController < ApplicationController
     end
 
   end
-  
+
   protected
 
     def find_organisation

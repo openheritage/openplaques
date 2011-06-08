@@ -1,13 +1,13 @@
 <h1>Unphotographed plaques in <%= link_to @country.name, country_path(@country) %></h1>
 
 <% unless @plaques.nil? %>
-	<p>There <%= pluralize_is_or_are(@plaques.size, "plaque") %> in <%= @country.name  %> that <%= havent_or_hasnt(@plaques.size) %> been photographed yet.</p>
+  <p>There <%= pluralize_is_or_are(@plaques.size, "plaque") %> in <%= @country.name  %> that <%= havent_or_hasnt(@plaques.size) %> been photographed yet.</p>
 
-	<% if @plaques.size > 0 %>
+  <% if @plaques.size > 0 %>
 
-	    <%= render :partial => '/plaques/map.html.erb' %>
+      <%= render :partial => '/plaques/map.html.erb' %>
 
-	<% end %>
+  <% end %>
 
-	<%= plaque_list(@plaques) %>
+  <%= plaque_list(@plaques) %>
 <% end %>

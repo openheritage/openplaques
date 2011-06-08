@@ -7,9 +7,9 @@ class RolesByIndexController < ApplicationController
     end
     @roles = Role.find(:all, :conditions => {:index => @index}, :order => "upper(name)")
   end
-  
+
   def index
-    
+
   end
 
 end

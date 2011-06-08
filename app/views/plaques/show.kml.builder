@@ -4,7 +4,7 @@ xml.kml(:xmlns=>"http://www.opengis.net/kml/2.2","xmlns:atom"=>"http://www.w3.or
     xml.name "OpenPlaques.org"
     xml.atom :link, "href"=>"http://openplaques.org"
     xml.description "Commemorative plaques around the world"
-    
+
     ["blue", "black", "green","red","white","yellow"].each do |colour|
       xml.Style(:id=>"plaque-" + colour) do
         xml.IconStyle do
@@ -14,9 +14,9 @@ xml.kml(:xmlns=>"http://www.opengis.net/kml/2.2","xmlns:atom"=>"http://www.w3.or
           end
         end
       end
-      
+
     end
-    
+
     for plaque in @plaques
       kml(plaque, xml)
     end

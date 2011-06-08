@@ -1,6 +1,6 @@
 # This class represents 'countries', as defined by the ISO country codes specification.
 # === Attributes
-# * +name+ - the country's common name (not necessarily its official one). 
+# * +name+ - the country's common name (not necessarily its official one).
 # * +alpha2+ - 2-letter code as defined by the ISO standard. Used in URLs.
 #
 # === Associations
@@ -13,7 +13,7 @@ class Country < ActiveRecord::Base
   validates_uniqueness_of :name   # Unlikely that we'll get two countries with the same name...
   validates_uniqueness_of :alpha2
   validates_format_of :alpha2, :with => /^[a-z]{2}$/, :message => "must be a 2 letter code"
-  
+
   has_many :areas
   has_many :locations, :through => :areas
   has_many :plaques, :through => :locations

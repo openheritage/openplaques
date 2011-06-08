@@ -1,4 +1,4 @@
-xml.instruct! :xml, :version=>"1.0" 
+xml.instruct! :xml, :version=>"1.0"
 xml.openplaques(){
   xml.plaques() {
     @plaques.each do |plaque|
@@ -33,12 +33,12 @@ xml.openplaques(){
           xml.organisation(:link => organisation_url(plaque.organisation.id)) {
             xml.name plaque.organisation.name
           }
-        end  
+        end
         if plaque.colour
           xml.colour(:link => colour_url(plaque.colour)) {
             xml.name plaque.colour.name
           }
-        end        
+        end
         if plaque.erected_at?
           if plaque.erected_at.day == 1 && plaque.erected_at.day == 1
             xml.date_erected plaque.erected_at.year
@@ -50,6 +50,6 @@ xml.openplaques(){
           xml.person(:name => person.name, :url => "/people/"+ person.id.to_s+".xml")
         end
       }
-    end    
+    end
   }
 }

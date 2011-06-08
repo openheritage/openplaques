@@ -3,6 +3,6 @@
 
 <ul>
 <% @verbs.each do |verb| %>
-	<%=content_tag("li", link_to(verb.name, verb_path(verb)))%>
+  <%=content_tag("li", link_to(verb.name, verb_path(verb)))%>
 <% end %>
 </ul>

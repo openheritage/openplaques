@@ -10,21 +10,21 @@ class CountriesController < ApplicationController
   def index
     @countries = Country.all(:order => :name)
   end
-  
+
   def new
     @country = Country.new
   end
-  
+
   def create
     @country = Country.new(params[:country])
-    
+
     if @country.save
       redirect_to country_path(@country)
     else
       render :new
     end
   end
-  
+
   def show
     begin
       @country = Country.find_by_alpha2!(params[:id])
@@ -36,9 +36,9 @@ class CountriesController < ApplicationController
     @areas = @country.areas.all(:order => :name, :include => :country)
 
   end
-        
+
   def update
-    
+
     if @country.update_attributes(params[:country])
       redirect_to country_path(@country)
     else
@@ -47,7 +47,7 @@ class CountriesController < ApplicationController
   end
 
   protected
-  
+
     def find_country
       @country = Country.find_by_alpha2!(params[:id])
     end

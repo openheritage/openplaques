@@ -14,9 +14,9 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :username, :name, :opted_in
-  
+
   has_many :plaques
-  
+
   validates_presence_of     :username
   validates_length_of       :username,    :within => 3..40
   validates_uniqueness_of   :username
@@ -24,12 +24,12 @@ class User < ActiveRecord::Base
   belongs_to :todo_item
 
   before_validation :generate_username_and_password_if_not_logged_in
-  
+
   def make_admin
     self.is_admin = true
     self.save!
   end
-  
+
   def generate_username_and_password_if_not_logged_in
     if !self.name.blank? && !self.email.blank? && self.username.blank?
       self.username = Time.now.to_i.to_s

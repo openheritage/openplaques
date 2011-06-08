@@ -1,8 +1,8 @@
 <% if (@possible_photos.length >0) %>
-	<p><label>Select plaque photo</label>
-	<p><% @possible_photos.each do |p| %>
-		<input type="radio" value="<%= p.url %>" name="photo" id="photo_url_<%=p.url.split("/").last %>">
-		<label for="photo_url_<%=p.url.split("/").last %>"><%= image_tag(p.file_url, :alt => p.photographer, :title => p.photographer, :size => "80x60") %></label>
-	<% end %>
-	</p>
+  <p><label>Select plaque photo</label>
+  <p><% @possible_photos.each do |p| %>
+    <input type="radio" value="<%= p.url %>" name="photo" id="photo_url_<%=p.url.split("/").last %>">
+    <label for="photo_url_<%=p.url.split("/").last %>"><%= image_tag(p.file_url, :alt => p.photographer, :title => p.photographer, :size => "80x60") %></label>
+  <% end %>
+  </p>
 <% end %>

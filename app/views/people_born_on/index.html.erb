@@ -5,7 +5,7 @@
 <% if Person.count(:born_on) == Person.count(:died_on) %>
   All
 <% else %>
-  <%= Person.count(:died_on) %> 
+  <%= Person.count(:died_on) %>
 <% end %>
 of them are now <a href="/people/died_on/">dead</a>.</p>
 <ul>

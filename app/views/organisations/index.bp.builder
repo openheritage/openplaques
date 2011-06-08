@@ -9,7 +9,7 @@ xml.page(:style => "list") {
       }
     }
     xml.tag!("page-title", "Organisation")
-  }  
+  }
   xml.content {
     xml.module {
       xml.header(:layout => "simple") {

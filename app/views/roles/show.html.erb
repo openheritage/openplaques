@@ -1,14 +1,14 @@
 <% @page_title = "Plaques commemorating " + @role.name.pluralize %>
 
 <div class="panel">
-	<h1><%= @role.name.pluralize.capitalize %></h1>
+  <h1><%= @role.name.pluralize.capitalize %></h1>
 
-	<% @role.people.each do |person| %>
+  <% @role.people.each do |person| %>
 
-	<h2><%= link_to person.name, person %> <%= dates(person) %></h2>
-	
-		<p><%= link_to pluralize(person.plaques.size, "plaque"), person %> in <%= list_of_area_links(person.areas) %></p>
+  <h2><%= link_to person.name, person %> <%= dates(person) %></h2>
 
-	<% end%>
+    <p><%= link_to pluralize(person.plaques.size, "plaque"), person %> in <%= list_of_area_links(person.areas) %></p>
+
+  <% end%>
 
 </div>

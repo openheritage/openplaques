@@ -1,4 +1,4 @@
-# This class represents an organisation entity which has been responsible for erecting 
+# This class represents an organisation entity which has been responsible for erecting
 # commemorative plaques. Famous examples include 'English Heritage' - other examples may be
 # civic societies or local councils.
 # === Attributes
@@ -15,9 +15,9 @@ class Organisation < ActiveRecord::Base
 
   scope :name_starts_with, lambda {|term| where(["lower(name) LIKE ?", term.downcase + "%"]) }
   scope :most_plaques_order, order("plaques_count DESC")
-  
+
   def as_json(options={})
     super(:only => [:name, :id])
   end
-  
+
 end

@@ -4,22 +4,22 @@
 <% form_for(@location) do |f| %>
   <%= f.error_messages %>
 
-	<p>
-		<%= f.label :name %>
-		<%= f.text_field :name %>
-	</p>
-	
-	<% if @areas.size > 0 %>
-	<p>
-		<%= f.label :area_id, "Area" %>
-		<%= f.collection_select :area_id, @areas, :id, :name, {:include_blank => true} %>
+  <p>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </p>
 
-		New area in:
-		<% @countries.each do |@country| %>
-			<%= link_to(@country.name, "/places/" + @country.alpha2 + "/areas/new") %>
-		<% end %>
-	</p>
-	<% end %>
+  <% if @areas.size > 0 %>
+  <p>
+    <%= f.label :area_id, "Area" %>
+    <%= f.collection_select :area_id, @areas, :id, :name, {:include_blank => true} %>
+
+    New area in:
+    <% @countries.each do |@country| %>
+      <%= link_to(@country.name, "/places/" + @country.alpha2 + "/areas/new") %>
+    <% end %>
+  </p>
+  <% end %>
   <p>
     <%= f.submit "Update" %>
   </p>

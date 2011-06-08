@@ -1,8 +1,8 @@
 <% @page_title = title(@plaque) %>
 
 <div class="panel clearfix">
-	<!-- <p id="plaque_number"><span>~ Plaque 2 of <a href="#" title="View all plaques">3879</a> ~</span></p> -->
-	
+  <!-- <p id="plaque_number"><span>~ Plaque 2 of <a href="#" title="View all plaques">3879</a> ~</span></p> -->
+
    <%= content_tag("h1", new_linked_inscription(@plaque), {:class => "inscription", :property => "op:inscription"}) %>
 
 </div>
@@ -11,145 +11,145 @@
 
 
 <div id="t-container">
-	
-	<div class="plaque_image" id="plaque_single_image">
-		
-		<% if @plaque.photos.size > 0 %>
-			<% photo = @plaque.photos.first %>
-			<%= link_to(image_tag(photo.file_url, {:alt => "Photo of plaque", :rel => "foaf:depiction"}), photo.url) %>
-			
-			<div id="photo_information" class="clearfix">
-				<p class="photo_credit">Photographed by <% if photo.photographer_url %>
-					<%= link_to(photo.photographer, photo.photographer_url) %>
-				<% else %>	
-					<%= photo.photographer %>.
-				<% end %></p>
-				<p class="photo_licence"><%= link_to(photo.licence.name, photo.licence.url) %></p>
-			</div>
+
+  <div class="plaque_image" id="plaque_single_image">
+
+    <% if @plaque.photos.size > 0 %>
+      <% photo = @plaque.photos.first %>
+      <%= link_to(image_tag(photo.file_url, {:alt => "Photo of plaque", :rel => "foaf:depiction"}), photo.url) %>
+
+      <div id="photo_information" class="clearfix">
+        <p class="photo_credit">Photographed by <% if photo.photographer_url %>
+          <%= link_to(photo.photographer, photo.photographer_url) %>
+        <% else %>
+          <%= photo.photographer %>.
+        <% end %></p>
+        <p class="photo_licence"><%= link_to(photo.licence.name, photo.licence.url) %></p>
+      </div>
 
 
-		<% else %>
+    <% else %>
 
-		<% end %>
-		
-	</div>	
+    <% end %>
+
+  </div>
 
 <!--
-	<div class="plaque_image" id="plaque_multiple_images">
-		
-		<a id="primary_image" href="#"><img src="/images/NoPhoto.gif" /></a>
-		<div id="secondary_images">
-			<a href="">
-				<img src="/images/NoPhoto.gif"></img>
-			</a>
-			<a href="">
-				<img src="/images/NoPhoto.gif"></img>
-			</a>
-			<a href="">
-				<img src="/images/NoPhoto.gif"></img>
-			</a>
-		</div>
+  <div class="plaque_image" id="plaque_multiple_images">
 
-	</div>
+    <a id="primary_image" href="#"><img src="/images/NoPhoto.gif" /></a>
+    <div id="secondary_images">
+      <a href="">
+        <img src="/images/NoPhoto.gif"></img>
+      </a>
+      <a href="">
+        <img src="/images/NoPhoto.gif"></img>
+      </a>
+      <a href="">
+        <img src="/images/NoPhoto.gif"></img>
+      </a>
+    </div>
+
+  </div>
 -->
 
-	<section id="plaque_identifier" class="plaque_info_panel">
+  <section id="plaque_identifier" class="plaque_info_panel">
 
-		<div class="header">
-			<h1>Plaque <abbr title="number">№</abbr> <%= @plaque.id %></h1>
-			
-			
-			
-			<div class="like_button">
-				<iframe src="http://www.facebook.com/plugins/like.php?href=<%= plaque_path(@plaque, :only_path => false) %>&amp;layout=button_count&amp;show_faces=false&amp;width=90&amp;action=like&amp;font&amp;colorscheme=light&amp;height=35" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:75px; height:20px; text-align:right;" allowTransparency="true"></iframe>
-			</div>
+    <div class="header">
+      <h1>Plaque <abbr title="number">№</abbr> <%= @plaque.id %></h1>
 
 
-			
-		</div>
-		
-		
-		<% if @plaque.geolocated? %>
-			<%= image_tag(google_maps_path(@plaque.latitude, @plaque.longitude, {:zoom => 16, :styles => 
-				{
-					:road => 
-						{:all => 
-							{:lightness => "30"}
-						},
-				 	"road.arterial" => 
-						{:all => 
-							{:hue => "0x003bff"}
-						},
-					:poi => 
-						{:all => 
-							{:visibility => :simplified}
-						},
-					:landscape => 
-						{:all =>
-							{:hue => "0x003bff"}
-						}
-				}
-			}	
-				)) %>
-		<% end %>
-		
-		
-		<table class="section_details" cellspacing="0" summary="Plaque details for #<%= @plaque.id %>">
-			<tr>
-				<th>Erected by</th>
-				<td><%= erected_information(@plaque) %></td>
-			</tr>
-			<tr>
-				<th>Language</th>
-				<td><%= language_if_known(@plaque) %></td>
-			</tr>
-			<!--tr>
-				<th>Co-ordinates</th>
-				<td><%= geolocation_if_known(@plaque) %></td>
-			</tr-->
-			<tr>
-				<th>Colour</th>
-				<td><%= colour_if_known(@plaque) %></td>
-			</tr>
-			<tr>
-				<th>Location</th>
-				<td><%= location_if_known(@plaque) %></td>
-			</tr>
-		</table>
 
-		<aside>
-			<h2>Contributor details</h2>
-			<ul>
-				<li><p>Inscription added by <a href="#">Simon Harriyott</a></p></li>
-				<li><p>Photographs added by <a href="#">Simon Harriyott</a>, <a href="#">Frankie Roberto</a> &amp; <a href="#">myf</a></p></li>
-				<li><p>Further edits contributed from <a href="#">Jez Nicholson</a></p></li>
-			</ul>
-			
-			
-		</aside>
-
-	</section>
+      <div class="like_button">
+        <iframe src="http://www.facebook.com/plugins/like.php?href=<%= plaque_path(@plaque, :only_path => false) %>&amp;layout=button_count&amp;show_faces=false&amp;width=90&amp;action=like&amp;font&amp;colorscheme=light&amp;height=35" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:75px; height:20px; text-align:right;" allowTransparency="true"></iframe>
+      </div>
 
 
-	<div id="plaques_nearby"></div>
-	
-	
+
+    </div>
+
+
+    <% if @plaque.geolocated? %>
+      <%= image_tag(google_maps_path(@plaque.latitude, @plaque.longitude, {:zoom => 16, :styles =>
+        {
+          :road =>
+            {:all =>
+              {:lightness => "30"}
+            },
+          "road.arterial" =>
+            {:all =>
+              {:hue => "0x003bff"}
+            },
+          :poi =>
+            {:all =>
+              {:visibility => :simplified}
+            },
+          :landscape =>
+            {:all =>
+              {:hue => "0x003bff"}
+            }
+        }
+      }
+        )) %>
+    <% end %>
+
+
+    <table class="section_details" cellspacing="0" summary="Plaque details for #<%= @plaque.id %>">
+      <tr>
+        <th>Erected by</th>
+        <td><%= erected_information(@plaque) %></td>
+      </tr>
+      <tr>
+        <th>Language</th>
+        <td><%= language_if_known(@plaque) %></td>
+      </tr>
+      <!--tr>
+        <th>Co-ordinates</th>
+        <td><%= geolocation_if_known(@plaque) %></td>
+      </tr-->
+      <tr>
+        <th>Colour</th>
+        <td><%= colour_if_known(@plaque) %></td>
+      </tr>
+      <tr>
+        <th>Location</th>
+        <td><%= location_if_known(@plaque) %></td>
+      </tr>
+    </table>
+
+    <aside>
+      <h2>Contributor details</h2>
+      <ul>
+        <li><p>Inscription added by <a href="#">Simon Harriyott</a></p></li>
+        <li><p>Photographs added by <a href="#">Simon Harriyott</a>, <a href="#">Frankie Roberto</a> &amp; <a href="#">myf</a></p></li>
+        <li><p>Further edits contributed from <a href="#">Jez Nicholson</a></p></li>
+      </ul>
+
+
+    </aside>
+
+  </section>
+
+
+  <div id="plaques_nearby"></div>
+
+
 </div>
 
 
 <div<%= " class=\"" + @plaque.colour.name + "plaque\"" if @plaque.colour %> about="#this" typeof="op:Plaque">
- 
 
- 
-	
+
+
+
 
   <% unless @plaque.description.blank? %>
-	  <div class="info">
-	    <%= link_to "Edit", edit_plaque_description_path(@plaque), {:class => :edit, :title => "Edit plaque description"} if current_user %>
-	      <div class="description" id="description">
-					<%= simple_format(h(@plaque.description)) %>
-	      </div>
-	  </div>
+    <div class="info">
+      <%= link_to "Edit", edit_plaque_description_path(@plaque), {:class => :edit, :title => "Edit plaque description"} if current_user %>
+        <div class="description" id="description">
+          <%= simple_format(h(@plaque.description)) %>
+        </div>
+    </div>
   <% end %>
 
 

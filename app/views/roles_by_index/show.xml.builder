@@ -1,4 +1,4 @@
-xml.instruct! :xml, :version=>"1.0" 
+xml.instruct! :xml, :version=>"1.0"
 xml.openplaques(){
   xml.role_index(:link => roles_by_index_url(params[:id])) {
     xml.roles {

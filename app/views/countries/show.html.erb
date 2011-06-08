@@ -1,32 +1,32 @@
 <% @page_title = @country.name  %>
 
 <div class="panel clearfix">
-	<h1>
+  <h1>
   <%= @country.name %>
   <a href="http://en.wikipedia.org/wiki/<%= @country.name.gsub(" ", "_") %>"><img src="/images/wikipedia-20.png" /></a>
   </h1>
 
-	<%= pluralize @country.plaques.size, "plaque" %>
+  <%= pluralize @country.plaques.size, "plaque" %>
 </div>
 
-	<% if @areas.size > 0 %>
-	
-		<%= content_tag("ol", :class => "results", :id => "people_results") do %>
-			<% @areas.each do |area| %>
-				<%= content_tag("li") do %>
-					<p class="result"><%= link_to area.name, area %></p>
-					<p class="count"><%= pluralize(area.plaques.size.to_s, "plaque") %></p>
-				<% end %>
-			<% end %>
-		<% end %>
+  <% if @areas.size > 0 %>
 
-	<% end %>
-	
+    <%= content_tag("ol", :class => "results", :id => "people_results") do %>
+      <% @areas.each do |area| %>
+        <%= content_tag("li") do %>
+          <p class="result"><%= link_to area.name, area %></p>
+          <p class="count"><%= pluralize(area.plaques.size.to_s, "plaque") %></p>
+        <% end %>
+      <% end %>
+    <% end %>
+
+  <% end %>
+
 </div>
 
 
 <%= content_tag("p", link_to("Add new area", new_country_area_path(@country.alpha2))) if current_user && current_user.is_admin? %>
 
 
-<!--TODO: Turn these off when it doesnt make sense-->  
+<!--TODO: Turn these off when it doesnt make sense-->
 <p>See <%= link_to "unphotographed plaques", country_unphotographed_path(@country) %>.</p>

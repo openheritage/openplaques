@@ -4,17 +4,17 @@
 <% form_for(@language) do |f| %>
   <%= f.error_messages %>
 
-	<p>
-		<%= f.label :name %>
-		<%= f.text_field :name %>
-	</p>
+  <p>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </p>
 
-	<p>
-		<%= f.label :alpha2, "Alpha2 code" %>
-		<%= f.text_field :alpha2 %>
-	</p>
+  <p>
+    <%= f.label :alpha2, "Alpha2 code" %>
+    <%= f.text_field :alpha2 %>
+  </p>
 
-	
+
   <p>
     <%= f.submit "Update" %>
   </p>

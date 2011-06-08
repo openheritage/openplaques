@@ -1,7 +1,7 @@
 module MapsHelper
 
   def google_maps_path(latitude, longitude, options = {})
-    
+
     width = options[:width] || 300
     height = options[:height] || 300
     colour = options[:colour] || "blue"
@@ -16,20 +16,20 @@ module MapsHelper
       value.each_pair do |element, value|
 
         style += "|element:" + element.to_s
-        
+
         rules = []
-        
+
         value.each_pair do |rule, value|
           rules << rule.to_s + ":" + value.to_s
         end
-      
+
         style += "|" + rules.join("|")
       end
-      
+
       params << style
-      
-    end  
-    
+
+    end
+
     url = "http://maps.google.com/maps/api/staticmap?"
     params << "size=" + width.to_s + "x" + height.to_s
     params << "markers=color:" + colour + "|" + latitude.to_s + "," + longitude.to_s
@@ -39,7 +39,7 @@ module MapsHelper
 
 
     url + params.join("&")
-    
+
   end
 
 end

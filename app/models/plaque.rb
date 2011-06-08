@@ -2,7 +2,7 @@
 # This class represents a physical commemorative plaque, which is either currently installed, or
 # was once installed on a building, site or monument. Our definition of plaques is quite wide,
 # encompassing 'traditional' blue plaques that commemorate a historic person's connection to a
-# place, as well as plaques that commemorate buildings, events, and so on. 
+# place, as well as plaques that commemorate buildings, events, and so on.
 #
 # === Attributes
 # * +inscription+ - The text inscription on the plaque.
@@ -25,7 +25,7 @@
 class Plaque < ActiveRecord::Base
 
   validates_presence_of :user
-  
+
 
   belongs_to :location, :counter_cache => true
   belongs_to :colour, :counter_cache => true
@@ -34,9 +34,9 @@ class Plaque < ActiveRecord::Base
   belongs_to :user, :counter_cache => true
   belongs_to :language, :counter_cache => true
   # belongs_to :todo_item
-  
+
   has_one :area, :through => :location
-  
+
 #  has_many :plaque_connections
   has_many :personal_connections #, :through => :plaque_connections
   has_many :photos, :inverse_of => :plaque
@@ -60,38 +60,38 @@ class Plaque < ActiveRecord::Base
 
   accepts_nested_attributes_for :photos, :reject_if => proc { |attributes| attributes['photo_url'].blank? }
   accepts_nested_attributes_for :user, :reject_if => :all_blank
- 
+
   include ApplicationHelper
  # validates_presence_of :latitude, :longtitude
 
   def user_attributes=(user_attributes)
-    
+
     if user_attributes.has_key?("email")
       user = User.find_by_email(user_attributes["email"])
       if user
-        raise "Attempting To Post Plaque As Existing Verified User" and return if user.is_verified?        
+        raise "Attempting To Post Plaque As Existing Verified User" and return if user.is_verified?
         self.user = user
       end
     end
 
     if !self.user
       self.build_user(user_attributes)
-    end  
-    
+    end
+
   end
-    
+
   def to_csv
    [self.id, self.inscription_csv, self.organisation_name, self.erected_at_string, self.language_name, self.colour_name, self.location_name, self.area_name, self.country_name, "\"" + self.coordinates + "\""].join(",")
-  end 
-  
+  end
+
   def inscription_csv
     if self.inscription
       '"' + self.inscription.gsub('"', '""') + '"'
-    else  
+    else
       ""
     end
   end
-  
+
   def coordinates
     if self.geolocated?
       self.latitude.to_s + "," + self.longitude.to_s
@@ -99,7 +99,7 @@ class Plaque < ActiveRecord::Base
       ""
     end
   end
-  
+
   def language_name
     if self.language
       self.language.name
@@ -116,7 +116,7 @@ class Plaque < ActiveRecord::Base
     end
   end
 
-  
+
   def area_name
     if self.location && self.location.area
       self.location.area.name
@@ -124,14 +124,14 @@ class Plaque < ActiveRecord::Base
       ""
     end
   end
-  
+
   def country_name
     if self.location && self.location.area && self.location.area.country
       self.location.area.country.name
     else
       ""
     end
-  end  
+  end
   def organisation_name
     if self.organisation
       self.organisation.name
@@ -139,7 +139,7 @@ class Plaque < ActiveRecord::Base
       ""
     end
   end
-  
+
   def colour_name
     if self.colour
       self.colour.name
@@ -155,19 +155,19 @@ class Plaque < ActiveRecord::Base
       nil
     end
   end
-  
+
   def erected_at_string
     if self.erected_at?
       if self.erected_at.month == 1 && self.erected_at.day == 1
-        self.erected_at.year.to_s 
+        self.erected_at.year.to_s
       else
         self.erected_at.to_s
       end
     else
       nil
-    end  
+    end
   end
-  
+
   def erected_at_string=(date)
     if date.length == 4
         self.erected_at = Date.parse(date + "-01-01")
@@ -175,23 +175,23 @@ class Plaque < ActiveRecord::Base
       self.erected_at = date
     end
   end
-  
+
   def parse_inscription
     inscription = self.inscription
     if inscription
-      
+
       inscription_regex = /\A(.+?),?\s(([a-z]+ed|was born|grew up|taught|wrote\s\'[a-zA-Zü\s]+\')(\sand\s(([a-z]+ed)|was born|grew up|taught|wrote\s\'[a-zA-Zü\s]+\'))?)\s(at\s)?(.+?)(\.?)\Z/
-      
+
       if inscription =~ inscription_regex
 
         subject = inscription[inscription_regex, 1]
         predicates = inscription[inscription_regex, 2]
         object = inscription[inscription_regex, 8]
-      
+
 
 
         subjects = []
-                
+
         subjects_regex =
             %r{
                 (
@@ -204,7 +204,7 @@ class Plaque < ActiveRecord::Base
                   (
                     [A-Z][a-züA-Z]+|                # additional name
                     de\s[A-Z][a-zA-Zü]+|                         # or de
-                    [A-Z]\.)|(                     # or initial  - eg F.          
+                    [A-Z]\.)|(                     # or initial  - eg F.
                     \,\sEarl\sof[A-Z][a-z]+|
                     \salias\s\'[A-Za-z]+\'|   # alias
                     \s\'[A-Z][a-z]+\'|
@@ -218,21 +218,21 @@ class Plaque < ActiveRecord::Base
                   [a-zA-Z\s\,\d\-\'\&]+   # roles
                 )?
               }x
-   
+
 
         subject.gsub(subjects_regex) do |s|
           subjects << s
         end
 
 
-        
+
         subjects.each do |subject|
-        
-        	person = Person.find_or_create_by_name_and_dates_and_roles(subject)    
-        
+
+          person = Person.find_or_create_by_name_and_dates_and_roles(subject)
+
           predicates.split(" and ").each do |predicate|
             verb = Verb.find_or_create_by_name(predicate)
-    
+
             if object =~ /here(\s(in\s)?\d{4}-\d{4})?\.?/
               if self.location
                 location = self.location
@@ -246,31 +246,31 @@ class Plaque < ActiveRecord::Base
                   personal_connection = PersonalConnection.new(:person => person, :verb => verb, :location => location,:plaque => self)
                 end
               else
-                # Can't create connection as 'here' refers to 
+                # Can't create connection as 'here' refers to
                 # an unspecified location.
                 break
               end
             else
               location = Location.find_or_create_by_name(object)
               personal_connection = PersonalConnection.new(:person => person, :verb => verb, :location => location, :plaque => self)
-            end  
-          
+            end
+
             personal_connection.save!
-          
+
           end
         end
       end
-      
-      return self.personal_connections    
+
+      return self.personal_connections
 
     end
-    
+
   end
-    
+
   def geolocated?
     !(self.latitude.nil?)
   end
-    
+
   def photographed?
     self.photos_count > 0
   end
@@ -284,11 +284,11 @@ class Plaque < ActiveRecord::Base
   end
 
   def first_person
-	  if personal_connections.size > 0
-	    personal_connections[0].person.name
-	  else
-	    return nil
-	  end
+    if personal_connections.size > 0
+      personal_connections[0].person.name
+    else
+      return nil
+    end
   end
 
   def people
@@ -300,20 +300,20 @@ class Plaque < ActiveRecord::Base
     end
     return people.uniq
   end
-   
+
   def as_json(options={})
     # this example ignores the user's options
     super(:only => [:id, :inscription, :reference, :latitude, :longitude, :erected_at, :created_at, :updated_at], :include => {:colour => {:only => :name}, :language => {:only => [:name, :alpha2]}, :location => {:only => :name, :include => {:area => {:only => :name, :include => {:country => {:only => [:name, :alpha2]}}}}}, :organisation => {:only => :name}})
-  end   
-   
+  end
+
   private
-  
+
     def use_other_colour_id
       if !self.colour && self.other_colour_id
         self.colour_id = self.other_colour_id
       end
     end
-  
+
     def set_erected_year
       if self.erected_at?
         plaque_erected_year = PlaqueErectedYear.find_or_create_by_name(self.erected_at.year.to_s)

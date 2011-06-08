@@ -18,8 +18,8 @@ xml.page {
               xml.label letter
               xml.tag!("load-page", :event => "activate", :page => "people/a-z/" + letter + ".bp")
           }
-        end      
-      } 
+        end
+      }
     }
   }
 }

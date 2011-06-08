@@ -1,21 +1,21 @@
 <h1>Add a connection for <%= link_to "Plaque #" + @plaque.id.to_s, @plaque %></h1>
 
 <% form_for @personal_connection, :url => personal_connections_path(@plaque) do |f| %>
-	<p><%= f.label :person_id, "Person" %>:
-		<%= f.collection_select :person_id, @people, :id, :name %> <%= link_to("Add person", "/people/new") %>
-    </p>
-	
-	<p><%= f.label :verb_id, "Verb" %>
-		<%= f.collection_select :verb_id, @verbs, :id, :name %>  <%= link_to("Add verb", "/verbs/new") %>
+  <p><%= f.label :person_id, "Person" %>:
+    <%= f.collection_select :person_id, @people, :id, :name %> <%= link_to("Add person", "/people/new") %>
     </p>
 
-	<p><%= f.label :location_id, "Location" %>
-		<% options = {} %>
-		<% options[:selected] = @plaque.location.id if @plaque.location %>
-		<%= f.collection_select :location_id, @locations, :id, :name, options %>
-	</p>
-	
-	<%= f.submit "Update" %>
+  <p><%= f.label :verb_id, "Verb" %>
+    <%= f.collection_select :verb_id, @verbs, :id, :name %>  <%= link_to("Add verb", "/verbs/new") %>
+    </p>
+
+  <p><%= f.label :location_id, "Location" %>
+    <% options = {} %>
+    <% options[:selected] = @plaque.location.id if @plaque.location %>
+    <%= f.collection_select :location_id, @locations, :id, :name, options %>
+  </p>
+
+  <%= f.submit "Update" %>
 
 
 <% end %>

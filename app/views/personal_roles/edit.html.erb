@@ -6,18 +6,18 @@
 <% form_for @personal_role do |f| %>
 <%= f.error_messages %>
 
-	<p>
-		<%= f.label :started_at, "From" %>	
-		<%= f.text_field :started_at %>
-	</p>
+  <p>
+    <%= f.label :started_at, "From" %>
+    <%= f.text_field :started_at %>
+  </p>
 
-	<p>
-		<%= f.label :ended_at, "To" %>	
-		<%= f.text_field :ended_at %>
-	</p>
-	
-	<p><%= f.submit "Save" %></p>
+  <p>
+    <%= f.label :ended_at, "To" %>
+    <%= f.text_field :ended_at %>
+  </p>
 
-	
-	
+  <p><%= f.submit "Save" %></p>
+
+
+
 <% end %>

@@ -14,10 +14,10 @@ xml.page {
     xml.module {
       xml.placard(:layout => "simple") {
         xml.tag!("layout-items") {
-          xml.block @plaque.inscription          
+          xml.block @plaque.inscription
         }
       }
-      if @plaque.geolocated? 
+      if @plaque.geolocated?
         xml.map {
           xml.center {
             xml.latitude (@plaque.latitude.to_f + 0.0001).to_s
@@ -43,7 +43,7 @@ xml.page {
       end
 
     }
-    
+
     xml.module {
       xml.header(:layout => "simple") {
         xml.tag!("layout-items") {
@@ -88,6 +88,6 @@ xml.page {
         }
       end
     }
-    
+
   }
 }

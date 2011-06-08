@@ -1,10 +1,10 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
-  
+
   def fieldset(options = {}, &block)
-    content_tag("fieldset", options, &block)    
+    content_tag("fieldset", options, &block)
   end
-  
+
   def csv_escape(string)
     unless string.blank?
       '"' + string.gsub(/[\r\n]/, " ").gsub(/\s\s+/, " ").strip + '"'
@@ -16,22 +16,22 @@ module ApplicationHelper
   def block_tag(tag, options = {}, &block)
     concat(content_tag(tag, capture(&block), options), block.binding)
   end
-  
+
   def google_analytics_code(code)
-    
+
     var = "var _gaq = _gaq || [];
     _gaq.push(['_setAccount', 'UA-8901261-1']);
     _gaq.push(['_setDomainName', '.openplaques.org']);
     _gaq.push(['_trackPageview']);
     "
     var += "_gaq.push(['_setVar', 'admin']);\n" if authorized?
-    
+
     function = "(function() {
       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
       ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();"
-    
+
     return javascript_tag(var + function)
   end
 
@@ -39,7 +39,7 @@ module ApplicationHelper
   def html_safe(phrase)
     return h(phrase).gsub(/'/,'&#39;').gsub(/\r\n/,"<br/>")
   end
-  
+
   def unknown(text = "unknown")
     content_tag("span", text, :class => :unknown)
   end
@@ -87,27 +87,27 @@ module ApplicationHelper
   # Generates a link to Open Street Map using latitude ang longitude.
   def link_to_osm(content, latitude, longitude, marker = true)
    link_to(content, "http://www.openstreetmap.org/?lat=" + latitude.to_s + "&amp;lon=" + longitude.to_s + "&amp;zoom=17&amp;mlat=" + latitude.to_s + "&amp;mlon=" + longitude.to_s)
-  end 
+  end
 
-  # Generates a link to Google Maps using latitude ang longitude.  
+  # Generates a link to Google Maps using latitude ang longitude.
   def link_to_google_map(content, latitude, longitude)
    link_to(content, "http://maps.google.co.uk?q=" + latitude.to_s + "," + longitude.to_s)
-  end 
+  end
 
-  # Generates a link to Google Street View using latitude ang longitude.    
+  # Generates a link to Google Street View using latitude ang longitude.
   def link_to_google_streetview(content, latitude, longitude)
    link_to(content, "http://maps.google.co.uk/?q=" + latitude.to_s + "," + longitude.to_s + "&layer=c&cbll=" + latitude.to_s + "," + longitude.to_s + "&cbp=12,0,,0,5")
-  end 
+  end
 
-  # Generates a link to Google Earth using id for kml.  
+  # Generates a link to Google Earth using id for kml.
   def link_to_google_earth(content, id)
    link_to(content, "http://maps.google.co.uk?t=f&q=http://openplaques.org/plaques/" + id.to_s + ".kml")
-  end 
+  end
 
-  
+
   def osm_iframe(latitude, longitude, bboffset = 0.001, height = 200, width = 300, marker = true)
     bb = (longitude - bboffset).to_s + "," + (latitude - bboffset).to_s + "," + (longitude + bboffset).to_s + "," + (latitude + bboffset).to_s
-    
+
     osm_embed_src = "http://www.openstreetmap.org/export/embed.html?bbox=" + bb + "&amp;marker=" + latitude.to_s + "," + longitude.to_s + "&amp;layer=mapnik"
     return content_tag("iframe","",{:height => height, :width => width, :scrolling => "no", :frameborder => "no", :marginheight => "0", :marginwidth => "0", :src => osm_embed_src, :class => "osm"})
   end
@@ -123,18 +123,18 @@ module ApplicationHelper
 
   def geo_map_icon_link(plaque)
     if !plaque.geolocated?
-	  return "";
+    return "";
     end
-	@alt = plaque.latitude.to_s + ", " + plaque.longitude.to_s
-	@image = image_tag("/images/map_icon.png", {:alt => @alt})
-	link_to_osm(@image, plaque.latitude, plaque.longitude )
+  @alt = plaque.latitude.to_s + ", " + plaque.longitude.to_s
+  @image = image_tag("/images/map_icon.png", {:alt => @alt})
+  link_to_osm(@image, plaque.latitude, plaque.longitude )
   end
 
   def user_menu
     if user_signed_in?
-      content_tag("p", ("You are logged in as ".html_safe + 
+      content_tag("p", ("You are logged in as ".html_safe +
         current_user.email +
-#        link_to(current_user.email, edit_user_registration_path) + 
+#        link_to(current_user.email, edit_user_registration_path) +
         ". " +
         link_to("logout", destroy_user_session_path)
       ), {:class => "user_info"})
@@ -150,12 +150,12 @@ module ApplicationHelper
   def circa_tag
     return content_tag("abbr", "c", {:title => "circa"})
   end
-  
+
   # Produces a link wrapped in a list item element (<li>).
-  def list_link_to(link_text, options = {}, html_options = {})  
+  def list_link_to(link_text, options = {}, html_options = {})
     content_tag("li", link_to(link_text, options, html_options))
   end
-  
+
   def linked_personal_connections(personal_connections)
     locations = []
     personal_connections.each do |personal_connection|
@@ -174,13 +174,13 @@ module ApplicationHelper
     end
     return ret
   end
-  
+
   def linked_personal_connection(personal_connection)
     s = dated_roled_person(personal_connection.person) + " " + link_to(personal_connection.verb.name, personal_connection.verb) + " at " + link_to(personal_connection.place.name, personal_connection.place)
     s += " from "+ personal_connection.started_at.year.to_s + " to " + personal_connection.ended_at.year.to_s if personal_connection.started_at && personal_connection.ended_at
     return s + "."
   end
-  
+
   def new_linked_inscription(plaque)
     inscription = plaque.inscription
     connections = plaque.personal_connections.all(:select => "personal_connections.person_id", :group => "personal_connections.person_id")
@@ -196,9 +196,9 @@ module ApplicationHelper
     end
     return inscription
   end
-  
+
   # Returns 'a' or 'an' depending on whether the word starts with a vowel or not
-  # 
+  #
   # ==== Parameters
   # <tt>name</tt> - the word
   # <tt>include_name - whether to include the name in the string output or not.
@@ -214,7 +214,7 @@ module ApplicationHelper
       article
     end
   end
-  
+
   # Returns "hasn't" or "haven't" depending on whether a number is more than 1.
   def havent_or_hasnt(number)
     if number == 1
@@ -223,7 +223,7 @@ module ApplicationHelper
       "haven't"
     end
   end
-  
+
   def pluralize_is_or_are(number, name)
     if number > 1
       word = "are"
@@ -238,7 +238,7 @@ module ApplicationHelper
   # The main difference is that the link is replaced by a <span> tag when
   # the link would otherwise lead to the page you're already on. This can be used
   # for styling in CSS.
-  def navigation_link_to(name, options = {}, html_options = {})      
+  def navigation_link_to(name, options = {}, html_options = {})
     if current_page?(options)
       content_tag("span", name)
     else
@@ -254,7 +254,7 @@ module ApplicationHelper
   def navigation_list_link_to(name, options = {}, html_options = {})
     content_tag("li", navigation_link_to(name, options, html_options))
   end
-  
+
   def pluralize_with_no(number, name)
     if number == 0
       "no " + name
@@ -286,11 +286,11 @@ module ApplicationHelper
 #    puts ("****** lat= " + @centre.latitude.to_s + ",lon= " + @centre.longitude.to_s + " from " + plaques.length.to_s + " plaques, " + @geolocated_plaques.length.to_s + " are geolocated")
     return @centre
   end
-      
+
   class Point
     attr_accessor :precision
     attr_accessor :latitude
     attr_accessor :longitude
-  end      
-      
+  end
+
 end

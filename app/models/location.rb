@@ -1,4 +1,4 @@
-# This class represents a physical location at which a plaques is located. This is commonly a 
+# This class represents a physical location at which a plaques is located. This is commonly a
 # single property, building, monument or other landmark. Not that Locations do NOT map directly
 # to a geographical co-ordinate - instead it is better to think of them as 'addresses' or very
 # small areas.
@@ -26,13 +26,13 @@ class Location < ActiveRecord::Base
   scope :no_area, :conditions => ["area_id IS NULL"]
 
   before_validation :update_country_id
-  
+
   private
-  
+
   def update_country_id
     if self.area && self.area.country_id
       self.country_id = self.area.country_id
     end
   end
-  
+
 end

@@ -1,19 +1,19 @@
 class PeopleController < ApplicationController
-  
+
   layout "v1"
-  
-  before_filter :authenticate_admin!, :only => :destroy  
+
+  before_filter :authenticate_admin!, :only => :destroy
   before_filter :authenticate_user!, :except => [:index, :show]
-  
+
   before_filter :find_person, :only => [:show, :edit, :update, :destroy]
-  
+
   def index
     @people = Person.find(:all)
     respond_to do |format|
       format.html { redirect_to(:controller => :people_by_index, :action => "show", :id => "a") }
       format.kml {
         @parent = @people
-        render "colours/index" 
+        render "colours/index"
       }
       format.yaml
       format.xml { render :xml => @people }
@@ -75,7 +75,7 @@ class PeopleController < ApplicationController
         flash[:notice] = 'Person was successfully created.'
         format.html { redirect_to(@person) }
         format.xml  { render :xml => @person, :status => :created, :location => @person }
-      else        
+      else
         format.html { render "new" }
         format.xml  { render :xml => @person.errors, :status => :unprocessable_entity }
       end
@@ -119,11 +119,11 @@ class PeopleController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  
+
   protected
-  
+
     def find_person
-      @person = Person.find(params[:id])      
+      @person = Person.find(params[:id])
     end
-  
+
 end

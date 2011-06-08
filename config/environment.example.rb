@@ -34,7 +34,7 @@ Rails::Initializer.run do |config|
 
   # Your secret key for verifying cookie session data integrity.
   # If you change this key, all old sessions will become invalid!
-  # Make sure the secret is at least 30 characters and all random, 
+  # Make sure the secret is at least 30 characters and all random,
   # no regular words or you'll be exposed to dictionary attacks.
   config.action_controller.session = {
     :session_key => '_plaques_session',
@@ -44,7 +44,7 @@ Rails::Initializer.run do |config|
   # Site constants
   SITE_NAME = "Open Plaques"
   SITE_STATUS = "Alpha"
-  
+
   # Flickr API key. Get yours here: http://www.flickr.com/services/api/keys/
   # FLICKR_KEY = ""
   # FLICKR_SECRET = ""
@@ -52,10 +52,10 @@ Rails::Initializer.run do |config|
   # Yahoo Geocoding API key - used for geolocation controller
   # http://developer.yahoo.com/maps/rest/V1/geocode.html
   # YAHOO_GEOCODING_KEY = ""
-  
+
   # Google Analytics ID (eg UA-353436-1).
   # GOOGLE_ANALYTICS_ID = ""
   config.active_record.observers = :plaque_observer
-  
-  
+
+
 end

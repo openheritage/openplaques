@@ -3,7 +3,7 @@ xml.page {
     xml.tag!("model") {
       xml.instance(:id => "loc-info") {
         xml.tag!("location-chooser", :xmlns => "") {
-        xml.search_location          
+        xml.search_location
         }
       }
       xml.submission(:method => "post")
@@ -23,7 +23,7 @@ xml.page {
           }
           xml.tag!("map-zoom", "2")
           xml.tag!("map-mode", "map")
-          for plaque in @plaques 
+          for plaque in @plaques
             xml.tag!("map-point") {
               xml.location {
                 xml.latitude plaque.latitude
@@ -34,23 +34,23 @@ xml.page {
                   xml.block truncate(plaque.inscription, 40)
                 }
                 xml.tag!("load-page", :event => "activate", :page => "plaques/" + plaque.id.to_s + ".bp")
-                
+
               }
-            }            
+            }
           end
         }
-        
+
       }
     end
-    
-    
+
+
     xml.module {
       xml.block "This is the mobile version of Open Plaques, a website about the historical blue plaques that commemorate historic people and events..."
-      
+
       xml.tag!("location-chooser", :ref => "search_location") {
         xml.label "Set your location below"
       }
-      
+
       xml.tag!("link-set", :appearance => "tab") {
         xml.tag!("inline-trigger") {
           xml.label "By person"

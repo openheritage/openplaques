@@ -46,7 +46,7 @@ Openplaques::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
-  
+
   # Disable delivery errors, bad email addresses will be ignored
   config.action_mailer.raise_delivery_errors = true
 

@@ -12,14 +12,14 @@ class Verb < ActiveRecord::Base
 
   validates_presence_of :name
   validates_uniqueness_of :name
-  
+
   has_many :personal_connections
   has_many :plaques, :through => :personal_connections
   has_many :people, :through => :personal_connections
   has_many :locations, :through => :personal_connections
-  
+
   def find_or_create_by_past_tense_name(verb)
-    
+
   end
-  
+
 end

@@ -1,7 +1,7 @@
 module LanguagesHelper
 
   def language_path(language, options = {})
-    url_for(options.merge(:controller => :languages, :action => :show, :id => language.alpha2))    
+    url_for(options.merge(:controller => :languages, :action => :show, :id => language.alpha2))
   end
 
   def language_if_known(plaque, text = "unknown")
@@ -11,5 +11,5 @@ module LanguagesHelper
       unknown(text)
     end
   end
-  
+
 end

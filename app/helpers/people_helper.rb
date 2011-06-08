@@ -1,16 +1,16 @@
 # -*- encoding : utf-8 -*-
 module PeopleHelper
-  
+
   def roles_list(person)
     if person.roles.size > 0
       list = []
-    	person.personal_roles.each do |personal_role|
-    		list <<  dated_role(personal_role)
-    	end
+      person.personal_roles.each do |personal_role|
+        list <<  dated_role(personal_role)
+      end
       content_tag("p", list.to_sentence.html_safe, {:class => "roles"})
     end
   end
-  
+
   def dated_role(personal_role)
     r = link_to(personal_role.role.name, role_path(personal_role.role), :class => "role")
     if personal_role.started_at? && personal_role.ended_at?
@@ -21,8 +21,8 @@ module PeopleHelper
       r += " (until " + personal_role.ended_at.year.to_s + ")"
     end
     return r
-  end  
-  
+  end
+
   def dates(person)
     dates = ""
     if person.born_on
@@ -30,7 +30,7 @@ module PeopleHelper
       if person.born_on_is_circa
         dates += circa_tag
       end
-      dates += person.born_on.year.to_s + "-" 
+      dates += person.born_on.year.to_s + "-"
       if person.died_on
         dates += person.died_on.year.to_s
       else
@@ -39,7 +39,7 @@ module PeopleHelper
       dates += ")"
     end
   end
-  
+
   def wikipedia_url(person)
     if person.wikipedia_url && person.wikipedia_url > ""
       return person.wikipedia_url
@@ -47,7 +47,7 @@ module PeopleHelper
     untitled_name = person.name.gsub("Canon ","").gsub("Captain ","").gsub("Cardinal ","").gsub("Dame ","").gsub("Dr ","").gsub("Lord ","").gsub("Sir ","").strip.gsub(/ /,"_")
     return "http://en.wikipedia.org/wiki/"+untitled_name
   end
-  
+
   def dbpedia_url(person)
     unless person.dbpedia_url.empty?
       dbpedia_url
@@ -55,7 +55,7 @@ module PeopleHelper
       wikipedia_url(person).gsub(/[a-zA-Z]{0,2}\.wikipedia\.org\/wiki\//, "dbpedia.org/resource/")
     end
   end
-  
+
   def wikipedia_summary_p(person)
     if person.wikipedia_paras && person.wikipedia_paras > ""
       return wikipedia_summary_each(wikipedia_url(person), person.wikipedia_paras)
@@ -89,13 +89,13 @@ module PeopleHelper
     rescue Exception
     return nil
   end
-  
+
   def age(birth_date)
     age = Date.today.year - birth_date.year
     age -= 1 if Date.today < birth_date + age.years #for days before birthday
     return age
   end
-  
+
   def dated_roled_person(person)
     if person
       roles = Array.new
@@ -112,7 +112,7 @@ module PeopleHelper
       return "XXXX"
     end
   end
-  
+
     def dated_person(person, options = {})
   #    options.stringify_keys!
       if (person.born_on? and person.died_on?)
@@ -123,14 +123,14 @@ module PeopleHelper
         dates = " (died " + linked_death_date(person) + ")"
       else
         dates =""
-      end    
+      end
       if options[:links] == :none
         return content_tag("span", person.name, {:class => "fn", :property => "rdfs:label foaf:name vcard:fn"}) + dates.html_safe
       else
         return link_to(person.name, person, {:class => "fn url", :property => "rdfs:label foaf:name vcard:fn", :rel => "foaf:homepage vcard:url"}) + dates.html_safe
       end
     end
-    
+
     def linked_death_date(person)
       birth_date = ""
       if person.died_on
@@ -140,7 +140,7 @@ module PeopleHelper
         birth_date += link_to(person.died_on.year.to_s, people_died_on_path(person.died_on.year.to_s), {:about => "/people/#{person.id}#person", :property => "dbpprop:dateOfDeath", :datatype => "xsd:date", :content => person.died_on.year.to_s})
       end
     end
-    
+
     def linked_birth_date(person)
       birth_date = ""
       if person.born_on
@@ -149,6 +149,6 @@ module PeopleHelper
         end
         birth_date += link_to(person.born_on.year.to_s, people_born_on_path(person.born_on.year.to_s), {:class => "bday", :about => "/people/#{person.id}#person", :property => "dbpprop:dateOfBirth vcard:bday", :datatype => "xsd:date", :content => person.born_on.year.to_s})
       end
-    end          
-    
+    end
+
 end

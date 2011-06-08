@@ -2,6 +2,6 @@
 
 <ul>
 <% @plaque_erected_year.plaques.each do |plaque| %>
-	<li><%= link_to "#" + plaque.id.to_s, plaque %>: <%= linked_inscription(plaque)%></li>
+  <li><%= link_to "#" + plaque.id.to_s, plaque %>: <%= linked_inscription(plaque)%></li>
 <% end %>
 </ul>

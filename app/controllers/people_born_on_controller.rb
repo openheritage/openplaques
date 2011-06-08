@@ -5,7 +5,7 @@ class PeopleBornOnController < ApplicationController
   end
 
   def show
-    @year = Date.parse(params[:id] + "-01-01") 
+    @year = Date.parse(params[:id] + "-01-01")
     @people = Person.find(:all, :conditions => {:born_on => @year}, :order => :died_on)
     respond_to do |format|
       format.html

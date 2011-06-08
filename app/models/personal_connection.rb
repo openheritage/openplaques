@@ -14,11 +14,11 @@ class PersonalConnection < ActiveRecord::Base
   belongs_to :person, :counter_cache => true
   belongs_to :location, :counter_cache => true
   belongs_to :plaque
-  
+
   def from
     started_at ? started_at.year.to_s : ""
   end
-  
+
   def to
     ended_at ? ended_at.year.to_s : ""
   end

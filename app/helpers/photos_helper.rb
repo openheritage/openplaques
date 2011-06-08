@@ -1,5 +1,5 @@
 module PhotosHelper
-  
+
   def photo_img(plaque)
     desc = ""
     if plaque.photos.size > 0

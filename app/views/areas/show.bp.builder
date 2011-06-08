@@ -9,7 +9,7 @@ xml.page {
       }
     }
     xml.tag!("page-title", @area.name)
-  }  
+  }
   xml.content {
     xml.module {
       xml.header(:layout => "simple") {

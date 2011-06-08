@@ -2,48 +2,48 @@
 <h1><%= "All" if @plaques.size > 1 %> <%= pluralize(@plaques.size, "Plaque")%></h1>
 
 <% if @plaques.size > 0 %>
-    
-	<%= content_tag("table", {:class => "plaques"}) do %>
 
-		<%= content_tag("tr") do %>
-			<%= content_tag("th", "\#", {:rowspan => "2", :class => "id"}) %>
-			<%= content_tag("th", "Inscription", {:rowspan => "2"}) %>
-			<%= content_tag("th", "Location", {:rowspan => "2"}) %>
-			<%= content_tag("th", "Colour", {:rowspan => "2"}) %>
-			<%= content_tag("th", "Erected", {:colspan => "2"}) %>
+  <%= content_tag("table", {:class => "plaques"}) do %>
 
-		<% end %>
+    <%= content_tag("tr") do %>
+      <%= content_tag("th", "\#", {:rowspan => "2", :class => "id"}) %>
+      <%= content_tag("th", "Inscription", {:rowspan => "2"}) %>
+      <%= content_tag("th", "Location", {:rowspan => "2"}) %>
+      <%= content_tag("th", "Colour", {:rowspan => "2"}) %>
+      <%= content_tag("th", "Erected", {:colspan => "2"}) %>
 
-		<%= content_tag("tr") do %>
-			<%= content_tag("th", "In") %>
-			<%= content_tag("th", "By") %>
-		<% end %>
-	
-		<% for plaque in @plaques %>
-			<%= content_tag("tr") do %>
-			<%= content_tag("td") do %>
-				<%= link_to(plaque.id, plaque) %>
-			<% end %>
+    <% end %>
 
-				<%= content_tag("td") do %>
-					<%= plaque.inscription %>
-				<% end %>
-				<%= content_tag("td") do %>
-					<%= location_if_known(plaque) %>
-				<% end %>
-				<%= content_tag("td", :class => :colour) do %>
-					<%= colour_if_known(plaque, "?") %>
-				<% end %>
-				<%= content_tag("td") do %>
-					<%= link_to(plaque.erected_at.year.to_s, plaque_erected_year_path(plaque.erected_at.year.to_s)) if plaque.erected_at? %>
-				<% end %>
-				
-				<%= content_tag("td") do %>
-					<%= link_to(h(plaque.organisation.name).gsub(" ", "&\#160"), plaque.organisation) if plaque.organisation %>
-				<% end %>
-			<% end %>
-		<% end %>
-	<% end %>
+    <%= content_tag("tr") do %>
+      <%= content_tag("th", "In") %>
+      <%= content_tag("th", "By") %>
+    <% end %>
+
+    <% for plaque in @plaques %>
+      <%= content_tag("tr") do %>
+      <%= content_tag("td") do %>
+        <%= link_to(plaque.id, plaque) %>
+      <% end %>
+
+        <%= content_tag("td") do %>
+          <%= plaque.inscription %>
+        <% end %>
+        <%= content_tag("td") do %>
+          <%= location_if_known(plaque) %>
+        <% end %>
+        <%= content_tag("td", :class => :colour) do %>
+          <%= colour_if_known(plaque, "?") %>
+        <% end %>
+        <%= content_tag("td") do %>
+          <%= link_to(plaque.erected_at.year.to_s, plaque_erected_year_path(plaque.erected_at.year.to_s)) if plaque.erected_at? %>
+        <% end %>
+
+        <%= content_tag("td") do %>
+          <%= link_to(h(plaque.organisation.name).gsub(" ", "&\#160"), plaque.organisation) if plaque.organisation %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
 <% else %>
-	<%= content_tag("p", "No plaques yet.")%>
+  <%= content_tag("p", "No plaques yet.")%>
 <% end %>

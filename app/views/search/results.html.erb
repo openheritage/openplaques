@@ -1,28 +1,28 @@
 <% @page_title = "Search results for '" + @phrase + "'"  %>
 
 <div class="panel clearfix">
-	<h1>Search results for &quot;<%= @phrase %>&quot;</h1>
+  <h1>Search results for &quot;<%= @phrase %>&quot;</h1>
 </div>
 
 <% if !@search_results.empty? %>
-	<ol id="search_results" class="results">
-		<% @search_results.each do |result| %> 
-		<li>
-			<p class="result">
-				<%= link_to(marked_text(title(result), @phrase), result, :class => :title) %>
-				<%= link_to(result.location.area.name, result.location.area, :class => :location) if result.location && result.location.area %>
-			</p>
-			<p class="snippet"><%= marked_text(search_snippet(result.inscription, @phrase), @phrase) %></p>
-		</li>
-		<% end %>
-	</ol>
+  <ol id="search_results" class="results">
+    <% @search_results.each do |result| %>
+    <li>
+      <p class="result">
+        <%= link_to(marked_text(title(result), @phrase), result, :class => :title) %>
+        <%= link_to(result.location.area.name, result.location.area, :class => :location) if result.location && result.location.area %>
+      </p>
+      <p class="snippet"><%= marked_text(search_snippet(result.inscription, @phrase), @phrase) %></p>
+    </li>
+    <% end %>
+  </ol>
 <% end %>
 
 
 <% if params[:from] && params[:from] == "submission" %>
 
-	<p>Plaque not listed? <%= link_to "Add it", new_plaque_path(:checked => true) %>.</p>
+  <p>Plaque not listed? <%= link_to "Add it", new_plaque_path(:checked => true) %>.</p>
 
 <% else %>
-	<%= render :partial => "search_form", :locals => { :phrase => @phrase } %>
+  <%= render :partial => "search_form", :locals => { :phrase => @phrase } %>
 <% end %>

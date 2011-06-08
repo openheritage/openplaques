@@ -6,7 +6,7 @@ module LocationsHelper
     else
       unknown()
     end
-  end  
+  end
 
   def address(location)
     if location.area
@@ -16,5 +16,5 @@ module LocationsHelper
     end
   end
 
-  
+
 end

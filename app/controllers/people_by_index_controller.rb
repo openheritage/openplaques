@@ -7,7 +7,7 @@ class PeopleByIndexController < ApplicationController
 
   def show
     @index = params[:id]
-    
+
     if @index =~ /^[A-Z]$/
       redirect_to people_by_index_path(@index.downcase), :status => :moved_permanently
     elsif @index =~ /^[a-z]$/
@@ -16,6 +16,6 @@ class PeopleByIndexController < ApplicationController
     else
       raise ActiveRecord::RecordNotFound
     end
-  end   
+  end
 
 end

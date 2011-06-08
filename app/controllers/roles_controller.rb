@@ -13,7 +13,7 @@ class RolesController < ApplicationController
       @roles = Role.find(:all, :order => :name)
       format.kml {
         @parent = @roles
-        render "colours/index" 
+        render "colours/index"
       }
       format.yaml
       format.xml { render :xml => @roles }
@@ -28,20 +28,20 @@ class RolesController < ApplicationController
       @role = Role.new
       @role.name = params[:id].downcase
     end
-    
+
     @related_roles = @role.related_roles()
-    
+
     for person in @role.people
       if person # a role record may exist that no longer has a person joined to it
         if (@plaques == nil)
-          @plaques = person.plaques          
+          @plaques = person.plaques
         else
           @plaques = @plaques + person.plaques
         end
       end
     end
     #@centre = find_mean(@plaques)
-    @zoom = 7  
+    @zoom = 7
     respond_to do |format|
       format.html
       format.kml { render "plaques/show" }
@@ -104,11 +104,11 @@ class RolesController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  
+
   protected
-  
+
     def find_role
       @role = Role.find_by_slug!(params[:id])
     end
-  
+
 end

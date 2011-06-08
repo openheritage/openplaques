@@ -4,37 +4,37 @@ require 'uri'
 require 'rexml/document'
 
 module PlaquesHelper
-  
+
   def marked_text(text, term)
     text.gsub(/(#{term})/i, '<mark>\1</mark>').html_safe
   end
-  
+
   def search_snippet(text, search_term)
     regex = /#{search_term}/i
     if text =~ regex
-      text = " " + text + " "  #HACK: This is so there's a space before the first word. 
-		  indexes = []
-		  first_index = text.index(regex)
-		  indexes << first_index
-		  second_index = text.index(regex, (first_index + search_term.length + 50))
-			indexes << second_index if second_index
-			snippet = ""
-			indexes.each do |i|
-			  i = i - 80
-			  i = 0 if i < 0
-			  s = text[i, 160]
-  			first_space = (s.index(/\s/) + 1)
-  			last_space = (s.rindex(/\s/) - 1)
-  			snippet += "..." if i > 0
-        snippet += (s[first_space..last_space])      
+      text = " " + text + " "  #HACK: This is so there's a space before the first word.
+      indexes = []
+      first_index = text.index(regex)
+      indexes << first_index
+      second_index = text.index(regex, (first_index + search_term.length + 50))
+      indexes << second_index if second_index
+      snippet = ""
+      indexes.each do |i|
+        i = i - 80
+        i = 0 if i < 0
+        s = text[i, 160]
+        first_space = (s.index(/\s/) + 1)
+        last_space = (s.rindex(/\s/) - 1)
+        snippet += "..." if i > 0
+        snippet += (s[first_space..last_space])
         snippet += "..." if last_space + 2 < text.length
-			end
+      end
       snippet
-		else
-		  return text
-		end
+    else
+      return text
+    end
   end
-  
+
   def title(plaque)
     if plaque.people.size > 4
       people = []
@@ -49,7 +49,7 @@ module PlaquesHelper
       return "Plaque #" + plaque.id.to_s
     end
   end
-  
+
   def kml(plaque, xml)
     if plaque.geolocated?
       xml.Placemark do
@@ -66,15 +66,15 @@ module PlaquesHelper
           xml.styleUrl "#plaque-" + plaque.colour.name
         else
           xml.styleUrl "#plaque-blue"
-        end 
+        end
       end
     end
   end
-  
+
   def machine_tag(plaque)
     return "openplaques:id=" + plaque.id.to_s
   end
-  
+
   # pass null to search all machinetagged photos on Flickr
   def find_photo_by_machinetag(plaque)
     key = FLICKR_KEY # "86c115028094a06ed5cd19cfe72e8f8b"
@@ -82,36 +82,36 @@ module PlaquesHelper
     machine_tag_key = "openplaques:id=".to_s
     if (plaque)
       machine_tag_key += plaque.id.to_s
-    end 
-  
+    end
+
     flickr_url = "http://api.flickr.com/services/rest/"
-    method = "flickr.photos.search"  
-    license = "1,2,3,4,5,6,7" # All the CC licencses that allow commercial re-use  
-  
+    method = "flickr.photos.search"
+    license = "1,2,3,4,5,6,7" # All the CC licencses that allow commercial re-use
+
     url = flickr_url + "?api_key=" + key + "&method=" + method + "&license=" + license + "&content_type=" + content_type + "&machine_tags=" + machine_tag_key +  "&extras=date_taken,owner_name,license,geo,machine_tags"
-  
+
     puts url
-    
+
     new_photos_count = 0
     response = open(url)
     doc = REXML::Document.new(response.read)
     doc.elements.each('//rsp/photos/photo') do |photo|
       print "."
       $stdout.flush
-    
+
       @photo = nil
 
       file_url = "http://farm" + photo.attributes["farm"] + ".static.flickr.com/" + photo.attributes["server"] + "/" + photo.attributes["id"] + "_" + photo.attributes["secret"] + "_m.jpg"
       photo_url = "http://www.flickr.com/photos/" + photo.attributes["owner"] + "/" + photo.attributes["id"] + "/"
 
       @photo = Photo.find_by_url(photo_url)
-    
+
       if @photo
       else
         plaque_id = photo.attributes["machine_tags"][/openplaques\:id\=(\d+)/, 1]
-        
+
         puts photo.attributes["title"]
-        
+
         @plaque = Plaque.find(:first, :conditions => {:id => plaque_id})
         if @plaque
           @photo = Photo.new
@@ -155,14 +155,14 @@ module PlaquesHelper
             else
               puts "Error adding geolocation to photo" + plaque.errors.full_messages.to_s #methods.join(" ")
             end
-          end   
+          end
         else
-          puts "Photo's machine tag doesn't match a plaque."  
+          puts "Photo's machine tag doesn't match a plaque."
         end
       end
     end
   end
- 
+
   def yaml(plaques)
 #    plaques.to_yaml
     s = ""
@@ -194,7 +194,7 @@ module PlaquesHelper
     plaque.longitude.to_s + ', ' + plaque.latitude.to_s + ", \"" + plaque.people.collect(&:name).to_sentence + "\"" + "\r\n"
     end
   end
-  
+
   def personal_connection_path(pc)
     url_for(:controller => "PersonalConnections", :action => :show, :id => pc.id, :plaque_id => pc.plaque_id)
   end
@@ -237,13 +237,13 @@ module PlaquesHelper
       if plaque.colour
         args = args.merge(:class => plaque.colour.name.downcase)
       end
-      
-      @listy << content_tag("tr", 
-		content_tag("td", link_to("#" + plaque.id.to_s, plaque_path(plaque)), :class => :photo)  +
-		content_tag("td", @loc, :class => "geo") +
-		content_tag("td", camera_icon, :class => :photo) + 
-		content_tag("td", new_linked_inscription(plaque)),
-	        args.merge!(:id => "openplaques:id:".html_safe + plaque.id.to_s))
+
+      @listy << content_tag("tr",
+    content_tag("td", link_to("#" + plaque.id.to_s, plaque_path(plaque)), :class => :photo)  +
+    content_tag("td", @loc, :class => "geo") +
+    content_tag("td", camera_icon, :class => :photo) +
+    content_tag("td", new_linked_inscription(plaque)),
+          args.merge!(:id => "openplaques:id:".html_safe + plaque.id.to_s))
     end
     @ul = content_tag("table", @listy, :class => :plaque_list)
     out = "".html_safe
@@ -254,14 +254,14 @@ module PlaquesHelper
     else
       out << content_tag("p", "No plaques yet.".html_safe + @create.html_safe)
     end
-    
+
   end
 
   def erected_information(plaque)
     if plaque.erected_at? or plaque.organisation
       info = link_to(h(plaque.organisation.name), plaque.organisation) if plaque.organisation
       if plaque.erected_at?
-        info += " ".html_safe 
+        info += " ".html_safe
         if plaque.erected_at.day == 1 && plaque.erected_at.month == 1
           info += "in ".html_safe
         else
@@ -275,7 +275,7 @@ module PlaquesHelper
       return content_tag("p", "Erected by: ".html_safe + content_tag("span", "unknown".html_safe, :class => :unknown) + ".")
     end
   end
-  
+
     def linked_inscription(plaque)
       if plaque.personal_connections.size > 0
         s = []
@@ -330,6 +330,6 @@ module PlaquesHelper
       else
         return plaque.inscription
       end
-    end  
-  
+    end
+
 end
