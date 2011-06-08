@@ -1,7 +1,7 @@
 class PhotosController < ApplicationController
 
   before_filter :authenticate_admin!, :only => :destroy
-  before_filter :authorisation_required, :except => [:index, :show]
+  before_filter :authenticate_user!, :except => [:index, :show]
 
   before_filter :find_photo, :only => [:destroy, :edit, :show, :update]
 
@@ -34,6 +34,7 @@ class PhotosController < ApplicationController
     if @photo.save
       redirect_to photo_path(@photo)
     else
+      @licences = Licence.all(:order => :name)
       render :new
     end
   end

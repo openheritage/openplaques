@@ -1,7 +1,7 @@
 <% @page_title = "New photo" %>
 <h1><%= @page_title %></h1>
 
-<% form_for @photo do |f| %>
+<%= form_for @photo do |f| %>
   <p><%= f.label :photographer %> <%= f.text_field :photographer %></p>
   <p><%= f.label :photographer_url %> <%= f.text_field :photographer_url %></p>
   <p><%= f.label :url %> <%= f.text_field :url %></p>
