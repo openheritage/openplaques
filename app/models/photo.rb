@@ -13,6 +13,7 @@ class Photo < ActiveRecord::Base
 
   belongs_to :plaque, :counter_cache => true
   belongs_to :licence, :counter_cache => true
+  belongs_to :user
 
   validates_presence_of :file_url, :plaque, :licence
 

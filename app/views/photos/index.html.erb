@@ -10,9 +10,9 @@ it on your Flickr map, give it one of the forms of Creative Commons licence, tag
 add it to <a href="http://www.flickr.com/groups/openplaques/">our Flickr group</a>.</p>
 <p><%= pluralize(@photos.size,"photo") %> taken by <%=@photographer_count %> <%= link_to "photographers", photographers_path %></p>
 
-<% content_tag("ul", :class => "photographer_photos") do %>
+<%= content_tag("ul", :class => "photographer_photos") do %>
   <% @photos.each do |photo| %>
-    <% content_tag("li") do %>
+    <%= content_tag("li") do %>
       <%= link_to(image_tag(photo.file_url), photo) %>
     <%= link_to(photo.photographer, "photographers/" + photo.photographer)  %>
     <% end %>
