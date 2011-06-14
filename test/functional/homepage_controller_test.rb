@@ -6,11 +6,12 @@ class HomepageControllerTest < ActionController::TestCase
     setup do
       get :index
     end
-    
+
     should respond_with :success
     should assign_to :plaques_count
+    should assign_to :recent_plaques
     should render_template :index
-    
+
   end
 
 

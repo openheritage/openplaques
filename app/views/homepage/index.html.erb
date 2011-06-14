@@ -22,23 +22,16 @@
   </div>
 
   <ol id="recent_photographed_plaques">
+  <% @recent_plaques.each do |plaque| %>
   <li class="first option_one">
-    <a href="#">
-      <img src="http://farm6.static.flickr.com/5110/5756124713_cd8e53d66f_m.jpg" width="200" alt="Plaque inscription" />
+    <%= link_to plaque_path(plaque) do %>
+      <img src="<%= plaque.photos.first.file_url %>" width="200" alt="Plaque inscription" />
       <div class="info">
-        <p>William Lilly (1602 - 1681) Master Astrologer Lived in a house on this site</p>
+        <p><%= truncate(plaque.inscription, :length => 150) %></p>
       </div>
-    </a>
+    <% end %>
   </li>
-  <li>
-    <a href="#">
-      <img src="http://farm6.static.flickr.com/5110/5756124713_cd8e53d66f_m.jpg" width="200" alt="Plaque inscription" />
-      <div class="info">
-        <p>William Lilly (1602 - 1681) Master Astrologer Lived in a house on this site</p>
-      </div>
-    </a>
-  </li>
-
+  <% end %>
   </ol>
 
 </div>
