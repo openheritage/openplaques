@@ -257,6 +257,12 @@ h1.inscription:after {
 	margin-bottom: 16px;
 }
 
+.no_photo_geo img {
+	border: solid 1px #CCC;
+	padding: 8px;
+	
+}
+
 
 .plaque_image a img {
 	border: solid 10px #EEE;

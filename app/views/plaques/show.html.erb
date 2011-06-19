@@ -30,7 +30,7 @@ plaque_mutliple_images
 			
 			<div class="no_photo_geo">
 				
-				<%= image_tag(google_maps_path(@plaque.latitude, @plaque.longitude, {:zoom => 16, :styles =>
+				<%= image_tag(google_maps_path(@plaque.latitude, @plaque.longitude, {:width => 260, :height => 260, :zoom => 16, :styles =>
 					{
 						:road =>
 							{:all =>
@@ -52,7 +52,7 @@ plaque_mutliple_images
 						}
 					)) %>
 					
-					<%= image_tag(google_maps_path(@plaque.latitude, @plaque.longitude, {:zoom => 12, :styles =>
+					<%= image_tag(google_maps_path(@plaque.latitude, @plaque.longitude, {:zoom => 10, :styles =>
 						{
 							:road =>
 								{:all =>
