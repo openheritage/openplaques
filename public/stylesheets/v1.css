@@ -258,9 +258,7 @@ h1.inscription:after {
 }
 
 .no_photo_geo img {
-	border: solid 1px #CCC;
-	padding: 8px;
-	
+	padding-right: 8px;
 }
 
 
@@ -499,10 +497,15 @@ header .search_box label {
 
 header .search_box #phrase {
 	color: #999;
-	font-family: "Baskerville";
+	font-family: "Baskerville", serif;
 	font-size: 18px;
-	/*width: 260px;*/ width: 345px;
+	width: 18em;
 }
+
+/*TODO: Make this work responsively */
+
+
+
 
 header .search_box #phrase:hover {
 	color: #000;
