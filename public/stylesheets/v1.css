@@ -246,7 +246,16 @@ h1.inscription:after {
 }
 
 .plaque_multiple_images {
-}	
+}
+
+.no_photo, .no_location {
+	background: rgba(230,230,0,.1);
+	border: solid 1px #ED0;
+	border-left: solid 10px #ED0;
+	border-radius: 8px; -moz-border-radius: 8px;
+	padding: 8px 8px 8px 12px;
+	margin-bottom: 16px;
+}
 
 
 .plaque_image a img {
@@ -328,12 +337,17 @@ h1.inscription:after {
 	width: 510px;
 	float: left;
 }
+
+#plaque_no_photos {
+	float: left;
+	margin: 0;
+	width: 60%;
+}
 	
 #plaque_identifier {
-	xbackground: yellow;
 	float: right;
 	margin: 0;
-	width: 300px;
+	width: 33%;
 }
 
 #plaque_identifier section {
@@ -379,6 +393,8 @@ html.no-rgba #plaque_identifier iframe.osm {border: solid 1px #FFF;}
 
 
 #plaque_identifier .header h1 {
+	border-bottom: none;
+	padding: 0;
 	float: left;
 	margin-right: 8px;
 	/*text-align: center;*/
@@ -958,7 +974,6 @@ table.plaque_list td.geo {}
 	border-radius: 16px;
 	padding: 16px;
 	/*float: right;*/
-	
 }
 
 .plaque_info_panel h1 {

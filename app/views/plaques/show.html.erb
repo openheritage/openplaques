@@ -20,44 +20,49 @@ plaque_mutliple_images
 	
 	<% if @plaque.photos.empty? %>
 		
-		<div class="no_photo">
-			<h2>No photograph</h2>
-			<p>We don't have any photos of this plaque yet. <a href="#">Add your own photo</a></p>
-		</div>
-		
-		<% if @plaque.geolocated? %>
+		<section id="plaque_no_photos">
+			<div class="no_photo">
+				<h2>No photograph</h2>
+				<p>We don't have any photos of this plaque yet. <a href="#">Add your own photo</a></p>
+			</div>
 			
-			<%= image_tag(google_maps_path(@plaque.latitude, @plaque.longitude, {:zoom => 16, :styles =>
-				{
-					:road =>
-						{:all =>
-							{:lightness => "30"}
-						},
-						"road.arterial" =>
+			<% if @plaque.geolocated? %>
+
+
+				<%= image_tag(google_maps_path(@plaque.latitude, @plaque.longitude, {:zoom => 16, :styles =>
+					{
+						:road =>
 							{:all =>
-								{:hue => "0x003bff"}
+								{:lightness => "30"}
 							},
-						:poi =>
-							{:all =>
-								{:visibility => :simplified}
-							},
-						:landscape =>
-							{:all =>
-								{:hue => "0x003bff"}
+							"road.arterial" =>
+								{:all =>
+									{:hue => "0x003bff"}
+								},
+							:poi =>
+								{:all =>
+									{:visibility => :simplified}
+								},
+							:landscape =>
+								{:all =>
+									{:hue => "0x003bff"}
+								}
 							}
 						}
-					}
-				)) %>
-				
-		<% else %>	
-			<h2>Location unknown</h2>
-			<p>We're not sure where this plaque is. <a href="#">Locate this plaque</a></p>
-		<% end %>
-		
-		
-		<%= render "plaque_header" %>
-		<%= render "plaque_details" %>
-		
+					)) %>
+
+			<% else %>
+				<div class="no_location">
+					<h2>Location unknown</h2>
+					<p>We don't know where this plaque is. <a href="#">Locate this plaque</a></p>
+				</div>
+			<% end %>
+		</section>
+
+		<section id="plaque_identifier" class="plaque_info_panel">
+			<%= render "plaque_header" %>
+			<%= render "plaque_details" %>
+		</section>
 		
 	<% elsif @plaque.photos.size < 2 %>
 		SINGLE IMAGE
