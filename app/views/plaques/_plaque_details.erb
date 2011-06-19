@@ -1,0 +1,22 @@
+<table class="section_details" cellspacing="0" summary="Plaque details for #<%= @plaque.id %>">
+   <tr>
+     <th>Erected by</th>
+     <td><%= erected_information(@plaque) %></td>
+   </tr>
+   <tr>
+     <th>Language</th>
+     <td><%= language_if_known(@plaque) %></td>
+   </tr>
+   <!--tr>
+     <th>Co-ordinates</th>
+     <td><%= geolocation_if_known(@plaque) %></td>
+   </tr-->
+   <tr>
+     <th>Colour</th>
+     <td><%= colour_if_known(@plaque) %></td>
+   </tr>
+   <tr>
+     <th>Location</th>
+     <td><%= location_if_known(@plaque) %></td>
+   </tr>
+ </table>

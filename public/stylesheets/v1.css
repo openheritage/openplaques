@@ -242,15 +242,10 @@ h1.inscription:after {
 /* Just for testing		content: " and other things which are important for test purposes. There is no real effective way of making this look good.";*/
 }
 
-#t-container {
-	padding: 16px 5%;
-	overflow: hidden; _zoom: 1;
+.plaque_single_image {
 }
 
-#plaque_single_image {
-}
-
-#plaque_multiple_images {
+.plaque_multiple_images {
 }	
 
 
@@ -266,7 +261,7 @@ h1.inscription:after {
 	-webkit-transition-duration: 0.3s;		
 }
 
-#plaque_single_image img {
+.plaque_single_image img {
 	width: 480px;
 	height: 360px;		
 }
