@@ -153,7 +153,9 @@ plaque_mutliple_images
 				
 				<div id="secondary_images">
 				<%
-					photo_list = @plaque.photos
+					photo_list = @plaque.photos %>
+					<%= photo_list.inspect %>
+				<% 
 					photo_list.each do |photo|
 						link_to(image_tag(photo.file_url, {:alt => "Photo of plaque", :rel => "foaf:depiction"}), photo.url)
 					end
