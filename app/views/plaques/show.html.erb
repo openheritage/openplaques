@@ -158,6 +158,7 @@ plaque_mutliple_images
 						link_to(image_tag(photo.file_url, {:alt => "Photo of plaque", :rel => "foaf:depiction"}), photo.url)
 					end
 				%>
+				
 				</div>
 				
 				
@@ -168,6 +169,8 @@ plaque_mutliple_images
 	<% end %>
 
 </div>
+<%= debug @plaque %>
+<%= debug @plaque.photos %>
 
 <div id="plaques_nearby"></div>
 
