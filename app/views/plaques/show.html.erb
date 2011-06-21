@@ -153,7 +153,7 @@ plaque_mutliple_images
 				
 				<div id="secondary_images">
 				<%
-					photo_list = @plaque.photos.all
+					photo_list = @plaque.photos
 					photo_list.each do |photo|
 						link_to(image_tag(photo.file_url, {:alt => "Photo of plaque", :rel => "foaf:depiction"}), photo.url)
 					end
@@ -169,9 +169,9 @@ plaque_mutliple_images
 	<% end %>
 
 </div>
-<%= debug @plaque %>
 <%= debug @plaque.photos %>
-
+<hr>
+<%= @plaque.photos.inspect %>
 <div id="plaques_nearby"></div>
 
 <div<%= " class=\"" + @plaque.colour.name + "plaque\"" if @plaque.colour %> about="#this" typeof="op:Plaque">
