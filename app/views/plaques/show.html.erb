@@ -145,7 +145,24 @@ plaque_mutliple_images
 		</section>
 		
 	<% else %>
-		TWO PLUS
+		
+
+			<div class="plaque_image plaque_multiple_images">
+				<% first_photo = @plaque.photos.first %>
+				<div id="secondary_images">
+				<%
+					photo_list = @plaque.photos
+					photo_list.each do |photo|
+						link_to(image_tag(photo.file_url, {:alt => "Photo of plaque", :rel => "foaf:depiction"}), photo.url)
+					end
+				%>
+				</div>
+				
+				<%= link_to(image_tag(first_photo.file_url, {:id => "primary_image", :alt => "Photo of plaque", :rel => "foaf:depiction"}), first_photo.url) %>
+				
+			</div>
+
+		
 	<% end %>
 
 </div>
