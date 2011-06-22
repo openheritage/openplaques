@@ -150,16 +150,6 @@ plaque_mutliple_images
         <% first_photo = @plaque.photos.first %>
         <%= link_to(image_tag(first_photo.file_url, {:id => "primary_image", :alt => "Photo of plaque", :rel => "foaf:depiction"}), first_photo.url) %>
 
-		<div id="photo_information" class="clearfix">
-        <p class="photo_credit">Photographed by
-        <% if photo.photographer_url %>
-          <%= link_to(photo.photographer, photo.photographer_url) %>
-        <% else %>
-          <%= photo.photographer %>.
-        <% end %></p>
-        <p class="photo_licence"><%= link_to(photo.licence.name, photo.licence.url) %></p>
-      </div>
-
         <div id="secondary_images">
         <% @plaque.photos.each do |image| %>
           <%= link_to(image_tag(image.file_url, {:alt => "Photo of plaque", :rel => "foaf:depiction"}), image.url) unless image == first_photo %>
