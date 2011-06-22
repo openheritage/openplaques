@@ -242,11 +242,6 @@ h1.inscription:after {
 /* Just for testing		content: " and other things which are important for test purposes. There is no real effective way of making this look good.";*/
 }
 
-.plaque_single_image {
-}
-
-.plaque_multiple_images {
-}
 
 .no_photo, .no_location {
 	background: rgba(230,230,0,.1);
@@ -299,39 +294,38 @@ h1.inscription:after {
 
 
 
-#plaque_multiple_images {
+.plaque_multiple_images {
 	position: relative;
 }
 
-#plaque_multiple_images #primary_image {
+.plaque_multiple_images #primary_image {
 	display: block;
 	margin-left: 120px;
 }
 
-#plaque_multiple_images #primary_image img {
+.plaque_multiple_images #primary_image img {
 	width: 360px;
 	height: 270px;
 }
 
-#plaque_multiple_images #secondary_images {
-
+.plaque_multiple_images #secondary_images {
 	position: absolute; top: 0; left: 0;
 	width: 104px;
 }	
 
-#plaque_multiple_images #secondary_images a {
+.plaque_multiple_images #secondary_images a {
 	display: block;
 	margin-bottom: 16px;
 }
 
-#plaque_multiple_images #secondary_images a:hover img {
+.plaque_multiple_images #secondary_images a:hover img {
 	border: solid 4px #FFF;
 	box-shadow: 0 0 10px #999;	
 	-moz-transition-duration: 0.3s;	
 	-webkit-transition-duration: 0.3s;		
 }
 
-#plaque_multiple_images #secondary_images img {
+.plaque_multiple_images #secondary_images img {
 	border: solid 4px #EEE;
 	width: 96px;
 	height: 72px;
