@@ -260,7 +260,6 @@ h1.inscription:after {
 .plaque_image a img {
 	border: solid 10px #EEE;
 	display: block;
-	width: 320px;
 }
 
 .plaque_image a:hover img {
@@ -272,8 +271,10 @@ h1.inscription:after {
 
 .plaque_single_image img {
 	width: 480px;
-	height: 360px;		
+	height: 360px;
 }
+
+
 
 .photo_credit, .photo_licence {
 	padding: 0 16px;
@@ -302,9 +303,6 @@ h1.inscription:after {
 .plaque_multiple_images #primary_image {
 	display: block;
 	margin-left: 120px;
-}
-
-.plaque_multiple_images #primary_image img {
 	width: 360px;
 	height: 270px;
 }
