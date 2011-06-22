@@ -92,7 +92,6 @@ plaque_mutliple_images
     </section>
 
   <% elsif @plaque.photos.size < 2 %>
-    SINGLE IMAGE
 
     <div class="plaque_image plaque_single_image">
 
@@ -159,9 +158,40 @@ plaque_mutliple_images
         </div>
 
 
-
       </div>
 
+		<section id="plaque_identifier" class="plaque_info_panel">
+
+	      <%= render "plaque_header" %>
+
+	      <% if @plaque.geolocated? %>
+	        <%= image_tag(google_maps_path(@plaque.latitude, @plaque.longitude, {:zoom => 16, :styles =>
+	        {
+	          :road =>
+	            {:all =>
+	              {:lightness => "30"}
+	            },
+	            "road.arterial" =>
+	              {:all =>
+	                {:hue => "0x003bff"}
+	              },
+	            :poi =>
+	              {:all =>
+	                {:visibility => :simplified}
+	              },
+	            :landscape =>
+	              {:all =>
+	                {:hue => "0x003bff"}
+	              }
+	            }
+	          }
+	        )) %>
+	      <% end %>
+
+	      <%= render "plaque_details" %>
+	      <%= render "contributor_details" %>
+
+	    </section>
 
   <% end %>
 
