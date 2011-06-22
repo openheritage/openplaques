@@ -260,6 +260,7 @@ h1.inscription:after {
 .plaque_image a img {
 	border: solid 10px #EEE;
 	display: block;
+	width: 320px;
 }
 
 .plaque_image a:hover img {
@@ -309,7 +310,7 @@ h1.inscription:after {
 }
 
 .plaque_multiple_images #secondary_images {
-	position: absolute; top: 0; left: 0;
+	position: absolute; top: 10px; left: 0;
 	width: 104px;
 }	
 
