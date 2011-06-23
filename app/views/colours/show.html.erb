@@ -1,6 +1,8 @@
 <% @page_title = @colour.name.capitalize + " plaques" %>
 <div typeof="op:Colour">
-<h1 property="rdfs:label" xml:lang="en" lang="en"><%= @page_title %></h1>
+	<div class="panel">
+		<h1 property="rdfs:label" xml:lang="en" lang="en"><%= @page_title %></h1>
+	</div>
 
 <% unless @colour.dbpedia_uri.blank? %>
 <p>
