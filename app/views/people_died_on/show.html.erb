@@ -1,5 +1,9 @@
 <% @page_title = "People who died in " + @year.year.to_s  %>
-<h1><%=pluralize(@people.size, "person") %> <a href="/people/died_on/">died in</a> <%= @year.year.to_s %></h1>
+
+<div class="panel">
+	<h1><%=pluralize(@people.size, "person") %> <a href="/people/died_on/">died in</a> <%= @year.year.to_s %></h1>
+	
+</div>
 
 <ul>
 <% @people.each do |person| %>
