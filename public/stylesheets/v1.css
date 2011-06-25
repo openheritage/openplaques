@@ -452,7 +452,7 @@ header .user_info {
 	position: absolute; top: 0; right: 0;
 }
 
-header .search_box {
+.search_box {
 	background: rgba(255,255,255,.5);
 	border: solid 1px #DDD;
 	border-radius: 8px; -moz-border-radius: 8px;
@@ -460,20 +460,20 @@ header .search_box {
 	padding: 8px 8px 8px 54px;
 }
 
-html.no-rgba header .search_box {background: #FFF;}
+html.no-rgba .search_box {background: #FFF;}
 
 
-header .search_box:hover {
+.search_box:hover {
 	background: #FFF;
 	-moz-transition-duration: 0.3s;	
 	-webkit-transition-duration: 0.3s;	
 }
 	
-header .search_box label {
+.search_box label {
 	position: absolute; left: -9999px;
 }
 
-.js header .search_box #magnifying_glass {
+.js .search_box #magnifying_glass {
 	background: url('../images/icon_search.png') no-repeat scroll top left;
 	position: absolute; top: -5px; left: 10px;
 /*	opacity: 0.5; */
@@ -487,14 +487,14 @@ header .search_box label {
 	-webkit-transition-duration: 0.3s;	
 } */
 
-.js header .search_box input[type="submit"] {
+.js .search_box input[type="submit"] {
 	position: absolute; left: -9999px;
 }
 
 /*TODO: Add JS to give the text field focus */
 
 
-header .search_box #phrase {
+.search_box #phrase {
 	border: none;
 	color: #999;
 	font-family: "Baskerville", serif;
@@ -507,7 +507,7 @@ header .search_box #phrase {
 
 
 
-header .search_box #phrase:hover {
+.search_box #phrase:hover {
 	color: #000;
 }
 
