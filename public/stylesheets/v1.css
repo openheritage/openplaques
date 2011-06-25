@@ -452,9 +452,10 @@ header .user_info {
 	position: absolute; top: 0; right: 0;
 }
 
-header .search_box {
-		position: absolute; bottom: 15px; right: 0;
-}
+
+/*
+	Search box
+*/
 
 .search_box {
 	background: rgba(255,255,255,.5);
@@ -463,8 +464,9 @@ header .search_box {
 	padding: 8px 8px 8px 54px;
 }
 
+header .search_box {position: absolute; bottom: 15px; right: 0;}
+#search_controller .search_box {width: 350px;}
 html.no-rgba .search_box {background: #FFF;}
-
 
 .search_box:hover {
 	background: #FFF;
