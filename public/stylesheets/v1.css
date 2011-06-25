@@ -453,6 +453,16 @@ header .user_info {
 }
 
 
+/**
+	SEARCH RESULTS
+*/
+
+#search_results {}
+
+#search_results_footer {
+	margin-bottom: 16px;
+}
+
 /*
 	Search box
 */
@@ -926,7 +936,8 @@ table.plaque_list td.geo {}
 
 #people_results li,
 #places_results li,
-#organisations_results li {
+#organisations_results li,
+#search_results li {
 	background: url('../images/bullet-blue.gif') no-repeat left 10px;
 	padding-left: 16px;
 	padding-bottom: 16px;
@@ -934,14 +945,16 @@ table.plaque_list td.geo {}
 
 #people_results li a,
 #places_results li a,
-#organisations_results li a {
+#organisations_results li a,
+#search_results li a {
 	color: #000;
 	text-decoration: none;
 }
 
 #people_results li a:hover,
 #places_results li a:hover,
-#organisations_results li a:hover {
+#organisations_results li a:hover,
+#search_results li a:hover {
 	color: #FFF;
 }
 
