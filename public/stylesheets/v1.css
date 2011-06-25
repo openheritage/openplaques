@@ -459,6 +459,12 @@ header .user_info {
 
 #search_results {}
 
+#search_results li .result {}
+#search_results li .result a {}
+
+#search_results li .snippet {}
+#search_results li .snippet a {}
+
 #search_results_footer {
 	margin-bottom: 16px;
 }
@@ -945,16 +951,14 @@ table.plaque_list td.geo {}
 
 #people_results li a,
 #places_results li a,
-#organisations_results li a,
-#search_results li a {
+#organisations_results li a {
 	color: #000;
 	text-decoration: none;
 }
 
 #people_results li a:hover,
 #places_results li a:hover,
-#organisations_results li a:hover,
-#search_results li a:hover {
+#organisations_results li a:hover {
 	color: #FFF;
 }
 
