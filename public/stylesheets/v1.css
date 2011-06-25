@@ -464,15 +464,16 @@ header .user_info {
 	padding: 8px 8px 8px 54px;
 }
 
-header .search_box {
-	position: absolute; bottom: 15px; right: 0;
-}
-
 #search_controller .search_box {
 	position: relative; 
 	width: 350px;
-
 }
+
+header .search_box,
+#search_controller header .search_box {
+	position: absolute; bottom: 15px; right: 0;
+}
+
 html.no-rgba .search_box {background: #FFF;}
 
 .search_box:hover {
@@ -484,9 +485,6 @@ html.no-rgba .search_box {background: #FFF;}
 .search_box label {
 	position: absolute; left: -9999px;
 }
-
-.js header .search_box #magnifying_glass {}
-.js #search_controller .search_box #magnifying_glass {}
 	
 .js .search_box #magnifying_glass {
 	background: url('../images/icon_search.png') no-repeat scroll top left;
