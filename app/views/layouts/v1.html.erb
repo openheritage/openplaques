@@ -28,8 +28,7 @@
     <%= csrf_meta_tag %>
   </head>
 
-  <body>
-
+  <body id="<%= params[:controller].parameterize %>_controller">
     <%= content_tag("div", "This is a staging version of Open Plaques with out-of-date data. ".html_safe + link_to("Visit the live site", "http://www.openplaques.org".html_safe) + "", :class => "staging") if ::Rails.env == "staging" %>
     <%= content_tag("div", "This is a development environment. Don't add good data here!", :class => "development") if ::Rails.env == "development" %>
 
