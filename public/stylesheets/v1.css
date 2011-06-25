@@ -1,23 +1,12 @@
 /**
 	OPEN PLAQUES v1 CORE STYLESHEET
 
-	0. TEMP DEVELOPMENT
 	1. RESET
 	2. CORE
 		2.1 Development elements
 	3. PLAQUE PAGE
 	
 */
-
-/**
-	0. TEMP DEVELOPMENT
-*/
-
-.dev {
-	background: rgba(255,0,0,.5);
-}
-
-html.no-rgba .dev {background: #F00;}
 
 /**
 	1. RESET
@@ -238,11 +227,6 @@ h1.inscription {
 }
 
 
-h1.inscription:after {
-/* Just for testing		content: " and other things which are important for test purposes. There is no real effective way of making this look good.";*/
-}
-
-
 .no_photo, .no_location {
 	background: rgba(230,230,0,.1);
 	border: solid 1px #ED0;
@@ -256,6 +240,12 @@ h1.inscription:after {
 	padding-right: 8px;
 }
 
+/* Plaque - single image */
+
+.plaque_image {
+	float: left;
+	width: 60%;	
+}
 
 .plaque_image a img {
 	border: solid 10px #EEE;
@@ -269,12 +259,16 @@ h1.inscription:after {
 	-webkit-transition-duration: 0.3s;		
 }
 
-.plaque_single_image img {
-	width: 480px;
-	height: 360px;
+.plaque_single_image a {
+	display: block;
+	width: 100%;
 }
 
-
+.plaque_single_image a img {
+	max-width: 100%;
+	/*width: 480px;*/
+	
+}
 
 .photo_credit, .photo_licence {
 	padding: 0 16px;
@@ -330,10 +324,6 @@ h1.inscription:after {
 	height: 72px;
 }
 
-.plaque_image {
-	width: 510px;
-	float: left;
-}
 
 #plaque_no_photos {
 	float: left;
