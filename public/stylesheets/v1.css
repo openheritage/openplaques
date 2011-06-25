@@ -252,6 +252,10 @@ h1.inscription {
 	display: block;
 }
 
+.plaque_image a:hover {
+	background-color: inherit;
+}
+
 .plaque_image a:hover img {
 	border: solid 10px #FFF;
 	box-shadow: 0 0 10px #999;
@@ -270,25 +274,25 @@ h1.inscription {
 	
 }
 
+
+/* Photo information */
+
+#photo_information {
+	margin: 8px 0;
+}
+
+#photo_information a {
+	display: inline;
+}
+.photo_credit {float: left;}
+.photo_licence {float: right;}
+
 .photo_credit, .photo_licence {
 	padding: 0 16px;
 	font-size: 13px;
 }
 
-#photo_information {
-	margin: 8px 0;
-/*	opacity: 0.7;*/
-}
-
-.photo_credit {
-	float: left;
-}
-
-.photo_licence {
-	float: right;
-}
-
-
+/****/
 
 .plaque_multiple_images {
 	position: relative;
