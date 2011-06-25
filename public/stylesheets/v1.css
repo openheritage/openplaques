@@ -264,14 +264,16 @@ h1.inscription {
 }
 
 .plaque_single_image a {
+	background-color: #CCC; /* remove!*/
 	display: block;
 	width: 100%;
 }
 
 .plaque_single_image a img {
-	max-width: 100%;
-	/*width: 480px;*/
-	
+	max-width: 100%; /*width: 480px;*/
+	/*TODO: create IE specific css */
+	*width: 100%;
+	-ms-interpolation-mode: bicubic;
 }
 
 
@@ -282,8 +284,15 @@ h1.inscription {
 }
 
 #photo_information a {
+	background-color: none;
 	display: inline;
 }
+
+#photo_information a:hover {
+	background-color: #4F7CBF;
+	color: #FFF;
+}
+
 .photo_credit {float: left;}
 .photo_licence {float: right;}
 
