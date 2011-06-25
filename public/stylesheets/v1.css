@@ -282,12 +282,10 @@ h1.inscription {
 #photo_information {
 	margin: 8px 0;
 }
-
 #photo_information a {
 	background-color: none;
 	display: inline;
 }
-
 #photo_information a:hover {
 	background-color: #4F7CBF;
 	color: #FFF;
@@ -452,6 +450,7 @@ header .user_info {
 
 header .search_box {
 	background: rgba(255,255,255,.5);
+	border: solid 1px #DDD;
 	border-radius: 8px; -moz-border-radius: 8px;
 	position: absolute; bottom: 15px; right: 0;
 	padding: 8px 8px 8px 54px;
@@ -492,6 +491,7 @@ header .search_box label {
 
 
 header .search_box #phrase {
+	border: none;
 	color: #999;
 	font-family: "Baskerville", serif;
 	font-size: 18px;
@@ -578,7 +578,6 @@ nav ul li span {
 } 
 
 
-
 /******/
 
 
@@ -590,8 +589,8 @@ nav ul li span {
 
 #content .container {
 	background: rgba(255,255,255,.6);
+	border: solid 1px #DDD;
 	border-radius: 16px; -moz-border-radius: 16px;
-	border-radius: 16px;
 }
 
 html.no-rgba #content .container {background: #FFF;}
