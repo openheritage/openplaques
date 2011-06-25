@@ -236,8 +236,14 @@ h1.inscription {
 	margin-bottom: 16px;
 }
 
+.no_photo_geo {
+	border: solid 1px #CCC;
+	border-radius: 8px;
+	padding: 8px;
+}
+
 .no_photo_geo img {
-	padding-right: 8px;
+	padding: 6px;
 }
 
 /* Plaque - single image */
