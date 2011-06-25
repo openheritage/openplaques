@@ -452,11 +452,14 @@ header .user_info {
 	position: absolute; top: 0; right: 0;
 }
 
+header .search_box {
+		position: absolute; bottom: 15px; right: 0;
+}
+
 .search_box {
 	background: rgba(255,255,255,.5);
 	border: solid 1px #DDD;
 	border-radius: 8px; -moz-border-radius: 8px;
-	position: absolute; bottom: 15px; right: 0;
 	padding: 8px 8px 8px 54px;
 }
 
@@ -494,7 +497,7 @@ html.no-rgba .search_box {background: #FFF;}
 /*TODO: Add JS to give the text field focus */
 
 
-.search_box #phrase {
+header .search_box #phrase {
 	border: none;
 	color: #999;
 	font-family: "Baskerville", serif;
@@ -507,7 +510,7 @@ html.no-rgba .search_box {background: #FFF;}
 
 
 
-.search_box #phrase:hover {
+header .search_box #phrase:hover {
 	color: #000;
 }
 
