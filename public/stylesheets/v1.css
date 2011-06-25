@@ -479,6 +479,8 @@ html.no-rgba .search_box {background: #FFF;}
 .js header .search_box #magnifying_glass {
 	position: absolute; top: -5px; left: 10px;
 }
+
+.js #search_controller .search_box #magnifying_glass {}
 	
 .js .search_box #magnifying_glass {
 	background: url('../images/icon_search.png') no-repeat scroll top left;
@@ -497,9 +499,10 @@ html.no-rgba .search_box {background: #FFF;}
 }
 
 /*TODO: Add JS to give the text field focus */
+/*TODO: Make this work responsively */
 
 
-header .search_box #phrase {
+.search_box #phrase {
 	border: none;
 	color: #999;
 	font-family: "Baskerville", serif;
@@ -507,15 +510,11 @@ header .search_box #phrase {
 	width: 18em;
 }
 
-/*TODO: Make this work responsively */
-
-
-
-
-header .search_box #phrase:hover {
+.search_box #phrase:hover {
 	color: #000;
 }
 
+/****/
 
 .branding {
 	float: left;
