@@ -24,5 +24,8 @@
   <p>Plaque not listed? <%= link_to "Add it", new_plaque_path(:checked => true) %>.</p>
 
 <% else %>
-  <%= render :partial => "search_form", :locals => { :phrase => @phrase } %>
+	<div class="panel">
+		<%= render :partial => "search_form", :locals => { :phrase => @phrase } %>
+	</div>
+
 <% end %>
