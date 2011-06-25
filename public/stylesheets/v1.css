@@ -476,10 +476,12 @@ html.no-rgba .search_box {background: #FFF;}
 	position: absolute; left: -9999px;
 }
 
+.js header .search_box #magnifying_glass {
+	position: absolute; top: -5px; left: 10px;
+}
+	
 .js .search_box #magnifying_glass {
 	background: url('../images/icon_search.png') no-repeat scroll top left;
-	position: absolute; top: -5px; left: 10px;
-/*	opacity: 0.5; */
 	width: 31px;
 	height: 60px;
 }
