@@ -49,9 +49,18 @@ Openplaques::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
-end
 
-  config.action_mailer.default_url_options = { :host => "www.openplaques.org" }
+  config.action_mailer.default_url_options = { :host => "openplaques.org" }
   NOTIFICATIONS_EMAIL = "feedback@openplaques.org"
 
+end
+
+ActionMailer::Base.smtp_settings = {
+  :address        => "smtp.sendgrid.net",
+  :port           => "25",
+  :authentication => :plain,
+  :user_name      => ENV['SENDGRID_USERNAME'],
+  :password       => ENV['SENDGRID_PASSWORD'],
+  :domain         => ENV['SENDGRID_DOMAIN']
+}
 
