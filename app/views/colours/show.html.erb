@@ -1,17 +1,16 @@
-<% @page_title = @colour.name.capitalize + " plaques" %>
-<div typeof="op:Colour">
-	<div class="panel">
-		<h1 property="rdfs:label" xml:lang="en" lang="en"><%= @page_title %></h1>
-	</div>
-
-<% unless @colour.dbpedia_uri.blank? %>
-<p>
-  <a href="<%= @colour.dbpedia_uri.gsub("dbpedia.org/resource/", "en.wikipedia.org/wiki/") %>">wikipedia</a>
-  <a href="<%= @colour.dbpedia_uri %>" rel="owl:sameAs">dbpedia.org</a>
+<div class="panel clearfix">
+  <h1><%= @colour.name.capitalize %> plaques</h1>
 </div>
+
+
+<%= content_tag("ol", :class => "results", :id => "search_results") do %>
+  <% @plaques.each do |plaque| %>
+    <%= content_tag("li") do %>
+      <p class="result">
+          <%= link_to title(plaque), plaque, :class => :title %>
+          <%= link_to(plaque.location.area.name, plaque.location.area, :class => :location) if plaque.location && plaque.location.area %>
+        </p>
+        <p class="snippet"><%= plaque.inscription %></p>
+    <% end %>
+  <% end %>
 <% end %>
-
-<%= render :partial => 'plaques/map.html.erb' %>
-
-<%= plaque_list(@plaques, :colour) %>
-</div>

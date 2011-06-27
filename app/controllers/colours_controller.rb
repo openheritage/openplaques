@@ -27,7 +27,7 @@ class ColoursController < ApplicationController
       redirect_to(colour_url(@colour.name), :status => :moved_permanently) and return
     end
 
-      @plaques = @colour.plaques
+      @plaques = @colour.plaques.includes(:personal_connections => :person, :location => [:area => :country])
 #      @centre = find_mean(@plaques)
       @zoom = 9
       respond_to do |format|
