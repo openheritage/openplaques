@@ -249,6 +249,7 @@ h1.inscription a {
 
 .no_photo_geo img {
   padding: 6px;
+	/* temp */ width: 235px;
 }
 
 /* Plaque - single image */
