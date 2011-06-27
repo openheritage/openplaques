@@ -255,7 +255,7 @@ h1.inscription a {
 
 .plaque_image {
   float: left;
-  width: 57%;
+  /*width: 57%;*/ width: 516px;
 }
 
 .plaque_image a img {
@@ -275,16 +275,16 @@ h1.inscription a {
 }
 
 .plaque_single_image a {
-  background-color: #CCC; /* remove!*/
   display: block;
   width: 100%;
 }
 
 .plaque_single_image a img {
-  max-width: 100%; /*width: 480px;*/
-  /*TODO: create IE specific css */
-  *width: 100%;
+	width: 480px;
+  /* TODO: Make images fluid when we get bigger ones from Flickr
+	max-width: 100%; *width: 100%;
   -ms-interpolation-mode: bicubic;
+	*/
 }
 
 
@@ -350,13 +350,13 @@ h1.inscription a {
 #plaque_no_photos {
   float: left;
   margin: 0;
-  width: 60%;
+  /*width: 60%;*/ width: 516px;
 }
 
 #plaque_identifier {
   float: right;
   margin: 0;
-  width: 33%;
+  /*width: 33%;*/ width: 302px;
 }
 
 #plaque_identifier section {
