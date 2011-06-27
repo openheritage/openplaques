@@ -1,98 +1,98 @@
 /**
-	OPEN PLAQUES v1 CORE STYLESHEET
+  OPEN PLAQUES v1 CORE STYLESHEET
 
-	1. RESET
-	2. CORE
-		2.1 Development elements
-	3. PLAQUE PAGE
-	
+  1. RESET
+  2. CORE
+    2.1 Development elements
+  3. PLAQUE PAGE
+
 */
 
 /**
-	1. RESET
+  1. RESET
 */
 
 * {
-	margin: 0;
-	padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 html { overflow-y: scroll; }
 
 /**
-	2. CORE
+  2. CORE
 */
 
 
 body {
-	background: #BBB;
-	font-family: "Baskerville", Georgia, serif;
+  background: #BBB;
+  font-family: "Baskerville", Georgia, serif;
 }
 
 h1, h2, h3, h4 {
-	font-weight: 600;
+  font-weight: 600;
 }
 
 p {
-	font-size: 16px;
-	line-height: 24px;
+  font-size: 16px;
+  line-height: 24px;
 }
 
 a:link, a:visited {
-	color: #4f7cbf;
+  color: #4f7cbf;
 }
 
 a:hover {
-	background: #4f7cbf;
-	color: #FFF;
+  background: #4f7cbf;
+  color: #FFF;
 }
 
 #content {
-	background: #EEE;
-/*	margin-top: 148px;*/
+  background: #EEE;
+/*  margin-top: 148px;*/
 }
 
 /**
-	2.1 Reuseable elements
+  2.1 Reuseable elements
 */
 
 .notice {
-	color: #0D0;
-	margin: 0 auto;
-	text-align: center;
-	padding: 16px 0;
+  color: #0D0;
+  margin: 0 auto;
+  text-align: center;
+  padding: 16px 0;
 }
 
 /**
-	2.2 Development elements
+  2.2 Development elements
 */
 
 .development {
-	background: rgba(255,255,0,.8);
-	border: dashed 2px rgba(0,0,0,0.5);
-	display: none; /*temporary for dev! */
-	color: #000;
-	font-weight: bold;
-	padding: 8px;
-	z-index: 10;
+  background: rgba(255,255,0,.8);
+  border: dashed 2px rgba(0,0,0,0.5);
+  display: none; /*temporary for dev! */
+  color: #000;
+  font-weight: bold;
+  padding: 8px;
+  z-index: 10;
 }
 
 
 
 
 /**
-	3. HOMEPAGE
+  3. HOMEPAGE
 */
 
 #homepage_content {
-	float: left;
-	width: 70%;
+  float: left;
+  width: 70%;
 }
 
 #homepage_content p.intro {
   font-size: 1.5em;
   line-height: 1.4em;
-	margin-bottom: 16px;
+  margin-bottom: 16px;
 }
 
 
@@ -101,326 +101,326 @@ a:hover {
 
 /*
 
-	background: -webkit-gradient(linear, 0 0, 0 100%, from(#FFF), to(#EEE));
-	background: -moz-linear-gradient(top, #FFF, #EEE);
+  background: -webkit-gradient(linear, 0 0, 0 100%, from(#FFF), to(#EEE));
+  background: -moz-linear-gradient(top, #FFF, #EEE);
 */
 
 
 #recent_photographed_plaques {
-	background: #EEE;
-	border-radius: 16px; -moz-border-radius: 16px;
+  background: #EEE;
+  border-radius: 16px; -moz-border-radius: 16px;
 
-	float: right;
-	list-style-type: none;
-	overflow: hidden; _zoom: 1; /*Cleafix */
-	width: 236px;
+  float: right;
+  list-style-type: none;
+  overflow: hidden; _zoom: 1; /*Cleafix */
+  width: 236px;
 }
 
 #recent_photographed_plaques li {
-/*	float: left;*/
-	padding-left: 10px;
-	padding-right: 10px;
-	margin-bottom: 10px;
-	width: 216px;
-	/*margin-right: 10px;*/
+/*  float: left;*/
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-bottom: 10px;
+  width: 216px;
+  /*margin-right: 10px;*/
 }
 
 #recent_photographed_plaques li.first {
-	padding-top: 10px;
+  padding-top: 10px;
 }
 
 
 #recent_photographed_plaques li a {
-	font-size: 0;
-	display: block;
+  font-size: 0;
+  display: block;
 }
 
 #recent_photographed_plaques li a {
-	border: solid 8px #EEE;
-	text-decoration: none;	
-	
+  border: solid 8px #EEE;
+  text-decoration: none;
+
 }
 
 #recent_photographed_plaques li.option_two a {
-	position: relative;
-} 
+  position: relative;
+}
 
 
 #recent_photographed_plaques li a:hover {
-	-moz-transition-duration: 0.3s;
-	border: 8px solid #FFF;
-	box-shadow: 0 0 10px #999;
-	
+  -moz-transition-duration: 0.3s;
+  border: 8px solid #FFF;
+  box-shadow: 0 0 10px #999;
+
 }
 
 #recent_photographed_plaques li a .info {
-	padding: 8px 0;
+  padding: 8px 0;
 }
 
 #recent_photographed_plaques li.option_two a .info {
-	position: absolute; bottom: 0;
-	display: none;
+  position: absolute; bottom: 0;
+  display: none;
 }
 
 #recent_photographed_plaques li a:hover .info {
-	display: block;
+  display: block;
 }
 
 
 #recent_photographed_plaques li a .info p {
-	font-size: 12px;
-	line-height: 16px;
-	text-align: center;
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
 }
 
 #recent_photographed_plaques li.option_two a .info p {
-	text-shadow: 1px 1px #333;
+  text-shadow: 1px 1px #333;
 }
-	
+
 
 /***/
 
 #homepage_modules {
-	list-style-type: none;
-	overflow: hidden; _zoom: 1;
+  list-style-type: none;
+  overflow: hidden; _zoom: 1;
 }
 
 #homepage_modules li {
-	background: #EEE;
-	border-radius: 16px; -moz-border-radius: 16px;
-	padding: 16px;
-	margin-bottom: 16px;
+  background: #EEE;
+  border-radius: 16px; -moz-border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 16px;
 }
 
 
 
 
 /**
-	3. PLAQUE PAGE
+  3. PLAQUE PAGE
 */
 
 h1.inscription {
-	text-align: center;
+  text-align: center;
 }
 
 h1.inscription a {
-	text-decoration: none;
-	border-bottom: dotted 1px;
+  text-decoration: none;
+  border-bottom: dotted 1px;
 }
 
 #plaque_number {
-	display: block;
-	margin: 0 auto;
-	color: #999;
-	font-style: italic;
-	font-size: 12px;
-	text-align: center;
+  display: block;
+  margin: 0 auto;
+  color: #999;
+  font-style: italic;
+  font-size: 12px;
+  text-align: center;
 }
 
 #plaque_number span {
-	padding: 2px 0;
-	border-top: solid 1px #EEE;
-	border-bottom: solid 1px #EEE;
+  padding: 2px 0;
+  border-top: solid 1px #EEE;
+  border-bottom: solid 1px #EEE;
 }
 
 #plaque_number a {
-	color: #999;
+  color: #999;
 }
 
 #plaque_number a:hover {
-	color: #FFF;
+  color: #FFF;
 }
 
 
 .no_photo, .no_location {
-	background: rgba(230,230,0,.1);
-	border: solid 1px #ED0;
-	border-left: solid 10px #ED0;
-	border-radius: 8px; -moz-border-radius: 8px;
-	padding: 8px 8px 8px 12px;
-	margin-bottom: 16px;
+  background: rgba(230,230,0,.1);
+  border: solid 1px #ED0;
+  border-left: solid 10px #ED0;
+  border-radius: 8px; -moz-border-radius: 8px;
+  padding: 8px 8px 8px 12px;
+  margin-bottom: 16px;
 }
 
 .no_photo_geo {
-	border: solid 1px #CCC;
-	border-radius: 8px;
-	padding: 8px;
+  border: solid 1px #CCC;
+  border-radius: 8px;
+  padding: 8px;
 }
 
 .no_photo_geo img {
-	padding: 6px;
+  padding: 6px;
 }
 
 /* Plaque - single image */
 
 .plaque_image {
-	float: left;
-	width: 57%;	
+  float: left;
+  width: 57%;
 }
 
 .plaque_image a img {
-	border: solid 10px #EEE;
-	display: block;
+  border: solid 10px #EEE;
+  display: block;
 }
 
 .plaque_image a:hover {
-	background-color: inherit;
+  background-color: inherit;
 }
 
 .plaque_image a:hover img {
-	border: solid 10px #FFF;
-	box-shadow: 0 0 10px #999;
-	-moz-transition-duration: 0.3s;	
-	-webkit-transition-duration: 0.3s;		
+  border: solid 10px #FFF;
+  box-shadow: 0 0 10px #999;
+  -moz-transition-duration: 0.3s;
+  -webkit-transition-duration: 0.3s;
 }
 
 .plaque_single_image a {
-	background-color: #CCC; /* remove!*/
-	display: block;
-	width: 100%;
+  background-color: #CCC; /* remove!*/
+  display: block;
+  width: 100%;
 }
 
 .plaque_single_image a img {
-	max-width: 100%; /*width: 480px;*/
-	/*TODO: create IE specific css */
-	*width: 100%;
-	-ms-interpolation-mode: bicubic;
+  max-width: 100%; /*width: 480px;*/
+  /*TODO: create IE specific css */
+  *width: 100%;
+  -ms-interpolation-mode: bicubic;
 }
 
 
 /* Photo information */
 
 #photo_information {
-	margin: 8px 0;
+  margin: 8px 0;
 }
 #photo_information a {
-	background-color: none;
-	display: inline;
+  background-color: none;
+  display: inline;
 }
 #photo_information a:hover {
-	background-color: #4F7CBF;
-	color: #FFF;
+  background-color: #4F7CBF;
+  color: #FFF;
 }
 
 .photo_credit {float: left;}
 .photo_licence {float: right;}
 
 .photo_credit, .photo_licence {
-	padding: 0 16px;
-	font-size: 13px;
+  padding: 0 16px;
+  font-size: 13px;
 }
 
 /****/
 
 .plaque_multiple_images {
-	position: relative;
+  position: relative;
 }
 
 .plaque_multiple_images #primary_image {
-	display: block;
-	margin-left: 120px;
-	width: 360px;
-	height: 270px;
+  display: block;
+  margin-left: 120px;
+  width: 360px;
+  height: 270px;
 }
 
 .plaque_multiple_images #secondary_images {
-	position: absolute; top: 10px; left: 0;
-	width: 104px;
-}	
+  position: absolute; top: 10px; left: 0;
+  width: 104px;
+}
 
 .plaque_multiple_images #secondary_images a {
-	display: block;
-	margin-bottom: 16px;
+  display: block;
+  margin-bottom: 16px;
 }
 
 .plaque_multiple_images #secondary_images a:hover img {
-	border: solid 4px #FFF;
-	box-shadow: 0 0 10px #999;	
-	-moz-transition-duration: 0.3s;	
-	-webkit-transition-duration: 0.3s;		
+  border: solid 4px #FFF;
+  box-shadow: 0 0 10px #999;
+  -moz-transition-duration: 0.3s;
+  -webkit-transition-duration: 0.3s;
 }
 
 .plaque_multiple_images #secondary_images img {
-	border: solid 4px #EEE;
-	width: 96px;
-	height: 72px;
+  border: solid 4px #EEE;
+  width: 96px;
+  height: 72px;
 }
 
 
 #plaque_no_photos {
-	float: left;
-	margin: 0;
-	width: 60%;
+  float: left;
+  margin: 0;
+  width: 60%;
 }
-	
+
 #plaque_identifier {
-	float: right;
-	margin: 0;
-	width: 33%;
+  float: right;
+  margin: 0;
+  width: 33%;
 }
 
 #plaque_identifier section {
-	margin: 0;
+  margin: 0;
 }
 
 #plaque_identifier img,
 #plaque_identifier iframe.osm {
-	border: 1px solid rgba(255, 255, 255, 0.5);
-	margin: 8px 0 0;
-	width: 300px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  margin: 8px 0 0;
+  width: 300px;
 }
 
 html.no-rgba #plaque_identifier img,
 html.no-rgba #plaque_identifier iframe.osm {border: solid 1px #FFF;}
 
-	
+
 #plaque_identifier aside {
-	margin-top: 20px;
+  margin-top: 20px;
 }
 
 #plaque_identifier aside h2 {
-	font-size: 16px;
-	margin-bottom: 4px;
+  font-size: 16px;
+  margin-bottom: 4px;
 }
 
 #plaque_identifier aside ul {
-	list-style-type: none;
+  list-style-type: none;
 }
 #plaque_identifier aside ul li {
-	background: url('../images/bullet-blue.gif') no-repeat left 10px;
-	padding-left: 16px;
+  background: url('../images/bullet-blue.gif') no-repeat left 10px;
+  padding-left: 16px;
 }
 
 #plaque_identifier aside ul li p {
-	font-size: 13px;
-	line-height: 20px;
+  font-size: 13px;
+  line-height: 20px;
 }
 
 #plaque_identifier .header {
-	background: rgba(255,0,0,.5);
+  background: rgba(255,0,0,.5);
 }
 
 
 #plaque_identifier .header h1 {
-	border-bottom: none;
-	padding: 0;
-	float: left;
-	margin-right: 8px;
-	/*text-align: center;*/
+  border-bottom: none;
+  padding: 0;
+  float: left;
+  margin-right: 8px;
+  /*text-align: center;*/
 }
 
 #plaque_identifier .header h1 a {
-	color: #000;
-	text-decoration: none;
-	border-bottom: dotted 1px #999;
+  color: #000;
+  text-decoration: none;
+  border-bottom: dotted 1px #999;
 }
 
 #plaque_identifier .header h1 a:hover {
-	color: #FFF;
+  color: #FFF;
 }
 
 #plaque_identifier .header .like_button {
-	float: left;
+  float: left;
 }
 
 footer nav {
@@ -444,28 +444,28 @@ footer nav a {
 
 
 header {
-	background: -webkit-gradient(linear, 0 0, 0 100%, from(#FFF), to(#EEE));
-	background: -moz-linear-gradient(top, #FFF, #EEE);
-	border-top: solid 10px #454a51;
-	display: block;
-	padding: 16px 0;
-/*	position: absolute; top: 0; height: 110px;*/
-	width: 100%;
-	position: relative;
+  background: -webkit-gradient(linear, 0 0, 0 100%, from(#FFF), to(#EEE));
+  background: -moz-linear-gradient(top, #FFF, #EEE);
+  border-top: solid 10px #454a51;
+  display: block;
+  padding: 16px 0;
+/*  position: absolute; top: 0; height: 110px;*/
+  width: 100%;
+  position: relative;
 }
 
 header .container {
-	min-height: 100px; _height: 100px;
-	position: relative;
+  min-height: 100px; _height: 100px;
+  position: relative;
 }
 
 header .user_info {
-	position: absolute; top: 0; right: 0;
+  position: absolute; top: 0; right: 0;
 }
 
 
 /**
-	SEARCH RESULTS
+  SEARCH RESULTS
 */
 
 #search_results {}
@@ -477,57 +477,57 @@ header .user_info {
 #search_results li .snippet a {}
 
 #search_results_footer {
-	margin-bottom: 16px;
+  margin-bottom: 16px;
 }
 
 /*
-	Search box
+  Search box
 */
 
 .search_box {
-	background: rgba(255,255,255,.5);
-	border: solid 1px #DDD;
-	border-radius: 8px; -moz-border-radius: 8px;
-	padding: 8px 8px 8px 54px;
+  background: rgba(255,255,255,.5);
+  border: solid 1px #DDD;
+  border-radius: 8px; -moz-border-radius: 8px;
+  padding: 8px 8px 8px 54px;
 }
 
 #search_controller .search_box {
-	position: relative; 
-	width: 350px;
+  position: relative;
+  width: 350px;
 }
 
 header .search_box,
 #search_controller header .search_box {
-	position: absolute; bottom: 15px; right: 0;
+  position: absolute; bottom: 15px; right: 0;
 }
 
 html.no-rgba .search_box {background: #FFF;}
 
 .search_box:hover {
-	background: #FFF;
-	-moz-transition-duration: 0.3s;	
-	-webkit-transition-duration: 0.3s;	
+  background: #FFF;
+  -moz-transition-duration: 0.3s;
+  -webkit-transition-duration: 0.3s;
 }
-	
+
 .search_box label {
-	position: absolute; left: -9999px;
+  position: absolute; left: -9999px;
 }
-	
+
 .js .search_box #magnifying_glass {
-	background: url('../images/icon_search.png') no-repeat scroll top left;
-	position: absolute; top: -5px; left: 10px;
-	width: 31px;
-	height: 60px;
+  background: url('../images/icon_search.png') no-repeat scroll top left;
+  position: absolute; top: -5px; left: 10px;
+  width: 31px;
+  height: 60px;
 }
 
 /* .js header .search_box #magnifying_glass:hover {
-	opacity: 1;
-	-moz-transition-duration: 0.3s;	
-	-webkit-transition-duration: 0.3s;	
+  opacity: 1;
+  -moz-transition-duration: 0.3s;
+  -webkit-transition-duration: 0.3s;
 } */
 
 .js .search_box input[type="submit"] {
-	position: absolute; left: -9999px;
+  position: absolute; left: -9999px;
 }
 
 /*TODO: Add JS to give the text field focus */
@@ -535,111 +535,111 @@ html.no-rgba .search_box {background: #FFF;}
 
 
 .search_box #phrase {
-	border: none;
-	color: #999;
-	font-family: "Baskerville", serif;
-	font-size: 18px;
-	width: 18em;
+  border: none;
+  color: #999;
+  font-family: "Baskerville", serif;
+  font-size: 18px;
+  width: 18em;
 }
 
 .search_box #phrase:hover {
-	color: #000;
+  color: #000;
 }
 
 /****/
 
 .branding {
-	float: left;
-	position: absolute; top: 0; left: 0;
+  float: left;
+  position: absolute; top: 0; left: 0;
 }
 
 .branding img {
-	border: none;
-	display: block;
+  border: none;
+  display: block;
 }
 
 .branding a:hover img {
-	-moz-transform: rotate(-20deg);
-	-webkit-transform: rotate(-20deg);
-	-webkit-transition-duration: 0.3s;
-	
+  -moz-transform: rotate(-20deg);
+  -webkit-transform: rotate(-20deg);
+  -webkit-transition-duration: 0.3s;
+
 }
 
 .site_name {
-	display: block;
-	color: #454A51;
-	font-size: 34px; /*40px*/
-	text-shadow: 1px 1px 1px #CCCCCC, -1px -1px 1px #FFFFFF;
-	text-transform: uppercase;
-	padding-left: 116px;
-	padding-top: 4px;
+  display: block;
+  color: #454A51;
+  font-size: 34px; /*40px*/
+  text-shadow: 1px 1px 1px #CCCCCC, -1px -1px 1px #FFFFFF;
+  text-transform: uppercase;
+  padding-left: 116px;
+  padding-top: 4px;
 }
 
 
 .site_name .small-caps {
-	font-size: 27px; /*34px*/
+  font-size: 27px; /*34px*/
 }
 
 
 nav {}
 
 nav ul {
-	list-style-type: none;
-	padding-top: 10px;
-	padding-left: 116px;
+  list-style-type: none;
+  padding-top: 10px;
+  padding-left: 116px;
 }
 
 nav ul li {
-	float: left;
-	margin-right: 8px;
+  float: left;
+  margin-right: 8px;
 }
 
 nav ul li a:hover,
 nav ul li span {
-	border-radius: 8px; -moz-border-radius: 8px;
-	background: none repeat scroll 0 0 #FFFFFF;
-	color: #4F7CBF;
+  border-radius: 8px; -moz-border-radius: 8px;
+  background: none repeat scroll 0 0 #FFFFFF;
+  color: #4F7CBF;
 }
 
 nav ul li a {
-	color: #1D3861;
-	text-decoration: none;
+  color: #1D3861;
+  text-decoration: none;
 }
 
 nav ul li a,
 nav ul li span {
-	font-size: 20px;
-	padding: 8px;
-	text-transform: uppercase;
+  font-size: 20px;
+  padding: 8px;
+  text-transform: uppercase;
 }
 
 nav ul li span {
-	color: #333;
-} 
+  color: #333;
+}
 
 
 /******/
 
 .container {
-	margin: 0 auto;
-	width: 80%;	
+  margin: 0 auto;
+  width: 80%;
 }
 
 
 #content .container {
-	background: rgba(255,255,255,.6);
-	border: solid 1px #DDD;
-	border-radius: 16px; -moz-border-radius: 16px;
+  background: rgba(255,255,255,.6);
+  border: solid 1px #DDD;
+  border-radius: 16px; -moz-border-radius: 16px;
 }
 
 html.no-rgba #content .container {background: #FFF;}
 
 
 footer {
-	background: -webkit-gradient(linear, 0 0, 0 100%, from(#EEE), to(#BBB));
-	background: -moz-linear-gradient(top, #EEE, #BBB);
-	display: block;
-	padding: 16px 0 125px;
+  background: -webkit-gradient(linear, 0 0, 0 100%, from(#EEE), to(#BBB));
+  background: -moz-linear-gradient(top, #EEE, #BBB);
+  display: block;
+  padding: 16px 0 125px;
 }
 
 footer nav {
@@ -649,167 +649,167 @@ footer nav {
 
 
 .panel {
-	padding: 16px 5%;
-	position: relative;
+  padding: 16px 5%;
+  position: relative;
 }
 
 .panel h1 {
-	/*float: left;*/
-	border-bottom: solid 1px #CCC;
-	font-weight: 600;
-	padding: 0 0 8px;
+  /*float: left;*/
+  border-bottom: solid 1px #CCC;
+  font-weight: 600;
+  padding: 0 0 8px;
 }
 
 .panel p {
-	margin-bottom: 0;
+  margin-bottom: 0;
 }
 
-.explore_by, 
+.explore_by,
 .sorted_by {
-	float: right;
-	margin: 8px 0 0 40px;
-	text-align: right;
+  float: right;
+  margin: 8px 0 0 40px;
+  text-align: right;
 }
 
-.explore_by .selected , 
+.explore_by .selected ,
 .sorted_by .selected {
-	font-weight: bold;
+  font-weight: bold;
 }
 
-.sorted_by a, 
+.sorted_by a,
 .explore_by a {
-	color: #4F7CBF;
+  color: #4F7CBF;
 }
 
-.sorted_by a:hover, 
+.sorted_by a:hover,
 .explore_by a:hover {
-	background: #4F7CBF;
-	color: #FFF;
+  background: #4F7CBF;
+  color: #FFF;
 }
 
 
 nav.alphabet {
-	clear: both;
-	display: block;
-	padding-top: 16px;
+  clear: both;
+  display: block;
+  padding-top: 16px;
 }
 
 nav.alphabet ol {
-/*	border-top: solid 1px #DDD;
-	border-bottom: solid 1px #DDD;*/
-	background: #EEE;
-	-moz-border-radius: 10px; border-radius: 10px;	
-	list-style-type: none;
-	text-align: center;
-	padding: 12px 0;
+/*  border-top: solid 1px #DDD;
+  border-bottom: solid 1px #DDD;*/
+  background: #EEE;
+  -moz-border-radius: 10px; border-radius: 10px;
+  list-style-type: none;
+  text-align: center;
+  padding: 12px 0;
 }
 
 nav.alphabet ol li {
-	display: inline-block;
+  display: inline-block;
 }
 
 nav.alphabet ol li a,
 nav.alphabet ol li span {
-	color: #454a51;
-	text-decoration: none;
-	padding: 4px 6px;
+  color: #454a51;
+  text-decoration: none;
+  padding: 4px 6px;
 }
 
 nav.alphabet ol li span {
-	cursor: default;
-	-moz-box-shadow: 0 0 5px #999;
-	-webkit-box-shadow: 0 0 5px #999;
-	box-shadow: 0 0 5px #999;
+  cursor: default;
+  -moz-box-shadow: 0 0 5px #999;
+  -webkit-box-shadow: 0 0 5px #999;
+  box-shadow: 0 0 5px #999;
 }
 
 nav.alphabet ol li a:hover,
 nav.alphabet ol li span {
-	background: #FFF;
-	color: #4f7cbf;
-	border-radius: 6px;
+  background: #FFF;
+  color: #4f7cbf;
+  border-radius: 6px;
 }
 
 .body,
 #organisation_info,
 form.new_plaque {
-	padding: 0 5% 32px;
+  padding: 0 5% 32px;
 }
 
 .body p,
 #organisation_info p {
-	margin-bottom: 16px;	
+  margin-bottom: 16px;
 }
 
 form.new_plaque h2 {
-	margin-bottom: 16px;
+  margin-bottom: 16px;
 }
 form.new_plaque fieldset {
-	background: -moz-linear-gradient(top, rgba(0,0,0,.01), rgba(0,0,0,.0) 8%);  
-	background: -webkit-gradient(linear, 0 0, 0 8%, from(rgba(0,0,0,.01)), to(rgba(0,0,0,.0)));
-	border: solid 1px #EEE;
-	border-radius: 16px;
-	box-shadow: 0px 0px 4px #FFF;
-	margin-bottom: 16px;
-	padding: 16px;	
+  background: -moz-linear-gradient(top, rgba(0,0,0,.01), rgba(0,0,0,.0) 8%);
+  background: -webkit-gradient(linear, 0 0, 0 8%, from(rgba(0,0,0,.01)), to(rgba(0,0,0,.0)));
+  border: solid 1px #EEE;
+  border-radius: 16px;
+  box-shadow: 0px 0px 4px #FFF;
+  margin-bottom: 16px;
+  padding: 16px;
 }
 
 html.no-rgba form.new_plaque fieldset {background: #FFF;}
 
 form.new_plaque .date_labels {
-	overflow: hidden; _zoom: 1;
+  overflow: hidden; _zoom: 1;
 }
 
 form.new_plaque .date_labels label {
-	float: left;
-	margin-right: 2.7em;
+  float: left;
+  margin-right: 2.7em;
 }
 
 @media screen and (max-width: 1000px) {
-	form.new_plaque .colour_options {
-		-moz-column-count: 2; -webkit-column-count: 2; column-count: 2;
-	}
+  form.new_plaque .colour_options {
+    -moz-column-count: 2; -webkit-column-count: 2; column-count: 2;
+  }
 }
 
 /* 17%+ March */
-@media screen and (min-width: 1000px) { 
-	form.new_plaque .colour_options {
-		-moz-column-count: 3; -webkit-column-count: 3; column-count: 3;
-	}
+@media screen and (min-width: 1000px) {
+  form.new_plaque .colour_options {
+    -moz-column-count: 3; -webkit-column-count: 3; column-count: 3;
+  }
 }
 
 
 
 form.new_plaque .colour_options span {
-	display: block;
-	float: left;
-	margin-right: 5%;
-	width: 25%;
+  display: block;
+  float: left;
+  margin-right: 5%;
+  width: 25%;
 }
 
 form.new_plaque .row {
-	margin-bottom: 16px;
+  margin-bottom: 16px;
 }
 
 form.new_plaque .row:last-child {
-	margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 form.new_plaque .row input {
-	font-size: 16px;
-	font-family: "Baskerville", "Georgia";
-	padding: 4px;
-	width: 400px;
+  font-size: 16px;
+  font-family: "Baskerville", "Georgia";
+  padding: 4px;
+  width: 400px;
 }
 
 form.new_plaque .radio input,
 form.new_plaque .checkbox input {
-	width: auto;
+  width: auto;
 }
 
 form.new_plaque .row label {
-	cursor: pointer;
-	display: block;
-	margin-bottom: 4px;
+  cursor: pointer;
+  display: block;
+  margin-bottom: 4px;
 }
 
 form.new_plaque .checkbox {
@@ -818,78 +818,85 @@ form.new_plaque .checkbox {
 
 form.new_plaque .radio label,
 form.new_plaque .checkbox label {
-	display: inline;
-	padding: 0 8px;
+  display: inline;
+  padding: 0 8px;
 }
 
 form.new_plaque .row textarea {
-	color: #CCC;
-	font: 16px/16px "Baskerville", "Georgia";
-	padding: 8px;
+  color: #CCC;
+  font: 16px/16px "Baskerville", "Georgia";
+  padding: 8px;
 }
 
 form.new_plaque .row textarea:focus {
-	color: #333;
+  color: #333;
 }
 
 form.new_plaque .row select {
-	font: 16px/16px "Baskerville", "Georgia";
-	padding-right: 8px;
+  font: 16px/16px "Baskerville", "Georgia";
+  padding-right: 8px;
 }
 
 form.new_plaque .confirmation {
-	margin-left: 120px;
+  margin-left: 120px;
 }
 
 .error_alert {
-	background: rgba(255,0,0,.1);
-	border-radius: 8px;
-	color: #D00;
-	margin: 16px 5%;
-	border: solid 1px red;
-	padding: 8px 16px;
+  background: rgba(255,0,0,.1);
+  border-radius: 8px;
+  color: #D00;
+  margin: 16px 5%;
+  border: solid 1px red;
+  padding: 8px 16px;
 }
 
 #new_plaque .row .field_with_errors label {
-	color: #D00;
+  color: #D00;
 }
 
 #new_plaque .row .field_with_errors input {
-	background: rgba(255,0,0,.1);
+  background: rgba(255,0,0,.1);
+}
+
+footer .about {
+  margin-top: 2em;
+  text-align: center;
+  color: #999;
+  font-size: .9em;
 }
 
 
 /*
-	Autocomplete
+  Autocomplete
 */
 
 .ui-autocomplete {
-	list-style-type: none;
-	width: 300px;
+  list-style-type: none;
+  width: 300px;
 }
 
 .ui-autocomplete .ui-menu-item {
-	background: rgba(255,255,255,.95);	
-	border-bottom: dotted 1px #CCC;
+  background: rgba(255,255,255,.95);
+  border-bottom: dotted 1px #CCC;
 }
 
 html.no-rgba .ui-autocomplete .ui-menu-item {background: #FFF;}
 
 .ui-autocomplete .ui-menu-item a {
-	display: block;
-	font-size: 14px;
-	color: #333;
-	padding: 8px;
+  display: block;
+  font-size: 14px;
+  color: #333;
+  padding: 8px;
 }
 
 .ui-autocomplete .ui-menu-item a.ui-state-hover {
-	color: #FFF;
-	cursor: pointer;
+  color: #FFF;
+  cursor: pointer;
 }
 
 .ui-autocomplete .ui-menu-item a#ui-active-menuitem {
-	background: #4F7CBF;
-	text-shadow: 1px 1px #333;
+  background: #4F7CBF;
+  text-shadow: 1px 1px #333;
 }
 
 
@@ -900,7 +907,7 @@ html.no-rgba .ui-autocomplete .ui-menu-item {background: #FFF;}
 table.plaque_list {}
 table.plaque_list tr {}
 table.plaque_list td {
-	padding: 8px;
+  padding: 8px;
 }
 table.plaque_list td.photo {}
 table.plaque_list td.geo {}
@@ -911,72 +918,72 @@ table.plaque_list td.geo {}
 #places_results,
 #organisations_results,
 #search_results {
-	padding: 0 5% 32px;
-	list-style-type: none;
+  padding: 0 5% 32px;
+  list-style-type: none;
 }
 
 @media screen and (min-width: 850px) {
-	#people_results,
-	#places_results,
-	#organisations_results {
-		-moz-column-gap: 40px; -webkit-column-gap: 40px; column-gap: 40px;
-		-moz-column-rule: solid 1px #EEE; -webkit-column-rule: solid 1px #EEE; column-rule: solid 1px #EEE;
-	}
+  #people_results,
+  #places_results,
+  #organisations_results {
+    -moz-column-gap: 40px; -webkit-column-gap: 40px; column-gap: 40px;
+    -moz-column-rule: solid 1px #EEE; -webkit-column-rule: solid 1px #EEE; column-rule: solid 1px #EEE;
+  }
 }
 
 /* 45% March */
-@media screen and (min-width: 850px) and (max-width: 1300px) { 
-	#people_results,
-	#places_results,
-	#organisations_results {
-		-moz-column-count: 2; -webkit-column-count: 2; column-count: 2;
-	}
+@media screen and (min-width: 850px) and (max-width: 1300px) {
+  #people_results,
+  #places_results,
+  #organisations_results {
+    -moz-column-count: 2; -webkit-column-count: 2; column-count: 2;
+  }
 }
 
 /* 17% March */
 @media screen and (min-width: 1300px) and (max-width: 1500px) {
-	#people_results,
-	#places_results,
-	#organisations_results {
-		-moz-column-count: 3; -webkit-column-count: 3; column-count: 3;
-	}
+  #people_results,
+  #places_results,
+  #organisations_results {
+    -moz-column-count: 3; -webkit-column-count: 3; column-count: 3;
+  }
 }
 
 /* 17%+ March */
-@media screen and (min-width: 1500px) { 
-	#people_results,
-	#places_results,
-	#organisations_results {
-		-moz-column-count: 4; -webkit-column-count: 4; column-count: 4;
-	}
+@media screen and (min-width: 1500px) {
+  #people_results,
+  #places_results,
+  #organisations_results {
+    -moz-column-count: 4; -webkit-column-count: 4; column-count: 4;
+  }
 }
 
 #people_results li,
 #places_results li,
 #organisations_results li,
 #search_results li {
-	background: url('../images/bullet-blue.gif') no-repeat left 10px;
-	padding-left: 16px;
-	padding-bottom: 16px;
+  background: url('../images/bullet-blue.gif') no-repeat left 10px;
+  padding-left: 16px;
+  padding-bottom: 16px;
 }
 
 #people_results li a,
 #places_results li a,
 #organisations_results li a {
-	color: #000;
-	text-decoration: none;
+  color: #000;
+  text-decoration: none;
 }
 
 #people_results li a:hover,
 #places_results li a:hover,
 #organisations_results li a:hover {
-	color: #FFF;
+  color: #FFF;
 }
 
 .results .count,
 .results li a.location {
-	color: #999;
-	display: inline-block;
+  color: #999;
+  display: inline-block;
 }
 
 #people_results .count a {
@@ -985,94 +992,94 @@ table.plaque_list td.geo {}
 
 .results li a.role,
 .results li a.attribute {
-	border-bottom :dotted 1px #CCC;
+  border-bottom :dotted 1px #CCC;
 }
 
 .results li a:hover {
-	background: #4f7cbf;
-	color: #FFF;
+  background: #4f7cbf;
+  color: #FFF;
 }
 
 .results strong {
-	font-weight: normal;
+  font-weight: normal;
 }
 
 .results span {
-	text-transform: uppercase;
+  text-transform: uppercase;
 }
 
 
 /*******/
 
 .one_destination_results .count {
-	display: block;
+  display: block;
 }
 
 .one_destination_results li a {
-	display: block;
+  display: block;
 }
 .one_destination_results li a:hover {
-	background: #EEE;
-	border-radius: 8px;
-	color: #000;
+  background: #EEE;
+  border-radius: 8px;
+  color: #000;
 }
 
 /*********/
 
 .plaque_info_panel {
-	background: #EEE;
-	border-radius: 16px;
-	padding: 16px;
-	/*float: right;*/
+  background: #EEE;
+  border-radius: 16px;
+  padding: 16px;
+  /*float: right;*/
 }
 
 .plaque_info_panel h1 {
-	font-size: 16px;
+  font-size: 16px;
 }
 
 .plaque_info_panel .photo a {
-	display: block;
+  display: block;
 }
 
 .plaque_info_panel .photo a img {
-	border: solid 2px #666;
+  border: solid 2px #666;
 }
 
 .section_details {
-	width: 100%;
+  width: 100%;
 }
 
 .section_details th {
-	padding-right: 16px;
-	width: 34%;
+  padding-right: 16px;
+  width: 34%;
 }
 
 .section_details th,
 .section_details td {
-	border-bottom: dotted 1px #CCC;
-	font-style: italic;
-	font-weight: normal;
-	text-align: left;
-	padding-top: 4px;
-	padding-bottom: 4px;
+  border-bottom: dotted 1px #CCC;
+  font-style: italic;
+  font-weight: normal;
+  text-align: left;
+  padding-top: 4px;
+  padding-bottom: 4px;
 }
 
 .visuallyhidden {
-	position: absolute !important;    
+  position: absolute !important;
   clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
   clip: rect(1px, 1px, 1px, 1px);
 }
 
 section {
-/*	border: solid 1px #000;
-	display: block;
-	margin: 8px;*/
+/*  border: solid 1px #000;
+  display: block;
+  margin: 8px;*/
 }
 
 /* >> The Magnificent CLEARFIX: Updated to prevent margin-collapsing on child elements << j.mp/bestclearfix */
 .clearfix:before, .clearfix:after {
-  content: "\0020"; display: block; height: 0; visibility: hidden;	
-} 
+  content: "\0020"; display: block; height: 0; visibility: hidden;
+}
 
 .clearfix:after { clear: both; }
 /* Fix clearfix: blueprintcss.lighthouseapp.com/projects/15318/tickets/5-extra-margin-padding-bottom-of-page */
@@ -1080,26 +1087,26 @@ section {
 
 
 /* 3%+ March */
-@media screen and (min-width: 400px) and (max-width: 700px) { 
+@media screen and (min-width: 400px) and (max-width: 700px) {
 
 }
 
 /* 15% March 1024x768 */
-@media screen and (min-width: 700px) and (max-width: 1100px) { 
+@media screen and (min-width: 700px) and (max-width: 1100px) {
 
 }
 
 /* 30% March 1280 x 800/1024 */
-@media screen and (min-width: 1100px) and (max-width: 1300px) { 
+@media screen and (min-width: 1100px) and (max-width: 1300px) {
 
 }
 
 /* 17% March 1366x768 + 1440x900 */
-@media screen and (min-width: 1300px) and (max-width: 1500px) { 
+@media screen and (min-width: 1300px) and (max-width: 1500px) {
 
 }
 
 /* 17%+ March 1600,1680,1920 */
-@media screen and (min-width: 1500px) { 
+@media screen and (min-width: 1500px) {
 
 }
