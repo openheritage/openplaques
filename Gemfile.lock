@@ -76,7 +76,6 @@ GEM
     treetop (1.4.9)
       polyglot (>= 0.3.1)
     tzinfo (0.3.28)
-    usertext (0.1.0)
     warden (1.0.4)
       rack (>= 1.0)
 
@@ -91,4 +90,3 @@ DEPENDENCIES
   rake
   shoulda
   sqlite3-ruby
-  usertext

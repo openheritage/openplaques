@@ -11,7 +11,7 @@ gem 'hpricot'
 
 gem 'sqlite3-ruby', :require => 'sqlite3'
 
-# gem 'mysql2', '< 0.3'
+#gem 'mysql', '2.8.1'
 # Use unicorn as the web server
 # gem 'unicorn'
 
@@ -24,7 +24,7 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 
 gem 'devise'
 
-gem 'usertext'
+#gem 'usertext'
 
 # Bundle the extra gems:
 # gem 'bj'
