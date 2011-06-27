@@ -30,7 +30,7 @@ plaque_mutliple_images
 
       <div class="no_photo_geo">
 
-        <%= image_tag(google_maps_path(@plaque.latitude, @plaque.longitude, {:width => 250, :height => 250, :zoom => 16, :styles =>
+        <%= image_tag(google_maps_path(@plaque.latitude, @plaque.longitude, {:width => 245, :height => 250, :zoom => 16, :styles =>
           {
             :road =>
               {:all =>
@@ -52,7 +52,7 @@ plaque_mutliple_images
             }
           )) %>
 
-          <%= image_tag(google_maps_path(@plaque.latitude, @plaque.longitude, {:width => 250, :height => 250, :zoom => 10, :styles =>
+          <%= image_tag(google_maps_path(@plaque.latitude, @plaque.longitude, {:width => 245, :height => 250, :zoom => 10, :styles =>
             {
               :road =>
                 {:all =>
@@ -139,7 +139,7 @@ plaque_mutliple_images
       <% end %>
 
       <%= render "plaque_details" %>
-      <%= render "contributor_details" %>
+      <% # render "contributor_details" %>
 
     </section>
 
@@ -160,38 +160,38 @@ plaque_mutliple_images
 
       </div>
 
-		<section id="plaque_identifier" class="plaque_info_panel">
+    <section id="plaque_identifier" class="plaque_info_panel">
 
-	      <%= render "plaque_header" %>
+        <%= render "plaque_header" %>
 
-	      <% if @plaque.geolocated? %>
-	        <%= image_tag(google_maps_path(@plaque.latitude, @plaque.longitude, {:zoom => 16, :styles =>
-	        {
-	          :road =>
-	            {:all =>
-	              {:lightness => "30"}
-	            },
-	            "road.arterial" =>
-	              {:all =>
-	                {:hue => "0x003bff"}
-	              },
-	            :poi =>
-	              {:all =>
-	                {:visibility => :simplified}
-	              },
-	            :landscape =>
-	              {:all =>
-	                {:hue => "0x003bff"}
-	              }
-	            }
-	          }
-	        )) %>
-	      <% end %>
+        <% if @plaque.geolocated? %>
+          <%= image_tag(google_maps_path(@plaque.latitude, @plaque.longitude, {:zoom => 16, :styles =>
+          {
+            :road =>
+              {:all =>
+                {:lightness => "30"}
+              },
+              "road.arterial" =>
+                {:all =>
+                  {:hue => "0x003bff"}
+                },
+              :poi =>
+                {:all =>
+                  {:visibility => :simplified}
+                },
+              :landscape =>
+                {:all =>
+                  {:hue => "0x003bff"}
+                }
+              }
+            }
+          )) %>
+        <% end %>
 
-	      <%= render "plaque_details" %>
-	      <%= render "contributor_details" %>
+        <%= render "plaque_details" %>
+        <% #= render "contributor_details" %>
 
-	    </section>
+      </section>
 
   <% end %>
 
