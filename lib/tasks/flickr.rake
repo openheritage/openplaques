@@ -4,40 +4,54 @@ require 'net/http'
 require 'uri'
 require 'rexml/document'
 
-namespace "photos" do 
-  
+namespace "photos" do
+
+  desc "Switch Flickr photos to using the largest size"
+  task :upsize => [:environment] do
+
+    re = /http:\/\/farm\d.static.flickr.com\/\d+\/.+_m.jpg/
+
+    Photo.find_each do |p|
+      if p.file_url =~ re
+        p.update_attribute(:file_url, p.file_url.gsub("m.jpg", "b.jpg"))
+      end
+    end
+
+  end
+
+
   desc "Find photos on Flickr"
   task :find => [:environment] do
     key = "86c115028094a06ed5cd19cfe72e8f8b"
     content_type = "1" # Photos only
     machine_tag_key = "openplaques:id"
-  
+
     flickr_url = "http://api.flickr.com/services/rest/"
-    method = "flickr.photos.search"  
-    license = "1,2,3,4,5,6,7" # All the CC licencses that allow commercial re-use  
-  
-    
+    method = "flickr.photos.search"
+    license = "1,2,3,4,5,6,7" # All the CC licencses that allow commercial re-use
+
+
     url = flickr_url + "?api_key=" + key + "&method=" + method + "&license=" + license + "&content_type=" + content_type + "&machine_tags=" + machine_tag_key +  "=&extras=date_taken,owner_name,license,geo,machine_tags"
-  
+
     new_photos_count = 0
     response = open(url)
     doc = REXML::Document.new(response.read)
     doc.elements.each('//rsp/photos/photo') do |photo|
       print "."
       $stdout.flush
-    
+
       @photo = nil
 
       file_url = "http://farm" + photo.attributes["farm"] + ".static.flickr.com/" + photo.attributes["server"] + "/" + photo.attributes["id"] + "_" + photo.attributes["secret"] + "_m.jpg"
       photo_url = "http://www.flickr.com/photos/" + photo.attributes["owner"] + "/" + photo.attributes["id"] + "/"
 
       @photo = Photo.find_by_url(photo_url)
-    
-    
+
+
       if @photo
       else
-        plaque_id = photo.attributes["machine_tags"][/openplaques\:id\=(\d+)/, 1] 
-        
+        plaque_id = photo.attributes["machine_tags"][/openplaques\:id\=(\d+)/, 1]
+
         @plaque = Plaque.find(:first, :conditions => {:id => plaque_id})
         if @plaque
           @photo = Photo.new
@@ -84,14 +98,14 @@ namespace "photos" do
           end
 
 
-        
+
         else
-          #puts "Photo's machine tag doesn't match a plaque."  
+          #puts "Photo's machine tag doesn't match a plaque."
         end
       end
     end
-  
+
     puts "\n" + new_photos_count.to_s + " new photos found and saved."
-  
+
   end
 end
