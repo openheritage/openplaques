@@ -1,7 +1,6 @@
 class PersonalConnectionsController < ApplicationController
 
   before_filter :authenticate_admin!, :only => :destroy
-  before_filter :authorisation_required
 
   before_filter :find_plaque, :only => [:edit, :update, :new, :create]
   before_filter :find_personal_connection, :only => [:edit, :destroy]
