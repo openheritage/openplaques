@@ -3,7 +3,7 @@ class AllPlaquesController < ApplicationController
   def show
     respond_to do |format|
       format.html {
-        @plaques = Plaque.find(:all, :order => :id, :include => [:organisation, {:location => :area}, :colour])
+        @plaques = Plaque.find(:all)
       }
       format.yaml {
         redirect_to plaques_url(:format => :yaml), :status => :moved_permanently
