@@ -258,8 +258,9 @@ module PlaquesHelper
   end
 
   def erected_information(plaque)
+    info = "".html_safe
     if plaque.erected_at? or plaque.organisation
-      info = link_to(h(plaque.organisation.name), plaque.organisation) if plaque.organisation
+      info += "by " + link_to(h(plaque.organisation.name), plaque.organisation) if plaque.organisation
       if plaque.erected_at?
         info += " ".html_safe
         if plaque.erected_at.day == 1 && plaque.erected_at.month == 1
