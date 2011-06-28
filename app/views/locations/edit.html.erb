@@ -1,8 +1,7 @@
 <% @page_title = "Edit " + @location.name %>
 <h1>Edit <%= link_to @location.name, @location %></h1>
 
-<% form_for(@location) do |f| %>
-  <%= f.error_messages %>
+<%= form_for(@location) do |f| %>
 
   <p>
     <%= f.label :name %>
@@ -24,3 +23,5 @@
     <%= f.submit "Update" %>
   </p>
 <% end %>
+
+<%= button_to "Delete", location_path(@location), {:method => :delete, :class => :delete} if current_user.try(:is_admin?) %>

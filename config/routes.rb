@@ -46,7 +46,7 @@ Openplaques::Application.routes.draw do
       resource :ungeolocated, :controller => :area_ungeolocated_plaques, :only => :show
     end
   end
-  resources :locations, :only => [:show, :index, :edit, :update]
+  resources :locations, :only => [:show, :index, :edit, :update, :destroy]
 
   # These are all to do with the photos.
   resources :photos

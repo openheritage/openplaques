@@ -3,7 +3,7 @@ class LocationsController < ApplicationController
   before_filter :authenticate_admin!, :only => :destroy
   before_filter :authenticate_user!, :except => [:index, :show]
 
-  before_filter :find_location, :only => [:show, :edit, :update]
+  before_filter :find_location, :only => [:show, :edit, :update, :destroy]
 
   def index
     @locations = Location.find(:all, :order => :name)
@@ -21,6 +21,11 @@ class LocationsController < ApplicationController
       render :edit
     end
 
+  end
+
+  def destroy
+    @location.destroy
+    redirect_to locations_path
   end
 
   protected
