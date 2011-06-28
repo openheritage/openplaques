@@ -13,7 +13,7 @@ class PersonalConnection < ActiveRecord::Base
   belongs_to :verb, :counter_cache => true
   belongs_to :person, :counter_cache => true
   belongs_to :location, :counter_cache => true
-  belongs_to :plaque
+  belongs_to :plaque, :counter_cache => true
 
   def from
     started_at ? started_at.year.to_s : ""

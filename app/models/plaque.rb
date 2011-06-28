@@ -33,12 +33,10 @@ class Plaque < ActiveRecord::Base
   belongs_to :plaque_erected_year, :counter_cache => true
   belongs_to :user, :counter_cache => true
   belongs_to :language, :counter_cache => true
-  # belongs_to :todo_item
 
   has_one :area, :through => :location
 
-#  has_many :plaque_connections
-  has_many :personal_connections #, :through => :plaque_connections
+  has_many :personal_connections
   has_many :photos, :inverse_of => :plaque
   has_many :verbs, :through => :personal_connections
 
@@ -52,7 +50,7 @@ class Plaque < ActiveRecord::Base
   scope :photographed_not_coloured, :conditions => ["photos_count > 0 AND colour_id IS NULL"]
   scope :geo_no_location, :conditions => ["latitude IS NOT NULL AND location_id IS NULL"]
   scope :detailed_address_no_geo, :conditions => ["latitude IS NULL AND 1 = ((SELECT name FROM locations WHERE locations.id = location_id) REGEXP '.*[0-9].*')"]
-  scope :no_connection, :conditions => {:plaque_connections_count => 0,:plaque_connections_count => nil }
+  scope :no_connection, :conditions => {:personal_connections_count => 0}
   scope :partial_inscription, :conditions => {:inscription_is_stub => true }
   scope :partial_inscription_photo, :conditions => {:photos_count => 1..99999, :inscription_is_stub => true}
 

@@ -33,7 +33,7 @@ Openplaques::Application.routes.draw do
     resource :inscription, :controller => "PlaqueInscription", :only => [:edit]
     resource :description, :controller => :plaque_description, :only => [:edit, :show]
     resource :language, :controller => "PlaqueLanguage", :only => [:edit]
-    resources :personal_connections, :controller => "PersonalConnections", :as => :connections
+    resources :connections, :controller => "PersonalConnections", :as => :connections
   end
 
   resource :areas, :controller => :all_areas, :only => [:show]

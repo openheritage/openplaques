@@ -46,6 +46,7 @@ class PersonalConnectionsController < ApplicationController
     end
   end
 
+
   protected
 
     def find_plaque

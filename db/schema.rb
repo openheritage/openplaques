@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110512074751) do
+ActiveRecord::Schema.define(:version => 20110628153552) do
 
   create_table "areas", :force => true do |t|
     t.string   "name"
@@ -161,26 +161,28 @@ ActiveRecord::Schema.define(:version => 20110512074751) do
 
   create_table "plaques", :force => true do |t|
     t.date     "erected_at"
-    t.float    "latitude",                 :limit => 255
-    t.float    "longitude",                :limit => 255
+    t.float    "latitude",                   :limit => 255
+    t.float    "longitude",                  :limit => 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "organisation_id"
-    t.text     "inscription",              :limit => 255
+    t.text     "inscription",                :limit => 255
     t.string   "reference"
-    t.integer  "plaque_connections_count"
     t.integer  "plaque_erected_year_id"
     t.text     "notes"
     t.text     "parsed_inscription"
     t.integer  "colour_id"
-    t.integer  "photos_count",                            :default => 0,     :null => false
+    t.integer  "photos_count",                              :default => 0,     :null => false
     t.string   "accuracy"
     t.integer  "user_id"
     t.integer  "language_id"
     t.text     "description"
-    t.boolean  "inscription_is_stub",                     :default => false
+    t.boolean  "inscription_is_stub",                       :default => false
     t.integer  "location_id"
+    t.integer  "personal_connections_count",                :default => 0
   end
+
+  add_index "plaques", ["personal_connections_count"], :name => "index_plaques_on_personal_connections_count"
 
   create_table "roles", :force => true do |t|
     t.string   "name"
