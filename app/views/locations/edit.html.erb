@@ -1,4 +1,4 @@
-<% @page_title = "Edit " + @location.name %>
+<% content_for :page_title, "Edit " + @location.name %>
 <h1>Edit <%= link_to @location.name, @location %></h1>
 
 <%= form_for(@location) do |f| %>

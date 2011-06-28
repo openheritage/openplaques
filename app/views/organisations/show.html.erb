@@ -1,7 +1,7 @@
-<% @page_title = @organisation.name  %>
+<% content_for :page_title, @organisation.name + " plaques" %>
 
 <div class="panel clearfix">
-  <h1 property="dc:title rdfs:label foaf:name" about="#this"><%= h @organisation.name %></h1>
+  <h1 property="dc:title rdfs:label foaf:name" about="#this"><%= h @organisation.name %> plaques</h1>
   <%= link_to("Edit", edit_organisation_path(@organisation), {:class => :edit, :title => "edit location"}) if current_user %>
   <%= content_tag("p", link_to(h(@organisation.website),@organisation.website), {:rel => "foaf:homepage vcard:url"}) unless @organisation.website.blank? %>
 </div>

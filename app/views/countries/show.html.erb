@@ -1,10 +1,8 @@
-<% @page_title = @country.name  %>
+<% content_for :page_title, "Historical plaques in " + @country.name %>
+
 
 <div class="panel clearfix">
-  <h1>
-  <%= @country.name %>
-  <a class="wikipedia_logo" href="http://en.wikipedia.org/wiki/<%= @country.name.gsub(" ", "_") %>"><img src="/images/wikipedia-20.png" alt="<%= @country.name %> on Wikipedia" /></a>
-  </h1>
+  <h1>Plaques in <%= @country.name %></h1>
 
   <%= pluralize @country.plaques.size, "plaque" %>
 </div>

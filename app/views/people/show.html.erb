@@ -1,4 +1,4 @@
-<% @page_title = @person.name  %>
+<% content_for :page_title, "Historical plaques about " + @person.name %>
 
 <div class="panel">
 <div class="vcard person" typeof="<%= if (@person.person?) then "foaf:Person" else "foaf:Agent" end %> vcard:VCard" about="#person">

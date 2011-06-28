@@ -1,9 +1,6 @@
-<% @page_title = "Colours" %>
+<% content_for :page_title, "Historical plaques - by colour" %>
 <div class="panel">
-	<h1><%= @page_title %></h1>
-</div>
-
-<p><%= pluralize(@colours.size, "colour") %></p>
+  <h1>Plaques - by colour</h1>
 
 <ul>
 <% for colour in @colours %>
@@ -12,3 +9,4 @@
 </ul>
 
 <%= content_tag("p", link_to("Add new colour", new_colour_path)) if current_user && current_user.is_admin %>
+</div>

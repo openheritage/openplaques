@@ -1,15 +1,18 @@
-<h1>Add country</h1>
+<% content_for :page_title, "Add country" %>
+<div class="panel">
+  <h1>Add country</h1>
 
-<% form_for @country, :url => countries_path do |f| %>
+  <% form_for @country, :url => countries_path do |f| %>
 
-  <%#= f.error_messages %>
+    <%#= f.error_messages %>
 
-  <p><%= f.label :name %> <%= f.text_field :name %></p>
+    <p><%= f.label :name %> <%= f.text_field :name %></p>
 
-  <p><%= f.label :alpha2, "Alpha-2 code" %> <%= f.text_field :alpha2 %></p>
+    <p><%= f.label :alpha2, "Alpha-2 code" %> <%= f.text_field :alpha2 %></p>
 
-  <p><%= f.label :dbpedia_uri, "DBpedia resource URI" %> <%= f.text_field :dbpedia_uri %></p>
+    <p><%= f.label :dbpedia_uri, "DBpedia resource URI" %> <%= f.text_field :dbpedia_uri %></p>
 
-  <%= f.submit "Add" %>
+    <%= f.submit "Add" %>
 
-<% end %>
+  <% end %>
+</div>

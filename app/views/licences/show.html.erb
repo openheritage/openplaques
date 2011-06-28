@@ -1,15 +1,16 @@
-<% @page_title = @licence.name + " Licence" %>
-<h1><%= @page_title %></h1>
+<% content_for :page_title, "Photos with a " + @licence.name %>
+<div class="panel">
+  <h1>Photos with a <%= @licence.name %></h1>
 
-<p>
-  <%= @licence.photos.count %> <%= link_to "photos",photos_path %> in Open Plaques are made available under the <%= @licence.name %> <%= link_to "licence",licences_path, {:rel => "owl:sameAs"} %>.
-  The licence allows commercial use = <%= @licence.allows_commercial_use.to_s %>.
-</p>
+  <p>
+    <%= @licence.photos.count %> <%= link_to "photos",photos_path %> in Open Plaques are made available under the <%= @licence.name %> <%= link_to "licence",licences_path, {:rel => "owl:sameAs"} %>.
+  </p>
 
-<%= content_tag("ul") do %>
-  <% @licence.photos.each do |photo| %>
-    <%= content_tag("li") do %>
-      <%= link_to(image_tag(photo.file_url), photo) %>
+  <%= content_tag("ul") do %>
+    <% @licence.photos.each do |photo| %>
+      <%= content_tag("li") do %>
+        <%= link_to("Photo " + photo.id.to_s, photo) %>
+      <% end %>
     <% end %>
   <% end %>
-<% end %>
+</div>

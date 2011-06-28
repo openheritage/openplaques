@@ -904,6 +904,9 @@ html.no-rgba .ui-autocomplete .ui-menu-item {background: #FFF;}
 
 /* TODO: Revamp this section */
 
+.plaques.all li {list-style-type: none; margin-bottom: .5em;}
+.plaques.all p a { display: block; text-decoration: none;}
+
 table.plaque_list {}
 table.plaque_list tr {}
 table.plaque_list td {

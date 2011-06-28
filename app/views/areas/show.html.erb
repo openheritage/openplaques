@@ -1,17 +1,17 @@
-<% @page_title = "Plaques in " + @area.name %>
+<% content_for :page_title, "Historical plaques in " + @area.name + ", " + @area.country.name %>
 
 <div class="panel clearfix">
-	<%= link_to(@area.country.name, @area.country) if @area.country %>
-	<h1><%= @area.name %></h1>
-	
-	<% @plaques.each do |plaque| %>
-		
-		<h2><%= link_to title(plaque), plaque %></h2>
-		
-		<p><%= plaque.inscription %></p>
-		
-	<% end %>	
-	
+  <%= link_to(@area.country.name, @area.country) if @area.country %>
+  <h1><%= @area.name %></h1>
+
+  <% @plaques.each do |plaque| %>
+
+    <h2><%= link_to title(plaque), plaque %></h2>
+
+    <p><%= plaque.inscription %></p>
+
+  <% end %>
+
 </div>
 
 

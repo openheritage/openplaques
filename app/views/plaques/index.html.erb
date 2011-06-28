@@ -1,3 +1,6 @@
+<% content_for :page_title, "Historical plaques - recently added" %>
+
+<div class="panel">
 <h1>Plaques</h1>
 
 <% if @plaques.size > 0 %>
@@ -14,3 +17,4 @@
 <% else %>
   <%= content_tag("p", "No plaques yet.")%>
 <% end %>
+</div>

@@ -1,14 +1,17 @@
-<% @page_title = "Add Colour" %>
-<h1><%= @page_title %></h1>
+<% content_for :page_title, "Add a plaque colour" %>
 
-<%= form_for @colour do |colour| %>
-  <%= colour.label :name, "Name" %>
-  <%= colour.text_field :name %>
+<div class="panel">
+  <h1>Add colour</h1>
 
-  <p>
-    <%= colour.label :dbpedia_uri %>
-    <%= colour.text_field :dbpedia_uri %>
-  </p>
+  <%= form_for @colour do |colour| %>
+    <%= colour.label :name, "Name" %>
+    <%= colour.text_field :name %>
 
-  <%= colour.submit "Save" %>
-<% end %>
+    <p>
+      <%= colour.label :dbpedia_uri %>
+      <%= colour.text_field :dbpedia_uri %>
+    </p>
+
+    <%= colour.submit "Save" %>
+  <% end %>
+</div>

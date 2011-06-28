@@ -1,3 +1,5 @@
+<% content_for :page_title, "Historical plaques at " + @location.name + ", " + @location.area.name %>
+
 <% @page_title = @location.name  %>
 <div class="location" typeof="geo:Point">
   <h1><%= @location.name %><% if @location.area %>, <%= link_to @location.area.name, @location.area %><% end %></h1>
@@ -12,5 +14,5 @@
   </ul>
 
 
-<%= content_tag("p", link_to("Edit", edit_location_path(@location))) if authorized? %>
+<%= content_tag("p", link_to("Edit", edit_location_path(@location))) if current_user.try(:is_admin?) %>
 

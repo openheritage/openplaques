@@ -1,12 +1,14 @@
-<% @page_title = "Languages" %>
-<h1>Languages</h1>
+<% content_for :page_title, "Historical plaques - by language" %>
+<div class="panel">
+  <h1>Plaques - by language</h1>
 
-<% if @languages.size > 0 %>
-  <%= content_tag("ul") do %>
-    <% @languages.each do |language| %>
-      <%= content_tag("li", link_to(language.name, language_path(language))) %>
+  <% if @languages.size > 0 %>
+    <%= content_tag("ul") do %>
+      <% @languages.each do |language| %>
+        <%= content_tag("li", link_to(language.name, language_path(language))) %>
+      <% end %>
     <% end %>
   <% end %>
-<% end %>
 
-<%= link_to("New language", new_language_path) if current_user %>
+  <%= link_to("New language", new_language_path) if current_user %>
+</div>

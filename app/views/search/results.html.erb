@@ -1,7 +1,8 @@
+<% content_for :page_title, "Plaques mentioning '" + @phrase + "'" %>
 <% @page_title = "Search results for '" + @phrase + "'"  %>
 
 <div class="panel clearfix">
-  <h1>Search results for &quot;<%= @phrase %>&quot;</h1>
+  <h1>Plaques mentioning &quot;<%= @phrase %>&quot;</h1>
 </div>
 
 <% if !@search_results.empty? %>
@@ -24,9 +25,9 @@
   <p>Plaque not listed? <%= link_to "Add it", new_plaque_path(:checked => true) %>.</p>
 
 <% else %>
-	<div class="panel" id="search_results_footer">
-		<h2>Can't find what you're looking for? Try another search</h2>
-		<%= render :partial => "search_form", :locals => { :phrase => @phrase } %>
-	</div>
+  <div class="panel" id="search_results_footer">
+    <h2>Can't find what you're looking for? Try another search</h2>
+    <%= render :partial => "search_form", :locals => { :phrase => @phrase } %>
+  </div>
 
 <% end %>

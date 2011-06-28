@@ -1,3 +1,5 @@
+<% content_for :page_title do %><%= title(@plaque) %><%= " in " + @plaque.location.area.name if @plaque.area %><% end %>
+
 <% @page_title = title(@plaque) %>
 
 <div class="panel clearfix">
