@@ -1,36 +1,18 @@
 <% @page_title = "Editing " + @person.name %>
-<h1>Editing <%= link_to @person.name, @person %></h1>
 
-<p>Plaques:</p>
-<ul>
-  <% @person.plaques.each do |plaque| %>
-    <li><%= link_to("\#" + plaque.id.to_s, plaque) %> "<%= plaque.inscription %>" --> <%= new_linked_inscription(plaque) %></li>
-  <% end %>
-</ul>
+<div class="panel">
+   <h1>Edit details about <%= link_to @person.name, @person %></h1>
 
-<% form_for(@person) do |f| %>
+
+<%= form_for(@person) do |f| %>
   <p><%= f.label :name %> <%= f.text_field :name %></p>
   <p><%= f.label :born_on, "Born" %> <%= text_field_tag :born_on, @born_on, {:maxlength => "4"} %> <%= f.label :died_on, "Died" %> <%= text_field_tag :died_on, @died_on, {:maxlength => "4"} %></p>
-  <div id="wikipedia">
     <p><%= f.label :wikipedia_url %> <%= f.text_field :wikipedia_url %></p>
     <p><%= f.label :wikipedia_paras %> <%= f.text_field :wikipedia_paras %> e.g. "[1,4,5]", "1,2" or "2 4 7"</p>
     <a href="<%= wikipedia_url(@person)%>"><%= wikipedia_url(@person)%></a><br/>
     "<%= wikipedia_summary_p(@person) %>"</p>
-  </div>
   <p><%= f.label :dbpedia_uri %> <%= f.text_field :dbpedia_uri %></p>
-  <p><%= f.label :surname_starts_with %> <%= f.text_field :surname_starts_with %></p>
+  <p><%= f.label :surname_starts_with %> <%= f.text_field :surname_starts_with, :maxlength => 1 %></p>
   <p><%= f.submit "Update" %></p>
 <% end %>
-
-<p>Roles: </p>
-<ul><% @person.personal_roles.each do |personal_role| %><li><%= dated_role(personal_role) %> <%= link_to "[Edit]", edit_personal_role_path(personal_role) %> <%= link_to "[x]", personal_role, {:method => :delete}%> <% end %> </li></ul>
-<p>
-  <% form_for @personal_role do |f| %>
-    <%= f.error_messages %>
-
-    <%= f.hidden_field :person_id, :value => @person.id %>
-    <%= f.collection_select :role, @roles, :id, :name %> (from <%= f.text_field :started_at %> to <%= f.text_field :ended_at %>)
-    <%= f.submit "Add" %>
-  <% end %>
-</p>
-<%= content_tag("p", link_to("Add new role", new_role_path)) if current_user.try(:is_admin?) %>
+</div>
