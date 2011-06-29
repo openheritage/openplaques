@@ -1,7 +1,6 @@
 <h1>Geocoding Plaque #<%= link_to(@plaque.id, @plaque) %></h1>
 
-<% form_for(@plaque) do |f| %>
-  <%= f.error_messages %>
+<%= form_for(@plaque) do |f| %>
 
   <% unless @plaque.geolocated? || @geocodes.length == 0%>
     <p>
@@ -25,8 +24,8 @@
   <% if @plaque.location != nil %>
 
     <div class="info">
-      <%= link_to "Edit", edit_plaque_location_path(@plaque), {:class => :edit, :title => "edit location"} if authorized?%>
-    <%= content_tag("p", "Location: " + address(@plaque.location) + ".") if @plaque.location %>
+      <%= link_to "Edit", edit_plaque_location_path(@plaque), {:class => :edit, :title => "edit location"} %>
+    <%= content_tag("p", "Location: ".html_safe + address(@plaque.location) + ".") if @plaque.location %>
     </div>
 
     <% if @yahoo_geo %>

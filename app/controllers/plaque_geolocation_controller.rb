@@ -4,7 +4,7 @@ include REXML
 
 class PlaqueGeolocationController < ApplicationController
 
-  before_filter :login_required
+  before_filter :authenticate_user!
 
   def edit
     @plaque = Plaque.find(params[:plaque_id])
