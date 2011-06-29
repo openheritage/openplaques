@@ -80,10 +80,10 @@
       <% end %>
 
       <% if alert %>
-			<div class="flash_alert">
-				<p><%= alert %></p>
-			</div>
-		<% end %>
+      <div class="flash_alert">
+        <p><%= alert %></p>
+      </div>
+    <% end %>
 
       <div class="container">
 
@@ -107,7 +107,7 @@
 
 
 <% if ::Rails.env == "production" %>
-  <%= google_analytics_code(GOOGLE_ANALYTICS_ID) if defined?(GOOGLE_ANALYTICS_ID) %>
+  <%= google_analytics_code(ENV['GOOGLE_ANALYTICS_ID']) %>
 <% end %>
 </body>
 </html>
