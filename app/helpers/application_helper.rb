@@ -20,11 +20,11 @@ module ApplicationHelper
   def google_analytics_code(code)
 
     var = "var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-8901261-1']);
+    _gaq.push(['_setAccount', '#{code}']);
     _gaq.push(['_setDomainName', '.openplaques.org']);
     _gaq.push(['_trackPageview']);
     "
-    var += "_gaq.push(['_setVar', 'admin']);\n" if authorized?
+    var += "_gaq.push(['_setVar', 'admin']);\n" if current_user.try(:admin?)
 
     function = "(function() {
       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
