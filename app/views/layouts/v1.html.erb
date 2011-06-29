@@ -107,7 +107,7 @@
 
 
 <% if ::Rails.env == "production" %>
-  <%= google_analytics_code(ENV['GOOGLE_ANALYTICS_ID']) if !(ENV['GOOGLE_ANALYTICS_ID'].nil? )%>
+  <%#= google_analytics_code(ENV['GOOGLE_ANALYTICS_ID']) if !(ENV['GOOGLE_ANALYTICS_ID'].nil? )%>
 <% end %>
 </body>
 </html>
