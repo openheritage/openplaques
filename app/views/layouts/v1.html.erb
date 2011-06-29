@@ -74,16 +74,16 @@
     <div id="content">
 
       <% if notice %>
-        <p class="notice">
-          <%= notice %>
-        </p>
+        <div class="flash_notice">
+          <p><%= notice %></p>
+        </div>
       <% end %>
 
       <% if alert %>
-        <p class="alert">
-          <%= alert %>
-        </p>
-      <% end %>
+			<div class="flash_alert">
+				<p><%= alert %></p>
+			</div>
+		<% end %>
 
       <div class="container">
 
