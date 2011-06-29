@@ -26,7 +26,7 @@ Openplaques::Application.routes.draw do
       post 'flickr_search'
       post 'flickr_search_all'
     end
-    resource :location, :controller => "PlaqueLocation", :only => [:edit]
+    resource :location, :controller => :plaque_location, :only => [:edit]
     resource :erected, :controller => "PlaqueErected", :only => [:edit]
     resource :colour, :controller => :plaque_colour, :only => [:edit]
     resource :geolocation, :controller => "PlaqueGeolocation", :only => [:edit]

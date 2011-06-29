@@ -1,20 +1,17 @@
-<% @page_title = "Edit location for plaque \#" + @plaque.id.to_s %>
-<h1>Edit location for <%= link_to("plaque \#" + @plaque.id.to_s, @plaque)%></h1>
+<% content_for :page_title, "Edit location for " + title(@plaque) %>
 
-<% form_for(@plaque) do |f| %>
-  <%= f.error_messages %>
 
-  <%= f.label :location %>
+<div class="panel">
+  <h1>Edit address for <%= link_to("plaque \#" + @plaque.id.to_s, @plaque)%></h1>
 
-  <%= text_field_tag :location, @plaque.location_string %>
-  <p>
-    <%= f.submit "Update" %>
-  </p>
-<% end %>
+  <%= form_for(@plaque) do |f| %>
 
-<% if @plaque.geolocated? %>
-  <%= osm_iframe(@plaque.latitude,@plaque.longitude) %>
-  <div class="info">
-    <p>Co-ordinates:  <%= geolocation_if_known(@plaque) %>. <%= "Google: " + google_map_if_known("map", @plaque) + ", " + google_streetview_if_known("street view", @plaque) if @plaque.geolocated? %>
-  </div>
-<% end %>
+    <%= f.label :location, "Street and number" %>
+    <%= text_field_tag :location, @plaque.location_string %>
+
+    <p>
+      <%= f.submit "Update" %>
+    </p>
+  <% end %>
+
+</div>
