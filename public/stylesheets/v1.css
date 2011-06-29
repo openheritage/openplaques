@@ -56,12 +56,22 @@ a:hover {
   2.1 Reuseable elements
 */
 
-.notice {
-  color: #0D0;
+.flash_notice, .flash_alert {
   margin: 0 auto;
   text-align: center;
-  padding: 16px 0;
+  padding: 16px 0;	
 }
+
+.flash_notice p, .flash_alert p {
+	border-radius: 8px;
+	color: #FFF;
+	display: inline-block;
+	padding: 8px 16px;	
+}
+
+.flash_notice p {background: #454A51;}
+.flash_alert p {background: #D00;}
+
 
 /**
   2.2 Development elements
