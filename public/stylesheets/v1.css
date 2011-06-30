@@ -209,11 +209,18 @@ a:hover {
   3. PLAQUE PAGE
 */
 
-h1.inscription {
+h1.inscription,
+h1.large_inscription {
   text-align: center;
 }
 
-h1.inscription a {
+h1.large_inscription {
+	font-size: 18px;
+	line-height: 26px;
+}
+
+h1.inscription a,
+h1.large_inscription a {
   text-decoration: none;
   border-bottom: dotted 1px;
 }
