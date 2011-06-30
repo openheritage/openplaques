@@ -4,19 +4,17 @@
 
 <div class="panel clearfix">
 
-  <%= content_tag("h1", new_linked_inscription(@plaque), {:class => "inscription", :property => "op:inscription"}) %>
+
+<%=
+	# TODO KLUDGE:
+	if new_linked_inscription(@plaque).length > 100
+		content_tag("h1", new_linked_inscription(@plaque), {:class => "large_inscription", :property => "op:inscription"})
+	else
+		content_tag("h1", new_linked_inscription(@plaque), {:class => "inscription", :property => "op:inscription"})
+	end
+%>
 
 </div>
-
-
-<!--
-TODO: Step by step instructions on how to do flickr
-
-plaque_no_image
-plaque_single_images
-plaque_mutliple_images
-
--->
 
 <div class="panel clearfix">
 
