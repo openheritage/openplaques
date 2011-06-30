@@ -7,7 +7,7 @@
 
 <%=
 	# TODO KLUDGE:
-	if new_linked_inscription(@plaque).length > 100
+	if new_linked_inscription(@plaque).length > 250
 		content_tag("h1", new_linked_inscription(@plaque), {:class => "large_inscription", :property => "op:inscription"})
 	else
 		content_tag("h1", new_linked_inscription(@plaque), {:class => "inscription", :property => "op:inscription"})
