@@ -51,7 +51,7 @@ Openplaques::Application.configure do
   config.active_support.deprecation = :notify
 
   config.action_mailer.default_url_options = { :host => "openplaques.org" }
-  NOTIFICATIONS_EMAIL = "feedback@openplaques.org"
+  NOTIFICATIONS_EMAIL = "notifications@openplaques.org"
 
 end
 
