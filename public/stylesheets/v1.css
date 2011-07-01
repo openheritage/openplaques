@@ -52,26 +52,110 @@ a:hover {
 /*  margin-top: 148px;*/
 }
 
-/**
-  2.1 Reuseable elements
-*/
-
-.flash_notice, .flash_alert {
+.container,
+.flash_notice,
+.flash_alert {
   margin: 0 auto;
+  width: 80%;
+}
+
+#content .container {
+  background: rgba(255,255,255,.6);
+  border: solid 1px #DDD;
+  border-radius: 16px;
+}
+
+html.no-rgba #content .container {background: #FFF;}
+
+
+
+
+/**
+  2.1 FLASH / ERRORS */
+
+.flash_notice,
+.flash_alert,
+#error_explanation {
+  margin: 0 auto 16px;
   text-align: center;
   padding: 16px 0;	
 }
 
-.flash_notice p, .flash_alert p {
+.flash_notice,
+.flash_alert,
+#error_explanation {
+	background: rgba(255,0,0,.1);
+	border: solid 1px #D00;
 	border-radius: 8px;
-	color: #FFF;
-	display: inline-block;
-	padding: 8px 16px;	
 }
 
-.flash_notice p {background: #454A51;}
-.flash_alert p {background: #D00;}
+#error_explanation h2 {
+	color: #333;
+	font-size: 16px;
+	margin-bottom: 6px;
+}
 
+#error_explanation ul {
+	list-style-type: none;
+}
+
+.flash_alert p,
+#error_explanation li {
+	color: #D00;
+	font-size: 24px;
+	font-weight: 600;
+}
+
+/**
+ 	2.1.1 BUTTONS
+*/
+
+/* Global */
+input.button, a.button {
+	-moz-background-inline-policy: continuous;
+	background: url("data:image/png;charset=utf-8;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAyCAYAAACd+7GKAAAAJklEQVQI12P4//+/AxMDA8N/OMGAykUj/uEVI5P1jypG4XckugcBcz8yYZey+NoAAAAASUVORK5CYII=") repeat-x scroll 0 0 #4F7CBF;
+	border: 1px solid #CCC;
+	border-radius: 4px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+	color: #FFF;
+	cursor: pointer;
+	display: inline-block;
+	font-family: "Baskerville", "Georgia", serif;
+	font-size: 18px;
+	font-weight: 600;
+	outline: medium none;
+	padding: 6px 14px;
+	position: relative;
+	text-decoration: none;
+	text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.25);
+}
+
+input.button:hover, a.button:hover {
+	background-color: #454A51;
+	border-color: #666;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+	text-decoration: none;
+}
+
+input.button:active, a.button:active  {
+	background-color: #000;
+	top: 2px;
+}
+
+/* Secondary */
+
+.secondary_button input, a.secondary_button {
+	background: url("data:image/png;charset=utf-8;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAyCAYAAACd+7GKAAAAJklEQVQI12P4//+/AxMDA8N/OMGAykUj/uEVI5P1jypG4XckugcBcz8yYZey+NoAAAAASUVORK5CYII=") repeat-x scroll 0 0 #EEE;
+	text-shadow: 0 -1px 1px rgba(255, 255, 255, 0.25);
+	color: #999;
+	margin-left: 16px;
+}
+
+a.secondary_button:hover, div.secondary_button:hover input {
+	background-color: #454A51;
+	color: #FFF;
+	text-shadow: 0 -1px 1px rgba(255, 255, 255, 0.25);
+}
 
 /**
   2.2 Development elements
@@ -637,21 +721,6 @@ nav ul li span {
 
 /******/
 
-.container {
-  margin: 0 auto;
-  width: 80%;
-}
-
-
-#content .container {
-  background: rgba(255,255,255,.6);
-  border: solid 1px #DDD;
-  border-radius: 16px; -moz-border-radius: 16px;
-}
-
-html.no-rgba #content .container {background: #FFF;}
-
-
 footer {
   background: -webkit-gradient(linear, 0 0, 0 100%, from(#EEE), to(#BBB));
   background: -moz-linear-gradient(top, #EEE, #BBB);
@@ -748,6 +817,7 @@ nav.alphabet ol li span {
 
 .body,
 #organisation_info,
+form.user_new,
 form.new_plaque {
   padding: 0 5% 32px;
 }
@@ -760,7 +830,10 @@ form.new_plaque {
 form.new_plaque h2 {
   margin-bottom: 16px;
 }
-form.new_plaque fieldset {
+
+
+
+form fieldset {
   background: -moz-linear-gradient(top, rgba(0,0,0,.01), rgba(0,0,0,.0) 8%);
   background: -webkit-gradient(linear, 0 0, 0 8%, from(rgba(0,0,0,.01)), to(rgba(0,0,0,.0)));
   border: solid 1px #EEE;
@@ -769,8 +842,9 @@ form.new_plaque fieldset {
   margin-bottom: 16px;
   padding: 16px;
 }
+html.no-rgba form fieldset {background: #FFF;}
 
-html.no-rgba form.new_plaque fieldset {background: #FFF;}
+
 
 form.new_plaque .date_labels {
   overflow: hidden; _zoom: 1;
@@ -803,27 +877,27 @@ form.new_plaque .colour_options span {
   width: 25%;
 }
 
-form.new_plaque .row {
+form .row {
   margin-bottom: 16px;
 }
 
-form.new_plaque .row:last-child {
+form .row:last-child {
   margin-bottom: 0;
 }
 
-form.new_plaque .row input {
+form .row input {
   font-size: 16px;
   font-family: "Baskerville", "Georgia";
   padding: 4px;
   width: 400px;
 }
 
-form.new_plaque .radio input,
-form.new_plaque .checkbox input {
+form .radio input,
+form .checkbox input {
   width: auto;
 }
 
-form.new_plaque .row label {
+form .row label {
   cursor: pointer;
   display: block;
   margin-bottom: 4px;
@@ -833,8 +907,8 @@ form.new_plaque .checkbox {
   margin-top: 16px;
 }
 
-form.new_plaque .radio label,
-form.new_plaque .checkbox label {
+form .radio label,
+form .checkbox label {
   display: inline;
   padding: 0 8px;
 }
