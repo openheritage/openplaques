@@ -1,6 +1,9 @@
 <h1>Add a connection for <%= link_to "Plaque #" + @plaque.id.to_s, @plaque %></h1>
 
 <% form_for @personal_connection, :url => personal_connections_path(@plaque) do |f| %>
+  <p>Inscription: <%= @plaque.inscription %>
+  </p>
+  
   <p><%= f.label :person_id, "Person" %>:
     <%= f.collection_select :person_id, @people, :id, :name %> <%= link_to("Add person", "/people/new") %>
     </p>
