@@ -5,7 +5,7 @@
   <p>These plaques have no connections:</p>
   <ul>
     <% @plaques.each do |plaque| %>
-    <li><%= link_to "Plaque #".html_safe + plaque.id.to_s, plaque %> <%= link_to "Add connection", new_plaque_connection_path(plaque) %></li>
+    <li><%= plaque.inscription %> <%= link_to "Add connection", new_plaque_connection_path(plaque) %></li>
     <% end %>
   </ul>
 <% else %>
