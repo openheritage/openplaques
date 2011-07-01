@@ -1,5 +1,29 @@
 <h1>Add a connection for <%= link_to "Plaque #" + @plaque.id.to_s, @plaque %></h1>
 
+  <h2>Current Connections</h2>
+
+  <table>
+    <tr>
+      <th>Person</th>
+      <th>Verb</th>
+      <th>Location</th>
+      <th>From</th>
+      <th>To</th>
+      <th></th>
+    </tr>
+    <% @plaque.personal_connections.each do |pc| %>
+      <tr>
+        <td><%= link_to pc.person.name, person_path(pc.person) %></td>
+        <td><%= link_to pc.verb.name, verb_path(pc.verb) %></td>
+        <td><%= link_to pc.location.name, location_path(pc.location) %> <%= "(here)" if pc.location == @plaque.location %></td>
+        <td><%= pc.from %></td>
+        <td><%= pc.to %></td>
+        <td><%= link_to "Edit", edit_personal_connection_path(pc) %> <%= link_to("Delete", personal_connection_path(pc), :method => :delete)%></td>
+      </tr>
+    <% end %>
+  </table>
+
+
 <% form_for @personal_connection, :url => personal_connections_path(@plaque) do |f| %>
   <p>Inscription: <%= @plaque.inscription %>
   </p>
