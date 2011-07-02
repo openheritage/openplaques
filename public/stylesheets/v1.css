@@ -20,6 +20,19 @@
 html { overflow-y: scroll; }
 
 /**
+  1.1 Development elements
+*/
+
+.development, .staging {
+	background: #454A51;
+	font-weight: bold;
+	color: #FF0;
+	padding-top: 10px;
+	text-align: center;
+}
+
+
+/**
   2. CORE
 */
 
@@ -67,9 +80,6 @@ a:hover {
 
 html.no-rgba #content .container {background: #FFF;}
 
-
-
-
 /**
   2.1 FLASH / ERRORS */
 
@@ -107,7 +117,7 @@ html.no-rgba #content .container {background: #FFF;}
 }
 
 /**
- 	2.1.1 BUTTONS
+	2.2 BUTTONS
 */
 
 /* Global */
@@ -155,20 +165,6 @@ a.secondary_button:hover, div.secondary_button:hover input {
 	background-color: #454A51;
 	color: #FFF;
 	text-shadow: 0 -1px 1px rgba(255, 255, 255, 0.25);
-}
-
-/**
-  2.2 Development elements
-*/
-
-.development {
-  background: rgba(255,255,0,.8);
-  border: dashed 2px rgba(0,0,0,0.5);
-  color: #000;
-  font-weight: bold;
-  padding: 8px;
-  z-index: 10;
-  text-align: center;
 }
 
 
