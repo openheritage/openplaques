@@ -636,6 +636,7 @@ html.no-rgba .search_box {background: #FFF;}
 
 
 .search_box #phrase {
+	background: transparent;
   border: none;
   color: #999;
   font-family: "Baskerville", serif;
