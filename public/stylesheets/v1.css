@@ -353,7 +353,7 @@ h1.large_inscription a {
 
 .plaque_image {
   float: left;
-  /*width: 57%;*/ width: 516px;
+  width: 57%;  /* width: 516px;*/
 }
 
 .plaque_image a img {
@@ -378,11 +378,9 @@ h1.large_inscription a {
 }
 
 .plaque_single_image a img {
-  width: 480px;
-  /* TODO: Make images fluid when we get bigger ones from Flickr
+  /*width: 480px;*/
   max-width: 100%; *width: 100%;
   -ms-interpolation-mode: bicubic;
-  */
 }
 
 
@@ -447,13 +445,13 @@ h1.large_inscription a {
 #plaque_no_photos {
   float: left;
   margin: 0;
-  /*width: 60%;*/ width: 516px;
+  width: 60%; /* width: 516px; */
 }
 
 #plaque_identifier {
   float: right;
   margin: 0;
-  /*width: 33%;*/ width: 302px;
+  width: 33%; /* width: 302px; */
 }
 
 #plaque_identifier section {
@@ -667,7 +665,7 @@ html.no-rgba .search_box {background: #FFF;}
   display: block;
   color: #454A51;
   font-size: 34px; /*40px*/
-  text-shadow: 1px 1px 1px #CCCCCC, -1px -1px 1px #FFFFFF;
+  text-shadow: 1px 1px 1px #CCC, -1px -1px 1px #FFF;
   text-transform: uppercase;
   padding-left: 116px;
   padding-top: 4px;
