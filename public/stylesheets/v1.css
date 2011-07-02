@@ -462,12 +462,12 @@ h1.large_inscription a {
 #plaque_identifier iframe.osm {
   border: 1px solid rgba(255, 255, 255, 0.5);
   margin: 8px 0 0;
-  width: 300px;
+  max-width: 100%; *width: 100%;
+  -ms-interpolation-mode: bicubic;
 }
 
 html.no-rgba #plaque_identifier img,
 html.no-rgba #plaque_identifier iframe.osm {border: solid 1px #FFF;}
-
 
 #plaque_identifier aside {
   margin-top: 20px;
