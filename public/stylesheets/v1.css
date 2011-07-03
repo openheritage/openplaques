@@ -733,13 +733,13 @@ nav ul li span {
 }
 
 nav ul li a {
-  border-radius: 8px;
   color: #1D3861;
   text-decoration: none;
 }
 
 nav ul li a,
 nav ul li span {
+  border-radius: 8px;	
   font-size: 18px;
   padding: 6px;
   text-transform: uppercase;
@@ -1099,10 +1099,13 @@ table.plaque_list td.geo {}
   text-decoration: none;
 }
 
-#people_results li a:hover,
+#people_results li a:hover {
+  color: #FFF;
+}
+
 #places_results li a:hover,
 #organisations_results li a:hover {
-  color: #FFF;
+	color: #4F7CBF;
 }
 
 .results .count,
@@ -1117,7 +1120,7 @@ table.plaque_list td.geo {}
 
 .results li a.role,
 .results li a.attribute {
-  border-bottom :dotted 1px #CCC;
+  border-bottom : dotted 1px #CCC;
 }
 
 .results li a:hover {
