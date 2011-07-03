@@ -508,11 +508,6 @@ html.no-rgba #plaque_identifier iframe.osm {border: solid 1px #FFF;}
   line-height: 20px;
 }
 
-#plaque_identifier .header {
-  background: rgba(255,0,0,.5);
-}
-
-
 #plaque_identifier .header h1 {
   border-bottom: none;
   padding: 0;
