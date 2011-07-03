@@ -6,12 +6,8 @@
 
 
 <%=
-	# TODO KLUDGE:
-	if new_linked_inscription(@plaque).length > 250
-		content_tag("h1", new_linked_inscription(@plaque), {:class => "large_inscription", :property => "op:inscription"})
-	else
-		content_tag("h1", new_linked_inscription(@plaque), {:class => "inscription", :property => "op:inscription"})
-	end
+	plaque_class = @plaque.inscription.length > 250 ? "large_inscription" : "inscription"
+	content_tag("h1", new_linked_inscription(@plaque), {:class => plaque_class, :property => "op:inscription"})
 %>
 
 </div>
@@ -19,7 +15,7 @@
 <div class="panel clearfix">
 
   <% if @plaque.photos.empty? %>
-
+<!--TODO: Incorporate streetview imagery -->
     <section id="plaque_no_photos">
       <div class="no_photo">
         <h2>No photograph</h2>
