@@ -405,11 +405,14 @@ h1.large_inscription a {
 
 #photo_information {
   margin: 8px 0;
+	position: relative; left: 10px; /* To account for the borders */
 }
+
 #photo_information a {
   background-color: none;
   display: inline;
 }
+
 #photo_information a:hover {
   background-color: #4F7CBF;
   color: #FFF;
@@ -419,7 +422,6 @@ h1.large_inscription a {
 .photo_licence {float: right;}
 
 .photo_credit, .photo_licence {
-  padding: 0 16px;
   font-size: 13px;
 }
 
