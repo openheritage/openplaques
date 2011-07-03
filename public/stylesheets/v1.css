@@ -32,6 +32,23 @@ html { overflow-y: scroll; }
 }
 
 
+/*@media screen and (min-width: 765px) and (max-width: 855px) {
+	#content {background: rgba(255,0,0,.1) !important;}
+}
+@media screen and (min-width: 855px) and (max-width: 1128px) {
+	#content {background: rgba(0,255,0,.1) !important;}
+}
+@media screen and (min-width: 1128px) and (max-width: 1300px) {
+	#content {background: rgba(0,255,255,.1) !important;}
+}
+@media screen and (min-width: 1300px) and (max-width: 1500px) {
+	#content {background: rgba(0,0,255,.1) !important;}
+}
+@media screen and (min-width: 1500px) {
+	#content {background: rgba(255,255,0,.1) !important;}
+}
+*/
+
 /**
   2. CORE
 */
@@ -536,17 +553,18 @@ footer nav a {
 /***/
 
 
-
-
 header {
   background: -webkit-gradient(linear, 0 0, 0 100%, from(#FFF), to(#EEE));
   background: -moz-linear-gradient(top, #FFF, #EEE);
   border-top: solid 10px #454a51;
   display: block;
   padding: 16px 0;
-/*  position: absolute; top: 0; height: 110px;*/
   width: 100%;
   position: relative;
+}
+
+header .user_info {
+  position: absolute; right: 0;
 }
 
 header .container {
@@ -554,9 +572,96 @@ header .container {
   position: relative;
 }
 
-header .user_info {
-  position: absolute; top: 0; right: 0;
+#navigation {
+	position: relative;
+	width: 100%;
 }
+
+
+
+@media screen and (max-width: 765px) {
+
+}
+
+@media screen and (min-width: 855px) {
+	
+	#navigation #primary_links {
+		width: 520px;
+	}
+
+}
+header .user_info {
+  top: 0;
+}
+
+
+#navigation nav {
+	display: block;
+}
+
+#navigation .search_box {
+	float: right;
+	max-width: 400px;
+	width: 100%;
+}
+
+.search_box form {
+  background: rgba(255,255,255,.5);
+  border: solid 1px #DDD;
+  border-radius: 8px; -moz-border-radius: 8px;
+  padding: 8px 8px 8px 54px;
+	position: relative;
+}
+html.no-rgba .search_box form {background: #FFF;}
+
+
+.search_box form:hover {
+  background: #FFF;
+  -moz-transition-duration: 0.3s;
+  -webkit-transition-duration: 0.3s;
+}
+
+.js .search_box form #magnifying_glass {
+  background: url('../images/icon_search.png') no-repeat scroll top left;
+  position: absolute; top: -5px; left: 10px;
+  width: 31px;
+  height: 60px;
+}
+
+.js .search_box form input[type="submit"], 
+.search_box form label {
+  position: absolute; left: -9999px;
+}
+
+
+
+.search_box form #phrase {
+	background: transparent;
+  border: none;
+  color: #999;
+  font-family: "Baskerville", serif;
+  font-size: 18px;
+	width: 100%
+}
+
+.search_box form #phrase:hover {
+  color: #000;
+}
+
+
+
+
+
+@media screen and (min-width: 855px) and (max-width: 1128px) {	
+}
+
+@media screen and (min-width: 1128px) {
+}
+
+
+
+
+
 
 
 /**
@@ -575,78 +680,12 @@ header .user_info {
   margin-bottom: 16px;
 }
 
-/*
-  Search box
-*/
-
-.search_box {
-  background: rgba(255,255,255,.5);
-  border: solid 1px #DDD;
-  border-radius: 8px; -moz-border-radius: 8px;
-  padding: 8px 8px 8px 54px;
-}
-
-#search_controller .search_box {
-  position: relative;
-  width: 350px;
-}
-
-header .search_box,
-#search_controller header .search_box {
-  position: absolute; bottom: 15px; right: 0;
-}
-
-html.no-rgba .search_box {background: #FFF;}
-
-.search_box:hover {
-  background: #FFF;
-  -moz-transition-duration: 0.3s;
-  -webkit-transition-duration: 0.3s;
-}
-
-.search_box label {
-  position: absolute; left: -9999px;
-}
-
-.js .search_box #magnifying_glass {
-  background: url('../images/icon_search.png') no-repeat scroll top left;
-  position: absolute; top: -5px; left: 10px;
-  width: 31px;
-  height: 60px;
-}
-
-/* .js header .search_box #magnifying_glass:hover {
-  opacity: 1;
-  -moz-transition-duration: 0.3s;
-  -webkit-transition-duration: 0.3s;
-} */
-
-.js .search_box input[type="submit"] {
-  position: absolute; left: -9999px;
-}
-
-/*TODO: Add JS to give the text field focus */
-/*TODO: Make this work responsively */
-
-
-.search_box #phrase {
-	background: transparent;
-  border: none;
-  color: #999;
-  font-family: "Baskerville", serif;
-  font-size: 18px;
-  width: 18em;
-}
-
-.search_box #phrase:hover {
-  color: #000;
-}
-
 /****/
 
 .branding {
   float: left;
   position: absolute; top: 0; left: 0;
+	z-index: 20;
 }
 
 .branding img {
@@ -681,7 +720,6 @@ nav {}
 
 nav ul {
   list-style-type: none;
-  padding-top: 10px;
   padding-left: 116px;
 }
 
@@ -692,20 +730,21 @@ nav ul li {
 
 nav ul li a:hover,
 nav ul li span {
-  border-radius: 8px; -moz-border-radius: 8px;
-  background: none repeat scroll 0 0 #FFFFFF;
+	background: #FFF;
+	box-shadow: 0 0 6px #CCC;
   color: #4F7CBF;
 }
 
 nav ul li a {
+  border-radius: 8px;
   color: #1D3861;
   text-decoration: none;
 }
 
 nav ul li a,
 nav ul li span {
-  font-size: 20px;
-  padding: 8px;
+  font-size: 18px;
+  padding: 6px;
   text-transform: uppercase;
 }
 
