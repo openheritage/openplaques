@@ -1,0 +1,23 @@
+<h1>To do: Lists to be datacapture</h1>
+<p><%= link_to("All to-do lists", "/todo") %></p>
+<p>These lists of plaques have been found on the internet, <%= link_to("and need adding to the site", new_plaque_path) %>
+<ul class="todo_add">
+  <% @lists_to_datacapture.each do |item| %>
+  <li>
+    <% if item.image_url == nil %>
+      <%= link_to(item.description, item.url) %>
+      <% else %>
+      <%= link_to(image_tag(item.image_url, {:alt => item.description}), item.url) %>
+    <% end  %>
+
+    <%= button_to("Delete", todo_path(item), {:method => :delete, :class => :delete}) if current_user %>
+
+  </li>
+  <% end %>
+</ul>
+</p>
+<p>
+  <%= link_to("Add new list", new_todo_path) %>
+  </p>
+
+<p class="clear"><%= link_to("All to-do lists", "/todo") %></p>

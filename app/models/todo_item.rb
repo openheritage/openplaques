@@ -20,5 +20,6 @@ class TodoItem < ActiveRecord::Base
   validates_presence_of :type, :description
 
   scope :to_add, :conditions => ["action = 'add' AND url IS NOT NULL"]
+  scope :to_datacapture, :conditions => ["action = 'datacapture' AND url IS NOT NULL"]
 
 end

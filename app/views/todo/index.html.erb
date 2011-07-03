@@ -1,5 +1,6 @@
-﻿<h1>To do lists</h1>
+<h1>To do lists</h1>
 <ul>
+  <li><%= link_to(pluralize(@lists_to_datacapture, "list") +  " with plaques to be datacaptured", todo_path('lists_to_datacapture')) %></li>
   <li><%= link_to(pluralize(@photographed_not_coloured_plaques_count, "plaque") +  " with photos but no colour identified", todo_path('colours_from_photos')) %></li>
   <li><%= link_to(pluralize(@geo_no_location_plaques_count, "geolocated plaque") +  " with no location name assigned", todo_path('locations_from_geolocations')) %></li>
   <li><%= link_to(pluralize(@location_no_area_plaques_count.to_i, "location") +  " with no area", todo_path('areas_from_locations')) %></li>
