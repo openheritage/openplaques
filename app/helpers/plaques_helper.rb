@@ -44,7 +44,7 @@ module PlaquesHelper
         people << pluralize(plaque.people.size - 4, "other")
       people.to_sentence
     elsif plaque.people.size > 0
-      return plaque.people.collect(&:name).to_sentence + " plaque"
+      return plaque.people.collect(&:name).to_sentence + (plaque.colour.nil? ? "" : " " + plaque.colour.name) + " plaque"
     else
       return "Plaque #" + plaque.id.to_s
     end

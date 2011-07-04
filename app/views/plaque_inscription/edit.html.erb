@@ -33,7 +33,6 @@
     <% @plaque.personal_connections.each do |pc| %>
       <tr>
         <td><%= link_to pc.person.name, person_path(pc.person) %></td>
-        <td><%= link_to pc.verb.name, verb_path(pc.verb) %></td>
         <td><%= link_to pc.location.name, location_path(pc.location) %> <%= "(here)" if pc.location == @plaque.location %></td>
         <td><%= pc.from %></td>
         <td><%= pc.to %></td>
@@ -42,7 +41,6 @@
     <% end %>
   </table>
 
-<% if current_user.try(:is_admin?) %>
 
   <p><%= link_to "Add connection", new_personal_connection_path(@plaque) %></p>
 
@@ -55,5 +53,4 @@
   <%= button_to("Un-parse inscription!", unparse_inscription_plaque_path(@plaque))%>
 
   <% end %>
-<% end %>
 
