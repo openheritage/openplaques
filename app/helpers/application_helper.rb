@@ -24,7 +24,7 @@ module ApplicationHelper
     _gaq.push(['_setDomainName', '.openplaques.org']);
     _gaq.push(['_trackPageview']);
     "
-    var += "_gaq.push(['_setVar', 'admin']);\n" if current_user.try(:admin?)
+    var += "_gaq.push(['_setVar', 'admin']);\n" if current_user.try(:is_admin?)
 
     function = "(function() {
       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;

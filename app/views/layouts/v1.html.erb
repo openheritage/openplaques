@@ -113,8 +113,8 @@
       <p class="about">A project of Open Heritage C.I.C.</p>
     </footer>
 
-<% if ::Rails.env == "production" %>
-  <%#= google_analytics_code(ENV['GOOGLE_ANALYTICS_ID']) if !(ENV['GOOGLE_ANALYTICS_ID'].nil? )%>
+<% if ::Rails.env == "development" %>
+  <%= google_analytics_code(ENV['GOOGLE_ANALYTICS_ID']) if !(ENV['GOOGLE_ANALYTICS_ID'].nil? )%>
 <% end %>
 
 <%= javascript_include_tag 'ToggleSearchValue' %>
