@@ -6,7 +6,7 @@ class PlaqueMailer < ActionMailer::Base
 
     mail( :from => "notifications@openplaques.org",
           :to => NOTIFICATIONS_EMAIL,
-          :subject => "New plaque added to website"
+          :subject => ""  # For some reason, having this non-blank results in: undefined method `encode!'
     )
   end
 
