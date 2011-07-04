@@ -44,29 +44,40 @@
           O<span class="small-caps">pen</span> P<span class="small-caps">laques</span>
         </span>
 
-        <nav>
-          <%= content_tag("ul", :class => "clearfix") do %>
-            <%= navigation_list_link_to "People", people_path %>
-            <%= navigation_list_link_to "Places", countries_path %>
-            <%= navigation_list_link_to "Organisations", organisations_path %>
-            <%#= navigation_list_link_to "To do lists", "/todo" if logged_in? %>
-            <%#= navigation_list_link_to "Explore", "#" %>
-            <%#= navigation_list_link_to "Contribute", "#" %>
-            <%#= navigation_list_link_to "About", "#" %>
-
-          <% end %>
-        </nav>
+<table id="navigation" cellpadding="0" cellspacing="0" border="0">
+	<tr>
+		<td id="primary_links">
+			<nav>
+				<%= content_tag("ul", :class => "clearfix") do %>
+					<%= navigation_list_link_to "People", people_path %>
+					<%= navigation_list_link_to "Places", countries_path %>
+					<%= navigation_list_link_to "Organisations", organisations_path %>
+					<%#= navigation_list_link_to "To do lists", "/todo" if logged_in? %>
+					<%#= navigation_list_link_to "Explore", "#" %>
+					<%#= navigation_list_link_to "Contribute", "#" %>
+					<%#= navigation_list_link_to "About", "#" %>
+				<% end %>
+			</nav>
+		</td>
+		<td id="primary_search">
+			<div class="search_box">
+				<%= form_tag(search_path, :method => "get") do %>
+					<span id="magnifying_glass"></span>
+					<%= label_tag(:phrase, "Search: ") %>
+					<%= text_field_tag(:phrase, params[:phrase], :placeholder => "Search for a person, place or organisation...") %>
+					<%= submit_tag("Go", :name => nil) %>
+				<% end %>
+			</div>
+		</td>
+	</tr>
+</table>
 
         <%= user_menu %>
 
         <%#= " ".html_safe + content_tag("span",SITE_STATUS, {:class => "status"}) if SITE_STATUS != "" %>
 
-        <%= form_tag(search_path, :method => "get", :class => "search_box") do %>
-          <span id="magnifying_glass"></span>
-          <%= label_tag(:phrase, "Search: ") %>
-          <%= text_field_tag(:phrase, params[:phrase], :placeholder => "Search for a person, place or organisation...") %>
-          <%= submit_tag("Go", :name => nil) %>
-        <% end %>
+
+
 
       </div>
 
@@ -102,11 +113,12 @@
       <p class="about">A project of Open Heritage C.I.C.</p>
     </footer>
 
-
-
 <% if ::Rails.env == "production" %>
   <%#= google_analytics_code(ENV['GOOGLE_ANALYTICS_ID']) if !(ENV['GOOGLE_ANALYTICS_ID'].nil? )%>
 <% end %>
+
+<%= javascript_include_tag 'ToggleSearchValue' %>
+
 </body>
 </html>
 

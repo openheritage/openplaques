@@ -9,6 +9,7 @@ class TodoController < ApplicationController
     @geo_no_location_plaques_count = Plaque.geo_no_location.count
     @location_no_area_plaques_count = Location.no_area.count
     @plaques_to_add_count = TodoItem.to_add.count
+    @lists_to_datacapture = TodoItem.to_datacapture.count
 #   @detailed_address_no_geo_count = Plaque.detailed_address_no_geo.count
     @no_connection_count = Plaque.no_connection.count
     @partial_inscription_count = Plaque.partial_inscription.count
@@ -41,6 +42,10 @@ class TodoController < ApplicationController
       @plaques_to_add = TodoItem.to_add
       render :plaques_to_add
 
+    when 'lists_to_datacapture'
+      @lists_to_datacapture = TodoItem.to_datacapture
+      render :lists_to_datacapture
+
     when 'no_connection'
       @plaques = Plaque.no_connection
       render :no_connection
@@ -65,6 +70,21 @@ class TodoController < ApplicationController
       raise ActiveRecord::RecordNotFound
     end
 
+  end
+
+  def new
+    @todo = TodoItem.new
+    @todo.action = "datacapture"
+  end
+
+  def create
+    @todo = TodoItem.new(params[:todo])
+
+    if @todo.save
+      redirect_to todo_path('lists_to_datacapture')
+    else
+      render :new
+    end
   end
 
 end

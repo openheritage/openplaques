@@ -20,6 +20,36 @@
 html { overflow-y: scroll; }
 
 /**
+  1.1 Development elements
+*/
+
+.development, .staging {
+	background: #454A51;
+	font-weight: bold;
+	color: #FF0;
+	padding-top: 10px;
+	text-align: center;
+}
+
+
+/*@media screen and (min-width: 765px) and (max-width: 855px) {
+	#content {background: rgba(255,0,0,.1) !important;}
+}
+@media screen and (min-width: 855px) and (max-width: 1128px) {
+	#content {background: rgba(0,255,0,.1) !important;}
+}
+@media screen and (min-width: 1128px) and (max-width: 1300px) {
+	#content {background: rgba(0,255,255,.1) !important;}
+}
+@media screen and (min-width: 1300px) and (max-width: 1500px) {
+	#content {background: rgba(0,0,255,.1) !important;}
+}
+@media screen and (min-width: 1500px) {
+	#content {background: rgba(255,255,0,.1) !important;}
+}
+*/
+
+/**
   2. CORE
 */
 
@@ -67,9 +97,6 @@ a:hover {
 
 html.no-rgba #content .container {background: #FFF;}
 
-
-
-
 /**
   2.1 FLASH / ERRORS */
 
@@ -107,7 +134,7 @@ html.no-rgba #content .container {background: #FFF;}
 }
 
 /**
- 	2.1.1 BUTTONS
+	2.2 BUTTONS
 */
 
 /* Global */
@@ -155,20 +182,6 @@ a.secondary_button:hover, div.secondary_button:hover input {
 	background-color: #454A51;
 	color: #FFF;
 	text-shadow: 0 -1px 1px rgba(255, 255, 255, 0.25);
-}
-
-/**
-  2.2 Development elements
-*/
-
-.development {
-  background: rgba(255,255,0,.8);
-  border: dashed 2px rgba(0,0,0,0.5);
-  color: #000;
-  font-weight: bold;
-  padding: 8px;
-  z-index: 10;
-  text-align: center;
 }
 
 
@@ -357,7 +370,7 @@ h1.large_inscription a {
 
 .plaque_image {
   float: left;
-  /*width: 57%;*/ width: 516px;
+  width: 57%;  /* width: 516px;*/
 }
 
 .plaque_image a img {
@@ -382,11 +395,9 @@ h1.large_inscription a {
 }
 
 .plaque_single_image a img {
-  width: 480px;
-  /* TODO: Make images fluid when we get bigger ones from Flickr
+  /*width: 480px;*/
   max-width: 100%; *width: 100%;
   -ms-interpolation-mode: bicubic;
-  */
 }
 
 
@@ -394,11 +405,14 @@ h1.large_inscription a {
 
 #photo_information {
   margin: 8px 0;
+	position: relative; left: 10px; /* To account for the borders */
 }
+
 #photo_information a {
   background-color: none;
   display: inline;
 }
+
 #photo_information a:hover {
   background-color: #4F7CBF;
   color: #FFF;
@@ -408,7 +422,6 @@ h1.large_inscription a {
 .photo_licence {float: right;}
 
 .photo_credit, .photo_licence {
-  padding: 0 16px;
   font-size: 13px;
 }
 
@@ -451,13 +464,13 @@ h1.large_inscription a {
 #plaque_no_photos {
   float: left;
   margin: 0;
-  /*width: 60%;*/ width: 516px;
+  width: 60%; /* width: 516px; */
 }
 
 #plaque_identifier {
   float: right;
   margin: 0;
-  /*width: 33%;*/ width: 302px;
+  width: 33%; /* width: 302px; */
 }
 
 #plaque_identifier section {
@@ -468,12 +481,12 @@ h1.large_inscription a {
 #plaque_identifier iframe.osm {
   border: 1px solid rgba(255, 255, 255, 0.5);
   margin: 8px 0 0;
-  width: 300px;
+  max-width: 100%; *width: 100%;
+  -ms-interpolation-mode: bicubic;
 }
 
 html.no-rgba #plaque_identifier img,
 html.no-rgba #plaque_identifier iframe.osm {border: solid 1px #FFF;}
-
 
 #plaque_identifier aside {
   margin-top: 20px;
@@ -496,11 +509,6 @@ html.no-rgba #plaque_identifier iframe.osm {border: solid 1px #FFF;}
   font-size: 13px;
   line-height: 20px;
 }
-
-#plaque_identifier .header {
-  background: rgba(255,0,0,.5);
-}
-
 
 #plaque_identifier .header h1 {
   border-bottom: none;
@@ -542,17 +550,18 @@ footer nav a {
 /***/
 
 
-
-
 header {
   background: -webkit-gradient(linear, 0 0, 0 100%, from(#FFF), to(#EEE));
   background: -moz-linear-gradient(top, #FFF, #EEE);
   border-top: solid 10px #454a51;
   display: block;
   padding: 16px 0;
-/*  position: absolute; top: 0; height: 110px;*/
   width: 100%;
   position: relative;
+}
+
+header .user_info {
+  position: absolute; right: 0;
 }
 
 header .container {
@@ -560,9 +569,96 @@ header .container {
   position: relative;
 }
 
-header .user_info {
-  position: absolute; top: 0; right: 0;
+#navigation {
+	position: relative;
+	width: 100%;
 }
+
+
+
+@media screen and (max-width: 765px) {
+
+}
+
+@media screen and (min-width: 855px) {
+	
+	#navigation #primary_links {
+		width: 520px;
+	}
+
+}
+header .user_info {
+  top: 0;
+}
+
+
+#navigation nav {
+	display: block;
+}
+
+#navigation .search_box {
+	float: right;
+	max-width: 400px;
+	width: 100%;
+}
+
+.search_box form {
+  background: rgba(255,255,255,.5);
+  border: solid 1px #DDD;
+  border-radius: 8px; -moz-border-radius: 8px;
+  padding: 8px 8px 8px 54px;
+	position: relative;
+}
+html.no-rgba .search_box form {background: #FFF;}
+
+
+.search_box form:hover {
+  background: #FFF;
+  -moz-transition-duration: 0.3s;
+  -webkit-transition-duration: 0.3s;
+}
+
+.js .search_box form #magnifying_glass {
+  background: url('../images/icon_search.png') no-repeat scroll top left;
+  position: absolute; top: -5px; left: 10px;
+  width: 31px;
+  height: 60px;
+}
+
+.js .search_box form input[type="submit"], 
+.search_box form label {
+  position: absolute; left: -9999px;
+}
+
+
+
+.search_box form #phrase {
+	background: transparent;
+  border: none;
+  color: #999;
+  font-family: "Baskerville", serif;
+  font-size: 18px;
+	width: 100%
+}
+
+.search_box form #phrase:hover {
+  color: #000;
+}
+
+
+
+
+
+@media screen and (min-width: 855px) and (max-width: 1128px) {	
+}
+
+@media screen and (min-width: 1128px) {
+}
+
+
+
+
+
 
 
 /**
@@ -581,77 +677,12 @@ header .user_info {
   margin-bottom: 16px;
 }
 
-/*
-  Search box
-*/
-
-.search_box {
-  background: rgba(255,255,255,.5);
-  border: solid 1px #DDD;
-  border-radius: 8px; -moz-border-radius: 8px;
-  padding: 8px 8px 8px 54px;
-}
-
-#search_controller .search_box {
-  position: relative;
-  width: 350px;
-}
-
-header .search_box,
-#search_controller header .search_box {
-  position: absolute; bottom: 15px; right: 0;
-}
-
-html.no-rgba .search_box {background: #FFF;}
-
-.search_box:hover {
-  background: #FFF;
-  -moz-transition-duration: 0.3s;
-  -webkit-transition-duration: 0.3s;
-}
-
-.search_box label {
-  position: absolute; left: -9999px;
-}
-
-.js .search_box #magnifying_glass {
-  background: url('../images/icon_search.png') no-repeat scroll top left;
-  position: absolute; top: -5px; left: 10px;
-  width: 31px;
-  height: 60px;
-}
-
-/* .js header .search_box #magnifying_glass:hover {
-  opacity: 1;
-  -moz-transition-duration: 0.3s;
-  -webkit-transition-duration: 0.3s;
-} */
-
-.js .search_box input[type="submit"] {
-  position: absolute; left: -9999px;
-}
-
-/*TODO: Add JS to give the text field focus */
-/*TODO: Make this work responsively */
-
-
-.search_box #phrase {
-  border: none;
-  color: #999;
-  font-family: "Baskerville", serif;
-  font-size: 18px;
-  width: 18em;
-}
-
-.search_box #phrase:hover {
-  color: #000;
-}
-
 /****/
 
 .branding {
   float: left;
   position: absolute; top: 0; left: 0;
+	z-index: 20;
 }
 
 .branding img {
@@ -670,7 +701,7 @@ html.no-rgba .search_box {background: #FFF;}
   display: block;
   color: #454A51;
   font-size: 34px; /*40px*/
-  text-shadow: 1px 1px 1px #CCCCCC, -1px -1px 1px #FFFFFF;
+  text-shadow: 1px 1px 1px #CCC, -1px -1px 1px #FFF;
   text-transform: uppercase;
   padding-left: 116px;
   padding-top: 4px;
@@ -686,7 +717,6 @@ nav {}
 
 nav ul {
   list-style-type: none;
-  padding-top: 10px;
   padding-left: 116px;
 }
 
@@ -697,8 +727,8 @@ nav ul li {
 
 nav ul li a:hover,
 nav ul li span {
-  border-radius: 8px; -moz-border-radius: 8px;
-  background: none repeat scroll 0 0 #FFFFFF;
+	background: #FFF;
+	box-shadow: 0 0 6px #CCC;
   color: #4F7CBF;
 }
 
@@ -709,8 +739,9 @@ nav ul li a {
 
 nav ul li a,
 nav ul li span {
-  font-size: 20px;
-  padding: 8px;
+  border-radius: 8px;	
+  font-size: 18px;
+  padding: 6px;
   text-transform: uppercase;
 }
 
@@ -1068,10 +1099,13 @@ table.plaque_list td.geo {}
   text-decoration: none;
 }
 
-#people_results li a:hover,
+#people_results li a:hover {
+  color: #FFF;
+}
+
 #places_results li a:hover,
 #organisations_results li a:hover {
-  color: #FFF;
+	color: #4F7CBF;
 }
 
 .results .count,
@@ -1086,7 +1120,7 @@ table.plaque_list td.geo {}
 
 .results li a.role,
 .results li a.attribute {
-  border-bottom :dotted 1px #CCC;
+  border-bottom : dotted 1px #CCC;
 }
 
 .results li a:hover {
