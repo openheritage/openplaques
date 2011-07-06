@@ -4,31 +4,6 @@
 
 <div class="panel clearfix">
 
-
-	<%= if @plaque.language_id !== 1 %>
-
-		<div class="goog-trans-section" lang="es">
-			<div class="goog-trans-control"></div>
-			<%=
-				plaque_class = @plaque.inscription.length > 250 ? "large_inscription" : "inscription"
-				content_tag("h1", new_linked_inscription(@plaque), {:class => plaque_class, :property => "op:inscription"})
-			%>
-		</div>
-
-			<script>
-			function googleSectionalElementInit() {
-			  new google.translate.SectionalElement({
-			    sectionalNodeClassName: 'goog-trans-section',
-			    controlNodeClassName: 'goog-trans-control',
-			    background: '#f4fa58'
-			  }, 'google_sectional_element');
-			}
-			</script>
-			<script src="http://translate.google.com/translate_a/element.js?cb=googleSectionalElementInit&ug=section&hl=en"></script>
-
-	<% end %>
-	
-
 <%=
 	plaque_class = @plaque.inscription.length > 250 ? "large_inscription" : "inscription"
 	content_tag("h1", new_linked_inscription(@plaque), {:class => plaque_class, :property => "op:inscription"})
