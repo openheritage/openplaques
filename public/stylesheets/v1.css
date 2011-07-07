@@ -32,7 +32,7 @@ html { overflow-y: scroll; }
 }
 
 
-/*@media screen and (min-width: 765px) and (max-width: 855px) {
+@media screen and (min-width: 765px) and (max-width: 855px) {
   #content {background: rgba(255,0,0,.1) !important;}
 }
 @media screen and (min-width: 855px) and (max-width: 1128px) {
@@ -47,7 +47,7 @@ html { overflow-y: scroll; }
 @media screen and (min-width: 1500px) {
   #content {background: rgba(255,255,0,.1) !important;}
 }
-*/
+
 
 /**
   2. CORE
@@ -431,10 +431,16 @@ h1.large_inscription a {
   position: relative;
 }
 
+.plaque_multiple_images a {
+  display: block;
+	width: 100%;
+}
+
 .plaque_multiple_images #primary_image {
   display: block;
   margin-left: 120px;
-  width: 360px;
+  max-width: 100%; *width: 100%;
+  -ms-interpolation-mode: bicubic;
 }
 
 .plaque_multiple_images #secondary_images {
@@ -457,7 +463,6 @@ h1.large_inscription a {
 .plaque_multiple_images #secondary_images img {
   border: solid 4px #EEE;
   width: 96px;
-  height: 72px;
 }
 
 
