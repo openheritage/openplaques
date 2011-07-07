@@ -299,11 +299,12 @@ a.secondary_button:hover, div.secondary_button:hover input {
   margin-bottom: 16px;
 }
 
-
-
-
 /**
   3. PLAQUE PAGE
+*/
+
+/*
+	3.1 Inscriptions
 */
 
 h1.inscription,
@@ -321,6 +322,22 @@ h1.large_inscription a {
   text-decoration: none;
   border-bottom: dotted 1px;
 }
+
+.goog-te-gadget-link {
+	display: block;
+	margin: 0 auto;
+}
+
+.goog-te-sectional-gadget-checkbox-text,
+.goog-te-sectional-gadget-link-text {
+	display: block;
+	font-weight: normal !important; /* Overriding Google's CSS */
+	margin: 0 auto;
+	text-align: center;
+}
+
+/***/
+
 
 #plaque_number {
   display: block;
