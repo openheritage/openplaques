@@ -436,17 +436,35 @@ h1.large_inscription a {
 	width: 100%;
 }
 
-.plaque_multiple_images #primary_image {
-  display: block;
-  margin-left: 23%;
-  max-width: 75%; *width: 75%;
-  -ms-interpolation-mode: bicubic;
+
+
+@media screen and (max-width: 855px) {
+	.plaque_multiple_images #primary_image {
+	  display: block;
+	  max-width: 100%; *width: 100%;
+	  -ms-interpolation-mode: bicubic;
+	}
+	
+	.plaque_multiple_images #secondary_images {}
+}
+@media screen and (min-width: 855px) {
+	
+	.plaque_multiple_images #primary_image {
+	  display: block;
+	  margin-left: 24%;
+	  max-width: 75%; *width: 75%;
+	  -ms-interpolation-mode: bicubic;
+	}
+	
+	.plaque_multiple_images #secondary_images {
+	  position: absolute; top: 10px; left: 0;
+	  width: 20%;
+	}
+	
+
 }
 
-.plaque_multiple_images #secondary_images {
-  position: absolute; top: 10px; left: 0;
-  width: 20%;
-}
+
 
 .plaque_multiple_images #secondary_images a {
   display: block;
