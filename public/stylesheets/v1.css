@@ -438,14 +438,14 @@ h1.large_inscription a {
 
 .plaque_multiple_images #primary_image {
   display: block;
-  margin-left: 120px;
-  max-width: 100%; *width: 100%;
+  margin-left: 23%;
+  max-width: 75%; *width: 75%;
   -ms-interpolation-mode: bicubic;
 }
 
 .plaque_multiple_images #secondary_images {
   position: absolute; top: 10px; left: 0;
-  width: 104px;
+  width: 20%;
 }
 
 .plaque_multiple_images #secondary_images a {
@@ -462,7 +462,7 @@ h1.large_inscription a {
 
 .plaque_multiple_images #secondary_images img {
   border: solid 4px #EEE;
-  width: 96px;
+  width: 100%;
 }
 
 
