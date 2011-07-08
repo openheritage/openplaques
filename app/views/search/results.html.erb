@@ -10,6 +10,9 @@
     <% @search_results.each do |result| %>
     <li>
       <p class="result">
+        <% if result.photographed? %>
+          <%= image_tag("/images/EOS-300D-32x32.png".html_safe, {:alt => "Photo of plaque".html_safe}) %>
+        <% end %>
         <%= link_to(marked_text(title(result), @phrase), result, :class => :title) %>
         <%= link_to(result.location.area.name, result.location.area, :class => :location) if result.location && result.location.area %>
       </p>
@@ -26,7 +29,7 @@
 
 <% else %>
   <div class="panel" id="search_results_footer">
-    <h2>Can't find what you're looking for? Try another search</h2>
+    <h2>Can't find what you're looking for? Try another search or <%= link_to "add it", new_plaque_path(:checked => true) %></h2>
     <%= render :partial => "search_form", :locals => { :phrase => @phrase } %>
   </div>
 
