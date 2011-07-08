@@ -366,11 +366,11 @@ h1.large_inscription a {
   /* temp */ width: 235px;
 }
 
-/* Plaque - single image */
+/* Plaque - all plaques */
 
 .plaque_image {
   float: left;
-  width: 57%;  /* width: 516px;*/
+  width: 55%;
 }
 
 .plaque_image a img {
@@ -388,6 +388,8 @@ h1.large_inscription a {
   -moz-transition-duration: 0.3s;
   -webkit-transition-duration: 0.3s;
 }
+
+/* Plaque - Single image */
 
 .plaque_single_image a {
   display: block;
@@ -445,8 +447,16 @@ h1.large_inscription a {
 	  -ms-interpolation-mode: bicubic;
 	}
 	
-	.plaque_multiple_images #secondary_images {}
+	.plaque_multiple_images #secondary_images {
+		margin-top: 8px;
+	}
+	
+	.plaque_multiple_images #secondary_images img {
+	  border: solid 4px #EEE;
+	  width: 100px;
+	}
 }
+
 @media screen and (min-width: 855px) {
 	
 	.plaque_multiple_images #primary_image {
@@ -460,6 +470,12 @@ h1.large_inscription a {
 	  position: absolute; top: 10px; left: 0;
 	  width: 20%;
 	}
+	
+	.plaque_multiple_images #secondary_images img {
+	  border: solid 4px #EEE;
+	  width: 100%;
+	}
+	
 	
 
 }
@@ -478,10 +494,6 @@ h1.large_inscription a {
   -webkit-transition-duration: 0.3s;
 }
 
-.plaque_multiple_images #secondary_images img {
-  border: solid 4px #EEE;
-  width: 100%;
-}
 
 
 #plaque_no_photos {
