@@ -71,10 +71,6 @@ module PlaquesHelper
     end
   end
 
-  def machine_tag(plaque)
-    return "openplaques:id=" + plaque.id.to_s
-  end
-
   # pass null to search all machinetagged photos on Flickr
   def find_photo_by_machinetag(plaque)
     key = FLICKR_KEY # "86c115028094a06ed5cd19cfe72e8f8b"
