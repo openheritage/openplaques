@@ -32,7 +32,7 @@ html { overflow-y: scroll; }
 }
 
 
-@media screen and (min-width: 765px) and (max-width: 855px) {
+/*@media screen and (min-width: 765px) and (max-width: 855px) {
   #content {background: rgba(255,0,0,.1) !important;}
 }
 @media screen and (min-width: 855px) and (max-width: 1128px) {
@@ -47,7 +47,7 @@ html { overflow-y: scroll; }
 @media screen and (min-width: 1500px) {
   #content {background: rgba(255,255,0,.1) !important;}
 }
-
+*/
 
 /**
   2. CORE
