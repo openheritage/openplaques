@@ -884,7 +884,8 @@ nav.alphabet ol li span {
 .body,
 #organisation_info,
 form.user_new,
-form.new_plaque {
+form.new_plaque,
+form.search_box{
   padding: 0 5% 32px;
 }
 
