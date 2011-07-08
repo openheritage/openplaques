@@ -77,6 +77,11 @@ a:hover {
   color: #FFF;
 }
 
+input[type="search"] {
+	-webkit-appearance: inherit;
+}
+
+
 #content {
   background: #EEE;
 /*  margin-top: 148px;*/
@@ -682,8 +687,6 @@ html.no-rgba .search_box form {background: #FFF;}
   position: absolute; left: -9999px;
 }
 
-
-
 .search_box form #phrase {
   background: transparent;
   border: none;
@@ -691,6 +694,7 @@ html.no-rgba .search_box form {background: #FFF;}
   font-family: "Baskerville", serif;
   font-size: 18px;
   width: 100%
+
 }
 
 .search_box form #phrase:hover {
@@ -975,6 +979,7 @@ form .row input {
   padding: 4px;
   width: 400px;
 }
+form .row input[type='search'] {padding: 4px 0;} /*Ensures browser additions fit*/
 
 form .radio input,
 form .checkbox input {
