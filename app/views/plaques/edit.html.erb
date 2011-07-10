@@ -1,7 +1,7 @@
 <h1>Editing <%= link_to("Plaque #" + @plaque.id.to_s, plaque_path(@plaque))%></h1>
 
 <div class="info inscription">
-  <%= link_to "Edit", edit_plaque_inscription_path(@plaque), {:class => :edit, :title => "Edit inscription"} %>
+  <%= link_to "Edit inscription", edit_plaque_inscription_path(@plaque), {:class => :edit, :title => "Edit inscription"} %>
   <%= content_tag("p", new_linked_inscription(@plaque), {:class => "inscription"}) %>
 </div>
 
@@ -23,3 +23,7 @@
 <%= button_to("Delete plaque", plaque_path(@plaque.id), {:method => :delete, :class => :delete}) if current_user.try(:is_admin?) %>
 
 
+<%= link_to "Edit colour", edit_plaque_colour_path(@plaque), {:class => :edit, :title => "Edit colour"} %>
+<%= link_to "Edit geolocation", edit_plaque_geolocation_path(@plaque), {:class => :edit, :title => "Edit geolocation"} %>
+<%= link_to "Edit location", edit_plaque_location_path(@plaque), {:class => :edit, :title => "Edit location"} %>
+<%= link_to "Edit erected", edit_plaque_erected_path(@plaque), {:class => :edit, :title => "Edit erected"} %>
