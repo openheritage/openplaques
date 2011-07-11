@@ -165,7 +165,7 @@
               <%= f.label :erected_at_1i, "Year" %>
               <%= f.label :erected_at_3i, "Date" %>
             </div>
-            <%= f.date_select :erected_at, :include_blank => true, :start_year => Time.now.year, :end_year => 1950, :field_name => :plaque_erected_at_year, :order => [:year, :day, :month] %>
+            <%= f.date_select :erected_at, :include_blank => true, :start_year => Time.now.year, :end_year => 1900, :field_name => :plaque_erected_at_year, :order => [:year, :day, :month] %>
           </div>
 
         <% end %>
