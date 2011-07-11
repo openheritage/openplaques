@@ -1097,11 +1097,13 @@ table.plaque_list td.photo {}
 table.plaque_list td.geo {}
 
 /***/
+/*TODO: Refactor results CSS to reduce lines of code */
 
 #people_results,
 #places_results,
 #organisations_results,
-#search_results {
+#search_results,
+#roles_results {
   padding: 0 5% 32px;
   list-style-type: none;
 }
@@ -1117,27 +1119,30 @@ table.plaque_list td.geo {}
 
 /* 45% March */
 @media screen and (min-width: 850px) and (max-width: 1300px) {
-  #people_results,
-  #places_results,
-  #organisations_results {
+	#people_results,
+	#places_results,
+	#organisations_results, 
+	#roles_results {
     -moz-column-count: 2; -webkit-column-count: 2; column-count: 2;
   }
 }
 
 /* 17% March */
 @media screen and (min-width: 1300px) and (max-width: 1500px) {
-  #people_results,
-  #places_results,
-  #organisations_results {
+	#people_results,
+	#places_results,
+	#organisations_results, 
+	#roles_results {
     -moz-column-count: 3; -webkit-column-count: 3; column-count: 3;
   }
 }
 
 /* 17%+ March */
 @media screen and (min-width: 1500px) {
-  #people_results,
-  #places_results,
-  #organisations_results {
+	#people_results,
+	#places_results,
+	#organisations_results, 
+	#roles_results {
     -moz-column-count: 4; -webkit-column-count: 4; column-count: 4;
   }
 }
@@ -1145,7 +1150,8 @@ table.plaque_list td.geo {}
 #people_results li,
 #places_results li,
 #organisations_results li,
-#search_results li {
+#search_results li,
+#roles_results li {
   background: url('../images/bullet-blue.gif') no-repeat left 10px;
   padding-left: 16px;
   padding-bottom: 16px;
@@ -1153,7 +1159,8 @@ table.plaque_list td.geo {}
 
 #people_results li a,
 #places_results li a,
-#organisations_results li a {
+#organisations_results li a,
+#roles_results li a {
   color: #000;
   text-decoration: none;
 }
