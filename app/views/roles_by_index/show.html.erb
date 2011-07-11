@@ -3,7 +3,7 @@
 	<h1>Roles - <%= @index %></h1>
 	<%= render :partial => "index_navigation" %>
 
-	<%= content_tag("ul", :class => 'roles_results') do %>
+	<%= content_tag("ul", :id => 'roles_results') do %>
 	  <% @roles.each do |role| %>
 	    <%= content_tag("li") do %>
 	      <%= link_to pluralize(role.personal_roles_count, role.name), role_path(role) %>
