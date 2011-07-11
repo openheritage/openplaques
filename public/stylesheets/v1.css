@@ -1166,7 +1166,8 @@ table.plaque_list td.geo {}
   text-decoration: none;
 }
 
-#people_results li a:hover {
+#people_results li a:hover,
+#roles_results li a:hover {
   color: #FFF;
 }
 

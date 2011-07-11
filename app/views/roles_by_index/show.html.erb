@@ -2,6 +2,7 @@
 <div class="panel clearfix">
 	<h1>Roles - <%= @index %></h1>
 	<%= render :partial => "index_navigation" %>
+</div>
 
 	<%= content_tag("ul", :id => 'roles_results', :class => 'results') do %>
 	  <% @roles.each do |role| %>
