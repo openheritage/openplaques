@@ -1111,7 +1111,8 @@ table.plaque_list td.geo {}
 @media screen and (min-width: 850px) {
   #people_results,
   #places_results,
-  #organisations_results {
+  #organisations_results,
+ 	#roles_results {
     -moz-column-gap: 40px; -webkit-column-gap: 40px; column-gap: 40px;
     -moz-column-rule: solid 1px #EEE; -webkit-column-rule: solid 1px #EEE; column-rule: solid 1px #EEE;
   }
