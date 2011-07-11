@@ -108,17 +108,21 @@ html.no-rgba #content .container {background: #FFF;}
 .flash_notice,
 .flash_alert,
 #error_explanation {
+  border-radius: 8px;
   margin: 0 auto 16px;
   text-align: center;
   padding: 16px 0;
 }
 
-.flash_notice,
+.flash_notice {
+  background: rgba(0,100,0,.1);
+  border: solid 1px #060;	
+}
+
 .flash_alert,
 #error_explanation {
   background: rgba(255,0,0,.1);
   border: solid 1px #D00;
-  border-radius: 8px;
 }
 
 #error_explanation h2 {
