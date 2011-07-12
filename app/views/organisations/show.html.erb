@@ -1,11 +1,11 @@
 <% content_for :page_title, @organisation.name + " plaques" %>
 
 <div class="panel clearfix">
-	<% # if current_user && current_user.is_admin? %>
+	<% if current_user && current_user.is_admin? %>
 	<section class="admin_panel">
 		<%= link_to("Edit", edit_organisation_path(@organisation), {:class => :edit, :title => "edit location"})%>
 	</section>
-	<% # end %>
+	<% end %>
 	
   <h1 property="dc:title rdfs:label foaf:name" about="#this"><%= h @organisation.name %> plaques</h1>
   <%= link_to("Edit", edit_organisation_path(@organisation), {:class => :edit, :title => "edit location"}) if current_user %>
