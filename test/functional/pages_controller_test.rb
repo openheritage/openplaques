@@ -12,6 +12,16 @@ class PagesControllerTest < ActionController::TestCase
     should respond_with_content_type "text/html"
   end
   
+  context "when viewing the Contact page" do
+    setup do
+      get(:show, {:id => "contact"})
+    end
+    
+    should respond_with :success
+    should render_template :show
+    should respond_with_content_type "text/html"
+  end
+  
   context "when not logged in" do
     
     

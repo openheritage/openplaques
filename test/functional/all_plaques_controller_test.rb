@@ -7,8 +7,10 @@ class AllPlaquesControllerTest < ActionController::TestCase
       get(:show)
     end
     
-    should respond_with :success
-    should assign_to :plaques
+    should respond_with :moved_permanently
+    should redirect_to("HTML version of plaques page") { plaques_path(:format => "html") }
+#    should respond_with :success
+#    should assign_to :plaques
   end
 
   context "when attempting to view an XML representation of the all-plaques page" do

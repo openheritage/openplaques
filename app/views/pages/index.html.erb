@@ -1,5 +1,6 @@
-<% @page_title = "Pages" %>
-<h1>Pages</h1>
+<% content_for :page_title, "Open Plaques pages" %>
+
+<p><%= pluralize(@pages.size, "Open Plaques page") %></p>
 
 <ul>
   <% @pages.each do |page| %>

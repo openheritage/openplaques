@@ -2,6 +2,7 @@
 frankieroberto:
   username: frankieroberto
   email: frankie@frankieroberto.com
+  encrypted_password: xyz
   name: Frankie Roberto
   is_verified: true
   is_admin: true
@@ -9,13 +10,17 @@ frankieroberto:
 quentin:
   username: quentin
   email: quentin@example.com
+  encrypted_password: xyz
       
 aaron:
   username: aaron
   email: aaron@example.com
+  encrypted_password: xyz
 
 jason:
   username: anon4545645645
   name: Jason
   email: jason@jason.com
   is_verified: false
+  encrypted_password: xyz
+

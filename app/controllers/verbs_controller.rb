@@ -12,7 +12,7 @@ class VerbsController < ApplicationController
       @verb = Verb.find_by_name!(params[:id])
     rescue
       @verb = Verb.find(params[:id])
-      redirect_to verb_path(@verb.name) and return
+      redirect_to verb_path(@verb) and return
     end
   end
 
@@ -24,7 +24,7 @@ class VerbsController < ApplicationController
     @verb = Verb.new(params[:verb])
 
     if @verb.save
-      redirect_to verb_path(@verb.name)
+      redirect_to verb_path(@verb)
     else
       render :new
     end

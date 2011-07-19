@@ -1,5 +1,5 @@
-<% @page_title = @verb.name.capitalize %>
-<h1><%= @verb.name %></h1>
+<% content_for :page_title, "Blue plaques for people who " + @verb.name %>
+<h1>Blue plaques for people who <%= @verb.name %></h1>
 
 <% if @verb.personal_connections.size > 0 %>
 

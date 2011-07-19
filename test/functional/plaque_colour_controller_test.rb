@@ -8,7 +8,9 @@ class PlaqueColourControllerTest < ActionController::TestCase
     
       setup { get :edit, :plaque_id => plaques(:frankie_sheffield_plaque).id }
     
-      should redirect_to("login page") {new_user_session_path}      
+      should respond_with :success
+      should render_template :edit
+      should assign_to :plaque
     
     end
 

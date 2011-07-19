@@ -22,4 +22,7 @@ class Verb < ActiveRecord::Base
 
   end
 
+  def to_param
+    "#{name.gsub('.', '-')}"
+  end
 end

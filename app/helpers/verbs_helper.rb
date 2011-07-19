@@ -1,7 +1,7 @@
 module VerbsHelper
 
   def verb_path(verb, options = {})
-    url_for(options.merge(:controller => :verbs, :action => :show, :id => verb.name))
+    url_for(options.merge(:controller => :verbs, :action => :show, :id => verb))
   end
 
   def past_tense(verb)
