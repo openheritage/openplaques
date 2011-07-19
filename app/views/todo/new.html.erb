@@ -1,6 +1,6 @@
 <h1>Add a todo</h1>
 
-<%= form_for @todo, :url => todo_path('create') do |f| -%>
+<%= form_for :todo, @todo, :url => { :action => "create" } do |f| -%>
   <p><%= f.label :action %><br/>
   <%= f.text_field :action %></p>
   <p><%= f.label :description %><br/>

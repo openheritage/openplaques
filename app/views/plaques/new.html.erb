@@ -96,7 +96,7 @@
         <h2>What does the plaque say?</h2>
         <div class="row">
           <%= f.label :inscription, "Please type in the description on the plaque" %>
-          <%= f.text_area :inscription, {:placeholder => "Joe Bloggs lived here", :rows => "6", :cols => "50"} %>
+          <%= f.text_area :inscription, {:placeholder => "Joe Bloggs lived here", :autofocus => 'true',  :rows => "6", :cols => "50"} %>
         </div>
 
         <div class="row">
@@ -165,7 +165,7 @@
               <%= f.label :erected_at_1i, "Year" %>
               <%= f.label :erected_at_3i, "Date" %>
             </div>
-            <%= f.date_select :erected_at, :include_blank => true, :start_year => Time.now.year, :end_year => 1950, :field_name => :plaque_erected_at_year, :order => [:year, :day, :month] %>
+            <%= f.date_select :erected_at, :include_blank => true, :start_year => Time.now.year, :end_year => 1900, :field_name => :plaque_erected_at_year, :order => [:year, :day, :month] %>
           </div>
 
         <% end %>

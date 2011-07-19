@@ -1,12 +1,14 @@
 <% @page_title = "Roles starting with " + @index.capitalize %>
-<h1>Roles - <%= @index %></h1>
+<div class="panel clearfix">
+	<h1>Roles - <%= @index %></h1>
+	<%= render :partial => "index_navigation" %>
+</div>
 
-<%= render :partial => "index_navigation" %>
-
-<%= content_tag("ul") do %>
-  <% @roles.each do |role| %>
-    <%= content_tag("li") do %>
-      <%= link_to pluralize(role.personal_roles_count, role.name), role_path(role) %>
-    <% end %>
-  <% end %>
-<% end %>
+	<%= content_tag("ul", :id => 'roles_results', :class => 'results') do %>
+	  <% @roles.each do |role| %>
+	    <%= content_tag("li") do %>
+	      <%= link_to pluralize(role.personal_roles_count, role.name), role_path(role) %>
+	    <% end %>
+	  <% end %>
+	<% end %>
+</div>

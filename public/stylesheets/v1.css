@@ -3,9 +3,11 @@
 
   1. RESET
   2. CORE
-    2.1 Development elements
+    2.1 Flash and error elements
+		2.2 Global buttons
+		2.3 Admin panel
   3. PLAQUE PAGE
-
+		3.1 Inscriptions
 */
 
 /**
@@ -77,6 +79,11 @@ a:hover {
   color: #FFF;
 }
 
+input[type="search"] {
+	-webkit-appearance: inherit;
+}
+
+
 #content {
   background: #EEE;
 /*  margin-top: 148px;*/
@@ -103,17 +110,21 @@ html.no-rgba #content .container {background: #FFF;}
 .flash_notice,
 .flash_alert,
 #error_explanation {
+  border-radius: 8px;
   margin: 0 auto 16px;
   text-align: center;
   padding: 16px 0;
 }
 
-.flash_notice,
+.flash_notice {
+  background: rgba(0,100,0,.1);
+  border: solid 1px #060;	
+}
+
 .flash_alert,
 #error_explanation {
   background: rgba(255,0,0,.1);
   border: solid 1px #D00;
-  border-radius: 8px;
 }
 
 #error_explanation h2 {
@@ -184,6 +195,30 @@ a.secondary_button:hover, div.secondary_button:hover input {
   text-shadow: 0 -1px 1px rgba(255, 255, 255, 0.25);
 }
 
+/**
+	2.3 admin_panel
+*/
+
+.admin_panel {
+	background: #CCC;
+	/*background: #EEE;*/
+	border-radius: 8px;
+	margin: 8px 0;
+	padding: 4px;
+}
+
+.admin_panel a {
+	color: #333;
+	padding: 8px;
+	border-radius: 8px;
+	text-decoration: none;
+}
+
+.admin_panel a:hover {
+	background: #333;
+	color: #FFF;
+	text-decoration: underline;	
+}
 
 
 
@@ -299,11 +334,12 @@ a.secondary_button:hover, div.secondary_button:hover input {
   margin-bottom: 16px;
 }
 
-
-
-
 /**
   3. PLAQUE PAGE
+*/
+
+/*
+	3.1 Inscriptions
 */
 
 h1.inscription,
@@ -321,6 +357,22 @@ h1.large_inscription a {
   text-decoration: none;
   border-bottom: dotted 1px;
 }
+
+.goog-te-gadget-link {
+	display: block;
+	margin: 0 auto;
+}
+
+.goog-te-sectional-gadget-checkbox-text,
+.goog-te-sectional-gadget-link-text {
+	display: block;
+	font-weight: normal !important; /* Overriding Google's CSS */
+	margin: 0 auto;
+	text-align: center;
+}
+
+/***/
+
 
 #plaque_number {
   display: block;
@@ -665,8 +717,6 @@ html.no-rgba .search_box form {background: #FFF;}
   position: absolute; left: -9999px;
 }
 
-
-
 .search_box form #phrase {
   background: transparent;
   border: none;
@@ -674,6 +724,7 @@ html.no-rgba .search_box form {background: #FFF;}
   font-family: "Baskerville", serif;
   font-size: 18px;
   width: 100%
+
 }
 
 .search_box form #phrase:hover {
@@ -862,9 +913,10 @@ nav.alphabet ol li {
 
 nav.alphabet ol li a,
 nav.alphabet ol li span {
-  color: #454a51;
-  text-decoration: none;
-  padding: 4px 6px;
+	color: #454a51;
+	text-decoration: none;
+	text-transform: uppercase;
+	padding: 4px 6px;
 }
 
 nav.alphabet ol li span {
@@ -958,6 +1010,7 @@ form .row input {
   padding: 4px;
   width: 400px;
 }
+form .row input[type='search'] {padding: 4px 0;} /*Ensures browser additions fit*/
 
 form .radio input,
 form .checkbox input {
@@ -1074,11 +1127,13 @@ table.plaque_list td.photo {}
 table.plaque_list td.geo {}
 
 /***/
+/*TODO: Refactor results CSS to reduce lines of code */
 
 #people_results,
 #places_results,
 #organisations_results,
-#search_results {
+#search_results,
+#roles_results {
   padding: 0 5% 32px;
   list-style-type: none;
 }
@@ -1086,7 +1141,8 @@ table.plaque_list td.geo {}
 @media screen and (min-width: 850px) {
   #people_results,
   #places_results,
-  #organisations_results {
+  #organisations_results,
+ 	#roles_results {
     -moz-column-gap: 40px; -webkit-column-gap: 40px; column-gap: 40px;
     -moz-column-rule: solid 1px #EEE; -webkit-column-rule: solid 1px #EEE; column-rule: solid 1px #EEE;
   }
@@ -1094,27 +1150,30 @@ table.plaque_list td.geo {}
 
 /* 45% March */
 @media screen and (min-width: 850px) and (max-width: 1300px) {
-  #people_results,
-  #places_results,
-  #organisations_results {
+	#people_results,
+	#places_results,
+	#organisations_results, 
+	#roles_results {
     -moz-column-count: 2; -webkit-column-count: 2; column-count: 2;
   }
 }
 
 /* 17% March */
 @media screen and (min-width: 1300px) and (max-width: 1500px) {
-  #people_results,
-  #places_results,
-  #organisations_results {
+	#people_results,
+	#places_results,
+	#organisations_results, 
+	#roles_results {
     -moz-column-count: 3; -webkit-column-count: 3; column-count: 3;
   }
 }
 
 /* 17%+ March */
 @media screen and (min-width: 1500px) {
-  #people_results,
-  #places_results,
-  #organisations_results {
+	#people_results,
+	#places_results,
+	#organisations_results, 
+	#roles_results {
     -moz-column-count: 4; -webkit-column-count: 4; column-count: 4;
   }
 }
@@ -1122,7 +1181,8 @@ table.plaque_list td.geo {}
 #people_results li,
 #places_results li,
 #organisations_results li,
-#search_results li {
+#search_results li,
+#roles_results li {
   background: url('../images/bullet-blue.gif') no-repeat left 10px;
   padding-left: 16px;
   padding-bottom: 16px;
@@ -1130,12 +1190,14 @@ table.plaque_list td.geo {}
 
 #people_results li a,
 #places_results li a,
-#organisations_results li a {
+#organisations_results li a,
+#roles_results li a {
   color: #000;
   text-decoration: none;
 }
 
-#people_results li a:hover {
+#people_results li a:hover,
+#roles_results li a:hover {
   color: #FFF;
 }
 
