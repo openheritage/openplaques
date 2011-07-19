@@ -2,8 +2,6 @@ include ActionView::Helpers::TextHelper
 
 class TodoController < ApplicationController
 
-  before_filter :authenticate_user!
-
   def index
     @photographed_not_coloured_plaques_count = Plaque.photographed_not_coloured.count
     @geo_no_location_plaques_count = Plaque.geo_no_location.count
