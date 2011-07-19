@@ -1,21 +1,42 @@
 <% @page_title = "Edit inscription for plaque \#" + @plaque.id.to_s %>
 <h1>Edit inscription for <%= link_to("plaque \#" + @plaque.id.to_s, @plaque)%></h1>
 
+
+<div class="panel clearfix">
+  <% if @plaque.photos.empty? %>
+    <section id="plaque_no_photos">
+      <div class="no_photo">
+        <h2>No photograph</h2>
+        <p>We don't have any photos of <%= @plaque.machine_tag %> yet.</p>
+      </div>
+    </section>
+  <% elsif @plaque.photos.size < 2 %>
+    <div class="plaque_image plaque_single_image">
+      <%= image_tag(@plaque.photos.first.file_url) %>
+    </div>
+  <% else %>
+    <div class="plaque_image plaque_multiple_images">
+      <% first_photo = @plaque.photos.first %>
+      <%= link_to(image_tag(first_photo.file_url, {:id => "primary_image", :alt => "Photo of plaque", :rel => "foaf:depiction"}), first_photo.url) %>
+      <div id="secondary_images">
+        <% @plaque.photos.each do |image| %>
+          <%= link_to(image_tag(image.file_url, {:alt => "Photo of plaque", :rel => "foaf:depiction"}), image.url) unless image == first_photo %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
 <% form_for(@plaque) do |f| %>
 
-  <%= f.label :inscription %><br>
+<%= f.label :inscription, "What is the exact wording of the plaque, not including the name of the organisation who put the plaque up. Please use mixed case." %><br>
   <%= f.text_area :inscription, :class => :inscription %>
   <%= f.check_box :inscription_is_stub %>
   <%= f.label :inscription_is_stub %>
-    <%= content_tag("p", new_linked_inscription(@plaque), {:class => "inscription"}) %>
 
     <p>
     <%= f.submit "Update" %>
     </p>
-
-  <% content_tag("div", :class => :photo) do %>
-    <%= image_tag(@plaque.photos.first.file_url) %>
-  <% end unless @plaque.photos.count == 0  %>
 
 <% end %>
 
