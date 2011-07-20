@@ -1,6 +1,9 @@
 <% @page_title = "Edit inscription for plaque \#" + @plaque.id.to_s %>
-<h1>Edit inscription for <%= link_to("plaque \#" + @plaque.id.to_s, @plaque)%></h1>
 
+<div class="panel">
+
+  <h1>Edit inscription for <%= link_to("plaque \#" + @plaque.id.to_s, @plaque)%></h1>
+</div>
 
 <div class="panel clearfix">
   <% if @plaque.photos.empty? %>
@@ -27,18 +30,34 @@
   <% end %>
 </div>
 
-<% form_for(@plaque) do |f| %>
+<%= form_for(@plaque) do |f| %>
 
-<%= f.label :inscription, "What is the exact wording of the plaque, not including the name of the organisation who put the plaque up. Please use mixed case." %><br>
-  <%= f.text_area :inscription, :class => :inscription %>
-  <%= f.check_box :inscription_is_stub %>
-  <%= f.label :inscription_is_stub %>
+<div class="primary">
+  <fieldset>
+    <h2>What does the plaque say?</h2>
+    <div class="row">
+      <%= f.label :inscription, "Please type in the description on the plaque" %>
+      <%= f.text_area :inscription, {:placeholder => "Joe Bloggs lived here", :autofocus => 'true',  :rows => "6", :cols => "50"} %>
+    </div>
 
-    <p>
-    <%= f.submit "Update" %>
-    </p>
+    <div class="row">
+        <%= f.label :language_id, "What language is it in?" %>
+        <%= f.collection_select :language_id, @languages, :id, :name %>
+    </div>
 
+    <div class="row">
+      <%= f.check_box :inscription_is_stub %>
+      <%= f.label :inscription_is_stub %>
+    </div>
+
+  </fieldset>
+
+  <%= f.submit "Update", :class => :button %>
+
+</div>
 <% end %>
+
+
 
   <h2>Connections</h2>
 

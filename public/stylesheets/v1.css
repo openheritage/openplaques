@@ -4,10 +4,10 @@
   1. RESET
   2. CORE
     2.1 Flash and error elements
-		2.2 Global buttons
-		2.3 Admin panel
+    2.2 Global buttons
+    2.3 Admin panel
   3. PLAQUE PAGE
-		3.1 Inscriptions
+    3.1 Inscriptions
 */
 
 /**
@@ -80,7 +80,7 @@ a:hover {
 }
 
 input[type="search"] {
-	-webkit-appearance: inherit;
+  -webkit-appearance: inherit;
 }
 
 
@@ -118,7 +118,7 @@ html.no-rgba #content .container {background: #FFF;}
 
 .flash_notice {
   background: rgba(0,100,0,.1);
-  border: solid 1px #060;	
+  border: solid 1px #060;
 }
 
 .flash_alert,
@@ -196,28 +196,28 @@ a.secondary_button:hover, div.secondary_button:hover input {
 }
 
 /**
-	2.3 admin_panel
+  2.3 admin_panel
 */
 
 .admin_panel {
-	background: #CCC;
-	/*background: #EEE;*/
-	border-radius: 8px;
-	margin: 8px 0;
-	padding: 4px;
+  background: #CCC;
+  /*background: #EEE;*/
+  border-radius: 8px;
+  margin: 8px 0;
+  padding: 4px;
 }
 
 .admin_panel a {
-	color: #333;
-	padding: 8px;
-	border-radius: 8px;
-	text-decoration: none;
+  color: #333;
+  padding: 8px;
+  border-radius: 8px;
+  text-decoration: none;
 }
 
 .admin_panel a:hover {
-	background: #333;
-	color: #FFF;
-	text-decoration: underline;	
+  background: #333;
+  color: #FFF;
+  text-decoration: underline;
 }
 
 
@@ -339,7 +339,7 @@ a.secondary_button:hover, div.secondary_button:hover input {
 */
 
 /*
-	3.1 Inscriptions
+  3.1 Inscriptions
 */
 
 h1.inscription,
@@ -359,16 +359,16 @@ h1.large_inscription a {
 }
 
 .goog-te-gadget-link {
-	display: block;
-	margin: 0 auto;
+  display: block;
+  margin: 0 auto;
 }
 
 .goog-te-sectional-gadget-checkbox-text,
 .goog-te-sectional-gadget-link-text {
-	display: block;
-	font-weight: normal !important; /* Overriding Google's CSS */
-	margin: 0 auto;
-	text-align: center;
+  display: block;
+  font-weight: normal !important; /* Overriding Google's CSS */
+  margin: 0 auto;
+  text-align: center;
 }
 
 /***/
@@ -487,48 +487,48 @@ h1.large_inscription a {
 
 .plaque_multiple_images a {
   display: block;
-	width: 100%;
+  width: 100%;
 }
 
 
 
 @media screen and (max-width: 855px) {
-	.plaque_multiple_images #primary_image {
-	  display: block;
-	  max-width: 100%; *width: 100%;
-	  -ms-interpolation-mode: bicubic;
-	}
-	
-	.plaque_multiple_images #secondary_images {
-		margin-top: 8px;
-	}
-	
-	.plaque_multiple_images #secondary_images img {
-	  border: solid 4px #EEE;
-	  width: 100px;
-	}
+  .plaque_multiple_images #primary_image {
+    display: block;
+    max-width: 100%; *width: 100%;
+    -ms-interpolation-mode: bicubic;
+  }
+
+  .plaque_multiple_images #secondary_images {
+    margin-top: 8px;
+  }
+
+  .plaque_multiple_images #secondary_images img {
+    border: solid 4px #EEE;
+    width: 100px;
+  }
 }
 
 @media screen and (min-width: 855px) {
-	
-	.plaque_multiple_images #primary_image {
-	  display: block;
-	  margin-left: 24%;
-	  max-width: 75%; *width: 75%;
-	  -ms-interpolation-mode: bicubic;
-	}
-	
-	.plaque_multiple_images #secondary_images {
-	  position: absolute; top: 10px; left: 0;
-	  width: 20%;
-	}
-	
-	.plaque_multiple_images #secondary_images img {
-	  border: solid 4px #EEE;
-	  width: 100%;
-	}
-	
-	
+
+  .plaque_multiple_images #primary_image {
+    display: block;
+    margin-left: 24%;
+    max-width: 75%; *width: 75%;
+    -ms-interpolation-mode: bicubic;
+  }
+
+  .plaque_multiple_images #secondary_images {
+    position: absolute; top: 10px; left: 0;
+    width: 20%;
+  }
+
+  .plaque_multiple_images #secondary_images img {
+    border: solid 4px #EEE;
+    width: 100%;
+  }
+
+
 
 }
 
@@ -913,10 +913,10 @@ nav.alphabet ol li {
 
 nav.alphabet ol li a,
 nav.alphabet ol li span {
-	color: #454a51;
-	text-decoration: none;
-	text-transform: uppercase;
-	padding: 4px 6px;
+  color: #454a51;
+  text-decoration: none;
+  text-transform: uppercase;
+  padding: 4px 6px;
 }
 
 nav.alphabet ol li span {
@@ -937,6 +937,7 @@ nav.alphabet ol li span {
 #organisation_info,
 form.user_new,
 form.new_plaque,
+form.edit_plaque,
 form.search_box{
   padding: 0 5% 32px;
 }
@@ -946,7 +947,7 @@ form.search_box{
   margin-bottom: 16px;
 }
 
-form.new_plaque h2 {
+form h2 {
   margin-bottom: 16px;
 }
 
@@ -965,31 +966,31 @@ html.no-rgba form fieldset {background: #FFF;}
 
 
 
-form.new_plaque .date_labels {
+form .date_labels {
   overflow: hidden; _zoom: 1;
 }
 
-form.new_plaque .date_labels label {
+form .date_labels label {
   float: left;
   margin-right: 2.7em;
 }
 
 @media screen and (max-width: 1000px) {
-  form.new_plaque .colour_options {
+  form .colour_options {
     -moz-column-count: 2; -webkit-column-count: 2; column-count: 2;
   }
 }
 
 /* 17%+ March */
 @media screen and (min-width: 1000px) {
-  form.new_plaque .colour_options {
+  form .colour_options {
     -moz-column-count: 3; -webkit-column-count: 3; column-count: 3;
   }
 }
 
 
 
-form.new_plaque .colour_options span {
+form .colour_options span {
   display: block;
   float: left;
   margin-right: 5%;
@@ -1023,7 +1024,7 @@ form .row label {
   margin-bottom: 4px;
 }
 
-form.new_plaque .checkbox {
+form .checkbox {
   margin-top: 16px;
 }
 
@@ -1033,22 +1034,22 @@ form .checkbox label {
   padding: 0 8px;
 }
 
-form.new_plaque .row textarea {
+form .row textarea {
   color: #CCC;
   font: 16px/16px "Baskerville", "Georgia";
   padding: 8px;
 }
 
-form.new_plaque .row textarea:focus {
+form .row textarea:focus {
   color: #333;
 }
 
-form.new_plaque .row select {
+form .row select {
   font: 16px/16px "Baskerville", "Georgia";
   padding-right: 8px;
 }
 
-form.new_plaque .confirmation {
+form .confirmation {
   margin-left: 120px;
 }
 
@@ -1061,11 +1062,11 @@ form.new_plaque .confirmation {
   padding: 8px 16px;
 }
 
-#new_plaque .row .field_with_errors label {
+.row .field_with_errors label {
   color: #D00;
 }
 
-#new_plaque .row .field_with_errors input {
+.row .field_with_errors input {
   background: rgba(255,0,0,.1);
 }
 
@@ -1142,7 +1143,7 @@ table.plaque_list td.geo {}
   #people_results,
   #places_results,
   #organisations_results,
- 	#roles_results {
+  #roles_results {
     -moz-column-gap: 40px; -webkit-column-gap: 40px; column-gap: 40px;
     -moz-column-rule: solid 1px #EEE; -webkit-column-rule: solid 1px #EEE; column-rule: solid 1px #EEE;
   }
@@ -1150,30 +1151,30 @@ table.plaque_list td.geo {}
 
 /* 45% March */
 @media screen and (min-width: 850px) and (max-width: 1300px) {
-	#people_results,
-	#places_results,
-	#organisations_results, 
-	#roles_results {
+  #people_results,
+  #places_results,
+  #organisations_results,
+  #roles_results {
     -moz-column-count: 2; -webkit-column-count: 2; column-count: 2;
   }
 }
 
 /* 17% March */
 @media screen and (min-width: 1300px) and (max-width: 1500px) {
-	#people_results,
-	#places_results,
-	#organisations_results, 
-	#roles_results {
+  #people_results,
+  #places_results,
+  #organisations_results,
+  #roles_results {
     -moz-column-count: 3; -webkit-column-count: 3; column-count: 3;
   }
 }
 
 /* 17%+ March */
 @media screen and (min-width: 1500px) {
-	#people_results,
-	#places_results,
-	#organisations_results, 
-	#roles_results {
+  #people_results,
+  #places_results,
+  #organisations_results,
+  #roles_results {
     -moz-column-count: 4; -webkit-column-count: 4; column-count: 4;
   }
 }
