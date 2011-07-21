@@ -1,6 +1,6 @@
 class PlaquesController < ApplicationController
 
-  before_filter :authenticate_user!, :only => [:update, :edit]
+  before_filter :authenticate_user!, :only => :edit
   before_filter :authenticate_admin!, :only => :destroy
 
   before_filter :find_plaque, :only => [:show, :parse_inscription, :unparse_inscription, :flickr_search, :flickr_search_all, :update, :destroy, :edit]
