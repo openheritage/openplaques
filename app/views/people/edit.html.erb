@@ -15,3 +15,18 @@
     <p><%= f.submit "Update" %></p>
   <% end %>
 </div>
+
+<div class="panel">
+  <p>Roles: </p>
+  <ul><% @person.personal_roles.each do |personal_role| %><li><%= dated_role(personal_role) %> <%= link_to "[Edit]", edit_personal_role_path(personal_role) %> <%= link_to "[x]", personal_role, {:method => :delete}%> <% end %> </li></ul>
+  <p>
+    <% form_for @personal_role do |f| %>
+      <%= f.hidden_field :person_id, :value => @person.id %>
+      <%= f.collection_select :role, @roles, :id, :name %> (from <%= f.text_field :started_at %> to <%= f.text_field :ended_at %>)
+      <%= f.submit "Add" %>
+    <% end %>
+  </p>
+  
+  <%= content_tag("p", link_to("Add new role", new_role_path)) if current_user %>
+</div>
+
