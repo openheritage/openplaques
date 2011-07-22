@@ -1,15 +1,10 @@
-<% @page_title = "Edit " + @country.name %>
+<% content_for :page_title, "Edit " + @country.name %>
 <h1>Edit <%= link_to @country.name, @country %></h1>
 
 <% form_for(@country) do |f| %>
-  <%= f.error_messages %>
-
   <p><%= f.label :alpha2, "Alpha-2 code" %> '<%= @country.alpha2 %>'</p>
-
   <p><%= f.label :name %><%= f.text_field :name %></p>
-
   <p><%= f.label :dbpedia_uri, "DBpedia resource URI" %> <%= f.text_field :dbpedia_uri %></p>
-
   <% if @areas && @areas.size > 0 %>
   <p>
     <%= f.label :area_id, "Area" %>
@@ -21,4 +16,4 @@
   </p>
 <% end %>
 
-<%= content_tag("p", link_to("Add new area", new_country_area_path(@country.alpha2))) if authorized? %>
+<%= content_tag("p", link_to("Add new area", new_country_area_path(@country.alpha2))) if current_user %>

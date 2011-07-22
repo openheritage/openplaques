@@ -1,4 +1,4 @@
-<% @page_title = "Edit description for plaque \#" + @plaque.id.to_s %>
+<% content_for :page_title, "Edit description for plaque \#" + @plaque.id.to_s %>
 <h1>Edit inscription for <%= link_to("plaque \#" + @plaque.id.to_s, @plaque)%></h1>
 
 <div class="info inscription">

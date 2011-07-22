@@ -1,4 +1,4 @@
-<% content_for :page_title, @organisation.name + " #{@colour_label} plaques" %>
+<% content_for :page_title, "#{@organisation.name} #{@colour_label} plaques" %>
 
 <div class="panel clearfix">
 	<% if current_user && current_user.is_admin? %>
@@ -8,6 +8,7 @@
 	<% end %>
 	
   <h1 property="dc:title rdfs:label foaf:name" about="#this"><%= h @organisation.name %> plaques</h1>
+  <p>This organisation predominantly erect <%= @colour_label %> plaques</p>
   <%= link_to("Edit", edit_organisation_path(@organisation), {:class => :edit, :title => "edit location"}) if current_user %>
   <%= content_tag("p", link_to(h(@organisation.website),@organisation.website), {:rel => "foaf:homepage vcard:url"}) unless @organisation.website.blank? %>
 </div>

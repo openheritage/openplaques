@@ -1,4 +1,4 @@
-<% @page_title = "People who were born in"  %>
+<% content_for :page_title, "People who were born in"  %>
 <h1>born in</h1>
 
 <p>We have records of when <%=pluralize(Person.count(:born_on), "person") %> were born.

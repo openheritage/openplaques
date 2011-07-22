@@ -1,3 +1,4 @@
+<% content_for :page_title, "Geocoding plaque \#" + @plaque.id.to_s %>
 <h1>Geocoding Plaque #<%= link_to(@plaque.id, @plaque) %></h1>
 
 <%= form_for(@plaque) do |f| %>

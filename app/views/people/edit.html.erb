@@ -1,18 +1,17 @@
-<% @page_title = "Editing " + @person.name %>
+<% content_for :page_title, "Editing " + @person.name %>
 
 <div class="panel">
-   <h1>Edit details about <%= link_to @person.name, @person %></h1>
+  <h1>Edit details about <%= link_to @person.name, @person %></h1>
 
-
-<%= form_for(@person) do |f| %>
-  <p><%= f.label :name %> <%= f.text_field :name %></p>
-  <p><%= f.label :born_on, "Born" %> <%= text_field_tag :born_on, @born_on, {:maxlength => "4"} %> <%= f.label :died_on, "Died" %> <%= text_field_tag :died_on, @died_on, {:maxlength => "4"} %></p>
+  <%= form_for(@person) do |f| %>
+    <p><%= f.label :name %> <%= f.text_field :name %></p>
+    <p><%= f.label :born_on, "Born" %> <%= text_field_tag :born_on, @born_on, {:maxlength => "4"} %> <%= f.label :died_on, "Died" %> <%= text_field_tag :died_on, @died_on, {:maxlength => "4"} %></p>
     <p><%= f.label :wikipedia_url %> <%= f.text_field :wikipedia_url %></p>
-    <p><%= f.label :wikipedia_paras %> <%= f.text_field :wikipedia_paras %> e.g. "[1,4,5]", "1,2" or "2 4 7"</p>
-    <a href="<%= wikipedia_url(@person)%>"><%= wikipedia_url(@person)%></a><br/>
-    "<%= wikipedia_summary_p(@person) %>"</p>
-  <p><%= f.label :dbpedia_uri %> <%= f.text_field :dbpedia_uri %></p>
-  <p><%= f.label :surname_starts_with %> <%= f.text_field :surname_starts_with, :maxlength => 1 %></p>
-  <p><%= f.submit "Update" %></p>
-<% end %>
+    <p><%= f.label :wikipedia_paras %> <%= f.text_field :wikipedia_paras %> e.g. "[1,4,5]", "1,2" or "2 4 7"<br/>
+      <a href="<%= wikipedia_url(@person)%>"><%= wikipedia_url(@person)%></a><br/>
+      "<%= wikipedia_summary_p(@person) %>"</p>
+    <p><%= f.label :dbpedia_uri %> <%= f.text_field :dbpedia_uri %></p>
+    <p><%= f.label :surname_starts_with %> <%= f.text_field :surname_starts_with, :maxlength => 1 %></p>
+    <p><%= f.submit "Update" %></p>
+  <% end %>
 </div>

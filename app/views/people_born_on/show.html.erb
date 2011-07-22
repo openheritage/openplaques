@@ -1,4 +1,4 @@
-<% @page_title = "People who were born in " + @year.year.to_s  %>
+<% content_for :page_title, "People who were born in " + @year.year.to_s  %>
 <h1><%=pluralize(@people.size, "person") %> <a href="/people/born_on/">born in</a> <%= @year.year.to_s %></h1>
 
 <ul>
