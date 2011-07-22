@@ -8,7 +8,7 @@
 <p>Commemorated on <%= pluralize(@person.plaques.size, "plaque") %>:</p>
 
 <% @plaques.each do |plaque| %>
-  <h2><%= link_to plaque.location.name + ", " + plaque.area.name, plaque %></h2>
+  <h2><%= link_to plaque.location.name + ", " + plaque.area.name, plaque if plaque.location and plaque.area %><%= link_to plaque.location.name, plaque if plaque.location and !plaque.area %></h2>
 
   <p><%= plaque.inscription %></p>
 
