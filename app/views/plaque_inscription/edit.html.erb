@@ -1,34 +1,10 @@
 <% @page_title = "Edit inscription for plaque \#" + @plaque.id.to_s %>
 
 <div class="panel">
-
   <h1>Edit inscription for <%= link_to("plaque \#" + @plaque.id.to_s, @plaque)%></h1>
 </div>
 
-<div class="panel clearfix">
-  <% if @plaque.photos.empty? %>
-    <section id="plaque_no_photos">
-      <div class="no_photo">
-        <h2>No photograph</h2>
-        <p>We don't have any photos of <%= @plaque.machine_tag %> yet.</p>
-      </div>
-    </section>
-  <% elsif @plaque.photos.size < 2 %>
-    <div class="plaque_image plaque_single_image">
-      <%= image_tag(@plaque.photos.first.file_url) %>
-    </div>
-  <% else %>
-    <div class="plaque_image plaque_multiple_images">
-      <% first_photo = @plaque.photos.first %>
-      <%= link_to(image_tag(first_photo.file_url, {:id => "primary_image", :alt => "Photo of plaque", :rel => "foaf:depiction"}), first_photo.url) %>
-      <div id="secondary_images">
-        <% @plaque.photos.each do |image| %>
-          <%= link_to(image_tag(image.file_url, {:alt => "Photo of plaque", :rel => "foaf:depiction"}), image.url) unless image == first_photo %>
-        <% end %>
-      </div>
-    </div>
-  <% end %>
-</div>
+<%= render "plaques/photos" %>
 
 <%= form_for(@plaque) do |f| %>
 
@@ -36,7 +12,7 @@
   <fieldset>
     <h2>What does the plaque say?</h2>
     <div class="row">
-      <%= f.label :inscription, "Please type in the description on the plaque" %>
+      <%= f.label :inscription, "Type in the words on the plaque excluding the organisation, e.g. 'John Smith 1900-1980 lived here', in sentence case." %>
       <%= f.text_area :inscription, {:placeholder => "Joe Bloggs lived here", :autofocus => 'true',  :rows => "6", :cols => "50"} %>
     </div>
 
@@ -46,8 +22,7 @@
     </div>
 
     <div class="row">
-      <%= f.check_box :inscription_is_stub %>
-      <%= f.label :inscription_is_stub %>
+      <%= f.label :inscription_is_stub, "We don't have the full, exact wording yet" %><%= f.check_box :inscription_is_stub %>
     </div>
 
   </fieldset>
