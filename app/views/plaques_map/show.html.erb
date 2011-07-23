@@ -1,4 +1,5 @@
-<% @page_title = "Map of plaques within [" + @top_left[0].to_s + "," + @top_left[1].to_s + "]-[" + @bottom_right[0].to_s + "," + @bottom_right[1].to_s + "]" %>
+<% @page_title = "Map of plaques"
+@pag_title += "within [" + @top_left[0].to_s + "," + @top_left[1].to_s + "]-[" + @bottom_right[0].to_s + "," + @bottom_right[1].to_s + "]" if @top_left %>
 <% content_for :page_title, @page_title %>
 
 <h1><%= @page_title %></h1>
