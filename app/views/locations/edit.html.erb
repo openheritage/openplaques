@@ -14,8 +14,8 @@
     <%= f.collection_select :area_id, @areas, :id, :name, {:include_blank => true} %>
 
     New area in:
-    <% @countries.each do |@country| %>
-      <%= link_to(@country.name, "/places/" + @country.alpha2 + "/areas/new") %>
+    <% @countries.each do |country| %>
+      <%= link_to(country.name, "/places/" + country.alpha2 + "/areas/new") %>
     <% end %>
   </p>
   <% end %>
