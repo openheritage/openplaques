@@ -1,6 +1,7 @@
-<% content_for :page_title, "Historical plaques at " + @location.name + ", " + @location.area.name %>
+<% @page_title = @location.name  
+@page_title += ", " + @location.area.name if @location.area %>
+<% content_for :page_title, "Historical plaques at " + @page_title %>
 
-<% @page_title = @location.name  %>
 <div class="location" typeof="geo:Point">
   <h1><%= @location.name %><% if @location.area %>, <%= link_to @location.area.name, @location.area %><% end %></h1>
 </div>
