@@ -227,8 +227,8 @@ a.secondary_button:hover, div.secondary_button:hover input {
 */
 
 #homepage_content {
-  float: left;
-  width: 68%;
+float: left;
+  width: 65%;
 }
 
 #homepage_content p.intro {
@@ -236,9 +236,6 @@ a.secondary_button:hover, div.secondary_button:hover input {
   line-height: 1.4em;
   margin-bottom: 16px;
 }
-
-
-
 
 
 /*
@@ -251,11 +248,10 @@ a.secondary_button:hover, div.secondary_button:hover input {
 #recent_photographed_plaques {
   background: #EEE;
   border-radius: 16px; -moz-border-radius: 16px;
-
   float: right;
   list-style-type: none;
   overflow: hidden; _zoom: 1; /*Cleafix */
-  width: 236px;
+  width: 33%; max-width: 236px;
 }
 
 #recent_photographed_plaques li {
@@ -263,7 +259,7 @@ a.secondary_button:hover, div.secondary_button:hover input {
   padding-left: 10px;
   padding-right: 10px;
   margin-bottom: 10px;
-  width: 216px;
+  /*width: 216px;*/
   /*margin-right: 10px;*/
 }
 
@@ -273,14 +269,15 @@ a.secondary_button:hover, div.secondary_button:hover input {
 
 
 #recent_photographed_plaques li a {
-  font-size: 0;
+  border: solid 8px #EEE;
   display: block;
+  font-size: 0;
+	text-align: center;
+  text-decoration: none;
 }
 
-#recent_photographed_plaques li a {
-  border: solid 8px #EEE;
-  text-decoration: none;
-
+#recent_photographed_plaques li a img {
+	max-width: 100%;
 }
 
 #recent_photographed_plaques li.option_two a {
