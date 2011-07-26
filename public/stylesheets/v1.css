@@ -1290,12 +1290,6 @@ table.plaque_list td.geo {}
   clip: rect(1px, 1px, 1px, 1px);
 }
 
-section {
-/*  border: solid 1px #000;
-  display: block;
-  margin: 8px;*/
-}
-
 /* >> The Magnificent CLEARFIX: Updated to prevent margin-collapsing on child elements << j.mp/bestclearfix */
 .clearfix:before, .clearfix:after {
   content: "\0020"; display: block; height: 0; visibility: hidden;

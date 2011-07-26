@@ -1,16 +1,37 @@
 <% content_for :page_title, "New person" %>
-<h1>New person</h1>
+<div class="panel">
+	<h1>New person</h1>
+</div>
+<div class="panel">
 
-<% form_for(@person) do |f| %>
+	<% form_for(@person) do |f| %>
+	
+	<fieldset>
+		<div class="row">
+			<%= f.label :name %> <%= f.text_field :name %>
+		</div>
+		<div class="row">
+			<%= f.label :surname_starts_with, "Surname starts with" %> <%= f.text_field :surname_starts_with %>
+		</div>
+		<div class="row">
+			<%= f.label :born_on, "Born in" %> <%= text_field_tag :born_on, "", {:maxlength => "4"} %>
+		</div>
+		<div class="row">
+			<%= f.label :died_on, "Died in" %> <%= text_field_tag :died_on, "", {:maxlength => "4"} %>
+		</div>
+		<div class="row">
+			<%= f.label :wikipedia_url, "Wikipedia link" %> <%= f.text_field :wikipedia_url %>
+		</div>
+		<div class="row">
+			<%= f.label :dbpedia_uri, "DBpedia resource URI" %> <%= f.text_field :dbpedia_uri %>
+		</div>
 
-  <p><%= f.label :name %> <%= f.text_field :name %></p>
-  <p><%= f.label :surname_starts_with, "Surname starts with" %> <%= f.text_field :surname_starts_with %></p>
-  <p><%= f.label :born_on, "Born in" %> <%= text_field_tag :born_on, "", {:maxlength => "4"} %></p>
-  <p><%= f.label :died_on, "Died in" %> <%= text_field_tag :died_on, "", {:maxlength => "4"} %></p>
-  <p><%= f.label :wikipedia_url, "Wikipedia link" %> <%= f.text_field :wikipedia_url %></p>
-  <p><%= f.label :dbpedia_uri, "DBpedia resource URI" %> <%= f.text_field :dbpedia_uri %></p>
+		<%= f.submit "Create", :class => 'button' %>
+	</fieldset>
+	  
+	<% end %>
 
-  <p><%= f.submit "Create" %></p>
-<% end %>
+	<%= link_to 'Back', people_path %>
+	
+</div>
 
-<%= link_to 'Back', people_path %>
