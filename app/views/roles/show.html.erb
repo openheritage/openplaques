@@ -4,8 +4,8 @@
   <h1>Plaques commemorating <%= @role.name.pluralize %></h1>
 
   <% @role.people.each do |person| %>
-    <div class="person">
-      <h2><%= link_to person.name, person %> <%= dates(person) %> </h2>
+    <div class="vcard person"  typeof="<%= if (person.person?) then "foaf:Person" else "foaf:Agent" end %> vcard:VCard" about="#person">
+      <h2><%= dated_person(person) %></h2>
       <p><%= link_to pluralize(person.plaques.size, "plaque"), person %> in <%= list_of_area_links(person.areas) %></p>
     </div>
   <% end%>
@@ -24,9 +24,9 @@
       <div class="role">
         <h3><%= link_to related_role.name, role_path(related_role) %></h3>
         <% for person in related_role.people %>
-	  <div class="person">
+          <div class="vcard person"  typeof="<%= if (person.person?) then "foaf:Person" else "foaf:Agent" end %> vcard:VCard" about="#person">
             <p><%= dated_person(person) %></p>
-	  </div>
+          </div>
         <% end %>
       </div>
     <% end %>
