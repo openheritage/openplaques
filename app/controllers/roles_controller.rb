@@ -106,7 +106,7 @@ class RolesController < ApplicationController
   protected
 
     def find_role
-      @role = Role.find_by_slug!(params[:id])
+      @role = Role.find_by_slug(params[:id])
     end
 
 end
