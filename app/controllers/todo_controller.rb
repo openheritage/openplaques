@@ -12,6 +12,7 @@ class TodoController < ApplicationController
     @no_connection_count = Plaque.no_connection.count
     @partial_inscription_count = Plaque.partial_inscription.count
     @partial_inscription_photo_count = Plaque.partial_inscription_photo.count
+    @no_roles_count = Person.no_role.count
   end
 
   def destroy
@@ -63,6 +64,10 @@ class TodoController < ApplicationController
     when 'fetch_from_flickr'
       flash[:notice] = pluralize(fetch_todo_items, 'photo') + ' added to the list.'
       redirect_to "/todo/plaques_to_add"
+
+    when 'no_roles'
+      @people = Person.no_role
+      render :no_roles
 
     else
       raise ActiveRecord::RecordNotFound

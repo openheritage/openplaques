@@ -33,6 +33,8 @@ class Person < ActiveRecord::Base
 
   before_save :update_index
 
+  scope :no_role, :conditions => {:personal_roles_count => 0}
+
   DATE_REGEX = /c?[\d]{4}/
   DATE_RANGE_REGEX = /(?:\(#{DATE_REGEX}-#{DATE_REGEX}\)|#{DATE_REGEX}-#{DATE_REGEX})/
 
