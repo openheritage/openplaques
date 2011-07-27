@@ -1,7 +1,7 @@
-﻿<h1>To do: Locations not in an area</h1>
-<p><%= link_to("All to-do lists", "/todo") %></p>
+﻿<% content_for :page_title, "To do: locations not in an area" %>
 
-<%= @locations.size.to_s %>
+<h1>To do: <%= @locations.size.to_s %> locations not in an area</h1>
+<p><%= link_to("All to-do lists", "/todo") %></p>
 
 <% if @locations.size > 0 %>
 

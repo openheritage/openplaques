@@ -1,3 +1,5 @@
+<% content_for :page_title, "To do lists" %>
+
 <h1>To do lists</h1>
 <ul>
   <li><%= link_to(pluralize(@lists_to_datacapture, "list") +  " with plaques to be datacaptured", todo_path('lists_to_datacapture')) %></li>
