@@ -3,9 +3,7 @@
 <p><%= link_to @personal_role.person.name, @personal_role.person %> was a <%= dated_role(@personal_role) %></p>
 
 
-<% form_for @personal_role do |f| %>
-<%= f.error_messages %>
-
+<%= form_for @personal_role do |f| %>
   <p>
     <%= f.label :started_at, "From" %>
     <%= f.text_field :started_at %>
@@ -17,7 +15,4 @@
   </p>
 
   <p><%= f.submit "Save" %></p>
-
-
-
 <% end %>
