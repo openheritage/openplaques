@@ -33,7 +33,8 @@ class OrganisationsController < ApplicationController
     end
 
       @plaques = @organisation.plaques
-      @colour_label = @plaques.map {|i| (i.colour.nil? || i.colour.name) || "" }.group_by {|col| col }.max_by(&:size).first || ""
+      most_prevelant_colour = @plaques.map {|i| (i.colour.nil? || i.colour.name) || "" }.group_by {|col| col }.max_by(&:size)
+      @colour_label = most_prevelant_colour ? most_prevelant_colour.first : ""
 #      @centre = find_mean(@plaques)
       @zoom = 13
       respond_to do |format|
