@@ -15,4 +15,9 @@ $(document).ready(function() {
 		}
 		
 		$(window).resize(checkWidth);
+		
+		// Make the search box easier to overwrite with new searches
+		$("#phrase").click( function(){
+			$(this).select();
+		})
  });
