@@ -9,7 +9,7 @@
 
   <% if @areas.size > 0 %>
 
-    <%= content_tag("ol", :class => "results", :id => "people_results") do %>
+    <%= content_tag("ol", :class => "results one_destination_results", :id => "people_results") do %>
       <% @areas.each do |area| %>
         <%= content_tag("li") do %>
           <p class="result"><%= link_to area.name, area %></p>
