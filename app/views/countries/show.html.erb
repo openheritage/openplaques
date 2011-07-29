@@ -12,8 +12,12 @@
     <%= content_tag("ol", :class => "results one_destination_results", :id => "people_results") do %>
       <% @areas.each do |area| %>
         <%= content_tag("li") do %>
-          <p class="result"><%= link_to area.name, area %></p>
-          <p class="count"><%= pluralize(area.plaques.size.to_s, "plaque") %></p>
+
+	    <a href="<%= url_for(area) %>">
+	      <p class="result"><%= area.name %></p>
+	      <p class="count"><%= pluralize(area.plaques.size.to_s, "plaque") if area.plaques.size > 0 %></p>
+	    </a>
+	
         <% end %>
       <% end %>
     <% end %>
