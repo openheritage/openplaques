@@ -34,6 +34,10 @@ module PlaquesHelper
       return text
     end
   end
+  
+  def title(plaque)
+    plaque.title
+  end
 
   def kml(plaque, xml)
     if plaque.geolocated?
