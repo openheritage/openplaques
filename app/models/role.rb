@@ -20,7 +20,8 @@ class Role < ActiveRecord::Base
 
   def related_roles
     Role.find(:all, :conditions =>
-      ['(name LIKE ? and name != ?) or (name LIKE ? and name != ?) or (name LIKE ? and name != ?)', "#{name} %", name, "% #{name} %", name, "% #{name}", name])
+      ['lower(name) != ? and (lower(name) LIKE ? or lower(name) LIKE ? or lower(name) LIKE ? )', name.downcase, 
+    "#{name.downcase} %", "% #{name.downcase} %", "% #{name.downcase}"])
   end
 
   private
