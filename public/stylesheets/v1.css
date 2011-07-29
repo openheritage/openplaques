@@ -1194,11 +1194,11 @@ table.plaque_list td.geo {}
   text-decoration: none;
 }
 
-#people_results li a:hover,
 #roles_results li a:hover {
   color: #FFF;
 }
 
+#people_results li a:hover,
 #places_results li a:hover,
 #organisations_results li a:hover {
   color: #4F7CBF;
