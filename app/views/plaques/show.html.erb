@@ -1,6 +1,4 @@
-<% content_for :page_title do %><%= title(@plaque) %><%= " in " + @plaque.location.area.name if @plaque.area %><% end %>
-
-<% @page_title = title(@plaque) %>
+<% content_for :page_title do %><%= @plaque.title %><% end %>
 
 <div class="panel clearfix">
 	<% foreign = true if @plaque.language_id != 1 %>

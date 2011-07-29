@@ -35,21 +35,6 @@ module PlaquesHelper
     end
   end
 
-  def title(plaque)
-    if plaque.people.size > 4
-      people = []
-      plaque.people.first(4).each do |person|
-        people << person[:name]
-      end
-        people << pluralize(plaque.people.size - 4, "other")
-      people.to_sentence
-    elsif plaque.people.size > 0
-      return plaque.people.collect(&:name).to_sentence + (plaque.colour.nil? ? "" : " " + plaque.colour.name) + " plaque"
-    else
-      return "Plaque #" + plaque.id.to_s
-    end
-  end
-
   def kml(plaque, xml)
     if plaque.geolocated?
       xml.Placemark do
@@ -266,7 +251,6 @@ module PlaquesHelper
         end
         info += link_to(plaque.erected_at.year.to_s, plaque_erected_year_path(plaque.erected_at.year.to_s))
       end
-      info += "."
       return content_tag("p", info)
     else
       return content_tag("p", "Erected by: ".html_safe + content_tag("span", "unknown".html_safe, :class => :unknown) + ".")

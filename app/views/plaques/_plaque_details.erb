@@ -19,4 +19,15 @@
      <th>Location</th>
      <td><%= location_if_known(@plaque) %></td>
    </tr>
+   <tr>
+     <th>Subject</th>
+     <td>
+       <% @plaque.people.each do |person| %>
+         <span class="vcard"><%= dated_person(person) %></span>
+       <% end %>
+       <% if @plaque.people.size == 0 %>
+         None identified yet
+       <% end %>
+     </td>
+   </tr>
  </table>
