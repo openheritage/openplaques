@@ -114,7 +114,6 @@ class Plaque < ActiveRecord::Base
     end
   end
 
-
   def area_name
     if self.location && self.location.area
       self.location.area.name
@@ -168,7 +167,7 @@ class Plaque < ActiveRecord::Base
 
   def erected_at_string=(date)
     if date.length == 4
-        self.erected_at = Date.parse(date + "-01-01")
+      self.erected_at = Date.parse(date + "-01-01")
     else
       self.erected_at = date
     end
@@ -185,8 +184,6 @@ class Plaque < ActiveRecord::Base
         subject = inscription[inscription_regex, 1]
         predicates = inscription[inscription_regex, 2]
         object = inscription[inscription_regex, 8]
-
-
 
         subjects = []
 
@@ -319,8 +316,8 @@ class Plaque < ActiveRecord::Base
     elsif people.size > 0
       people.collect(&:name).to_sentence + " " + colour_name + " plaque"
     else
-      colour_name + " plaque " + machine_tag
-    end  << " in " + area_name if area
+      colour_name + " plaque"
+    end << " " + machine_tag << " in " + area_name if area
   end
 
   private
