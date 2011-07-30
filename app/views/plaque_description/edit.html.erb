@@ -1,17 +1,10 @@
 <% content_for :page_title, "Edit description for plaque \#" + @plaque.id.to_s %>
-<h1>Edit inscription for <%= link_to("plaque \#" + @plaque.id.to_s, @plaque)%></h1>
-
-<div class="info inscription">
-  <%= link_to "Edit", edit_plaque_inscription_path(@plaque), {:class => :edit, :title => "Edit inscription"} if current_user %>
-  <%= content_tag("p", new_linked_inscription(@plaque), {:class => "inscription"}) %>
-</div>
-
+<h1>Edit description for <%= link_to("plaque \#" + @plaque.id.to_s, @plaque)%></h1>
 
 <%= form_for(@plaque) do |f| %>
-
+  <p>Enter any additional interesting information about the plaque and links to articles about it. This will appear on the plaque detail page.</p> 
   <%= f.label :description %><br>
   <%= f.text_area :description, :class => :description %>
-
   <p>
     <%= f.submit "Save" %>
   </p>

@@ -5,6 +5,11 @@
   <%= content_tag("p", new_linked_inscription(@plaque), {:class => "inscription"}) %>
 </div>
 
+<%= link_to "Edit description", edit_plaque_description_path(@plaque), {:class => :edit, :title => "Edit description"} %>
+<%= link_to "Edit colour", edit_plaque_colour_path(@plaque), {:class => :edit, :title => "Edit colour"} %>
+<%= link_to "Edit geolocation", edit_plaque_geolocation_path(@plaque), {:class => :edit, :title => "Edit geolocation"} %>
+<%= link_to "Edit location", edit_plaque_location_path(@plaque), {:class => :edit, :title => "Edit location"} %>
+<%= link_to "Edit erected", edit_plaque_erected_path(@plaque), {:class => :edit, :title => "Edit erected"} %>
 
 <div class="info">
   <p>First added by <%= link_to @plaque.user.username, user_path(@plaque.user) %> on <%= @plaque.created_at.to_s(:long) %>. <%= "Last updated: " + @plaque.updated_at.to_s(:long) + "." if @plaque.created_at != @plaque.updated_at %></p>
@@ -23,7 +28,4 @@
 <%= button_to("Delete plaque", plaque_path(@plaque.id), {:method => :delete, :class => :delete}) if current_user.try(:is_admin?) %>
 
 
-<%= link_to "Edit colour", edit_plaque_colour_path(@plaque), {:class => :edit, :title => "Edit colour"} %>
-<%= link_to "Edit geolocation", edit_plaque_geolocation_path(@plaque), {:class => :edit, :title => "Edit geolocation"} %>
-<%= link_to "Edit location", edit_plaque_location_path(@plaque), {:class => :edit, :title => "Edit location"} %>
-<%= link_to "Edit erected", edit_plaque_erected_path(@plaque), {:class => :edit, :title => "Edit erected"} %>
+

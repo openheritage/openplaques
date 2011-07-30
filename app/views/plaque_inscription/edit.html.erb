@@ -35,30 +35,17 @@
 
 
   <h2>Connections</h2>
+  
+  <p>This plaque has an inscription of "<%= @plaque.inscription %>" from which we can establish the following:</p>
 
-  <table>
-    <tr>
-      <th>Person</th>
-      <th>Verb</th>
-      <th>Location</th>
-      <th>From</th>
-      <th>To</th>
-      <th></th>
-    </tr>
-    <% @plaque.personal_connections.each do |pc| %>
-      <tr>
-        <td><%= link_to pc.person.name, person_path(pc.person) %></td>
-        <td><%= link_to pc.location.name, location_path(pc.location) %> <%= "(here)" if pc.location == @plaque.location %></td>
-        <td><%= pc.from %></td>
-        <td><%= pc.to %></td>
-        <td><%= link_to "Edit", edit_personal_connection_path(pc) %> <%= link_to("Delete", personal_connection_path(pc), :method => :delete)%></td>
-      </tr>
-    <% end %>
-  </table>
+  <ul><% @plaque.personal_connections.each do |pc| %>
+    <li><%= link_to pc.person.name, person_path(pc.person) %> <%= pc.verb.name %> at <%= link_to pc.location.name, location_path(pc.location) %> <%= "(here)" if pc.location == @plaque.location %> from <%= pc.started_at %> to <%= pc.ended_at %> <%= link_to "Edit", edit_personal_connection_path(pc) %> <%= link_to("Delete", personal_connection_path(pc), :method => :delete)%></li>
+  <% end %>
+    <li><%= link_to "Add a fact", new_personal_connection_path(@plaque) %></li>
+  </ul>
 
-
-  <p><%= link_to "Add connection", new_personal_connection_path(@plaque) %></p>
-
+  
+  <br/>
   <% if @plaque.personal_connections.size == 0 %>
 
   <%= button_to("Parse inscription!", parse_inscription_plaque_path(@plaque))%>
