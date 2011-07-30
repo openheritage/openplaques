@@ -7,52 +7,25 @@
 <%= render "plaques/photos" %>
 
 <%= form_for(@plaque) do |f| %>
+  <div class="primary">
+    <fieldset>
+      <h2>What does the plaque say?</h2>
+      <div class="row">
+        <%= f.label :inscription, "Type in the words on the plaque excluding the organisation, e.g. 'John Smith 1900-1980 lived here', in sentence case." %>
+        <%= f.text_area :inscription, {:placeholder => "Joe Bloggs lived here", :autofocus => 'true',  :rows => "6", :cols => "50"} %>
+      </div>
 
-<div class="primary">
-  <fieldset>
-    <h2>What does the plaque say?</h2>
-    <div class="row">
-      <%= f.label :inscription, "Type in the words on the plaque excluding the organisation, e.g. 'John Smith 1900-1980 lived here', in sentence case." %>
-      <%= f.text_area :inscription, {:placeholder => "Joe Bloggs lived here", :autofocus => 'true',  :rows => "6", :cols => "50"} %>
-    </div>
-
-    <div class="row">
+      <div class="row">
         <%= f.label :language_id, "What language is it in?" %>
         <%= f.collection_select :language_id, @languages, :id, :name %>
-    </div>
+      </div>
 
-    <div class="row">
-      <%= f.label :inscription_is_stub, "We don't have the full, exact wording yet" %><%= f.check_box :inscription_is_stub %>
-    </div>
+      <div class="row">
+        <%= f.label :inscription_is_stub, "We don't have the full, exact wording yet" %><%= f.check_box :inscription_is_stub %>
+      </div>
+    </fieldset>
 
-  </fieldset>
-
-  <%= f.submit "Update", :class => :button %>
-
-</div>
+    <%= f.submit "Update", :class => :button %>
+  </div>
 <% end %>
-
-
-
-  <h2>Connections</h2>
-  
-  <p>This plaque has an inscription of "<%= @plaque.inscription %>" from which we can establish the following:</p>
-
-  <ul><% @plaque.personal_connections.each do |pc| %>
-    <li><%= link_to pc.person.name, person_path(pc.person) %> <%= pc.verb.name %> at <%= link_to pc.location.name, location_path(pc.location) %> <%= "(here)" if pc.location == @plaque.location %> from <%= pc.started_at %> to <%= pc.ended_at %> <%= link_to "Edit", edit_personal_connection_path(pc) %> <%= link_to("Delete", personal_connection_path(pc), :method => :delete)%></li>
-  <% end %>
-    <li><%= link_to "Add a fact", new_personal_connection_path(@plaque) %></li>
-  </ul>
-
-  
-  <br/>
-  <% if @plaque.personal_connections.size == 0 %>
-
-  <%= button_to("Parse inscription!", parse_inscription_plaque_path(@plaque))%>
-
-  <% else %>
-
-  <%= button_to("Un-parse inscription!", unparse_inscription_plaque_path(@plaque))%>
-
-  <% end %>
 

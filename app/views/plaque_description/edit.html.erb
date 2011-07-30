@@ -1,11 +1,15 @@
 <% content_for :page_title, "Edit description for plaque \#" + @plaque.id.to_s %>
-<h1>Edit description for <%= link_to("plaque \#" + @plaque.id.to_s, @plaque)%></h1>
+
+<div class="panel">
+  <h1>Edit description for <%= link_to("plaque \#" + @plaque.id.to_s, @plaque)%></h1>
+</div>
 
 <%= form_for(@plaque) do |f| %>
-  <p>Enter any additional interesting information about the plaque and links to articles about it. This will appear on the plaque detail page.</p> 
-  <%= f.label :description %><br>
-  <%= f.text_area :description, :class => :description %>
-  <p>
-    <%= f.submit "Save" %>
-  </p>
+  <%= f.label "Enter any additional interesting information about the plaque and links to articles about it to be displayed on the plaque detail page." %>
+  <div class="primary">
+    <div class="row">
+      <%= f.text_area :description, :class => :description %>
+    </div>
+    <%= f.submit "Save", :class => :button %>
+  </div>
 <% end %>

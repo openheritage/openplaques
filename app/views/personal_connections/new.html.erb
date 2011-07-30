@@ -1,48 +1,35 @@
-<h1>Add a connection for <%= link_to "Plaque #" + @plaque.id.to_s, @plaque %></h1>
+<div class="panel">
+  <h1>Add a connection for <%= link_to "Plaque #" + @plaque.id.to_s, @plaque %></h1>
+</div>
 
-  <h2>Current Connections</h2>
+<div class="primary">
+  <p>This plaque has an inscription of "<%= @plaque.inscription %>" from which we can establish the following:</p>
 
-  <table>
-    <tr>
-      <th>Person</th>
-      <th>Verb</th>
-      <th>Location</th>
-      <th>From</th>
-      <th>To</th>
-      <th></th>
-    </tr>
-    <% @plaque.personal_connections.each do |pc| %>
-      <tr>
-        <td><%= link_to pc.person.name, person_path(pc.person) %></td>
-        <td><%= link_to pc.verb.name, verb_path(pc.verb) %></td>
-        <td><%= link_to pc.location.name, location_path(pc.location) %> <%= "(here)" if pc.location == @plaque.location %></td>
-        <td><%= pc.from %></td>
-        <td><%= pc.to %></td>
-        <td><%= link_to "Edit", edit_personal_connection_path(pc) %> <%= link_to("Delete", personal_connection_path(pc), :method => :delete)%></td>
-      </tr>
-    <% end %>
-  </table>
+  <ul><% @plaque.personal_connections.each do |pc| %><li><%= link_to pc.person.name, person_path(pc.person) %> <%= pc.verb.name %> at <%= link_to pc.location.name, location_path(pc.location) %> <%= "(here)" if pc.location == @plaque.location %> from <%= pc.started_at %> to <%= pc.ended_at %> <%= link_to "Edit", edit_personal_connection_path(pc) %> <%= link_to("Delete", personal_connection_path(pc), :method => :delete)%></li>
+  <% end %>
+  <% if @plaque.personal_connections.size == 0 %>
+    <li>No facts have been established yet</li>
+  <% end %>
+  </ul>
 
 
 <% form_for @personal_connection, :url => personal_connections_path(@plaque) do |f| %>
-  <p>Inscription: <%= @plaque.inscription %>
-  </p>
+  <fieldset>
+    <div class="row"><%= f.label :person_id, "Person" %>:
+      <%= f.collection_select :person_id, @people, :id, :name %> <%= link_to("Add person", "/people/new") %>
+    </div>
+
+    <div class="row"><%= f.label :verb_id, "Verb" %>
+      <%= f.collection_select :verb_id, @verbs, :id, :name %>  <%= link_to("Add verb", "/verbs/new") %>
+    </div>
+
+    <div class="row"><%= f.label :location_id, "Location" %>
+      <% options = {} %>
+      <% options[:selected] = @plaque.location.id if @plaque.location %>
+      <%= f.collection_select :location_id, @locations, :id, :name, options %>
+    </div>
+  </fieldset>
   
-  <p><%= f.label :person_id, "Person" %>:
-    <%= f.collection_select :person_id, @people, :id, :name %> <%= link_to("Add person", "/people/new") %>
-    </p>
-
-  <p><%= f.label :verb_id, "Verb" %>
-    <%= f.collection_select :verb_id, @verbs, :id, :name %>  <%= link_to("Add verb", "/verbs/new") %>
-    </p>
-
-  <p><%= f.label :location_id, "Location" %>
-    <% options = {} %>
-    <% options[:selected] = @plaque.location.id if @plaque.location %>
-    <%= f.collection_select :location_id, @locations, :id, :name, options %>
-  </p>
-
-  <%= f.submit "Update" %>
-
+  <%= f.submit "Add", :class => :button %>
 
 <% end %>
