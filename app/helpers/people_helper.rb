@@ -41,11 +41,7 @@ module PeopleHelper
   end
 
   def wikipedia_url(person)
-    if person.wikipedia_url && person.wikipedia_url > ""
-      return person.wikipedia_url
-    end
-    untitled_name = person.name.gsub("Canon ","").gsub("Captain ","").gsub("Cardinal ","").gsub("Dame ","").gsub("Dr ","").gsub("Lord ","").gsub("Sir ","").strip.gsub(/ /,"_")
-    return "http://en.wikipedia.org/wiki/"+untitled_name
+    person.default_wikipedia_url
   end
 
   def dbpedia_url(person)

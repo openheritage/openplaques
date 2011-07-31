@@ -17,7 +17,7 @@
     <% end %>
 
     <br/>
-    <%= content_tag("p", "Read more about ".html_safe + link_to(@person.name, @person.wikipedia_url, :target => '_blank') + " on Wikipedia.".html_safe) unless @person.wikipedia_url.blank? %>
+    <%= content_tag("p", "Read more about ".html_safe + link_to(@person.name, @person.default_wikipedia_url, :target => '_blank') + " on Wikipedia.".html_safe) unless @person.default_wikipedia_url.blank? %>
 
     <%= content_tag("p", link_to("Edit", edit_person_path(@person))) if current_user && current_user.is_admin? %>
   </div>

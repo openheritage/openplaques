@@ -4,7 +4,7 @@ require 'open-uri'
 # This class represents a human who has been commemorated on a plaque.
 # === Attributes
 # * +name+ - The common full name of the person.
-# * +wikipedia_url+ - A link to the person's Wikipedia page (if they have one).
+# * +wikipedia_url+ - An override link to the person's Wikipedia page (if they have one and it isn't linked to via their name).
 # * +dbpedia_uri+ - A link to the DBpedia resource representing the person (if one exists).
 # * +born_on+ - The date on which the person was born. Optional.
 # * +died_on+ - The date on which the person died. Optional.
@@ -142,6 +142,16 @@ class Person < ActiveRecord::Base
   
   def age_in(year)
     return year - born_in if born_in
+  end
+  
+  # note that the Wikipedia url is constructed from the person's name
+  # unless it is overridden by data in the wikipedia_url field
+  # or the wikipedia_url field is set to blank to indicate that there
+  # is no Wikipedia record
+  def default_wikipedia_url
+    return wikipedia_url if wikipedia_url && wikipedia_url > ""
+    untitled_name = name.gsub("Canon ","").gsub("Captain ","").gsub("Cardinal ","").gsub("Dame ","").gsub("Dr ","").gsub("Lord ","").gsub("Sir ","").strip.gsub(/ /,"_")
+    "http://en.wikipedia.org/wiki/"+untitled_name
   end
 
   private
