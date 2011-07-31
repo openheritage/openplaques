@@ -1,27 +1,22 @@
 <% content_for :page_title, "Historical plaques about people by index - " + @index.upcase %>
 
-<% @page_title = "People - " + @index  %>
-
 <div class="panel clearfix">
   <h1>People - <%= @index.upcase %></h1>
 
-  <!-- TODO: Give the current letter a class of .selected -->
   <nav class="alphabet">
     <%= content_tag("ol") do %>
       <% for letter in "A".."Z" %>
         <%= content_tag("li", navigation_link_to(letter, people_by_index_path(letter.downcase))) %>
       <% end %>
     <% end %>
-
   </nav>
 </div>
 
-
 <%= content_tag("ol", :class => "results", :id => "people_results") do %>
   <% @people.each do |person| %>
-    <%= content_tag("li") do %>
+    <li>
       <p class="result"><%= link_to dated_roled_person(person) %></p>
       <p class="count"><%= pluralize(person.plaques.size, "plaque") %> <%= "in ".html_safe + list_of_area_links(person.areas) unless person.areas.size == 0 %></p>
-    <% end %>
+    </li>
   <% end %>
 <% end %>

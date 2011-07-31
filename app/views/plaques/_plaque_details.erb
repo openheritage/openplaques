@@ -23,7 +23,7 @@
      <th>Subject</th>
      <td>
        <% @plaque.people.each do |person| %>
-         <span class="vcard"><%= dated_person(person) %></span>
+         <span class="vcard"><%= dated_person(person) %></span><br/>
        <% end %>
        <% if @plaque.people.size == 0 %>
          None identified yet
