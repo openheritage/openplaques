@@ -100,9 +100,48 @@ class Person < ActiveRecord::Base
   end
 
   def person?
-    false if roles.member?(Role.find_by_name("dog"))
     true
+    false if animal?
+    false if thing?
     # TODO: add 'not human' property to role and abstract.
+  end
+
+  def animal?
+    false
+    true if roles.member?(Role.find_by_name("dog"))
+  end
+
+  def thing?
+    false
+    true if roles.member?(Role.find_by_name("charity"))
+    true if roles.member?(Role.find_by_slug("type_foundry"))
+  end
+  
+  def born_in
+    born_on.year if born_on
+  end
+  
+  def died_in
+    died_on.year if died_on
+  end
+  
+  def dead?
+    false
+#    true if !born_in && !died_in
+    true if died_in
+  end
+  
+  def alive?
+    !dead?
+  end
+  
+  def age
+    return died_in - born_in if died_in && born_in
+    return Time.now.year - born_in if born_in
+  end
+  
+  def age_in(year)
+    return year - born_in if born_in
   end
 
   private

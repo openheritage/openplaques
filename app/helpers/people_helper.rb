@@ -30,9 +30,9 @@ module PeopleHelper
       if person.born_on_is_circa
         dates += circa_tag
       end
-      dates += person.born_on.year.to_s + "-"
+      dates += person.born_in.to_s + "-"
       if person.died_on
-        dates += person.died_on.year.to_s
+        dates += person.died_in.to_s
       else
         dates += "present"
       end
@@ -137,7 +137,7 @@ module PeopleHelper
         if person.died_on_is_circa
           birth_date = circa_tag
         end
-        birth_date += link_to(person.died_on.year.to_s, people_died_on_path(person.died_on.year.to_s), {:about => "/people/#{person.id}#person", :property => "dbpprop:dateOfDeath", :datatype => "xsd:date", :content => person.died_on.year.to_s})
+        birth_date += link_to(person.died_in.to_s, people_alive_in_path(person.died_in.to_s), {:about => "/people/#{person.id}#person", :property => "dbpprop:dateOfDeath", :datatype => "xsd:date", :content => person.died_in.to_s})
       end
     end
 
@@ -147,7 +147,7 @@ module PeopleHelper
         if person.born_on_is_circa
           birth_date = circa_tag
         end
-        birth_date += link_to(person.born_on.year.to_s, people_born_on_path(person.born_on.year.to_s), {:class => "bday", :about => "/people/#{person.id}#person", :property => "dbpprop:dateOfBirth vcard:bday", :datatype => "xsd:date", :content => person.born_on.year.to_s})
+        birth_date += link_to(person.born_in.to_s, people_alive_in_path(person.born_in.to_s), {:class => "bday", :about => "/people/#{person.id}#person", :property => "dbpprop:dateOfBirth vcard:bday", :datatype => "xsd:date", :content => person.born_in.to_s})
       end
     end
 

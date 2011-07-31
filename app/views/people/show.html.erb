@@ -4,16 +4,20 @@
   <div class="vcard person" typeof="<%= if (@person.person?) then "foaf:Person" else "foaf:Agent" end %> vcard:VCard" about="#person">
 
     <h1><%= dated_person(@person, {:links => :none}) %> <%= roles_list(@person) %></h1>
+    
+    <p><%= "Died aged" if !@person.thing? && @person.dead? %><%= "Closed aged" if @person.thing? && @person.dead? %><%= "Aged" if @person.alive? && @person.age%> <%= "c." + @person.age.to_s if @person.age%></p>
 
     <p>Is commemorated at:</p>
 
     <% @plaques.each do |plaque| %>
-    <h2><%= link_to plaque.location.name + ", " + plaque.area.name, plaque if plaque.location and plaque.area %><%= link_to plaque.location.name, plaque if plaque.location and !plaque.area %></h2>
-      <p>"<%= plaque.inscription %>"</p>
+      <div class="plaque">
+        <h2><%= link_to plaque.location.name + ", " + plaque.area.name, plaque if plaque.location and plaque.area %><%= link_to plaque.location.name, plaque if plaque.location and !plaque.area %></h2>
+        <p>"<%= plaque.inscription %>"</p>
+      </div>
     <% end %>
 
     <br/>
-    <%= content_tag("p", "Read more about ".html_safe + link_to(@person.name, @person.wikipedia_url) + " on Wikipedia.".html_safe) unless @person.wikipedia_url.blank? %>
+    <%= content_tag("p", "Read more about ".html_safe + link_to(@person.name, @person.wikipedia_url, :target => '_blank') + " on Wikipedia.".html_safe) unless @person.wikipedia_url.blank? %>
 
     <%= content_tag("p", link_to("Edit", edit_person_path(@person))) if current_user && current_user.is_admin? %>
   </div>
