@@ -1,21 +1,24 @@
 <% content_for :page_title, "Plaques commemorating " + @role.name.pluralize %>
 
-<div class="panel">
-  <h1>Plaques commemorating <%= @role.name.pluralize %></h1>
+<div class="panel clearfix">
+  <h1>Commemorated <%= @role.name.pluralize %></h1>
+</div>
 
+<ol class="results" id="people_results">
   <% @role.people.each do |person| %>
-    <div class="vcard person"  typeof="<%= if (person.person?) then "foaf:Person" else "foaf:Agent" end %> vcard:VCard" about="#person">
-      <h2><%= dated_person(person) %></h2>
-      <p><%= link_to pluralize(person.plaques.size, "plaque"), person %> in <%= list_of_area_links(person.areas) %></p>
-    </div>
+    <li class="vcard person"  typeof="<%= if (person.person?) then "foaf:Person" else "foaf:Agent" end %> vcard:VCard" about="#person">
+      <p class="result"><%= dated_person(person) %></p>
+      <p class="count"><%= link_to pluralize(person.plaques.size, "plaque"), person %> in <%= list_of_area_links(person.areas) %></p>
+    </li>
   <% end%>
   
   <% if @role.people.size == 0 %>
-    <h2>None</h2>
-    <p>There are no plaques mentioning this role.</p>
+    <li>
+      <p class="result">None</p>
+      <p class="count">There are no plaques mentioning this role.</p>
+    </li>
   <% end %>
-
-</div>
+</ol>
 
 <% if @related_roles.size > 0 %>
   <div class="panel">
