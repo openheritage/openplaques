@@ -21,17 +21,21 @@
 </ol>
 
 <% if @related_roles.size > 0 %>
-  <div class="panel">
+  <div class="panel clearfix">
     <h2>Related Roles</h2>
-    <% for related_role in @related_roles %>
-      <div class="role">
-        <h3><%= link_to related_role.name, role_path(related_role) %></h3>
-        <% for person in related_role.people %>
-          <div class="vcard person"  typeof="<%= if (person.person?) then "foaf:Person" else "foaf:Agent" end %> vcard:VCard" about="#person">
-            <p><%= dated_person(person) %></p>
-          </div>
-        <% end %>
-      </div>
-    <% end %>
   </div>
+  <ol class="results" id="people_results">
+    <% for related_role in @related_roles %>
+      <li class="role">
+        <p class="result"><%= link_to related_role.name, role_path(related_role) %></p>
+        <p class="count">
+          <% for person in related_role.people %>
+            <div class="vcard person" typeof="<%= if (person.person?) then "foaf:Person" else "foaf:Agent" end %> vcard:VCard" about="#person">
+              <%= dated_person(person) %>
+            </div>
+          <% end %>
+        </p>
+      </li>
+    <% end %>
+  </ol>
 <% end %>
