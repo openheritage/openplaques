@@ -115,6 +115,7 @@ class Person < ActiveRecord::Base
     false
     true if roles.member?(Role.find_by_name("charity"))
     true if roles.member?(Role.find_by_slug("type_foundry"))
+    true if roles.member?(Role.find_by_slug("football_club"))
   end
   
   def born_in
@@ -127,8 +128,8 @@ class Person < ActiveRecord::Base
   
   def dead?
     false
-#    true if !born_in && !died_in
     true if died_in
+    true if !thing? && born_in < 1900
   end
   
   def alive?
@@ -137,7 +138,9 @@ class Person < ActiveRecord::Base
   
   def age
     return died_in - born_in if died_in && born_in
-    return Time.now.year - born_in if born_in
+    return Time.now.year - born_in if born_in && thing?
+    return Time.now.year - born_in if born_in && born_in > 1900
+    "unknown"
   end
   
   def age_in(year)

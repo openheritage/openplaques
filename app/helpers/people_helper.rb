@@ -114,9 +114,18 @@ module PeopleHelper
       if (person.born_on? and person.died_on?)
         dates = " (" + linked_birth_date(person) + "&#8202;–&#8202;" + linked_death_date(person) + ")"
       elsif (person.born_on?)
-        dates = " (born " + linked_birth_date(person) + "<span property=\"foaf:age\" content=\"#{age(person.born_on)}\" />)"
+        if (person.thing?)
+          dates = " (from "
+        else
+          dates = " (born "
+        end
+        dates += linked_birth_date(person) + "<span property=\"foaf:age\" content=\"#{age(person.born_on)}\" />)"
       elsif (person.died_on?)
-        dates = " (died " + linked_death_date(person) + ")"
+        if (person.thing?)
+          dates = " (to " + linked_death_date(person) + ")"
+        else
+          dates = " (died " + linked_death_date(person) + ")"
+        end
       else
         dates =""
       end
