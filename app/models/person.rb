@@ -101,21 +101,17 @@ class Person < ActiveRecord::Base
 
   def person?
     true
-    false if animal?
-    false if thing?
-    # TODO: add 'not human' property to role and abstract.
+    false if animal? or thing?
   end
 
   def animal?
     false
-    true if roles.member?(Role.find_by_name("dog"))
+    true if roles.any?{|role| role.animal?}
   end
 
   def thing?
     false
-    true if roles.member?(Role.find_by_name("charity"))
-    true if roles.member?(Role.find_by_slug("type_foundry"))
-    true if roles.member?(Role.find_by_slug("football_club"))
+    true if roles.any?{|role| role.thing?}
   end
   
   def born_in
@@ -128,8 +124,8 @@ class Person < ActiveRecord::Base
   
   def dead?
     false
-    true if died_in
-    true if !thing? && born_in < 1900
+    return true if died_in
+    return true if !thing? && born_in < 1900
   end
   
   def alive?
@@ -137,11 +133,11 @@ class Person < ActiveRecord::Base
   end
   
   def age
+    "unknown"
     return died_in - born_in if died_in && born_in
     return Time.now.year - born_in if born_in && thing?
     return Time.now.year - born_in if born_in && born_in > 1900
-    "unknown"
-  end
+   end
   
   def age_in(year)
     return year - born_in if born_in

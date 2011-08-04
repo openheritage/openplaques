@@ -24,6 +24,26 @@ class Role < ActiveRecord::Base
     "#{name.downcase} %", "% #{name.downcase} %", "% #{name.downcase}"])
   end
 
+  def person?
+    true
+    false if animal? or thing?
+  end
+
+  def animal?
+    false
+    return true if "dog" == slug
+  end
+
+  def thing?
+    false
+    #TODO add this as a settable attribute on role
+    return true if "charity" == slug
+    return true if "type_foundry" == slug
+    return true if "football_club" == slug
+    return true if "house" == slug
+    return true if "street" == slug
+  end
+
   private
 
     def update_index
