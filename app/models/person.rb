@@ -125,7 +125,7 @@ class Person < ActiveRecord::Base
   def dead?
     false
     return true if died_in
-    return true if !thing? && born_in < 1900
+    return true if !thing? && born_in && born_in < 1900
   end
   
   def alive?

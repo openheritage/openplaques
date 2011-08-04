@@ -42,6 +42,7 @@ class Role < ActiveRecord::Base
     return true if "football_club" == slug
     return true if "house" == slug
     return true if "street" == slug
+    return true if "battle" == slug
   end
 
   private
