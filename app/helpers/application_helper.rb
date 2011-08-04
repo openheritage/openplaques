@@ -188,9 +188,9 @@ module ApplicationHelper
       connections.each do |connection|
         if inscription.index(connection.person.name) != nil
           inscription = inscription.gsub(connection.person.name, link_to(connection.person.name, person_path(connection.person))).html_safe
-        else
+        elsif (connection.person.name.rindex(" "))
           search_for = connection.person.name[0,connection.person.name.rindex(" ")]
-          inscription = inscription.gsub(search_for, link_to(search_for, person_path(connection.person))).html_safe
+          inscription = inscription.gsub(search_for, link_to(search_for, person_path(connection.person))).html_safe if search_for
         end
       end
     end
