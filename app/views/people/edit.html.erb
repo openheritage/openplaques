@@ -17,12 +17,20 @@
 </div>
 
 <div class="panel">
-  <p>Roles: </p>
-  <ul><% @person.personal_roles.each do |personal_role| %><li><%= dated_role(personal_role) %> <%= button_to "Edit", edit_personal_role_path(personal_role) %> <%= button_to "Delete", personal_role, :method => :delete%> <% end %> </li></ul>
+  <p>This person features on plaques with inscriptions...
+    <% @person.plaques.each do |plaque| %>
+      <div class="plaque">
+        <p>"<%= plaque.inscription %>"</p>
+      </div>
+    <% end %>
+  
+  <p>...from which we can establish the following:</p>
+  
+  <ul><% @person.personal_roles.each do |personal_role| %><li><%= @person.name %> was a <%= dated_role(personal_role) %> <%= button_to "Edit", edit_personal_role_path(personal_role) %> <%= button_to "Delete", personal_role, :method => :delete%> <% end %> </li></ul>
   <p>
     <%= form_for @personal_role do |f| %>
       <%= f.hidden_field :person_id, :value => @person.id %>
-      <%= f.collection_select :role, @roles, :id, :name %> (from <%= f.text_field :started_at %> to <%= f.text_field :ended_at %>)
+      <%= @person.name %> was a <%= f.collection_select :role, @roles, :id, :name %> (from <%= f.text_field :started_at %> to <%= f.text_field :ended_at %>)
       <%= f.submit "Add" %>
     <% end %>
   </p>
