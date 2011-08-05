@@ -6,13 +6,13 @@
   <%= form_for(@person) do |f| %>
     <p><%= f.label :name %> <%= f.text_field :name %></p>
     <p><%= f.label :born_on, "Born" %> <%= text_field_tag :born_on, @born_on, {:maxlength => "4"} %> <%= f.label :died_on, "Died" %> <%= text_field_tag :died_on, @died_on, {:maxlength => "4"} %></p>
-    <p><%= f.label :wikipedia_url %> <%= f.text_field :wikipedia_url %></p>
+    <p>The <%= f.label :wikipedia_url %> <%= f.text_field :wikipedia_url %> overrides the default generated one if it's incorrect. Set it to blank if there is no Wikipedia page.</p>
     <p><%= f.label :wikipedia_paras %> <%= f.text_field :wikipedia_paras %> e.g. "[1,4,5]", "1,2" or "2 4 7"<br/>
       <a href="<%= wikipedia_url(@person)%>"><%= wikipedia_url(@person)%></a><br/>
       "<%= wikipedia_summary_p(@person) %>"</p>
     <p><%= f.label :dbpedia_uri %> <%= f.text_field :dbpedia_uri %></p>
     <p><%= f.label :surname_starts_with %> <%= f.text_field :surname_starts_with, :maxlength => 1 %></p>
-    <p><%= f.submit "Update" %></p>
+    <p><%= f.submit "Update", :class => :button %></p>
   <% end %>
 </div>
 
@@ -26,12 +26,12 @@
   
   <p>...from which we can establish the following:</p>
   
-  <ul><% @person.personal_roles.each do |personal_role| %><li><%= @person.name %> was a <%= dated_role(personal_role) %> <%= button_to "Edit", edit_personal_role_path(personal_role) %> <%= button_to "Delete", personal_role, :method => :delete%> <% end %> </li></ul>
+  <ul><% @person.personal_roles.each do |personal_role| %><li><%= @person.name %> was a <%= dated_role(personal_role) %> <%= link_to "Edit", edit_personal_role_path(personal_role) %> <%= button_to "Delete", personal_role, :method => :delete, :class => :button%> <% end %> </li></ul>
   <p>
     <%= form_for @personal_role do |f| %>
       <%= f.hidden_field :person_id, :value => @person.id %>
-      <%= @person.name %> was a <%= f.collection_select :role, @roles, :id, :name %> (from <%= f.text_field :started_at %> to <%= f.text_field :ended_at %>)
-      <%= f.submit "Add" %>
+      <%= @person.name %> was a <%= f.collection_select :role, @roles, :id, :name %> from <%= f.text_field :started_at %> to <%= f.text_field :ended_at %>
+      <%= f.submit "Add", :class => :button %>
     <% end %>
   </p>
   
