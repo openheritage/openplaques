@@ -8,7 +8,7 @@ class PersonalConnectionsController < ApplicationController
   def destroy
     @plaque = @personal_connection.plaque
     @personal_connection.destroy
-    redirect_to edit_plaque_inscription_path(@plaque)
+    redirect_to edit_plaque_path(@plaque)
   end
 
   def edit
@@ -20,7 +20,7 @@ class PersonalConnectionsController < ApplicationController
   def update
     @personal_connection = @plaque.personal_connections.find(params[:id])
     if @personal_connection.update_attributes(params[:personal_connection])
-      redirect_to edit_plaque_inscription_path(@plaque.id)
+      redirect_to edit_plaque_path(@plaque.id)
     else
       render :edit
     end
@@ -37,7 +37,7 @@ class PersonalConnectionsController < ApplicationController
   def create
     @personal_connection = @plaque.personal_connections.new(params[:personal_connection])
     if @personal_connection.save
-      redirect_to edit_plaque_inscription_path(@plaque)
+      redirect_to :back
     else
       @people = Person.all(:order => :name)
       @verbs = Verb.all(:order => :name)

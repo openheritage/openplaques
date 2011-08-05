@@ -6,7 +6,7 @@
   <p>This plaque has an inscription of "<%= @plaque.inscription %>" from which we can establish the following:</p>
 
   <ul><% @plaque.personal_connections.each do |pc| %><li><%= link_to pc.person.name, person_path(pc.person) %> <%= pc.verb.name %> 
-    at <%= link_to pc.location.name, location_path(pc.location) %> 
+    at <%= link_to pc.location.name, location_path(pc.location) %> <%= link_to @plaque.location.area.name, area_path(@plaque.location.area) if @plaque.location and @plaque.location.area%> 
     <%= "from " + pc.started_at.year.to_s if pc.started_at %><%= " to " + pc.ended_at.year.to_s if pc.ended_at %> 
     <%= link_to "Edit", edit_personal_connection_path(pc) %> <%= link_to("Delete", personal_connection_path(pc), :method => :delete)%></li>
   <% end %>
@@ -16,7 +16,7 @@
   </ul>
 
 
-<% form_for @personal_connection, :url => personal_connections_path(@plaque) do |f| %>
+<%= form_for @personal_connection, :url => personal_connections_path(@plaque) do |f| %>
   <fieldset>
     <div class="row">
       <%= f.collection_select :person_id, @people, :id, :name %> <%= link_to("Add person", "/people/new") %>
@@ -27,6 +27,7 @@
     </div>
 
     <div class="row">at <%= link_to @plaque.location.name, location_path(@plaque.location) %> <%= link_to @plaque.location.area.name, area_path(@plaque.location.area) if @plaque.location and @plaque.location.area%>
+    <%= f.hidden_field :location_id, :value => @plaque.location.id %>
     </div>
 
     <div class="row">
