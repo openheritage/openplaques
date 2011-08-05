@@ -317,7 +317,7 @@ class Plaque < ActiveRecord::Base
       people.collect(&:name).to_sentence + " " + colour_name + " plaque"
     else
       colour_name + " plaque"
-    end << " " + machine_tag << " in " + area_name if area
+    end << " in " + area_name if area
   end
 
   private
