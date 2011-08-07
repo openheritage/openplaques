@@ -1,11 +1,11 @@
 class PlaquePhotosController < ApplicationController
 
-  def edit
+  before_filter :find_plaque
 
-  end
+  protected
 
-  def show
-
-  end
+    def find_plaque
+      @plaque = Plaque.find(params[:plaque_id])
+    end
 
 end
