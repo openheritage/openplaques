@@ -59,8 +59,7 @@ class Plaque < ActiveRecord::Base
   accepts_nested_attributes_for :photos, :reject_if => proc { |attributes| attributes['photo_url'].blank? }
   accepts_nested_attributes_for :user, :reject_if => :all_blank
 
-  include ApplicationHelper
- # validates_presence_of :latitude, :longtitude
+  include ApplicationHelper, ActionView::Helpers::TextHelper
 
   def user_attributes=(user_attributes)
 
