@@ -1,6 +1,8 @@
+<% content_for :page_title, "Photos of the " + @plaque.title %>
+
 <h1>Photos of the <%= @plaque.title %></h1>
 
-<p>We currently link to <%= pluralize(@plaque.photos.size,"photo") %> of the <%= @plaque.title %>. To identify the location, inscription, <%= link_to "colour", colours_path %> and <%= link_to "organisation", organisations_path %> of a plaque Open Plaques collates data from a <a href="http://flickr.com/">Flickr</a> photo which has a Creative Commons <%= link_to "licence", licences_path %> and has been tagged with an machine tag of <i><%= @plaque.machine_tag %></i>.
+<p>We currently link to <%= pluralize_with_no(@plaque.photos.size.to_s,"photo") %> of the <%= @plaque.title %>. To identify the location, inscription, <%= link_to "colour", colours_path %> and <%= link_to "organisation", organisations_path %> of a plaque Open Plaques collates data from a <a href="http://flickr.com/">Flickr</a> photo which has a Creative Commons <%= link_to "licence", licences_path %> and has been tagged with an machine tag of <i><%= @plaque.machine_tag %></i>.
 We need you to hunt down any that don't have photographs, take a picture, post it to Flickr, accurately place it on your Flickr map, give it one of the forms of Creative Commons licence, tag it with the openplaques id and add it to <a href="http://www.flickr.com/groups/openplaques/">our Flickr group</a>.</p>
 
   <%= content_tag("ul", :class => "photographer_photos") do %>
