@@ -16,7 +16,7 @@ class OrganisationsController < ApplicationController
       format.html
       format.kml {
         @parent = @organisations
-        render "colours/index"
+        render "plaques/index"
       }
       format.yaml
       format.xml { render :xml => @organisations }
@@ -39,7 +39,8 @@ class OrganisationsController < ApplicationController
       @zoom = 13
       respond_to do |format|
         format.html
-        format.kml { render "plaques/show" }
+        format.kml { render "plaques/index" }
+        format.osm { render "plaques/index" }
         format.yaml
         format.xml { render :xml => @organisation }
         format.json { render :json => @organisation }

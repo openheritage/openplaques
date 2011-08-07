@@ -59,6 +59,18 @@ module PlaquesHelper
       end
     end
   end
+  
+  def osm(plaque, xml)
+    if plaque.geolocated?
+      xml.node(:id=>'-1', :visible=>'true', :lat=>plaque.latitude, :lon=>plaque.longitude) do
+        xml.tag(:k=>'created_by', :v=>'openplaques.org')
+        xml.tag(:k=>'ref', :v=>plaque.machine_tag)
+        xml.tag(:k=>'landmark', :v=>'memorial_plaque')
+        xml.tag(:k=>'name', :v=>'William IV and Adelaide blue plaque in Brighton')
+        xml.tag(:k=>'note', :v=>'&lt;p&gt;William IV and Queen Adelaide stayed here 1829&lt;/p&gt; &lt;p&gt;&lt;a href=&quot;http://openplaques.org/plaques/1051&quot;&gt;&lt;img src=&quot;http://www.flickr.com/photos/63641363@N00/3504305632/&quot;/&gt;&lt;/a&gt;&lt;/p&gt;')
+      end
+    end
+  end
 
   # pass null to search all machinetagged photos on Flickr
   def find_photo_by_machinetag(plaque)
