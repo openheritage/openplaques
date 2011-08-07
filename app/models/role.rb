@@ -43,6 +43,7 @@ class Role < ActiveRecord::Base
     return true if "house" == slug
     return true if "street" == slug
     return true if "battle" == slug
+    return true if "band" == slug
   end
 
   private
