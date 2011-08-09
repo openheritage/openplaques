@@ -31,20 +31,20 @@ class OrganisationsController < ApplicationController
       @organisation = Organisation.find(params[:id])
       redirect_to(organisation_path(@organisation.slug), :status => :moved_permanently) and return
     end
-
-      @plaques = @organisation.plaques
-      most_prevelant_colour = @plaques.map {|i| (i.colour.nil? || i.colour.name) || "" }.group_by {|col| col }.max_by(&:size)
-      @colour_label = most_prevelant_colour ? most_prevelant_colour.first : ""
+    
+    @plaques = @organisation.plaques
+    most_prevelant_colour = @plaques.map {|i| (i.colour.nil? || i.colour.name) || "" }.group_by {|col| col }.max_by(&:size)
+    @colour_label = most_prevelant_colour ? most_prevelant_colour.first : ""
 #      @centre = find_mean(@plaques)
-      @zoom = 13
-      respond_to do |format|
-        format.html
-        format.kml { render "plaques/index" }
-        format.osm { render "plaques/index" }
-        format.yaml
-        format.xml { render :xml => @organisation }
-        format.json { render :json => @organisation }
-      end
+    @zoom = 13
+    respond_to do |format|
+      format.html
+      format.kml { render "plaques/index" }
+      format.osm { render "plaques/index" }
+      format.yaml
+      format.xml { render :xml => @organisation }
+      format.json { render :json => @organisation }
+    end
   end
 
   def new

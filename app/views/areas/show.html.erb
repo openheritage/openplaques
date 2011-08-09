@@ -4,13 +4,7 @@
   <%= link_to(@area.country.name, @area.country) if @area.country %>
   <h1><%= @area.name %></h1>
 
-  <% @plaques.each do |plaque| %>
-
-    <h2><%= link_to title(plaque), plaque %></h2>
-
-    <p><%= plaque.inscription %></p>
-
-  <% end %>
+  <%= plaque_list(@plaques) %>
 
 </div>
 
