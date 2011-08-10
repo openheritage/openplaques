@@ -28,7 +28,7 @@ class CountriesController < ApplicationController
       @country = Country.find_by_alpha2!(params[:id])
     rescue
       @country = Country.find(params[:id])
-      redirect_to(country_url(@country.alpha2), :status => :moved_permanently)
+      redirect_to(country_url(@country.alpha2), :status => :moved_permanently) and return
     end
 
     @areas = @country.areas.all(:order => :name, :include => :country)
