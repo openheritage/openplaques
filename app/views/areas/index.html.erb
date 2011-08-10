@@ -8,7 +8,7 @@
   <%= content_tag("ul") do %>
     <% @areas.each do |area| %>
       <%= content_tag("li") do %>
-        <%= link_to area.name, area %>
+        <%= link_to area.name, country_area_path(area.country, area) %>
         <%= "(" + pluralize(area.plaques.size, "plaque") + ")" %>
       <% end %>
     <% end %>

@@ -1,11 +1,11 @@
 module AreasHelper
 
   def area_path(area, options = {})
-    url_for(options.merge(:controller => :areas, :action => :show, :id => area.slug, :country_id => area.country.alpha2))
+    country_area_path(area.country, area, options)
   end
 
   def area_url(area, options = {})
-    area_path(area, options.merge!(:only_path => false))
+    country_area_url(area.country, area, options)
   end
 
   def edit_area_path(area, options = {})
