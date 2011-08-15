@@ -299,7 +299,7 @@ class Plaque < ActiveRecord::Base
     # this example ignores the user's options
     super(:only => [:id, :inscription, :reference, :latitude, :longitude, :erected_at, :created_at, :updated_at], :include => {:colour => {:only => :name}, :language => {:only => [:name, :alpha2]}, :location => {:only => :name, :include => {:area => {:only => :name, :include => {:country => {:only => [:name, :alpha2]}}}}}, :organisation => {:only => :name}})
   end
-  
+
   def machine_tag
     "openplaques:id=" + id.to_s
   end
@@ -315,7 +315,7 @@ class Plaque < ActiveRecord::Base
     elsif people.size > 0
       people.collect(&:name).to_sentence + " " + colour_name + " plaque"
     else
-      colour_name + " plaque " + machine_tag 
+      colour_name.capitalize + " plaque № #{id}"
     end << " in " + area_name if area
   end
 
