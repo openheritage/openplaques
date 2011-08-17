@@ -45,6 +45,19 @@ class Role < ActiveRecord::Base
     return true if "battle" == slug
     return true if "band" == slug
   end
+  
+  # work it out from the name unless override value stored in the db
+  def wikipedia_stub
+    self[:wikipedia_stub] ? self[:wikipedia_stub] : self.name.capitalize.strip.gsub(/ /,"_")
+  end
+  
+  def dbpedia_url
+    "http://dbpedia.org/resource/" + wikipedia_stub
+  end
+  
+  def wikipedia_url
+    "http://en.wikipedia.org/wiki/" + wikipedia_stub
+  end
 
   private
 
