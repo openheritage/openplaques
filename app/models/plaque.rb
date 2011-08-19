@@ -9,8 +9,8 @@
 # * +inscription_is_stub+ - The inscription is incomplete and needs entering.
 # * +erected_at+ - The date on which the plaque was erected. Optional.
 # * +reference+ - An official reference number or identifier for the plaque. Sometimes marked on the actual plaque itself, sometimes only in promotional material. Optional.
-# * +latitude+ - The latitude of the plaque's location (as a decimal). Optional.
-# * +longitude+ - The longitude of the plaque's location (as a decimal). Optional.
+# * +latitude+ - The latitude of the plaque's location (as a decimal in WSG-84 projection). Optional.
+# * +longitude+ - The longitude of the plaque's location (as a decimal in WSG-84 projection). Optional.
 # * +notes+ - A general purpose notes field for internal admin and data-collection purposes.
 #
 # === Associations
@@ -22,10 +22,10 @@
 # * Language - The primary language of the inscripton on the plaque. Optional.
 # * Photos - Photos of the plaque.
 # * Verbs - The verbs used on the plaque's inscription.
+# * Series - A series that this plaque is part of. Optional.
 class Plaque < ActiveRecord::Base
 
   validates_presence_of :user
-
 
   belongs_to :location, :counter_cache => true
   belongs_to :colour, :counter_cache => true
@@ -33,6 +33,7 @@ class Plaque < ActiveRecord::Base
   belongs_to :plaque_erected_year, :counter_cache => true
   belongs_to :user, :counter_cache => true
   belongs_to :language, :counter_cache => true
+  belongs_to :series, :counter_cache => true
 
   has_one :area, :through => :location
 
