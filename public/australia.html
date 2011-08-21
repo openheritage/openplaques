@@ -1,0 +1,162 @@
+
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+   xmlns:foaf="http://xmlns.com/foaf/0.1/"
+   xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
+   xmlns:owl="http://www.w3.org/2002/07/owl#"
+   xmlns:dbpprop="http://dbpedia.org/property/"
+   xmlns:op="http://openplaques.org/ontology/"
+   xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+   xmlns:sioc="http://rdfs.org/sioc/ns#"
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema#"> 
+ 
+  <head> 
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" /> 
+    <title>Historical plaques in Australia</title> 
+ 
+    <link href="/stylesheets/v1.css?1312881766" media="screen" rel="stylesheet" type="text/css" /> 
+ 
+    <script src="/javascripts/application.js?1312881766" type="text/javascript"></script> 
+    
+    <script src="/javascripts/jquery-1.5.1.min.js?1312881766" type="text/javascript"></script> 
+    <script src="/javascripts/jquery-ui-1.8.11.custom.min.js?1312881766" type="text/javascript"></script> 
+ 
+  <script src="/javascripts/lib/modernizr-1.7.min.js?1312881766" type="text/javascript"></script> 
+ 
+    <link href="/images/openplaques-icon.png?1312881766" rel="shortcut icon" /> 
+    <meta name="csrf-param" content="authenticity_token"/> 
+<meta name="csrf-token" content="kqQAOlw9eBNpAzlHjCdJoqXUgrV8Cx0yprIxESI6kkQ="/> 
+  </head> 
+ 
+  <body id="countries_controller"> 
+    
+    
+ 
+    <header> 
+ 
+      <div class="container"> 
+ 
+        <div class="branding"> 
+          <a href="/" class="logo"><img alt="Openplaques" src="/images/openplaques.png?1312881766" /></a> 
+        </div> 
+ 
+        <span class="site_name"> 
+          O<span class="small-caps">pen</span> P<span class="small-caps">laques</span> 
+        </span> 
+ 
+<table id="navigation" cellpadding="0" cellspacing="0" border="0"> 
+	<tr> 
+		<td id="primary_links"> 
+			<nav> 
+				<ul class="clearfix"> 
+					<li><a href="/people">People</a></li> 
+					<li><a href="/places">Places</a></li> 
+					<li><a href="/organisations">Organisations</a></li> 
+</ul>			</nav> 
+		</td> 
+		<td id="primary_search"> 
+			<div class="search_box"> 
+				<form accept-charset="UTF-8" action="/search" method="get"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div> 
+					<span id="magnifying_glass"></span> 
+					<label for="phrase">Search: </label> 
+					<input id="phrase" name="phrase" placeholder="Search for a person, place or organisation..." type="search" /> 
+					<input type="submit" value="Go" /> 
+</form>			</div> 
+		</td> 
+	</tr> 
+</table> 
+ 
+        <p class="user_info"><a href="/users/sign_in">Login</a></p> 
+ 
+ 
+ 
+ 
+ 
+      </div> 
+ 
+    </header> 
+    <div id="content"> 
+ 
+ 
+		
+		<div id="city_results" class="clearfix container"> 
+		
+
+	<div id="city_title" class="panel"> 
+		<h1>Plaques in Australia</h1>
+		<section class="plaque_count">
+			<p><strong>14 plaques found</strong> <em>(12 of which remain <a href="/places/au/unphotographed">unphotographed</a>)</em></p>
+		</section>
+	</div> 
+
+	<ol class="results one_destination_results"> 
+	<li> 
+
+	<a href="/places/au/areas/echuca_victoria"> 
+	<p class="result">Echuca, Victoria</p> 
+	<p class="count">1 plaque</p> 
+	</a> 
+
+	</li>        <li> 
+
+	<a href="/places/au/areas/melbourne_victoria"> 
+	<p class="result">Melbourne, Victoria</p> 
+	<p class="count">2 plaques</p> 
+	</a> 
+
+	</li>        <li> 
+
+	<a href="/places/au/areas/perth_western_australia"> 
+	<p class="result">Perth, Western Australia</p> 
+	<p class="count">11 plaques</p> 
+	</a> 
+
+	</li>
+	</ol> 
+	
+	
+	<div id="map">
+		<img src="http://maps.googleapis.com/maps/api/staticmap?
+		size=500x300
+		&markers=size:mid%7Ccolor:blue%7CPerth
+		&markers=size:mid%7Ccolor:blue%7CMelbourne
+		&markers=size:mid%7Ccolor:blue%7CEchuca,Victoria
+		&sensor=false" />
+		
+	</div> 
+ 
+ 
+		</div> 
+ 
+    </div> 
+    <footer> 
+      <nav> 
+        <a href="/about">About</a> 
+        <a href="/contact">Contact</a> 
+        <a href="/about/data">The data</a> 
+        <a href="http://blog.openplaques.org/">Blog</a> 
+        <a href="http://twitter.com/openplaques">Twitter</a> 
+      </nav> 
+ 
+      <p class="about">A project of Open Heritage C.I.C.</p> 
+    </footer> 
+ 
+  <script type="text/javascript"> 
+//<![CDATA[
+var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-8901261-1']);
+    _gaq.push(['_setDomainName', '.openplaques.org']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+//]]>
+</script> 
+ 
+<script src="/javascripts/ToggleSearchValue.js?1312881766" type="text/javascript"></script> 
+ 
+</body> 
+</html> 
