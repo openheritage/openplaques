@@ -10,5 +10,5 @@
     <% end %>
   <% end %>
 
-  <%= link_to("New language", new_language_path) if current_user %>
+  <%= button_to("New language", new_language_path, {:method => :get, :class => :button}) if current_user %>
 </div>
