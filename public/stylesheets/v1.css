@@ -6,8 +6,11 @@
     2.1 Flash and error elements
     2.2 Global buttons
     2.3 Admin panel
-  3. PLAQUE PAGE
-    3.1 Inscriptions
+	3. PLACES
+		3.1 Country
+  4. PLAQUE PAGE
+    4.1 Inscriptions
+	5. HOMEPAGE
 */
 
 /**
@@ -220,123 +223,93 @@ a.secondary_button:hover, div.secondary_button:hover input {
   text-decoration: underline;
 }
 
-
-
 /**
-  3. HOMEPAGE
-*/
-
-#homepage_content {
-float: left;
-  width: 65%;
-}
-
-#homepage_content p.intro {
-  font-size: 1.5em;
-  line-height: 1.4em;
-  margin-bottom: 16px;
-}
-
-
-/*
-
-  background: -webkit-gradient(linear, 0 0, 0 100%, from(#FFF), to(#EEE));
-  background: -moz-linear-gradient(top, #FFF, #EEE);
-*/
-
-
-#recent_photographed_plaques {
-  background: #EEE;
-  border-radius: 16px; -moz-border-radius: 16px;
-  float: right;
-  list-style-type: none;
-  overflow: hidden; _zoom: 1; /*Cleafix */
-  width: 33%; max-width: 236px;
-}
-
-#recent_photographed_plaques li {
-/*  float: left;*/
-  padding-left: 10px;
-  padding-right: 10px;
-  margin-bottom: 10px;
-  /*width: 216px;*/
-  /*margin-right: 10px;*/
-}
-
-#recent_photographed_plaques li.first {
-  padding-top: 10px;
-}
-
-
-#recent_photographed_plaques li a {
-  border: solid 8px #EEE;
-  display: block;
-  font-size: 0;
-	text-align: center;
-  text-decoration: none;
-}
-
-#recent_photographed_plaques li a img {
-	max-width: 100%;
-}
-
-#recent_photographed_plaques li.option_two a {
-  position: relative;
-}
-
-
-#recent_photographed_plaques li a:hover {
-  -moz-transition-duration: 0.3s;
-  border: 8px solid #FFF;
-  box-shadow: 0 0 10px #999;
-
-}
-
-#recent_photographed_plaques li a .info {
-  padding: 8px 0;
-}
-
-#recent_photographed_plaques li.option_two a .info {
-  position: absolute; bottom: 0;
-  display: none;
-}
-
-#recent_photographed_plaques li a:hover .info {
-  display: block;
-}
-
-
-#recent_photographed_plaques li a .info p {
-  font-size: 12px;
-  line-height: 16px;
-  text-align: center;
-}
-
-#recent_photographed_plaques li.option_two a .info p {
-  text-shadow: 1px 1px #333;
-}
-
-
-/***/
-
-#homepage_modules {
-  list-style-type: none;
-  overflow: hidden; _zoom: 1;
-}
-
-#homepage_modules li {
-  background: #EEE;
-  border-radius: 16px; -moz-border-radius: 16px;
-  padding: 16px;
-  margin-bottom: 16px;
-}
-
-/**
-  3. PLAQUE PAGE
+	3. PLACES
 */
 
 /*
-  3.1 Inscriptions
+	3.1. /places/country
+*/
+
+#city_results {}
+
+#city_title {
+	position: relative;
+}
+
+#city_title .plaque_count {
+	position: absolute; top: 16px; right: 5%;
+	padding: 10px 0 8px;
+}
+
+#city_results ol.results {
+	float: left;
+	list-style-type: none;
+	margin: 0 0 0 5%;
+	width: 33%;
+}
+
+#city_results ol.results li {
+	background: url("../images/bullet-blue.gif") no-repeat scroll left 10px transparent;
+	padding-bottom: 16px;
+	padding-left: 16px;
+}
+
+#city_results ol.results li a {
+	text-decoration: none;
+}
+
+#city_results ol.results li a .result {
+	color: #000;
+}
+
+#city_results ol.results li a:hover .result {
+	color: #4F7CBF;
+}
+
+@media screen and (max-width: 855px) {
+	/*red*/
+	#city_title .plaque_count {position: static; padding: 0;}
+}
+
+@media screen and (max-width: 1128px) {
+	#city_results ol.results {width: 90%;}
+}
+
+@media screen and (min-width: 855px) and (max-width: 1128px) {
+	/* green */
+	#city_results ol.results {
+		-moz-column-count: 2; -webkit-column-count: 2; column-count: 2;
+	}
+}
+
+@media screen and (min-width: 1128px) and (max-width: 1500px) {
+	/* blue */
+	#city_results #map {
+		border: solid 3px #FFF;
+		float: right;
+		overflow: hidden;
+		width: 500px;
+		margin: 16px 5% 32px 0;
+		height: 300px;
+	}	
+}
+
+@media screen and (max-width: 1128px) {
+	#city_results #map {display: none;}
+}
+
+#map.fixed {
+	position: fixed;
+	top: 0; right: 9%;
+}
+
+/**
+  4. PLAQUE PAGE
+*/
+
+/*
+  4.1 Inscriptions
 */
 
 h1.inscription,
@@ -741,6 +714,115 @@ html.no-rgba .search_box form {background: #FFF;}
 
 
 
+
+/**
+  5. HOMEPAGE
+*/
+
+#homepage_content {
+float: left;
+  width: 65%;
+}
+
+#homepage_content p.intro {
+  font-size: 1.5em;
+  line-height: 1.4em;
+  margin-bottom: 16px;
+}
+
+
+/*
+
+  background: -webkit-gradient(linear, 0 0, 0 100%, from(#FFF), to(#EEE));
+  background: -moz-linear-gradient(top, #FFF, #EEE);
+*/
+
+
+#recent_photographed_plaques {
+  background: #EEE;
+  border-radius: 16px; -moz-border-radius: 16px;
+  float: right;
+  list-style-type: none;
+  overflow: hidden; _zoom: 1; /*Cleafix */
+  width: 33%; max-width: 236px;
+}
+
+#recent_photographed_plaques li {
+/*  float: left;*/
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-bottom: 10px;
+  /*width: 216px;*/
+  /*margin-right: 10px;*/
+}
+
+#recent_photographed_plaques li.first {
+  padding-top: 10px;
+}
+
+
+#recent_photographed_plaques li a {
+  border: solid 8px #EEE;
+  display: block;
+  font-size: 0;
+	text-align: center;
+  text-decoration: none;
+}
+
+#recent_photographed_plaques li a img {
+	max-width: 100%;
+}
+
+#recent_photographed_plaques li.option_two a {
+  position: relative;
+}
+
+
+#recent_photographed_plaques li a:hover {
+  -moz-transition-duration: 0.3s;
+  border: 8px solid #FFF;
+  box-shadow: 0 0 10px #999;
+
+}
+
+#recent_photographed_plaques li a .info {
+  padding: 8px 0;
+}
+
+#recent_photographed_plaques li.option_two a .info {
+  position: absolute; bottom: 0;
+  display: none;
+}
+
+#recent_photographed_plaques li a:hover .info {
+  display: block;
+}
+
+
+#recent_photographed_plaques li a .info p {
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
+}
+
+#recent_photographed_plaques li.option_two a .info p {
+  text-shadow: 1px 1px #333;
+}
+
+
+/***/
+
+#homepage_modules {
+  list-style-type: none;
+  overflow: hidden; _zoom: 1;
+}
+
+#homepage_modules li {
+  background: #EEE;
+  border-radius: 16px; -moz-border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
 
 
 
@@ -1194,11 +1276,11 @@ table.plaque_list td.geo {}
   text-decoration: none;
 }
 
+#people_results li a:hover,
 #roles_results li a:hover {
   color: #FFF;
 }
 
-#people_results li a:hover,
 #places_results li a:hover,
 #organisations_results li a:hover {
   color: #4F7CBF;
@@ -1227,7 +1309,6 @@ table.plaque_list td.geo {}
 .results strong {
   font-weight: normal;
 }
-
 
 /*******/
 

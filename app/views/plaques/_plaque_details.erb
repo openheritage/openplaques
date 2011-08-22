@@ -3,6 +3,12 @@
      <th>Erected</th>
      <td><%= erected_information(@plaque) %></td>
    </tr>
+   <% if @plaque.series %>
+   <tr>
+     <th>Series</th>
+     <td><%= link_to(@plaque.series.name, @plaque.series) %></td>
+   </tr>
+   <% end %>
    <tr>
      <th>Language</th>
      <td><%= language_if_known(@plaque) %></td>

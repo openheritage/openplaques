@@ -28,4 +28,8 @@ class Area < ActiveRecord::Base
     {:label => name, :value => name, :id => id, :country_id => country.id, :country_name => country.name}
   end
 
+  def to_param
+    slug
+  end
+
 end

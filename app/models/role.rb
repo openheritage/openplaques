@@ -37,13 +37,29 @@ class Role < ActiveRecord::Base
   def thing?
     false
     #TODO add this as a settable attribute on role
-    return true if "charity" == slug
-    return true if "type_foundry" == slug
-    return true if "football_club" == slug
-    return true if "house" == slug
-    return true if "street" == slug
-    return true if "battle" == slug
     return true if "band" == slug
+    return true if "battle" == slug
+    return true if "charity" == slug
+    return true if "cinema" == slug
+    return true if "football_club" == slug
+    return true if "fire_station" == slug
+    return true if "house" == slug
+    return true if "pier" == slug
+    return true if "street" == slug
+    return true if "type_foundry" == slug
+  end
+  
+  # work it out from the name unless override value stored in the db
+  def wikipedia_stub
+    self[:wikipedia_stub] ? self[:wikipedia_stub] : self.name.capitalize.strip.gsub(/ /,"_")
+  end
+  
+  def dbpedia_url
+    "http://dbpedia.org/resource/" + wikipedia_stub
+  end
+  
+  def wikipedia_url
+    "http://en.wikipedia.org/wiki/" + wikipedia_stub
   end
 
   private

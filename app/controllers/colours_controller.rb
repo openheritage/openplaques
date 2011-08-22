@@ -9,10 +9,8 @@ class ColoursController < ApplicationController
     @colours = Colour.all
     respond_to do |format|
       format.html
-      format.kml {
-        @parent = @colours
-        render "colours/index"
-      }
+      format.kml { render "plaques/index"}
+      format.osm { render "plaques/index"}
       format.yaml
       format.xml { render :xml => @colours }
       format.json { render :json => @colours }
@@ -27,17 +25,17 @@ class ColoursController < ApplicationController
       redirect_to(colour_url(@colour.name), :status => :moved_permanently) and return
     end
 
-      @plaques = @colour.plaques.includes(:personal_connections => :person, :location => [:area => :country])
+    @plaques = @colour.plaques.includes(:personal_connections => :person, :location => [:area => :country])
 #      @centre = find_mean(@plaques)
-      @zoom = 9
-      respond_to do |format|
-        format.html
-        format.kml { render "plaques/show" }
-        format.yaml
-        format.xml  { render :xml => @colour }
-        format.json { render :json => @colour }
-      end
-
+    @zoom = 9
+    respond_to do |format|
+      format.html
+      format.kml { render "plaques/index" }
+      format.osm { render "plaques/index" }
+      format.yaml
+      format.xml  { render :xml => @colour }
+      format.json { render :json => @colour }
+    end
   end
 
   def new
@@ -63,7 +61,6 @@ class ColoursController < ApplicationController
       @colour.slug = old_slug
       render :edit
     end
-
   end
 
   protected

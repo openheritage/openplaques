@@ -7,11 +7,11 @@
 <%= content_tag("ol", :id => "places_results", :class => "results one_destination_results") do %>
   <% @countries.each do |country| %>
     <%= content_tag("li") do %>
-        <a href="<%= url_for(country) %>">
+      <%= link_to country do %>
           <p class="result"><%= country.name %></p>
           <p class="count"><%= pluralize(country.plaques.size, "plaque") %></p>
-        </a>
       <% end %>
+    <% end %>
   <% end %>
 <% end %>
 

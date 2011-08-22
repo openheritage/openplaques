@@ -26,7 +26,8 @@ class PeopleController < ApplicationController
 	
     respond_to do |format|
       format.html
-      format.kml { render "plaques/show" }
+      format.kml { render "plaques/index" }
+      format.osm { render "plaques/index" }
       format.yaml
       format.xml  { render :xml => @person }
       format.json { render :json => @person }

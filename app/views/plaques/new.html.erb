@@ -46,6 +46,7 @@
   $(function() {
 
     $( "#organisation_name" ).autocomplete({
+      autofocus: true,
       source: function(request, response) {
         $.ajax({
           url: "/organisations",

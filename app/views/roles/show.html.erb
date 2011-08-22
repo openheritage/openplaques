@@ -2,6 +2,7 @@
 
 <div class="panel clearfix">
   <h1>Commemorated <%= @role.name.pluralize %></h1>
+  <p>Read more about what <%= a_or_an @role.name, false %> <%= link_to @role.name, @role.wikipedia_url %> is on Wikipedia</p>
 </div>
 
 <ol class="results" id="people_results">

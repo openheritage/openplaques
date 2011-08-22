@@ -54,12 +54,11 @@ Openplaques::Application.routes.draw do
   resources :photographers, :controller => "PhotoPhotographers", :only => [:index, :show]
   resources :licences, :only => [:index, :show]
 
-  # These are the organisations:
+  # These are the organisations
   resources :organisations
-
+  
   # Verbs, roles and their connections to the plaques
   resources :verbs
-
 
   scope "/roles" do
     resources "a-z", :as => "roles_by_index", :controller => :roles_by_index, :only => [:show, :index]
@@ -77,13 +76,11 @@ Openplaques::Application.routes.draw do
   end
   resources :people
 
-
   # Misc other resources
   resources :languages
   resources :colours
-
+  resources :series
   resources :todo
-
 
   # Convenience paths for search:
   match 'search' => "search#index"

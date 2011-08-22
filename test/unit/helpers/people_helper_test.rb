@@ -1,117 +1,117 @@
 #require 'test_helper'
 require File.dirname(__FILE__) + '/../../test_helper'
 
-include RolesHelper 
-  
+include RolesHelper
+
 class PeopleHelperTest < ActionView::TestCase
 
   context "dated_role()" do
-    
+
     context "for a role with no dates" do
-      
+
       setup do
-        
+
         @person = Person.create(:name => "Blah")
         @role = Role.create(:name => "role", :slug => "role")
         @personal_role = PersonalRole.new
         @personal_role.role = @role
         @personal_role.person = @person
-        
+
       end
-      
+
       teardown do
         @person.destroy
         @role.destroy
       end
-      
+
       should "display the role" do
-        
+
         assert_equal dated_role(@personal_role), "<a href=\"" + role_path(@role) + "\" class=\"role\">" + @role.name + "</a>"
-        
+
       end
-      
-      
+
+
     end
-    
-    
+
+
   end
 
 
   context "roles_list()" do
-    
-    setup do 
-      
-      
+
+    setup do
+
+
     end
-    
+
     context "for a person with multiple roles" do
-      
+
       setup do
         @person = Person.create(:name => "Test")
-      
+
         @role1 = Role.create(:name => "role1", :slug => "role_one")
         @role2 = Role.create(:name => "role2", :slug => "role_two")
         @role3 = Role.create(:name => "role3", :slug => "role_three")
-        
+
         @person.roles = [@role1, @role2, @role3]
       end
-      
+
       teardown do
         @person.destroy
         @role1.destroy
         @role2.destroy
         @role3.destroy
       end
-      
+
       should "return a list of linked roles, separated by a comma" do
-        
+
         expected = '<p class="roles"><a href="/roles/role_one" class="role">role1</a>, <a href="/roles/role_two" class="role">role2</a>, and <a href="/roles/role_three" class="role">role3</a></p>'
-        
+
         assert_equal(expected, roles_list(@person))
-        
-        
+
+
       end
-      
-      
+
+
     end
-    
-    
+
+
   end
-  
+
 
   context "wikipedia_url()" do
 
     context "for a Person with an explicit wikipedia_url set" do
-      
-      setup do 
+
+      setup do
         @wikipedia_url = "http://en.wikipedia.org/wiki/Sherlock_Holmes"
-        @person = Person.new(:wikipedia_url => @wikipedia_url)        
+        @person = Person.new(:wikipedia_url => @wikipedia_url)
       end
-      
+
       should "return the value of the wikipedia_url attribute" do
         assert_equal(@wikipedia_url, wikipedia_url(@person))
       end
-      
+
     end
-    
+
     context "for a Person with a name but no wikipedia_url set" do
-      
+
       setup do
         @person = Person.new(:name => "Sherlock Holmes")
       end
-      
+
       should "return a guessed English language wikipedia url based on the name, with spaces replaced by underscores" do
         assert_equal("http://en.wikipedia.org/wiki/Sherlock_Holmes", wikipedia_url(@person))
       end
-      
+
     end
-    
+
     context "for a Person with a name prefixed with 'Captain' but no wikipedia_url set" do
       setup do
         @person = Person.new(:name => "Captain Frederick Marryat")
       end
 
-      should "return a guessed English language wikipedia url based on the name, with the prefix removed and spaces replaced by underscores" do      
+      should "return a guessed English language wikipedia url based on the name, with the prefix removed and spaces replaced by underscores" do
         assert_equal("http://en.wikipedia.org/wiki/Frederick_Marryat", wikipedia_url(@person))
       end
     end
@@ -159,9 +159,9 @@ class PeopleHelperTest < ActionView::TestCase
   end
 
 =end
-  
+
   context "dated_person" do
-  
+
     context "when the person has birth and death dates" do
 
       should "display both dates" do
@@ -170,14 +170,14 @@ class PeopleHelperTest < ActionView::TestCase
         death_date = Date.parse("1990-03-12")
 
         a_person = Person.new(:born_on => birth_date, :died_on => death_date)
-        
+
         age = age(birth_date)
 
-        expecting = "<span class=\"fn\" property=\"rdfs:label foaf:name vcard:fn\"></span> (<a href=\"/people/born_on/1970\" about=\"/people/#person\" class=\"bday\" content=\"1970\" datatype=\"xsd:date\" property=\"dbpprop:dateOfBirth vcard:bday\">1970</a>&#8202;–&#8202;<a href=\"/people/died_on/1990\" about=\"/people/#person\" content=\"1990\" datatype=\"xsd:date\" property=\"dbpprop:dateOfDeath\">1990</a>)"        
+        expecting = "<span class=\"fn\" property=\"rdfs:label foaf:name vcard:fn\"></span> (<a href=\"/people/alive_in/1970\" about=\"/people/#person\" class=\"bday\" content=\"1970\" datatype=\"xsd:date\" property=\"dbpprop:dateOfBirth vcard:bday\">1970</a>&#8202;–&#8202;<a href=\"/people/alive_in/1990\" about=\"/people/#person\" content=\"1990\" datatype=\"xsd:date\" property=\"dbpprop:dateOfDeath\">1990</a>)"
         actual = dated_person(a_person, {:links => :none})
         assert_equal(expecting, actual)
       end
-      
+
     end
 
     context "when the person only has a birth date" do
@@ -186,34 +186,34 @@ class PeopleHelperTest < ActionView::TestCase
 
         birth_date = Date.parse("1970-05-05")
         a_person = Person.new(:born_on => birth_date)
-        
+
         age = age(birth_date)
-        
-        expecting = "<span class=\"fn\" property=\"rdfs:label foaf:name vcard:fn\"></span> (born <a href=\"/people/born_on/1970\" about=\"/people/#person\" class=\"bday\" content=\"1970\" datatype=\"xsd:date\" property=\"dbpprop:dateOfBirth vcard:bday\">1970</a><span property=\"foaf:age\" content=\"#{age}\" />)"
+
+        expecting = "<span class=\"fn\" property=\"rdfs:label foaf:name vcard:fn\"></span> (born <a href=\"/people/alive_in/1970\" about=\"/people/#person\" class=\"bday\" content=\"1970\" datatype=\"xsd:date\" property=\"dbpprop:dateOfBirth vcard:bday\">1970</a><span property=\"foaf:age\" content=\"#{age}\" />)"
         actual = dated_person(a_person, {:links => :none})
         assert_equal(expecting, actual)
       end
 
     end
-    
+
     context "when the person only has a death date" do
-      
+
       should "display only the date of death" do
 
         a_person = Person.new
         a_person.died_on = "1970-01-01"
 
-        expecting = "<span class=\"fn\" property=\"rdfs:label foaf:name vcard:fn\"></span> (died <a href=\"/people/died_on/1970\" about=\"/people/#person\" content=\"1970\" datatype=\"xsd:date\" property=\"dbpprop:dateOfDeath\">1970</a>)"
+        expecting = "<span class=\"fn\" property=\"rdfs:label foaf:name vcard:fn\"></span> (died <a href=\"/people/alive_in/1970\" about=\"/people/#person\" content=\"1970\" datatype=\"xsd:date\" property=\"dbpprop:dateOfDeath\">1970</a>)"
 
         actual = dated_person(a_person, {:links => :none})
         assert_equal(expecting, actual)
       end
-      
+
     end
-    
+
   end
-  
-  
+
+
 
 
 end
