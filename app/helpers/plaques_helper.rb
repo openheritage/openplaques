@@ -257,7 +257,7 @@ module PlaquesHelper
       end
       return content_tag("p", info)
     else
-      return content_tag("p", "by ".html_safe + content_tag("span", "unknown".html_safe, :class => :unknown) + ".")
+      return content_tag("p", "by ".html_safe + content_tag("span", "unknown".html_safe, :class => :unknown))
     end
   end
 
