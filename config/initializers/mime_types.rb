@@ -6,3 +6,4 @@ Mime::Type.register 'application/vnd.google-earth.kml+xml', :kml
 Mime::Type.register 'text/plain', :poi
 Mime::Type.register 'application/rss+xml', :georss
 Mime::Type.register 'application/osm+xml', :osm
+Mime::Type.register 'application/rdf+xml', :rdf
