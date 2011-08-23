@@ -1,16 +1,22 @@
-<% content_for :page_title, "Photo \#" + @photo.id.to_s %>
+<% content_for :page_title, @photo.title %>
 
-<h1>"Photo \#" + @photo.id.to_s</h1>
+<h1><%= @photo.title %></h1>
 
 <div class="info">
   <%= link_to("Edit", edit_photo_path(@photo), {:class => :edit, :title => "edit photo"}) if current_user %>
+  
   <%= content_tag("p", link_to(image_tag(@photo.file_url), @photo.url)) %>
+  <p>
+  <% if @photo.plaque %>
+    This is a <%= @photo.shot_name %> photo of <%= link_to @photo.plaque.title, @photo.plaque %>. 
+  <% else %>
+    This <%= @photo.shot_name %> photo has not been linked to a plaque yet.
+  <% end %>
+
+It was taken
+<%= content_tag("span", " on " + @photo.taken_at.to_s(:long)) unless @photo.taken_at.blank? %>
+by <%= link_to @photo.photographer, photographer_url(@photo.photographer) %></p>
+<p>The image was licenced by its copyright owner under a <%= link_to @photo.licence.name, @photo.licence %>.</p>
 </div>
 
-<%= content_tag("p", "Taken on " + @photo.taken_at.to_s(:long)) unless @photo.taken_at.blank? %>
-<%= content_tag("p", "Photographer: " + link_to(@photo.photographer, photographer_url(@photo.photographer))) %>
-<%= content_tag("p", "Licence: " + link_to(@photo.licence.name, @photo.licence)) %>
-<%= content_tag("p", "Commercial use: " + @photo.licence.allows_commercial_use.to_s) %>
-<%= content_tag("p", link_to("Plaque #" + @photo.plaque.id.to_s, @photo.plaque) + " " + @photo.plaque.inscription)%>
-
-<%= link_to("Delete", photo_path(@photo), {:method => :delete}) if current_user.try(:is_admin?) %>
+<%= button_to("Delete photo", photo_path(@photo), {:method => :delete, :class => :button}) if current_user.try(:is_admin?) %>

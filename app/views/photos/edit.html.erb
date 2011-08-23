@@ -1,5 +1,5 @@
 <% @page_title = "Edit photo \#" + @photo.id.to_s %>
-<h1>Edit details of <%= link_to "Photo #" + @photo.id.to_s, @photo %></h1>
+<h1>Edit details of <%= link_to @photo.title, @photo %></h1>
 
 <% form_for @photo do |f| %>
   <%= content_tag("p", link_to(image_tag(@photo.file_url), @photo.url)) %>
@@ -10,9 +10,10 @@
 
   <p><%= f.label :photographer %> <%= f.text_field :photographer %> <%= content_tag("span", link_to(@photo.photographer, photographer_url(@photo.photographer))) %></p>
 
-  <%= content_tag("p", "Licence: " + link_to(@photo.licence.name, @photo.licence)) %>
-  <%= content_tag("p", "Commercial use: " + @photo.licence.allows_commercial_use.to_s) %>
-  <%= content_tag("p", link_to("Plaque #" + @photo.plaque.id.to_s, @photo.plaque) + " " + @photo.plaque.inscription)%>
+  <p>The image was licenced by its copyright owner under a <%= link_to @photo.licence.name, @photo.licence %></p>
+  <p>It depicts plaque number <%= f.text_field :plaque_id, :maxlength => "5" %> <%= link_to(@photo.plaque.title, @photo.plaque) %>
 
-  <%= f.submit "Save" %>
+  <p>This is a <%= f.collection_select :shot, @shots, :to_s, :to_s, :include_blank => true %> shot</p>
+
+  <%= f.submit "Save", :class => "button" %>
 <% end %>

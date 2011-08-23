@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 # This class represents a photograph of a Plaque.
 #
 # === Attributes
@@ -5,6 +6,7 @@
 # * +file_url+ - A link to the actual digital photo file.
 # * +photographer+ - The name of the photographer
 # * +photographer_url+ - A link to a webpage for the photographer - currently always a Flickr profile page.
+# * +shot+ - types of framing technique. One of "extreme close up", "close up", "medium close up", "medium shot", "long shot", "establishing shot"
 #
 # === Associations
 # * Licence - The content licence under which the photo is made available.
@@ -22,6 +24,8 @@ class Photo < ActiveRecord::Base
   after_initialize :assign_from_photo_url
   before_validation :assign_licence_if_cc_by_accepted
 
+  scope :detail_order, :order => "shot ASC"
+  
   def assign_from_photo_url
     if @photo_url
       if @photo_url =~ /http\:\/\/www\.flickr\.com\/photos\/.+\/\d+\//
@@ -39,5 +43,14 @@ class Photo < ActiveRecord::Base
     end
   end
 
+  def title
+    "photo № #{id}"
+  end
+  
+  def shot_name
+    if shot
+      return shot[3,shot.length]
+    end
+  end
 
 end

@@ -45,6 +45,10 @@ class PhotosController < ApplicationController
     @photo.destroy
     redirect_to plaque_path(@plaque)
   end
+  
+  def edit
+    @shots = ["1 - extreme close up", "2 - close up", "3 - medium close up", "4 - medium shot", "5 - long shot", "6 - establishing shot"]
+  end
 
   protected
 
