@@ -27,6 +27,194 @@
     <link href="/images/openplaques-icon.png?1301354908" rel="shortcut icon" /> 
     <meta name="csrf-param" content="authenticity_token"/> 
 <meta name="csrf-token" content="5Yr3ScnjvCLZR8IcU59fYDvwr2/N/QU/j2G9H5L+WuY="/> 
+
+
+
+<style>
+
+footer {
+	padding: 16px 0 32px;
+}
+footer nav {
+	padding-top: 40px;
+	width: auto;
+	padding-left: 0;
+	text-align: center;
+	font-style: italic;
+}
+
+footer .about {
+	font-size: 13px;
+	margin-top: 4px;
+}
+
+body {
+	background: url('images/bg-plaques.jpg') no-repeat top right;
+}
+
+header {
+    background: -moz-linear-gradient(center top , rgba(255,255,255,.1), #EEE) repeat scroll 0 0 transparent;
+}
+
+p.intro {
+	font-size: 1.3em;
+    line-height: 1.4em;
+	margin: 16px 13% 0;
+	text-align: center;
+}
+
+#homepage_modules {
+	padding: 0 0 16px;
+}
+
+#homepage_modules table {
+	width: 80%;
+		/*width: 66%;
+		*/margin: 0 auto;
+}
+
+
+#homepage_modules td {
+	vertical-align: top;
+	width: 34%;
+	padding-top: 8px;
+	padding-right: 2%;
+	padding-bottom: 8px;
+	height: 170px;
+}
+
+td#module_follow {
+	padding-right: 0;
+}
+
+#homepage_modules a {
+	display: block;
+	height: 100%;
+	padding: 16px;
+	text-align: center;
+	background: none repeat scroll 0 0 rgba(255, 255, 255, 0.6);
+	border: 1px solid #DDDDDD;
+	border-radius: 16px 16px 16px 16px;
+	text-decoration: none;
+}
+
+#homepage_modules a:hover {
+	background: #FFF;
+	box-shadow: 0 0 6px #CCC;
+	color: #4F7CBF;
+	-webkit-transition-duration: 0.3s;
+	-moz-transition-duration: 0.3s;
+}
+
+#homepage_modules a h1 {
+	padding-top: 90px;
+}
+
+#module_explore a h1 {
+	background: url('images/icon-explore-3.png') no-repeat top center;
+}
+
+#module_contribute a h1 {
+	background: url('images/icon-camera-3.png') no-repeat top center;
+}
+
+#module_follow a h1 {
+	background: url('images/icon-news.png') no-repeat top center;	
+}
+
+#homepage_modules a p {
+	color: #999;
+}
+
+
+/***/
+
+#plaque_of_the_day {
+	padding: 16px 10%;
+	background: rgba(0,0,0,.05);
+	border-top: dotted 1px #CCC;
+	border-bottom: dotted 1px #CCC;
+}
+
+#plaque_of_the_day h1 a.rss {
+	background: url('images/icon-rss-tiny.png') no-repeat center right;
+	text-indent: -9999px;
+	display: block;
+	width: 18px; height: 18px;}
+
+#recent_photos {
+
+	padding: 16px 10%;
+}
+
+#recent_photos ol {
+	list-style-type: none;
+	overflow: hidden; _zoom: 1;
+}
+
+#recent_photos ol li {
+	float: left;
+	padding: 8px 4% 0 0;
+	width: 46%;
+}
+
+#recent_photos .info {
+	padding: 8px 0 0;
+}
+
+#recent_photos .info p {
+	margin-bottom: 8px;
+}
+
+#recent_photos p.attribution {
+	font-style: italic;
+}
+
+#recent_photos p.attribution .location {
+	padding-right: 32px;
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-position: center right;
+}
+
+.gb {
+	background-image: url('https://chart.googleapis.com/chart?chst=d_simple_text_icon_left&chld=|0|0|flag_uk|12|') !important;
+}
+
+.fr {
+	background-image: url('https://chart.googleapis.com/chart?chst=d_simple_text_icon_left&chld=|0|0|flag_fr|12|') !important;
+}
+
+#recent_photos p.attribution .location:hover {
+	background-color: #4F7CBF;
+}
+
+#recent_photos h1 {
+	margin-bottom: 16px;
+}
+
+#recent_photos a.photo {
+
+}
+
+#recent_photos a img {
+    border: 10px solid #EEE;
+	display: block;
+} 
+
+
+#recent_photos a:hover img {
+    -moz-transition-duration: 0.3s;
+    border: 10px solid #FFF;
+    box-shadow: 0 0 10px #999;
+}
+
+#recent_photos .info {
+
+}
+</style>
+
+
   </head> 
  
   <body id="homepage_controller"> 
@@ -79,163 +267,6 @@
     <div id="content"> 
  
 
-<style>
-
-body {
-	background: url('images/bg-plaques.jpg') no-repeat top right;
-}
-
-header {
-    background: -moz-linear-gradient(center top , rgba(255,255,255,.1), #EEE) repeat scroll 0 0 transparent;
-}
-
-p.intro {
-	font-size: 1.3em;
-    line-height: 1.4em;
-	margin: 16px 13%;
-	text-align: center;
-}
-
-
-#homepage_modules table {
-	width: 80%;
-	margin: 0 auto;
-}
-
-
-#homepage_modules td {
-	vertical-align: top;
-	width: 34%;
-	padding-top: 8px;
-	padding-right: 2%;
-	padding-bottom: 8px;
-	height: 195px;
-}
-
-td#module_follow {
-	padding-right: 0;
-}
-
-#homepage_modules a {
-	display: block;
-	height: 100%;
-	padding: 16px;
-	text-align: center;
-	background: none repeat scroll 0 0 rgba(255, 255, 255, 0.6);
-	border: 1px solid #DDDDDD;
-	border-radius: 16px 16px 16px 16px;
-	text-decoration: none;
-}
-
-#homepage_modules a:hover {
-	background: #FFF;
-	box-shadow: 0 0 6px #CCC;
-	color: #4F7CBF;
-	-webkit-transition-duration: 0.3s;
-	-moz-transition-duration: 0.3s;
-}
-
-#homepage_modules a h1 {
-	padding-top: 110px;
-}
-
-#module_explore a h1 {
-	background: url('images/icon-explore.png') no-repeat top center;
-}
-
-#module_contribute a h1 {
-	background: url('images/icon-camera-2.png') no-repeat top center;
-}
-
-#module_follow a h1 {
-	background: url('images/icon-rss.png') no-repeat top center;	
-}
-
-#homepage_modules a p {
-	color: #999;
-}
-
-
-/***/
-
-#plaque_of_the_day {
-	padding: 16px 10%;
-}
-
-#plaque_of_the_day h1 a.rss {
-	background: url('images/icon-rss-tiny.png') no-repeat center right;
-	text-indent: -9999px;
-	display: block;
-	width: 18px; height: 18px;}
-
-#recent_photos {
-	background: rgba(0,0,0,.05);
-	border-top: dotted 1px #666;
-	border-bottom: dotted 1px #CCC;
-	margin: 16px 0 0;
-	padding: 16px 10%;
-}
-
-#recent_photos ol {
-border-bottom: solid 1px #CCC;
-	list-style-type: none;
-	overflow: hidden; _zoom: 1;
-}
-
-#recent_photos ol li {
-	float: left;
-	padding: 8px 4% 0 0;
-	width: 46%;
-}
-
-#recent_photos .info {
-	padding: 8px 0 0;
-}
-
-#recent_photos .info p {
-	margin-bottom: 8px;
-}
-
-#recent_photos p.attribution {
-	font-style: italic;
-}
-
-#recent_photos p.attribution .location {
-	padding-right: 32px;
-	background-color: transparent;
-	background-image: url('https://chart.googleapis.com/chart?chst=d_simple_text_icon_left&chld=|0|0|flag_uk|12|');
-	background-repeat: no-repeat;
-	background-position: center right;
-}
-
-#recent_photos p.attribution .location:hover {
-	background-color: #4F7CBF;
-}
-
-#recent_photos h1 {
-	margin-bottom: 16px;
-}
-
-#recent_photos a.photo {
-
-}
-
-#recent_photos a img {
-    border: 10px solid #EEE;
-	display: block;
-} 
-
-
-#recent_photos a:hover img {
-    -moz-transition-duration: 0.3s;
-    border: 10px solid #FFF;
-    box-shadow: 0 0 10px #999;
-}
-
-#recent_photos .info {
-
-}
-</style>
 
 <section id="homepage_modules">
 	<table cellpadding="0" cellspacing="0" border="0">
@@ -262,6 +293,15 @@ border-bottom: solid 1px #CCC;
 	</table>
 </section>
 
+
+<section id="plaque_of_the_day">
+	<h1>Plaque of the day</h1>
+	
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+</section>
+
+
 <section id="recent_photos">
 	<h1>Recently photogpraphed plaques</h1>
 	<ol>
@@ -272,30 +312,22 @@ border-bottom: solid 1px #CCC;
 			<div class="info">
 			        <p>The Stocks and Pillory
 			The stocks and pillory are an early form of punishment in which offenders were held by the legs or wrist for public ridicul...</p>
-					<p class="attribution">Added by <a href="#">g0akh</a> in Old Town Hall, Market Square, <a class="location" href="#">Midhurst</a></p>
+					<p class="attribution">Photographed by <a href="#">g0akh</a> in Old Town Hall, Market Square, <a class="location gb" href="#">Midhurst</a></p>
 			</div>
 			
 		</li>
 		<li class="clearfix">
 			<a class="photo" href="#">
-				<img src="http://farm7.static.flickr.com/6082/6034691799_1f453878b6_m.jpg" />
+				<img src="http://farm7.static.flickr.com/6078/6064225343_e0ab08a876_m.jpg" />
 			</a>
 				<div class="info">
-				        <p>Site of St. Margaret's church (13th century) and the borough compter</p>
-				<p class="attribution">Added by <a href="#">Simon Harriyott</a> in unknown</p>
+				        <p>Pierre Guerin 1923-1943 Resistant "Mort pour la France"</p>
+				<p class="attribution">Photographed by <a href="#">atrebatus</a> in <a href="#" class="location fr">unknown</a></p>
 				</div>
 		</li>		
 	</ol>
-
 	
 </section>
-
-<section id="plaque_of_the_day">
-	<h1>Plaque of the day</h1>
-	
-	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-</div> 
-
 
 
     <footer> 
@@ -304,10 +336,10 @@ border-bottom: solid 1px #CCC;
         <a href="/contact">Contact</a> 
         <a href="/about/data">The data</a> 
         <a href="http://blog.openplaques.org/">Blog</a> 
-        <a href="http://twitter.com/openplaques">Twitter</a> 
+        <a style="margin-right: 0" href="http://twitter.com/openplaques">Twitter</a> 
       </nav> 
  
-      <p class="about">A project of Open Heritage C.I.C.</p> 
+      <p class="about">A project of Open Heritage C.I.C. 2009-2011</p> 
     </footer> 
  
  
