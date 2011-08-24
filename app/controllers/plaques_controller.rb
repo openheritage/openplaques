@@ -79,7 +79,6 @@ class PlaquesController < ApplicationController
       format.json {
         render :json => @plaque
       }
-      format.bp
     end
   end
 
