@@ -6,11 +6,11 @@
     2.1 Flash and error elements
     2.2 Global buttons
     2.3 Admin panel
-	3. PLACES
-		3.1 Country
+  3. PLACES
+    3.1 Country
   4. PLAQUE PAGE
     4.1 Inscriptions
-	5. HOMEPAGE
+  5. HOMEPAGE
 */
 
 /**
@@ -224,84 +224,84 @@ a.secondary_button:hover, div.secondary_button:hover input {
 }
 
 /**
-	3. PLACES
+  3. PLACES
 */
 
 /*
-	3.1. /places/country
+  3.1. /places/country
 */
 
 #city_results {}
 
 #city_title {
-	position: relative;
+  position: relative;
 }
 
 #city_title .plaque_count {
-	position: absolute; top: 16px; right: 5%;
-	padding: 10px 0 8px;
+  position: absolute; top: 16px; right: 5%;
+  padding: 10px 0 8px;
 }
 
 #city_results ol.results {
-	float: left;
-	list-style-type: none;
-	margin: 0 0 0 5%;
-	width: 33%;
+  float: left;
+  list-style-type: none;
+  margin: 0 0 0 5%;
+  width: 33%;
 }
 
 #city_results ol.results li {
-	background: url("../images/bullet-blue.gif") no-repeat scroll left 10px transparent;
-	padding-bottom: 16px;
-	padding-left: 16px;
+  background: url("../images/bullet-blue.gif") no-repeat scroll left 10px transparent;
+  padding-bottom: 16px;
+  padding-left: 16px;
 }
 
 #city_results ol.results li a {
-	text-decoration: none;
+  text-decoration: none;
 }
 
 #city_results ol.results li a .result {
-	color: #000;
+  color: #000;
 }
 
 #city_results ol.results li a:hover .result {
-	color: #4F7CBF;
+  color: #4F7CBF;
 }
 
 @media screen and (max-width: 855px) {
-	/*red*/
-	#city_title .plaque_count {position: static; padding: 0;}
+  /*red*/
+  #city_title .plaque_count {position: static; padding: 0;}
 }
 
 @media screen and (max-width: 1128px) {
-	#city_results ol.results {width: 90%;}
+  #city_results ol.results {width: 90%;}
 }
 
 @media screen and (min-width: 855px) and (max-width: 1128px) {
-	/* green */
-	#city_results ol.results {
-		-moz-column-count: 2; -webkit-column-count: 2; column-count: 2;
-	}
+  /* green */
+  #city_results ol.results {
+    -moz-column-count: 2; -webkit-column-count: 2; column-count: 2;
+  }
 }
 
 @media screen and (min-width: 1128px) and (max-width: 1500px) {
-	/* blue */
-	#city_results #map {
-		border: solid 3px #FFF;
-		float: right;
-		overflow: hidden;
-		width: 500px;
-		margin: 16px 5% 32px 0;
-		height: 300px;
-	}	
+  /* blue */
+  #city_results #map {
+    border: solid 3px #FFF;
+    float: right;
+    overflow: hidden;
+    width: 500px;
+    margin: 16px 5% 32px 0;
+    height: 300px;
+  }
 }
 
 @media screen and (max-width: 1128px) {
-	#city_results #map {display: none;}
+  #city_results #map {display: none;}
 }
 
 #map.fixed {
-	position: fixed;
-	top: 0; right: 9%;
+  position: fixed;
+  top: 0; right: 9%;
 }
 
 /**
@@ -765,12 +765,12 @@ float: left;
   border: solid 8px #EEE;
   display: block;
   font-size: 0;
-	text-align: center;
+  text-align: center;
   text-decoration: none;
 }
 
 #recent_photographed_plaques li a img {
-	max-width: 100%;
+  max-width: 100%;
 }
 
 #recent_photographed_plaques li.option_two a {
@@ -1326,6 +1326,10 @@ table.plaque_list td.geo {}
 }
 
 /*********/
+
+.alternate_formats {font-size: .8em; text-align: center; color: #888; margin-top: 2em; margin-bottom: 1em;}
+a[rel=alternate] {padding: 1px 4px; text-decoration: none; border: 1px solid #AAA; background-color: #EEE;}
+a[rel=alternate]:hover {color: #555;}
 
 .plaque_info_panel {
   background: #EEE;
