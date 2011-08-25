@@ -1,0 +1,17 @@
+<% content_for :page_title, "plaque pick" %>
+
+<div class="panel clearfix">
+	<% if current_user && current_user.is_admin? %>
+	<section class="admin_panel">
+		<%= link_to("Edit this pick", edit_pick_path(@pick), {:class => :edit, :title => "Edit this pick"})%>
+	</section>
+	<% end %>
+</div>
+
+<div class="panel clearfix">
+  <p><%= @pick.plaque.title %></p>
+  <p><%= @pick.description %></p>
+  <p><%= @pick.feature_on %></p>
+  <p><%= @pick.last_featured %></p>
+  <p><%= @pick.featured_count %></p>
+</div>

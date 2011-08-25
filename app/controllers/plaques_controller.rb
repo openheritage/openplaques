@@ -131,7 +131,7 @@ class PlaquesController < ApplicationController
     if current_user
       @plaque.user = current_user
     end
-
+    
     if params[:location] && !params[:location].blank?
       country = Country.find(params[:plaque][:country])
       if params[:area_id] && !params[:area_id].blank?

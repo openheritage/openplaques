@@ -1,0 +1,14 @@
+<% content_for :page_title, "Pick a plaque" %>
+<div class="panel">
+  <h1>Pick a plaque</h1>
+
+  <% form_for @picks, :url => picks_path do |f| %>
+
+    <p><%= f.label :plaque_id %> <%= f.text_field :plaque_id %></p>
+
+    <p><%= f.label :description %> <%= f.text_field :description %></p>
+
+    <%= f.submit "Add" %>
+
+  <% end %>
+</div>

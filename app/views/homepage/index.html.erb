@@ -18,6 +18,12 @@
         <h2>News</h2>
         <p>Subscribe to <a href="http://blog.openplaques.org">our blog</a> and follow us on <a href="http://www.twitter.com/openplaques">Twitter</a> for updates.</p>
       </li>
+      <% if @todays %>
+      <li>
+        <h2>Featured Plaque</h2>
+        <p><%= @todays.plaque.title %></p>
+      </li>
+      <% end %>
     </ul>
 
   </div>

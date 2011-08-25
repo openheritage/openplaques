@@ -36,6 +36,7 @@ class Plaque < ActiveRecord::Base
   belongs_to :series, :counter_cache => true
 
   has_one :area, :through => :location
+  has_one :pick
 
   has_many :personal_connections
   has_many :photos, :inverse_of => :plaque

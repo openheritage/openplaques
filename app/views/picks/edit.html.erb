@@ -1,0 +1,12 @@
+<% content_for :page_title, "Edit pick " + @pick.id.to_s %>
+<h1>Edit <%= link_to(h("pick " + @pick.id.to_s), @pick) %></h1>
+
+<%= form_for(@pick) do |f| %>
+  <p><%= f.label :plaque_id %><%= f.text_field :plaque_id %></p>
+  <p><%= f.label :description %><%= f.text_field :description %></p>
+  <p><%= f.label :feature_on %><%= f.text_field :feature_on %></p>
+
+  <p><%= f.submit "Update", :class => :button %></p>
+<% end %>
+
+<%= button_to("Delete pick", pick_path(@pick), {:method => :delete, :class => :button}) if current_user.try(:is_admin?) %>

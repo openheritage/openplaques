@@ -1,17 +1,12 @@
-<% content_for :page_title, "Edit location for " + title(@plaque) %>
-
+<% content_for :page_title, "Edit location for ${@plaque.title}" %>
 
 <div class="panel">
-  <h1>Edit address for <%= link_to("plaque \#" + @plaque.id.to_s, @plaque)%></h1>
+  <h1>Edit address for <%= link_to(@plaque.title, @plaque)%></h1>
 
   <%= form_for(@plaque) do |f| %>
-
-    <%= f.label :location, "Street and number" %>
-    <%= text_field_tag :location, @plaque.location_string %>
-
-    <p>
-      <%= f.submit "Update" %>
-    </p>
+    <p><%= f.label :location, "Street and number" %>: <%= text_field_tag :location, @plaque.location_string %></p>
+    <p>Area: <%= @plaque.location.area.name %></p>
+    <p><%= f.submit "Update", :class => :button %></p>
   <% end %>
 
 </div>
