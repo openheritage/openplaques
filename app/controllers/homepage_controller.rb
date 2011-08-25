@@ -16,6 +16,9 @@ class HomepageController < ApplicationController
       if @todays
         # great, you chose one, so make it today's pick
         @todays.last_featured = DateTime.now
+        if @todays.featured_count == nil
+          @todays.featured_count = 0
+        end
         @todays.featured_count = @todays.featured_count + 1
         @todays.save
       end
