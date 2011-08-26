@@ -26,9 +26,13 @@
       <%= f.collection_select :verb_id, @verbs, :id, :name %>  <%= link_to("Add verb", "/verbs/new") %>
     </div>
 
-    <div class="row">at <%= link_to @plaque.location.name, location_path(@plaque.location) %> <%= link_to @plaque.location.area.name, area_path(@plaque.location.area) if @plaque.location and @plaque.location.area%>
-    <%= f.hidden_field :location_id, :value => @plaque.location.id %>
-    </div>
+    <% if @plaque.location %>
+      <div class="row">at <%= link_to @plaque.location.name, location_path(@plaque.location) %> <%= link_to @plaque.location.area.name, area_path(@plaque.location.area) if @plaque.location and @plaque.location.area%>
+        <%= f.hidden_field :location_id, :value => @plaque.location.id %>
+      </div>
+    <% else %>
+      <div class="row">There is no location for this plaque. Probably shouldn't create a connection.</div>
+    <% end %>
 
     <div class="row">
       <%= f.label :started_at, "From" %>
