@@ -9,9 +9,9 @@
 </div>
 
 <div class="panel clearfix">
-  <p><%= @pick.plaque.title %></p>
-  <p><%= @pick.description %></p>
-  <p><%= @pick.feature_on %></p>
-  <p><%= @pick.last_featured %></p>
-  <p><%= @pick.featured_count %></p>
+  <p>plaque: <%= link_to @pick.plaque.title, @pick.plaque %></p>
+  <p>description: <%= @pick.description %></p>
+  <p>feature on: <%= @pick.feature_on %></p>
+  <p>last featured: <%= @pick.last_featured %></p>
+  <p>This Pick has been featured plaque of the day <%= @pick.featured_count %> times</p>
 </div>

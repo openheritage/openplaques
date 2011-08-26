@@ -18,6 +18,10 @@ Openplaques::Application.routes.draw do
 
   end
 
+  # Main nav jumping-off pages
+  resource :contribute, :only => :show, :controller => :contribute
+
+
   # Main PLAQUE resources, and sub-resources
   resources :plaques do
     member do
@@ -56,7 +60,7 @@ Openplaques::Application.routes.draw do
 
   # These are the organisations
   resources :organisations
-  
+
   # Verbs, roles and their connections to the plaques
   resources :verbs
 

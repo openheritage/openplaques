@@ -13,130 +13,130 @@
 ActiveRecord::Schema.define(:version => 20110824073355) do
 
   create_table "areas", :force => true do |t|
-    t.string    "name"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.integer   "locations_count"
-    t.integer   "woeid"
-    t.string    "dbpedia_uri"
-    t.integer   "country_id"
-    t.string    "slug"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "locations_count"
+    t.integer  "woeid"
+    t.string   "dbpedia_uri"
+    t.integer  "country_id"
+    t.string   "slug"
   end
 
   create_table "colours", :force => true do |t|
-    t.string    "name"
-    t.integer   "plaques_count"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.string    "dbpedia_uri"
-    t.boolean   "common",        :default => false, :null => false
-    t.string    "slug"
+    t.string   "name"
+    t.integer  "plaques_count"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "dbpedia_uri"
+    t.boolean  "common",        :default => false, :null => false
+    t.string   "slug"
   end
 
   add_index "colours", ["slug"], :name => "index_colours_on_slug"
 
   create_table "connections", :force => true do |t|
-    t.string    "name"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "countries", :force => true do |t|
-    t.string    "name"
-    t.string    "alpha2"
-    t.integer   "areas_count"
-    t.integer   "plaques_count"
-    t.integer   "locations_count"
-    t.string    "dbpedia_uri"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
+    t.string   "name"
+    t.string   "alpha2"
+    t.integer  "areas_count"
+    t.integer  "plaques_count"
+    t.integer  "locations_count"
+    t.string   "dbpedia_uri"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "languages", :force => true do |t|
-    t.string    "name"
-    t.string    "alpha2"
-    t.integer   "plaques_count"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
+    t.string   "name"
+    t.string   "alpha2"
+    t.integer  "plaques_count"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "licences", :force => true do |t|
-    t.string    "name"
-    t.string    "url"
-    t.boolean   "allows_commercial_use"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.integer   "photos_count"
+    t.string   "name"
+    t.string   "url"
+    t.boolean  "allows_commercial_use"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "photos_count"
   end
 
   create_table "locations", :force => true do |t|
-    t.string    "name"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.integer   "personal_connections_count"
-    t.integer   "plaques_count"
-    t.integer   "area_id"
-    t.integer   "country_id"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "personal_connections_count"
+    t.integer  "plaques_count"
+    t.integer  "area_id"
+    t.integer  "country_id"
   end
 
   create_table "organisations", :force => true do |t|
-    t.string    "name"
-    t.string    "website"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.integer   "plaques_count"
-    t.text      "notes"
-    t.string    "slug"
-    t.text      "description"
+    t.string   "name"
+    t.string   "website"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "plaques_count"
+    t.text     "notes"
+    t.string   "slug"
+    t.text     "description"
   end
 
   create_table "pages", :force => true do |t|
-    t.string    "name"
-    t.string    "slug"
-    t.text      "body"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
+    t.string   "name"
+    t.string   "slug"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "people", :force => true do |t|
-    t.string    "name"
-    t.date      "born_on"
-    t.date      "died_on"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.integer   "personal_connections_count"
-    t.integer   "personal_roles_count"
-    t.string    "index"
-    t.boolean   "born_on_is_circa"
-    t.boolean   "died_on_is_circa"
-    t.string    "wikipedia_url"
-    t.string    "dbpedia_uri"
-    t.string    "wikipedia_paras"
-    t.string    "surname_starts_with"
+    t.string   "name"
+    t.date     "born_on"
+    t.date     "died_on"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "personal_connections_count"
+    t.integer  "personal_roles_count"
+    t.string   "index"
+    t.boolean  "born_on_is_circa"
+    t.boolean  "died_on_is_circa"
+    t.string   "wikipedia_url"
+    t.string   "dbpedia_uri"
+    t.string   "wikipedia_paras"
+    t.string   "surname_starts_with"
   end
 
   add_index "people", ["index"], :name => "index_people_on_index"
   add_index "people", ["surname_starts_with"], :name => "index_people_on_surname_starts_with"
 
   create_table "personal_connections", :force => true do |t|
-    t.integer   "person_id"
-    t.integer   "verb_id"
-    t.integer   "location_id"
-    t.integer   "plaque_id"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.timestamp "started_at"
-    t.timestamp "ended_at"
-    t.integer   "plaque_connections_count"
+    t.integer  "person_id"
+    t.integer  "verb_id"
+    t.integer  "location_id"
+    t.integer  "plaque_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "started_at"
+    t.datetime "ended_at"
+    t.integer  "plaque_connections_count"
   end
 
   create_table "personal_roles", :force => true do |t|
-    t.integer   "person_id"
-    t.integer   "role_id"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.date      "started_at"
-    t.date      "ended_at"
+    t.integer  "person_id"
+    t.integer  "role_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.date     "started_at"
+    t.date     "ended_at"
   end
 
   create_table "photos", :force => true do |t|
@@ -164,10 +164,10 @@ ActiveRecord::Schema.define(:version => 20110824073355) do
   end
 
   create_table "plaque_erected_years", :force => true do |t|
-    t.string    "name"
-    t.integer   "plaques_count"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
+    t.string   "name"
+    t.integer  "plaques_count"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "plaques", :force => true do |t|
@@ -197,13 +197,13 @@ ActiveRecord::Schema.define(:version => 20110824073355) do
   add_index "plaques", ["personal_connections_count"], :name => "index_plaques_on_personal_connections_count"
 
   create_table "roles", :force => true do |t|
-    t.string    "name"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.integer   "personal_roles_count"
-    t.string    "index"
-    t.string    "slug"
-    t.string    "wikipedia_stub"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "personal_roles_count"
+    t.string   "index"
+    t.string   "slug"
+    t.string   "wikipedia_stub"
   end
 
   create_table "series", :force => true do |t|
@@ -214,14 +214,14 @@ ActiveRecord::Schema.define(:version => 20110824073355) do
   end
 
   create_table "todo_items", :force => true do |t|
-    t.string    "description"
-    t.string    "action"
-    t.string    "url"
-    t.string    "image_url"
-    t.integer   "plaque_id"
-    t.integer   "user_id"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
+    t.string   "description"
+    t.string   "action"
+    t.string   "url"
+    t.string   "image_url"
+    t.integer  "plaque_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", :force => true do |t|
@@ -253,10 +253,10 @@ ActiveRecord::Schema.define(:version => 20110824073355) do
   add_index "users", ["username"], :name => "index_users_on_username", :unique => true
 
   create_table "verbs", :force => true do |t|
-    t.string    "name"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.integer   "personal_connections_count"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "personal_connections_count"
   end
 
 end

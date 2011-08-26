@@ -45,31 +45,31 @@
         </span>
 
 <table id="navigation" cellpadding="0" cellspacing="0" border="0">
-	<tr>
-		<td id="primary_links">
-			<nav>
-				<%= content_tag("ul", :class => "clearfix") do %>
-					<%= navigation_list_link_to "People", people_path %>
-					<%= navigation_list_link_to "Places", countries_path %>
-					<%= navigation_list_link_to "Organisations", organisations_path %>
-					<%#= navigation_list_link_to "To do lists", "/todo" if logged_in? %>
-					<%#= navigation_list_link_to "Explore", "#" %>
-					<%#= navigation_list_link_to "Contribute", "#" %>
-					<%#= navigation_list_link_to "About", "#" %>
-				<% end %>
-			</nav>
-		</td>
-		<td id="primary_search">
-			<div class="search_box">
-				<%= form_tag(search_path, :method => "get") do %>
-					<span id="magnifying_glass"></span>
-					<%= label_tag(:phrase, "Search: ") %>
-					<%= text_field_tag(:phrase, params[:phrase], :type => 'search', :placeholder => "Search for a person, place or organisation...") %>
-					<%= submit_tag("Go", :name => nil) %>
-				<% end %>
-			</div>
-		</td>
-	</tr>
+  <tr>
+    <td id="primary_links">
+      <nav>
+        <%= content_tag("ul", :class => "clearfix") do %>
+          <%= navigation_list_link_to "People", people_path %>
+          <%= navigation_list_link_to "Places", countries_path %>
+          <%#= navigation_list_link_to "Organisations", organisations_path %>
+          <%#= navigation_list_link_to "To do lists", "/todo" if logged_in? %>
+          <%#= navigation_list_link_to "Explore", "#" %>
+          <%= navigation_list_link_to "Contribute", contribute_path %>
+          <%= navigation_list_link_to "About", about_path %>
+        <% end %>
+      </nav>
+    </td>
+    <td id="primary_search">
+      <div class="search_box">
+        <%= form_tag(search_path, :method => "get") do %>
+          <span id="magnifying_glass"></span>
+          <%= label_tag(:phrase, "Search: ") %>
+          <%= text_field_tag(:phrase, params[:phrase], :type => 'search', :placeholder => "Search for a person, place or organisation...") %>
+          <%= submit_tag("Go", :name => nil) %>
+        <% end %>
+      </div>
+    </td>
+  </tr>
 </table>
 
         <%= user_menu %>
@@ -84,21 +84,21 @@
     </header>
     <div id="content">
 
-		<% if notice %>
-			<div class="flash_notice">
-				<p><%= notice %></p>
-			</div>
-		<% end %>
+    <% if notice %>
+      <div class="flash_notice">
+        <p><%= notice %></p>
+      </div>
+    <% end %>
 
-		<% if alert %>
-			<div class="flash_alert">
-				<p><%= alert %></p>
-			</div>
-		<% end %>
-		
-		<div class="container">
-			<%= yield  %>
-		</div>
+    <% if alert %>
+      <div class="flash_alert">
+        <p><%= alert %></p>
+      </div>
+    <% end %>
+
+    <div class="container">
+      <%= yield  %>
+    </div>
 
     </div>
     <footer>
