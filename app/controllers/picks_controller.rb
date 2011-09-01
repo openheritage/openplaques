@@ -1,5 +1,6 @@
 class PicksController < ApplicationController
 
+  before_filter :authenticate_user!
   before_filter :find_pick, :only => [:edit, :update, :show, :destroy]
 
   def index
@@ -16,18 +17,26 @@ class PicksController < ApplicationController
     @pick.plaque = @plaque
     @pick.description = params[:pick][:description].to_s
     @pick.save
-    redirect_to picks_path()
+    redirect_to picks_path
   end
 
   def destroy
     @pick.destroy
-    redirect_to picks_path()
+    redirect_to picks_path
   end
-  
+
   def promote
     @pick.last_featured = DateTime.now
     @pick.save
 #    redirect_to picks_path()
+  end
+
+  def update
+    if @pick.update_attributes(params[:pick])
+      redirect_to pick_path(@pick)
+    else
+      render :edit
+    end
   end
 
   protected
