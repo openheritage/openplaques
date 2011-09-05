@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.9'
+gem 'rails', '3.1.0'
 gem 'rake', "0.8.7"  # Version 0.9.0 doesn't work with Rails yet.
 
 gem 'mail'
