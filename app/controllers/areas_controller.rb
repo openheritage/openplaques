@@ -3,8 +3,8 @@ class AreasController < ApplicationController
   before_filter :authenticate_admin!, :only => :destroy
   before_filter :authenticate_user!, :except => [:index, :show]
 
-  before_filter :find_country, :only => [:index, :new, :show, :create, :edit, :update]
-  before_filter :find_area, :only => [:show, :edit, :update]
+  before_filter :find_country, :only => [:index, :new, :show, :create, :edit, :update, :destroy]
+  before_filter :find_area, :only => [:show, :edit, :update, :destroy]
 
   def index
     @areas = @country.areas.all(:order => :name)
@@ -52,14 +52,10 @@ class AreasController < ApplicationController
     end
   end
 
-  # DELETE /areas/1
+  # DELETE /areas/aa
   def destroy
-    @area = Area.find(params[:id])
-    if (@area.plaques != nil)
-      # should we block this if there are plaques?
-    end
     @area.destroy
-    redirect_to(areas_url)
+    redirect_to country_path(@country)
   end
 
   def edit

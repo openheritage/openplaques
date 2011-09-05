@@ -1,6 +1,5 @@
 <% content_for :page_title, "Historical plaques in " + @country.name %>
 
-
 <div class="panel clearfix">
   <h1>Plaques in <%= @country.name %></h1>
 
@@ -22,11 +21,12 @@
 
   <% end %>
 
+  <!--TODO: Turn these off when it doesnt make sense-->
+  <p>See <%= link_to "unphotographed plaques", country_unphotographed_path(@country) %>.</p>
+
+  <%= content_tag("p", link_to("Add new area", new_country_area_path(@country.alpha2))) if current_user && current_user.is_admin? %>
 </div>
 
 
-<%= content_tag("p", link_to("Add new area", new_country_area_path(@country.alpha2))) if current_user && current_user.is_admin? %>
 
 
-<!--TODO: Turn these off when it doesnt make sense-->
-<p>See <%= link_to "unphotographed plaques", country_unphotographed_path(@country) %>.</p>

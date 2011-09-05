@@ -21,11 +21,8 @@
   </p>
 
   <p>
-    <%= f.submit "Update" %>
+    <%= f.submit "Update", :class => :button %>
   </p>
 <% end %>
 
-<%= button_to("DELETE AREA", area_path(@area), {:method => :delete}) %>
-
-<%= link_to 'Show', @area %> |
-<%= link_to 'Back', country_areas_path(@country.alpha2) %>
+<%= button_to("Delete", area_path(@area), {:method => :delete, :class => :button}) %>
