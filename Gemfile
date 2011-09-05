@@ -5,7 +5,6 @@ gem 'rake'
 
 gem 'mail'
 
-gem 'hpricot'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
