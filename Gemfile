@@ -39,3 +39,7 @@ gem 'devise'
  group :development, :test do
    gem 'shoulda'
  end
+
+ group :assets do
+   gem 'uglifier'
+ end
