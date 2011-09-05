@@ -10,6 +10,9 @@ gem 'mail'
 
 gem 'sqlite3-ruby', :require => 'sqlite3'
 
+# Postgres needed for Heroku
+gem 'pg'
+
 #gem 'mysql', '2.8.1'
 # Use unicorn as the web server
 # gem 'unicorn'
