@@ -4,8 +4,8 @@
 // It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
 // the compiled file.
 //
-//= require jquery
-//= require jquery_ujs
+//= require jquery-1.5.1.min
+//= require jquery-ui-1.8.11.custom.min
 //= require_tree .
 
 // Place your application-specific JavaScript functions and classes here
