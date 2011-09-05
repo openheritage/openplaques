@@ -36,6 +36,12 @@ module Openplaques
     # Enable the asset pipeline for speedier loading
     config.assets.enabled = true
 
+    # Version of your assets, change this if you want to expire all your assets
+    config.assets.version = '1.0'
+
+    # Change the path that assets are served from
+    # config.assets.prefix     = "/assets"
+
     # JavaScript files you want as :defaults (application.js is always included).
     # config.action_view.javascript_expansions[:defaults] = %w(jquery rails)
 
