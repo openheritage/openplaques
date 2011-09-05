@@ -37,7 +37,7 @@ gem 'devise'
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
  group :development, :test do
-   gem 'shoulda'
+   gem "shoulda", "~> 3.0.0.beta1"
  end
 
  group :assets do
