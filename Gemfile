@@ -1,47 +1,41 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.0'
-gem 'rake'
-
-gem 'mail'
+gem 'rails', '3.1.1.rc2'
 
 # Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
+# gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3-ruby', :require => 'sqlite3'
+group :production do
+  gem 'pg'
+end
+group :development, :test do
+  gem 'sqlite3'
+end
 
-# Postgres needed for Heroku
-gem 'pg'
+gem 'json'
 
-#gem 'mysql', '2.8.1'
+gem 'devise'
+
+
+# Gems used only for assets and not required
+# in production environments by default.
+group :assets do
+  gem 'sass-rails',   '~> 3.1.0'
+  gem 'coffee-rails', '~> 3.1.0'
+  gem 'uglifier', '>= 1.0.3'
+end
+
+gem 'jquery-rails'
+
+# To use ActiveModel has_secure_password
+# gem 'bcrypt-ruby', '~> 3.0.0'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 
 # Deploy with Capistrano
 # gem 'capistrano'
 
-# To use debugger (ruby-debug for Ruby 1.8.7+, ruby-debug19 for Ruby 1.9.2+)
+# To use debugger
 # gem 'ruby-debug'
-# gem 'ruby-debug19'
-gem 'hoptoad_notifier'
 
-gem 'devise'
-
-#gem 'usertext'
-
-# Bundle the extra gems:
-# gem 'bj'
-# gem 'nokogiri'
-# gem 'sqlite3-ruby', :require => 'sqlite3'
-# gem 'aws-s3', :require => 'aws/s3'
-
-# Bundle gems for the local environment. Make sure to
-# put test-only gems in this group so their generators
-# and rake tasks are available in development mode:
- group :development, :test do
-   gem "shoulda", "~> 3.0.0.beta1"
- end
-
- group :assets do
-   gem 'uglifier'
- end
