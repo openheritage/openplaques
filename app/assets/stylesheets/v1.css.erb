@@ -250,7 +250,7 @@ a.secondary_button:hover, div.secondary_button:hover input {
 }
 
 #city_results ol.results li {
-  background: url("../images/bullet-blue.gif") no-repeat scroll left 10px transparent;
+  background: url(<%= asset_path 'bullet-blue.gif' %>) no-repeat scroll left 10px transparent;
   padding-bottom: 16px;
   padding-left: 16px;
 }
@@ -558,7 +558,7 @@ html.no-rgba #plaque_identifier iframe.osm {border: solid 1px #FFF;}
   list-style-type: none;
 }
 #plaque_identifier aside ul li {
-  background: url('../images/bullet-blue.gif') no-repeat left 10px;
+  background: url(<%= asset_path 'bullet-blue.gif' %>) no-repeat left 10px;
   padding-left: 16px;
 }
 
@@ -676,7 +676,7 @@ html.no-rgba .search_box form {background: #FFF;}
 }
 
 .js .search_box form #magnifying_glass {
-  background: url('../images/icon_search.png') no-repeat scroll top left;
+  background: url(<%= asset_path "icon_search.png" %>) no-repeat scroll top left;
   position: absolute; top: -5px; left: 10px;
   width: 31px;
   height: 60px;
@@ -1263,7 +1263,7 @@ table.plaque_list td.geo {}
 #organisations_results li,
 #search_results li,
 #roles_results li {
-  background: url('../images/bullet-blue.gif') no-repeat left 10px;
+  background: url(<%= asset_path 'bullet-blue.gif' %>) no-repeat left 10px;
   padding-left: 16px;
   padding-bottom: 16px;
 }
