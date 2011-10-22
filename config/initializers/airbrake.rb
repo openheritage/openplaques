@@ -1,3 +1,3 @@
 Airbrake.configure do |config|
-  config.api_key = "ENV['SENDGRID_USERNAME']"
+  config.api_key = "ENV['AIRBRAKE_KEY']"
 end
