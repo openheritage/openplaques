@@ -7,7 +7,9 @@ gem 'rails', '3.1.1.rc2'
 
 group :production do
   gem 'pg'
+  gem "airbrake"
 end
+
 group :development, :test do
   gem 'sqlite3'
 end
