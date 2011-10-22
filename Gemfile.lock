@@ -124,7 +124,7 @@ DEPENDENCIES
   jquery-rails
   json
   pg
-  rails (= 3.1.1.rc2)
+  rails
   sass-rails (~> 3.1.0)
   sqlite3
   uglifier (>= 1.0.3)
