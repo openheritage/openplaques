@@ -16,7 +16,7 @@ module ColoursHelper
 
   def colour_if_known(plaque, text = "unknown")
     if plaque.colour
-      link_to_colour(plaque.colour, {:rel => "op:hasPrimaryColour"})
+      plaque.colour.name
     else
       unknown(text)
     end
