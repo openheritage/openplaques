@@ -207,7 +207,7 @@ module PlaquesHelper
       @photo = "".html_safe
       if plaque.photographed?
         # icon from http://www.iconarchive.com/show/canon-digital-camera-icons-by-newformula.org/
-        camera_icon = image_tag("/images/EOS-300D-32x32.png".html_safe, {:alt => "Photo of plaque".html_safe})
+        camera_icon = image_tag("EOS-300D-32x32.png".html_safe, {:alt => "Photo of plaque".html_safe})
       end
 
       # RDFa: because plaques have different relationships with the current page.

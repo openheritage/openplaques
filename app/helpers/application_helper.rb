@@ -131,7 +131,7 @@ module ApplicationHelper
     return "";
     end
   @alt = plaque.latitude.to_s + ", " + plaque.longitude.to_s
-  @image = image_tag("/images/map_icon.png", {:alt => @alt})
+  @image = image_tag("map_icon.png", {:alt => @alt})
   link_to_osm(@image, plaque.latitude, plaque.longitude )
   end
 
