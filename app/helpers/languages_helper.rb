@@ -6,7 +6,7 @@ module LanguagesHelper
 
   def language_if_known(plaque, text = "unknown")
     if plaque.language
-	  plaque.language.name
+	  content_tag("span", plaque.language.name, {:property => "dc:language", :content => plaque.language.alpha2, :datatype => "xsd:language"})
 #      link_to(plaque.language.name, language_path(plaque.language), {:property => "dc:language", :content => plaque.language.alpha2, :datatype => "xsd:language"})
     else
       unknown(text)
