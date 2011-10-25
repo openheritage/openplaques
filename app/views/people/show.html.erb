@@ -11,7 +11,7 @@
 
     <% @plaques.each do |plaque| %>
       <div class="plaque">
-        <h2><%= link_to plaque.location.name + ", " + plaque.area.name, plaque if plaque.location and plaque.area %><%= link_to plaque.location.name, plaque if plaque.location and !plaque.area %></h2>
+        <h2><%= plaque_icon(plaque) %> <%= link_to plaque.location.name + ", " + plaque.area.name, plaque if plaque.location and plaque.area %><%= link_to plaque.location.name, plaque if plaque.location and !plaque.area %></h2>
         <p>"<%= plaque.inscription %>"</p>
       </div>
     <% end %>

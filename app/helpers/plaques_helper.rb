@@ -205,10 +205,6 @@ module PlaquesHelper
     plaques.each do |plaque|
       @loc = map_icon_if_known(plaque)
       @photo = "".html_safe
-      if plaque.photographed?
-        # icon from http://www.iconarchive.com/show/canon-digital-camera-icons-by-newformula.org/
-        camera_icon = image_tag("EOS-300D-32x32.png".html_safe, {:alt => "Photo of plaque".html_safe})
-      end
 
       # RDFa: because plaques have different relationships with the current page.
       # in the context of an organisation page, it is a list of plaques made by that organisation
@@ -224,9 +220,10 @@ module PlaquesHelper
       end
 
       @listy << content_tag("tr",
+    content_tag("td", plaque_icon(plaque), :class => :photo)  +
     content_tag("td", link_to("#" + plaque.id.to_s, plaque_path(plaque)), :class => :photo)  +
     content_tag("td", @loc, :class => "geo") +
-    content_tag("td", camera_icon, :class => :photo) +
+    content_tag("td", camera_icon(plaque), :class => :photo) +
     content_tag("td", new_linked_inscription(plaque)),
           args.merge!(:id => "openplaques:id:".html_safe + plaque.id.to_s))
     end
@@ -317,4 +314,104 @@ module PlaquesHelper
       end
     end
 
+  def geolocation_if_known(plaque)
+    if plaque.geolocated?
+      geo_microformat(plaque)
+    else
+      unknown()
+    end
+  end
+
+  def map_icon_if_known(plaque)
+    if plaque.geolocated?
+      geo_map_icon_link(plaque)
+    else
+      ""
+    end
+  end
+
+  def google_map_if_known(content, plaque)
+    if plaque.geolocated?
+      link_to_google_map(content, plaque.latitude, plaque.longitude)
+    else
+      unknown()
+    end
+  end
+
+  def google_streetview_if_known(content, plaque)
+    if plaque.geolocated?
+      link_to_google_streetview(content, plaque.latitude, plaque.longitude)
+    else
+      unknown()
+    end
+  end
+
+  def google_earth_if_known(content, plaque)
+    if plaque.geolocated?
+      link_to_google_earth(content, plaque.id)
+    else
+      unknown()
+    end
+  end
+
+  # Generates a link to Open Street Map using latitude ang longitude.
+  def link_to_osm(content, latitude, longitude, marker = true)
+   link_to(content, "http://www.openstreetmap.org/?lat=" + latitude.to_s + "&amp;lon=" + longitude.to_s + "&amp;zoom=17&amp;mlat=" + latitude.to_s + "&amp;mlon=" + longitude.to_s)
+  end
+
+  # Generates a link to Google Maps using latitude ang longitude.
+  def link_to_google_map(content, latitude, longitude)
+   link_to(content, "http://maps.google.co.uk?q=" + latitude.to_s + "," + longitude.to_s)
+  end
+
+  # Generates a link to Google Street View using latitude ang longitude.
+  def link_to_google_streetview(content, latitude, longitude)
+   link_to(content, "http://maps.google.co.uk/?q=" + latitude.to_s + "," + longitude.to_s + "&layer=c&cbll=" + latitude.to_s + "," + longitude.to_s + "&cbp=12,0,,0,5")
+  end
+
+  # Generates a link to Google Earth using id for kml.
+  def link_to_google_earth(content, id)
+   link_to(content, "http://maps.google.co.uk?t=f&q=http://openplaques.org/plaques/" + id.to_s + ".kml")
+  end
+
+  def osm_iframe(latitude, longitude, bboffset = 0.001, height = 200, width = 300, marker = true)
+    bb = (longitude - bboffset).to_s + "," + (latitude - bboffset).to_s + "," + (longitude + bboffset).to_s + "," + (latitude + bboffset).to_s
+
+    osm_embed_src = "http://www.openstreetmap.org/export/embed.html?bbox=" + bb + "&amp;marker=" + latitude.to_s + "," + longitude.to_s + "&amp;layer=mapnik"
+    return content_tag("iframe","",{:height => height, :width => width, :scrolling => "no", :frameborder => "no", :marginheight => "0", :marginwidth => "0", :src => osm_embed_src, :class => "osm"})
+  end
+
+  def geo_microformat(plaque, container = "span")
+    if !plaque.geolocated?
+      return ""
+    end
+    @lat = content_tag("span", plaque.latitude, {:class => "latitude", :property => "geo:lat", :about => "#plaque_location"})
+    @lon = content_tag("span", plaque.longitude, {:class => "longitude", :property => "geo:long", :about => "#plaque_location"})
+    content_tag(container, link_to_osm(@lat + ", " + @lon, plaque.latitude, plaque.longitude), {:class => "geo", :typeof => "geo:Point", :about => "#plaque_location"})
+  end
+
+  def geo_map_icon_link(plaque)
+    if !plaque.geolocated?
+    return "";
+    end
+    @alt = plaque.latitude.to_s + ", " + plaque.longitude.to_s
+    @image = image_tag("map_icon.png", {:alt => @alt})
+    link_to_osm(@image, plaque.latitude, plaque.longitude )
+  end
+  
+  def plaque_icon(plaque)
+	if plaque.colour && plaque.colour.name =~ /(blue|black|yellow|red|white|green)/
+      image_tag("icon-" + plaque.colour.name + ".png", :size => "16x16")
+    else
+      image_tag("icon-blue.png", :size => "16x16")
+    end
+  end
+
+  def camera_icon(plaque)
+    if plaque.photographed?
+      # icon from http://www.iconarchive.com/show/canon-digital-camera-icons-by-newformula.org/
+      camera_icon = image_tag("EOS-300D-32x32.png".html_safe, {:alt => "Photo of plaque".html_safe})
+    end
+  end
+  
 end
