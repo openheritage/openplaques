@@ -4,14 +4,14 @@
 </div>
 <div class="panel">
 
-	<% form_for(@person) do |f| %>
+	<%= form_for(@person) do |f| %>
 	
 	<fieldset>
 		<div class="row">
 			<%= f.label :name %> <%= f.text_field :name %>
 		</div>
 		<div class="row">
-			<%= f.label :surname_starts_with, "Surname starts with" %> <%= f.text_field :surname_starts_with %>
+			<%= f.label :surname_starts_with, "Surname starts with (optional)" %> <%= f.text_field :surname_starts_with %>
 		</div>
 		<div class="row">
 			<%= f.label :born_on, "Born in" %> <%= text_field_tag :born_on, "", {:maxlength => "4"} %>
@@ -31,7 +31,5 @@
 	  
 	<% end %>
 
-	<%= link_to 'Back', people_path %>
-	
 </div>
 
