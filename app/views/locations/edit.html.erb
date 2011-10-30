@@ -1,7 +1,9 @@
 <% content_for :page_title, "Edit " + @location.name %>
-<h1>Edit <%= link_to @location.name, @location %></h1>
+<div class="panel clearfix">
 
-<p>There <%= pluralize_is_or_are(@location.plaques.size, "plaque") %> at this location:</p>
+  <h1>Edit <%= link_to @location.name, @location %></h1>
+
+  <p>There <%= pluralize_is_or_are(@location.plaques.size, "plaque") %> at this location:</p>
 
   <ul>
     <% @location.plaques.each do |plaque| %>
@@ -9,27 +11,29 @@
     <% end %>
   </ul>
   
-<%= form_for(@location) do |f| %>
+</div>
 
-  <p>
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </p>
+<div class="panel clearfix">
 
-  <% if @areas.size > 0 %>
-  <p>
-    <%= f.label :area_id, "Area" %>
-    <%= f.collection_select :area_id, @areas, :id, :name, {:include_blank => true} %>
+  <%= form_for(@location) do |f| %>
 
-    New area in:
-    <% @countries.each do |country| %>
-      <%= link_to(country.name, "/places/" + country.alpha2 + "/areas/new") %>
+    <p><%= f.text_field :name %></p>
+
+    <% if @areas.size > 0 %>
+      <p>
+        <%= f.collection_select :area_id, @areas, :id, :name, {:include_blank => true} %>
+
+        New area in:
+        <% @countries.each do |country| %>
+          <%= link_to(country.name, "/places/" + country.alpha2 + "/areas/new") %>
+        <% end %>
+      </p>
     <% end %>
-  </p>
-  <% end %>
-  <p>
+    <p>
     <%= f.submit "Update" %>
   </p>
 <% end %>
 
 <%= button_to "Delete", location_path(@location), {:method => :delete, :class => :delete} if current_user.try(:is_admin?) %>
+
+</div>

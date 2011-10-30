@@ -1,19 +1,27 @@
 <% content_for :page_title, "Edit erected information for plaque \#" + @plaque.id.to_s %>
-<h1>Edit erected information for <%= link_to("plaque \#" + @plaque.id.to_s, @plaque)%></h1>
 
-<%= render "plaques/photos" %>
+<div class="panel">
 
-<% form_for(@plaque) do |f| %>
+  <h1>Edit organisation for <%= link_to @plaque.title, @plaque %></h1>
 
-  <div>
-    <%= f.label :erected_at_string, "Erected in" %>: <%= f.text_field :erected_at_string, {:include_blank => true} %> <%= f.label :organisation_id, "by" %> <%= f.collection_select :organisation_id, @organisations, :id, :name, {:include_blank => true} %> 
-    <%= f.label :organisation_id, "part of the series" %> <%= f.collection_select :series_id, @series, :id, :name, {:include_blank => true} %> 
+  <%= render "plaques/photos" %>
+
+  <%= form_for(@plaque) do |f| %>
+
+    <div>
+      <%= f.label :erected_at_string, "Erected in" %>: <%= f.text_field :erected_at_string, {:include_blank => true} %> <%= f.label :organisation_id, "by" %> <%= f.collection_select :organisation_id, @organisations, :id, :name, {:include_blank => true} %>
+      
+      <br/>
+      
+      <%= f.label :organisation_id, "part of the series" %> <%= f.collection_select :series_id, @series, :id, :name, {:include_blank => true} %> 
   
-  <%= f.submit "Update" %>
-  </div>
+      <br/>
+      
+      <%= f.submit "Update", :class => :button %>
+    </div>
 
-  <p>
-  </p>
-<% end %>
+  <% end %>
 
-<%= content_tag("p", link_to("Add new organisation", new_organisation_path)) if current_user %>
+  <%= content_tag("p", link_to("Add new organisation", new_organisation_path)) if current_user %>
+  
+</div>

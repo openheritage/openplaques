@@ -1,6 +1,6 @@
 <% content_for :page_title, "Edit " + @area.name %>
 
-<h1>Edit <%= link_to(h(@area.name), @area) %></h1>
+<h1>Edit <%= link_to(h(@area.name), @area) %>, <%= link_to @area.country.name, @area.country %></h1>
 
 <%= form_for(@area) do |f| %>
 

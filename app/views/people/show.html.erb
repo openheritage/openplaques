@@ -1,6 +1,11 @@
 <% content_for :page_title, "Historical plaques about " + @person.name %>
 
 <div class="panel">
+  <% if current_user && current_user.is_admin? %>
+  <section class="admin_panel">
+    <%= link_to("Edit this person", edit_person_path(@person), {:class => :edit, :title => "Edit this person"})%>
+  </section>
+  <% end %>
   <div class="vcard person" typeof="<%= if (@person.person?) then "foaf:Person" else "foaf:Agent" end %> vcard:VCard" about="#person">
 
     <h1><%= dated_person(@person, {:links => :none}) %> <%= roles_list(@person) %></h1>
@@ -18,8 +23,6 @@
 
     <br/>
     <%= content_tag("p", "Read more about ".html_safe + link_to(@person.name, @person.default_wikipedia_url, :target => '_blank') + " on Wikipedia.".html_safe) unless @person.default_wikipedia_url.blank? %>
-
-    <%= content_tag("p", link_to("Edit", edit_person_path(@person))) if current_user && current_user.is_admin? %>
   </div>
 
 </div>

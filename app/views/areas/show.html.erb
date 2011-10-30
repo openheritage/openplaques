@@ -1,6 +1,12 @@
 <% content_for :page_title, "Historical plaques in " + @area.name + ", " + @area.country.name %>
 
 <div class="panel clearfix">
+  <% if current_user && current_user.is_admin? %>
+  <section class="admin_panel">
+    <%= link_to("Edit this area", edit_area_path(@area), {:class => :edit, :title => "Edit this area"})%>
+  </section>
+  <% end %>
+  
   <%= link_to(@area.country.name, @area.country) if @area.country %>
   <h1><%= @area.name %></h1>
 
@@ -8,10 +14,7 @@
 
 </div>
 
-
-
-<p>See <%= link_to "unphotographed plaques", {:controller => :unphotographed_plaques_by_area, :country_id => @area.country.alpha2, :area_id => @area.slug, :action => :show} %>.</p>
-
-
-<%= link_to "Edit", edit_area_path(@area) if current_user && current_user.is_admin? %>
+<div class="panel clearfix">
+  <p>See <%= link_to "unphotographed plaques", {:controller => :unphotographed_plaques_by_area, :country_id => @area.country.alpha2, :area_id => @area.slug, :action => :show} %>.</p>
+</div>
 

@@ -1,36 +1,41 @@
-<% content_for :page_title, "Edit colour of plaque \#" + @plaque.id.to_s %>
-<h1>Edit colour of <%= link_to "Plaque #" + @plaque.id.to_s, @plaque %></h1>
+<% content_for :page_title, "Edit colour of " + @plaque.title %>
 
-<div class="panel clearfix">
-  <% if @plaque.photos.empty? %>
-    <section id="plaque_no_photos">
-      <div class="no_photo">
-        <h2>No photograph</h2>
-        <p>We don't have any photos of <%= @plaque.machine_tag %> yet.</p>
+<div class="panel">
+
+ <h1>Edit colour of <%= link_to @plaque.title, @plaque %></h1>
+
+  <div class="panel clearfix">
+    <% if @plaque.photos.empty? %>
+      <section id="plaque_no_photos">
+        <div class="no_photo">
+          <h2>No photograph</h2>
+          <p>We don't have any photos of <%= @plaque.machine_tag %> yet.</p>
+        </div>
+      </section>
+    <% elsif @plaque.photos.size < 2 %>
+      <div class="plaque_image plaque_single_image">
+        <%= image_tag(@plaque.photos.first.file_url) %>
       </div>
-    </section>
-  <% elsif @plaque.photos.size < 2 %>
-    <div class="plaque_image plaque_single_image">
-      <%= image_tag(@plaque.photos.first.file_url) %>
-    </div>
-  <% else %>
-    <div class="plaque_image plaque_multiple_images">
-      <% first_photo = @plaque.photos.first %>
-      <%= link_to(image_tag(first_photo.file_url, {:id => "primary_image", :alt => "Photo of plaque", :rel => "foaf:depiction"}), first_photo.url) %>
-      <div id="secondary_images">
-        <% @plaque.photos.each do |image| %>
-          <%= link_to(image_tag(image.file_url, {:alt => "Photo of plaque", :rel => "foaf:depiction"}), image.url) unless image == first_photo %>
-        <% end %>
+    <% else %>
+      <div class="plaque_image plaque_multiple_images">
+        <% first_photo = @plaque.photos.first %>
+        <%= link_to(image_tag(first_photo.file_url, {:id => "primary_image", :alt => "Photo of plaque", :rel => "foaf:depiction"}), first_photo.url) %>
+        <div id="secondary_images">
+          <% @plaque.photos.each do |image| %>
+            <%= link_to(image_tag(image.file_url, {:alt => "Photo of plaque", :rel => "foaf:depiction"}), image.url) unless image == first_photo %>
+          <% end %>
+        </div>
       </div>
-    </div>
+    <% end %>
+  </div>
+
+  <%= form_for @plaque do |f| %>
+
+    <%= f.label :colour_id, "This plaque is" %>
+    <%= f.collection_select :colour_id, @colours, :id, :name, {:include_blank => true} %>
+      <%= f.submit "Save", :class => :button %>
   <% end %>
+
+  <%= content_tag("p", "Or ".html_safe + link_to("add a new colour", new_colour_path) + ".") %>
+
 </div>
-
-<%= form_for @plaque do |f| %>
-
-  <%= f.label :colour_id, "What colour is this plaque?" %>
-  <%= f.collection_select :colour_id, @colours, :id, :name, {:include_blank => true} %>
-    <%= f.submit "Save" %>
-<% end %>
-
-<%= content_tag("p", "Or ".html_safe + link_to("add a new colour", new_colour_path) + ".") %>
