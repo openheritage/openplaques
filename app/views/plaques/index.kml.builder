@@ -10,7 +10,7 @@ xml.kml(:xmlns=>"http://www.opengis.net/kml/2.2","xmlns:atom"=>"http://www.w3.or
         xml.IconStyle do
           xml.scale "0.5"
           xml.Icon do
-            xml.href root_url + "/images/icon-" + colour + ".png"
+            xml.href root_url + "assets/icon-" + colour + ".png"
           end
         end
       end
