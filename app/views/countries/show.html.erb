@@ -1,10 +1,15 @@
 <% content_for :page_title, "Historical plaques in " + @country.name %>
 
 <div class="panel clearfix">
+  <% if current_user && current_user.is_admin? %>
+    <section class="admin_panel">
+      <%= link_to("Add new area in " + @country.name, new_country_area_path(@country.alpha2), {:class => :edit, :title => "Add new area in " + @country.name})%>
+    </section>
+  <% end %>
+
   <h1>Plaques in <%= @country.name %></h1>
 
   <%= pluralize @country.plaques.size, "plaque" %>
-</div>
 
   <% if @areas.size > 0 %>
 
@@ -24,7 +29,6 @@
   <!--TODO: Turn these off when it doesnt make sense-->
   <p>See <%= link_to "unphotographed plaques", country_unphotographed_path(@country) %>.</p>
 
-  <%= content_tag("p", link_to("Add new area", new_country_area_path(@country.alpha2))) if current_user && current_user.is_admin? %>
 </div>
 
 
