@@ -29,6 +29,8 @@
   <!--TODO: Turn these off when it doesnt make sense-->
   <p>See <%= link_to "unphotographed plaques", country_unphotographed_path(@country) %>.</p>
 
+  <p class="alternate_formats">Data about this country as <%= alternate_link_to "XML", country_path(@country, :xml), :xml %> <%= alternate_link_to "JSON", country_path(@country, :json), :json %> <%= alternate_link_to "KML", country_path(@country, :kml), :kml %>  <%= alternate_link_to "GMAP", "http://maps.google.co.uk/maps?q=" + country_url(@country, :kml), :html %></p>
+
 </div>
 
 
