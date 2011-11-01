@@ -29,13 +29,13 @@ if @geolocated_plaques
         var popupClass = AutoSizeFramedCloud;
         var size = new OpenLayers.Size(10,10);
         var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
-        var icon = new OpenLayers.Icon('/images/openplaques-icon.png',size,offset);
-        var icon_blue = new OpenLayers.Icon('/images/icon-blue.png',size,offset);
-        var icon_black = new OpenLayers.Icon('/images/icon-black.png',size,offset);
-        var icon_green = new OpenLayers.Icon('/images/icon-green.png',size,offset);
-        var icon_red = new OpenLayers.Icon('/images/icon-red.png',size,offset);
-        var icon_white = new OpenLayers.Icon('/images/icon-white.png',size,offset);
-        var icon_yellow = new OpenLayers.Icon('/images/icon-yellow.png',size,offset);
+        var icon = new OpenLayers.Icon('<%= asset_path 'openplaques-icon.png' %>',size,offset);
+        var icon_blue = new OpenLayers.Icon('<%= asset_path 'icon-blue.png' %>',size,offset);
+        var icon_black = new OpenLayers.Icon('<%= asset_path 'icon-black.png' %>',size,offset);
+        var icon_green = new OpenLayers.Icon('<%= asset_path 'icon-green.png' %>',size,offset);
+        var icon_red = new OpenLayers.Icon('<%= asset_path 'icon-red.png' %>',size,offset);
+        var icon_white = new OpenLayers.Icon('<%= asset_path 'icon-white.png' %>',size,offset);
+        var icon_yellow = new OpenLayers.Icon('<%= asset_path 'icon-yellow.png' %>',size,offset);
         <% if @centre %>
           var lat = <%= @centre.latitude %>;
           var lon = <%= @centre.longitude %>;
