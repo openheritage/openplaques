@@ -25,7 +25,7 @@ class Photo < ActiveRecord::Base
   before_validation :assign_licence_if_cc_by_accepted
 
   scope :detail_order, :order => "shot ASC"
-  
+
   def assign_from_photo_url
     if @photo_url
       if @photo_url =~ /http\:\/\/www\.flickr\.com\/photos\/.+\/\d+\//
@@ -53,4 +53,8 @@ class Photo < ActiveRecord::Base
     end
   end
 
+  def self.shots
+    ["1 - extreme close up", "2 - close up", "3 - medium close up", "4 - medium shot", "5 - long shot", "6 - establishing shot"]
+  end
+    
 end
