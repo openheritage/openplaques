@@ -36,6 +36,9 @@
       <div class="no_photo">
         <h2>No photograph</h2>
         <p>We don't have any photos of <%= @plaque.machine_tag %> yet. <!--<a href="#">Add your own photo</a>--></p>
+		<% if current_user %>
+		  <%= button_to "find on Flickr", :action => :flickr_search, :id => @plaque %>
+		<% end %>
       </div>
 
       <% if @plaque.geolocated? %>
@@ -225,4 +228,4 @@
 
 </div>
 
-<p class="alternate_formats">Download data about this plaque as <%= alternate_link_to "XML", plaque_path(@plaque, :xml), :xml %> <%= alternate_link_to "JSON", plaque_path(@plaque, :json), :json %> <%= alternate_link_to "KML", plaque_path(@plaque, :kml), :kml %></p>
+<p class="alternate_formats">Data about this plaque as <%= alternate_link_to "XML", plaque_path(@plaque, :xml), :xml %> <%= alternate_link_to "JSON", plaque_path(@plaque, :json), :json %> <%= alternate_link_to "KML", plaque_path(@plaque, :kml), :kml %> <%= alternate_link_to "GMAP", "http://maps.google.co.uk/maps?q=" + plaque_url(@plaque, :kml), :html %></p>
