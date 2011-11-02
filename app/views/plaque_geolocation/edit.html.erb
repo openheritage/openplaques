@@ -24,7 +24,7 @@
       <p><%= f.label :accuracy, "Accuracy" %> <%= f.text_field :accuracy %></p>
       <p><%= f.submit "Update", :class => :button  %></p>
     </div>
-    
+
     <%= osm_iframe(@plaque.latitude.to_f,@plaque.longitude.to_f) if @plaque.geolocated? %>
 
     <% if @yahoo_geo %>
@@ -43,7 +43,5 @@
     <% end %>
 
   <% end %>
-
-  <%= javascript_include_tag "plaque_edit" %>
 
 </div>
