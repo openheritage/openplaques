@@ -113,20 +113,8 @@ class PlaquesController < ApplicationController
   end
 
   def flickr_search
-  puts "*** flickr_search ****"
-  puts "*** flickr_search ****"
-  puts "*** flickr_search ****"
-  puts "*** flickr_search ****"
-  puts "*** flickr_search ****"
-  puts "*** flickr_search ****"
-  puts "*** flickr_search ****"
-  puts "*** flickr_search ****"
-  puts "*** flickr_search ****"
-  puts "*** flickr_search ****"
-  puts "*** flickr_search ****"
-  puts "*** flickr_search ****"
     help.find_photo_by_machinetag(@plaque)
-#    redirect_to @plaque
+    redirect_to @plaque
   end
 
   def flickr_search_all
@@ -137,7 +125,6 @@ class PlaquesController < ApplicationController
   # POST /plaques
   # POST /plaques.xml
   def create
-
     @plaque = Plaque.new(params[:plaque])
 
     if current_user
