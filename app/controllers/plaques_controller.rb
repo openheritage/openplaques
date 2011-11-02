@@ -73,7 +73,7 @@ class PlaquesController < ApplicationController
     @plaques = [@plaque]
     respond_to do |format|
       format.html # show.html.erb
-      format.kml
+      format.kml { render "plaques/index" }
       format.yaml
       format.xml
       format.json {
@@ -113,8 +113,20 @@ class PlaquesController < ApplicationController
   end
 
   def flickr_search
+  puts "*** flickr_search ****"
+  puts "*** flickr_search ****"
+  puts "*** flickr_search ****"
+  puts "*** flickr_search ****"
+  puts "*** flickr_search ****"
+  puts "*** flickr_search ****"
+  puts "*** flickr_search ****"
+  puts "*** flickr_search ****"
+  puts "*** flickr_search ****"
+  puts "*** flickr_search ****"
+  puts "*** flickr_search ****"
+  puts "*** flickr_search ****"
     help.find_photo_by_machinetag(@plaque)
-    redirect_to @plaque
+#    redirect_to @plaque
   end
 
   def flickr_search_all
