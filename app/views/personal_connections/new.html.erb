@@ -17,11 +17,11 @@
 <%= form_for @personal_connection, :url => personal_connections_path(@plaque) do |f| %>
   <fieldset>
     <div class="row">
-      <%= f.collection_select :person_id, @people, :id, :name %> <%= link_to("Add person", "/people/new") %>
+      <%= f.collection_select :person_id, @people, :id, :name, {} , { "style" => "width:400px" } %> <%= link_to("Add person", "/people/new") %>
     </div>
 
     <div class="row">
-      <%= f.collection_select :verb_id, @verbs, :id, :name %>  <%= link_to("Add verb", "/verbs/new") %>
+      <%= f.collection_select :verb_id, @verbs, :id, :name, { :selected => "222"}, { "style" => "width:400px" } %>  <%= link_to("Add verb", "/verbs/new") %>
     </div>
 
     <% if @plaque.location %>
