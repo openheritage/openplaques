@@ -1,14 +1,17 @@
 <% content_for :page_title, "Plaques commemorating " + @role.name.pluralize %>
 
 <div class="panel clearfix">
+  <section class="admin_panel">
+    <%= link_to("Edit this "+@role.type+" role", edit_role_path(@role), {:class => :edit, :title => "Edit this "+@role.type+" role"})%>
+  </section>
   <h1>Commemorated <%= @role.name.pluralize %></h1>
   <p>Read more about what <%= a_or_an @role.name, false %> <%= link_to @role.name, @role.wikipedia_url %> is on Wikipedia</p>
 </div>
 
 <ol class="results" id="people_results">
   <% @role.people.each do |person| %>
-    <li class="vcard person"  typeof="<%= if (person.person?) then "foaf:Person" else "foaf:Agent" end %> vcard:VCard" about="#person">
-      <p class="result"><%= dated_person(person) %></p>
+    <li class="vcard person" typeof="<%= if @role.person? then "foaf:Person" else "foaf:Agent" end %> vcard:VCard" about="#person">
+      <p class="result"> <%= dated_person(person) %></p>
       <p class="count"><%= link_to pluralize(person.plaques.size, "plaque"), person %> in <%= list_of_area_links(person.areas) %></p>
     </li>
   <% end%>
@@ -31,7 +34,7 @@
         <p class="result"><%= link_to related_role.name, role_path(related_role) %></p>
         <p class="count">
           <% for person in related_role.people %>
-            <div class="vcard person" typeof="<%= if (person.person?) then "foaf:Person" else "foaf:Agent" end %> vcard:VCard" about="#person">
+            <div class="vcard person" typeof="<%= if person.person? then "foaf:Person" else "foaf:Agent" end %> vcard:VCard" about="#person">
               <%= dated_person(person) %>
             </div>
           <% end %>

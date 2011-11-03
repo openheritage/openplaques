@@ -3,7 +3,7 @@
 <div class="panel">
   <h1>Edit details about <%= link_to @person.name, @person %></h1>
 
-  <%= form_for(@person) do |f| %>
+  <%= form_for @person do |f| %>
     <p><%= f.label :name %> <%= f.text_field :name %></p>
     <p><%= f.label :born_on, "Born" %> <%= text_field_tag :born_on, @born_on, {:maxlength => "4"} %> <%= f.label :died_on, "Died" %> <%= text_field_tag :died_on, @died_on, {:maxlength => "4"} %></p>
     <p>The <%= f.label :wikipedia_url %> <%= f.text_field :wikipedia_url %> overrides the default generated one if it's incorrect. Set it to blank if there is no Wikipedia page.</p>
@@ -37,4 +37,3 @@
   
   <%= content_tag("p", link_to("Add new role", new_role_path)) if current_user %>
 </div>
-

@@ -1,29 +1,25 @@
 <table class="section_details" cellspacing="0" summary="Plaque details for #<%= @plaque.id %>">
    <tr>
      <th>Erected</th>
-     <td><%= erected_information(@plaque) %></td>
+     <td><%= erected_information @plaque %></td>
    </tr>
    <% if @plaque.series %>
-   <tr>
-     <th>Series</th>
-     <td><%= link_to(@plaque.series.name, @plaque.series) %></td>
-   </tr>
+     <tr>
+       <th>Series</th>
+       <td><%= link_to @plaque.series.name, @plaque.series %></td>
+     </tr>
    <% end %>
    <tr>
      <th>Language</th>
-     <td><%= language_if_known(@plaque) %></td>
+     <td><%= language_if_known @plaque %></td>
    </tr>
-   <!--tr>
-     <th>Co-ordinates</th>
-     <td><%= geolocation_if_known(@plaque) %></td>
-   </tr-->
    <tr>
      <th>Colour</th>
-     <td><%= colour_if_known(@plaque) %></td>
+     <td><%= colour_if_known @plaque %></td>
    </tr>
    <tr>
      <th>Location</th>
-     <td><%= location_if_known(@plaque) %></td>
+     <td><%= location_if_known @plaque %></td>
    </tr>
    <tr>
      <th>Subject</th>

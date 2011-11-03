@@ -3,7 +3,7 @@ module PeopleHelper
 
   def roles_list(person)
     if person.roles.size > 0
-      list = []
+      list = [person.type]
       person.personal_roles.each do |personal_role|
         list <<  dated_role(personal_role)
       end
@@ -30,11 +30,11 @@ module PeopleHelper
       if person.born_on_is_circa
         dates += circa_tag
       end
-      dates += person.born_in.to_s + "-"
-      if person.died_on
+      dates += person.born_in.to_s
+      if person.died_on && (person.born_in != person.died_on)
         dates += person.died_in.to_s
       else
-        dates += "present"
+        dates += "-present"
       end
       dates += ")"
     end

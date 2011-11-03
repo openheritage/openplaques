@@ -25,28 +25,63 @@ class Role < ActiveRecord::Base
   end
 
   def person?
-    true
-    false if animal? or thing?
+    return false if animal? or thing? or group? or place?
+	return true
   end
 
   def animal?
-    false
     return true if "dog" == slug
+    return true if "bulldog" == slug
+	return false
   end
 
   def thing?
-    false
-    #TODO add this as a settable attribute on role
+    return true if "battle" == slug
+    return true if "bomb" == slug
+    return false
+  end
+
+  def group?
     return true if "band" == slug
     return true if "battle" == slug
+    return true if "bomb" == slug
     return true if "charity" == slug
-    return true if "cinema" == slug
     return true if "football_club" == slug
+    return true if "society" == slug
+    return true if "street" == slug
+    return false
+  end
+
+  def place?
+    #TODO add this as a settable attribute on role
+    return true if "aerodrome" == slug
+    return true if "almshouse" == slug
+    return true if "asylum" == slug
+    return true if "barracks" == slug
+    return true if slug.start_with?("birthplace")
+    return true if "brightons_smallest_pub" == slug
+    return true if "cinema" == slug
+    return true if "coffee_house" == slug
     return true if "fire_station" == slug
+    return true if "football_ground" == slug
+    return true if "grammar_school" == slug
     return true if "house" == slug
+    return true if "mill" == slug
     return true if "pier" == slug
+    return true if "public_house" == slug
+    return true if "society" == slug
     return true if "street" == slug
     return true if "type_foundry" == slug
+    return false
+  end
+  
+  def type
+	return "person" if person?
+	return "animal" if animal?
+	return "thing" if thing?
+	return "group" if group?
+	return "place" if place?
+	return "?"
   end
   
   # work it out from the name unless override value stored in the db

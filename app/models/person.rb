@@ -100,8 +100,8 @@ class Person < ActiveRecord::Base
   end
 
   def person?
-    true
-    false if animal? or thing?
+    return false if animal? or thing? or group? or place?
+	return true
   end
 
   def animal?
@@ -112,6 +112,25 @@ class Person < ActiveRecord::Base
   def thing?
     false
     true if roles.any?{|role| role.thing?}
+  end
+
+  def group?
+    false
+    true if roles.any?{|role| role.group?}
+  end
+
+  def place?
+    false
+    true if roles.any?{|role| role.place?}
+  end
+  
+  def type
+	return "person" if person?
+	return "animal" if animal?
+	return "thing" if thing?
+	return "group" if group?
+	return "place" if place?
+	return "?"
   end
   
   def born_in
@@ -125,7 +144,7 @@ class Person < ActiveRecord::Base
   def dead?
     false
     return true if died_in
-    return true if !thing? && born_in && born_in < 1900
+    return true if (person? || animal?) && born_in && born_in < 1900
   end
   
   def alive?

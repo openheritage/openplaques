@@ -18,4 +18,3 @@
   <p>See <%= link_to "unphotographed plaques", {:controller => :unphotographed_plaques_by_area, :country_id => @area.country.alpha2, :area_id => @area.slug, :action => :show} %>.</p>
   <p class="alternate_formats">Data about this area as <%= alternate_link_to "XML", area_path(@area, :xml), :xml %> <%= alternate_link_to "JSON", area_path(@area, :json), :json %> <%= alternate_link_to "KML", area_path(@area, :kml), :kml %>  <%= alternate_link_to "GMAP", "http://maps.google.co.uk/maps?q=" + area_url(@area, :kml), :html %></p>
 </div>
-

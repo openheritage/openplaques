@@ -42,7 +42,7 @@ module PlaquesHelper
   def kml(plaque, xml)
     if plaque.geolocated?
       xml.Placemark do
-        xml.name(title(plaque))
+        xml.name(plaque.title)
         xml.description do
           xml.cdata!(("<p>" + plaque.inscription + "</p> <p><a href=\"" + plaque_url(plaque) + "\">" + photo_img(plaque) + "</a></p>").html_safe)
         end
@@ -251,7 +251,7 @@ module PlaquesHelper
         else
           info += "on ".html_safe + plaque.erected_at.strftime('%d %B') + " "
         end
-        info += link_to(plaque.erected_at.year.to_s, plaque_erected_year_path(plaque.erected_at.year.to_s))
+        info += plaque.erected_at.year.to_s
       end
       return content_tag("p", info)
     else

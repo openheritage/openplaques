@@ -2,7 +2,7 @@
 <div class="panel">
   <h1>Pick a plaque</h1>
 
-  <% form_for @picks, :url => picks_path do |f| %>
+  <%= form_for @picks, :url => picks_path do |f| %>
 
     <p><%= f.label :plaque_id %> <%= f.text_field :plaque_id %></p>
 
