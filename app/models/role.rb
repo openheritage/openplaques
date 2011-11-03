@@ -38,6 +38,8 @@ class Role < ActiveRecord::Base
   def thing?
     return true if "battle" == slug
     return true if "bomb" == slug
+    return true if "china" == slug
+    return true if "gallows" == slug
     return false
   end
 
@@ -46,7 +48,10 @@ class Role < ActiveRecord::Base
     return true if "battle" == slug
     return true if "bomb" == slug
     return true if "charity" == slug
+    return true if "company" == slug
     return true if "football_club" == slug
+    return true if "football_league" == slug
+    return true if "rugby_football_league" == slug
     return true if "society" == slug
     return true if "street" == slug
     return false
@@ -62,6 +67,7 @@ class Role < ActiveRecord::Base
     return true if "brightons_smallest_pub" == slug
     return true if "cinema" == slug
     return true if "coffee_house" == slug
+    return true if "design_studio" == slug
     return true if "fire_station" == slug
     return true if "football_ground" == slug
     return true if "grammar_school" == slug
