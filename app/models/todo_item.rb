@@ -21,5 +21,10 @@ class TodoItem < ActiveRecord::Base
 
   scope :to_add, :conditions => ["action = 'add' AND url IS NOT NULL"]
   scope :to_datacapture, :conditions => ["action = 'datacapture' AND url IS NOT NULL"]
+  
+  def to_datacapture?
+    false
+	true if action = 'datacapture'
+  end
 
 end

@@ -1,5 +1,6 @@
 <% content_for :page_title, "To do: lists to be datacaptured" %>
 
+<div class="panel">
 <h1>To do: Lists to be datacapture</h1>
 <p><%= link_to("All to-do lists", "/todo") %></p>
 <p>These lists of plaques have been found on the internet, <%= link_to("and need adding to the site", new_plaque_path) %>
@@ -18,8 +19,10 @@
   <% end %>
 </ul>
 </p>
+<br/>
 <p>
-  <%= link_to("Add new list", new_todo_path) %>
+  <%= link_to("Add a new list", new_todo_path) %>
   </p>
+  </div>
 
 <p class="clear"><%= link_to("All to-do lists", "/todo") %></p>

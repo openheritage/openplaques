@@ -17,8 +17,10 @@ class TodoController < ApplicationController
 
   def destroy
     @todoitem = TodoItem.find(params[:id])
+	@direct_to = 'plaques_to_add'
+	@direct_to = 'lists_to_datacapture' if @todoitem.to_datacapture?
     @todoitem.destroy
-    redirect_to todo_path('plaques_to_add')
+    redirect_to todo_path(@direct_to)
   end
 
   def show
