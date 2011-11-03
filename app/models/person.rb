@@ -172,6 +172,17 @@ class Person < ActiveRecord::Base
     "http://en.wikipedia.org/wiki/"+untitled_name
   end
 
+  def name_and_dates
+	r = name
+	r += " (" if born_on || died_on
+	r += born_on.year.to_s if born_on
+	r += "?-" if !born_on && died_on
+	r += "-" if born_on && died_on
+	r += died_on.year.to_s if died_on
+	r += ")" if born_on || died_on
+	return r
+  end
+
   private
 
     def update_index
