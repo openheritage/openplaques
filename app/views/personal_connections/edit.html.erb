@@ -1,8 +1,8 @@
 <div class="panel">
 
-  <h1>Edit connection for <%= link_to @plaque.title, @plaque %> <%= @personal_connection %></h1>
+  <h1>Edit connection for <%= link_to @plaque.title, @plaque %></h1>
 
-  <%= form_for @personal_connection do |f| %>
+  <%= form_for @personal_connection, :url => plaque_connection_path(@plaque, @personal_connection) do |f| %>
     <p><%= f.label :person_id, "Person" %>:
       <%= f.collection_select :person_id, @people, :id, :name %> <%= link_to("Add person", "/people/new") %>
     </p>
@@ -29,5 +29,5 @@
 
     <%= f.submit "Update", :class => :button %>
   <% end %>
-  
+
 </div>
