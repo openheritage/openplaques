@@ -24,7 +24,7 @@ class TodoItem < ActiveRecord::Base
   
   def to_datacapture?
     false
-	true if action = 'datacapture'
+	true if action == 'datacapture'
   end
 
 end
