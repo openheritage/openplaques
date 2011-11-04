@@ -69,9 +69,11 @@ class Role < ActiveRecord::Base
     return true if "coffee_house" == slug
     return true if "design_studio" == slug
     return true if "fire_station" == slug
+    return true if "film_studio" == slug
     return true if "football_ground" == slug
     return true if "grammar_school" == slug
     return true if "house" == slug
+    return true if "laboratory" == slug
     return true if "mill" == slug
     return true if "pier" == slug
     return true if "public_house" == slug

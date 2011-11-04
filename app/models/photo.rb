@@ -56,5 +56,24 @@ class Photo < ActiveRecord::Base
   def self.shots
     ["1 - extreme close up", "2 - close up", "3 - medium close up", "4 - medium shot", "5 - long shot", "6 - establishing shot"]
   end
+  
+  def ping?
+    begin # check header response
+      case Net::HTTP.get_response(URI.parse(file_url))
+        when Net::HTTPSuccess then return true
+        else return false
+      end
+    rescue # Recover optimistically on DNS failures..
+	  return true
+    end 
+  end
+  
+  def flickr?
+    photo_url && photo_url.starts_with?("http://www.flickr.com")
+  end
+  
+  def flickr_photo_id
+    # retrieve from photo_url e.g. http://www.flickr.com/photos/84195101@N00/3412825200/
+  end
     
 end

@@ -1,22 +1,35 @@
 <% content_for :page_title, @photo.title %>
 
-<h1><%= @photo.title %></h1>
+<% if current_user && current_user.is_admin? %>
+  <section class="admin_panel">
+    <%= link_to("Edit this photo", edit_photo_path(@photo), {:class => :edit, :title => "Edit this photo"})%>
+  </section>
+<% end %>
 
-<div class="info">
-  <%= link_to("Edit", edit_photo_path(@photo), {:class => :edit, :title => "edit photo"}) if current_user %>
-  
+<div class="panel">
+  <h1><%= @photo.title %></h1>
+
   <%= content_tag("p", link_to(image_tag(@photo.file_url), @photo.url)) %>
   <p>
-  <% if @photo.plaque %>
-    This is a <%= @photo.shot_name %> photo of <%= link_to @photo.plaque.title, @photo.plaque %>. 
+    <% if @photo.plaque %>
+      This is a <%= @photo.shot_name %> photo of <%= link_to @photo.plaque.title, @photo.plaque %>. 
+    <% else %>
+      This <%= @photo.shot_name %> photo has not been linked to a plaque yet.
+    <% end %>
+
+    It was taken <%= content_tag("span", " on " + @photo.taken_at.to_s(:long)) unless @photo.taken_at.blank? %>
+    by <%= link_to @photo.photographer, photographer_url(@photo.photographer) %>
+  </p>
+  <p>The image was licenced by its copyright owner under a <%= link_to @photo.licence.name, @photo.licence %>.</p>
+
+  <% if @photo.ping? %>
+  <p>A ping to the image url found it.</p>
   <% else %>
-    This <%= @photo.shot_name %> photo has not been linked to a plaque yet.
+    <p>A ping to the image url <strong>did not find it</strong>.</p>
   <% end %>
 
-It was taken
-<%= content_tag("span", " on " + @photo.taken_at.to_s(:long)) unless @photo.taken_at.blank? %>
-by <%= link_to @photo.photographer, photographer_url(@photo.photographer) %></p>
-<p>The image was licenced by its copyright owner under a <%= link_to @photo.licence.name, @photo.licence %>.</p>
 </div>
-
-<%= button_to("Delete photo", photo_path(@photo), {:method => :delete, :class => :button}) if current_user.try(:is_admin?) %>
+  
+<div class="panel">
+  <%= button_to("Delete photo", photo_path(@photo), {:method => :delete, :class => :button}) if current_user.try(:is_admin?) %>
+</div>
