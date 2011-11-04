@@ -40,6 +40,7 @@ class Role < ActiveRecord::Base
     return true if "bomb" == slug
     return true if "china" == slug
     return true if "gallows" == slug
+    return true if "well" == slug
     return false
   end
 
@@ -75,15 +76,21 @@ class Role < ActiveRecord::Base
     return true if "gate" == slug
     return true if "grammar_school" == slug
     return true if "house" == slug
+    return true if "institute" == slug
     return true if "laboratory" == slug
     return true if "mill" == slug
     return true if "pier" == slug
     return true if "public_house" == slug
     return true if "school" == slug
+    return true if "shop" == slug
     return true if "society" == slug
+    return true if "stables" == slug
+    return true if "station" == slug
     return true if "street" == slug
     return true if "type_foundry" == slug
-    return false
+    return true if "university" == slug
+    return true if slug.start_with?("where ")
+   return false
   end
   
   def type
