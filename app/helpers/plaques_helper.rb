@@ -6,7 +6,7 @@ require 'rexml/document'
 module PlaquesHelper
 
   def marked_text(text, term)
-    text.gsub(/(#{term})/i, '<mark>\1</mark>').html_safe
+    text.to_s.gsub(/(#{term})/i, '<mark>\1</mark>').html_safe
   end
 
   def search_snippet(text, search_term)

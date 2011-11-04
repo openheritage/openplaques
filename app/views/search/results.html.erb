@@ -14,7 +14,7 @@
         <% if result.photographed? %>
           <%= image_tag("EOS-300D-32x32.png".html_safe, {:alt => "Photo of plaque".html_safe}) %>
         <% end %>
-        <%= link_to(marked_text(title(result), @phrase), result, :class => :title) %>
+        <%= link_to(marked_text(result.title, @phrase), result, :class => :title) %>
         <%= link_to(result.location.area.name, result.location.area, :class => :location) if result.location && result.location.area %>
       </p>
       <p class="snippet"><%= marked_text(search_snippet(result.inscription, @phrase), @phrase) %></p>
