@@ -13,6 +13,7 @@ class TodoController < ApplicationController
     @partial_inscription_count = Plaque.partial_inscription.count
     @partial_inscription_photo_count = Plaque.partial_inscription_photo.count
     @no_roles_count = Person.no_role.count
+    @needs_geolocating_count = Plaque.ungeolocated.count
   end
 
   def destroy
@@ -70,6 +71,10 @@ class TodoController < ApplicationController
     when 'no_roles'
       @people = Person.no_role
       render :no_roles
+
+    when 'needs_geolocating'
+      @plaques = Plaque.ungeolocated
+      render :detailed_address_no_geo
 
     else
       raise ActiveRecord::RecordNotFound

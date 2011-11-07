@@ -13,5 +13,6 @@
     <li><%= link_to(pluralize(@partial_inscription_photo_count, "plaque") +  " with photos needing full inscription" , todo_path('partial_inscription_photo')) %></li>
     <li><%= link_to(pluralize(@partial_inscription_count, "plaque") +  " needing full inscription" , todo_path('partial_inscription')) %></li>
     <li><%= link_to(pluralize(@no_roles_count, "people") +  " needing roles" , todo_path('no_roles')) %></li>
+    <li><%= link_to(pluralize(@needs_geolocating_count, "plaque") +  " need geolocating", todo_path('needs_geolocating')) %></li>
   </ul>
 </div>

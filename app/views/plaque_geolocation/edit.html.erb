@@ -18,7 +18,13 @@
         <% end %>
       </p>
     <% end %>
+	
+	<br/>
+	
+	<p>Find "<%= @plaque.location.name if @plaque.location %>" on <a href="http://maps.google.co.uk/maps?q=<%= @plaque.location.name if @plaque.location %>&z=18" target="_new">google maps</a></p>
 
+	<br/>
+	
     <div class="edit_lat_long">
       <p><%= f.label :latitude, "Latitude" %> <%= f.text_field :latitude %> <%= f.label :longitude, "Longitude" %> <%= f.text_field :longitude %> </p>
       <p><%= f.label :accuracy, "Accuracy" %> <%= f.text_field :accuracy %></p>
