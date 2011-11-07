@@ -6,7 +6,7 @@
     <p>Here are some of our top picks:</p>
     <ul>
       <% @picks.each do |pick| %>
-      <li><%= link_to(pick.plaque.title, pick_path(pick)) %> '<%= pick.description %>' has been featured <%= pick.featured_count %> times.
+      <li><%= link_to(pick.plaque.title, pick_path(pick)) %> '<%= pick.description %>' has been featured <%= pluralize(pick.featured_count, "time") %>.
       <% if pick.feature_on %>It would be great to feature it on <%= pick.feature_on %><% end %>
       </li>
       <% end %>
