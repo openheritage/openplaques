@@ -21,7 +21,7 @@
 	
 	<br/>
 	
-	<p>Find "<%= @plaque.location.name if @plaque.location %>" on <a href="http://maps.google.co.uk/maps?q=<%= @plaque.location.name if @plaque.location %>&z=18" target="_new">google maps</a></p>
+	<p>Find "<%= @plaque.location.name if @plaque.location %>" on <a href="http://maps.google.co.uk/maps?q=<%= @plaque.location.name if @plaque.location %>,<%= @plaque.area.name if @plaque.area %>&z=18" target="_new">google maps</a></p>
 
 	<br/>
 	
