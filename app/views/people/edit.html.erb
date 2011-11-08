@@ -11,6 +11,7 @@
       <a href="<%= wikipedia_url(@person)%>"><%= wikipedia_url(@person)%></a><br/>
       "<%= wikipedia_summary_p(@person) %>"</p>
     <p><%= f.label :dbpedia_uri %> <%= f.text_field :dbpedia_uri %></p>
+    <p>I believe the surname to be "<%= @person.surname %>"</p>
     <p><%= f.label :surname_starts_with %> <%= f.text_field :surname_starts_with, :maxlength => 1 %></p>
     <p><%= f.submit "Update", :class => :button %></p>
   <% end %>

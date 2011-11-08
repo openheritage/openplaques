@@ -182,6 +182,10 @@ class Person < ActiveRecord::Base
 	r += ")" if born_on || died_on
 	return r
   end
+  
+  def surname
+    self.name[self.name.downcase.rindex(" " + self.surname_starts_with.downcase) ? self.name.downcase.rindex(" " + self.surname_starts_with.downcase) + 1: 0,self.name.size]
+  end
 
   private
 
