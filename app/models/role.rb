@@ -30,6 +30,7 @@ class Role < ActiveRecord::Base
   end
 
   def animal?
+    return true if "cat" == slug
     return true if "dog" == slug
     return true if "bulldog" == slug
 	return false
