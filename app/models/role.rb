@@ -36,18 +36,20 @@ class Role < ActiveRecord::Base
   end
 
   def thing?
+    return true if "arch" == slug
     return true if "battle" == slug
     return true if "bomb" == slug
+    return true if "bombing" == slug
     return true if "china" == slug
+    return true if "conspiracy" == slug
     return true if "gallows" == slug
+    return true if "lead_fresh_water_channel" == slug
     return true if "well" == slug
     return false
   end
 
   def group?
     return true if "band" == slug
-    return true if "battle" == slug
-    return true if "bomb" == slug
     return true if "charity" == slug
     return true if "company" == slug
     return true if "football_club" == slug
@@ -55,7 +57,6 @@ class Role < ActiveRecord::Base
     return true if "mod_band" == slug
     return true if "rugby_football_league" == slug
     return true if "society" == slug
-    return true if "street" == slug
     return false
   end
 
@@ -69,6 +70,7 @@ class Role < ActiveRecord::Base
     return true if "brightons_smallest_pub" == slug
     return true if "cinema" == slug
     return true if "coffee_house" == slug
+    return true if "court" == slug
     return true if "design_studio" == slug
     return true if "fire_station" == slug
     return true if "film_studio" == slug
@@ -76,6 +78,8 @@ class Role < ActiveRecord::Base
     return true if "gate" == slug
     return true if "grammar_school" == slug
     return true if "house" == slug
+    return true if "houses" == slug
+    return true if "hospital" == slug
     return true if "institute" == slug
     return true if "laboratory" == slug
     return true if "mill" == slug
@@ -87,6 +91,7 @@ class Role < ActiveRecord::Base
     return true if "stables" == slug
     return true if "station" == slug
     return true if "street" == slug
+    return true if "theatre" == slug
     return true if "type_foundry" == slug
     return true if "university" == slug
     return true if slug.start_with?("where ")
