@@ -16,4 +16,27 @@ class Pick < ActiveRecord::Base
   validates_presence_of :plaque_id
   validates_uniqueness_of :plaque_id
   
+  def self.todays
+    # use today's plaque if one has already been chosen
+    @todays = Pick.find(:first, :conditions => ["last_featured > ? and last_featured < ?", Date.today, Date.today + 1.day], :order => "last_featured DESC")   
+    if @todays.nil?
+      # otherwise see if one would like to be displayed today, e.g. because it's the subject's birthday
+      @todays = Pick.find(:first, :conditions => ["feature_on > ? and feature_on < ?", Date.today, Date.today + 1.day])
+      if @todays.nil?
+        # otherwise get the least featured, but not yesterday's pick
+        @todays = Pick.find(:first, :conditions => ["last_featured isnull or last_featured < ?", Date.today - 1.day], :order => "featured_count ASC")
+      end
+      if @todays
+        # great, you chose one, so make it today's pick
+        @todays.last_featured = DateTime.now
+        if @todays.featured_count == nil
+          @todays.featured_count = 0
+        end
+        @todays.featured_count = @todays.featured_count + 1
+        @todays.save
+      end
+    end
+    return @todays
+  end
+  
 end
