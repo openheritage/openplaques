@@ -18,13 +18,13 @@ class Pick < ActiveRecord::Base
   
   def self.todays
     # use today's plaque if one has already been chosen
-    @todays = Pick.find(:first, :conditions => ["last_featured > ? and last_featured < ?", Date.today, Date.today + 1.day], :order => "last_featured DESC")   
+    @todays = Pick.find(:first, :conditions => ["last_featured > ? and last_featured < ?", (Date.today - 1.day).strftime + " 23:59:59 UTC" , (Date.today + 1.day).strftime + " 00:00:00 UTC"], :order => "last_featured DESC")   
     if @todays.nil?
       # otherwise see if one would like to be displayed today, e.g. because it's the subject's birthday
-      @todays = Pick.find(:first, :conditions => ["feature_on > ? and feature_on < ?", Date.today, Date.today + 1.day])
+      @todays = Pick.find(:first, :conditions => ["feature_on > ? and feature_on < ?", (Date.today - 1.day).strftime + " 23:59:59 UTC" , (Date.today + 1.day).strftime + " 00:00:00 UTC"])
       if @todays.nil?
-        # otherwise get the least featured, but not yesterday's pick
-        @todays = Pick.find(:first, :conditions => ["last_featured isnull or last_featured < ?", Date.today - 1.day], :order => "featured_count ASC")
+        # otherwise get the least featured, but any of this week's pick or one destined for a particular day
+        @todays = Pick.find(:first, :conditions => ["feature_on isnull and (last_featured isnull or last_featured < ?)", Date.today - 1.week], :order => "featured_count ASC")
       end
       if @todays
         # great, you chose one, so make it today's pick
