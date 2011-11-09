@@ -1,11 +1,13 @@
 <% content_for :page_title, "Blue plaque photographers" %>
 
-<p><%= pluralize(@photographers.size, "Blue plaque photographer") %></p>
+<div class="panel">
+  <p><%= pluralize(@photographers.size, "Blue plaque photographer") %></p>
 
-<ul>
-<% for photographer in @photographers.sort_by { |p| 1 - p[1] } %>
-  <% if photographer[0] != nil %>
-  <li><%= link_to(photographer[0], photographer_url(photographer[0].gsub(/\./,'_'))) %> - <%= pluralize(photographer[1], "photo") %></li>
-  <% end %>
-<% end %>
-</ul>
+  <ol>
+    <% for photographer in @photographers.sort_by { |p| 1 - p[1] } %>
+      <% if photographer[0] != nil %>
+        <li><%= link_to(photographer[0], photographer_url(photographer[0].gsub(/\./,'_'))) %> - <%= pluralize(photographer[1], "photo") %></li>
+      <% end %>
+    <% end %>
+  </ol>
+</div>
