@@ -1,10 +1,10 @@
 <% content_for :page_title do %><%= @plaque.title %><% end %>
 
-  <% if current_user && current_user.is_admin? %>
-    <section class="admin_panel">
-      <%= link_to("Edit this plaque", edit_plaque_path(@plaque), {:class => :edit, :title => "Edit this plaque"})%>
-    </section>
-  <% end %>
+<% if current_user && current_user.is_admin? %>
+  <section class="admin_panel">
+    <%= link_to("Edit this plaque", edit_plaque_path(@plaque), {:class => :edit, :title => "Edit this plaque"})%>
+  </section>
+<% end %>
 
 <div class="panel clearfix">
   <% foreign = true if @plaque.language_id != 1 %>
@@ -224,7 +224,6 @@
         </div>
     </div>
   <% end %>
-
 
 </div>
 

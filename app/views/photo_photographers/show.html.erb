@@ -6,8 +6,12 @@
   <ul class="photographer_photos>
     <% @photos.each do |photo| %>
       <li>
-        <%= link_to(image_tag(photo.file_url, :height => '64', :width => '64'), photo) %>
-        <%= link_to(photo.plaque.first_person || "Plaque #" + photo.plaque.id.to_s, photo.plaque)  %>
+        <%= link_to(thumbnail_img(photo), photo) %>
+		<% if photo.plaque %>
+          <%= link_to(photo.plaque.title, photo.plaque)  %>
+		<% else %>
+		  Not linked to a plaque. Could be an error.
+		<% end %>
       </li>
     <% end %>
   </ul>

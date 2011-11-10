@@ -22,14 +22,14 @@
   </p>
   <p>The image was licenced by its copyright owner under a <%= link_to @photo.licence.name, @photo.licence %>.</p>
 
+  <p>Photo url <%= link_to(@photo.file_url, @photo.file_url) %><p>
   <% if @photo.ping? %>
   <p>A ping to the image url found it.</p>
   <% else %>
     <p>A ping to the image url <strong>did not find it</strong>.</p>
   <% end %>
 
-</div>
-  
-<div class="panel">
-  <%= button_to("Delete photo", photo_path(@photo), {:method => :delete, :class => :button}) if current_user.try(:is_admin?) %>
+  <p><%= thumbnail_img(@photo) %></p>
+  <p>Thumbnail url <%= link_to(@photo.thumbnail_url, @photo.thumbnail_url) %><p>
+
 </div>

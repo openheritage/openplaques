@@ -75,5 +75,11 @@ class Photo < ActiveRecord::Base
   def flickr_photo_id
     # retrieve from photo_url e.g. http://www.flickr.com/photos/84195101@N00/3412825200/
   end
+  
+  def thumbnail_url
+    if (file_url.ends_with?("_b.jpg"))
+	  return file_url.gsub("b.jpg", "s.jpg")
+	end
+  end
     
 end

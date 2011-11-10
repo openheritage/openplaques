@@ -8,6 +8,7 @@
 	<br/>
     <p><%= f.label :url %> <%= f.text_field :url, :maxlength => "100" %><%= link_to(@photo.url, @photo.url) %></p>
     <p><%= f.label :file_url %> <%= f.text_field :file_url, :maxlength => "100" %></p>
+	<p>thumbnail_url <%= @photo.thumbnail_url %></p>
     <%= content_tag("p", "Taken on " + @photo.taken_at.to_s(:long)) unless @photo.taken_at.blank? %>
     <p><%= f.label :photographer %> <%= f.text_field :photographer %> <%= content_tag("span", link_to(@photo.photographer, photographer_url(@photo.photographer))) %></p>
     <p>The image was licenced by its copyright owner under a <%= link_to @photo.licence.name, @photo.licence %></p>
@@ -17,4 +18,7 @@
     <%= f.submit "Save", :class => "button" %>
   <% end %>
 
+</div>
+<div class="panel">
+  <%= button_to("Delete", photo_path(@photo), {:method => :delete, :class => :button}) if current_user.try(:is_admin?) %>
 </div>
