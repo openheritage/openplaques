@@ -1,26 +1,22 @@
 Openplaques::Application.routes.draw do
 
-
   devise_for :users
   resources :users, :only => [:index, :show]
-
 
   # This site is designed to be RESTful, so most of the routes are defined here as resources.
 
   # These ones are related to plaques, but only in general, not a single plaque, and so use plaques as a prefix in the path. These have to be defined BEFORE the plaques resource.
-
   scope "/plaques" do
-
     resources :erected_in, :controller => :plaque_erected_years, :as => :plaque_erected_years, :only => [:index, :show]
     resource :all, :controller => :all_plaques, :as => :all_plaques, :only => [:show]
-    resource :map, :as => :map, :controller => :plaques_map, :only => [:show]
     resource :latest, :as => :latest, :controller => :plaques_latest, :only => [:show]
-
   end
+  
+  # e.g. /map?box=[51.6,-0.3],[51.4,-0.1]
+  resource :map, :as => :map, :controller => :plaques_map, :only => [:show]
 
   # Main nav jumping-off pages
   resource :contribute, :only => :show, :controller => :contribute
-
 
   # Main PLAQUE resources, and sub-resources
   resources :plaques do
