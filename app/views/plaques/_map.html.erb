@@ -88,7 +88,7 @@ if @geolocated_plaques
                <% if plaque.photos.size > 0 %>
                  popupClass = FramedCloudMinSize;
                  <% photo = plaque.photos.first %>
-                 popupContentHTML = popupContentHTML + '<p><%= link_to(image_tag(photo.file_url, {:alt => "Photo of plaque"}), plaque) %></p>';
+                 popupContentHTML = popupContentHTML + '<p><%= link_to(thumbnail_img(photo), plaque) %></p>';
                  popupContentHTML = popupContentHTML + '<p>Photographer: <%= link_to(html_safe(photo.photographer), photo.url) %>';
          <%
          if !photo.licence.nil? %>
