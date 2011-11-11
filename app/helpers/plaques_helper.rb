@@ -402,8 +402,8 @@ module PlaquesHelper
   end
   
   def plaque_icon(plaque)
-	if plaque.colour && plaque.colour.name =~ /(blue|black|yellow|red|white|green)/
-      image_tag("icon-" + plaque.colour.name + ".png", :size => "16x16")
+	if plaque.colour && plaque.colour.slug =~ /(blue|black|yellow|red|white|green)/
+      image_tag("icon-" + plaque.colour.slug + ".png", :size => "16x16")
     else
       image_tag("icon-blue.png", :size => "16x16")
     end
