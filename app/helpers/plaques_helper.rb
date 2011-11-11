@@ -44,15 +44,15 @@ module PlaquesHelper
       xml.Placemark do
         xml.name(plaque.title)
         xml.description do
-          xml.cdata!(("<p>" + plaque.inscription + "</p> <p><a href=\"" + plaque_url(plaque) + "\">" + photo_img(plaque) + "</a></p>").html_safe)
+          xml.cdata!(("<p>" + plaque.inscription + "</p> <p><a href=\"" + plaque_url(plaque) + "\">" + thumbnail_img(plaque) + "</a></p>").html_safe)
         end
         if plaque.latitude && plaque.longitude
           xml.Point do
             xml.coordinates plaque.longitude.to_s + ',' + plaque.latitude.to_s + ",0"
           end
         end
-        if plaque.colour && plaque.colour.name =~ /(blue|black|yellow|red|white|green)/
-          xml.styleUrl "#plaque-" + plaque.colour.name
+        if plaque.colour && plaque.colour.slug =~ /(blue|black|yellow|red|white|green)/
+          xml.styleUrl "#plaque-" + plaque.colour.slug
         else
           xml.styleUrl "#plaque-blue"
         end
