@@ -1,18 +1,15 @@
 ﻿<% content_for :page_title, "To do: colours from photos" %>
 
-<h1>To do: Plaques with photos but no colours</h1>
-<p><%= link_to("All to-do lists", "/todo") %></p>
+<div class="panel">
+  <h1>To do: Plaques with photos but no colours</h1>
+  <p><%= link_to("All to-do lists", "/todo") %></p>
 
-<% if @plaques.size > 0 %>
-
-  <p>These plaques should be easy to identify the colour for, as they have photographs:
-  <ul class="photographer_photos">
+  <% if @plaques.size > 0 %>
     <% @plaques.each do |plaque| %>
-    <li><%= link_to(image_tag(plaque.photos.first.file_url, {:alt => ""}), "/plaques/" + plaque.id.to_s + "/colour/edit") %></li>
-    <% end %>
-  </ul>
-  </p>
-<% else %>
-  <p>No plaques found.</p>
-<% end %>
-  <p class="clear"><%= link_to("All to-do lists", "/todo") %></p>
+	  <div style="float: left;"><%= link_to(thumbnail_img(plaque), "/plaques/" + plaque.id.to_s + "/colour/edit") %></div>
+	<% end %>
+	<br style="clear: left;"/>
+  <% else %>
+    <p>Currently, every plaque with a photo has a colour attribute assigned.</p>
+  <% end %>
+</div>

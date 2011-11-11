@@ -1,18 +1,12 @@
 <% content_for :page_title,  "Blue plaque photos by " + @photographer %>
 
 <div class="panel">
-  <p><%= pluralize(@photos.size,"photo") %></p>
+  <p><%= pluralize(@photos.size,"photo") %> taken by <%= link_to("photographer", "/photographers/") %> <%= @photographer %></p>
 
-  <ul class="photographer_photos>
-    <% @photos.each do |photo| %>
-      <li>
-        <%= link_to(thumbnail_img(photo), photo) %>
-		<% if photo.plaque %>
-          <%= link_to(photo.plaque.title, photo.plaque)  %>
-		<% else %>
-		  Not linked to a plaque. Could be an error.
-		<% end %>
-      </li>
-    <% end %>
-  </ul>
+  <% @photos.each do |photo| %>
+    <div style="float: left;">
+      <%= link_to(thumbnail_img(photo), photo) %>
+    </div>
+  <% end %>
+  <br style="clear: left;"/>
 </div>
