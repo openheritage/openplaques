@@ -30,7 +30,6 @@
   <% @person.personal_roles.each do |personal_role| %>
     <div>
       <%= @person.name %> was a <%= dated_role(personal_role) %> <%= link_to "Edit", edit_personal_role_path(personal_role) %>
-      <%= personal_role.related_person.name if personal_role.related_person %> 
       <%= button_to "Delete", personal_role, :method => :delete, :class => :button%> 
     </div>
   <% end %>
