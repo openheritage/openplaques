@@ -80,18 +80,24 @@ class PersonalRolesController < ApplicationController
     if (params[:personal_role][:related_person_id])
       related_person = Person.find(params[:personal_role][:related_person_id])
     end
-    started_at = params[:personal_role][:started_at]
-    if started_at =~/\d{4}/
-      started_at = Date.parse(started_at + "-01-01")
-    else
-      started_at = Date.parse(started_at)
+    started_at = nil
+    if (params[:personal_role][:started_at]>"")
+      started_at = params[:personal_role][:started_at]
+      if started_at =~/\d{4}/
+        started_at = Date.parse(started_at + "-01-01")
+      else
+        started_at = Date.parse(started_at)
+      end
     end
 
-    ended_at = params[:personal_role][:ended_at]
-    if ended_at =~/\d{4}/
-      ended_at = Date.parse(ended_at + "-01-01")
-    else
-      ended_at = Date.parse(ended_at)
+    ended_at = nil
+    if (params[:personal_role][:ended_at]>"")
+      ended_at = params[:personal_role][:ended_at]
+      if ended_at =~/\d{4}/
+        ended_at = Date.parse(ended_at + "-01-01")
+      else
+        ended_at = Date.parse(ended_at)
+      end
     end
 
     if @personal_role.update_attributes(:started_at => started_at, :ended_at => ended_at, :related_person => related_person)
