@@ -4,6 +4,11 @@
 
 
 <%= form_for @personal_role do |f| %>
+  <% if @personal_role.role.relationship? %>
+    <p>
+      <%= f.collection_select :related_person_id, @people, :id, :name_and_dates, {} , { "style" => "width:400px" } %>	
+    </p>
+  <% end %>
   <p>
     <%= f.label :started_at, "From" %>
     <%= f.text_field :started_at %>

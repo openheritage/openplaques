@@ -25,9 +25,15 @@
       </div>
     <% end %>
   
-  <p>...from which we can establish the following:</p>
+  <p>...from which we can establish that:</p>
   
-  <ul><% @person.personal_roles.each do |personal_role| %><li><%= @person.name %> was a <%= dated_role(personal_role) %> <%= link_to "Edit", edit_personal_role_path(personal_role) %> <%= button_to "Delete", personal_role, :method => :delete, :class => :button%> <% end %> </li></ul>
+  <% @person.personal_roles.each do |personal_role| %>
+    <div>
+      <%= @person.name %> was a <%= dated_role(personal_role) %> <%= link_to "Edit", edit_personal_role_path(personal_role) %>
+      <%= personal_role.related_person.name if personal_role.related_person %> 
+      <%= button_to "Delete", personal_role, :method => :delete, :class => :button%> 
+    </div>
+  <% end %>
   <p>
     <%= form_for @personal_role do |f| %>
       <%= f.hidden_field :person_id, :value => @person.id %>

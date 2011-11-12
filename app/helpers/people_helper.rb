@@ -13,6 +13,10 @@ module PeopleHelper
 
   def dated_role(personal_role)
     r = link_to(personal_role.role.name, role_path(personal_role.role), :class => "role")
+    if personal_role.related_person
+      r += " of "
+      r += link_to(personal_role.related_person.name, personal_role.related_person)
+    end
     if personal_role.started_at? && personal_role.ended_at?
       r += " (" + personal_role.started_at.year.to_s + "-" + personal_role.ended_at.year.to_s + ")"
     elsif personal_role.started_at?
@@ -111,7 +115,9 @@ module PeopleHelper
 
     def dated_person(person, options = {})
   #    options.stringify_keys!
-      if (person.born_on? and person.died_on?)
+      if (person.born_on? and person.died_on? and (person.born_on == person.died_on))
+        dates = " (" + linked_birth_date(person) + ")"
+      elsif (person.born_on? and person.died_on?)
         dates = " (" + linked_birth_date(person) + "&#8202;–&#8202;" + linked_death_date(person) + ")"
       elsif (person.born_on?)
         if (person.thing?)

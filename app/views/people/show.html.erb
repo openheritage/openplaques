@@ -10,7 +10,7 @@
 
     <h1><%= dated_person(@person, {:links => :none}) %> <%= roles_list(@person) %></h1>
     
-    <p><%= "Died aged" if (@person.thing? || @person.animal?) && @person.dead? %><%= "Closed aged" if @person.place? && @person.dead? %><%= "Aged" if @person.alive? && @person.age%> <%= "c." + @person.age.to_s if @person.age%></p>
+    <p><%= "Died aged" if (@person.person? || @person.thing? || @person.animal?) && @person.dead? %><%= "Closed aged" if @person.place? && @person.dead? %><%= "Aged" if @person.alive? && @person.age%> <%= "c." + @person.age.to_s if @person.age%></p>
 
     <p>Is commemorated at:</p>
 

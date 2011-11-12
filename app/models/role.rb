@@ -26,14 +26,14 @@ class Role < ActiveRecord::Base
 
   def person?
     return false if animal? or thing? or group? or place?
-	return true
+	  return true
   end
 
   def animal?
     return true if "cat" == slug
     return true if "dog" == slug
     return true if "bulldog" == slug
-	return false
+	  return false
   end
 
   def thing?
@@ -96,16 +96,16 @@ class Role < ActiveRecord::Base
     return true if "type_foundry" == slug
     return true if "university" == slug
     return true if slug.start_with?("where ")
-   return false
+    return false
   end
   
   def type
-	return "person" if person?
-	return "animal" if animal?
-	return "thing" if thing?
-	return "group" if group?
-	return "place" if place?
-	return "?"
+	  return "person" if person?
+	  return "animal" if animal?
+	  return "thing" if thing?
+	  return "group" if group?
+	  return "place" if place?
+	  return "?"
   end
   
   # work it out from the name unless override value stored in the db
@@ -119,6 +119,16 @@ class Role < ActiveRecord::Base
   
   def wikipedia_url
     "http://en.wikipedia.org/wiki/" + wikipedia_stub
+  end
+  
+  def relationship?
+    return true if "wife" == slug
+    return true if "husband" == slug
+    return true if "mother" == slug
+    return true if "father" == slug
+    return true if "grandmother" == slug
+    return true if "grandfather" == slug
+    return false
   end
 
   private

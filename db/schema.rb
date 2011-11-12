@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110901083252) do
+ActiveRecord::Schema.define(:version => 20111112142816) do
 
   create_table "areas", :force => true do |t|
     t.string    "name"
@@ -137,6 +138,7 @@ ActiveRecord::Schema.define(:version => 20110901083252) do
     t.timestamp "updated_at"
     t.date      "started_at"
     t.date      "ended_at"
+    t.integer   "related_person_id"
   end
 
   create_table "photos", :force => true do |t|
@@ -171,27 +173,27 @@ ActiveRecord::Schema.define(:version => 20110901083252) do
   end
 
   create_table "plaques", :force => true do |t|
-    t.date     "erected_at"
-    t.float    "latitude"
-    t.float    "longitude"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "organisation_id"
-    t.text     "inscription"
-    t.string   "reference"
-    t.integer  "plaque_erected_year_id"
-    t.text     "notes"
-    t.text     "parsed_inscription"
-    t.integer  "colour_id"
-    t.integer  "photos_count",               :default => 0,     :null => false
-    t.string   "accuracy"
-    t.integer  "user_id"
-    t.integer  "language_id"
-    t.text     "description"
-    t.boolean  "inscription_is_stub",        :default => false
-    t.integer  "location_id"
-    t.integer  "personal_connections_count", :default => 0
-    t.integer  "series_id"
+    t.date      "erected_at"
+    t.float     "latitude"
+    t.float     "longitude"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.integer   "organisation_id"
+    t.text      "inscription"
+    t.string    "reference"
+    t.integer   "plaque_erected_year_id"
+    t.text      "notes"
+    t.text      "parsed_inscription"
+    t.integer   "colour_id"
+    t.integer   "photos_count",               :default => 0,     :null => false
+    t.string    "accuracy"
+    t.integer   "user_id"
+    t.integer   "language_id"
+    t.text      "description"
+    t.boolean   "inscription_is_stub",        :default => false
+    t.integer   "location_id"
+    t.integer   "personal_connections_count", :default => 0
+    t.integer   "series_id"
   end
 
   add_index "plaques", ["personal_connections_count"], :name => "index_plaques_on_personal_connections_count"
@@ -207,10 +209,10 @@ ActiveRecord::Schema.define(:version => 20110901083252) do
   end
 
   create_table "series", :force => true do |t|
-    t.string   "name"
-    t.string   "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string    "name"
+    t.string    "description"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
   end
 
   create_table "todo_items", :force => true do |t|
@@ -225,27 +227,27 @@ ActiveRecord::Schema.define(:version => 20110901083252) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "username",                  :limit => 40
-    t.string   "name",                      :limit => 100
-    t.string   "email",                     :limit => 100
-    t.string   "crypted_password",          :limit => 40
-    t.string   "salt",                      :limit => 40
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "remember_token",            :limit => 40
-    t.datetime "remember_token_expires_at"
-    t.boolean  "is_admin"
-    t.integer  "plaques_count"
-    t.string   "encrypted_password",        :limit => 128,                    :null => false
-    t.string   "reset_password_token"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                            :default => 0
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.boolean  "is_verified",                              :default => false, :null => false
-    t.boolean  "opted_in",                                 :default => false
+    t.string    "username",                  :limit => 40
+    t.string    "name",                      :limit => 100
+    t.string    "email",                     :limit => 100
+    t.string    "crypted_password",          :limit => 40
+    t.string    "salt",                      :limit => 40
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.string    "remember_token",            :limit => 40
+    t.timestamp "remember_token_expires_at"
+    t.boolean   "is_admin"
+    t.integer   "plaques_count"
+    t.string    "encrypted_password",        :limit => 128,                    :null => false
+    t.string    "reset_password_token"
+    t.timestamp "remember_created_at"
+    t.integer   "sign_in_count",                            :default => 0
+    t.timestamp "current_sign_in_at"
+    t.timestamp "last_sign_in_at"
+    t.string    "current_sign_in_ip"
+    t.string    "last_sign_in_ip"
+    t.boolean   "is_verified",                              :default => false, :null => false
+    t.boolean   "opted_in",                                 :default => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

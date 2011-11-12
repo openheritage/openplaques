@@ -76,6 +76,10 @@ class PersonalRolesController < ApplicationController
   # PUT /personal_roles/1
   # PUT /personal_roles/1.xml
   def update
+    related_person = nil
+    if (params[:personal_role][:related_person_id])
+      related_person = Person.find(params[:personal_role][:related_person_id])
+    end
     started_at = params[:personal_role][:started_at]
     if started_at =~/\d{4}/
       started_at = Date.parse(started_at + "-01-01")
@@ -90,7 +94,7 @@ class PersonalRolesController < ApplicationController
       ended_at = Date.parse(ended_at)
     end
 
-    if @personal_role.update_attributes(:started_at => started_at, :ended_at => ended_at)
+    if @personal_role.update_attributes(:started_at => started_at, :ended_at => ended_at, :related_person => related_person)
       redirect_to(edit_person_path(@personal_role.person))
     else
       render :edit
@@ -108,6 +112,10 @@ class PersonalRolesController < ApplicationController
       format.html { redirect_to(edit_person_url(@person)) }
       format.xml  { head :ok }
     end
+  end
+  
+  def edit
+    @people = Person.all(:order => :name)
   end
 
   protected
