@@ -126,8 +126,12 @@ class Role < ActiveRecord::Base
     return true if "husband" == slug
     return true if "mother" == slug
     return true if "father" == slug
+    return true if "stepmother" == slug
+    return true if "stepfather" == slug
     return true if "son" == slug
     return true if "daughter" == slug
+    return true if "stepson" == slug
+    return true if "stepdaughter" == slug
     return true if "grandmother" == slug
     return true if "grandfather" == slug
     return true if "grandson" == slug
