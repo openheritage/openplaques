@@ -45,6 +45,7 @@ class Role < ActiveRecord::Base
     return true if "conspiracy" == slug
     return true if "gallows" == slug
     return true if "lead_fresh_water_channel" == slug
+    return true if "printing_press" == slug
     return true if "well" == slug
     return false
   end
@@ -86,6 +87,7 @@ class Role < ActiveRecord::Base
     return true if "mill" == slug
     return true if "pier" == slug
     return true if "public_house" == slug
+    return true if "print_works" == slug
     return true if "school" == slug
     return true if "shop" == slug
     return true if "society" == slug
@@ -144,6 +146,7 @@ class Role < ActiveRecord::Base
     return true if "grandfather" == slug
     return true if "grandson" == slug
     return true if "granddaughter" == slug
+    return true if "business_partner" == slug
     return false
   end
 
