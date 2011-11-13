@@ -36,9 +36,9 @@
       <div class="no_photo">
         <h2>No photograph</h2>
         <p>We don't have any photos of <%= @plaque.machine_tag %> yet. <!--<a href="#">Add your own photo</a>--></p>
-		<% if current_user %>
-		  <%= button_to "find on Flickr", :action => :flickr_search, :id => @plaque %>
-		<% end %>
+    <% if current_user %>
+      <%= button_to "find on Flickr", :action => :flickr_search, :id => @plaque %>
+    <% end %>
       </div>
 
       <% if @plaque.geolocated? %>
@@ -212,18 +212,19 @@
 
 </div>
 
+<% unless @plaque.description.blank? %>
+  <div class="panel clearfix  info">
+      <div class="description" id="description">
+        <%= simple_format(h(@plaque.description)) %>
+      </div>
+  </div>
+<% end %>
+
 <div id="plaques_nearby"></div>
 
 <div<%= " class=\"" + @plaque.colour.name + "plaque\"" if @plaque.colour %> about="#this" typeof="op:Plaque">
 
-  <% unless @plaque.description.blank? %>
-    <div class="info">
-      <%= link_to "Edit", edit_plaque_description_path(@plaque), {:class => :edit, :title => "Edit plaque description"} if current_user %>
-        <div class="description" id="description">
-          <%= simple_format(h(@plaque.description)) %>
-        </div>
-    </div>
-  <% end %>
+
 
 </div>
 
