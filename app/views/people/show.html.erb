@@ -25,4 +25,6 @@
     <%= content_tag("p", "Read more about ".html_safe + link_to(@person.name, @person.default_wikipedia_url, :target => '_blank') + " on Wikipedia.".html_safe) unless @person.default_wikipedia_url.blank? %>
   </div>
 
+  <p class="alternate_formats">Data about this person as <%= alternate_link_to "XML", person_path(@person, :xml), :xml %> <%= alternate_link_to "JSON", person_path(@person, :json), :json %> <%= alternate_link_to "KML", person_path(@person, :kml), :kml %>  <%= alternate_link_to "GMAP", "http://maps.google.co.uk/maps?q=" + person_url(@person, :kml), :html %></p>
+
 </div>
