@@ -28,6 +28,7 @@ class Photo < ActiveRecord::Base
   before_validation :assign_licence_if_cc_by_accepted
 
   scope :detail_order, :order => "shot ASC"
+  scope :unassigned, :conditions => ["plaque_id IS NULL"]
 
   def assign_from_photo_url
     if @photo_url

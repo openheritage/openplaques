@@ -15,12 +15,13 @@ class TodoController < ApplicationController
     @no_roles_count = Person.no_role.count
     @needs_geolocating_count = Plaque.ungeolocated.count
     @no_description_count = Plaque.no_description.count
+    @unassigned_photo_count = Photo.unassigned.count
   end
 
   def destroy
     @todoitem = TodoItem.find(params[:id])
-  @direct_to = 'plaques_to_add'
-  @direct_to = 'lists_to_datacapture' if @todoitem.to_datacapture?
+    @direct_to = 'plaques_to_add'
+    @direct_to = 'lists_to_datacapture' if @todoitem.to_datacapture?
     @todoitem.destroy
     redirect_to todo_path(@direct_to)
   end
@@ -81,6 +82,10 @@ class TodoController < ApplicationController
       @plaques = Plaque.no_description.limit(100)
       render :needs_description
 
+    when 'unassigned_photo'
+      @photos = Photo.unassigned.limit(100)
+      render :unassigned_photo
+      
     else
       raise ActiveRecord::RecordNotFound
     end

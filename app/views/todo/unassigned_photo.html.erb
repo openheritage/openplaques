@@ -1,0 +1,14 @@
+﻿<% content_for :page_title, "To do: photos with no plaque" %>
+
+<h1>To do: Photos with no plaque</h1>
+<p><%= link_to("All to-do lists", "/todo") %></p>
+<p>These photos don't have a plaque yet. They have been found on the web by the openplaquebot.
+	They either do not count as plaques on our system, match an existing plaque, or need a new plaque creating:
+</p>
+  <% @photos.each do |photo| %>
+    <div style="float: left;">
+      <%= link_to(thumbnail_img(photo), photo) %>
+    </div>
+  <% end %>
+  <br style="clear: left;"/>
+<p class="clear"><%= link_to("All to-do lists", "/todo") %></p>
