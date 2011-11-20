@@ -11,9 +11,9 @@
     <p><%= thumbnail_img(@photo) %></p>
 	<p>thumbnail_url <%= @photo.thumbnail_url %></p>
     <%= content_tag("p", "Taken on " + @photo.taken_at.to_s(:long)) unless @photo.taken_at.blank? %>
-    <p><%= f.label :photographer %> <%= f.text_field :photographer %> <%= content_tag("span", link_to(@photo.photographer, photographer_url(@photo.photographer))) %></p>
-    <p>The image was licenced by its copyright owner under a <%= link_to @photo.licence.name, @photo.licence %></p>
-    <p>It depicts plaque number <%= f.text_field :plaque_id, :maxlength => "5" %> <%= link_to(@photo.plaque.title, @photo.plaque) %>
+    <p><%= f.label :photographer %> <%= f.text_field :photographer %> <%= content_tag("span", link_to(@photo.photographer, photographer_url(@photo.photographer))) if @photo.photographer %></p>
+    <p>The image was licenced by its copyright owner under a <%= link_to @photo.licence.name, @photo.licence if @photo.licence %></p>
+    <p>It depicts plaque number <%= f.text_field :plaque_id, :maxlength => "5" %> <%= link_to(@photo.plaque.title, @photo.plaque) if @photo.plaque %>
     <p>This is a <%= f.collection_select :shot, Photo.shots, :to_s, :to_s, :include_blank => true %> shot</p>
 
     <%= f.submit "Save", :class => "button" %>

@@ -11,13 +11,16 @@
 # === Associations
 # * Licence - The content licence under which the photo is made available.
 # * Plaque - the featured in the photo.
+require 'curb'
+
 class Photo < ActiveRecord::Base
 
   belongs_to :plaque, :counter_cache => true
   belongs_to :licence, :counter_cache => true
   belongs_to :user
 
-  validates_presence_of :file_url, :plaque, :licence
+#  validates_presence_of :file_url, :plaque, :licence
+  validates_presence_of :file_url
 
   attr_accessor :photo_url, :accept_cc_by_licence
 
@@ -69,17 +72,58 @@ class Photo < ActiveRecord::Base
   end
   
   def flickr?
-    photo_url && photo_url.starts_with?("http://www.flickr.com")
+    url && url.starts_with?("http://www.flickr.com")
+  end
+  
+  def wikimedia?
+    url && url.starts_with?("http://commons.wikimedia.org")
+  end
+  
+  def wikimedia_filename
+    if (wikimedia?)
+      return url[url.index('File:')+5..-1]
+    end
+    return ""
+    # http://commons.wikimedia.org/wiki/Special:FilePath/George_Dance_plaque.JPG/213px
+  end
+  
+  def wikimedia_special
+    return "http://commons.wikimedia.org/wiki/Special:FilePath/"+wikimedia_filename+"?width=640"
   end
   
   def flickr_photo_id
-    # retrieve from photo_url e.g. http://www.flickr.com/photos/84195101@N00/3412825200/
+    # retrieve from url e.g. http://www.flickr.com/photos/84195101@N00/3412825200/
   end
   
   def thumbnail_url
     if (file_url.ends_with?("_b.jpg"))
-	  return file_url.gsub("b.jpg", "s.jpg")
-	end
+	    return file_url.gsub("b.jpg", "s.jpg")
+	  end
+	  if (wikimedia?)
+	    return "http://commons.wikimedia.org/wiki/Special:FilePath/"+wikimedia_filename+"?width=75"
+    end
+  end
+  
+  # http://commons.wikimedia.org/w/api.php?action=query&iiprop=url|user&prop=imageinfo&format=json&titles=File:George_Dance_plaque.JPG
+  def wikimedia_data
+    # http://commons.wikimedia.org/wiki/File:George_Dance_plaque.JPG
+    # http://commons.wikimedia.org/wiki/File:Abney1.jpg
+    if (wikimedia?)   
+      url = "http://commons.wikimedia.org/w/api.php?action=query&iiprop=url|user&prop=imageinfo&format=json&titles=File:"+wikimedia_filename
+      begin
+        ch = Curl::Easy.perform(url) do |curl| 
+          curl.headers["User-Agent"] = "openplaques"
+          curl.verbose = true
+        end
+        parsed_json = JSON.parse(ch.body_str)
+        parsed_json['query']['pages'].each do |page, pageInfo|
+          self.photographer = pageInfo['imageinfo'][0]['user']
+        end
+        self.photographer_url = "http://commons.wikimedia.org/wiki/User:"+photographer.gsub(' ','_')
+      rescue
+      end
+      self.file_url = wikimedia_special
+    end
   end
     
 end

@@ -17,6 +17,7 @@ group :development, :test do
 end
 
 gem 'json'
+gem 'curb'
 
 gem 'devise'
 
