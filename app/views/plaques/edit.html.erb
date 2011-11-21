@@ -33,6 +33,8 @@
     <p><b><%= f.label :notes %></b>: (these are for internal use, and aren't displayed publicly)<br>
     <%= f.text_area :notes, :class => :notes %></p>
 
+    <p><%= f.label :is_current, "We believe this plaque currently exists" %> <%= f.check_box :is_current %></p>
+
     <p><%= f.submit "Save", :class => :button %></p>
 
   <% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111112142816) do
+ActiveRecord::Schema.define(:version => 20111121133031) do
 
   create_table "areas", :force => true do |t|
     t.string    "name"
@@ -194,6 +194,8 @@ ActiveRecord::Schema.define(:version => 20111112142816) do
     t.integer   "location_id"
     t.integer   "personal_connections_count", :default => 0
     t.integer   "series_id"
+    t.boolean   "is_accurate_geolocation",    :default => true
+    t.boolean   "is_current",                 :default => true
   end
 
   add_index "plaques", ["personal_connections_count"], :name => "index_plaques_on_personal_connections_count"

@@ -27,7 +27,7 @@
 	
     <div class="edit_lat_long">
       <p><%= f.label :latitude, "Latitude" %> <%= f.text_field :latitude %> <%= f.label :longitude, "Longitude" %> <%= f.text_field :longitude %> </p>
-      <p><%= f.label :accuracy, "Accuracy" %> <%= f.text_field :accuracy %></p>
+      <p><%= f.label :is_accurate_geolocation, "Is accurate" %> <%= f.check_box :is_accurate_geolocation %></p>
       <p><%= f.submit "Update", :class => :button  %></p>
     </div>
 
