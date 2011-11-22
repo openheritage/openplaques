@@ -35,7 +35,7 @@
     <section id="plaque_no_photos">
       <div class="no_photo">
         <h2>No photograph</h2>
-        <p>We don't have any photos of <%= @plaque.machine_tag %> yet. <!--<a href="#">Add your own photo</a>--></p>
+        <p>To add a photo, publish it on Flickr and tag it: <%= @plaque.machine_tag %></p>
     <% if current_user %>
       <%= button_to "find on Flickr", :action => :flickr_search, :id => @plaque %>
     <% end %>
@@ -122,7 +122,6 @@
         <% end %></p>
         <p class="photo_licence"><%= link_to(photo.licence.name, photo.licence.url) %></p>
       </div>
-
     </div>
 
     <section id="plaque_identifier" class="plaque_info_panel">

@@ -415,5 +415,54 @@ module PlaquesHelper
       camera_icon = image_tag("EOS-300D-32x32.png".html_safe, {:alt => "Photo of plaque".html_safe})
     end
   end
+
+  def new_linked_inscription(plaque)
+    inscription = plaque.inscription
+    connections = plaque.personal_connections.all(:select => "personal_connections.person_id", :group => "personal_connections.person_id")
+    if connections.size > 0
+      connections.each do |connection|
+        if inscription.index(connection.person.name) != nil
+          inscription = inscription.gsub(connection.person.name, link_to(connection.person.name, person_path(connection.person))).html_safe
+        elsif (connection.person.name.rindex(" "))
+          search_for = connection.person.name[0,connection.person.name.rindex(" ")]
+          inscription = inscription.gsub(search_for, link_to(search_for, person_path(connection.person))).html_safe if search_for
+        end
+      end
+    end
+	if plaque.inscription_is_stub
+	  inscription += " [full inscription unknown]"
+	end
+    return inscription
+  end
+
+  # given a set of plaques tell me what the mean point is
+  def find_mean(plaques)
+    @centre = Point.new
+    @centre.latitude = 51.475 # Greenwich Meridian
+    @centre.longitude = 0
+    if (plaques == nil)
+      return @centre
+    end
+    @lat = 0
+    @lon = 0
+    @geolocated_plaques = @plaques.clone()
+    @geolocated_plaques.delete_if{ |plaque| !plaque.geolocated?}
+    for plaque in @geolocated_plaques
+      @lat += plaque.latitude
+      @lon += plaque.longitude
+    end
+    if (@geolocated_plaques.length > 0)
+      @centre.latitude = @lat / @geolocated_plaques.length
+      @centre.longitude = @lon / @geolocated_plaques.length
+    end
+#    puts ("****** lat= " + @centre.latitude.to_s + ",lon= " + @centre.longitude.to_s + " from " + plaques.length.to_s + " plaques, " + @geolocated_plaques.length.to_s + " are geolocated")
+    return @centre
+  end
+
+  class Point
+    attr_accessor :precision
+    attr_accessor :latitude
+    attr_accessor :longitude
+  end
   
 end
