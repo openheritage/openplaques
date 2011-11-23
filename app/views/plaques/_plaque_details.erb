@@ -1,4 +1,10 @@
 <table class="section_details" cellspacing="0" summary="Plaque details for #<%= @plaque.id %>">
+   <% if !@plaque.is_accurate_geolocation %>
+   <tr>
+     <th>Map accuracy</th>
+     <td>This is an approximate position</td>
+   </tr>
+   <% end %>
    <tr>
      <th>Erected</th>
      <td><%= erected_information @plaque %></td>
@@ -32,4 +38,10 @@
        <% end %>
      </td>
    </tr>
+   <% if !@plaque.is_current %>
+   <tr>
+     <th>Not found</th>
+     <td>As far as we know, it is not currently on display</td>
+   </tr>
+   <% end %>
  </table>
