@@ -33,6 +33,7 @@ class Role < ActiveRecord::Base
     return true if "cat" == slug
     return true if "dog" == slug
     return true if "bulldog" == slug
+    return true if "mouse" == slug
 	  return false
   end
 
