@@ -1,7 +1,7 @@
 class PeopleBornOnController < ApplicationController
 
   def index
-    @counts = Person.count(:born_on, :group => 'born_on')
+    @counts = Person.count(:born_on, :group => 'born_on', :order => 'born_on')
   end
 
   def show
