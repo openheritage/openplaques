@@ -321,6 +321,12 @@ class Plaque < ActiveRecord::Base
       colour_name.capitalize + " plaque № #{id}"
     end << " in " + area_name if area
   end
+  
+  def main_photo
+	if !self.photos.empty?
+	  return photos.detail_order.first
+	end
+  end
 
   private
 

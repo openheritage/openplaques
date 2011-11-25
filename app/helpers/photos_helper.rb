@@ -31,4 +31,18 @@ module PhotosHelper
     return desc.html_safe
   end
 
+  # this works, but slows the page down if you use it a lot probably because it does a read of the photos
+  def thumbnail_icon(plaque)
+    if plaque.photographed?
+	  camera_icon = link_to(thumbnail_img(plaque.main_photo),plaque)
+	else
+      camera_icon = image_tag("EOS-300D-32x32.png".html_safe, {:alt => "Plaque needs photographing".html_safe})
+    end
+  end
+
+  def camera_icon(plaque)
+    if plaque.photographed?
+      camera_icon = image_tag("EOS-300D-32x32.png".html_safe, {:alt => "Plaque has been photographed".html_safe})
+    end
+  end
 end

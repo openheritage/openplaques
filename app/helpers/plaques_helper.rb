@@ -409,13 +409,6 @@ module PlaquesHelper
     end
   end
 
-  def camera_icon(plaque)
-    if plaque.photographed?
-      # icon from http://www.iconarchive.com/show/canon-digital-camera-icons-by-newformula.org/
-      camera_icon = image_tag("EOS-300D-32x32.png".html_safe, {:alt => "Photo of plaque".html_safe})
-    end
-  end
-
   def new_linked_inscription(plaque)
     inscription = plaque.inscription
     connections = plaque.personal_connections.all(:select => "personal_connections.person_id", :group => "personal_connections.person_id")
