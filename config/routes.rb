@@ -72,8 +72,8 @@ Openplaques::Application.routes.draw do
     resources "a-z", :controller => "people_by_index", :as => "people_by_index", :only => :show
     resources :born_on, :controller => :people_born_on, :as => "people_born_on", :only => [:index, :show]
     resources :died_on, :controller => :people_died_on, :as => "people_died_on", :only => [:index, :show]
-    resources :born_in, :controller => :people_born_on, :as => "people_born_on", :only => [:index, :show]
-    resources :died_in, :controller => :people_died_on, :as => "people_died_on", :only => [:index, :show]
+    resources :born_in, :controller => :people_born_on, :as => "people_born_in", :only => [:index, :show]
+    resources :died_in, :controller => :people_died_on, :as => "people_died_in", :only => [:index, :show]
     resources :alive_in, :controller => :people_alive_in, :as => "people_alive_in", :only => [:index, :show]
   end
   resources :people

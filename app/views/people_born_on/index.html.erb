@@ -7,7 +7,7 @@
 <% else %>
   <%= Person.count(:died_on) %>
 <% end %>
-of them are now <a href="/people/died_on/">dead</a>.</p>
+of them are now <a href="/people/died_in/">dead</a>.</p>
 <table cellspacing="0" cellpadding="0" summary="Years in which commemorated people died">
   <caption align="top"><br /><br /></caption>
   <tr>
@@ -17,7 +17,7 @@ of them are now <a href="/people/died_on/">dead</a>.</p>
   <% for count in @counts %>
     <% if count[0] != nil %>
       <tr>
-	    <td><%= link_to(count[0].to_s[0,4], people_died_on_path(count[0].to_s[0,4]), {:class => "bday"}) %></td>
+	    <td><%= link_to(count[0].to_s[0,4], people_born_in_path(count[0].to_s[0,4]), {:class => "bday"}) %></td>
 	    <td class="value"><%= image_tag("bar.png", :alt=>"", :width=>count[1]*10, :height=>"16") %><%= pluralize(count[1], "person") %></td>
       </tr>
 	<% end %>
