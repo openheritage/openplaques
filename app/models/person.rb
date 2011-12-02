@@ -181,6 +181,10 @@ class Person < ActiveRecord::Base
     untitled_name = name.gsub("Canon ","").gsub("Captain ","").gsub("Cardinal ","").gsub("Dame ","").gsub("Dr ","").gsub("Lord ","").gsub("Sir ","").strip.gsub(/ /,"_")
     "http://en.wikipedia.org/wiki/"+untitled_name
   end
+  
+  def default_dbpedia_uri
+    return default_wikipedia_url.gsub("http://en.wikipedia.org/wiki","http://dbpedia.org/resource")
+  end
 
   def name_and_dates
 	r = name
@@ -203,7 +207,7 @@ class Person < ActiveRecord::Base
     super(:only => [:id, :name, :created_at, :updated_at], 
 	:include => {
 	  :roles => {:only => [:name]}
-	}, :methods => [:born_in, :born_at, :died_in, :died_at, :default_wikipedia_url, :surname, :type]
+	}, :methods => [:born_in, :born_at, :died_in, :died_at, :default_wikipedia_url, :default_dbpedia_uri, :surname, :type]
 	)
   end
   
