@@ -30,6 +30,8 @@ class Person < ActiveRecord::Base
   has_many :locations, :through => :personal_connections, :uniq => true
   has_many :verbs, :through => :personal_connections
   has_many :plaques, :through => :personal_connections, :uniq => true
+  has_one :place_of_birth, :class_name => "PersonalConnection", :conditions => [ 'verb_id = 8']
+  has_one :place_of_death, :class_name => "PersonalConnection", :conditions => [ 'verb_id = 3']
 
   before_save :update_index
 
@@ -141,6 +143,14 @@ class Person < ActiveRecord::Base
     died_on.year if died_on
   end
   
+  def born_at
+    place_of_birth.location.name + ", " + place_of_birth.location.area.name + ", " + place_of_birth.location.area.country.name if (place_of_birth)
+  end
+  
+  def died_at
+    place_of_death.location.name + ", " + place_of_death.location.area.name + ", " + place_of_death.location.area.country.name if (place_of_death)
+  end
+  
   def dead?
     false
     return true if died_in
@@ -186,6 +196,18 @@ class Person < ActiveRecord::Base
   def surname
     self.name[self.name.downcase.rindex(" " + self.surname_starts_with.downcase) ? self.name.downcase.rindex(" " + self.surname_starts_with.downcase) + 1: 0,self.name.size]
   end
+
+  def to_xml(options={})
+    # this example ignores the user's options
+#    super(:only => [:id, :created_at, :updated_at], :include => {:colour => {:only => :name}, :language => {:only => [:name, :alpha2]}, :location => {:only => :name, :include => {:area => {:only => :name, :include => {:country => {:only => [:name, :alpha2]}}}}}, :organisation => {:only => :name}})
+    super(:only => [:id, :name, :created_at, :updated_at], 
+	:include => {
+	  :roles => {:only => [:name]}
+	}, :methods => [:born_in, :born_at, :died_in, :died_at, :default_wikipedia_url, :surname, :type]
+	)
+  end
+  
+  # :roles => {:only => [:name]},
 
   private
 
