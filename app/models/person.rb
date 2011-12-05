@@ -203,12 +203,15 @@ class Person < ActiveRecord::Base
 
   def to_xml(options={})
     # this example ignores the user's options
-    super(:only => [:id, :name, :created_at, :updated_at], 
+    super(:only => [:id, :name, :updated_at], 
 	:include => {
 	  :roles => {:only => [:name]},
-	  :plaques => {:only => [:id]},
-	  :place_of_birth  => {:only => [:location_id]},
-	  :place_of_death  => {:only => [:location_id]}
+	  :personal_connections  => {:only => [:started_at, :ended_at, :plaque_id],
+	    :include => {
+		  :location => {:only => [:id, :name], :include => {:area => {:only => :name, :include => {:country => {:only => [:name, :alpha2]}}}}},
+		  :verb =>{:only => [:name]}
+		}
+	  }
 	},
 	:methods => [:born_in, :born_at, :died_in, :died_at, :default_wikipedia_url, :default_dbpedia_uri, :surname, :type]
 	)
@@ -216,12 +219,15 @@ class Person < ActiveRecord::Base
 
   def as_json(options={})
     # this example ignores the user's options
-    super(:only => [:id, :name, :created_at, :updated_at], 
+    super(:only => [:id, :name, :updated_at], 
 	:include => {
 	  :roles => {:only => [:name]},
-	  :plaques => {:only => [:id]},
-	  :place_of_birth  => {:only => [:location_id]},
-	  :place_of_death  => {:only => [:location_id]}
+	  :personal_connections  => {:only => [:started_at, :ended_at, :plaque_id],
+	    :include => {
+		  :location => {:only => [:id, :name], :include => {:area => {:only => :name, :include => {:country => {:only => [:name, :alpha2]}}}}},
+		  :verb =>{:only => [:name]}
+		}
+	  }
 	},
 	:methods => [:born_in, :born_at, :died_in, :died_at, :default_wikipedia_url, :default_dbpedia_uri, :surname, :type]
 	)
