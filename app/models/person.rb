@@ -203,15 +203,29 @@ class Person < ActiveRecord::Base
 
   def to_xml(options={})
     # this example ignores the user's options
-#    super(:only => [:id, :created_at, :updated_at], :include => {:colour => {:only => :name}, :language => {:only => [:name, :alpha2]}, :location => {:only => :name, :include => {:area => {:only => :name, :include => {:country => {:only => [:name, :alpha2]}}}}}, :organisation => {:only => :name}})
     super(:only => [:id, :name, :created_at, :updated_at], 
 	:include => {
-	  :roles => {:only => [:name]}
-	}, :methods => [:born_in, :born_at, :died_in, :died_at, :default_wikipedia_url, :default_dbpedia_uri, :surname, :type]
+	  :roles => {:only => [:name]},
+	  :plaques => {:only => [:id]},
+	  :place_of_birth  => {:only => [:location_id]},
+	  :place_of_death  => {:only => [:location_id]}
+	},
+	:methods => [:born_in, :born_at, :died_in, :died_at, :default_wikipedia_url, :default_dbpedia_uri, :surname, :type]
 	)
   end
-  
-  # :roles => {:only => [:name]},
+
+  def as_json(options={})
+    # this example ignores the user's options
+    super(:only => [:id, :name, :created_at, :updated_at], 
+	:include => {
+	  :roles => {:only => [:name]},
+	  :plaques => {:only => [:id]},
+	  :place_of_birth  => {:only => [:location_id]},
+	  :place_of_death  => {:only => [:location_id]}
+	},
+	:methods => [:born_in, :born_at, :died_in, :died_at, :default_wikipedia_url, :default_dbpedia_uri, :surname, :type]
+	)
+  end
 
   private
 
