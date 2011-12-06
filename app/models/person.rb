@@ -103,7 +103,7 @@ class Person < ActiveRecord::Base
 
   def person?
     return false if animal? or thing? or group? or place?
-	return true
+  return true
   end
 
   def animal?
@@ -125,53 +125,53 @@ class Person < ActiveRecord::Base
     false
     true if roles.any?{|role| role.place?}
   end
-  
+
   def type
-	return "person" if person?
-	return "animal" if animal?
-	return "thing" if thing?
-	return "group" if group?
-	return "place" if place?
-	return "?"
+  return "person" if person?
+  return "animal" if animal?
+  return "thing" if thing?
+  return "group" if group?
+  return "place" if place?
+  return "?"
   end
-  
+
   def born_in
     born_on.year if born_on
   end
-  
+
   def died_in
     died_on.year if died_on
   end
-  
+
   def born_at
     place_of_birth.location.name + ", " + place_of_birth.location.area.name + ", " + place_of_birth.location.area.country.name if (place_of_birth)
   end
-  
+
   def died_at
     place_of_death.location.name + ", " + place_of_death.location.area.name + ", " + place_of_death.location.area.country.name if (place_of_death)
   end
-  
+
   def dead?
     false
     return true if died_in
     return true if (person? || animal?) && born_in && born_in < 1900
   end
-  
+
   def alive?
     !dead?
   end
-  
+
   def age
     "unknown"
     return died_in - born_in if died_in && born_in
     return Time.now.year - born_in if born_in && thing?
     return Time.now.year - born_in if born_in && born_in > 1900
    end
-  
+
   def age_in(year)
     return year - born_in if born_in
   end
-  
+
   # note that the Wikipedia url is constructed from the person's name
   # unless it is overridden by data in the wikipedia_url field
   # or the wikipedia_url field is set to blank to indicate that there
@@ -181,56 +181,56 @@ class Person < ActiveRecord::Base
     untitled_name = name.gsub("Canon ","").gsub("Captain ","").gsub("Cardinal ","").gsub("Dame ","").gsub("Dr ","").gsub("Lord ","").gsub("Sir ","").strip.gsub(/ /,"_")
     "http://en.wikipedia.org/wiki/"+untitled_name
   end
-  
+
   def default_dbpedia_uri
     return default_wikipedia_url.gsub("http://en.wikipedia.org/wiki","http://dbpedia.org/resource")
   end
 
   def name_and_dates
-	r = name
-	r += " (" if born_on || died_on
-	r += born_on.year.to_s if born_on
-	r += "?-" if !born_on && died_on
-	r += "-" if born_on && died_on
-	r += died_on.year.to_s if died_on
-	r += ")" if born_on || died_on
-	return r
+  r = name
+  r += " (" if born_on || died_on
+  r += born_on.year.to_s if born_on
+  r += "?-" if !born_on && died_on
+  r += "-" if born_on && died_on
+  r += died_on.year.to_s if died_on
+  r += ")" if born_on || died_on
+  return r
   end
-  
+
   def surname
     self.name[self.name.downcase.rindex(" " + self.surname_starts_with.downcase) ? self.name.downcase.rindex(" " + self.surname_starts_with.downcase) + 1: 0,self.name.size]
   end
 
   def to_xml(options={})
     # this example ignores the user's options
-    super(:only => [:id, :name, :updated_at], 
-	:include => {
-	  :roles => {:only => [:name]},
-	  :personal_connections  => {:only => [:started_at, :ended_at, :plaque_id],
-	    :include => {
-		  :location => {:only => [:id, :name], :include => {:area => {:only => :name, :include => {:country => {:only => [:name, :alpha2]}}}}},
-		  :verb =>{:only => [:name]}
-		}
-	  }
-	},
-	:methods => [:born_in, :born_at, :died_in, :died_at, :default_wikipedia_url, :default_dbpedia_uri, :surname, :type]
-	)
+    super(:only => [:id, :name, :updated_at],
+  :include => {
+    :roles => {:only => [:name]},
+    :personal_connections  => {:only => [:started_at, :ended_at, :plaque_id],
+      :include => {
+      :location => {:only => [:id, :name], :include => {:area => {:only => :name, :include => {:country => {:only => [:name, :alpha2]}}}}},
+      :verb =>{:only => [:name]}
+    }
+    }
+  },
+  :methods => [:born_in, :born_at, :died_in, :died_at, :default_wikipedia_url, :default_dbpedia_uri, :surname]
+  )
   end
 
   def as_json(options={})
     # this example ignores the user's options
-    super(:only => [:id, :name, :updated_at], 
-	:include => {
-	  :roles => {:only => [:name]},
-	  :personal_connections  => {:only => [:started_at, :ended_at, :plaque_id],
-	    :include => {
-		  :location => {:only => [:id, :name], :include => {:area => {:only => :name, :include => {:country => {:only => [:name, :alpha2]}}}}},
-		  :verb =>{:only => [:name]}
-		}
-	  }
-	},
-	:methods => [:born_in, :born_at, :died_in, :died_at, :default_wikipedia_url, :default_dbpedia_uri, :surname, :type]
-	)
+    super(:only => [:id, :name, :updated_at],
+  :include => {
+    :roles => {:only => [:name]},
+    :personal_connections  => {:only => [:started_at, :ended_at, :plaque_id],
+      :include => {
+      :location => {:only => [:id, :name], :include => {:area => {:only => :name, :include => {:country => {:only => [:name, :alpha2]}}}}},
+      :verb =>{:only => [:name]}
+    }
+    }
+  },
+  :methods => [:born_in, :born_at, :died_in, :died_at, :default_wikipedia_url, :default_dbpedia_uri, :surname, :type]
+  )
   end
 
   private
