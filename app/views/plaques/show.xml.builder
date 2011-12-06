@@ -28,7 +28,7 @@ xml.openplaques(){
       }
     end
     if @plaque.organisation
-      xml.organisation(:link => organisation_url(@plaque.organisation.id)) {
+      xml.organisation(:link => organisation_url(@plaque.organisation)) {
         xml.name @plaque.organisation.name
       }
     end
