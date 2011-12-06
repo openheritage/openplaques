@@ -29,12 +29,12 @@ xml.openplaques(){
     end
     if @plaque.organisation
       xml.organisation(:link => organisation_url(@plaque.organisation)) {
-        xml.name @plaque.organisation.name
+        xml.text! @plaque.organisation.name
       }
     end
     if @plaque.colour
-      xml.colour(:link => colour_url(@plaque.colour)) {
-        xml.name @plaque.colour.name
+      xml.colour(:uri => colour_url(@plaque.colour)) {
+        xml.text! @plaque.colour.name
       }
     end
 
@@ -46,7 +46,9 @@ xml.openplaques(){
       end
     end
     @plaque.people.each do |person|
-      xml.person(:name => person.name, :url => person_url(person))
+      xml.person(:uri => person_url(person)) {
+	    xml.text! person.name
+	  }
     end
   }
 }
