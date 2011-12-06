@@ -23,13 +23,13 @@ class PeopleController < ApplicationController
   # GET /people/1.xml
   def show
     @plaques = @person.plaques
-	
+
     respond_to do |format|
       format.html
       format.kml { render "plaques/index" }
       format.osm { render "plaques/index" }
       format.yaml
-      format.xml  { render :xml => @person }
+      format.xml
       format.json { render :json => @person }
     end
   end

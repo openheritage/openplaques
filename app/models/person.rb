@@ -201,22 +201,6 @@ class Person < ActiveRecord::Base
     self.name[self.name.downcase.rindex(" " + self.surname_starts_with.downcase) ? self.name.downcase.rindex(" " + self.surname_starts_with.downcase) + 1: 0,self.name.size]
   end
 
-  def to_xml(options={})
-    # this example ignores the user's options
-    super(:only => [:id, :name, :updated_at],
-  :include => {
-    :roles => {:only => [:name]},
-    :personal_connections  => {:only => [:started_at, :ended_at, :plaque_id],
-      :include => {
-      :location => {:only => [:id, :name], :include => {:area => {:only => :name, :include => {:country => {:only => [:name, :alpha2]}}}}},
-      :verb =>{:only => [:name]}
-    }
-    }
-  },
-  :methods => [:born_in, :born_at, :died_in, :died_at, :default_wikipedia_url, :default_dbpedia_uri, :surname]
-  )
-  end
-
   def as_json(options={})
     # this example ignores the user's options
     super(:only => [:id, :name, :updated_at],
