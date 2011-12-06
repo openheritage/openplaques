@@ -46,7 +46,7 @@ xml.openplaques(){
       end
     end
     @plaque.people.each do |person|
-      xml.person(:name => person.name, :url => "/people/"+person.id.to_s+".xml")
+      xml.person(:name => person.name, :url => person_url(person))
     end
   }
 }
