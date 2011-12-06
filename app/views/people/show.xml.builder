@@ -14,14 +14,14 @@ xml.openplaques(){
     xml.tag!("died-at") { xml.text!(@person.died_at.to_s) } unless @person.died_at.blank?
     xml.roles {
       @person.roles.each do |role|
-        xml.role(:id => role_url(role)) {
+        xml.role(:link => role_url(role)) {
           xml.name role.name
         }
       end
     }
     xml.plaques {
       @person.plaques.each do |plaque|
-        xml.plaque(:id => plaque_url(plaque)) {
+        xml.plaque(:link => plaque_url(plaque)) {
           xml.title plaque.title
         }
       end
