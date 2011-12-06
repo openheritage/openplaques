@@ -14,7 +14,7 @@ class RolesController < ApplicationController
         render "colours/index"
       }
       format.yaml
-      format.xml { render :xml => @roles }
+      format.xml
       format.json { render :json => @roles }
     end
   end

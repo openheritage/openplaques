@@ -1,30 +1,50 @@
 xml.instruct! :xml, :version=>"1.0"
 xml.openplaques(){
-  attributes = {:id => person_url(@person), :created_at => @person.created_at.xmlschema, :updated_at => @person.updated_at.xmlschema}
-  attributes[:wikipedia_url] = @person.wikipedia_url unless @person.wikipedia_url.blank?
-  attributes[:dbpedia_uri] = @person.dbpedia_uri unless @person.dbpedia_uri.blank?
+  attributes = {:uri => person_url(@person), :updated_at => @person.updated_at.xmlschema}
   xml.person(attributes) {
     xml.name do
       xml.full @person.name
       xml.surname @person.surname
     end
-    xml.tag!("born-in") { xml.text!(@person.born_in.to_s) } unless @person.born_in.blank?
-    xml.tag!("born-at") { xml.text!(@person.born_at.to_s) } unless @person.born_at.blank?
-    xml.tag!("died-in") { xml.text!(@person.died_in.to_s) } unless @person.died_in.blank?
-    xml.tag!("died-at") { xml.text!(@person.died_at.to_s) } unless @person.died_at.blank?
-    xml.roles {
-      @person.roles.each do |role|
-        xml.role(:link => role_url(role)) {
-          xml.name role.name
-        }
-      end
-    }
-    xml.plaques {
-      @person.plaques.each do |plaque|
-        xml.plaque(:link => plaque_url(plaque)) {
-          xml.title plaque.title
-        }
-      end
-    }
+    xml.born {
+      xml.in { xml.text! @person.born_in.to_s } unless @person.born_in.blank?
+	  xml.at(:uri => location_url(@person.born_at.id)) {
+	    xml.address @person.born_at.full_address
+		xml.geolocation(:reference_system => "WGS84") {
+		  xml.latitude @person.birth_connection.plaque.latitude
+		  xml.longitude @person.birth_connection.plaque.longitude
+		} unless @person.birth_connection == nil
+	  } unless @person.born_at.blank?
+	} unless @person.born_in.blank? and @person.born_at.blank?
+	xml.died {
+      xml.in { xml.text! @person.died_in.to_s } unless @person.died_in.blank?
+      xml.at(:uri => location_url(@person.died_at.id)) {
+	    xml.address @person.died_at.full_address
+		xml.geolocation(:reference_system => "WGS84") {
+		  xml.latitude @person.death_connection.plaque.latitude
+		  xml.longitude @person.death_connection.plaque.longitude
+		}
+      } unless @person.died_at.blank?
+	  xml.age @person.age
+	} unless @person.died_in.blank? and @person.died_at.blank?
+	@person.roles.each do |role|
+	xml.role(:uri => role_url(role)) {
+	  xml.text! role.name
+	}
+	end
+	@person.plaques.each do |plaque|
+	xml.plaque(:uri => plaque_url(plaque)) {
+	  xml.title plaque.title
+	  xml.location(:uri => location_url(plaque.location.id)) {
+		xml.address plaque.location.full_address
+		xml.geolocation(:reference_system => "WGS84") {
+		  xml.latitude plaque.latitude
+		  xml.longitude plaque.longitude
+		}
+	  }
+	}
+	end
+    xml.wikipedia_uri @person.default_wikipedia_url unless @person.default_wikipedia_url.blank?
+    xml.dbpedia_uri @person.default_dbpedia_uri unless @person.default_dbpedia_uri.blank?
   }
 }

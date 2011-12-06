@@ -30,8 +30,8 @@ class Person < ActiveRecord::Base
   has_many :locations, :through => :personal_connections, :uniq => true
   has_many :verbs, :through => :personal_connections
   has_many :plaques, :through => :personal_connections, :uniq => true
-  has_one :place_of_birth, :class_name => "PersonalConnection", :conditions => [ 'verb_id = 8']
-  has_one :place_of_death, :class_name => "PersonalConnection", :conditions => [ 'verb_id = 3']
+  has_one :birth_connection, :class_name => "PersonalConnection", :conditions => [ 'verb_id = 8']
+  has_one :death_connection, :class_name => "PersonalConnection", :conditions => [ 'verb_id = 3']
 
   before_save :update_index
 
@@ -144,11 +144,11 @@ class Person < ActiveRecord::Base
   end
 
   def born_at
-    place_of_birth.location.name + ", " + place_of_birth.location.area.name + ", " + place_of_birth.location.area.country.name if (place_of_birth)
+    birth_connection.location if (birth_connection)
   end
 
   def died_at
-    place_of_death.location.name + ", " + place_of_death.location.area.name + ", " + place_of_death.location.area.country.name if (place_of_death)
+    death_connection.location if (death_connection)
   end
 
   def dead?

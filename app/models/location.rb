@@ -26,6 +26,12 @@ class Location < ActiveRecord::Base
   scope :no_area, :conditions => ["area_id IS NULL"]
 
   before_validation :update_country_id
+  
+  def full_address
+    address = name
+    address += ", " + area.name if area
+	address += ", " + area.country.name if area and area.country
+  end
 
   private
 

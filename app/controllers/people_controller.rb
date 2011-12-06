@@ -14,7 +14,7 @@ class PeopleController < ApplicationController
         render "plaques/index"
       }
       format.yaml
-      format.xml { render :xml => @people }
+      format.xml
       format.json { render :json => @people }
     end
   end
@@ -23,7 +23,6 @@ class PeopleController < ApplicationController
   # GET /people/1.xml
   def show
     @plaques = @person.plaques
-
     respond_to do |format|
       format.html
       format.kml { render "plaques/index" }
@@ -38,7 +37,6 @@ class PeopleController < ApplicationController
   # GET /people/new.xml
   def new
     @person = Person.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @person }
@@ -57,7 +55,6 @@ class PeopleController < ApplicationController
   # POST /people.xml
   def create
     @person = Person.new(params[:person])
-
     if params[:born_on].blank?
       @person.born_on = nil
     else
@@ -113,7 +110,6 @@ class PeopleController < ApplicationController
   # DELETE /people/1.xml
   def destroy
     @person.destroy
-
     respond_to do |format|
       format.html { redirect_to(people_url) }
       format.xml  { head :ok }
