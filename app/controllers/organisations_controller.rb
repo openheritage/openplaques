@@ -40,7 +40,7 @@ class OrganisationsController < ApplicationController
       format.kml { render "plaques/index" }
       format.osm { render "plaques/index" }
       format.yaml
-      format.xml { render :xml => @organisation }
+      format.xml
       format.json { render :json => @organisation }
     end
   end

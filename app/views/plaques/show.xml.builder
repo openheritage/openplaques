@@ -1,41 +1,41 @@
 xml.instruct! :xml, :version=>"1.0"
 xml.openplaques(){
-  xml.plaque(:id => plaque_url(@plaque), :created_at => @plaque.created_at.xmlschema, :updated_at => @plaque.updated_at.xmlschema){
+  xml.plaque(:uri => plaque_url(@plaque), :created_at => @plaque.created_at.xmlschema, :updated_at => @plaque.updated_at.xmlschema){
+    xml.title @plaque.title
     xml.inscription {
       xml.raw @plaque.inscription
       xml.linked linked_inscription(@plaque) if linked_inscription(@plaque) != @plaque.inscription
     }
+    if @plaque.geolocated?
+      xml.geo(:reference_system => "WGS84", :latitude => @plaque.latitude, :longitude => @plaque.longitude)
+    end
     if @plaque.location or @plaque.geolocated?
       xml.location {
-        if @plaque.geolocated?
-          xml.geo(:latitude => @plaque.latitude, :longitude => @plaque.longitude)
-        end
         if @plaque.location
-          xml.tag!("street-address") {
-            xml.name @plaque.location.name
+          xml.address @plaque.location.full_address
+          xml.street(:uri => location_url(@plaque.location)) {
+            xml.text! @plaque.location.name
           }
           if @plaque.location.area
-            xml.locality(:link => area_url(@plaque.location.area)) {
-              xml.name @plaque.location.area.name
+            xml.locality(:uri => area_url(@plaque.location.area)) {
+              xml.text! @plaque.location.area.name
             }
           end
           if @plaque.location.country
-            xml.country(:link => country_url(@plaque.location.country)) {
-              xml.name @plaque.location.country.name
+            xml.country(:uri => country_url(@plaque.location.country)) {
+              xml.text! @plaque.location.country.name
             }
           end
         end
       }
     end
     if @plaque.organisation
-      xml.organisation(:link => organisation_url(@plaque.organisation)) {
+      xml.organisation(:uri => organisation_url(@plaque.organisation)) {
         xml.text! @plaque.organisation.name
       }
     end
     if @plaque.colour
-      xml.colour(:uri => colour_url(@plaque.colour)) {
-        xml.text! @plaque.colour.name
-      }
+      xml.colour @plaque.colour.name
     end
 
     if @plaque.erected_at?
@@ -47,8 +47,8 @@ xml.openplaques(){
     end
     @plaque.people.each do |person|
       xml.person(:uri => person_url(person)) {
-	    xml.text! person.name
-	  }
+	      xml.text! person.name
+	    }
     end
   }
 }
