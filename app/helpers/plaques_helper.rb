@@ -198,6 +198,7 @@ module PlaquesHelper
   end
 
   def plaque_list(plaques, context = nil)
+    plaques.sort!{|t1,t2|t1.title <=> t2.title}
     @listy = "".html_safe
     @add = "".html_safe
     @add += content_tag("p", link_to("add one?".html_safe, new_plaque_path)) if current_user && current_user.is_admin?
@@ -221,11 +222,12 @@ module PlaquesHelper
       end
 
       @listy << content_tag("tr",
-#    content_tag("td", thumbnail_img(plaque), :class => :photo)  +
     content_tag("td", plaque_icon(plaque), :class => :photo)  +
-    content_tag("td", link_to("#" + plaque.id.to_s, plaque_path(plaque)), :class => :photo)  +
-    content_tag("td", @loc, :class => "geo") +
-    content_tag("td", camera_icon(plaque), :class => :photo) +
+    content_tag("td", thumbnail_img(plaque), :class => :photo)  +
+    content_tag("td", link_to(plaque.title, plaque_path(plaque))) + 
+#    content_tag("td", link_to("#" + plaque.id.to_s, plaque_path(plaque)), :class => :photo)  +
+#    content_tag("td", @loc, :class => "geo") +
+#    content_tag("td", camera_icon(plaque), :class => :photo) +
     content_tag("td", new_linked_inscription(plaque)),
           args.merge!(:id => "openplaques:id:".html_safe + plaque.id.to_s))
     end
