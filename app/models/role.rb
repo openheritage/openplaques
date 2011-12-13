@@ -149,7 +149,7 @@ class Role < ActiveRecord::Base
     return true if "grandson" == slug
     return true if "granddaughter" == slug
     return true if "business_partner" == slug
-    return true if slug.start_with?("kings_")
+    return true if slug.include?("kings_")
     return false
   end
 
