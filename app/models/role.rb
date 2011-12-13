@@ -99,7 +99,7 @@ class Role < ActiveRecord::Base
     return true if "theatre" == slug
     return true if "type_foundry" == slug
     return true if "university" == slug
-    return true if slug.start_with?("where ")
+    return true if slug.start_with?("where_")
     return false
   end
   
@@ -149,6 +149,7 @@ class Role < ActiveRecord::Base
     return true if "grandson" == slug
     return true if "granddaughter" == slug
     return true if "business_partner" == slug
+    return true if slug.start_with?("kings_")
     return false
   end
 
