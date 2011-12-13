@@ -25,6 +25,7 @@ class RolesController < ApplicationController
     if @role == nil # create a dummy role for display purposes
       @role = Role.new
       @role.name = params[:id].downcase
+      @role.slug = params[:id].downcase
     end
 
     @related_roles = @role.related_roles()
