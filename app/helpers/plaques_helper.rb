@@ -223,7 +223,7 @@ module PlaquesHelper
 
       @listy << content_tag("tr",
     content_tag("td", plaque_icon(plaque), :class => :photo)  +
-    content_tag("td", thumbnail_img(plaque), :class => :photo)  +
+    content_tag("td", link_to(thumbnail_img(plaque), plaque_path(plaque)), :class => :photo)  +
     content_tag("td", link_to(plaque.title, plaque_path(plaque))) + 
 #    content_tag("td", link_to("#" + plaque.id.to_s, plaque_path(plaque)), :class => :photo)  +
 #    content_tag("td", @loc, :class => "geo") +
