@@ -1,25 +1,35 @@
 <% content_for :page_title, "Photos of the " + @plaque.title %>
 
 <div class="panel">
-  <h1>Photos of the <%= @plaque.title %></h1>
+  <h1>Photos of the <%= link_to(@plaque.title, @plaque) %></h1>
 
-  <p>We currently link to <%= pluralize_with_no(@plaque.photos.size.to_s,"photo") %> of the <%= @plaque.title %>.</p>
+  <p>We currently link to <%= pluralize_with_no(@plaque.photos.size.to_s,"photo") %> of this plaque.</p>
+  <br/>
   <p>To identify the location, inscription, colour and organisation of a plaque Open Plaques 
-  collates data from <a href="http://www.flickr.com/search/?q=<%= @plaque.machine_tag %>">Flickr photos tagged with an machine tag of <i><%= @plaque.machine_tag %></i></a>.</p>
+  automatically collates data from <a href="http://www.flickr.com/search/?q=<%= @plaque.machine_tag %>">Flickr photos tagged with an machine tag of <i><%= @plaque.machine_tag %></i></a>.
+  To add your photo, publish it on Flickr with a Creative Commons licence and tag it: <%= @plaque.machine_tag %></p>
+  <br/>
+  <p>If your photos are not coming through check that you haven't excluded them from Flickr search.</p>
+  <p>
+    <%= button_to "Give the automatic search a kick", :controller => :plaques, :action => :flickr_search, :id => @plaque %>
+  </p>
+</div>
+
+<div class="panel clearfix">
   <%= content_tag("ul", :class => "photographer_photos") do %>
     <% @plaque.photos.each do |photo| %>
-	  <li>
+	    <li>
         <% if current_user && current_user.is_admin? %>
           <section class="admin_panel">
-	        <%= link_to("Edit", edit_photo_path(photo), {:class => :edit, :title => "edit photo"}) %>
+            <%= link_to("Edit", edit_photo_path(photo), {:class => :edit, :title => "edit photo"}) %>
           </section>
         <% end %>
-	    <%= content_tag("p", link_to(image_tag(photo.file_url), photo.url)) %>
-	    <p>This <%= photo.shot_name %> photo was taken
+	      <%= content_tag("p", link_to(thumbnail_img(@plaque), photo.url)) %>
+	      <p>This <%= photo.shot_name %> photo was taken
 	      <%= content_tag("span", " on " + photo.taken_at.to_s(:long)) unless photo.taken_at.blank? %>
 	      by <%= link_to photo.photographer, photographer_url(photo.photographer) if photo.photographer %>.
 	      The image was licenced by its copyright owner under a <%= link_to photo.licence.name, photo.licence %>.
-	    </p>
+	      </p>
       </li>
     <% end %>
   <% end %>
