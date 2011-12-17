@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111121133031) do
+ActiveRecord::Schema.define(:version => 20111217105646) do
 
   create_table "areas", :force => true do |t|
     t.string    "name"
@@ -156,13 +156,14 @@ ActiveRecord::Schema.define(:version => 20111121133031) do
   end
 
   create_table "picks", :force => true do |t|
-    t.integer  "plaque_id"
-    t.text     "description"
-    t.datetime "feature_on"
-    t.datetime "last_featured"
-    t.integer  "featured_count"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer   "plaque_id"
+    t.text      "description"
+    t.timestamp "feature_on"
+    t.timestamp "last_featured"
+    t.integer   "featured_count"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.string    "proposer"
   end
 
   create_table "plaque_erected_years", :force => true do |t|

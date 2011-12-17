@@ -9,23 +9,24 @@ module PhotosHelper
     return desc.html_safe
   end
 
-  def thumbnail_img(photo_or_plaque)
+  def thumbnail_img(thing)
 	desc = ""
 	begin
-	  if photo_or_plaque.thumbnail_url
-        desc += "<img src=\""+photo_or_plaque.thumbnail_url+"\"/>"
+	  if thing.thumbnail_url
+      desc += "<img src=\""+thing.thumbnail_url+"\"/>"
 	  else
-        desc += "<img src=\""+photo_or_plaque.file_url+"\" width=\"75\" height=\"75\"/>"
+      desc += "<img src=\""+thing.file_url+"\" width=\"75\" height=\"75\"/>"
 	  end
 	rescue
 	  begin
-	    # not a photo, maybe it's a plaque
-	    if photo_or_plaque.photos.size > 0
-          photo = photo_or_plaque.photos.first
-          desc += thumbnail_img(photo)
-        end
+	    # not a photo, is it a plaque?
+	    desc += thumbnail_img(thing.main_photo)
 	  rescue
-	    ## it wasn't even a plaque  
+	    ## it wasn't even a plaque, is it something that links to a plaque?
+	    begin
+	      desc += thumbnail_img(thing.plaque)
+      rescue
+      end
 	  end
 	end
     return desc.html_safe

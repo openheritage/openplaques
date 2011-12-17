@@ -20,8 +20,11 @@
       </li>
       <% if @todays %>
       <li>
-        <h2>Featured plaque</h2>
-        <p><%= link_to @todays.plaque.title, @todays.plaque %> <%= @todays.description %></p>
+        <h2>Plaque Of The Day</h2>
+        <div>
+	      <div style="float: left; margin: 0 1% 0 0"><%= link_to thumbnail_img(@todays.plaque), @todays.plaque %></div>
+	      <div><%= link_to @todays.plaque.title, @todays.plaque %><br/>"<%= @todays.description %>" - <%= @todays.proposer %></div>
+	    </div>
       </li>
       <% end %>
     </ul>
