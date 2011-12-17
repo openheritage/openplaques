@@ -14,10 +14,10 @@
   <p>"<%= @pick.description %>"</p>
   <p>proposed by <%= @pick.proposer %></p>
   <% if @pick.feature_on %>
-    <p>It would be great to feature it on <%= @pick.feature_on.strftime('%m/%d/%Y') %></p>
+    <p>It would be great to feature it on <%= @pick.feature_on.strftime('%d/%m/%Y') %></p>
   <% end %>
   <% if @pick.last_featured %>
-    <p>This has been featured plaque of the day <%= pluralize(@pick.featured_count, "time") %><% if @pick.featured_count > 1 %> and was last featured<% end %> on <%= @pick.last_featured.strftime('%m/%d/%Y') %>.</p>
+    <p>This has been featured plaque of the day <%= pluralize(@pick.featured_count, "time") %><% if @pick.featured_count > 1 %> and was last featured<% end %> on <%= @pick.last_featured.strftime('%d/%m/%Y') %>.</p>
   <% else %>
     <p>This has not been displayed as plaque of the day yet.
   <% end %>
