@@ -132,15 +132,18 @@ class PlaquesController < ApplicationController
     end
     
     if params[:location] && !params[:location].blank?
-      country = Country.find(params[:plaque][:country])
+      country = Country.find(params[:plaque][:country].blank? ? 1 : params[:plaque][:country])
       if params[:area_id] && !params[:area_id].blank?
         area = Area.find(params[:area_id])
         raise "ERROR" if area.country_id != country.id and return
       elsif params[:area] && !params[:area].blank?
         area = country.areas.find_by_name(params[:area])
-         unless area
-           area = country.areas.create!(:name => params[:area], :slug => params[:area].downcase.gsub(" ", "_"))
-         end
+        unless area
+          area = country.areas.find_by_slug(params[:area].rstrip.lstrip.downcase.gsub(" ", "_"))
+        end
+        unless area
+          area = country.areas.create!(:name => params[:area], :slug => params[:area].rstrip.lstrip.downcase.gsub(" ", "_"))
+        end
       end
 
       if area
