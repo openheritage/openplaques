@@ -8,6 +8,7 @@
 # * Plaques - plaques erected by this organisation.
 class Organisation < ActiveRecord::Base
 
+  before_validation :make_slug_not_war
   validates_presence_of :name, :slug
   validates_uniqueness_of :slug
 
@@ -19,5 +20,10 @@ class Organisation < ActiveRecord::Base
   def as_json(options={})
     super(:only => [:name, :id])
   end
+  
+  private
+    def make_slug_not_war
+      self.slug = (self.slug.blank? ? self.name : self.slug).rstrip.lstrip.downcase.gsub(" ", "_").gsub("-", "_").gsub(",", "_")
+    end
 
 end

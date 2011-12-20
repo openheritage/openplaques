@@ -13,10 +13,10 @@
 # * Plaques - plaques located in this area.
 class Area < ActiveRecord::Base
 
+  before_validation :make_slug_not_war
   validates_presence_of :name, :slug, :country_id
   validates_uniqueness_of :slug, :scope => :country_id
   validates_format_of :slug, :with => /^[a-z\_]+$/, :message => "can only contain lowercase letters and underscores"
-
 
   belongs_to :country, :counter_cache => true
   delegate :alpha2, :to => :country, :prefix => true
@@ -31,5 +31,10 @@ class Area < ActiveRecord::Base
   def to_param
     slug
   end
+  
+  private
+    def make_slug_not_war
+      self.slug = (self.slug.blank? ? self.name : self.slug).rstrip.lstrip.downcase.gsub(" ", "_").gsub("-", "_").gsub(",", "_")
+    end
 
 end

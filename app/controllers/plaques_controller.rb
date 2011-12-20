@@ -142,7 +142,7 @@ class PlaquesController < ApplicationController
           area = country.areas.find_by_slug(params[:area].rstrip.lstrip.downcase.gsub(" ", "_"))
         end
         unless area
-          area = country.areas.create!(:name => params[:area], :slug => params[:area].rstrip.lstrip.downcase.gsub(" ", "_"))
+          area = country.areas.create!(:name => params[:area])
         end
       end
 
@@ -155,9 +155,11 @@ class PlaquesController < ApplicationController
     end
 
     @plaque.location = location if location
+    
+    organisation = Organisation.find_or_create_by_name(params[:organisation_name])
+    @plaque.organisation = organisation
 
     if @plaque.save
-
       PlaqueMailer.new_plaque_email(@plaque).deliver
       flash[:notice] = "Thanks for adding this plaque."
       redirect_to plaque_path(@plaque)
