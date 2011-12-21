@@ -1,12 +1,17 @@
 <% content_for :page_title, "Historical plaques - by colour" %>
+
 <div class="panel">
+  <% if current_user && current_user.is_admin? %>
+    <section class="admin_panel">
+      <%= link_to("Add new colour", new_colour_path(), {:class => :edit, :title => "Add new colour"})%>
+    </section>
+  <% end %>
+  
   <h1>Plaques - by colour</h1>
 
-<ul>
-<% for colour in @colours %>
-  <li><%= link_to_colour(colour) %> - <%= pluralize(colour.plaques.size, "plaque")%></li>
-<% end %>
-</ul>
-
-<%= content_tag("p", link_to("Add new colour", new_colour_path)) if current_user && current_user.is_admin %>
+  <ul>
+    <% for colour in @colours %>
+      <li><%= colour.name %> - <%= pluralize(colour.plaques.size, "plaque")%></li>
+    <% end %>
+  </ul>
 </div>
