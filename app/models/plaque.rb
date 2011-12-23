@@ -335,9 +335,13 @@ class Plaque < ActiveRecord::Base
   end
   
   def main_photo
-	if !self.photos.empty?
-	  return photos.detail_order.first
-	end
+	  if !self.photos.empty?
+	    return photos.detail_order.first
+	  end
+  end
+  
+  def foreign?
+    self.language.alpha2 != "en"
   end
 
   private

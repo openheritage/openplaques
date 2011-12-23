@@ -7,13 +7,12 @@
 <% end %>
 
 <div class="panel clearfix">
-  <% foreign = true if @plaque.language_id != 1 %>
-  <% if foreign == true %><div class="goog-trans-section" lang=""><% end %>
+  <% if @plaque.foreign? %><div class="goog-trans-section" lang=""><% end %>
     <%=
       plaque_class = @plaque.inscription.length > 250 ? "large_inscription" : "inscription"
       content_tag("h1", new_linked_inscription(@plaque), {:class => plaque_class, :property => "op:inscription"})
     %>
-    <% if foreign == true %><div class="goog-trans-control"></div>
+    <% if @plaque.foreign? %><div class="goog-trans-control"></div>
     </div>
     <script>
     function googleSectionalElementInit() {
