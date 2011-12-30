@@ -77,6 +77,7 @@ class Photo < ActiveRecord::Base
   end
   
   def wikimedia?
+    url.gsub!("http://en.wikipedia.org/","http://commons.wikimedia.org/")
     url && url.starts_with?("http://commons.wikimedia.org")
   end
   
@@ -85,7 +86,6 @@ class Photo < ActiveRecord::Base
       return url[url.index('File:')+5..-1]
     end
     return ""
-    # http://commons.wikimedia.org/wiki/Special:FilePath/George_Dance_plaque.JPG/213px
   end
   
   def wikimedia_special

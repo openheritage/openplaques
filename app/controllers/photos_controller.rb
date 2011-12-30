@@ -48,6 +48,7 @@ class PhotosController < ApplicationController
   end
   
   def edit
+    @licences = Licence.all(:order => :name)
   end
 
   protected
