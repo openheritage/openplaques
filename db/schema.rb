@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111223102656) do
+ActiveRecord::Schema.define(:version => 20111230094632) do
 
   create_table "areas", :force => true do |t|
     t.string    "name"
@@ -153,6 +153,7 @@ ActiveRecord::Schema.define(:version => 20111223102656) do
     t.string    "photographer_url"
     t.timestamp "taken_at"
     t.string    "shot"
+    t.boolean   "of_a_plaque",      :default => true
   end
 
   create_table "picks", :force => true do |t|
@@ -174,30 +175,29 @@ ActiveRecord::Schema.define(:version => 20111223102656) do
   end
 
   create_table "plaques", :force => true do |t|
-    t.date      "erected_at"
-    t.float     "latitude"
-    t.float     "longitude"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.integer   "organisation_id"
-    t.text      "inscription"
-    t.string    "reference"
-    t.integer   "plaque_erected_year_id"
-    t.text      "notes"
-    t.text      "parsed_inscription"
-    t.integer   "colour_id"
-    t.integer   "photos_count",               :default => 0,     :null => false
-    t.string    "accuracy"
-    t.integer   "user_id"
-    t.integer   "language_id"
-    t.text      "description"
-    t.boolean   "inscription_is_stub",        :default => false
-    t.integer   "location_id"
-    t.integer   "personal_connections_count", :default => 0
-    t.integer   "series_id"
-    t.boolean   "is_accurate_geolocation",    :default => true
-    t.boolean   "is_current",                 :default => true
-    t.text      "inscription_in_english"
+    t.date     "erected_at"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "organisation_id"
+    t.text     "inscription"
+    t.string   "reference"
+    t.integer  "plaque_erected_year_id"
+    t.text     "notes"
+    t.text     "parsed_inscription"
+    t.integer  "colour_id"
+    t.integer  "photos_count",               :default => 0,     :null => false
+    t.integer  "user_id"
+    t.integer  "language_id"
+    t.text     "description"
+    t.boolean  "inscription_is_stub",        :default => false
+    t.integer  "location_id"
+    t.integer  "personal_connections_count", :default => 0
+    t.integer  "series_id"
+    t.boolean  "is_accurate_geolocation",    :default => true
+    t.boolean  "is_current",                 :default => true
+    t.text     "inscription_in_english"
   end
 
   add_index "plaques", ["personal_connections_count"], :name => "index_plaques_on_personal_connections_count"
