@@ -6,9 +6,8 @@ class PersonalConnectionsController < ApplicationController
   before_filter :find_personal_connection, :only => [:edit, :destroy]
 
   def destroy
-    @plaque = @personal_connection.plaque
     @personal_connection.destroy
-    redirect_to edit_plaque_path(@plaque)
+    redirect_to :back
   end
 
   def edit
@@ -24,14 +23,12 @@ class PersonalConnectionsController < ApplicationController
     else
       render :edit
     end
-
   end
 
   def new
     @personal_connection = @plaque.personal_connections.new
     @people = Person.all(:order => :name)
     @verbs = Verb.all(:order => :name)
-    @locations = Location.all(:order => :name)
   end
 
   def create
@@ -54,7 +51,7 @@ class PersonalConnectionsController < ApplicationController
     end
 
     def find_personal_connection
-      @personal_connection = @plaque.personal_connections.find(params[:id])
+      @personal_connection = PersonalConnection.find(params[:id])
     end
 
 end
