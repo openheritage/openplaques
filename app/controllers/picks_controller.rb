@@ -12,10 +12,9 @@ class PicksController < ApplicationController
   end
 
   def create
-    @pick = Pick.new
+    @pick = Pick.new(params[:pick])
     @plaque = Plaque.find(params[:pick][:plaque_id])
     @pick.plaque = @plaque
-    @pick.description = params[:pick][:description].to_s
     @pick.save
     redirect_to picks_path
   end
@@ -28,7 +27,6 @@ class PicksController < ApplicationController
   def promote
     @pick.last_featured = DateTime.now
     @pick.save
-#    redirect_to picks_path()
   end
 
   def update

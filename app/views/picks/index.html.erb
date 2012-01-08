@@ -1,5 +1,9 @@
 <% content_for :page_title, "Plaque picks" %>
 <div class="panel clearfix">
+  <section class="admin_panel">
+    <%= link_to("Add a new pick", new_pick_path, {:class => :edit, :title => "Add a new pick"})%>
+  </section>
+
   <h1>Plaque Picks</h1>
   
   <% if @picks.size > 0 %>
@@ -22,6 +26,5 @@
     <p>There aren't any yet.</p>
   <% end %>
 
-  <%= button_to("New pick", new_pick_path, {:method => :get, :class => :button}) %>
 </div>
 <div class="panel clearfix"/>

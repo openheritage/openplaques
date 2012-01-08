@@ -7,6 +7,7 @@
 # * +photographer+ - The name of the photographer
 # * +photographer_url+ - A link to a webpage for the photographer - currently always a Flickr profile page.
 # * +shot+ - types of framing technique. One of "extreme close up", "close up", "medium close up", "medium shot", "long shot", "establishing shot"
+# * +of_a_plaque+ - whether this is actually a photo of a plaque (and not, for example, mistakenly labelled on Wikimedia as one)
 #
 # === Associations
 # * Licence - The content licence under which the photo is made available.

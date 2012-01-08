@@ -6,6 +6,7 @@
 # * +feature_on+ - (optional) a specific date to show this plaque, e.g. someone's birthday
 # * +last_featured+ - when the plaque was last featured
 # * +featured_count+ - number of times the plaque has been featured
+# * +proposer+ - who to say proposed it
 #
 # === Associations
 # * Plaque - the plaque to feature
