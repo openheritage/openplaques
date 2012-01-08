@@ -89,15 +89,12 @@ namespace "photos" do
             puts "New geolocation found"
             @plaque.latitude = photo.attributes["latitude"]
             @plaque.longitude = photo.attributes["longitude"]
-            @plaque.accuracy = 'flickr'
             if @plaque.save
               puts "New geolocation added to photo"
             else
               puts "Error adding geolocation to photo" + plaque.errors.full_messages.to_s #methods.join(" ")
             end
           end
-
-
 
         else
           #puts "Photo's machine tag doesn't match a plaque."
