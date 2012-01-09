@@ -26,7 +26,7 @@ class AreasController < ApplicationController
 
   def show
 
-    @plaques = @area.plaques
+    @plaques = @area.plaques.paginate(:page => params[:page], :per_page => 100)
     if @plaques
       #  @centre = find_mean(@plaques)
       @zoom = 11

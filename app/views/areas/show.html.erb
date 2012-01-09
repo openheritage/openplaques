@@ -10,7 +10,11 @@
   <%= link_to(@area.country.name, @area.country) if @area.country %>
   <h1><%= @area.name %></h1>
 
+  <%= will_paginate @plaques %>
+
   <%= plaque_list(@plaques) %>
+  
+  <%= will_paginate @plaques %>
 
 </div>
 
