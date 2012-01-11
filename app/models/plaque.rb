@@ -331,7 +331,7 @@ class Plaque < ActiveRecord::Base
       people.collect(&:name).to_sentence + " " + colour_name + " plaque"
     else
       colour_name.capitalize + " plaque № #{id}"
-    end << " in " + area_name if area
+    end << (area_name != "" ? " in " : "") + area_name 
   end
   
   def main_photo
