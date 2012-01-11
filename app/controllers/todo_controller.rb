@@ -16,6 +16,7 @@ class TodoController < ApplicationController
     @needs_geolocating_count = Plaque.ungeolocated.count
     @no_description_count = Plaque.no_description.count
     @unassigned_photo_count = Photo.unassigned.count
+    @unphotographed_plaque_count = Plaque.unphotographed.count
   end
 
   def destroy
@@ -51,19 +52,19 @@ class TodoController < ApplicationController
       render :lists_to_datacapture
 
     when 'no_connection'
-      @plaques = Plaque.no_connection
+      @plaques = Plaque.no_connection.paginate(:page => params[:page], :per_page => 100)
       render :no_connection
 
     when 'partial_inscription'
-      @plaques = Plaque.partial_inscription
+      @plaques = Plaque.partial_inscription.paginate(:page => params[:page], :per_page => 100)
       render :partial_inscription
 
     when 'partial_inscription_photo'
-      @plaques = Plaque.partial_inscription_photo
+      @plaques = Plaque.partial_inscription_photo.paginate(:page => params[:page], :per_page => 100)
       render :partial_inscription_photo
 
     when 'detailed_address_no_geo'
-      @plaques = Plaque.detailed_address_no_geo
+      @plaques = Plaque.detailed_address_no_geo.paginate(:page => params[:page], :per_page => 100)
       render :detailed_address_no_geo
 
     when 'fetch_from_flickr'
@@ -71,20 +72,24 @@ class TodoController < ApplicationController
       redirect_to "/todo/plaques_to_add"
 
     when 'no_roles'
-      @people = Person.no_role
+      @people = Person.no_role.paginate(:page => params[:page], :per_page => 100)
       render :no_roles
 
     when 'needs_geolocating'
-      @plaques = Plaque.ungeolocated
+      @plaques = Plaque.ungeolocated.paginate(:page => params[:page], :per_page => 100)
       render :detailed_address_no_geo
 
     when 'needs_description'
-      @plaques = Plaque.no_description.limit(100)
+      @plaques = Plaque.no_description.paginate(:page => params[:page], :per_page => 100)
       render :needs_description
 
     when 'unassigned_photo'
-      @photos = Photo.unassigned.limit(100)
+      @photos = Photo.unassigned.paginate(:page => params[:page], :per_page => 100)
       render :unassigned_photo
+
+    when 'unphotographed'
+      @plaques = Plaque.unphotographed.paginate(:page => params[:page], :per_page => 100)
+      render :unphotographed
       
     else
       raise ActiveRecord::RecordNotFound

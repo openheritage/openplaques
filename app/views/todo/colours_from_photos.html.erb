@@ -1,15 +1,15 @@
 ﻿<% content_for :page_title, "To do: colours from photos" %>
 
 <div class="panel">
-  <h1>To do: Plaques with photos but no colours</h1>
-  <p><%= link_to("All to-do lists", "/todo") %></p>
-
+  <h1>Plaques with photos but no colour identified</h1>
+  <section class="admin_panel"><%= link_to("All to-do lists", "/todo") %></section>
   <% if @plaques.size > 0 %>
+    <%= will_paginate @plaques %>
     <% @plaques.each do |plaque| %>
 	  <div style="float: left;"><%= link_to(thumbnail_img(plaque), "/plaques/" + plaque.id.to_s + "/colour/edit") %></div>
 	<% end %>
 	<br style="clear: left;"/>
   <% else %>
-    <p>Currently, every plaque with a photo has a colour attribute assigned.</p>
+    <p>Every plaque with a photo has a colour attribute assigned. Bravo!</p>
   <% end %>
 </div>

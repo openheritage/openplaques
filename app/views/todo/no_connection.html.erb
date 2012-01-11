@@ -1,16 +1,16 @@
 ﻿<% content_for :page_title, "To do: plaques with no connections" %>
 
-<h1>To do: Plaques with no connections</h1>
-<p><%= link_to("All to-do lists", "/todo") %></p>
-
-<% if @plaques.size > 0 %>
-  <p>These plaques have no connections:</p>
-  <ul>
-    <% @plaques.each do |plaque| %>
-    <li><%= plaque.inscription %> <%= link_to "Add connection", new_plaque_connection_path(plaque) %></li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>There aren't any plaques with no connections...</p>
-<% end %>
-<p class="clear"><%= link_to("All to-do lists", "/todo") %></p>
+<div class="panel">
+  <h1>Plaques with no connections</h1>
+  <section class="admin_panel"><%= link_to("All to-do lists", "/todo") %></section>
+  <% if @plaques.size > 0 %>
+    <%= will_paginate @plaques %>
+    <ul>
+      <% @plaques.each do |plaque| %>
+        <li><%= plaque.inscription %> <%= link_to "Add connection", new_plaque_connection_path(plaque) %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>All plaques have connections. Bravo!</p>
+  <% end %>
+</div>

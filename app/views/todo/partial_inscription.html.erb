@@ -1,12 +1,12 @@
 ﻿<% content_for :page_title, "To do: plaques with partial inscriptions" %>
 
-<h1>To do: Plaques with partial inscriptions</h1>
-<p><%= link_to("All to-do lists", "/todo") %></p>
-<p>These plaques have partial inscriptions which need completing:
-<ul>
-  <% @plaques.each do |plaque| %>
-  <li><%= link_to(plaque.first_person || "Plaque #" + plaque.id.to_s, "/plaques/" + plaque.id.to_s + "/inscription/edit")  %> <%= plaque.inscription %></li>
-  <% end %>
-</ul>
-</p>
-<p class="clear"><%= link_to("All to-do lists", "/todo") %></p>
+<div class="panel">
+  <h1>Plaques with partial inscriptions</h1>
+  <section class="admin_panel"><%= link_to("All to-do lists", "/todo") %></section>
+  <%= will_paginate @plaques %>
+  <ul>
+    <% @plaques.each do |plaque| %>
+      <li><%= link_to(plaque.first_person || "Plaque #" + plaque.id.to_s, "/plaques/" + plaque.id.to_s + "/inscription/edit")  %> <%= plaque.inscription %></li>
+    <% end %>
+  </ul>
+</div>

@@ -1,19 +1,16 @@
 ﻿<% content_for :page_title, "To do: needs geolocating" %>
 
 <div class="panel">
-  <h1>To do: Plaques with no geolocation</h1>
-  <p><%= link_to("All to-do lists", "/todo") %></p>
-
+  <h1>Plaques with no geolocation</h1>
+  <section class="admin_panel"><%= link_to("All to-do lists", "/todo") %></section>
   <% if @plaques.size > 0 %>
-    <p>These plaques have a detailed address, but have not been geolocated:</p>
+    <%= will_paginate @plaques %>
     <ul>
       <% @plaques.each do |plaque| %>
         <li><%= link_to(plaque.first_person || "Plaque #" + plaque.id.to_s, "/plaques/" + plaque.id.to_s + "/geolocation/edit")  %> - <%= plaque.location.name if plaque.location %>, <%= plaque.area.name if plaque.area %></li>
       <% end %>
     </ul>
   <% else %>
-    <p>No plaques that have not been geolocated.</p>
+    <p>Every plaque has been geolocated. Bravo!</p>
   <% end %>
 </div>
-
-<p class="panel clearfix"><%= link_to("All to-do lists", "/todo") %></p>
