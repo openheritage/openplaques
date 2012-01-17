@@ -1,6 +1,5 @@
 class PicksController < ApplicationController
 
-  before_filter :authenticate_user!
   before_filter :find_pick, :only => [:edit, :update, :show, :destroy]
 
   def index
