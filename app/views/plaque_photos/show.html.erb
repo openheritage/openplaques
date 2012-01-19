@@ -13,7 +13,7 @@
             <%= link_to("Edit", edit_photo_path(photo), {:class => :edit, :title => "edit photo"}) %>
           </section>
         <% end %>
-	      <%= content_tag("p", link_to(thumbnail_img(@plaque), photo.url)) %>
+	      <%= content_tag("p", link_to(thumbnail_img(photo), photo.url)) %>
 	      <p>This <%= photo.shot_name %> photo was taken
 	      <%= content_tag("span", " on " + photo.taken_at.to_s(:long)) unless photo.taken_at.blank? %>
 	      by <%= link_to photo.photographer, photographer_url(photo.photographer) if photo.photographer %>.
