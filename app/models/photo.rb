@@ -20,7 +20,6 @@ class Photo < ActiveRecord::Base
   belongs_to :licence, :counter_cache => true
   belongs_to :user
 
-#  validates_presence_of :file_url, :plaque, :licence
   validates_presence_of :file_url
 
   attr_accessor :photo_url, :accept_cc_by_licence
@@ -55,6 +54,12 @@ class Photo < ActiveRecord::Base
   def shot_name
     if shot
       return shot[3,shot.length]
+    end
+  end
+  
+  def shot_order
+    if shot
+      return shot[0,1]
     end
   end
 

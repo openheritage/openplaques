@@ -302,16 +302,17 @@ class Plaque < ActiveRecord::Base
     # this example ignores the user's options
     super(:only => [:id, :inscription, :latitude, :longitude, :erected_at, :updated_at], 
 	  :include => {
+      :photos => {:only => [:id,:thumbnail_url]},
 	    :colour => {:only => :name},
-		:language => {:only => [:name, :alpha2]},
-		:location => {:only => :name,
-		  :include => {
-		    :area => {:only => :name, :include => {:country => {:only => [:name, :alpha2]}}}
-		  }
-		}, 
-		:organisation => {:only => :name}
+		  :language => {:only => [:name, :alpha2]},
+		  :location => {:only => :name,
+        :include => {
+          :area => {:only => :name, :include => {:country => {:only => [:name, :alpha2]}}}
+        }
+      }, 
+		  :organisation => {:only => [:name, :id]} 
 	  },
-	  :methods => [:title, :colour_name, :machine_tag, :organisation_name, :geolocated?, :photographed?]
+	  :methods => [:title, :colour_name, :machine_tag, :organisation_name, :geolocated?, :photographed?, :url, :photo_url, :thumbnail_url, :shot_name]
     )
   end
 
