@@ -101,10 +101,10 @@ class Photo < ActiveRecord::Base
   def flickr_photo_id
     # retrieve from url e.g. http://www.flickr.com/photos/84195101@N00/3412825200/
   end
-  
+
   def thumbnail_url
-    if (file_url.ends_with?("_b.jpg"))
-	    return file_url.gsub("b.jpg", "s.jpg")
+    if (file_url.ends_with?("_b.jpg") or file_url.ends_with?("_z.jpg") or file_url.ends_with?("_m.jpg"))
+	    return file_url.gsub("b.jpg", "s.jpg").gsub("z.jpg", "s.jpg").gsub("m.jpg", "s.jpg")
 	  end
 	  if (wikimedia?)
 	    return "http://commons.wikimedia.org/wiki/Special:FilePath/"+wikimedia_filename+"?width=75"
