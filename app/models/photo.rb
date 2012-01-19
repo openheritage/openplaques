@@ -104,7 +104,7 @@ class Photo < ActiveRecord::Base
 
   def thumbnail_url
     if (file_url.ends_with?("_b.jpg") or file_url.ends_with?("_z.jpg") or file_url.ends_with?("_z.jpg?zz=1") or file_url.ends_with?("_m.jpg"))
-	    return file_url.gsub("b.jpg", "s.jpg").gsub("z.jpg", "s.jpg").gsub("z.jpg?zz=1", "s.jpg").gsub("m.jpg", "s.jpg")
+	    return file_url.gsub("b.jpg", "s.jpg").gsub("z.jpg?zz=1", "s.jpg").gsub("z.jpg", "s.jpg").gsub("m.jpg", "s.jpg")
 	  end
 	  if (wikimedia?)
 	    return "http://commons.wikimedia.org/wiki/Special:FilePath/"+wikimedia_filename+"?width=75"
