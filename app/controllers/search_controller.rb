@@ -4,23 +4,27 @@ class SearchController < ApplicationController
 
   def index
     if @phrase != nil && @phrase != ""
-        @search_results = get_search_results(@phrase)
+      if @street != nil && @street !=""
+        @search_results = Plaque.find(:all, :joins => :location, :conditions => ["lower(inscription) LIKE ? and lower(locations.name) LIKE ?", "%" + @phrase.downcase + "%", "%" + @street.downcase + "%"], :include => [[:personal_connections => [:person]], [:location => [:area => :country]]])
+      else
+        @search_results = Plaque.find(:all, :conditions => ["lower(inscription) LIKE ?", "%" + @phrase.downcase + "%"], :include => [[:personal_connections => [:person]], [:location => [:area => :country]]])
+      end
+      render "results"
+    else
+      @search_results = Plaque.find(:all, :joins => :location, :conditions => ["lower(locations.name) LIKE ?", "%" + @street.downcase + "%"], :include => [[:personal_connections => [:person]], [:location => [:area => :country]]])      
+      @phrase = ""
       render "results"
     end
   end
 
-  def results
-    @search_results = get_search_results(@phrase)
-  end
-
   def get_search_results(phrase)
-    return Plaque.find(:all, :conditions => ["lower(inscription) LIKE ?", "%" + phrase.downcase + "%"], :include => [[:personal_connections => [:person]], [:location => [:area => :country]]])
   end
 
   protected
 
     def set_phrase
       @phrase = params[:phrase]
+      @street = params[:street]
     end
 
 end
