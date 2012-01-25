@@ -4,6 +4,8 @@ class PlaquesController < ApplicationController
   before_filter :authenticate_admin!, :only => :destroy
 
   before_filter :find_plaque, :only => [:show, :parse_inscription, :unparse_inscription, :flickr_search, :flickr_search_all, :update, :destroy, :edit]
+  after_filter :set_access_control_headers, :only => :index
+
 
   respond_to :html, :xml, :json, :kml, :poi, :rss, :csv, :yaml
 
@@ -130,7 +132,7 @@ class PlaquesController < ApplicationController
     if current_user
       @plaque.user = current_user
     end
-    
+
     if params[:location] && !params[:location].blank?
       country = Country.find(params[:plaque][:country].blank? ? 1 : params[:plaque][:country])
       if params[:area_id] && !params[:area_id].blank?
@@ -155,7 +157,7 @@ class PlaquesController < ApplicationController
     end
 
     @plaque.location = location if location
-    
+
     organisation = Organisation.find_or_create_by_name(params[:organisation_name])
     @plaque.organisation = organisation
 
@@ -237,4 +239,7 @@ class PlaquesController < ApplicationController
       @plaque = Plaque.find(params[:id])
     end
 
+    def set_access_control_headers
+      headers['Access-Control-Allow-Origin'] = '*'
+    end
 end
