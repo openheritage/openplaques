@@ -7,6 +7,7 @@
 //= require jquery-1.5.1.min
 //= require jquery-ui-1.8.11.custom.min
 //= require modernizr-1.7.min
+//= require leaflet
 //= require_tree .
 
 // Place your application-specific JavaScript functions and classes here

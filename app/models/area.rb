@@ -28,10 +28,30 @@ class Area < ActiveRecord::Base
     {:label => name, :value => name, :id => id, :country_id => country.id, :country_name => country.name}
   end
 
+  def latitude_or_default
+    if !latitude.blank?
+      latitude
+    elsif plaques.geolocated.first
+      plaques.geolocated.first.latitude
+    else
+      nil
+    end
+  end
+
+  def longitude_or_default
+    if !longitude.blank?
+      longitude
+    elsif plaques.geolocated.first
+      plaques.geolocated.first.longitude
+    else
+      nil
+    end
+  end
+
   def to_param
     slug
   end
-  
+
   private
     def make_slug_not_war
       self.slug = (self.slug.blank? ? self.name : self.slug).rstrip.lstrip.downcase.gsub(" ", "_").gsub("-", "_").gsub(",", "_")

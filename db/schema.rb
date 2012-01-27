@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111230094632) do
+ActiveRecord::Schema.define(:version => 20120127102832) do
 
   create_table "areas", :force => true do |t|
     t.string    "name"
@@ -22,6 +21,8 @@ ActiveRecord::Schema.define(:version => 20111230094632) do
     t.string    "dbpedia_uri"
     t.integer   "country_id"
     t.string    "slug"
+    t.float     "latitude"
+    t.float     "longitude"
   end
 
   create_table "colours", :force => true do |t|
@@ -157,14 +158,14 @@ ActiveRecord::Schema.define(:version => 20111230094632) do
   end
 
   create_table "picks", :force => true do |t|
-    t.integer   "plaque_id"
-    t.text      "description"
-    t.timestamp "feature_on"
-    t.timestamp "last_featured"
-    t.integer   "featured_count"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.string    "proposer"
+    t.integer  "plaque_id"
+    t.text     "description"
+    t.datetime "feature_on"
+    t.datetime "last_featured"
+    t.integer  "featured_count"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "proposer"
   end
 
   create_table "plaque_erected_years", :force => true do |t|

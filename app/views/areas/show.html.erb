@@ -6,14 +6,17 @@
     <%= link_to("Edit this area", edit_area_path(@area), {:class => :edit, :title => "Edit this area"})%>
   </section>
   <% end %>
-  
+
   <%= link_to(@area.country.name, @area.country) if @area.country %>
   <h1><%= @area.name %></h1>
+
+
+  <div id="plaque-map" data-latitude="<%= @area.latitude_or_default %>" data-longitude="<%= @area.longitude_or_default %>"></div>
 
   <%= will_paginate @plaques %>
 
   <%= plaque_list(@plaques) %>
-  
+
   <%= will_paginate @plaques %>
 
 </div>
