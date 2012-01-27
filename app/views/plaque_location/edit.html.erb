@@ -4,8 +4,9 @@
   <h1>Edit address for <%= link_to(@plaque.title, @plaque)%></h1>
 
   <%= form_for(@plaque) do |f| %>
-    <p><%= f.label :location, "Street and number" %>: <%= text_field_tag :location, @plaque.location_string %></p>
-    <p>Area: <%= @plaque.location.area.name %></p>
+    <p><%= f.label :location, "Street and number" %>: <%= text_field_tag :location, @plaque.location_string, :size => 50 %>
+	  <%= ", " + @plaque.location.area.name unless @plaque.location.area == nil %> <%= ", " + @plaque.location.area.country.name unless @plaque.location.area == nil or @plaque.location.area.country == nil %>
+
     <p><%= f.submit "Update", :class => :button %></p>
   <% end %>
 
