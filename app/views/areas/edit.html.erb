@@ -1,28 +1,41 @@
 <% content_for :page_title, "Edit " + @area.name %>
 
-<h1>Edit <%= link_to(h(@area.name), @area) %>, <%= link_to @area.country.name, @area.country %></h1>
+<div class="panel clearfix">
 
-<%= form_for(@area) do |f| %>
+  <h1>Edit <%= link_to(h(@area.name), @area) %>, <%= link_to @area.country.name, @area.country %></h1>
 
-  <p>
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </p>
+  <%= form_for(@area) do |f| %>
 
-  <p>
-    <%= f.label :slug %>
-    <%= f.text_field :slug %> (must be lowercase with underscores)
-  </p>
+    <p>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </p>
 
+    <p>
+      <%= f.label :slug %>
+      <%= f.text_field :slug %> (must be lowercase with underscores)
+    </p>
 
-  <p>
-    <%= f.label :country_id, "Country" %>
-    <%= f.collection_select :country_id, @countries, :id, :name %>
-  </p>
+    <p>
+      <%= f.label :country_id, "Country" %>
+      <%= f.collection_select :country_id, @countries, :id, :name %>
+    </p>
 
-  <p>
-    <%= f.submit "Update", :class => :button %>
-  </p>
-<% end %>
+    <fieldset>
+      <legend>Geolocation</legend>
 
-<%= button_to("Delete", area_path(@area), {:method => :delete, :class => :button}) %>
+      <%= f.label :latitude %>
+      <%= f.text_field :latitude %>
+
+      <%= f.label :longitude %>
+      <%= f.text_field :longitude %>
+
+    </fieldset>
+
+    <p>
+      <%= f.submit "Update", :class => :button %>
+    </p>
+  <% end %>
+
+  <%= button_to("Delete", area_path(@area), {:method => :delete, :class => "button delete"}) %>
+</div>
