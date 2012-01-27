@@ -3,6 +3,11 @@ var ajaxRequest;
 var plotlist;
 var plotlayers=[];
 
+var PlaqueIcon = L.Icon.extend({
+    iconUrl: '/assets/images/marker.png',
+    shadowUrl: '/assets/images/marker-shadow.png',
+});
+
 function getXmlHttpObject() {
   if (window.XMLHttpRequest) { return new XMLHttpRequest(); }
   if (window.ActiveXObject)  { return new ActiveXObject("Microsoft.XMLHTTP"); }
@@ -21,7 +26,8 @@ function stateChanged() {
 
         var plaque = plotlist[i].plaque;
         var plotll = new L.LatLng(plotlist[i].plaque.latitude,plotlist[i].plaque.longitude, true);
-        var plotmark = new L.Marker(plotll);
+        var plaque_icon = new PlaqueIcon();
+        var plotmark = new L.Marker(plotll, {icon: plaque_icon});
         plotmark.data=plotlist[i];
         map.addLayer(plotmark);
 
