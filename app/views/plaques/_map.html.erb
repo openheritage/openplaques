@@ -85,15 +85,16 @@ if @geolocated_plaques
                point.transform(proj, map.getProjectionObject());
                popupContentHTML = '<p><%= link_to("\#" + plaque.id.to_s, plaque) %> <%= html_safe(plaque.inscription) %> </p>';
                popupContentHTML = popupContentHTML + '<div class="popup_photo">';
-               <% if plaque.photos.size > 0 %>
+               <% if plaque.photographed? %>
                  popupClass = FramedCloudMinSize;
                  <% photo = plaque.photos.first %>
-                 popupContentHTML = popupContentHTML + '<p><%= link_to(thumbnail_img(photo), plaque) %></p>';
-                 popupContentHTML = popupContentHTML + '<p>Photographer: <%= link_to(html_safe(photo.photographer), photo.url) %>';
-         <%
-         if !photo.licence.nil? %>
-                   popupContentHTML = popupContentHTML + '<br/>License:&#160;<%= link_to(photo.licence.name, photo.licence.url)  %></p>';
-               <% end %>
+                 <% if !photo.nil? %>
+                   popupContentHTML = popupContentHTML + '<p><%= link_to(thumbnail_img(photo), plaque) %></p>';
+                   popupContentHTML = popupContentHTML + '<p>Photographer: <%= link_to(html_safe(photo.photographer), photo.url) %>';
+                   <% if !photo.licence.nil? %>
+                     popupContentHTML = popupContentHTML + '<br/>License:&#160;<%= link_to(photo.licence.name, photo.licence.url)  %></p>';
+                   <% end %>
+                 <% end %>
                <% end %>
                popupContentHTML = popupContentHTML + '</div>';
                addMarker(point, <% if plaque.colour && plaque.colour.name =~ /(blue|black|yellow|red|white|green)/ %> '<%= plaque.colour.name %>' <% else %> 'blue' <% end %>, popupClass, popupContentHTML, true, true);
