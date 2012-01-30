@@ -51,6 +51,7 @@ class Role < ActiveRecord::Base
     return true if "band" == slug
     return true if "charity" == slug
     return true if "company" == slug
+    return true if "diplomatic_mission" == slug
     return true if "football_club" == slug
     return true if "football_league" == slug
     return true if "government_organisation" == slug
