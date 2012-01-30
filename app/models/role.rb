@@ -38,16 +38,12 @@ class Role < ActiveRecord::Base
   end
 
   def thing?
-    return true if "arch" == slug
     return true if "battle" == slug
     return true if "bomb" == slug
     return true if "bombing" == slug
     return true if "china" == slug
     return true if "conspiracy" == slug
-    return true if "gallows" == slug
-    return true if "lead_fresh_water_channel" == slug
     return true if "printing_press" == slug
-    return true if "well" == slug
     return false
   end
 
@@ -69,6 +65,7 @@ class Role < ActiveRecord::Base
     #TODO add this as a settable attribute on role
     return true if "aerodrome" == slug
     return true if "almshouse" == slug
+    return true if "arch" == slug
     return true if "asylum" == slug
     return true if "barracks" == slug
     return true if slug.start_with?("birthplace")
@@ -81,6 +78,7 @@ class Role < ActiveRecord::Base
     return true if "fire_station" == slug
     return true if "film_studio" == slug
     return true if "football_ground" == slug
+    return true if "gallows" == slug
     return true if "gate" == slug
     return true if "grammar_school" == slug
     return true if "house" == slug
@@ -88,6 +86,7 @@ class Role < ActiveRecord::Base
     return true if "hospital" == slug
     return true if "institute" == slug
     return true if "laboratory" == slug
+    return true if "lead_fresh_water_channel" == slug
     return true if "mill" == slug
     return true if "pharmacy" == slug
     return true if "pier" == slug
@@ -100,9 +99,11 @@ class Role < ActiveRecord::Base
     return true if "station" == slug
     return true if "street" == slug
     return true if "theatre" == slug
+    return true if "town_hall" == slug
     return true if "type_foundry" == slug
     return true if "university" == slug
     return true if slug.start_with?("where_")
+    return true if "well" == slug
     return false
   end
   

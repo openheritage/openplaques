@@ -122,8 +122,12 @@ module PeopleHelper
       elsif (person.born_on?)
         if (person.thing?)
           dates = " (from "
+        elsif (person.group?)
+          dates = " (formed "
+        elsif (person.place?)
+          dates = " (built "
         else
-          dates = " (born "
+          dates = "x (born "
         end
         dates += linked_birth_date(person) + "<span property=\"foaf:age\" content=\"#{age(person.born_on)}\" />)"
       elsif (person.died_on?)
