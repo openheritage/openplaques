@@ -57,7 +57,7 @@ function askForPlots() {
   var bounds=map.getBounds();
   var minll=bounds.getSouthWest();
   var maxll=bounds.getNorthEast();
-  var msg='/plaques.json?box=['+maxll.lat+','+minll.lng+'],['+minll.lat+','+maxll.lng+']&limit=99&data=simple';
+  var msg='/plaques.json?box=['+maxll.lat+','+minll.lng+'],['+minll.lat+','+maxll.lng+']&limit=2000&data=simple';
 
 
 //   var msg = 'http://openplaques.org/plaques.json?box=[51.5482,-0.1617],[51.5282,-0.1217]'
