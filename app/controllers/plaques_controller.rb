@@ -59,9 +59,17 @@ class PlaquesController < ApplicationController
       limit = 20
     end
 
-    @plaques = Plaque.all(:conditions => conditions, :order => "created_at DESC", :limit => limit, :include => [:language, :organisation, :colour, [:location => [:area => :country]]])
+    if params[:data] && params[:data] == "simple"
+      @plaques = Plaque.all(:conditions => conditions, :order => "created_at DESC", :limit => limit)
+    else
+      @plaques = Plaque.all(:conditions => conditions, :order => "created_at DESC", :limit => limit, :include => [:language, :organisation, :colour, [:location => [:area => :country]]])
+    end
 
-    respond_with @plaques
+    respond_with @plaques do |format|
+      if params[:data] && params[:data] == "simple"
+        format.json { render :json => @plaques.as_json(:only => [:id, :latitude, :longitude, :inscription], :include => nil, :exclude => [:colour_name]) }
+      end
+    end
 
   end
 

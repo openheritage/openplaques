@@ -300,20 +300,27 @@ class Plaque < ActiveRecord::Base
 
   def as_json(options={})
     # this example ignores the user's options
-    super(:only => [:id, :inscription, :latitude, :longitude, :erected_at, :updated_at], 
-	  :include => {
+
+    default_options = {:only => [:id, :inscription, :latitude, :longitude, :erected_at, :updated_at],
+    :include => {
       :photos => {:only => [:id,:thumbnail_url]},
-	    :colour => {:only => :name},
-		  :language => {:only => [:name, :alpha2]},
-		  :location => {:only => :name,
+      :colour => {:only => :name},
+      :language => {:only => [:name, :alpha2]},
+      :location => {:only => :name,
         :include => {
           :area => {:only => :name, :include => {:country => {:only => [:name, :alpha2]}}}
         }
-      }, 
-		  :organisation => {:only => [:name, :id]} 
-	  },
-	  :methods => [:title, :colour_name, :machine_tag, :organisation_name, :geolocated?, :photographed?, :url, :photo_url, :thumbnail_url, :shot_name]
-    )
+      },
+      :organisation => {:only => [:name, :id]}
+    },
+    :methods => [:title, :colour_name, :machine_tag, :organisation_name, :geolocated?, :photographed?, :url, :photo_url, :thumbnail_url, :shot_name]
+    }
+
+    if options.size > 0
+      super(options)
+    else
+      super(default_options)
+    end
   end
 
   def machine_tag
@@ -332,15 +339,15 @@ class Plaque < ActiveRecord::Base
       people.collect(&:name).to_sentence + " " + colour_name + " plaque"
     else
       colour_name.capitalize + " plaque № #{id}"
-    end << (area_name != "" ? " in " : "") + area_name 
+    end << (area_name != "" ? " in " : "") + area_name
   end
-  
+
   def main_photo
-	  if !self.photos.empty?
-	    return photos.detail_order.first
-	  end
+    if !self.photos.empty?
+      return photos.detail_order.first
+    end
   end
-  
+
   def foreign?
     self.language.alpha2 != "en"
   end
