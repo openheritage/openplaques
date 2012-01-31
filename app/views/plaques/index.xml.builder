@@ -1,8 +1,12 @@
 xml.instruct! :xml, :version=>"1.0"
 xml.openplaques(){
     @plaques.each do |plaque|
-      xml.plaque(:uri => plaque_url(plaque), :updated_at => plaque.updated_at.xmlschema){
+      
+      xml.plaque(:uri => plaque_url(plaque), :machine_tag => plaque.machine_tag, :created_at => plaque.created_at.xmlschema, :updated_at => plaque.updated_at.xmlschema){
         xml.title plaque.title
+        if plaque.colour
+          xml.colour plaque.colour_name
+        end
         xml.inscription {
           xml.raw plaque.inscription
           xml.linked linked_inscription(plaque) if linked_inscription(plaque) != plaque.inscription
@@ -13,17 +17,18 @@ xml.openplaques(){
         if plaque.location or plaque.geolocated?
           xml.location {
             if plaque.location
-              xml.tag!("street-address") {
-                xml.name plaque.location.name
+              xml.address plaque.location.full_address
+              xml.street(:uri => location_url(plaque.location)) {
+                xml.text! plaque.location.name
               }
               if plaque.location.area
                 xml.locality(:uri => area_url(plaque.location.area)) {
-                  xml.name plaque.location.area.name
+                  xml.text! plaque.location.area.name
                 }
               end
               if plaque.location.country
                 xml.country(:uri => country_url(plaque.location.country)) {
-                  xml.name plaque.location.country.name
+                  xml.text! plaque.location.country.name
                 }
               end
             end
@@ -31,12 +36,7 @@ xml.openplaques(){
         end
         if plaque.organisation
           xml.organisation(:uri => organisation_url(plaque.organisation)) {
-            xml.name plaque.organisation.name
-          }
-        end
-        if plaque.colour
-          xml.colour {
-            xml.text! plaque.colour.name
+            xml.text! plaque.organisation.name
           }
         end
         if plaque.erected_at?
@@ -47,8 +47,29 @@ xml.openplaques(){
           end
         end
         plaque.people.each do |person|
-          xml.person(:name => person.name, :url => "/people/"+ person.id.to_s+".xml")
+          xml.person(:uri => person_url(person)) {
+    	      xml.text! person.name
+    	    }
+        end
+        plaque.photos.each do |photo|
+          xml.photo {
+    	      xml.url photo.url
+    	      xml.file_url photo.file_url
+    	      xml.thumbnail photo.thumbnail_url
+    	      xml.photographer(:uri => photo.photographer_url) { 
+              xml.text! photo.photographer
+            }
+            if photo.shot
+              xml.shot(:order => photo.shot_order) {
+                xml.text! photo.shot_name
+              }
+            end
+            xml.licence(:uri => photo.licence.url) {
+              xml.text! photo.licence.name
+            }
+    	    }
         end
       }
+
     end
 }

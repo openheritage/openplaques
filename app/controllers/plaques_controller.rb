@@ -85,7 +85,7 @@ class PlaquesController < ApplicationController
       format.html # show.html.erb
       format.kml { render "plaques/index" }
       format.yaml
-      format.xml
+      format.xml { render "plaques/index" }
       format.json {
         render :json => @plaque
       }
