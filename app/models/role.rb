@@ -73,6 +73,7 @@ class Role < ActiveRecord::Base
     return true if "brightons_smallest_pub" == slug
     return true if "church" == slug
     return true if "cinema" == slug
+    return true if "convention_centre" == slug
     return true if "coffee_house" == slug
     return true if "court" == slug
     return true if "design_studio" == slug
