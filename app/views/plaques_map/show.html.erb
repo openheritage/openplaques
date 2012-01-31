@@ -1,10 +1,12 @@
-<% @template_format = "html" %>
-<% @page_title = "Map of plaques"
-@page_title += " within [" + @top_left[0].to_s + "," + @top_left[1].to_s + "]-[" + @bottom_right[0].to_s + "," + @bottom_right[1].to_s + "]" if @top_left %>
-<% content_for :page_title, @page_title %>
+<% content_for :page_title do %>Map of plaques<% end %>
 
-<h1><%= @page_title %></h1>
+<div class="panel clearfix">
+  <h1>Map of all plaques</h1>
 
-<%= render 'plaques/map' %>
+  <div id="plaque-map" data-latitude="51.01" data-longitude="0" class="full" data-zoom="8"></div>
+
+</div>
+
+
 
 
