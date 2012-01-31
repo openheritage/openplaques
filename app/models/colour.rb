@@ -7,6 +7,7 @@
 # * Plaques - plaques which use this colour.
 class Colour < ActiveRecord::Base
 
+  before_validation :make_slug_not_war
   validates_presence_of :name
   validates_uniqueness_of :name
 
@@ -18,5 +19,10 @@ class Colour < ActiveRecord::Base
 
   scope :common, where(:common => true)
   scope :other, where(:common => false)
+  
+  private
+    def make_slug_not_war
+      self.slug = (self.slug.blank? ? self.name : self.slug).rstrip.lstrip.downcase.gsub(" ", "_").gsub("-", "_").gsub(",", "_").gsub(".", "_")
+    end
 
 end
