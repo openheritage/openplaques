@@ -6,7 +6,7 @@
   <ol>
     <% for photographer in @photographers.sort_by { |p| 1 - p[1] } %>
       <% if photographer[0] != nil %>
-        <li><%= link_to(photographer[0], photographer_url(photographer[0].gsub(/\./,'_'))) %> - <%= pluralize(photographer[1], "photo") %></li>
+        <li><%= link_to(photographer[0], photographer_url(photographer[0].gsub(/\./,'_').gsub('/','_'))) rescue photographer[0] %> - <%= pluralize(photographer[1], "photo") %></li>
       <% end %>
     <% end %>
   </ol>
