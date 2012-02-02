@@ -18,7 +18,7 @@
     <% end %>
 
     It was taken <%= content_tag("span", " on " + @photo.taken_at.to_s(:long)) unless @photo.taken_at.blank? %>
-    by <%= link_to @photo.photographer, photographer_url(@photo.photographer) if @photo.photographer %>
+    by <%= link_to @photo.photographer, photographer_url(@photo.photographer.gsub(".","_").gsub("/","_")) if @photo.photographer rescue @photo.photographer %>
   </p>
   <p>The image was licenced by its copyright owner under a <%= link_to @photo.licence.name, @photo.licence if @photo.licence %>.</p>
 
