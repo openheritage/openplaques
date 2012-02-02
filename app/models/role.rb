@@ -43,6 +43,7 @@ class Role < ActiveRecord::Base
     return true if "bombing" == slug
     return true if "china" == slug
     return true if "conspiracy" == slug
+    return true if "movie" == slug
     return true if "printing_press" == slug
     return false
   end
