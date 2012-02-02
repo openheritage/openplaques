@@ -67,10 +67,12 @@ class Role < ActiveRecord::Base
     return true if "aerodrome" == slug
     return true if "almshouse" == slug
     return true if "arch" == slug
+    return true if "art_gallery" == slug
     return true if "asylum" == slug
     return true if "barracks" == slug
     return true if slug.start_with?("birthplace")
     return true if "brightons_smallest_pub" == slug
+    return true if "canal" == slug
     return true if "church" == slug
     return true if "cinema" == slug
     return true if "convention_centre" == slug
@@ -81,15 +83,18 @@ class Role < ActiveRecord::Base
     return true if "film_studio" == slug
     return true if "football_ground" == slug
     return true if "gallows" == slug
+    return true if "gallery" == slug
     return true if "gate" == slug
     return true if "grammar_school" == slug
     return true if "house" == slug
     return true if "houses" == slug
     return true if "hospital" == slug
+    return true if "infant_school" == slug
     return true if "institute" == slug
     return true if "laboratory" == slug
     return true if "lead_fresh_water_channel" == slug
     return true if "mill" == slug
+    return true if "museum" == slug
     return true if "pharmacy" == slug
     return true if "pier" == slug
     return true if "public_house" == slug
