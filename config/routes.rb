@@ -15,9 +15,6 @@ Openplaques::Application.routes.draw do
   # e.g. /map?box=[51.6,-0.3],[51.4,-0.1]
   resource :map, :as => :map, :controller => :plaques_map, :only => [:show]
 
-  # Main nav jumping-off pages
-  resource :contribute, :only => :show, :controller => :contribute
-
   # Main PLAQUE resources, and sub-resources
   resources :plaques do
     member do
@@ -95,6 +92,8 @@ Openplaques::Application.routes.draw do
   scope "/about" do
     resource :data, :controller => :pages, :id => "data", :as => "about_the_data", :only => :show
   end
+  resource :contribute, :controller => :pages, :id => "contribute", :as => "contribute", :only => :show
+  resource :explore, :controller => :pages, :id => "explore", :as => "explore", :only => :show
 
   # Generic resource for all pages
   resources :pages
