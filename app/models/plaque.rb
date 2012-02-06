@@ -347,6 +347,11 @@ class Plaque < ActiveRecord::Base
       return photos.detail_order.first
     end
   end
+  def main_photo_reverse
+    if !self.photos.empty?
+      return photos.reverse_detail_order.first
+    end
+  end
 
   def foreign?
     self.language.alpha2 != "en"

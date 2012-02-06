@@ -8,14 +8,14 @@
     </section>
   <% elsif @plaque.photos.size < 2 %>
     <div class="plaque_image plaque_single_image">
-      <%= image_tag(@plaque.photos.first.file_url) %>
+      <%= image_tag(@plaque.main_photo.file_url) %>
     </div>
   <% else %>
     <div class="plaque_image plaque_multiple_images">
-      <% first_photo = @plaque.photos.first %>
+      <% first_photo = @plaque.main_photo %>
       <%= link_to(image_tag(first_photo.file_url, {:id => "primary_image", :alt => "Photo of plaque", :rel => "foaf:depiction"}), first_photo.url) %>
       <div id="secondary_images">
-        <% @plaque.photos.each do |image| %>
+        <% @plaque.photos.detail_order.each do |image| %>
           <%= link_to(image_tag(image.file_url, {:alt => "Photo of plaque", :rel => "foaf:depiction"}), image.url) unless image == first_photo %>
         <% end %>
       </div>

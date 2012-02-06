@@ -33,11 +33,9 @@
 <!--TODO: Incorporate streetview imagery -->
     <section id="plaque_no_photos">
       <div class="no_photo">
-        <h2>No photograph</h2>
-        <p>To add a photo, publish it on Flickr and tag it: <%= @plaque.machine_tag %></p>
-    <% if current_user %>
-      <%= button_to "find on Flickr", :action => :flickr_search, :id => @plaque %>
-    <% end %>
+        <h2>No photograph yet</h2>
+        <p>To add a photo, publish it on Flickr with a Creative Commons licence and tag it <span class="machinetag"><%= @plaque.machine_tag %></span></p>
+      <%= button_to "find on Flickr", {:action => :flickr_search, :id => @plaque}, :class => :button %>
       </div>
 
       <% if @plaque.geolocated? %>
@@ -160,11 +158,11 @@
 
 
       <div class="plaque_image plaque_multiple_images">
-      <% first_photo = @plaque.main_photo %>
+      <% first_photo = @plaque.main_photo_reverse %>
         <%= link_to(image_tag(first_photo.file_url, {:id => "primary_image", :alt => "Photo of plaque", :rel => "foaf:depiction"}), first_photo.url) %>
 
         <div id="secondary_images">
-        <% @plaque.photos.detail_order.each do |image| %>
+        <% @plaque.photos.reverse_detail_order.each do |image| %>
           <%= link_to(image_tag(image.file_url, {:alt => "Photo of plaque", :rel => "foaf:depiction"}), image.url) unless image == first_photo %>
         <% end %>
 
