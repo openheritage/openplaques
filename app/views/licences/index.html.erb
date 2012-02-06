@@ -1,15 +1,13 @@
 <% content_for :page_title, "Photos licences" %>
 
 <div class="panel">
-<h1>Photo licences</h1>
+  <h1>Photo licences</h1>
 
-<p><%= pluralize(@licences.size, "licence") %></p>
+  <p><%= pluralize(@licences.size, "licence") %></p>
 
-<ul>
-<% for licence in @licences %>
-  <li><%= link_to(licence.name, licence_url(licence)) %>
-   - <%= pluralize(licence.photos.count, "photo") %>
-   </li>
-<% end %>
-</ul>
+  <ul>
+  <% for licence in @licences %>
+    <li><%= link_to(licence.name, licence_url(licence)) %> - <%= pluralize(licence.photos.count, "photo") %></li>
+  <% end %>
+  </ul>
 </div>

@@ -1,20 +1,23 @@
-<h1>New page</h1>
+<% content_for :page_title, "Add a page" %>
 
-<% form_for @page do |f| %>
+<div class="panel">
+  <h1>New page</h1>
 
-  <p>
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </p>
+  <%= form_for @page do |f| %>
 
-  <p>
-    <%= f.label :slug %>
-    <%= f.text_field :slug %>
-  </p>
+    <p>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </p>
 
-  <%= f.text_area :body %>
+    <p>
+      <%= f.label :slug %>
+      <%= f.text_field :slug %>
+    </p>
 
-  <%= f.submit "Save" %>
+    <%= f.text_area :body %>
 
+    <%= f.submit "Save" %>
 
-<% end %>
+  <% end %>
+</div>

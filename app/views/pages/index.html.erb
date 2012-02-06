@@ -1,13 +1,13 @@
 <% content_for :page_title, "Open Plaques pages" %>
 
-<p><%= pluralize(@pages.size, "Open Plaques page") %></p>
+<div class="panel clearfix">
+  <p><%= pluralize(@pages.size, "Open Plaques page") %></p>
 
-<ul>
-  <% @pages.each do |page| %>
-    <% content_tag("li") do %>
-      <%= link_to page.name, {:action => :show, :id => page.slug} %>. Last updated <%= page.updated_at.to_s(:long) %> <%= link_to "[Edit]", edit_page_path(page.slug) %>
+  <ul>
+    <% for page in @pages %>
+      <li><%= link_to page.name, {:action => :show, :id => page.slug} %>. Last updated <%= page.updated_at.to_s(:long) %> <%= link_to "[Edit]", edit_page_path(page.slug) %></li>
     <% end %>
-  <% end %>
-</ul>
+  </ul>
 
-<%= link_to "Add new page", new_page_path %>
+  <%= button_to "Add new page", new_page_path %>
+</div>
