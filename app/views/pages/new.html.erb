@@ -15,9 +15,9 @@
       <%= f.text_field :slug %>
     </p>
 
-    <%= f.text_area :body %>
+    <%= f.text_area :body, {:rows => "40", :cols => "160"} %>
 
-    <%= f.submit "Save" %>
+    <%= f.submit "Save", :class => :button %>
 
   <% end %>
 </div>
