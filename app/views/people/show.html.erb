@@ -12,15 +12,16 @@
     
     <p><%= "Died aged" if (@person.person? || @person.thing? || @person.animal?) && @person.dead? %><%= "Closed aged" if @person.place? && @person.dead? %><%= "Aged" if @person.alive? && @person.age%> <%= "c." + @person.age.to_s if @person.age%></p>
 
-    <p>Is commemorated at:</p>
-
+    <table>
     <% @plaques.each do |plaque| %>
-      <div class="plaque">
-        <h2><%= plaque_icon(plaque) %> <%= link_to plaque.location.name + ", " + plaque.area.name, plaque if plaque.location and plaque.area %><%= link_to plaque.location.name, plaque if plaque.location and !plaque.area %></h2>
-        <p>"<%= plaque.inscription %>"</p>
-      </div>
+      <tr>
+        <td><%= link_to(thumbnail_img(plaque), plaque_path(plaque)) %></td>
+        <td><%= verbs(@person,plaque).to_sentence.html_safe %> at <%= link_to plaque.location.name + ", " + plaque.area.name, plaque if plaque.location and plaque.area %><%= link_to plaque.location.name, plaque if plaque.location and !plaque.area %></td>
+        <td>"<%= plaque.inscription %>"</td>
+      </tr>
     <% end %>
-
+    </table>
+    
     <br/>
     <%= content_tag("p", "Read more about ".html_safe + link_to(@person.name, @person.default_wikipedia_url, :target => '_blank') + " on Wikipedia.".html_safe) unless @person.default_wikipedia_url.blank? %>
   </div>

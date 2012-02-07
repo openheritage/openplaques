@@ -10,25 +10,28 @@ module PhotosHelper
   end
 
   def thumbnail_img(thing)
-	desc = ""
-	begin
-	  if thing.thumbnail_url
-      desc += "<img src=\""+thing.thumbnail_url+"\"/>"
-	  else
-      desc += "<img src=\""+thing.file_url+"\" width=\"75\" height=\"75\"/>"
-	  end
-	rescue
-	  begin
-	    # not a photo, is it a plaque?
-	    desc += thumbnail_img(thing.main_photo)
-	  rescue
-	    ## it wasn't even a plaque, is it something that links to a plaque?
-	    begin
-	      desc += thumbnail_img(thing.plaque)
-      rescue
+    desc = ""
+    begin
+      if thing.thumbnail_url
+        desc += "<img src=\""+thing.thumbnail_url+"\"/>"
+      else
+        desc += "<img src=\""+thing.file_url+"\" width=\"75\" height=\"75\"/>"
       end
-	  end
-	end
+    rescue
+      begin
+        # not a photo, is it a plaque?
+        desc += thumbnail_img(thing.main_photo)
+      rescue
+        ## it wasn't even a plaque, is it something that links to a plaque?
+        begin
+          desc += thumbnail_img(thing.plaque)
+        rescue
+          if thing.colour && thing.colour.slug =~ /(blue|black|yellow|red|white|green)/
+            desc += image_tag("icon-" + thing.colour.slug + ".png", :size => "16x16")
+          end
+        end
+      end
+    end
     return desc.html_safe
   end
 

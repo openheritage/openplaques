@@ -169,5 +169,17 @@ module PeopleHelper
         birth_date += link_to(person.born_in.to_s, people_alive_in_path(person.born_in.to_s), {:class => "bday", :about => "/people/#{person.id}#person", :property => "dbpprop:dateOfBirth vcard:bday", :datatype => "xsd:date", :content => person.born_in.to_s})
       end
     end
+    
+    def connections(person, plaque)
+      person.personal_connections.where(:plaque_id => plaque)
+    end
+    
+    def verbs(person, plaque)
+      verbs = Array.new
+      connections(person, plaque).each do |personal_connection|
+        verbs << personal_connection.verb.name
+      end
+      return verbs
+    end
 
 end
