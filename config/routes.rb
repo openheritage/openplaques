@@ -11,7 +11,7 @@ Openplaques::Application.routes.draw do
     resource :all, :controller => :all_plaques, :as => :all_plaques, :only => [:show]
     resource :latest, :as => :latest, :controller => :plaques_latest, :only => [:show]
   end
-  
+
   # e.g. /map?box=[51.6,-0.3],[51.4,-0.1]
   resource :map, :as => :map, :controller => :plaques_map, :only => [:show]
 
@@ -93,7 +93,7 @@ Openplaques::Application.routes.draw do
     resource :data, :controller => :pages, :id => "data", :as => "about_the_data", :only => :show
   end
   resource :contribute, :controller => :pages, :id => "contribute", :as => "contribute", :only => :show
-  resource :explore, :controller => :pages, :id => "explore", :as => "explore", :only => :show
+  resource :explore, :controller => :explore, :only => :show
 
   # Generic resource for all pages
   resources :pages

@@ -1,3 +1,5 @@
 #plaque-map {height: 300px;}
 
 #plaque-map.full {height: 600px;}
+
+#plaque-map.mini {height: 400px; }
