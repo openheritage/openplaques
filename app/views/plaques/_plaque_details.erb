@@ -44,4 +44,16 @@
      <td>As far as we know, it is not currently on display</td>
    </tr>
    <% end %>
+   <tr>
+      <th>See also...</th>
+      <td>
+      <% @plaque.people.each do |person| %>
+        <% person.plaques.each do |plaque| %>
+          <% if plaque != @plaque %>
+            <%= link_to(thumbnail_img(plaque), plaque) %>
+          <% end %>
+        <% end %>
+      <% end %>
+      </td>
+   </tr>
  </table>
