@@ -20,6 +20,7 @@ end
 gem 'json'
 gem 'curb'
 gem 'will_paginate'
+gem 'randumb'
 
 gem 'devise'
 
