@@ -27,7 +27,7 @@ module PhotosHelper
           desc += thumbnail_img(thing.plaque)
         rescue
           if thing.colour && thing.colour.slug =~ /(blue|black|yellow|red|white|green)/
-            desc += image_tag("icon-" + thing.colour.slug + ".png", :size => "16x16")
+            desc += image_tag("icon_" + thing.colour.slug + "_16.png", :size => "16x16")
           end
         end
       end
