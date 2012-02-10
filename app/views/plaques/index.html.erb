@@ -6,13 +6,8 @@
 <% if @plaques.size > 0 %>
 
   <p>Recently added plaques:</p>
-
-  <% @plaques.each do |plaque| %>
-    <h2><%= link_to title(plaque), plaque %></h2>
-    <%= plaque.location.area.name if plaque.location.try(:area) %>
-    <p><%= plaque.inscription.blank? ? "(unknown inscription)" : plaque.inscription %></p>
-
-  <% end %>
+  
+  <%= plaque_list(@plaques) %>
 
 <% else %>
   <%= content_tag("p", "No plaques yet.")%>
