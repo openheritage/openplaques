@@ -42,8 +42,11 @@ namespace "photos" do
 
       @photo = nil
 
-      file_url = "http://farm" + photo.attributes["farm"] + ".static.flickr.com/" + photo.attributes["server"] + "/" + photo.attributes["id"] + "_" + photo.attributes["secret"] + "_b.jpg"
+      file_url = "http://farm" + photo.attributes["farm"] + ".staticflickr.com/" + photo.attributes["server"] + "/" + photo.attributes["id"] + "_" + photo.attributes["secret"] + "_z.jpg"
       photo_url = "http://www.flickr.com/photos/" + photo.attributes["owner"] + "/" + photo.attributes["id"] + "/"
+
+# http://farm5.staticflickr.com/4054/4445296995_bea2dc79aa_b.jpg
+# http://farm5.staticflickr.com/4054/4445296995_bea2dc79aa_z.jpg?zz=1
 
       @photo = Photo.find_by_url(photo_url)
 

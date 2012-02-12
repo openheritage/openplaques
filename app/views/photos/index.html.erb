@@ -11,15 +11,13 @@
   We need you to hunt down any that don't have photographs, take a picture, post it to Flickr, accurately place
   it on your Flickr map, give it one of the forms of Creative Commons licence, tag it with the openplaques id and
   add it to <a href="http://www.flickr.com/groups/openplaques/">our Flickr group</a>.</p>
-  <p>Here are the <%= pluralize(@photos.size,"most recently taken photograph") %> from just some of the <%=@photographer_count %> <%= link_to "photographers", photographers_path %> who have linked their photos to our site:</p>
 
-  <%= content_tag("ul", :class => "photographer_photos") do %>
-    <% @photos.each do |photo| %>
-      <%= content_tag("li") do %>
-        <%= link_to(image_tag(photo.file_url), photo) %>
-      <%= link_to(photo.photographer, "photographers/" + photo.photographer)  %>
-      <% end %>
-    <% end %>
+  <%= will_paginate @plaques %>
+
+  <% @photos.each do |photo| %>
+    <div style="float: left;">
+      <%= link_to(image_tag(photo.file_url, :size => "75x75"), photo) %>
+    </div>
   <% end %>
-  
+  <br style="clear: left;"/>
 </div>
