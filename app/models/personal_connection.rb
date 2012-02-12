@@ -16,10 +16,22 @@ class PersonalConnection < ActiveRecord::Base
   belongs_to :plaque, :counter_cache => true
 
   def from
+    if (verb.id == 8)
+      return person.born_in.to_s
+    end
+    if (verb.id == 3)
+      return person.died_in.to_s
+    end
     started_at ? started_at.year.to_s : ""
   end
 
   def to
+    if (verb.id == 8)
+      return person.born_in.to_s
+    end
+    if (verb.id == 3)
+      return person.died_in.to_s
+    end
     ended_at ? ended_at.year.to_s : ""
   end
 
