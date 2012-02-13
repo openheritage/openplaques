@@ -7,7 +7,11 @@
     <%= will_paginate @people %>
     <ul>
       <% @people.each do |person| %>
-        <li><%= dated_person(person) %> <%= link_to "Add role", new_personal_role_path(person) %></li>
+        <li><%= dated_person(person) %> <%= link_to "Add role", new_personal_role_path(person) %>
+          <% person.plaques.each do |plaque| %>
+            <br />"<%= plaque.inscription %>"
+          <% end %>
+        </li>
       <% end %>
     </ul>
   <% else %>
