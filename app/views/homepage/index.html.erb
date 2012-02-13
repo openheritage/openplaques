@@ -7,24 +7,24 @@
 
     <ul id="homepage_modules">
       <li>
-        <h2>Explore</h2>
+        <h2><%=t :explore %></h2>
         <p>Browse the <%= @plaques_count %> plaques by <%= link_to "person", people_path %>, <%= link_to "location", countries_path %> or <%= link_to "search", search_path %>.</p>
       </li>
       <li>
-        <h2>Contribute</h2>
+        <h2><%=t :contribute %></h2>
         <p>Spotted a plaque? Help us by <%= link_to "adding it", new_plaque_path %> to the site.</p>
       </li>
       <li>
-        <h2>News</h2>
+        <h2><%=t :news %></h2>
         <p>Subscribe to <a href="http://blog.openplaques.org">our blog</a> and follow us on <a href="http://www.twitter.com/openplaques">Twitter</a> for updates.</p>
       </li>
       <% if @todays %>
       <li id="plaque_of_the_day">
-        <h2>Plaque Of The Day</h2>
+        <h2><%=t :plaque_of_the_day %></h2>
         <div>
-					<div class="thumb">
+          <div class="thumb">
         <%= link_to thumbnail_img(@todays.plaque), @todays.plaque %>
-				</div>
+        </div>
         <div><%= link_to @todays.plaque.title, @todays.plaque %><br/>"<%= @todays.description %>" - <%= @todays.proposer %></div>
       </div>
       </li>
