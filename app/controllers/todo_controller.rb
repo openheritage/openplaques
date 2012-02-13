@@ -32,7 +32,7 @@ class TodoController < ApplicationController
     case params[:id]
 
     when 'colours_from_photos'
-      @plaques = Plaque.photographed_not_coloured
+      @plaques = Plaque.photographed_not_coloured.paginate(:page => params[:page], :per_page => 100)
       render :colours_from_photos
 
     when 'locations_from_geolocations'
