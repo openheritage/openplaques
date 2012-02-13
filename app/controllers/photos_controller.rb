@@ -6,8 +6,7 @@ class PhotosController < ApplicationController
   before_filter :find_photo, :only => [:destroy, :edit, :show, :update]
 
   def index
-    @photos = Photo.find(:all, :limit => 10, :order => "created_at DESC", :offset => params[:offset])
-    @photographer_count = Photo.all(:group => "photographer").count
+    @photos = Photo.paginate(:page => params[:page], :per_page => 20)
   end
 
   def update

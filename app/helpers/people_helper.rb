@@ -177,7 +177,17 @@ module PeopleHelper
     def verbs(person, plaque)
       verbs = Array.new
       connections(person, plaque).each do |personal_connection|
-        verbs << personal_connection.verb.name
+        years = ""
+        if personal_connection.from != ""
+          years += "(" + personal_connection.from
+        end
+        if personal_connection.to != "" and personal_connection.to != personal_connection.from
+          years += "-" + personal_connection.to
+        end
+        if years != ""
+          years += ")"
+        end
+        verbs << personal_connection.verb.name + " " + years
       end
       return verbs
     end

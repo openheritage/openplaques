@@ -158,11 +158,11 @@
 
 
       <div class="plaque_image plaque_multiple_images">
-      <% first_photo = @plaque.main_photo_reverse %>
+      <% first_photo = @plaque.main_photo %>
         <%= link_to(image_tag(first_photo.file_url, {:id => "primary_image", :alt => "Photo of plaque", :rel => "foaf:depiction"}), first_photo.url) %>
 
         <div id="secondary_images">
-        <% @plaque.photos.reverse_detail_order.each do |image| %>
+        <% @plaque.photos.detail_order.each do |image| %>
           <%= link_to(image_tag(image.file_url, {:alt => "Photo of plaque", :rel => "foaf:depiction"}), image.url) unless image == first_photo %>
         <% end %>
 
