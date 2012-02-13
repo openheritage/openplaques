@@ -9,6 +9,7 @@
   <p><%= f.label :photographer_url %> <%= f.text_field :photographer_url %></p>
   <p><%= f.label :file_url %> <%= f.text_field :file_url %></p>
   <p><%= f.label :plaque_id %> <%= f.text_field :plaque_id %></p>
-
+  <p>This is a <%= f.collection_select :shot, Photo.shots, :to_s, :to_s, :include_blank => true %> shot</p>
+    
   <%= f.submit "Create" %>
 <% end %>
