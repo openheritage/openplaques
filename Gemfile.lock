@@ -92,6 +92,7 @@ GEM
       rdoc (~> 3.4)
       thor (~> 0.14.6)
     rake (0.9.2.2)
+    randumb (0.1.4)
     rdoc (3.11)
       json (~> 1.4)
     sass (3.1.8)
@@ -133,6 +134,7 @@ DEPENDENCIES
   json
   pg
   rails
+  randumb
   sass-rails (~> 3.1.0)
   sqlite3
   uglifier (>= 1.0.3)
