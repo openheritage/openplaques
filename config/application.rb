@@ -29,7 +29,7 @@ module Openplaques
     # config.time_zone = 'Central Time (US & Canada)'
 
     # Set the default locale to be British English
-#    config.i18n.default_locale = :"en-GB"
+    config.i18n.default_locale = :"en-GB"
 
     # Enable the asset pipeline for speedier loading
     config.assets.enabled = true
