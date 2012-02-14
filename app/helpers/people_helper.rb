@@ -18,7 +18,11 @@ module PeopleHelper
       r += link_to(personal_role.related_person.name, personal_role.related_person)
     end
     if personal_role.started_at? && personal_role.ended_at?
-      r += " (" + personal_role.started_at.year.to_s + "-" + personal_role.ended_at.year.to_s + ")"
+      r += " (" + personal_role.started_at.year.to_s
+      if personal_role.started_at != personal_role.ended_at
+        r += "-" + personal_role.ended_at.year.to_s
+      end
+      r += ")"
     elsif personal_role.started_at?
       r += " (from " + personal_role.started_at.year.to_s + ")"
     elsif personal_role.ended_at?
