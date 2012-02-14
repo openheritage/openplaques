@@ -165,5 +165,9 @@ module ApplicationHelper
       pluralize(number, name)
     end
   end
+  
+  def make_slug_not_war
+    self.slug = (self.slug.blank? ? self.name : self.slug).rstrip.lstrip.downcase.gsub(" ", "_").gsub("-", "_").gsub(",", "_").gsub(".", "_").gsub("'", "")
+  end
 
 end

@@ -3,11 +3,13 @@
 # === Attributes
 # * +name+ - The name of the role.
 # * +role_type+ - The classification of the role (see self.types for choice)
+# * +wikipedia_stub+ - url of a relevant Wikipedia page
 #
 # === Associations
 # * +people+ - The people who have been asctibed this role.
 class Role < ActiveRecord::Base
 
+  before_validation :make_slug_not_war
   validates_presence_of :name, :slug
   validates_uniqueness_of :name, :slug
   validates_format_of :slug, :with => /^[a-z\_]+$/, :message => "can only contain lowercase letters and underscores"
@@ -18,6 +20,7 @@ class Role < ActiveRecord::Base
 
   before_save :update_index, :filter_name
 
+  include ApplicationHelper
 
   def related_roles
     Role.find(:all, :conditions =>
@@ -51,8 +54,6 @@ class Role < ActiveRecord::Base
 
   def place?
     return true if "place" == role_type
-#    return true if slug.start_with?("birthplace")
-#    return true if slug.start_with?("where_")
     return false
   end
   
@@ -80,7 +81,6 @@ class Role < ActiveRecord::Base
   
   def relationship?
     return true if "relationship" == role_type
-#    return true if slug.include?("kings_")
     return false
   end
 
