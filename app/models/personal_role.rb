@@ -5,7 +5,6 @@
 # * Related Person - optional related person for special roles like 'wife' or 'mother'
 class PersonalRole < ActiveRecord::Base
 
-  validates_uniqueness_of :person_id, :scope => :role_id
   validates_presence_of :role_id, :person_id
 
   belongs_to :person, :counter_cache => true
