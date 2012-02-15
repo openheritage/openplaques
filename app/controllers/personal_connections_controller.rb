@@ -18,6 +18,22 @@ class PersonalConnectionsController < ApplicationController
 
   def update
     @personal_connection = @plaque.personal_connections.find(params[:id])
+    if params[:personal_connection][:started_at] > ""
+      started_at = params[:personal_connection][:started_at]
+      if started_at =~/\d{4}/
+        started_at = started_at + "-01-01"
+        started_at = Date.parse(started_at)
+        @personal_connection.started_at = started_at
+      end
+    end
+    if params[:personal_connection][:ended_at] > ""
+      ended_at = params[:personal_connection][:ended_at]
+      if ended_at =~/\d{4}/
+        ended_at = ended_at + "-01-01"
+        ended_at = Date.parse(ended_at)
+        @personal_connection.ended_at = ended_at
+      end
+    end
     if @personal_connection.update_attributes(params[:personal_connection])
       redirect_to edit_plaque_path(@plaque.id)
     else
@@ -33,6 +49,22 @@ class PersonalConnectionsController < ApplicationController
 
   def create
     @personal_connection = @plaque.personal_connections.new(params[:personal_connection])
+    if params[:personal_connection][:started_at] > ""
+      started_at = params[:personal_connection][:started_at]
+      if started_at =~/\d{4}/
+        started_at = started_at + "-01-01"
+        started_at = Date.parse(started_at)
+        @personal_connection.started_at = started_at
+      end
+    end
+    if params[:personal_connection][:ended_at] > ""
+      ended_at = params[:personal_connection][:ended_at]
+      if ended_at =~/\d{4}/
+        ended_at = ended_at + "-01-01"
+        ended_at = Date.parse(ended_at)
+        @personal_connection.ended_at = ended_at
+      end
+    end
     if @personal_connection.save
       redirect_to :back
     else
@@ -42,7 +74,6 @@ class PersonalConnectionsController < ApplicationController
       render :new
     end
   end
-
 
   protected
 
