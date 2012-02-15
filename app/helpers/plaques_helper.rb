@@ -284,7 +284,7 @@ module PlaquesHelper
     @ul = content_tag("table", @listy, :class => :plaque_list)
     out = "".html_safe
     if things.size > 0
-      out << content_tag("p", pluralize(things.size.to_s, "plaque"))
+      out << content_tag("p", pluralize(things.size.to_s, "results"))
       out << @ul
       out << @add
     else
