@@ -356,6 +356,10 @@ class Plaque < ActiveRecord::Base
   def foreign?
     self.language.alpha2 != "en"
   end
+  
+  def to_s
+    self.title
+  end
 
   private
 

@@ -216,6 +216,14 @@ class Person < ActiveRecord::Base
   :methods => [:born_in, :born_at, :died_in, :died_at, :default_wikipedia_url, :default_dbpedia_uri, :surname, :type]
   )
   end
+  
+  def thumbnail_url
+    return "/assets/NoPersonSqr.png"
+  end
+  
+  def to_s
+    self.name
+  end
 
   private
 

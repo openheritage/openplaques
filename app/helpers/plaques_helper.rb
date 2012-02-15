@@ -205,9 +205,6 @@ module PlaquesHelper
     @create = "".html_safe
     @create += " ".html_safe + link_to("Create one?".html_safe, new_plaque_path).html_safe if current_user && current_user.is_admin?
     plaques.each do |plaque|
-      @loc = map_icon_if_known(plaque)
-      @photo = "".html_safe
-
       # RDFa: because plaques have different relationships with the current page.
       # in the context of an organisation page, it is a list of plaques made by that organisation
       # in the context of, say, colour it is a 'has primary colour of' relationship.
@@ -222,25 +219,77 @@ module PlaquesHelper
       end
 
       @listy << content_tag("tr",
-#    content_tag("td", plaque_icon(plaque), :class => :photo)  +
-    content_tag("td", link_to(thumbnail_img(plaque), plaque_path(plaque)), :class => :photo)  +
-    content_tag("td", link_to(plaque.title, plaque_path(plaque))) + 
-#    content_tag("td", link_to("#" + plaque.id.to_s, plaque_path(plaque)), :class => :photo)  +
-#    content_tag("td", @loc, :class => "geo") +
-#    content_tag("td", camera_icon(plaque), :class => :photo) +
-    content_tag("td", new_linked_inscription(plaque)),
-          args.merge!(:id => "openplaques:id:".html_safe + plaque.id.to_s))
+      content_tag("td", link_to(thumbnail_img(plaque), plaque_path(plaque)), :class => :photo)  +
+      content_tag("td", link_to(plaque.title, plaque_path(plaque))) + 
+      content_tag("td", new_linked_inscription(plaque)),
+      args.merge!(:id => "openplaques:id:".html_safe + plaque.id.to_s))
     end
     @ul = content_tag("table", @listy, :class => :plaque_list)
     out = "".html_safe
-    if @plaques.size > 0
-      out << content_tag("p", pluralize(@plaques.size.to_s, "plaque"))
+    if plaques.size > 0
+      out << content_tag("p", pluralize(plaques.size.to_s, "plaque"))
       out << @ul
       out << @add
     else
       out << content_tag("p", "No plaques yet.".html_safe + @create.html_safe)
     end
+  end
 
+  def list(things, context = nil)
+    # things.sort!{|t1,t2|t1.to_s <=> t2.to_s}
+    @listy = "".html_safe
+    @add = "".html_safe
+    @add += content_tag("p", link_to("add one?".html_safe, new_plaque_path)) if current_user && current_user.is_admin?
+    @create = "".html_safe
+    @create += " ".html_safe + link_to("Create one?".html_safe, new_plaque_path).html_safe if current_user && current_user.is_admin?
+    things.each do |thing|
+      # RDFa: because plaques have different relationships with the current page.
+      # in the context of an organisation page, it is a list of plaques made by that organisation
+      # in the context of, say, colour it is a 'has primary colour of' relationship.
+      args = case context
+        when :organisation then {:rel => "foaf:made".html_safe}
+        when :colour then {:rel => "op:primaryColourOf".html_safe}
+        else {}
+      end
+
+      begin
+        args = args.merge(:class => thing.colour.name.downcase)
+      rescue
+      end
+
+      begin
+        @listy << content_tag("tr",
+          content_tag("td", link_to(thumbnail_img(thing), plaque_path(thing)), :class => :photo)  +
+          content_tag("td", link_to(thing.to_s, plaque_path(thing))) + 
+          content_tag("td", new_linked_inscription(thing)),
+          args.merge!(:id => thing.machine_tag.html_safe)
+        )
+      rescue
+        # maybe it is a person
+        begin
+          @listy << content_tag("tr",
+            content_tag("td", link_to(thumbnail_img(thing), person_path(thing)), :class => :photo)  +
+            content_tag("td", link_to(thing.to_s, person_path(thing))) +
+            content_tag("td", "")
+          )
+        rescue
+          @listy << content_tag("tr",
+            content_tag("td", thumbnail_img(thing), :class => :photo)  +
+            content_tag("td", thing.to_s) +
+            content_tag("td", "** not sure what this object is (or something threw an error) **")
+          )
+        end
+      end
+    end
+    @ul = content_tag("table", @listy, :class => :plaque_list)
+    out = "".html_safe
+    if things.size > 0
+      out << content_tag("p", pluralize(things.size.to_s, "plaque"))
+      out << @ul
+      out << @add
+    else
+      out << content_tag("p", "No plaques yet.".html_safe + @create.html_safe)
+    end
   end
 
   def erected_information(plaque)
