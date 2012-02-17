@@ -26,6 +26,7 @@
 
     <%= tag("link", :rel => "shortcut icon", :href => image_path("openplaques-icon.png"))%>
     <%= csrf_meta_tag %>
+    <%= display_meta_tags :site => 'My website' %>
   </head>
 
   <body id="<%= params[:controller].parameterize %>_controller">

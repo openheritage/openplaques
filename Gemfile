@@ -21,6 +21,7 @@ gem 'json'
 gem 'curb'
 gem 'will_paginate'
 gem 'randumb'
+gem 'meta-tags', :require => 'meta_tags'
 
 gem 'devise'
 

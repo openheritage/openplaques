@@ -352,6 +352,10 @@ class Plaque < ActiveRecord::Base
       return photos.reverse_detail_order.first
     end
   end
+  
+  def thumbnail_url
+    main_photo ? main_photo.thumbnail_url : nil
+  end
 
   def foreign?
     self.language.alpha2 != "en"

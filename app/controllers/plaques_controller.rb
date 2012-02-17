@@ -81,6 +81,13 @@ class PlaquesController < ApplicationController
   # GET /plaques/1.bp
   def show
     @plaques = [@plaque]
+    set_meta_tags :open_graph => {
+      :type  => :website,
+      :url   => url_for(:only_path=>false),
+      :image => @plaque.thumbnail_url,
+      :title => @plaque.title,
+      :description => @plaque.inscription,
+    }
     respond_to do |format|
       format.html # show.html.erb
       format.kml { render "plaques/index" }
