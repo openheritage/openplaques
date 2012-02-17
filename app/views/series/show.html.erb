@@ -1,12 +1,5 @@
 <% content_for :page_title, "Plaque series " + @series.name %>
 <div class="panel">
   <h1>Plaque series <%= @series.name %></h1>
-
-  <%= content_tag("ul") do %>
-    <% @series.plaques.each do |plaque| %>
-      <%= content_tag("li") do %>
-        <%= link_to(plaque.title, plaque) %>
-      <% end %>
-    <% end %>
-  <% end %>
+  <%= list(@series.plaques) %>
 </div>
