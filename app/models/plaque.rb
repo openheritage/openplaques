@@ -354,7 +354,10 @@ class Plaque < ActiveRecord::Base
   end
   
   def thumbnail_url
-    main_photo ? main_photo.thumbnail_url : nil
+    if main_photo == nil 
+      return nil
+    end
+    main_photo.thumbnail_url != "" ? main_photo.thumbnail_url : main_photo.file_url
   end
 
   def foreign?
