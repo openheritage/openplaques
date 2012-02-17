@@ -8,6 +8,17 @@ class SeriesController < ApplicationController
   
   def show
     @series = Series.find(params[:id])
+    @plaques = @series.plaques
+    @mean = help.find_mean(@plaques)
+    respond_to do |format|
+      format.html # show.html.erb
+      format.kml { render "plaques/index" }
+      format.yaml
+      format.xml { render "plaques/index" }
+      format.json {
+        render :json => @series.plaques
+      }
+    end
   end
 
   def new
@@ -29,4 +40,13 @@ class SeriesController < ApplicationController
     end
   end
 
+  def help
+    Helper.instance
+  end
+
+  class Helper
+    include Singleton
+    include PlaquesHelper
+  end
+  
 end

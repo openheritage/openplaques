@@ -53,7 +53,7 @@ class PlaquesController < ApplicationController
       end
     end
 
-    if params[:limit] && params[:limit].to_i <= 2000
+    if params[:limit] && params[:limit].to_i <= 10000
       limit = params[:limit]
     else
       limit = 20

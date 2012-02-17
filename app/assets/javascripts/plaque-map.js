@@ -57,8 +57,12 @@ function askForPlots() {
   var bounds=map.getBounds();
   var minll=bounds.getSouthWest();
   var maxll=bounds.getNorthEast();
-  var msg='/plaques.json?box=['+maxll.lat+','+minll.lng+'],['+minll.lat+','+maxll.lng+']&limit=2000&data=simple';
-
+  var msg = '';
+  if (showAll) {
+    msg='/plaques.json?box=['+maxll.lat+','+minll.lng+'],['+minll.lat+','+maxll.lng+']&limit=10000&data=simple';
+  } else {
+    msg=thisUrl + '.json?box=['+maxll.lat+','+minll.lng+'],['+minll.lat+','+maxll.lng+']&limit=10000&data=simple';
+  }
 
 //   var msg = 'http://openplaques.org/plaques.json?box=[51.5482,-0.1617],[51.5282,-0.1217]'
   ajaxRequest.onreadystatechange = stateChanged;
@@ -69,6 +73,7 @@ function askForPlots() {
 function initmap() {
 
   var plaque_map = $("#plaque-map");
+  var showAll = true;
 
   if (plaque_map) {
 
@@ -92,7 +97,6 @@ function initmap() {
       mapquestAttrib = 'Data &amp; imagery from <a href="http://open.mapquest.co.uk" target="_blank">MapQuest</a>, <a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> and contributors.';
       var mapquest = new L.TileLayer(mapquestUrl, {maxZoom: 18, attribution: mapquestAttrib, subdomains: subDomains});
 
-
       var latitude = plaque_map.attr("data-latitude");
       var longitude = plaque_map.attr("data-longitude");
       var zoom = plaque_map.attr("data-zoom");
@@ -113,7 +117,6 @@ function initmap() {
       map.addLayer(mapquest);
       askForPlots();
       map.on('moveend', onMapMove);
-
   }
 
 }

@@ -489,15 +489,17 @@ module PlaquesHelper
     end
     @lat = 0
     @lon = 0
-    @geolocated_plaques = @plaques.clone()
-    @geolocated_plaques.delete_if{ |plaque| !plaque.geolocated?}
-    for plaque in @geolocated_plaques
-      @lat += plaque.latitude
-      @lon += plaque.longitude
+    @count = 0
+    plaques.each do |plaque|
+      if plaque.geolocated?
+        @lat += plaque.latitude
+        @lon += plaque.longitude
+        @count = @count + 1
+      end
     end
-    if (@geolocated_plaques.length > 0)
-      @centre.latitude = @lat / @geolocated_plaques.length
-      @centre.longitude = @lon / @geolocated_plaques.length
+    if (@count > 0)
+      @centre.latitude = @lat / @count
+      @centre.longitude = @lon / @count
     end
 #    puts ("****** lat= " + @centre.latitude.to_s + ",lon= " + @centre.longitude.to_s + " from " + plaques.length.to_s + " plaques, " + @geolocated_plaques.length.to_s + " are geolocated")
     return @centre
