@@ -1,5 +1,8 @@
 <% content_for :page_title, "Historical plaques in " + @area.name + ", " + @area.country.name %>
-
+<script>
+  showAll = true;
+  thisUrl = "<%= url_for() %>";
+</script>
 <div class="panel clearfix">
   <% if current_user && current_user.is_admin? %>
   <section class="admin_panel">
