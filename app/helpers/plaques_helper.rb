@@ -479,36 +479,42 @@ module PlaquesHelper
     return inscription
   end
 
-  # given a set of plaques tell me what the mean point is
-  def find_mean(plaques)
-    @centre = Point.new
-    @centre.latitude = 51.475 # Greenwich Meridian
-    @centre.longitude = 0
-    if (plaques == nil)
+  # given a set of plaques, or a thing that has plaques (like an organisation) tell me what the mean point is
+  def find_mean(thing)
+    begin
+      @centre = Point.new
+      @centre.latitude = 51.475 # Greenwich Meridian
+      @centre.longitude = 0
+      begin
+        @lat = 0
+        @lon = 0
+        @count = 0
+        thing.each do |plaque|
+          if plaque.geolocated?
+            @lat += plaque.latitude
+            @lon += plaque.longitude
+            @count = @count + 1
+          end
+        end
+        @centre.latitude = @lat / @count
+        @centre.longitude = @lon / @count
+#        puts ("****** lat= " + @centre.latitude.to_s + ",lon= " + @centre.longitude.to_s + " from " + thing.size.to_s + " plaques, " + @count.to_s + " are geolocated")
+        return @centre
+      rescue
+        # oh, maybe it's a thing that has plaques
+        return find_mean(thing.plaques)
+      end
+    rescue
+      # something went wrong, failing gracefully
       return @centre
     end
-    @lat = 0
-    @lon = 0
-    @count = 0
-    plaques.each do |plaque|
-      if plaque.geolocated?
-        @lat += plaque.latitude
-        @lon += plaque.longitude
-        @count = @count + 1
-      end
-    end
-    if (@count > 0)
-      @centre.latitude = @lat / @count
-      @centre.longitude = @lon / @count
-    end
-#    puts ("****** lat= " + @centre.latitude.to_s + ",lon= " + @centre.longitude.to_s + " from " + plaques.length.to_s + " plaques, " + @geolocated_plaques.length.to_s + " are geolocated")
-    return @centre
   end
 
   class Point
     attr_accessor :precision
     attr_accessor :latitude
     attr_accessor :longitude
+    attr_accessor :zoom
   end
   
 end

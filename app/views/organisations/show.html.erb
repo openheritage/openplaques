@@ -1,4 +1,8 @@
 <% content_for :page_title, "#{@organisation.name} #{@colour_label} plaques" %>
+<script>
+  showAll = false;
+  thisUrl = "<%= url_for() %>";
+</script>
 
 <div class="panel clearfix">
   <% if current_user && current_user.is_admin? %>
@@ -14,7 +18,7 @@
 
 <div id="organisation_info" typeof="foaf:Organization">
   <%= simple_format(@organisation.description) if @organisation.description %>
-  <%#= render :partial => 'plaques/map.html.erb' %>
+  <div id="plaque-map" data-latitude="<%= @mean.latitude %>" data-longitude="<%= @mean.longitude %>" class="full" data-zoom="<%= @zoom %>"></div>
   <%= plaque_list(@plaques, :organisation) %>
 </div>
 

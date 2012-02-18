@@ -32,16 +32,15 @@ class OrganisationsController < ApplicationController
       redirect_to(organisation_path(@organisation.slug), :status => :moved_permanently) and return
     end
     
-    @plaques = @organisation.plaques
-#      @centre = find_mean(@plaques)
-    @zoom = 13
+    @mean = help.find_mean(@organisation.plaques)
+    @zoom = 10
     respond_to do |format|
       format.html
       format.kml { render "plaques/index" }
       format.osm { render "plaques/index" }
       format.yaml
       format.xml
-      format.json { render :json => @organisation }
+      format.json { render :json => @organisation.plaques }
     end
   end
 
@@ -76,6 +75,15 @@ class OrganisationsController < ApplicationController
 
     def find_organisation
       @organisation = Organisation.find_by_slug!(params[:id])
+    end
+
+    def help
+      Helper.instance
+    end
+
+    class Helper
+      include Singleton
+      include PlaquesHelper
     end
 
 end
