@@ -26,6 +26,7 @@ class SearchController < ApplicationController
     def set_phrase
       @phrase = params[:phrase]
       @street = params[:street]
+      @street = @street[/([a-zA-Z][a-z A-Z]+)/] unless @street == nil
     end
 
 end
