@@ -14,9 +14,16 @@ class SearchController < ApplicationController
     elsif  @street != nil && @street !=""
       @search_results = Plaque.find(:all, :joins => :location, :conditions => ["lower(locations.name) LIKE ?", "%" + @street.downcase + "%"], :include => [[:personal_connections => [:person]], [:location => [:area => :country]]])      
       @phrase = ""
-      render "results"
+      
     end
-  end
+    respond_to do |format|
+      format.html { render "results" }
+      format.kml { render "plaques/index" }
+      format.osm { render "plaques/index" }
+      format.yaml
+      format.xml { render :xml => @search_results }
+      format.json { render :json => @search_results }
+    end  end
 
   def get_search_results(phrase)
   end
