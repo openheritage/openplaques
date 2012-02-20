@@ -86,6 +86,9 @@ Openplaques::Application.routes.draw do
   match 'search' => "search#index"
   match 'search/:phrase' => "search#results"
 
+  # Convenience paths for search:
+  match 'match' => "match#index"
+
   # Convenience resources for important pages:
   resource :about, :controller => :pages, :id => "about", :only => :show
   resource :contact, :controller => :pages, :id => "contact", :only => :show
