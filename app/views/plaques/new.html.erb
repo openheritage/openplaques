@@ -103,6 +103,10 @@
         </div>
 
         <div class="row">
+          <%= f.label :inscription_is_stub, "I don't know the full, exact wording yet" %><%= f.check_box :inscription_is_stub %>
+        </div>
+
+        <div class="row">
             <%= f.label :language_id, "What language is it in?" %>
             <%= f.collection_select :language_id, @languages, :id, :name %>
         </div>
