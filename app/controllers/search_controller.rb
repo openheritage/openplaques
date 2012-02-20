@@ -10,11 +10,9 @@ class SearchController < ApplicationController
         @search_results = Person.find(:all, :conditions => ["lower(name) LIKE ?", "%" + @phrase.downcase + "%"])
         @search_results += Plaque.find(:all, :conditions => ["lower(inscription) LIKE ?", "%" + @phrase.downcase + "%"], :include => [[:personal_connections => [:person]], [:location => [:area => :country]]]).sort!{|t1,t2|t1.to_s <=> t2.to_s}
       end
-      render "results"
     elsif  @street != nil && @street !=""
       @search_results = Plaque.find(:all, :joins => :location, :conditions => ["lower(locations.name) LIKE ?", "%" + @street.downcase + "%"], :include => [[:personal_connections => [:person]], [:location => [:area => :country]]])      
       @phrase = ""
-      
     end
     respond_to do |format|
       format.html { render "results" }
