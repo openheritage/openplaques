@@ -1,8 +1,4 @@
 <% content_for :page_title, "#{@organisation.name} #{@colour_label} plaques" %>
-<script>
-  showAll = false;
-  thisUrl = "<%= url_for() %>";
-</script>
 
 <div class="panel clearfix">
   <% if current_user && current_user.is_admin? %>

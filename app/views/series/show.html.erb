@@ -1,8 +1,4 @@
 <% content_for :page_title, "Plaque series " + @series.name %>
-<script>
-  showAll = false;
-  thisUrl = "<%= url_for() %>";
-</script>
 <div class="panel">
   <h1>Plaque series <%= @series.name %></h1>
   <div id="plaque-map" data-latitude="<%= @mean.latitude %>" data-longitude="<%= @mean.longitude %>" class="full" data-zoom="8"></div>

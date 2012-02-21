@@ -52,17 +52,12 @@ function removeMarkers() {
 }
 
 
-function askForPlots() {
+function askForPlots(url) {
   // request the marker info with AJAX for the current bounds
   var bounds=map.getBounds();
   var minll=bounds.getSouthWest();
   var maxll=bounds.getNorthEast();
-  var msg = '';
-  if (showAll) {
-    msg='/plaques.json?box=['+maxll.lat+','+minll.lng+'],['+minll.lat+','+maxll.lng+']&limit=10000&data=simple';
-  } else {
-    msg=thisUrl + '.json?box=['+maxll.lat+','+minll.lng+'],['+minll.lat+','+maxll.lng+']&limit=10000&data=simple';
-  }
+  var msg = url + '?box=['+maxll.lat+','+minll.lng+'],['+minll.lat+','+maxll.lng+']&limit=10000&data=simple';
 
 //   var msg = 'http://openplaques.org/plaques.json?box=[51.5482,-0.1617],[51.5282,-0.1217]'
   ajaxRequest.onreadystatechange = stateChanged;
@@ -114,15 +109,19 @@ function initmap() {
         map.setView(new L.LatLng(51.54281206119232,-0.16788482666015625),zoom_level);
       }
 
+      var data_view = plaque_map.attr("data-view");
+      if (data_view && data_view == "all") {
+        var url = '/plaques.json';
+      } else {
+        var url = document.location + '.json';
+      }
+
       map.addLayer(mapquest);
-      askForPlots();
-      map.on('moveend', onMapMove);
+      askForPlots(url);
+      map.on('moveend', function() { askForPlots(url) });
   }
 
 }
-
-  // then add this as a new function...
-function onMapMove(e) { askForPlots(); }
 
 $(document).ready(function() {
   if ($("#plaque-map")) {
