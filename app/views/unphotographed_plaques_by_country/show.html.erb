@@ -1,9 +1,5 @@
 <% content_for :page_title, "Unphotographed plaques in " + @country.name %>
 <h1>Unphotographed plaques in <%= link_to @country.name, country_path(@country) %></h1>
-<script>
-  showAll = false;
-  thisUrl = "<%= url_for() %>";
-</script>
 
 <% unless @plaques.nil? %>
   <p>There <%= pluralize_is_or_are(@plaques.size, "plaque") %> in <%= @country.name  %> that <%= havent_or_hasnt(@plaques.size) %> been photographed yet.</p>

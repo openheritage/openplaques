@@ -29,6 +29,7 @@ GEM
       activesupport (= 3.1.1)
     activesupport (3.1.1)
       multi_json (~> 1.0)
+    addressable (2.2.7)
     airbrake (3.0.4)
       activesupport
       builder
@@ -51,6 +52,14 @@ GEM
     erubis (2.7.0)
     execjs (1.2.9)
       multi_json (~> 1.0)
+    faraday (0.7.6)
+      addressable (~> 2.2)
+      multipart-post (~> 1.1)
+      rack (~> 1.1)
+    google-spreadsheet-ruby (0.1.8)
+      nokogiri (>= 1.4.3.1)
+      oauth (>= 0.3.6)
+      oauth2 (>= 0.5.0)
     hike (1.2.1)
     i18n (0.6.0)
     jquery-rails (1.0.14)
@@ -61,8 +70,17 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    meta-tags (1.2.4)
+      actionpack
     mime-types (1.17.2)
     multi_json (1.0.3)
+    multipart-post (1.1.5)
+    nokogiri (1.5.0)
+    nokogiri (1.5.0-x86-mingw32)
+    oauth (0.4.5)
+    oauth2 (0.5.2)
+      faraday (~> 0.7)
+      multi_json (~> 1.0)
     orm_adapter (0.0.5)
     pg (0.11.0)
     pg (0.11.0-x86-mingw32)
@@ -130,8 +148,10 @@ DEPENDENCIES
   coffee-rails (~> 3.1.0)
   curb
   devise
+  google-spreadsheet-ruby
   jquery-rails
   json
+  meta-tags
   pg
   rails
   randumb
