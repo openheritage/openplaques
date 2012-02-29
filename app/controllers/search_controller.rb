@@ -3,6 +3,10 @@ class SearchController < ApplicationController
   before_filter :set_phrase, :only => [:index, :results]
 
   def index
+    @search_results = []
+    if @phrase == nil
+      @phrase = ""
+    end
     if @phrase != nil && @phrase != ""
       if @street != nil && @street !=""
         @search_results = Plaque.find(:all, :joins => :location, :conditions => ["lower(inscription) LIKE ? and lower(locations.name) LIKE ?", "%" + @phrase.downcase + "%", "%" + @street.downcase + "%"], :include => [[:personal_connections => [:person]], [:location => [:area => :country]]])
@@ -21,7 +25,8 @@ class SearchController < ApplicationController
       format.yaml
       format.xml { render :xml => @search_results }
       format.json { render :json => @search_results }
-    end  end
+    end
+  end
 
   def get_search_results(phrase)
   end
