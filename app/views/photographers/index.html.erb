@@ -1,6 +1,10 @@
 <% content_for :page_title, "Blue plaque photographers" %>
 
 <div class="panel">
+  <section class="admin_panel">
+    <%= link_to("Add a new photographer", new_photographer_path, {:class => :edit, :title => "Add a new photographer"})%>
+  </section>
+  
   <p><%= pluralize(@photographers.size, "Blue plaque photographer") %></p>
 
   <ol>

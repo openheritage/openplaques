@@ -61,7 +61,7 @@ module PlaquesHelper
   end
 
   # pass null to search all machinetagged photos on Flickr
-  def find_photo_by_machinetag(plaque)
+  def find_photo_by_machinetag(plaque, flickr_user_id)
 #    key = FLICKR_KEY # "86c115028094a06ed5cd19cfe72e8f8b"
     key = "86c115028094a06ed5cd19cfe72e8f8b"
     content_type = "1" # Photos only
@@ -76,6 +76,9 @@ module PlaquesHelper
 
     url = flickr_url + "?api_key=" + key + "&method=" + method + "&license=" + license + "&content_type=" + content_type + "&machine_tags=" + machine_tag_key +  "&extras=date_taken,owner_name,license,geo,machine_tags"
 
+    if (flickr_user_id)
+      url += "&user_id=" + flickr_user_id
+    end
     puts url
 
     new_photos_count = 0

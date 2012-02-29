@@ -48,7 +48,7 @@ Openplaques::Application.routes.draw do
 
   # These are all to do with the photos.
   resources :photos
-  resources :photographers, :controller => "PhotoPhotographers", :only => [:index, :show]
+  resources :photographers, :as => :photographers, :only => [:create, :index, :show, :new]
   resources :licences, :only => [:index, :show]
 
   # These are the organisations
