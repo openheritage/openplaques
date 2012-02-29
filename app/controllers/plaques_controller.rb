@@ -130,12 +130,12 @@ class PlaquesController < ApplicationController
   end
 
   def flickr_search
-    help.find_photo_by_machinetag(@plaque)
+    help.find_photo_by_machinetag(@plaque, nil)
     redirect_to @plaque
   end
 
   def flickr_search_all
-    help.find_photo_by_machinetag(nil)
+    help.find_photo_by_machinetag(nil, nil)
     redirect_to @plaque
   end
 
