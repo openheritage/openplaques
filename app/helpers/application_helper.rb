@@ -167,7 +167,7 @@ module ApplicationHelper
   end
   
   def make_slug_not_war
-    self.slug = (self.slug.blank? ? self.name : self.slug).rstrip.lstrip.downcase.gsub(" ", "_").gsub("-", "_").gsub(",", "_").gsub(".", "_").gsub("'", "")
+    self.slug = (self.slug.blank? ? self.name : self.slug).rstrip.lstrip.downcase.gsub(" ", "_").gsub("-", "_").gsub(",", "_").gsub(".", "_").gsub("'", "").gsub("__", "_")
   end
 
 end

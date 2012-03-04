@@ -32,6 +32,7 @@ Openplaques::Application.routes.draw do
     resource :language, :controller => "PlaqueLanguage", :only => [:edit]
     resources :connections, :controller => "PersonalConnections", :as => :connections
     resource :photos, :controller => "PlaquePhotos", :only => [:show]
+    resources :sponsorships
   end
 
   resource :areas, :controller => :all_areas, :only => [:show]
@@ -53,6 +54,7 @@ Openplaques::Application.routes.draw do
 
   # These are the organisations
   resources :organisations
+  resources :sponsorships
 
   # Verbs, roles and their connections to the plaques
   resources :verbs

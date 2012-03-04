@@ -4,6 +4,7 @@
 # === Attributes
 # * +name+ - The official name of the organisation
 # * +slug+ - An identifier for the organisation, usually equivalent to its name in lower case, with spaces replaced by underscores. Used in URLs.
+# * +description+ - A textual description
 # === Associations
 # * Plaques - plaques erected by this organisation.
 class Organisation < ActiveRecord::Base
@@ -12,7 +13,8 @@ class Organisation < ActiveRecord::Base
   validates_presence_of :name, :slug
   validates_uniqueness_of :slug
 
-  has_many :plaques
+  has_many :sponsorships
+  has_many :plaques, :through => :sponsorships
 
   scope :name_starts_with, lambda {|term| where(["lower(name) LIKE ?", term.downcase + "%"]) }
   scope :most_plaques_order, order("plaques_count DESC")
@@ -23,7 +25,7 @@ class Organisation < ActiveRecord::Base
   
   private
     def make_slug_not_war
-      self.slug = (self.slug.blank? ? self.name : self.slug).rstrip.lstrip.downcase.gsub(" ", "_").gsub("-", "_").gsub(",", "_").gsub(".", "_")
+      self.slug = (self.slug.blank? ? self.name : self.slug).rstrip.lstrip.downcase.gsub(" ", "_").gsub("-", "_").gsub(",", "_").gsub(".", "_").gsub("__", "_")
     end
 
 end

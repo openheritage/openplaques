@@ -29,7 +29,7 @@ class Plaque < ActiveRecord::Base
 
   belongs_to :location, :counter_cache => true
   belongs_to :colour, :counter_cache => true
-  belongs_to :organisation, :counter_cache => true
+#  belongs_to :organisation, :counter_cache => true
   belongs_to :plaque_erected_year, :counter_cache => true
   belongs_to :user, :counter_cache => true
   belongs_to :language, :counter_cache => true
@@ -39,8 +39,10 @@ class Plaque < ActiveRecord::Base
   has_one :pick
 
   has_many :personal_connections
+#  has_many :verbs, :through => :personal_connections
   has_many :photos, :inverse_of => :plaque
-  has_many :verbs, :through => :personal_connections
+  has_many :sponsorships
+  has_many :organisations, :through => :sponsorships
 
   before_save :set_erected_year, :use_other_colour_id
 
@@ -362,6 +364,19 @@ class Plaque < ActiveRecord::Base
 
   def foreign?
     self.language.alpha2 != "en"
+  end
+  
+  # so that old code still works
+  def organisation
+    self.organisations[0]
+  end
+  
+  # so that old code still works
+  def organisation=(organisation)
+    if organisation
+      sponsorship = self.sponsorships.new
+      sponsorship.organisation = organisation
+    end
   end
   
   def to_s

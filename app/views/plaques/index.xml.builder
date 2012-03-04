@@ -34,9 +34,9 @@ xml.openplaques(){
             end
           }
         end
-        if plaque.organisation
-          xml.organisation(:uri => organisation_url(plaque.organisation)) {
-            xml.text! plaque.organisation.name
+        plaque.organisations.each do |organisation|
+          xml.organisation(:uri => organisation_url(organisation)) {
+            xml.text! organisation.name
           }
         end
         if plaque.erected_at?
