@@ -15,7 +15,7 @@
 	  <p>
 	    <%= form_for @sponsorship do |f| %>
 	      <%= f.hidden_field :plaque_id, :value => @plaque.id %>
-	      Also sponsored by <%= f.collection_select :organisation_id, @organisations, :id, :name, {:include_blank => true} %>
+	      <% if @plaque.sponsorships.all.count > 0 %>Also sponsored<% end %> by <%= f.collection_select :organisation_id, @organisations, :id, :name, {:include_blank => true} %>
 	      <%= f.submit "Add", :class => :button %>
 	    <% end %>
 	  </p>
