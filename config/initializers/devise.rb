@@ -22,6 +22,9 @@ Devise.setup do |config|
   # session. If you need permissions, you should implement that in a before filter.
   # config.authentication_keys = [ :email ]
 
+
+  config.case_insensitive_keys = [:email]
+
   # Tell if authentication through request.params is enabled. True by default.
   # config.params_authenticatable = true
 
@@ -115,7 +118,7 @@ Devise.setup do |config|
 
   # Configure sign_out behavior.
   # By default sign_out is scoped (i.e. /users/sign_out affects only :user scope).
-  # In case of sign_out_all_scopes set to true any logout action will sign out all active scopes.
+  # In § of sign_out_all_scopes set to true any logout action will sign out all active scopes.
   # config.sign_out_all_scopes = false
 
   # ==> Navigation configuration
