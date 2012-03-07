@@ -10,7 +10,7 @@ To run this website, you will need to have the following bits of software instal
 
 * Ruby
 * Ruby on Rails
-* A database server - either MySQL or SQLite
+* A database server - either MySQL (preferred) or SQLite
 
 h2. Getting Started
 
