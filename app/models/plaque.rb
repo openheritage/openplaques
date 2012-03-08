@@ -47,17 +47,17 @@ class Plaque < ActiveRecord::Base
   before_save :set_erected_year, :use_other_colour_id
 
   scope :geolocated, :conditions => ["latitude IS NOT NULL"]
-  scope :ungeolocated, :conditions => {:latitude => nil}
+  scope :ungeolocated, :conditions => {:latitude => nil} , :order => "id DESC"
   scope :photographed, :conditions => ["photos_count > 0"]
-  scope :unphotographed, :conditions => {:photos_count => 0}
+  scope :unphotographed, :conditions => {:photos_count => 0} , :order => "id DESC"
   scope :coloured, :conditions => ["colour_id IS NOT NULL"]
   scope :photographed_not_coloured, :conditions => ["photos_count > 0 AND colour_id IS NULL"]
   scope :geo_no_location, :conditions => ["latitude IS NOT NULL AND location_id IS NULL"]
   scope :detailed_address_no_geo, :conditions => ["latitude IS NULL AND 1 = ((SELECT name FROM locations WHERE locations.id = location_id) REGEXP '.*[0-9].*')"]
-  scope :no_connection, :conditions => {:personal_connections_count => 0}
+  scope :no_connection, :conditions => {:personal_connections_count => 0} , :order => "id DESC"
   scope :no_description, where("description = '' OR description IS NULL")
-  scope :partial_inscription, :conditions => {:inscription_is_stub => true }
-  scope :partial_inscription_photo, :conditions => {:photos_count => 1..99999, :inscription_is_stub => true}
+  scope :partial_inscription, :conditions => {:inscription_is_stub => true } , :order => "id DESC"
+  scope :partial_inscription_photo, :conditions => {:photos_count => 1..99999, :inscription_is_stub => true} , :order => "id DESC"
 
   attr_accessor :country, :other_colour_id
 

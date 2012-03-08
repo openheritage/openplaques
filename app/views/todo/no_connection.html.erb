@@ -5,11 +5,8 @@
   <section class="admin_panel"><%= link_to("All to-do lists", "/todo") %></section>
   <% if @plaques.size > 0 %>
     <%= will_paginate @plaques %>
-    <ul>
-      <% @plaques.each do |plaque| %>
-        <li><%= plaque.inscription %> <%= link_to "Add connection", new_plaque_connection_path(plaque) %></li>
-      <% end %>
-    </ul>
+    <%= list @plaques, :no_connection %>
+    <%= will_paginate @plaques %>
   <% else %>
     <p>All plaques have connections. Bravo!</p>
   <% end %>

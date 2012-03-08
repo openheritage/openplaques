@@ -14,7 +14,7 @@
     <li><%= link_to(pluralize(@partial_inscription_count, "plaque") +  " needing full inscription" , todo_path('partial_inscription')) %></li>
     <li><%= link_to(pluralize(@no_roles_count, "people") +  " needing roles" , todo_path('no_roles')) %></li>
     <li><%= link_to(pluralize(@needs_geolocating_count, "plaque") +  " need geolocating", todo_path('needs_geolocating')) %></li>
-    <li><%= link_to(pluralize(@no_description_count, "plaque") +  " have no description", todo_path('needs_description')) %></li>
+    <% # <li><%= link_to(pluralize(@no_description_count, "plaque") +  " have no description", todo_path('needs_description')) </li> %>
     <li><%= link_to(pluralize(@unassigned_photo_count, "photos") +  " aren't linked to a plaque", todo_path('unassigned_photo')) %></li>
     <li><%= link_to(pluralize(@unphotographed_plaque_count, "plaques") +  " don't have a photo", todo_path('unphotographed')) %></li>
   </ul>

@@ -4,12 +4,10 @@
   <h1>Plaques with geolocations but no areas defined</h1>
   <section class="admin_panel"><%= link_to("All to-do lists", "/todo") %></section>
   <% if @plaques.size > 0 %>
-    <ul>
-      <% @plaques.each do |plaque| %>
-        <li><%= link_to(plaque.first_person || "Plaque #" + plaque.id.to_s, "/plaques/" + plaque.id.to_s + "/location/edit")  %></li>
-      <% end %>
-    </ul>
+    <%= will_paginate @plaques %>
+    <%= list @plaques %>
+    <%= will_paginate @plaques %>
   <% else %>
-    <p>All plaques with geolocations have areas defined. Bravo!</p>
+    <p>Every plaque with a location has a geolocation. Bravo!</p>
   <% end %>
 </div>

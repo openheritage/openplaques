@@ -5,10 +5,8 @@
   <section class="admin_panel"><%= link_to("All to-do lists", "/todo") %></section>
   <% if @plaques.size > 0 %>
     <%= will_paginate @plaques %>
-    <% @plaques.each do |plaque| %>
-	  <div style="float: left;"><%= link_to(thumbnail_img(plaque), "/plaques/" + plaque.id.to_s + "/colour/edit") %></div>
-	<% end %>
-	<br style="clear: left;"/>
+    <%= list @plaques, :colours_from_photos %>
+    <%= will_paginate @plaques %>
   <% else %>
     <p>Every plaque with a photo has a colour attribute assigned. Bravo!</p>
   <% end %>

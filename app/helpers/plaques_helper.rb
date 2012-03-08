@@ -238,7 +238,7 @@ module PlaquesHelper
     end
   end
 
-  def list(things, context = nil)
+  def list(things, context = nil, extras = nil)
     # things.sort!{|t1,t2|t1.to_s <=> t2.to_s}
     @listy = "".html_safe
     @add = "".html_safe
@@ -261,10 +261,17 @@ module PlaquesHelper
       end
 
       begin
+        extras = case context
+          when :no_connection then content_tag("td", button_to("Add connection", new_plaque_connection_path(thing), :method => :get, :class => :button))
+          when :partial_inscription then content_tag("td", button_to("Edit inscription", edit_plaque_inscription_path(thing), :method => :get, :class => :button))
+          when :colours_from_photos then content_tag("td", button_to("Edit colour", edit_plaque_colour_path(thing), :method => :get, :class => :button))
+          when :detailed_address_no_geo then content_tag("td", button_to("Edit geolocation", edit_plaque_geolocation_path(thing), :method => :get, :class => :button))
+        end
         @listy << content_tag("tr",
           content_tag("td", link_to(thumbnail_img(thing), plaque_path(thing)), :class => :photo)  +
           content_tag("td", link_to(thing.to_s, plaque_path(thing))) + 
-          content_tag("td", new_linked_inscription(thing)),
+          content_tag("td", new_linked_inscription(thing)) + 
+          extras,
           args.merge!(:id => thing.machine_tag.html_safe)
         )
       rescue
