@@ -13,6 +13,9 @@
       <li>
         <h2><%=t :contribute %></h2>
         <p>Spotted a plaque? Help us by <%= link_to "adding it", new_plaque_path %> to the site.</p>
+        <% if current_user && current_user.is_admin? %>
+          <p>Or find something <%= link_to("Todo", "/todo", {:class => :edit, :title => "Todos"})%></p>
+        <% end %>
       </li>
       <li>
         <h2><%=t :news %></h2>
