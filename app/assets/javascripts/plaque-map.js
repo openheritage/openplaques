@@ -124,7 +124,7 @@ function initmap() {
 }
 
 $(document).ready(function() {
-  if ($("#plaque-map")) {
+  if ($("#plaque-map").length) {
     initmap();
   }
 })
