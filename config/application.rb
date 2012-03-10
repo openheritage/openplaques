@@ -40,6 +40,9 @@ module Openplaques
     # Change the path that assets are served from
     # config.assets.prefix     = "/assets"
 
+    # This makes Devise work with Heroku
+    config.assets.initialize_on_precompile = false
+
     # JavaScript files you want as :defaults (application.js is always included).
     # config.action_view.javascript_expansions[:defaults] = %w(jquery rails)
 
