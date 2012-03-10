@@ -112,4 +112,6 @@ Openplaques::Application.routes.draw do
   # The Homepage
   root :to => "homepage#index"
 
+  match '*path', :to => 'errors#not_found'
+
 end

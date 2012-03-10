@@ -10,6 +10,14 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
 
+  rescue_from(ActiveRecord::RecordNotFound) do
+    respond_to do |format|
+      format.html { render :template => "errors/not_found.html", :status => 404, :layout => "v1" }
+      format.json { render :json => {:error => "Not found"}, :status => 404}
+      format.xml { render :xml => {:title => "Not found"}, :status => 404}
+    end
+  end
+
   rescue_from UnAuthorised, :with => :unauthorised
 
   def authenticate_admin!
