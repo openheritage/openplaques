@@ -1,7 +1,12 @@
-<% content_for :page_title, "Historical plaques - by country" %>
+<% content_for :page_title, "Countries that have plaques" %>
 
 <div class="panel clearfix">
-  <h1>Plaques - by country</h1>
+  <h1>Countries that have plaques</h1>
+  <% if current_user && current_user.is_admin? %>
+  <section class="admin_panel">
+    <%= link_to("Add a country", new_country_path, {:class => :edit, :title => "Add a country"})%>
+  </section>
+  <% end %>
 </div>
 
 <%= content_tag("ol", :id => "places_results", :class => "results one_destination_results") do %>
@@ -14,5 +19,3 @@
     <% end %>
   <% end %>
 <% end %>
-
-<%= content_tag("p", link_to("Add country", new_country_path)) if current_user %>
