@@ -103,7 +103,7 @@ class PlaquesController < ApplicationController
   # GET /plaques/new.xml
   def new
 
-    @plaque = Plaque.new
+    @plaque = Plaque.new(:language_id => 1)
     @plaque.build_user
     @plaque.photos.build
 
