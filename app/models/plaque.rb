@@ -306,20 +306,20 @@ class Plaque < ActiveRecord::Base
     default_options = {:only => [:id, :inscription, :latitude, :longitude, :erected_at, :updated_at],
     :include => {
       :photos => {:only => [:id,:thumbnail_url]},
+      :organisations => {:only => [:name, :id]},
       :colour => {:only => :name},
       :language => {:only => [:name, :alpha2]},
       :location => {:only => :name,
         :include => {
           :area => {:only => :name, :include => {:country => {:only => [:name, :alpha2]}}}
         }
-      },
-      :organisation => {:only => [:name, :id]}
+      }
     },
-    :methods => [:title, :colour_name, :machine_tag, :organisation_name, :geolocated?, :photographed?, :url, :photo_url, :thumbnail_url, :shot_name]
+    :methods => [:title, :colour_name, :machine_tag, :geolocated?, :photographed?, :url, :photo_url, :thumbnail_url, :shot_name]
     }
 
     if options.size > 0
-      super(options)
+      super(default_options.merge(options))
     else
       super(default_options)
     end
@@ -354,9 +354,9 @@ class Plaque < ActiveRecord::Base
       return photos.reverse_detail_order.first
     end
   end
-  
+
   def thumbnail_url
-    if main_photo == nil 
+    if main_photo == nil
       return nil
     end
     main_photo.thumbnail_url != "" ? main_photo.thumbnail_url : main_photo.file_url
@@ -365,12 +365,12 @@ class Plaque < ActiveRecord::Base
   def foreign?
     self.language.alpha2 != "en"
   end
-  
+
   # so that old code still works
   def organisation
     self.organisations[0]
   end
-  
+
   # so that old code still works
   def organisation=(organisation)
     if organisation
@@ -378,7 +378,7 @@ class Plaque < ActiveRecord::Base
       sponsorship.organisation = organisation
     end
   end
-  
+
   def to_s
     self.title
   end
