@@ -62,7 +62,7 @@ class PlaquesController < ApplicationController
     if params[:data] && params[:data] == "simple"
       @plaques = Plaque.all(:conditions => conditions, :order => "created_at DESC", :limit => limit)
     else
-      @plaques = Plaque.all(:conditions => conditions, :order => "created_at DESC", :limit => limit, :include => [:language, :organisation, :colour, [:location => [:area => :country]]])
+      @plaques = Plaque.all(:conditions => conditions, :order => "created_at DESC", :limit => limit, :include => [:language, :organisations, :colour, [:location => [:area => :country]]])
     end
 
     respond_with @plaques do |format|
