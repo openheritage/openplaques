@@ -20,3 +20,5 @@
     </li>
   <% end %>
 <% end %>
+
+<p class="alternate_formats">Data about people as <%= alternate_link_to "XML", people_by_index_path(@index.downcase, :xml), :xml %> <%= alternate_link_to "JSON", people_by_index_path(@index.downcase, :json), :json %></p>

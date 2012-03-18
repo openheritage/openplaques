@@ -30,7 +30,7 @@ class Location < ActiveRecord::Base
   def full_address
     address = name
     address += ", " + area.name if area
-	address += ", " + area.country.name if area and area.country
+	  address += ", " + area.country.name if area and area.country
   end
 
   private
