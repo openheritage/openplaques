@@ -4,7 +4,7 @@ class VerbsController < ApplicationController
   before_filter :authenticate_user!, :except => [:index, :show]
 
   def index
-    @verbs = Verb.find(:all, :conditions => "personal_connections_count > 0")
+    @verbs = Verb.find(:all, :conditions => "personal_connections_count > 0", :order => :name)
   end
 
   def show
