@@ -26,6 +26,10 @@ class OrganisationsController < ApplicationController
 
   def show
     begin
+      if (params[:id]=="oxfordshire_blue_plaques_scheme") 
+        params[:id] = "oxfordshire_blue_plaques_board"
+        redirect_to(organisation_path(params[:id])) and return
+      end
       @organisation = Organisation.find_by_slug!(params[:id])
     rescue
       @organisation = Organisation.find(params[:id])
