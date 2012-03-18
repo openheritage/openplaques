@@ -16,20 +16,20 @@ class PersonalConnection < ActiveRecord::Base
   belongs_to :plaque, :counter_cache => true
 
   def from
-    if (verb.id == 8)
+    if (verb.id == 8 or verb.id == 504)
       return person.born_in.to_s
     end
-    if (verb.id == 3)
+    if (verb.id == 3 or verb.id == 49 or verb.id == 161 or verb.id == 1108)
       return person.died_in.to_s
     end
     started_at ? started_at.year.to_s : ""
   end
 
   def to
-    if (verb.id == 8)
+    if (verb.id == 8 or verb.id == 504)
       return person.born_in.to_s
     end
-    if (verb.id == 3)
+    if (verb.id == 3 or verb.id == 49 or verb.id == 161 or verb.id == 1108)
       return person.died_in.to_s
     end
     ended_at ? ended_at.year.to_s : ""

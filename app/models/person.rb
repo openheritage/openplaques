@@ -30,8 +30,8 @@ class Person < ActiveRecord::Base
   has_many :locations, :through => :personal_connections, :uniq => true
   has_many :verbs, :through => :personal_connections
   has_many :plaques, :through => :personal_connections, :uniq => true
-  has_one :birth_connection, :class_name => "PersonalConnection", :conditions => [ 'verb_id = 8']
-  has_one :death_connection, :class_name => "PersonalConnection", :conditions => [ 'verb_id = 3']
+  has_one :birth_connection, :class_name => "PersonalConnection", :conditions => [ 'verb_id in (8,504)']
+  has_one :death_connection, :class_name => "PersonalConnection", :conditions => [ 'verb_id in (3,49,161,1108)']
 
   before_save :update_index
 
