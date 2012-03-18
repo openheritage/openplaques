@@ -19,7 +19,7 @@ class OrganisationsController < ApplicationController
         render "plaques/index"
       }
       format.yaml
-      format.xml { render :xml => @organisations }
+      format.xml
       format.json { render :json => @organisations }
     end
   end
