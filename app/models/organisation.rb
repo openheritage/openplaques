@@ -17,6 +17,7 @@ class Organisation < ActiveRecord::Base
   has_many :plaques, :through => :sponsorships
 
   scope :name_starts_with, lambda {|term| where(["lower(name) LIKE ?", term.downcase + "%"]) }
+  scope :name_contains, lambda {|term| where(["lower(name) LIKE ?", "%" + term.downcase + "%"]) }
   scope :most_plaques_order, order("plaques_count DESC")
 
   def as_json(options={})
