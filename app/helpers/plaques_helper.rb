@@ -358,6 +358,8 @@ module PlaquesHelper
             ss = content_tag("span",dated_roled_person(person), {:class => "vcard"}) + ", ".html_safe + verbs.to_sentence.html_safe + " "
             if location == plaque.location
               ss += link_to("here".html_safe, location)
+            elsif location == nil
+              # huh? maybe it only has an area?
             else
               ss += link_to(location.name, location)
             end
