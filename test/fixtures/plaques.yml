@@ -4,7 +4,6 @@ frankie_sheffield_plaque:
   inscription: "Frankie Roberto (1984-), web developer, worked here"
   location: innovation_centre
   colour: blue
-  organisation: open_plaques
   plaque_erected_year: y2k
   user: frankieroberto
 
@@ -13,12 +12,12 @@ churchill_daleks:
   colour: red
   location: cabinet_war_rooms
   user: quentin
-  
+
 jez_plaque:
   inscription: "Jez Nicholson, technologist, worked here"
   colour: red
   user: quentin
-  
+
 geolocated_plaque:
   latitude: 0.55
   longitude: 0.33
