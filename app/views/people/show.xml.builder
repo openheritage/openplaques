@@ -1,5 +1,5 @@
 xml.instruct! :xml, :version=>"1.0"
-xml.openplaques(){
+xml.openplaques(:uri => person_url(@person)){
   xml.person(:uri => person_url(@person), :updated_at => @person.updated_at.xmlschema) {
     xml.name do
       xml.full @person.name
