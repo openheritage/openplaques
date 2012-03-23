@@ -1,5 +1,5 @@
 xml.instruct! :xml, :version=>"1.0"
-xml.openplaques(){
+xml.openplaques(:uri => organisation_url(@organisation)){
   attributes = {:uri => organisation_url(@organisation), :updated_at => @organisation.updated_at.xmlschema}
   xml.organisation(attributes) {
     xml.name @organisation.name
