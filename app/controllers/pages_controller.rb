@@ -5,8 +5,14 @@ class PagesController < ApplicationController
 
   before_filter :find_page, :only => [:show, :edit, :update]
 
+  respond_to :html, :json
+
   def about
     @organisations_count = Organisation.count
+  end
+
+  def show
+    respond_with(@page)
   end
 
   def index
