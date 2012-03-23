@@ -52,11 +52,11 @@ xml.openplaques(){
     	    }
         end
         plaque.photos.each do |photo|
-          xml.photo {
-    	      xml.url photo.url
-    	      xml.file_url photo.file_url
-    	      xml.thumbnail photo.thumbnail_url
-    	      xml.photographer(:uri => photo.photographer_url) { 
+          xml.photo(:uri => photo_url(photo.id)) {
+            xml.webpage(:uri => photo.url)
+            xml.fullsize(:uri => photo.file_url)
+            xml.thumbnail(:uri => photo.thumbnail_url)
+            xml.photographer(:uri => photo.photographer_url) { 
               xml.text! photo.photographer
             }
             if photo.shot_name
@@ -67,7 +67,8 @@ xml.openplaques(){
             xml.licence(:uri => photo.licence.url) {
               xml.text! photo.licence.name
             }
-    	    }
+            xml.plaque(:uri => plaque_url(photo.plaque)) if photo.plaque
+          }
         end
       }
 

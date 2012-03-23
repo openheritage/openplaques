@@ -33,3 +33,5 @@
   <p>Thumbnail url <%= link_to(@photo.thumbnail_url, @photo.thumbnail_url) %><p>
 
 </div>
+
+<p class="alternate_formats">Data about this photo as <%= alternate_link_to "XML", photo_path(@photo, :format => :xml), :xml %> <%= alternate_link_to "JSON", photo_path(@photo, :format => :json), :json %></p>

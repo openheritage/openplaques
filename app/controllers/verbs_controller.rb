@@ -5,6 +5,11 @@ class VerbsController < ApplicationController
 
   def index
     @verbs = Verb.find(:all, :conditions => "personal_connections_count > 0", :order => :name)
+    respond_to do |format|
+      format.html
+      format.xml # { render :xml => @verbs }
+      format.json { render :json => @verbs }
+    end
   end
 
   def show
@@ -13,6 +18,11 @@ class VerbsController < ApplicationController
     rescue
       @verb = Verb.find(params[:id])
       redirect_to verb_path(@verb) and return
+    end
+    respond_to do |format|
+      format.html
+      format.xml # { render :xml => @verb }
+      format.json { render :json => @verb }
     end
   end
 

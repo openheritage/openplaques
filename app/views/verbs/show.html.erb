@@ -5,7 +5,6 @@
   <h1>Blue plaques for people who <%= @verb.name %></h1>
 
   <% if @verb.personal_connections.size > 0 %>
-
     <ul>
     <% @verb.personal_connections.each do |personal_connection| %>
       <li>
@@ -18,5 +17,6 @@
     <% end %>
     </ul>
   <% end %>
-
 </div>
+
+<p class="alternate_formats">Data about this verb as <%= alternate_link_to "XML", verb_path(@verb, :format => :xml), :xml %> <%= alternate_link_to "JSON", verb_path(@verb, :format => :json), :json %></p>

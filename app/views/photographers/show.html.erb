@@ -1,12 +1,14 @@
-<% content_for :page_title,  "Blue plaque photos by " + @photographer %>
+<% content_for :page_title,  "Blue plaque photos by " + @photographer.id %>
 
 <div class="panel">
-  <p><%= pluralize(@photos.size,"photo") %> taken by <%= link_to("photographer", "/photographers/") %> <%= @photographer %></p>
+  <p><%= pluralize(@photographer.photos.size,"photo") %> taken by <%= link_to("photographer", "/photographers/") %> <%= @photographer.id %></p>
 
-  <% @photos.each do |photo| %>
+  <% @photographer.photos.each do |photo| %>
     <div style="float: left;">
       <%= link_to(thumbnail_img(photo), photo) %>
     </div>
   <% end %>
   <br style="clear: left;"/>
 </div>
+
+<p class="alternate_formats">Data about this photographer as <%= alternate_link_to "XML", photographer_path(@photographer.id, :format => :xml), :xml %> <%= alternate_link_to "JSON", photographer_path(@photographer.id, :format => :json), :json %></p>

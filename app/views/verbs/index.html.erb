@@ -1,8 +1,12 @@
 <% content_for :page_title, "Verbs" %>
-<h1>Verbs</h1>
 
-<ul>
-<% @verbs.each do |verb| %>
-  <%=content_tag("li", link_to(verb.name, verb_path(verb)))%>
-<% end %>
-</ul>
+<div class="panel clearfix">
+  <h1>Verbs</h1>
+  <ul>
+    <% @verbs.each do |verb| %>
+      <%=content_tag("li", link_to(verb.name, verb_path(verb)))%>
+    <% end %>
+  </ul>
+</div>
+
+<p class="alternate_formats">Data about verbs as <%= alternate_link_to "XML", verbs_path(:xml), :xml %> <%= alternate_link_to "JSON", verbs_path(:json), :json %></p>

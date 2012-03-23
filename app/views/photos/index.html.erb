@@ -5,7 +5,7 @@
   <h1>Photos</h1>
 
   <p>To identify the location, inscription, <%= link_to "colour", colours_path %>
-  and <%= link_to "organisation", organisations_path %> of a plaque Open Plaques collates data
+  and <%= link_to "organisation", photos_path %> of a plaque Open Plaques collates data
   from a <a href="http://flickr.com/">Flickr</a> photo which has a Creative Commons <%= link_to "licence", licences_path %>
   and has been tagged with an openplaques machine tag.
   We need you to hunt down any that don't have photographs, take a picture, post it to Flickr, accurately place
@@ -21,3 +21,5 @@
   <% end %>
   <br style="clear: left;"/>
 </div>
+
+<p class="alternate_formats">Data about photos as <%= alternate_link_to "XML", photos_path(:xml), :xml %> <%= alternate_link_to "JSON", photos_path(:json), :json %></p>

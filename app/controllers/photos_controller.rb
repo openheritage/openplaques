@@ -7,6 +7,19 @@ class PhotosController < ApplicationController
 
   def index
     @photos = Photo.paginate(:page => params[:page], :per_page => 20)
+    respond_to do |format|
+      format.html
+      format.xml # { render :xml => @photo }
+      format.json { render :json => @photos }
+    end
+  end
+
+  def show
+    respond_to do |format|
+      format.html
+      format.xml # { render :xml => @photo }
+      format.json { render :json => @photo }
+    end
   end
 
   def update
@@ -30,7 +43,6 @@ class PhotosController < ApplicationController
   def create
     @photo = Photo.new(params[:photo])
     @photo.wikimedia_data
-    
     if @photo.save
       redirect_to photo_path(@photo)
     else
@@ -41,7 +53,6 @@ class PhotosController < ApplicationController
 
   def destroy
     @plaque = @photo.plaque
-
     @photo.destroy
     redirect_to plaque_path(@plaque)
   end
