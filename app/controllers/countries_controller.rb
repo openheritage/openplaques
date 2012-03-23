@@ -34,7 +34,7 @@ class CountriesController < ApplicationController
       redirect_to(country_url(@country.alpha2), :status => :moved_permanently) and return
     end
     @areas = @country.areas.all(:order => :name, :include => :country)
-#    @plaques = @country.plaques
+    @plaques = @country.plaques
     respond_to do |format|
       format.html
       format.xml { render :xml => @country }
