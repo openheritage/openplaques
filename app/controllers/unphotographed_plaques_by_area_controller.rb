@@ -2,8 +2,8 @@ class UnphotographedPlaquesByAreaController < ApplicationController
 
   def show
     @country = Country.find_by_alpha2(params[:country_id])
-    @area = @country.areas.find_by_slug(params[:area_id])
-    @plaques = @area.plaques.unphotographed
+    @area = @country.areas.find_by_slug!(params[:area_id])
+    @plaques = @area.plaques.unphotographed if @area.plaques
     @mean = help.find_mean(@plaques)
     @zoom = 11
     respond_to do |format|

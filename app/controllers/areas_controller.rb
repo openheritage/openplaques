@@ -12,7 +12,7 @@ class AreasController < ApplicationController
       format.html
       format.kml {
         @parent = @areas
-        render "colours/index"
+        render "plaques/index"
       }
       format.yaml
       format.xml { render :xml => @areas }
@@ -25,13 +25,11 @@ class AreasController < ApplicationController
   end
 
   def show
-
     @plaques = @area.plaques.paginate(:page => params[:page], :per_page => 100)
     if @plaques
       #  @centre = find_mean(@plaques)
       @zoom = 11
     end
-
     respond_to do |format|
       format.html
       format.kml { render "plaques/index" }
@@ -44,7 +42,6 @@ class AreasController < ApplicationController
 
   def create
     @area = @country.areas.new(params[:area])
-
     if @area.save
       redirect_to country_area_path(@area.country_alpha2, @area.slug)
     else
@@ -63,7 +60,6 @@ class AreasController < ApplicationController
   end
 
   def update
-
     if @area.update_attributes(params[:area])
       flash[:notice] = 'Area was successfully updated.'
       redirect_to(country_area_path(@area.country.alpha2, @area.slug))

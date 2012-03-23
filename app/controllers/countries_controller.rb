@@ -2,11 +2,15 @@ class CountriesController < ApplicationController
 
   before_filter :authenticate_admin!, :only => :destroy
   before_filter :authenticate_user!, :except => [:index, :show]
-
   before_filter :find_country, :only => [:edit, :update]
 
   def index
     @countries = Country.all(:order => :name)
+    respond_to do |format|
+      format.html
+      format.xml { render :xml => @countries }
+      format.json { render :json => @countries }
+    end
   end
 
   def new
@@ -15,7 +19,6 @@ class CountriesController < ApplicationController
 
   def create
     @country = Country.new(params[:country])
-
     if @country.save
       redirect_to country_path(@country)
     else
@@ -30,19 +33,18 @@ class CountriesController < ApplicationController
       @country = Country.find(params[:id])
       redirect_to(country_url(@country.alpha2), :status => :moved_permanently) and return
     end
-
     @areas = @country.areas.all(:order => :name, :include => :country)
-    @plaques = @country.plaques
-
+#    @plaques = @country.plaques
     respond_to do |format|
       format.html
+      format.xml { render :xml => @country }
+      format.json { render :json => @country }
       format.kml { render "plaques/index" }
       format.osm { render "plaques/index" }
     end
   end
 
   def update
-
     if @country.update_attributes(params[:country])
       redirect_to country_path(@country)
     else
