@@ -26,7 +26,7 @@ class RoleTest < ActiveSupport::TestCase
     should "set the index letter of a role" do
       assert_equal "t", @role.index
     end
-    
+
     teardown { @role.destroy }
 
   end
@@ -41,10 +41,10 @@ class RoleTest < ActiveSupport::TestCase
     should "update the index letter of a role" do
       assert_equal "c", @role.index
     end
-    
+
     teardown { @role.destroy }
 
   end
 
-  
+
 end

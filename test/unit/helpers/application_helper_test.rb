@@ -11,8 +11,8 @@ class ApplicationHelperTest < ActionView::TestCase
       end
 
 
-      should 'include rel="alternate"' do
-        assert_match /rel=\"alternate\"/, @link
+      should 'include "alternate"' do
+        assert_match /alternate/, @link
       end
 
       should 'include type="application/xml"' do

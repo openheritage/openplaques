@@ -4,6 +4,6 @@ doc/api
 doc/guides
 db/*.sqlite3
 log/*.log
-tmp/**/*
+tmp/
 config/database.yml
 .DS_Store

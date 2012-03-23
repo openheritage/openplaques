@@ -7,7 +7,7 @@ class PlaqueTest < ActiveSupport::TestCase
   should belong_to :location
   should belong_to :colour
   should belong_to :language
-  should belong_to :organisation
+  should have_many :organisations
   should belong_to :user
   should belong_to :plaque_erected_year
 
@@ -15,7 +15,6 @@ class PlaqueTest < ActiveSupport::TestCase
 
   should have_many :personal_connections
   should have_many :photos
-  should have_many :verbs
 
   context "#geolocated" do
 
