@@ -20,13 +20,12 @@ class Organisation < ActiveRecord::Base
   scope :name_contains, lambda {|term| where(["lower(name) LIKE ?", "%" + term.downcase + "%"]) }
   scope :most_plaques_order, order("plaques_count DESC")
 
+  include ApplicationHelper
+
   def as_json(options={})
     super(:only => [:name, :id])
   end
-  
+
   private
-    def make_slug_not_war
-      self.slug = (self.slug.blank? ? self.name : self.slug).rstrip.lstrip.downcase.gsub(" ", "_").gsub("-", "_").gsub(",", "_").gsub(".", "_").gsub("__", "_")
-    end
 
 end

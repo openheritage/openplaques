@@ -24,6 +24,8 @@ class Area < ActiveRecord::Base
   has_many :locations
   has_many :plaques, :through => :locations
 
+  include ApplicationHelper
+
   def as_json(options={})
     {:label => name, :value => name, :id => id, :country_id => country.id, :country_name => country.name}
   end
@@ -51,10 +53,5 @@ class Area < ActiveRecord::Base
   def to_param
     slug
   end
-
-  private
-    def make_slug_not_war
-      self.slug = (self.slug.blank? ? self.name : self.slug).to_s.rstrip.lstrip.downcase.gsub(" ", "_").gsub("-", "_").gsub(",", "_")
-    end
 
 end
