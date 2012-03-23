@@ -8,7 +8,7 @@ class CountriesController < ApplicationController
     @countries = Country.all(:order => :name)
     respond_to do |format|
       format.html
-      format.xml { render :xml => @countries }
+      format.xml # { render :xml => @countries }
       format.json { render :json => @countries }
     end
   end
@@ -37,7 +37,7 @@ class CountriesController < ApplicationController
     @plaques = @country.plaques
     respond_to do |format|
       format.html
-      format.xml { render :xml => @country }
+      format.xml # { render :xml => @country }
       format.json { render :json => @country }
       format.kml { render "plaques/index" }
       format.osm { render "plaques/index" }
