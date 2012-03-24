@@ -1,19 +1,16 @@
 <% content_for :page_title, "Blue plaques for people who " + @verb.name %>
 
 <div class="panel">
-
   <h1>Blue plaques for people who <%= @verb.name %></h1>
-
   <% if @verb.personal_connections.size > 0 %>
     <ul>
     <% @verb.personal_connections.each do |personal_connection| %>
       <li>
-        <%= link_to("#" + personal_connection.plaque.id.to_s, personal_connection.plaque) %>:
+        <%= link_to("#" + personal_connection.plaque.id.to_s, personal_connection.plaque) if personal_connection.plaque %>:
         <%= dated_roled_person(personal_connection.person) %>
         <strong><%= personal_connection.verb.name %></strong> at
-      <%= link_to(personal_connection.location.name, personal_connection.location) if personal_connection.location %>
+        <%= link_to(personal_connection.location.full_address, personal_connection.location) if personal_connection.location %>
       </li>
-
     <% end %>
     </ul>
   <% end %>
