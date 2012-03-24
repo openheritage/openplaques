@@ -19,11 +19,10 @@ class SearchController < ApplicationController
       @phrase = ""
     end
     respond_to do |format|
-      format.html { render "results" }
+      format.html
       format.kml { render "plaques/index" }
       format.osm { render "plaques/index" }
-      format.yaml
-      format.xml { render :xml => @search_results }
+      format.xml # { render :xml => @search_results }
       format.json { render :json => @search_results }
     end
   end
