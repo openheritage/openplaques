@@ -363,7 +363,11 @@ class Plaque < ActiveRecord::Base
   end
 
   def foreign?
-    self.language.alpha2 != "en"
+    begin
+      self.language.alpha2 != "en"
+    rescue
+      false
+    end
   end
 
   # so that old code still works
