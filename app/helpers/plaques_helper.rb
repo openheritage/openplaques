@@ -138,7 +138,6 @@ module PlaquesHelper
             puts "New geolocation found"
             @plaque.latitude = photo.attributes["latitude"]
             @plaque.longitude = photo.attributes["longitude"]
-            @plaque.accuracy = 'flickr'
             if @plaque.save
               puts "New geolocation added to photo"
             else
