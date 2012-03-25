@@ -10,12 +10,11 @@ class PhotographersController < ApplicationController
   end
 
   def show
-#    @photographer = params[:id]
     @photographer = Photographer.new
     @photographer.id = params[:id]
     @photos = Photo.find(:all, :conditions => {:photographer => @photographer.id})
     if @photos.length == 0
-      @photographer = params[:id].gsub(/\_/,'.')
+      @photographer.id = params[:id].gsub(/\_/,'.')
       @photos = Photo.find(:all, :conditions => {:photographer => @photographer.id})
     end
     @photographer.photos = @photos
