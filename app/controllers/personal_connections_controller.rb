@@ -4,6 +4,7 @@ class PersonalConnectionsController < ApplicationController
 
   before_filter :find_plaque, :only => [:edit, :update, :new, :create]
   before_filter :find_personal_connection, :only => [:edit, :destroy]
+  before_filter :list_people_and_verbs, :only => [:new, :edit]
 
   def destroy
     @personal_connection.destroy
@@ -11,8 +12,6 @@ class PersonalConnectionsController < ApplicationController
   end
 
   def edit
-    @people = Person.all(:order => :name)
-    @verbs = Verb.all(:order => :name)
     @locations = Location.all(:order => :name)
   end
 
@@ -43,8 +42,6 @@ class PersonalConnectionsController < ApplicationController
 
   def new
     @personal_connection = @plaque.personal_connections.new
-    @people = Person.all(:order => :name)
-    @verbs = Verb.all(:order => :name)
   end
 
   def create
@@ -68,9 +65,8 @@ class PersonalConnectionsController < ApplicationController
     if @personal_connection.save
       redirect_to :back
     else
-      @people = Person.all(:order => :name)
-      @verbs = Verb.all(:order => :name)
-      @locations = Location.all(:order => :name)
+      # can we just redirect to new?
+      list_people_and_verbs
       render :new
     end
   end
@@ -83,6 +79,11 @@ class PersonalConnectionsController < ApplicationController
 
     def find_personal_connection
       @personal_connection = PersonalConnection.find(params[:id])
+    end
+    
+    def list_people_and_verbs
+      @people = Person.all(:order => :name, :select => 'id, name, born_on, died_on')
+      @verbs = Verb.all(:order => :name, :select => 'id, name' )
     end
 
 end
