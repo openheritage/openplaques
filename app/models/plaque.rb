@@ -62,6 +62,7 @@ class Plaque < ActiveRecord::Base
   attr_accessor :country, :other_colour_id
 
   delegate :name, :to => :colour, :prefix => true, :allow_nil => true
+  delegate :name, :alpha2, :to => :language, :prefix => true, :allow_nil => true
 
   accepts_nested_attributes_for :photos, :reject_if => proc { |attributes| attributes['photo_url'].blank? }
   accepts_nested_attributes_for :user, :reject_if => :all_blank
@@ -99,14 +100,6 @@ class Plaque < ActiveRecord::Base
   def coordinates
     if self.geolocated?
       self.latitude.to_s + "," + self.longitude.to_s
-    else
-      ""
-    end
-  end
-
-  def language_name
-    if self.language
-      self.language.name
     else
       ""
     end

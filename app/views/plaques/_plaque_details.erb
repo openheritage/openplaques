@@ -17,7 +17,13 @@
    <% end %>
    <tr>
      <th>Language</th>
-     <td><%= language_if_known @plaque %></td>
+     <td>
+      <% if @plaque.language_name %>
+        <%= content_tag("span", @plaque.language_name, {:property => "dc:language", :content => @plaque.language_alpha2, :datatype => "xsd:language"}) %>
+      <% else %>
+        Unknown
+      <% end %>
+    </td>
    </tr>
    <tr>
      <th>Colour</th>
