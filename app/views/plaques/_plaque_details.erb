@@ -21,7 +21,7 @@
    </tr>
    <tr>
      <th>Colour</th>
-     <td><%= colour_if_known @plaque %></td>
+     <td><%= @plaque.colour_name || "Unknown" %></td>
    </tr>
    <tr>
      <th>Location</th>

@@ -14,12 +14,4 @@ module ColoursHelper
     colour_path(colour, options.merge(:only_path => false))
   end
 
-  def colour_if_known(plaque, text = "unknown")
-    if plaque.colour
-      plaque.colour.name
-    else
-      unknown(text)
-    end
-  end
-
 end

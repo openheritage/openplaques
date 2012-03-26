@@ -8,7 +8,7 @@ xml.openplaques(:uri => organisation_url(@organisation)){
     @organisation.plaques.each do |plaque|
       xml.plaque(:uri => plaque_url(plaque)) {
         xml.title plaque.title
-        xml.colour plaque.colour_name
+        xml.colour plaque.colour_name if plaque.colour_name
         xml.inscription plaque.inscription
         xml.geo(:reference_system => "WGS84", :latitude => plaque.latitude, :longitude => plaque.longitude)
       }

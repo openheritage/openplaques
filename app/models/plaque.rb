@@ -61,6 +61,8 @@ class Plaque < ActiveRecord::Base
 
   attr_accessor :country, :other_colour_id
 
+  delegate :name, :to => :colour, :prefix => true, :allow_nil => true
+
   accepts_nested_attributes_for :photos, :reject_if => proc { |attributes| attributes['photo_url'].blank? }
   accepts_nested_attributes_for :user, :reject_if => :all_blank
 
@@ -83,7 +85,7 @@ class Plaque < ActiveRecord::Base
   end
 
   def to_csv
-   [self.id, self.inscription_csv, self.organisation_name, self.erected_at_string, self.language_name, self.colour_name, self.location_name, self.area_name, self.country_name, "\"" + self.coordinates + "\""].join(",")
+   [self.id, self.inscription_csv, self.organisation_name, self.erected_at_string, self.language_name, self.colour_name.to_s, self.location_name, self.area_name, self.country_name, "\"" + self.coordinates + "\""].join(",")
   end
 
   def inscription_csv
@@ -136,14 +138,6 @@ class Plaque < ActiveRecord::Base
   def organisation_name
     if self.organisation
       self.organisation.name
-    else
-      ""
-    end
-  end
-
-  def colour_name
-    if self.colour
-      self.colour.name
     else
       ""
     end
@@ -338,7 +332,7 @@ class Plaque < ActiveRecord::Base
       first_4_people << pluralize(people.size - 4, "other")
       first_4_people.to_sentence
     elsif people.size > 0
-      people.collect(&:name).to_sentence + " " + colour_name + " plaque"
+      people.collect(&:name).to_sentence + " " + (colour_name || 'unknown') + " plaque"
     else
       colour_name.capitalize + " plaque № #{id}"
     end << (area_name != "" ? " in " : "") + area_name
