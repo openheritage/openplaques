@@ -317,20 +317,25 @@ class Plaque < ActiveRecord::Base
   end
 
   def title
-    if people.size > 4
-      first_4_people = []
-      people.first(4).each do |person|
-        first_4_people << person[:name]
-      end
-      first_4_people << pluralize(people.size - 4, "other")
-      first_4_people.to_sentence
-    elsif people.size > 0
-      people.collect(&:name).to_sentence + " " + (colour_name || 'unknown') + " plaque"
-    elsif colour_name
-      colour_name.capitalize + " plaque № #{id}"
-    else
-      "plaque № #{id}"
-    end << (area_name != "" ? " in " : "") + area_name
+    begin
+      if people.size > 4
+        first_4_people = []
+        people.first(4).each do |person|
+          first_4_people << person[:name]
+        end
+        first_4_people << pluralize(people.size - 4, "other")
+        first_4_people.to_sentence
+      elsif people.size > 0
+        people.collect(&:name).to_sentence + " " + (colour_name || 'unknown') + " plaque"
+      elsif colour_name
+        colour_name.capitalize + " plaque № #{id}"
+      else
+        "plaque № #{id}"
+      end << (area_name != "" ? " in " : "") + area_name
+    rescue Exception => e 
+      Airbrake.notify(e)
+      plaque № #{id}"
+    end
   end
 
   def main_photo
