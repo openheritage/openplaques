@@ -328,11 +328,11 @@ class Plaque < ActiveRecord::Base
       elsif people.size > 0
         people.collect(&:name).to_sentence + " " + (colour_name || 'unknown') + " plaque"
       elsif colour_name
-        colour_name.capitalize + " plaque № #{id}"
+        colour_name.to_s.capitalize + " plaque № #{id}"
       else
         "plaque № #{id}"
       end << (area_name != "" ? " in " : "") + area_name
-    rescue Exception => e 
+    rescue Exception => e
       Airbrake.notify(e)
       plaque № #{id}"
     end
