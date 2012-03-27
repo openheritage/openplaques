@@ -326,8 +326,10 @@ class Plaque < ActiveRecord::Base
       first_4_people.to_sentence
     elsif people.size > 0
       people.collect(&:name).to_sentence + " " + (colour_name || 'unknown') + " plaque"
-    else
+    elsif colour_name
       colour_name.capitalize + " plaque № #{id}"
+    else
+      "plaque № #{id}"
     end << (area_name != "" ? " in " : "") + area_name
   end
 
