@@ -26,6 +26,7 @@ class Photo < ActiveRecord::Base
 
   after_initialize :assign_from_photo_url
   before_validation :assign_licence_if_cc_by_accepted
+  after_update :reset_plaque_photo_count
 
   scope :reverse_detail_order, :order => "shot DESC"
   scope :detail_order, :order => "shot ASC"
@@ -133,5 +134,14 @@ class Photo < ActiveRecord::Base
       self.file_url = wikimedia_special
     end
   end
+  
+  private
+  
+    def reset_plaque_photo_count
+      if plaque_id_changed?
+        Plaque.reset_counters(plaque_id_was, :photos) unless plaque_id_was == nil
+        Plaque.reset_counters(plaque.id, :photos) unless plaque == nil
+      end
+    end
     
 end
