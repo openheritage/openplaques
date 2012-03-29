@@ -22,13 +22,9 @@ class RolesController < ApplicationController
   # GET /roles/artist
   # GET /roles/artist.xml
   def show
-    if @role == nil # create a dummy role for display purposes
-      @role = Role.new
-      @role.name = params[:id].downcase
-      @role.slug = params[:id].downcase
-    end
+    @role = Role.find_by_slug!(params[:id])
 
-    @related_roles = @role.related_roles()
+    @related_roles = @role.related_roles
 
     for person in @role.people
       if person # a role record may exist that no longer has a person joined to it
