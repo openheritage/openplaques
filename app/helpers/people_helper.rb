@@ -40,7 +40,7 @@ module PeopleHelper
       end
       dates += person.born_in.to_s
       if person.died_on && (person.born_in != person.died_on)
-        dates += person.died_in.to_s
+        dates += "-" + person.died_in.to_s
       else
         dates += "-present"
       end
@@ -173,11 +173,11 @@ module PeopleHelper
         birth_date += link_to(person.born_in.to_s, people_alive_in_path(person.born_in.to_s), {:class => "bday", :about => "/people/#{person.id}#person", :property => "dbpprop:dateOfBirth vcard:bday", :datatype => "xsd:date", :content => person.born_in.to_s})
       end
     end
-    
+
     def connections(person, plaque)
       person.personal_connections.where(:plaque_id => plaque)
     end
-    
+
     def verbs(person, plaque)
       verbs = Array.new
       connections(person, plaque).each do |personal_connection|
