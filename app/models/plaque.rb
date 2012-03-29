@@ -288,7 +288,7 @@ class Plaque < ActiveRecord::Base
   end
 
   def as_json(options={})
-    # this example ignores the user's options
+    # This sets default options which are overriden if otherwise specified.
 
     default_options = {:only => [:id, :inscription, :latitude, :longitude, :erected_at, :updated_at],
     :include => {
@@ -306,7 +306,7 @@ class Plaque < ActiveRecord::Base
     }
 
     if options.size > 0
-      super(default_options.merge(options))
+      super(options)
     else
       super(default_options)
     end
