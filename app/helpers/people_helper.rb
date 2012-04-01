@@ -127,7 +127,7 @@ module PeopleHelper
         else
           dates = " (born "
         end
-        dates += linked_birth_date(person) + "<span property=\"foaf:age\" content=\"#{age(person.born_on)}\" />)"
+        dates += linked_birth_date(person) + "<span property=\"foaf:age\" content=\"#{person.age}\" />)"
       elsif (person.died_on?)
         if (person.thing?)
           dates = " (to " + linked_death_date(person) + ")"
