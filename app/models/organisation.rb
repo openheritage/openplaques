@@ -21,11 +21,29 @@ class Organisation < ActiveRecord::Base
   scope :most_plaques_order, order("plaques_count DESC")
 
   include ApplicationHelper
+  
+  def latitude
+    52
+  end
+  
+  def longitude
+    0
+  end
+  
+  def zoom
+    6
+  end
 
   def as_json(options={})
     super(:only => [:name, :id])
   end
-
-  private
+  
+  def to_param
+    slug
+  end
+  
+  def to_s
+    name
+  end
 
 end

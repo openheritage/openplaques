@@ -20,7 +20,7 @@ xml.kml(:xmlns=>"http://www.opengis.net/kml/2.2","xmlns:atom"=>"http://www.w3.or
           for plaque in person.plaques
           if plaque.geolocated?
             xml.Placemark do
-              xml.name(title(plaque))
+              xml.name(plaque.title)
               xml.description(plaque.inscription + " " +plaque_url(plaque) + photo_img(plaque))
               if plaque.latitude && plaque.longitude
                 xml.Point do

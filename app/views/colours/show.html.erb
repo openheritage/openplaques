@@ -1,18 +1,7 @@
 <% content_for :page_title, @colour.name.capitalize + " plaques" %>
 
 <div class="panel clearfix">
-  <h1><%= @colour.name.capitalize %> plaques</h1>
+  <h1><%= @colour.to_s.capitalize %> plaques</h1>
 </div>
 
-
-<%= content_tag("ol", :class => "results", :id => "search_results") do %>
-  <% @plaques.each do |plaque| %>
-    <%= content_tag("li") do %>
-      <p class="result">
-          <%= link_to title(plaque), plaque, :class => :title %>
-          <%= link_to(plaque.location.area.name, plaque.location.area, :class => :location) if plaque.location && plaque.location.area %>
-        </p>
-        <p class="snippet"><%= plaque.inscription %></p>
-    <% end %>
-  <% end %>
-<% end %>
+<%= list(@plaques) %>

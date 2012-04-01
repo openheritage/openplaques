@@ -17,10 +17,26 @@ class Country < ActiveRecord::Base
   has_many :areas
   has_many :locations, :through => :areas
   has_many :plaques, :through => :locations
+  
+  def latitude
+    52
+  end
+  
+  def longitude
+    0
+  end
+  
+  def zoom
+    6
+  end
 
   # Construct paths using the alpha2 code
   def to_param
     alpha2
+  end
+  
+  def to_s
+    name
   end
 
 end

@@ -6,7 +6,7 @@
   <% @plaque_erected_year.plaques.each do |plaque| %>
     <li>
       <p class="result">
-        <%= link_to title(plaque), plaque %>
+        <%= link_to plaque.title, plaque %>
         <%= link_to(plaque.location.area.name, plaque.location.area, :class => :location) if plaque.location && plaque.location.area %>
       </p>
     </li>

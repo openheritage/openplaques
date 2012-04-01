@@ -3,5 +3,5 @@
 <% unless @plaques.nil? %>
   <p>There <%= pluralize_is_or_are(@plaques.size, "plaque") %> in this area that <%= havent_or_hasnt(@plaques.size) %> been geolocated yet.</p>
 
-  <%= plaque_list(@plaques) %>
+  <%= list(@plaques) %>
 <% end %>

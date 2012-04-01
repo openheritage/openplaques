@@ -4,7 +4,6 @@ class UnphotographedPlaquesByCountryController < ApplicationController
     @country = Country.find_by_alpha2!(params[:country_id])
     @plaques = @country.plaques.unphotographed
     @mean = help.find_mean(@plaques)
-    @zoom = 7
     respond_to do |format|
       format.html
       format.kml { render "plaques/index" }

@@ -34,10 +34,6 @@ module PlaquesHelper
       return text
     end
   end
-  
-  def title(plaque)
-    plaque.title
-  end
 
   def kml(plaque, xml)
     if plaque.geolocated?
@@ -199,51 +195,9 @@ module PlaquesHelper
     url_for(:controller => "PersonalConnections", :action => :new, :plaque_id => plaque.id)
   end
 
-  def plaque_list(plaques, context = nil)
-    plaques.sort!{|t1,t2|t1.title <=> t2.title}
-    @listy = "".html_safe
-    @add = "".html_safe
-    @add += content_tag("p", link_to("add one?".html_safe, new_plaque_path)) if current_user && current_user.is_admin?
-    @create = "".html_safe
-    @create += " ".html_safe + link_to("Create one?".html_safe, new_plaque_path).html_safe if current_user && current_user.is_admin?
-    plaques.each do |plaque|
-      # RDFa: because plaques have different relationships with the current page.
-      # in the context of an organisation page, it is a list of plaques made by that organisation
-      # in the context of, say, colour it is a 'has primary colour of' relationship.
-      args = case context
-        when :organsation then {:rel => "foaf:made".html_safe}
-        when :colour then {:rel => "op:primaryColourOf".html_safe}
-        else {}
-      end
-
-      if plaque.colour
-        args = args.merge(:class => plaque.colour.name.downcase)
-      end
-
-      @listy << content_tag("tr",
-      content_tag("td", link_to(thumbnail_img(plaque), plaque_path(plaque)), :class => :photo)  +
-      content_tag("td", link_to(plaque.title, plaque_path(plaque))) + 
-      content_tag("td", new_linked_inscription(plaque)),
-      args.merge!(:id => "openplaques:id:".html_safe + plaque.id.to_s))
-    end
-    @ul = content_tag("table", @listy, :class => :plaque_list)
-    out = "".html_safe
-    if plaques.size > 0
-      out << content_tag("p", pluralize(plaques.size.to_s, "plaque"))
-      out << @ul
-      out << @add
-    else
-      out << content_tag("p", "No plaques yet.".html_safe + @create.html_safe)
-    end
-  end
-
   def list(things, context = nil, extras = nil)
     # things.sort!{|t1,t2|t1.to_s <=> t2.to_s}
     @listy = "".html_safe
-    @add = "".html_safe
-    @add += content_tag("p", link_to("add one?".html_safe, new_plaque_path)) if current_user && current_user.is_admin?
-    @create = "".html_safe
-    @create += " ".html_safe + link_to("Create one?".html_safe, new_plaque_path).html_safe if current_user && current_user.is_admin?
     things.each do |thing|
       # RDFa: because plaques have different relationships with the current page.
       # in the context of an organisation page, it is a list of plaques made by that organisation
@@ -295,9 +249,8 @@ module PlaquesHelper
     if things.size > 0
       out << content_tag("p", pluralize(things.size.to_s, "results"))
       out << @ul
-      out << @add
     else
-      out << content_tag("p", "No plaques yet.".html_safe + @create.html_safe)
+      out << content_tag("p", "Nothing found.".html_safe)
     end
   end
 
@@ -496,7 +449,7 @@ module PlaquesHelper
   end
 
   # given a set of plaques, or a thing that has plaques (like an organisation) tell me what the mean point is
-  def find_mean(thing)
+  def find_mean(things)
     begin
       @centre = Point.new
       @centre.latitude = 51.475 # Greenwich Meridian
@@ -505,10 +458,10 @@ module PlaquesHelper
         @lat = 0
         @lon = 0
         @count = 0
-        thing.each do |plaque|
-          if plaque.geolocated?
-            @lat += plaque.latitude
-            @lon += plaque.longitude
+        things.each do |thing|
+          if thing.geolocated?
+            @lat += thing.latitude
+            @lon += thing.longitude
             @count = @count + 1
           end
         end

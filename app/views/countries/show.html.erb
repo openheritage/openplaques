@@ -9,25 +9,24 @@
 
   <h1>Plaques in <%= @country.name %></h1>
 
+  <!-- div id="plaque-map" data-latitude="<%= @country.latitude %>" data-longitude="<%= @country.longitude %>"  data-zoom="<%= @country.zoom %>"></div -->
+
   <%= pluralize @country.plaques.size, "plaque" %>
 
-  <% if @areas.size > 0 %>
-
-    <%= content_tag("ol", :class => "results one_destination_results", :id => "people_results") do %>
-      <% @areas.each do |area| %>
-        <%= content_tag("li") do %>
-          <%= link_to country_area_path(area.country, area) do %>
-            <p class="result"><%= area.name %></p>
-            <p class="count"><%= pluralize(area.plaques.size.to_s, "plaque") if area.plaques.size > 0 %></p>
-          <% end %>
+  <%= content_tag("ol", :class => "results one_destination_results", :id => "people_results") do %>
+    <% @areas.each do |area| %>
+      <%= content_tag("li") do %>
+        <%= link_to country_area_path(area.country, area) do %>
+          <p class="result"><%= area.name %></p>
+          <p class="count"><%= pluralize(area.plaques.size.to_s, "plaque") if area.plaques.size > 0 %></p>
         <% end %>
       <% end %>
     <% end %>
+  <% end unless @areas.size <=0 %>
 
+  <%= content_tag("p") do %>
+    See <%= link_to "unphotographed plaques", country_unphotographed_path(@country) %>.
   <% end %>
 
-  <!--TODO: Turn these off when it doesnt make sense-->
-  <p>See <%= link_to "unphotographed plaques", country_unphotographed_path(@country) %>.</p>
-
-  <p class="alternate_formats">Data about this country as <%= alternate_link_to "XML", country_path(@country, :xml), :xml %> <%= alternate_link_to "JSON", country_path(@country, :json), :json %> <%= alternate_link_to "KML", country_path(@country, :kml), :kml %>  <%= alternate_link_to "GMAP", "http://maps.google.co.uk/maps?q=" + country_url(@country, :kml), :html %></p>
+  <p class="alternate_formats">Data about <%= @country %> as <%= alternate_link_to "XML", country_path(@country, :xml), :xml %> <%= alternate_link_to "JSON", country_path(@country, :json), :json %> <%= alternate_link_to "KML", country_path(@country, :kml), :kml %>  <%= alternate_link_to "GMAP", "http://maps.google.co.uk/maps?q=" + country_url(@country, :kml), :html %></p>
 </div>

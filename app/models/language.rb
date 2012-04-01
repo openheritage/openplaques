@@ -13,5 +13,13 @@ class Language < ActiveRecord::Base
   validates_format_of :alpha2, :with => /^[a-z]{2}$/, :message => "must be a 2 letter code"
 
   has_many :plaques
+  
+  def to_param
+    alpha2
+  end
+  
+  def to_s
+    name
+  end
 
 end

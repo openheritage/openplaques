@@ -3,18 +3,18 @@
   <% if current_user && current_user.is_admin? %>
   <section class="admin_panel">
     <%= link_to("Edit this area", edit_area_path(@area), {:class => :edit, :title => "Edit this area"})%>
+    <%= link_to("Add a plaque", new_plaque_path(), {:class => :edit, :title => "Add a plaque"})%>
   </section>
   <% end %>
 
   <%= link_to(@area.country.name, @area.country) if @area.country %>
   <h1><%= @area.name %></h1>
 
-
   <div id="plaque-map" data-latitude="<%= @area.latitude_or_default %>" data-longitude="<%= @area.longitude_or_default %>" data-view="all"></div>
 
   <%= will_paginate @plaques %>
 
-  <%= plaque_list(@plaques) %>
+  <%= list(@plaques) %>
 
   <%= will_paginate @plaques %>
 
@@ -22,5 +22,5 @@
 
 <div class="panel clearfix">
   <p>See <%= link_to "unphotographed plaques", {:controller => :unphotographed_plaques_by_area, :country_id => @area.country.alpha2, :area_id => @area.slug, :action => :show} %>.</p>
-  <p class="alternate_formats">Data about this area as <%= alternate_link_to "XML", area_path(@area, :xml), :xml %> <%= alternate_link_to "JSON", area_path(@area, :json), :json %> <%= alternate_link_to "KML", area_path(@area, :kml), :kml %>  <%= alternate_link_to "GMAP", "http://maps.google.co.uk/maps?q=" + area_url(@area, :kml), :html %></p>
+  <p class="alternate_formats">Data about <%= @area %> as <%= alternate_link_to "XML", area_path(@area, :xml), :xml %> <%= alternate_link_to "JSON", area_path(@area, :json), :json %> <%= alternate_link_to "KML", area_path(@area, :kml), :kml %>  <%= alternate_link_to "GMAP", "http://maps.google.co.uk/maps?q=" + area_url(@area, :kml), :html %></p>
 </div>

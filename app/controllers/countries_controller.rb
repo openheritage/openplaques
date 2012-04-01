@@ -8,7 +8,7 @@ class CountriesController < ApplicationController
     @countries = Country.all(:order => :name)
     respond_to do |format|
       format.html
-      format.xml # { render :xml => @countries }
+      format.xml
       format.json { render :json => @countries }
     end
   end
@@ -31,13 +31,13 @@ class CountriesController < ApplicationController
       @country = Country.find_by_alpha2!(params[:id])
     rescue
       @country = Country.find(params[:id])
-      redirect_to(country_url(@country.alpha2), :status => :moved_permanently) and return
+      redirect_to(country_url(@country), :status => :moved_permanently) and return
     end
     @areas = @country.areas.all(:order => :name, :include => :country)
     @plaques = @country.plaques
     respond_to do |format|
       format.html
-      format.xml # { render :xml => @country }
+      format.xml
       format.json { render :json => @country }
       format.kml { render "plaques/index" }
       format.osm { render "plaques/index" }

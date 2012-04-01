@@ -94,12 +94,6 @@ module PeopleHelper
     return nil
   end
 
-  def age(birth_date)
-    age = Date.today.year - birth_date.year
-    age -= 1 if Date.today < birth_date + age.years #for days before birthday
-    return age
-  end
-
   def dated_roled_person(person)
     if person
       roles = Array.new

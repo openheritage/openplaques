@@ -1,7 +1,7 @@
 <% content_for :page_title, "Edit " + @language.name %>
-<h1>Edit <%= link_to @language.name, @language %></h1>
+<h1>Edit <%= @language %></h1>
 
-<% form_for(@language) do |f| %>
+<%= form_for(@language) do |f| %>
   <p>
     <%= f.label :name %>
     <%= f.text_field :name %>
@@ -13,6 +13,6 @@
   </p>
 
   <p>
-    <%= f.submit "Update" %>
+    <%= f.submit "Update", :class => :button %>
   </p>
 <% end %>
