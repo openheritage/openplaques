@@ -113,7 +113,7 @@ class PlaquesController < ApplicationController
     @organisations = Organisation.all(:order => :name)
     @languages = Language.all(:order => :name)
     @common_colours = Colour.common.all(:order => "plaques_count DESC")
-    @other_colours = Colour.other.all(:order => :name)
+    @other_colours = Colour.uncommon.all(:order => :name)
 
     if !current_user
       @user = User.new
