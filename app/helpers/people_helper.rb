@@ -189,5 +189,31 @@ module PeopleHelper
       end
       return verbs
     end
+	
+	def age_icon(age)
+	  if age < 3
+	    image_tag("age1.png", {:alt => "first age of man"})
+      elsif age < 10
+	    image_tag("age2.png", {:alt => "first age of man"})
+      elsif age < 20
+	    image_tag("age3.png", {:alt => "first age of man"})
+      elsif age < 30
+	    image_tag("age4.png", {:alt => "first age of man"})
+      elsif age < 40
+	    image_tag("age5.png", {:alt => "first age of man"})
+      elsif age < 50
+	    image_tag("age6.png", {:alt => "first age of man"})
+      elsif age < 60
+	    image_tag("age7.png", {:alt => "first age of man"})
+      elsif age < 70
+	    image_tag("age8.png", {:alt => "first age of man"})
+      elsif age < 80
+	    image_tag("age9.png", {:alt => "first age of man"})
+      elsif age < 90
+	    image_tag("age10.png", {:alt => "first age of man"})
+      else
+	    image_tag("age11.png", {:alt => "first age of man"})
+	  end
+	end
 
 end
