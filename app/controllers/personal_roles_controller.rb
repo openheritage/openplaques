@@ -44,6 +44,7 @@ class PersonalRolesController < ApplicationController
     @person = Person.find(params[:personal_role][:person_id])
     @personal_role.person = @person
 
+    # TODO: need better validation on the date format here.
     if params[:personal_role][:started_at] > ""
       started_at = params[:personal_role][:started_at]
       if started_at =~/\d{4}/
@@ -119,7 +120,7 @@ class PersonalRolesController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  
+
   def edit
     @people = Person.all(:order => :name)
   end
