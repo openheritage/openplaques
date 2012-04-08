@@ -9,13 +9,10 @@ class RolesByIndexControllerTest < ActionController::TestCase
     should assign_to :roles
   end
 
-  context "when viewing the listing page for roles beginning with non-valid character" do
-
-    should "raise a not-found error" do
-      assert_raises(ActiveRecord::RecordNotFound) { get :show, :id => "|" }
-    end
-    
+  test "viewing the listing page for roles beginning with non-valid character" do
+    get :show, :id => "|"
+    assert_response :missing
   end
-    
-  
+
+
 end

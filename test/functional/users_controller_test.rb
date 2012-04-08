@@ -14,14 +14,16 @@ class UsersControllerTest < ActionController::TestCase
       should assign_to :user
 
     end
-  
+
     context "when viewing a non-existant user's page" do
 
-      should "raise a not-found error" do
-        assert_raises(ActiveRecord::RecordNotFound) { get :show, :id => "xxxxx" }
-      end    
+      setup { get :show, :id => "xxxxx" }
 
-    end  
+      should "show a not found page" do
+        assert_response :missing
+      end
+
+    end
 
 
     context "when viewing the page listing users" do
@@ -30,8 +32,8 @@ class UsersControllerTest < ActionController::TestCase
 
       should respond_with :success
       should render_template :index
-      should assign_to :users    
-    
+      should assign_to :users
+
     end
 
     context "when viewing the page listing ALL users" do
@@ -40,10 +42,10 @@ class UsersControllerTest < ActionController::TestCase
 
       should respond_with :success
       should render_template :index
-      should assign_to :users    
-    
+      should assign_to :users
+
     end
 
   end
-  
+
 end
