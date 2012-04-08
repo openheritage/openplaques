@@ -22,8 +22,6 @@ class RolesController < ApplicationController
   # GET /roles/artist
   # GET /roles/artist.xml
   def show
-    @role = Role.find_by_slug!(params[:id])
-
     @related_roles = @role.related_roles
 
     for person in @role.people
@@ -103,7 +101,7 @@ class RolesController < ApplicationController
   protected
 
     def find_role
-      @role = Role.find_by_slug(params[:id])
+      @role = Role.find_by_slug!(params[:id])
     end
 
 end
