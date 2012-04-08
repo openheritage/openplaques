@@ -65,7 +65,7 @@ class PeopleHelperTest < ActionView::TestCase
 
       should "return a list of linked roles, separated by a comma" do
 
-        expected = '<p class="roles"><a href="/roles/role_one" class="role">role1</a>, <a href="/roles/role_two" class="role">role2</a>, and <a href="/roles/role_three" class="role">role3</a></p>'
+        expected = '<p class="roles">person, <a href="/roles/role_one" class="role">role1</a>, <a href="/roles/role_two" class="role">role2</a>, and <a href="/roles/role_three" class="role">role3</a></p>'
 
         assert_equal(expected, roles_list(@person))
 
@@ -171,8 +171,6 @@ class PeopleHelperTest < ActionView::TestCase
 
         a_person = Person.new(:born_on => birth_date, :died_on => death_date)
 
-        age = age(birth_date)
-
         expecting = "<span class=\"fn\" property=\"rdfs:label foaf:name vcard:fn\"></span> (<a href=\"/people/alive_in/1970\" about=\"/people/#person\" class=\"bday\" content=\"1970\" datatype=\"xsd:date\" property=\"dbpprop:dateOfBirth vcard:bday\">1970</a>&#8202;–&#8202;<a href=\"/people/alive_in/1990\" about=\"/people/#person\" content=\"1990\" datatype=\"xsd:date\" property=\"dbpprop:dateOfDeath\">1990</a>)"
         actual = dated_person(a_person, {:links => :none})
         assert_equal(expecting, actual)
@@ -184,12 +182,12 @@ class PeopleHelperTest < ActionView::TestCase
 
       should "display only the birth date" do
 
-        birth_date = Date.parse("1970-05-05")
+        birth_date = Date.today - 1.year
         a_person = Person.new(:born_on => birth_date)
 
-        age = age(birth_date)
 
-        expecting = "<span class=\"fn\" property=\"rdfs:label foaf:name vcard:fn\"></span> (born <a href=\"/people/alive_in/1970\" about=\"/people/#person\" class=\"bday\" content=\"1970\" datatype=\"xsd:date\" property=\"dbpprop:dateOfBirth vcard:bday\">1970</a><span property=\"foaf:age\" content=\"#{age}\" />)"
+
+        expecting = "<span class=\"fn\" property=\"rdfs:label foaf:name vcard:fn\"></span> (born <a href=\"/people/alive_in/#{birth_date.year}\" about=\"/people/#person\" class=\"bday\" content=\"#{birth_date.year}\" datatype=\"xsd:date\" property=\"dbpprop:dateOfBirth vcard:bday\">#{birth_date.year}</a><span property=\"foaf:age\" content=\"1\" />)"
         actual = dated_person(a_person, {:links => :none})
         assert_equal(expecting, actual)
       end

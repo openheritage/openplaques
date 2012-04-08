@@ -28,7 +28,7 @@ class PlaqueTest < ActiveSupport::TestCase
 
     should "return only plaques without latitude or longitude" do
       # TODO: Find some way of making this test less brittle, as it currently relies on Fixtures.
-      assert_equal [plaques(:frankie_sheffield_plaque), plaques(:churchill_daleks), plaques(:jez_plaque)], Plaque.ungeolocated
+      assert_equal [plaques(:jez_plaque), plaques(:churchill_daleks), plaques(:frankie_sheffield_plaque)], Plaque.ungeolocated
     end
 
   end
