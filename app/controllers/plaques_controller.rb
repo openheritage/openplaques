@@ -34,8 +34,8 @@ class PlaquesController < ApplicationController
     conditions = {}
 
     # Bounding-box query
-    if params["box"]
-      # Should really do some validation here...
+    if !params["box"].blank?
+      # TODO: Should really do some validation here...
       coords = params["box"][1,params["box"].length-2].split("],[")
       top_left = coords[0].split(",")
       bottom_right = coords[1].split(",")
