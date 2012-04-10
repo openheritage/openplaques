@@ -36,7 +36,7 @@ class TodoController < ApplicationController
       render :colours_from_photos
 
     when 'locations_from_geolocations'
-      @plaques = Plaque.geo_no_location
+      @plaques = Plaque.geo_no_location.paginate(:page => params[:page], :per_page => 100)
       render :locations_from_geolocations
 
     when 'areas_from_locations'
