@@ -372,6 +372,8 @@ class Plaque < ActiveRecord::Base
 
   # so that old code still works
   def organisation=(organisation)
+    warn "[DEPRECATION] `organisation=` is deprecated.  Please use `organisations <<` instead."
+
     if organisation
       sponsorship = self.sponsorships.new
       sponsorship.organisation = organisation
