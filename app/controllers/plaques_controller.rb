@@ -176,7 +176,7 @@ class PlaquesController < ApplicationController
     @plaque.location = location if location
 
     organisation = Organisation.find_or_create_by_name(params[:organisation_name])
-    @plaque.organisation = organisation
+    @plaque.organisations << organisation
 
     if @plaque.save
       PlaqueMailer.new_plaque_email(@plaque).deliver rescue puts "ERROR: mailer didn't work"

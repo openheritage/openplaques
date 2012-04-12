@@ -159,8 +159,8 @@ module PlaquesHelper
       if plaque.erected_at
         s+= "  erected_at: " + plaque.erected_at_string + "\r\n"
       end
-      if plaque.organisation
-        s+= "  organisation: " + plaque.organisation.name + "\r\n"
+      if !plaque.organisations.empty?
+        s+= "  organisation: " + plaque.organisations.first.name + "\r\n"
       end
       unless plaque.notes.blank?
         s+= "  notes: " + h(plaque.notes).gsub(/\r\n/," ") + "\r\n"
@@ -222,8 +222,8 @@ module PlaquesHelper
         end
         @listy << content_tag("tr",
           content_tag("td", link_to(thumbnail_img(thing), plaque_path(thing)), :class => :photo)  +
-          content_tag("td", link_to(thing.to_s, plaque_path(thing))) + 
-          content_tag("td", new_linked_inscription(thing)) + 
+          content_tag("td", link_to(thing.to_s, plaque_path(thing))) +
+          content_tag("td", new_linked_inscription(thing)) +
           extras,
           args.merge!(:id => thing.machine_tag.html_safe)
         )
@@ -256,8 +256,8 @@ module PlaquesHelper
 
   def erected_information(plaque)
     info = "".html_safe
-    if plaque.erected_at? or plaque.organisation
-      info += "by ".html_safe if plaque.organisation
+    if plaque.erected_at? or !plaque.organisations.empty?
+      info += "by ".html_safe if !plaque.organisations.empty?
       org_list = []
       plaque.organisations.each do |organisation|
         org_list << link_to(h(organisation.name), organisation)
@@ -420,9 +420,9 @@ module PlaquesHelper
     @image = image_tag("map_icon.png", {:alt => @alt})
     link_to_osm(@image, plaque.latitude, plaque.longitude )
   end
-  
+
   def plaque_icon(plaque)
-	if plaque.colour && plaque.colour.slug =~ /(blue|black|yellow|red|white|green)/
+  if plaque.colour && plaque.colour.slug =~ /(blue|black|yellow|red|white|green)/
       image_tag("icon-" + plaque.colour.slug + ".png", :size => "16x16")
     else
       image_tag("icon-blue.png", :size => "16x16")
@@ -442,9 +442,9 @@ module PlaquesHelper
         end
       end
     end
-	if plaque.inscription_is_stub
-	  inscription += " [full inscription unknown]"
-	end
+  if plaque.inscription_is_stub
+    inscription += " [full inscription unknown]"
+  end
     return inscription
   end
 
@@ -485,5 +485,5 @@ module PlaquesHelper
     attr_accessor :longitude
     attr_accessor :zoom
   end
-  
+
 end

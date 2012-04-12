@@ -2,4 +2,4 @@ plaque<%= @plaque.id %>:
   inscription: "<%= @plaque.inscription %>"
 <% if @plaque.location %>  location: "<%= @plaque.location.name %>"<% end %>
   erected_at: "<%= @plaque.erected_at_string %>"
-<% if @plaque.organisation %>  organisation: "<%= @plaque.organisation.name %>"<% end %>
+<% if @plaque.organisations %>  organisations: "<%= @plaque.organisations.collect(:name).join(",") %>"<% end %>
