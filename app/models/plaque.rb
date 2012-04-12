@@ -366,7 +366,8 @@ class Plaque < ActiveRecord::Base
 
   # so that old code still works
   def organisation
-    self.organisations[0]
+    warn "[DEPRECATION] `organisation` is deprecated.  Please use `organisations.first` or refactor to use the whole organisations collection."
+    organisations[0]
   end
 
   # so that old code still works
