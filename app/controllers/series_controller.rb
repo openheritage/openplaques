@@ -6,6 +6,10 @@ class SeriesController < ApplicationController
     @series = Series.all
   end
   
+  def edit
+    @series = Series.find(params[:id])
+  end  
+
   def show
     @series = Series.find(params[:id])
     @plaques = @series.plaques
