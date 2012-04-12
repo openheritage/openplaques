@@ -4,7 +4,7 @@ class AllAreasController < ApplicationController
 
   def show
     if params[:term]
-      @areas = Area.all(:conditions => ["lower(name) LIKE ?", params[:term].downcase + "%"], :limit => 10, :order => "locations_count DESC", :include => :country)
+      @areas = Area.all(:conditions => ["lower(areas.name) LIKE ?", params[:term].downcase + "%"], :limit => 10, :order => "areas.locations_count DESC", :include => :country)
     else
       @areas = Area.all
     end
