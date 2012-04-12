@@ -79,77 +79,77 @@ class Plaque < ActiveRecord::Base
       end
     end
 
-    if !self.user
-      self.build_user(user_attributes)
+    if !user
+      build_user(user_attributes)
     end
 
   end
 
   def to_csv
-   [self.id, self.inscription_csv, self.organisation_name, self.erected_at_string, self.language_name, self.colour_name.to_s, self.location_name, self.area_name, self.country_name, "\"" + self.coordinates + "\""].join(",")
+   [id, inscription_csv, organisation_name, erected_at_string, language_name, colour_name.to_s, location_name, area_name, country_name, '\"' + coordinates + '\"'].join(",")
   end
 
   def inscription_csv
-    if self.inscription
-      '"' + self.inscription.gsub('"', '""') + '"'
+    if inscription
+      '"' + inscription.gsub('"', '""') + '"'
     else
       ""
     end
   end
 
   def coordinates
-    if self.geolocated?
-      self.latitude.to_s + "," + self.longitude.to_s
+    if geolocated?
+      latitude.to_s + "," + longitude.to_s
     else
       ""
     end
   end
 
   def location_name
-    if self.location && self.location.name
-      '"' + self.location.name.gsub('"', '""') + '"'
+    if location && location.name
+      '"' + location.name.gsub('"', '""') + '"'
     else
       ""
     end
   end
 
   def area_name
-    if self.location && self.location.area
-      self.location.area.name
+    if location && location.area
+      location.area.name
     else
       ""
     end
   end
 
   def country_name
-    if self.location && self.location.area && self.location.area.country
-      self.location.area.country.name
+    if location && location.area && location.area.country
+      location.area.country.name
     else
       ""
     end
   end
   def organisation_name
-    if self.organisation
-      self.organisation.name
+    if organisation
+      organisation.name
     else
       ""
     end
   end
 
   def location_string
-    if self.location
-      self.location.name
+    if location
+      location.name
     else
       nil
     end
   end
 
   def erected_at_string
-    if self.erected_at?
-      if self.erected_at.month == 1 && self.erected_at.day == 1
-        self.erected_at.year.to_s
+    if erected_at?
+      if erected_at.month == 1 && erected_at.day == 1
+        erected_at.year.to_s
       else
-        self.erected_at.to_s
+        erected_at.to_s
       end
     else
       nil
@@ -247,23 +247,23 @@ class Plaque < ActiveRecord::Base
         end
       end
 
-      return self.personal_connections
+      return personal_connections
 
     end
 
   end
 
   def geolocated?
-    !(self.latitude.nil?)
+    !(latitude.nil?)
   end
 
   def photographed?
-    self.photos_count > 0
+    photos_count > 0
   end
 
   def unparse_inscription
-    if self.personal_connections.size > 0
-      self.personal_connections.each do |personal_connection|
+    if personal_connections.size > 0
+      personal_connections.each do |personal_connection|
         personal_connection.destroy
       end
     end
@@ -279,7 +279,7 @@ class Plaque < ActiveRecord::Base
 
   def people
     people = Array.new
-    self.personal_connections.each do |personal_connection|
+    personal_connections.each do |personal_connection|
       if personal_connection.person != nil && personal_connection.person.name != ""
         people << personal_connection.person
       end
@@ -339,12 +339,12 @@ class Plaque < ActiveRecord::Base
   end
 
   def main_photo
-    if !self.photos.empty?
+    if !photos.empty?
       return photos.detail_order.first
     end
   end
   def main_photo_reverse
-    if !self.photos.empty?
+    if !photos.empty?
       return photos.reverse_detail_order.first
     end
   end
@@ -358,7 +358,7 @@ class Plaque < ActiveRecord::Base
 
   def foreign?
     begin
-      self.language.alpha2 != "en"
+      language.alpha2 != "en"
     rescue
       false
     end
@@ -381,20 +381,20 @@ class Plaque < ActiveRecord::Base
   end
 
   def to_s
-    self.title
+    title
   end
 
   private
 
     def use_other_colour_id
-      if !self.colour && self.other_colour_id
-        self.colour_id = self.other_colour_id
+      if !colour && other_colour_id
+        self.colour_id = other_colour_id
       end
     end
 
     def set_erected_year
-      if self.erected_at?
-        plaque_erected_year = PlaqueErectedYear.find_or_create_by_name(self.erected_at.year.to_s)
+      if erected_at?
+        plaque_erected_year = PlaqueErectedYear.find_or_create_by_name(erected_at.year.to_s)
         self.plaque_erected_year = plaque_erected_year
       end
     end
