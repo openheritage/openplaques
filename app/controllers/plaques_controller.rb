@@ -104,21 +104,16 @@ class PlaquesController < ApplicationController
   # GET /plaques/new
   # GET /plaques/new.xml
   def new
-
     @plaque = Plaque.new(:language_id => 1)
     @plaque.build_user
     @plaque.photos.build
-
     @countries = Country.all(:order => :name)
-    @organisations = Organisation.all(:order => :name)
     @languages = Language.all(:order => :name)
     @common_colours = Colour.common.all(:order => "plaques_count DESC")
     @other_colours = Colour.uncommon.all(:order => :name)
-
     if !current_user
       @user = User.new
     end
-
   end
 
   def parse_inscription
@@ -176,25 +171,24 @@ class PlaquesController < ApplicationController
     @plaque.location = location if location
 
     organisation = Organisation.find_or_create_by_name(params[:organisation_name])
-    @plaque.organisations << organisation
-
+#    @plaque.organisations << organisation
+    @plaque.organisation = organisation
+    
     if @plaque.save
       PlaqueMailer.new_plaque_email(@plaque).deliver rescue puts "ERROR: mailer didn't work"
       flash[:notice] = "Thanks for adding this plaque."
       redirect_to plaque_path(@plaque)
     else
+      puts "*** plaque failed to save "
+      puts @plaque.errors.full_messages
       params[:checked] = "true"
       @plaque.photos.build if @plaque.photos.size == 0
-
       @countries = Country.all(:order => :name)
-      @organisations = Organisation.all(:order => :name)
       @languages = Language.all(:order => :name)
       @common_colours = Colour.common.all(:order => "plaques_count DESC")
-      @other_colours = Colour.other.all(:order => :name)
-
+      @other_colours = Colour.uncommon.all(:order => :name)
       render :new
     end
-
   end
 
   # PUT /plaques/1
