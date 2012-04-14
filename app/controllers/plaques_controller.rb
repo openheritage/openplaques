@@ -180,8 +180,6 @@ class PlaquesController < ApplicationController
       flash[:notice] = "Thanks for adding this plaque."
       redirect_to plaque_path(@plaque)
     else
-      puts "*** plaque failed to save "
-      puts @plaque.errors.full_messages
       params[:checked] = "true"
       @plaque.photos.build if @plaque.photos.size == 0
       @countries = Country.all(:order => :name)
