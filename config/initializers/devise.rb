@@ -73,6 +73,9 @@ Devise.setup do |config|
   # ==> Configuration for :validatable
   # Range for password length
   # config.password_length = 6..20
+  
+  config.reset_password_within = 6.hours
+  config.use_salt_as_remember_token = true
 
   # Regex to use to validate the email address
   # config.email_regexp = /^([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})$/i
