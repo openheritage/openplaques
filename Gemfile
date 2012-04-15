@@ -26,6 +26,7 @@ gem 'will_paginate'
 gem 'randumb'
 gem 'meta-tags', :require => 'meta_tags'
 gem 'google-spreadsheet-ruby'
+gem 'rdf'
 
 gem 'devise'
 
