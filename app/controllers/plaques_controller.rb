@@ -170,17 +170,16 @@ class PlaquesController < ApplicationController
 
     @plaque.location = location if location
 
-    organisation = Organisation.find_or_create_by_name(params[:organisation_name])
-#    @plaque.organisations << organisation
-    @plaque.organisation = organisation
-    
+    unless params[:organisation_name].empty?
+      organisation = Organisation.find_or_create_by_name(params[:organisation_name])
+      @plaque.organisations << organisation if organisation.valid?
+    end
+
     if @plaque.save
       PlaqueMailer.new_plaque_email(@plaque).deliver rescue puts "ERROR: mailer didn't work"
       flash[:notice] = "Thanks for adding this plaque."
       redirect_to plaque_path(@plaque)
     else
-      puts "*** plaque failed to save "
-      puts @plaque.errors.full_messages
       params[:checked] = "true"
       @plaque.photos.build if @plaque.photos.size == 0
       @countries = Country.all(:order => :name)
