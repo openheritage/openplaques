@@ -33,6 +33,8 @@ class Person < ActiveRecord::Base
   has_one :birth_connection, :class_name => "PersonalConnection", :conditions => [ 'verb_id in (8,504)']
   has_one :death_connection, :class_name => "PersonalConnection", :conditions => [ 'verb_id in (3,49,161,1108)']
 
+  attr_accessor :depiction, :abstract, :comment # dbpedia fields
+
   before_save :update_index
 
   scope :no_role, :conditions => {:personal_roles_count => [nil,0]}
@@ -186,15 +188,19 @@ class Person < ActiveRecord::Base
     return default_wikipedia_url.gsub("http://en.wikipedia.org/wiki","http://dbpedia.org/resource")
   end
 
+  def dbpedia_ntriples_uri
+    default_dbpedia_uri.gsub("resource","data") + ".ntriples"
+  end
+
   def name_and_dates
-  r = name
-  r += " (" if born_on || died_on
-  r += born_on.year.to_s if born_on
-  r += "?-" if !born_on && died_on
-  r += "-" if born_on && died_on
-  r += died_on.year.to_s if died_on
-  r += ")" if born_on || died_on
-  return r
+    r = name
+    r += " (" if born_on || died_on
+    r += born_on.year.to_s if born_on
+    r += "?-" if !born_on && died_on
+    r += "-" if born_on && died_on
+    r += died_on.year.to_s if died_on
+    r += ")" if born_on || died_on
+    return r
   end
 
   def surname
@@ -219,6 +225,28 @@ class Person < ActiveRecord::Base
   
   def thumbnail_url
     return "/assets/NoPersonSqr.png"
+  end
+
+  def populate_from_dbpedia
+    begin
+      graph = RDF::Graph.load(self.dbpedia_ntriples_uri)
+      query = RDF::Query.new({
+        :person => {
+          RDF::URI("http://dbpedia.org/ontology/birthDate") => :birthDate,
+          RDF::URI("http://dbpedia.org/ontology/deathDate") => :deathDate,
+          RDF::URI("http://xmlns.com/foaf/0.1/depiction") => :depiction,
+          RDF::URI("http://dbpedia.org/ontology/abstract") => :abstract,
+          RDF::URI("http://www.w3.org/2000/01/rdf-schema#comment") => :comment,
+        }
+      })
+      query.execute(graph).filter { |solution| solution.comment.language == :en }.each do |solution|
+        self.depiction = solution.depiction
+        # need to filter abstract/comment with something like http://rdf.rubyforge.org/RDF/Query/Solutions.html
+        self.abstract = solution.abstract
+        self.comment = solution.comment
+      end
+    rescue
+    end
   end
   
   def to_s
