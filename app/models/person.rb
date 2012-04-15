@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'open-uri'
+require 'rdf/ntriples'
 
 # This class represents a human who has been commemorated on a plaque.
 # === Attributes
