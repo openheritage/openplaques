@@ -194,7 +194,11 @@ class Person < ActiveRecord::Base
   end
 
   def name_and_dates
-    r = name
+    name + dates
+  end
+
+  def dates
+    r = ""
     r += " (" if born_on || died_on
     r += born_on.year.to_s if born_on
     r += "?-" if !born_on && died_on
@@ -223,7 +227,7 @@ class Person < ActiveRecord::Base
   :methods => [:born_in, :born_at, :died_in, :died_at, :default_wikipedia_url, :default_dbpedia_uri, :surname, :type]
   )
   end
-  
+
   def thumbnail_url
     return "/assets/NoPersonSqr.png"
   end
@@ -249,7 +253,7 @@ class Person < ActiveRecord::Base
     rescue
     end
   end
-  
+
   def to_s
     self.name
   end

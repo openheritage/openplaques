@@ -15,8 +15,8 @@
 <%= content_tag("ol", :class => "results", :id => "people_results") do %>
   <% @people.each do |person| %>
     <li>
-      <p class="result"><%= link_to dated_roled_person(person) %></p>
-      <p class="count"><%= pluralize(person.plaques.size, "plaque") %> <%= "in ".html_safe + list_of_area_links(person.areas) unless person.areas.size == 0 %></p>
+      <p class="result"><%= link_to person.name, person %> <%= person.dates %></p>
+      <p class="count"><%= pluralize(person.personal_connections.size, "plaque") %></p>
     </li>
   <% end %>
 <% end %>
