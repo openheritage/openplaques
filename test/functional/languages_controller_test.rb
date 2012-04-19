@@ -2,13 +2,9 @@ require 'test_helper'
 
 class LanguagesControllerTest < ActionController::TestCase
 
-  context "when requesting a non-existant language" do
-
-    should "raise a not-found error" do
-      assert_raises(ActiveRecord::RecordNotFound) do
-        get(:show, {:id => "zz"})
-      end
-    end
+  test "requesting a non-existant language" do
+    get :show, :id => "zz"
+    assert_response(404)
   end
 
   context "when viewing languages index page" do

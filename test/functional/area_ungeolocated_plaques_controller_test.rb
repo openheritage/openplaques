@@ -17,23 +17,15 @@ class AreaUngeolocatedPlaquesControllerTest < ActionController::TestCase
 
   end
 
-  context "when requesting a non-existant page" do
-
-    should "raise a not-found error" do
-      assert_raises(ActiveRecord::RecordNotFound) do      
-        get(:show, {:area_id => "fictional_area", :country_id => "xx"})
-      end
-    end    
+  test "when requesting a non-existant page" do
+    get(:show, {:area_id => "fictional_area", :country_id => "xx"})
+    assert_response(404)
   end
 
-  context "when getting a mis-matched area and country" do
-
-    should "raise a not-found error" do
-      assert_raises(ActiveRecord::RecordNotFound) do      
-        get(:show, {:area_id => areas(:london).slug, :country_id => countries(:france).alpha2})
-      end
-    end    
+  test "when getting a mis-matched area and country" do
+    get(:show, {:area_id => areas(:london).slug, :country_id => countries(:france).alpha2})
+    assert_response(404)
   end
-  
+
 
 end

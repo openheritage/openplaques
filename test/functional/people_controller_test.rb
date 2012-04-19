@@ -19,16 +19,9 @@ class PeopleControllerTest < ActionController::TestCase
 
   end
 
-  should "get a 404 when requesting non-existant person" do
-
-    assert_raises(ActiveRecord::RecordNotFound) do
-      get(:show, {:id => "99999"})
-    end
-  end
-
-  context "when not signed in" do
-
-
+  test "requesting non-existant person" do
+    get :show, :id => "99999"
+    assert_response(404)
   end
 
   context "when signed in as a user" do

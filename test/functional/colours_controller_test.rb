@@ -3,7 +3,7 @@ require 'test_helper'
 class ColoursControllerTest < ActionController::TestCase
 
   context "when viewing the index page" do
-    
+
     setup do
       get :index
     end
@@ -17,12 +17,12 @@ class ColoursControllerTest < ActionController::TestCase
     setup do
       get :show, {:id => colours(:blue).slug}
     end
-    
+
     should respond_with :success
     should assign_to :colour
-    
+
   end
-  
+
   context "when viewing a legacy colour URL identified by an id" do
 
     setup do
@@ -33,36 +33,32 @@ class ColoursControllerTest < ActionController::TestCase
     should respond_with :moved_permanently
     should redirect_to("color page") {colour_path(@colour.name)}
   end
-  
-  context "when requesting a non-existant colour" do
 
-    should "raise a not-found error" do
-      assert_raises(ActiveRecord::RecordNotFound) do      
-        get(:show, {:id => "blueygreenorange"})
-      end
-    end
+  test "requesting a non-existant colour" do
+    get(:show, {:id => "blueygreenorange"})
+    assert_response(404)
   end
 
   context "when signed in" do
-    
+
     setup do
       sign_in users(:frankieroberto)
     end
 
     context "when viewing the new colour page" do
       setup { get :new }
-      
+
       should respond_with :success
       should assign_to :colour
     end
-    
+
     context "when viewing the edit colour page" do
       setup { get :edit, :id => colours(:blue).name }
-      
+
       should respond_with :success
-      should assign_to :colour      
+      should assign_to :colour
     end
-    
+
     context "when submitting a valid new colour" do
 
       setup do
@@ -84,16 +80,16 @@ class ColoursControllerTest < ActionController::TestCase
       should render_template :new
 
     end
-    
+
     context "when updating a colour with valid new attributes" do
 
       setup do
         @slug = "blue_new"
         put :update, :id => colours(:blue).slug, :colour => {:slug => @slug, :name => "new blue"}
       end
-      
-      should redirect_to("the page for the new colour") { colour_path(@slug) }      
-      
+
+      should redirect_to("the page for the new colour") { colour_path(@slug) }
+
     end
 
     context "when updating a colour with invalid new attributes" do
@@ -101,10 +97,10 @@ class ColoursControllerTest < ActionController::TestCase
       setup do
         put :update, :id => colours(:blue).slug, :colour => {:slug => ""}
       end
-      
+
       should assign_to :colour
       should render_template :edit
-      
+
     end
 
   end
