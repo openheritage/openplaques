@@ -17,15 +17,15 @@ class Country < ActiveRecord::Base
   has_many :areas
   has_many :locations, :through => :areas
   has_many :plaques, :through => :locations
-  
+
   def latitude
     52
   end
-  
+
   def longitude
     0
   end
-  
+
   def zoom
     6
   end
@@ -34,9 +34,13 @@ class Country < ActiveRecord::Base
   def to_param
     alpha2
   end
-  
+
   def to_s
     name
+  end
+
+  def as_json(options={})
+    super(options.merge(:only => [:alpha2, :name, :areas_count, :dbpedia_uri]))
   end
 
 end
