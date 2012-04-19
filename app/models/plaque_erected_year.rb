@@ -14,4 +14,8 @@ class PlaqueErectedYear < ActiveRecord::Base
 
   has_many :plaques
 
+  def as_json(options={})
+    super(options.merge(:only => [:name, :plaques_count]))
+  end
+
 end
