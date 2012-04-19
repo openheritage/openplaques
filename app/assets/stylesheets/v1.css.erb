@@ -524,11 +524,47 @@ h1.large_inscription a {
   width: 60%; /* width: 516px; */
 }
 
-#plaque_identifier {
+#plaque_identifier, article aside {
   float: right;
   margin: 0;
   width: 33%; /* width: 302px; */
 }
+
+article aside figure figcaption {
+  font-size: .8em;
+  text-align: center;
+  font-style: italic;
+}
+
+article p, article.panel p {
+  margin-bottom: 1em;
+}
+
+article section {
+  margin-top: 1em;
+}
+
+article section header {
+  border: 0;
+}
+
+article section header h2 {
+  font-size: 1.2em;
+}
+
+article section section header h3 {
+  font-size: 1em;
+}
+
+article ul {
+  margin-left: 2em;
+}
+
+article blockquote {
+  font-style: italic;
+  margin-left: 2em;
+}
+
 
 #plaque_identifier section {
   margin: 0;
@@ -616,6 +652,31 @@ header {
   width: 100%;
   position: relative;
 }
+
+article header {
+  background: none;
+  border: none;
+  padding: 0;
+  width: auto;
+  position: relative;
+  margin-bottom: 1em;
+  border-bottom: solid 1px #CCC;
+}
+
+article.panel header h1 {
+  font-size: 2em;
+  border-bottom: 0;
+}
+
+article.panel header h2 {
+  margin-bottom: 0.5em;
+}
+
+article p.intro {
+  font-size: 1.3em;
+  line-height: 1.5em;
+}
+
 
 header .user_info {
   position: absolute; right: 0;
@@ -943,6 +1004,11 @@ footer {
   background: -moz-linear-gradient(top, #EEE, #BBB);
   display: block;
   padding: 16px 0 125px;
+}
+
+article footer {
+  background: none;
+  padding: 0;
 }
 
 footer nav {

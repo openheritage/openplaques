@@ -254,6 +254,32 @@ module PlaquesHelper
     end
   end
 
+  def plaque_organisation_links(plaque)
+
+    plaque_organisations = plaque.organisations
+
+    if plaque_organisations.size > 0
+      links = plaque.organisations.collect do |organisation|
+        link_to(h(organisation.name), organisation)
+      end
+      links.to_sentence
+    else
+      "an unknown organisation".html_safe
+    end
+  end
+
+  def erected_date(plaque)
+    if plaque.erected_at?
+      if plaque.erected_at.day == 1 && plaque.erected_at.month == 1
+        "in ".html_safe + plaque.erected_at.year.to_s
+      else
+        "on ".html_safe + plaque.erected_at.strftime('%d %B %Y')
+      end
+    else
+      "sometime in the past"
+    end
+  end
+
   def erected_information(plaque)
     info = "".html_safe
     if plaque.erected_at? or !plaque.organisations.empty?

@@ -75,7 +75,9 @@ Openplaques::Application.routes.draw do
     resources :died_in, :controller => :people_died_on, :as => "people_died_in", :only => [:index, :show]
     resources :alive_in, :controller => :people_alive_in, :as => "people_alive_in", :only => [:index, :show]
   end
-  resources :people
+  resources :people do
+    resource :plaques, :controller => :person_plaques, :only => :show
+  end
 
   # Misc other resources
   resources :languages

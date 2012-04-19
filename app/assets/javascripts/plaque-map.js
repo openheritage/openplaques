@@ -89,7 +89,7 @@ function initmap() {
 
       var mapquestUrl = 'http://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png',
       subDomains = ['otile1','otile2','otile3','otile4'],
-      mapquestAttrib = 'Data &amp; imagery from <a href="http://open.mapquest.co.uk" target="_blank">MapQuest</a>, <a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> and contributors.';
+      mapquestAttrib = 'Map from <a href="http://open.mapquest.co.uk" target="_blank">MapQuest</a> &amp; <a href="http://www.openstreetmap.org/" target="_blank">OSM</a>.';
       var mapquest = new L.TileLayer(mapquestUrl, {maxZoom: 18, attribution: mapquestAttrib, subdomains: subDomains});
 
       var latitude = plaque_map.attr("data-latitude");
@@ -110,8 +110,11 @@ function initmap() {
       }
 
       var data_view = plaque_map.attr("data-view");
+      var data_path = plaque_map.attr("data-path");
       if (data_view && data_view == "all") {
         var url = '/plaques.json';
+      } else if (data_path) {
+        var url = data_path;
       } else {
         var url = document.location + '.json';
       }

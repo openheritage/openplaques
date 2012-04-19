@@ -305,7 +305,7 @@ class Plaque < ActiveRecord::Base
     :methods => [:title, :colour_name, :machine_tag, :geolocated?, :photographed?, :url, :photo_url, :thumbnail_url, :shot_name]
     }
 
-    if options.size > 3
+    if options.size > 0
       super(options)
     else
       super(default_options)

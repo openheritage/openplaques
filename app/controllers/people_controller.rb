@@ -3,7 +3,7 @@ class PeopleController < ApplicationController
   before_filter :authenticate_admin!, :only => :destroy
   before_filter :authenticate_user!, :except => [:index, :show]
 
-  before_filter :find_person, :only => [:show, :edit, :update, :destroy]
+  before_filter :find_person, :only => [:edit, :update, :destroy]
 
   def index
     @people = Person.find(:all)
@@ -22,7 +22,7 @@ class PeopleController < ApplicationController
   # GET /people/1
   # GET /people/1.xml
   def show
-    @plaques = @person.plaques
+    @person = Person.find(params[:id], :include => {:personal_roles => :role})
     respond_to do |format|
       format.html
       format.kml { render "plaques/index" }
