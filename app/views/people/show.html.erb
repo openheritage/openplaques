@@ -1,46 +1,32 @@
 <% content_for :page_title, "Historical plaques about " + @person.name %>
 
-<%= content_tag "article", :class => "panel" do %>
-  <%= content_tag "header" do %>
-    <% content_tag "hgroup" do %>
-      <%= content_tag "h1", dated_person(@person, {:links => :none}) %>
-      <%= content_tag "h2", roles_list(@person) %>
-    <% end %>
+<div class="panel">
+  <% if current_user && current_user.is_admin? %>
+    <section class="admin_panel">
+      <%= link_to("Edit this "+@person.type, edit_person_path(@person), {:class => :edit, :title => "Edit this "+@person.type})%>
+    </section>
   <% end %>
+  <div class="vcard person" typeof="<%= if (@person.person?) then "foaf:Person" else "foaf:Agent" end %> vcard:VCard" about="#person">
 
-  <aside class="plaque_info_panel">
-    <%= content_tag("figure") do %>
-      <div id="plaque-map" data-path="<%= person_plaques_path(@person, :format => :json) %>" data-zoom="4"></div>
-      <figcaption><p>Mentioned on <%= pluralize(@person.plaques.size, "plaque") %>.</p></figcaption>
-    <% end %>
-  </aside>
+    <p><% @person.populate_from_dbpedia %><%= image_tag(@person.depiction, :width => "100", :alt => "a depiction of "+@person.name) if @person.depiction %></p>
+    <h1><%= dated_person(@person, {:links => :none}) %> <%= roles_list(@person) %></h1>
+    
+    <p><%= "Died aged" if (@person.person? || @person.thing? || @person.animal?) && @person.dead? %><%= "Closed aged" if @person.place? && @person.dead? %><%= "Aged" if @person.alive? && @person.age%> <%= "c." + @person.age.to_s if @person.age%></p>
 
-  <%= content_tag("p", @person.introduction, :class => "intro") if @person.introduction %>
-
-  <section class="clearfix">
-    <header><h2><%= @person.plaques.size > 1 ? "Plaques" : "Plaque" %></h2></header>
-
+    <table>
     <% @person.plaques.each do |plaque| %>
-      <section>
-        <header><h3><%= link_to plaque.title, plaque %></h3></header>
-
-        <p>This plaque, erected <%= erected_date(plaque) %> by <%= plaque_organisation_links(plaque) %>, reads:</p>
-
-        <blockquote><p><%= plaque.inscription %></p></blockquote>
-      </section>
+      <tr>
+        <td><%= link_to(thumbnail_img(plaque), plaque_path(plaque)) %></td>
+        <td><%= verbs(@person,plaque).to_sentence.html_safe %> at <%= link_to plaque.location.name + ", " + plaque.area.name, plaque if plaque.location and plaque.area %><%= link_to plaque.location.name, plaque if plaque.location and !plaque.area %></td>
+        <td>"<%= plaque.inscription %>"</td>
+      </tr>
     <% end %>
+    </table>
+    
+    <br/>
+    <%= content_tag("p", "Read more about ".html_safe + link_to(@person.name, @person.default_wikipedia_url, :target => '_blank') + " on Wikipedia.".html_safe) unless @person.default_wikipedia_url.blank? %>
+  </div>
 
-  </section>
+  <p class="alternate_formats">Data about this person as <%= alternate_link_to "XML", person_path(@person, :xml), :xml %> <%= alternate_link_to "JSON", person_path(@person, :json), :json %> <%= alternate_link_to "KML", person_path(@person, :kml), :kml %>  <%= alternate_link_to "GMAP", "http://maps.google.co.uk/maps?q=" + person_url(@person, :kml), :html %></p>
 
-  <section>
-    <header><h2>Links</h2></header>
-    <ul>
-      <li><%= content_tag("p", link_to(@person.name, @person.default_wikipedia_url, :target => '_blank') + " on Wikipedia.".html_safe) unless @person.default_wikipedia_url.blank? %></li>
-    </ul>
-  </section>
-
-  <footer>
-    <p class="alternate_formats">Data about this person as <%= alternate_link_to "XML", person_path(@person, :xml), :xml %> <%= alternate_link_to "JSON", person_path(@person, :json), :json %> <%= alternate_link_to "KML", person_path(@person, :kml), :kml %>  <%= alternate_link_to "GMAP", "http://maps.google.co.uk/maps?q=" + person_url(@person, :kml), :html %></p>
-  </footer>
-
-<% end %>
+</div>
