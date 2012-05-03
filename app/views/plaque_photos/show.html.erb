@@ -1,7 +1,7 @@
 <% content_for :page_title, "Photos of the " + @plaque.title %>
 
 <div class="panel clearfix">
-  <% if @plaque.photos.count < 2 %>
+  <% if @plaque.photos.size < 1 %>
     <p>We don't have a photo of this plaque yet. You could be the first!</p>
   <% else %>
     <p>We currently link to <%= pluralize_with_no(@plaque.photos.size.to_s,"photo") %> of this plaque. We display multiple photos of each plaque, so you don&apos;t have to be the first.<p>
