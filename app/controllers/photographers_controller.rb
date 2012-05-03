@@ -32,6 +32,9 @@ class PhotographersController < ApplicationController
     # photographer isn't an actual object, but we can search a named Flickr user's photos
     # which is useful, because it finds more than is in the public search
     @photographer = params[:flickr_url]
+	@photographer.gsub!('http://www.flickr.com/photos/','')
+	@photographer.gsub!(/\/.*/,'')
+	puts 'xxxxx' + @photographer
     help.find_photo_by_machinetag(nil, @photographer)
     redirect_to photographers_path
   end
