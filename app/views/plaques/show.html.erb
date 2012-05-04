@@ -32,11 +32,10 @@
   <% if @plaque.photos.empty? %>
 <!--TODO: Incorporate streetview imagery -->
     <section id="plaque_no_photos">
-      <div class="no_photo">
-        <h2>No photograph yet</h2>
-        <p>To add a photo, publish it on Flickr with a Creative Commons licence and tag it <span class="machinetag"><%= @plaque.machine_tag %></span></p>
-      <%= button_to "find on Flickr", {:action => :flickr_search, :id => @plaque}, :class => :button %>
-      </div>
+        <div class="no_photo">
+          <h2>Add a photo</h2>
+		  <p>Do you have a photograph of <%= @plaque.machine_tag %>? <%= link_to "How to add it", plaque_photos_path(@plaque), {:class => :show, :title => "Show photos"} %></p>
+        </div>
 
       <% if @plaque.geolocated? %>
 
@@ -88,13 +87,13 @@
 
       </div>
 
-
-
       <% else %>
+	  
         <div class="no_location">
           <h2>Map location unknown</h2>
-          <p>We haven't located this plaque on a map yet. <!--a href="#">Locate this plaque</a--></p>
+          <p>We haven&apos;t located this plaque on a map yet. <!--a href="#">Locate this plaque</a--></p>
         </div>
+		
       <% end %>
     </section>
 
@@ -103,13 +102,11 @@
       <%= render "plaque_details" %>
     </section>
 
-  <% elsif @plaque.photos.size < 2 %>
-
+  <% elsif @plaque.photos.size < 0 %>
+  
     <div class="plaque_image plaque_single_image">
-
       <% photo = @plaque.main_photo %>
       <%= link_to(image_tag(photo.file_url, {:alt => "Photo of plaque", :rel => "foaf:depiction"}), photo.url) %>
-
       <div id="photo_information" class="clearfix">
         <p class="photo_credit">Photographed by
         <% if photo.photographer_url %>
@@ -128,23 +125,11 @@
       <% if @plaque.geolocated? %>
         <%= image_tag(google_maps_path(@plaque.latitude, @plaque.longitude, {:zoom => 16, :styles =>
         {
-          :road =>
-            {:all =>
-              {:lightness => "30"}
-            },
-            "road.arterial" =>
-              {:all =>
-                {:hue => "0x003bff"}
-              },
-            :poi =>
-              {:all =>
-                {:visibility => :simplified}
-              },
-            :landscape =>
-              {:all =>
-                {:hue => "0x003bff"}
-              }
-            }
+          :road => {:all => {:lightness => "30"} },
+          "road.arterial" => {:all => {:hue => "0x003bff"} },
+          :poi => {:all => {:visibility => :simplified} },
+          :landscape => {:all => {:hue => "0x003bff"} }
+		}
           }
         )) %>
       <% end %>
@@ -156,18 +141,18 @@
 
   <% else %>
 
-
       <div class="plaque_image plaque_multiple_images">
-      <% first_photo = @plaque.main_photo %>
+        <% first_photo = @plaque.main_photo %>
         <%= link_to(image_tag(first_photo.file_url, {:id => "primary_image", :alt => "Photo of plaque", :rel => "foaf:depiction"}), first_photo.url) %>
-
         <div id="secondary_images">
-        <% @plaque.photos.detail_order.each do |image| %>
-          <%= link_to(image_tag(image.file_url, {:alt => "Photo of plaque", :rel => "foaf:depiction"}), image.url) unless image == first_photo %>
-        <% end %>
-
+          <% @plaque.photos.detail_order.each do |image| %>
+            <%= link_to(image_tag(image.file_url, {:alt => "Photo of plaque", :rel => "foaf:depiction"}), image.url) unless image == first_photo %>
+          <% end %>
+          <div class="no_photo">
+            <h2>Add a photo</h2>
+		    <p>Do you have a photograph? <%= link_to "How to add it", plaque_photos_path(@plaque), {:class => :show, :title => "Show photos"} %></p>
+          </div>
         </div>
-
       </div>
 
     <section id="plaque_identifier" class="plaque_info_panel">
@@ -175,27 +160,15 @@
         <%= render "plaque_header" %>
 
         <% if @plaque.geolocated? %>
-          <%= image_tag(google_maps_path(@plaque.latitude, @plaque.longitude, {:zoom => 16, :styles =>
-          {
-            :road =>
-              {:all =>
-                {:lightness => "30"}
-              },
-              "road.arterial" =>
-                {:all =>
-                  {:hue => "0x003bff"}
-                },
-              :poi =>
-                {:all =>
-                  {:visibility => :simplified}
-                },
-              :landscape =>
-                {:all =>
-                  {:hue => "0x003bff"}
-                }
-              }
-            }
-          )) %>
+        <%= image_tag(google_maps_path(@plaque.latitude, @plaque.longitude, {:zoom => 16, :styles =>
+        {
+          :road => {:all => {:lightness => "30"} },
+          "road.arterial" => {:all => {:hue => "0x003bff"} },
+          :poi => {:all => {:visibility => :simplified} },
+          :landscape => {:all => {:hue => "0x003bff"} }
+		}
+          }
+        )) %>
         <% end %>
 
         <%= render "plaque_details" %>

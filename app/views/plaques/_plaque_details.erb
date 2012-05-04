@@ -27,7 +27,18 @@
    </tr>
    <tr>
      <th>Colour</th>
-     <td><%= @plaque.colour_name || "Unknown" %></td>
+	 <% if @plaque.colour_name %>
+       <td><%= @plaque.colour_name || "Unknown" %></td>
+	 <% else %>
+	   <% @colours = Colour.find(:all) %>
+	   <td>
+	     <%= form_for @plaque do |f| %>
+           <%= f.label :colour_id, "This plaque is" %>
+           <%= f.collection_select :colour_id, @colours, :id, :name, {:include_blank => true} %>
+           <%= f.submit "Save", :class => :button %>
+         <% end %>
+       </td>
+     <% end %>
    </tr>
    <tr>
      <th>Location</th>
@@ -44,22 +55,28 @@
        <% end %>
      </td>
    </tr>
-   <% if !@plaque.is_current %>
    <tr>
-     <th>Not found</th>
-     <td>As far as we know, it is not currently on display</td>
+     <th>Machine tag</th>
+     <td><%= @plaque.machine_tag %></td>
    </tr>
+   <% if !@plaque.is_current %>
+     <tr>
+       <th>Not found</th>
+       <td>As far as we know, it is not currently on display</td>
+     </tr>
    <% end %>
-   <tr>
-      <th>See also...</th>
-      <td>
-      <% @plaque.people.each do |person| %>
-        <% person.plaques.each do |plaque| %>
-          <% if plaque != @plaque %>
-            <%= link_to(thumbnail_img(plaque), plaque) %>
+   <% if @plaque.people.size > 0 %>
+     <tr>
+        <th>See also...</th>
+        <td>
+        <% @plaque.people.each do |person| %>
+          <% person.plaques.each do |plaque| %>
+            <% if plaque != @plaque %>
+              <%= link_to(thumbnail_img(plaque), plaque) %>
+            <% end %>
           <% end %>
         <% end %>
-      <% end %>
-      </td>
-   </tr>
+        </td>
+     </tr>
+   <% end %>   
  </table>
