@@ -25,8 +25,10 @@ class PeopleController < ApplicationController
     @person = Person.find(params[:id], :include => {:personal_roles => :role})
     respond_to do |format|
       format.html
-      format.kml { render "plaques/index" }
-      format.osm { render "plaques/index" }
+      format.kml { @plaques = @person.plaques
+	  render "plaques/index" }
+      format.osm { @plaques = @person.plaques
+	  render "plaques/index" }
       format.yaml
       format.xml
       format.json { render :json => @person }
