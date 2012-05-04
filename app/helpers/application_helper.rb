@@ -165,6 +165,10 @@ module ApplicationHelper
       pluralize(number, name)
     end
   end
+  
+  def pluralize_word(count, singular, plural = nil)
+    (count == 1 || count =~ %r/^1(\.0+)?$/) ? singular : (plural || singular.pluralize)
+  end
 
   def make_slug_not_war
     if slug.blank?

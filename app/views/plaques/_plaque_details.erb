@@ -1,9 +1,9 @@
 <table class="section_details" cellspacing="0" summary="Plaque details for #<%= @plaque.id %>">
    <% if !@plaque.is_accurate_geolocation %>
-   <tr>
-     <th>Map accuracy</th>
-     <td>This is an approximate position</td>
-   </tr>
+     <tr>
+       <th>Map accuracy</th>
+       <td>This is an approximate position</td>
+     </tr>
    <% end %>
    <tr>
      <th>Erected</th>
@@ -45,7 +45,7 @@
      <td><%= location_if_known @plaque %></td>
    </tr>
    <tr>
-     <th>Subject</th>
+     <th><%= pluralize_word(@plaque.people.size, "Subject") %></th>
      <td>
        <% @plaque.people.each do |person| %>
          <span class="vcard"><%= dated_person(person) %></span><br/>
@@ -65,17 +65,13 @@
        <td>As far as we know, it is not currently on display</td>
      </tr>
    <% end %>
-   <% if @plaque.people.size > 0 %>
+   <% if !@plaque.see_also.empty? %>
      <tr>
         <th>See also...</th>
         <td>
-        <% @plaque.people.each do |person| %>
-          <% person.plaques.each do |plaque| %>
-            <% if plaque != @plaque %>
-              <%= link_to(thumbnail_img(plaque), plaque) %>
-            <% end %>
+		  <% @plaque.see_also.each do |plaque| %>
+            <%= link_to(thumbnail_img(plaque), plaque) %>
           <% end %>
-        <% end %>
         </td>
      </tr>
    <% end %>   

@@ -379,6 +379,16 @@ class Plaque < ActiveRecord::Base
       sponsorship.organisation = organisation
     end
   end
+  
+  def see_also
+    also = []
+    people.each do |person|
+      person.plaques.each do |plaque|
+        also << plaque unless plaque == self
+      end
+    end
+	also
+  end
 
   def to_s
     title
