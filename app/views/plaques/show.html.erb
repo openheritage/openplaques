@@ -34,7 +34,7 @@
     <section id="plaque_no_photos">
         <div class="no_photo">
           <h2>Add a photo</h2>
-		  <p>Do you have a photograph of <%= @plaque.machine_tag %>? <%= link_to "How to add it", plaque_photos_path(@plaque), {:class => :show, :title => "Show photos"} %></p>
+		  <p>Do you have a photograph? <%= link_to "How to add it", plaque_photos_path(@plaque), {:class => :show, :title => "Show photos"} %></p>
         </div>
 
       <% if @plaque.geolocated? %>
