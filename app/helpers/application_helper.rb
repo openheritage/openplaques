@@ -176,4 +176,63 @@ module ApplicationHelper
     end
   end
 
+  def list(things, context = nil, extras = nil)
+    # things.sort!{|t1,t2|t1.to_s <=> t2.to_s}
+    @listy = "".html_safe
+    things.each do |thing|
+      # RDFa: because plaques have different relationships with the current page.
+      # in the context of an organisation page, it is a list of plaques made by that organisation
+      # in the context of, say, colour it is a 'has primary colour of' relationship.
+      args = case context
+        when :organisation then {:rel => "foaf:made".html_safe}
+        when :colour then {:rel => "op:primaryColourOf".html_safe}
+        else {}
+      end
+
+      begin
+        args = args.merge(:class => thing.colour.name.downcase)
+      rescue
+      end
+
+      begin
+        extras = case context
+          when :no_connection then content_tag("td", button_to("Add connection", new_plaque_connection_path(thing), :method => :get, :class => :button))
+          when :partial_inscription then content_tag("td", button_to("Edit inscription", edit_plaque_inscription_path(thing), :method => :get, :class => :button))
+          when :colours_from_photos then content_tag("td", button_to("Edit colour", edit_plaque_colour_path(thing), :method => :get, :class => :button))
+          when :detailed_address_no_geo then content_tag("td", button_to("Edit geolocation", edit_plaque_geolocation_path(thing), :method => :get, :class => :button))
+        end
+        @listy << content_tag("tr",
+          content_tag("td", link_to(thumbnail_img(thing), plaque_path(thing)), :class => :photo)  +
+          content_tag("td", link_to(thing.to_s, plaque_path(thing))) +
+          content_tag("td", new_linked_inscription(thing)) +
+          extras,
+          args.merge!(:id => thing.machine_tag.html_safe)
+        )
+      rescue
+        # maybe it is a person
+        begin
+          @listy << content_tag("tr",
+            content_tag("td", link_to(thumbnail_img(thing), person_path(thing)), :class => :photo)  +
+            content_tag("td", link_to(thing.to_s, person_path(thing))) +
+            content_tag("td", roles_list(thing) + dates(thing))
+          )
+        rescue
+          @listy << content_tag("tr",
+            content_tag("td", thumbnail_img(thing), :class => :photo)  +
+            content_tag("td", thing.to_s) +
+            content_tag("td", "** not sure what this object is (or something threw an error) **")
+          )
+        end
+      end
+    end
+    @ul = content_tag("table", @listy, :class => :plaque_list)
+    out = "".html_safe
+    if things.size > 0
+      out << content_tag("p", pluralize(things.size.to_s, "results"))
+      out << @ul
+    else
+      out << content_tag("p", "Nothing found.".html_safe)
+    end
+  end
+  
 end
