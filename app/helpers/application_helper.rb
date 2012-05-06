@@ -213,8 +213,8 @@ module ApplicationHelper
         begin
           @listy << content_tag("tr",
             content_tag("td", link_to(thumbnail_img(thing), person_path(thing)), :class => :photo)  +
-            content_tag("td", link_to(thing.to_s, person_path(thing))) +
-            content_tag("td", roles_list(thing) + dates(thing))
+            content_tag("td", dated_person(thing)) +
+            content_tag("td", roles_list(thing))
           )
         rescue
           @listy << content_tag("tr",
