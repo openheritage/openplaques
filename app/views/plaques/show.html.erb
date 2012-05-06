@@ -33,8 +33,8 @@
 <!--TODO: Incorporate streetview imagery -->
     <section id="plaque_no_photos">
         <div class="no_photo">
-          <h2>Add a photo</h2>
-		  <p>Do you have a photograph? <%= link_to "How to add it", plaque_photos_path(@plaque), {:class => :show, :title => "Show photos"} %></p>
+          <h2>Your photo</h2>
+		  <p><%= link_to "How to add it", plaque_photos_path(@plaque), {:class => :show, :title => "Show photos"} %></p>
         </div>
 
       <% if @plaque.geolocated? %>
@@ -149,8 +149,8 @@
             <%= link_to(image_tag(image.file_url, {:alt => "Photo of plaque", :rel => "foaf:depiction"}), image.url) unless image == first_photo %>
           <% end %>
           <div class="no_photo">
-            <h2>Add a photo</h2>
-		    <p>Do you have a photograph? <%= link_to "How to add it", plaque_photos_path(@plaque), {:class => :show, :title => "Show photos"} %></p>
+            <h2>Your photo</h2>
+		    <p><%= link_to "How to add it", plaque_photos_path(@plaque), {:class => :show, :title => "Show photos"} %></p>
           </div>
         </div>
       </div>
