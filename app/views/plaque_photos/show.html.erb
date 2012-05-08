@@ -7,7 +7,7 @@
     <p>We currently link to <%= pluralize_with_no(@plaque.photos.size.to_s,"photo") %> of this plaque. We display multiple photos of each plaque, so you don&apos;t have to be the first.<p>
   <% end %>
   <p>We like close-ups as well as long-shots of the building that set the scene. We connect and add context to existing resources on the web instead of trying to own it all ouselves.</p>
-  <%= content_tag("ul", :class => "photographer_photos") do %>
+  <%= content_tag("ul", :class => "photographer_photos clearfix") do %>
     <% @plaque.photos.each do |photo| %>
 	    <li>
         <% if current_user && current_user.is_admin? %>
@@ -15,45 +15,43 @@
             <%= link_to("Edit", edit_photo_path(photo), {:class => :edit, :title => "edit photo"}) %>
           </section>
         <% end %>
-	      <%= link_to(thumbnail_img(photo), photo.url) %>
-	      This <%= photo.shot_name %> photo was taken by <%= link_to photo.photographer, photographer_url(photo.photographer.gsub(".","_").gsub("/","_")) if photo.photographer rescue photo.photographer %>.
+	      <%= link_to(thumbnail_img(photo), photo.url, :class => 'photographer_thumb') %>
+	      <span>This <%= photo.shot_name %> photo was taken by <%= link_to photo.photographer, photographer_url(photo.photographer.gsub(".","_").gsub("/","_")) if photo.photographer rescue photo.photographer %>.</span>
       </li>
     <% end %>
   <% end %>
-</div>
+  
+  <section id="how_to_add_photo" class="inside_panel">
+    <h2>How to add a photo of the <%= link_to(@plaque.title, @plaque) %></h2>
+    <ol><li>put it on <a href="http://www.flickr.com/" target="new">Flickr</a> (for free)</li>
+    <li>give it a Creative Commons licence</li>
+    <li>tag it <strong><%= @plaque.machine_tag %></strong></li>
+    <li>add it to <a href="http://www.flickr.com/groups/openplaques/" target="new">our Flickr group</a></li>
+    <li>wait 5 minutes</li>
+    <li>it should now appear in the Flickr search of <a href="http://www.flickr.com/search/?q=<%= @plaque.machine_tag %>&m=machinetags&l=cc&content_type=1" target="new">photos tagged '<%= @plaque.machine_tag %>'</a></li>
+    <li>wait for 24 hours and our servers should automatically find it and display it on our site</li>
+    </ol>   
+  </section>
 
-<div class="panel clearfix"> 
-  <h2>How to add a photo of the <%= link_to(@plaque.title, @plaque) %></h2>
-  <ol><li>put it on <a href="http://www.flickr.com/" target="new">Flickr</a> (for free)</li>
-  <li>give it a Creative Commons licence</li>
-  <li>tag it <strong><%= @plaque.machine_tag %></strong></li>
-  <li>add it to <a href="http://www.flickr.com/groups/openplaques/" target="new">our Flickr group</a></li>
-  <li>wait 5 minutes</li>
-  <li>it should now appear in the Flickr search of <a href="http://www.flickr.com/search/?q=<%= @plaque.machine_tag %>&m=machinetags&l=cc&content_type=1" target="new">photos tagged '<%= @plaque.machine_tag %>'</a></li>
-  <li>wait for 24 hours and our servers should automatically find it and display it on our site</li>
-  </ol>
-</div>
+  <section id="troubleshooting_photos" class="inside_panel">
+    <h2>Help, my photos aren't appearing!</h2>
+    <ol><li>check that the licence is Creative Commons, i.e. it shouldn't say "All Rights Reserved"</li>
+      <li>ensure that you haven&apos;t ticked the 'hidden from search' setting. (On Flickr, go to your profile by clicking your username in top right hand corner, do you have "Hide your stuff from public searches" set to "no"?)</li>
+    <li>a brand new Flickr account might not be included in their search immediately. Sometimes it waits until you have posted 5+ images. Enter your photo's url into the box below and we'll see what we can do...</li>
+    <%= form_tag("/photographers", :method => "create") do %>
+      <%= label_tag(:flickr_url, "Flickr photo url:") %>
+      <%= text_field_tag(:flickr_url) %>
+      <%= submit_tag("Search", :class=>'button secondary_button') %>
+    <% end %>
+  </section>
+  
+  <section id="help_photos" class="inside_panel">
+    <h2>Help, I really don't understand!</h2>
+    <p>If this all proves too complicated, then you can <a href="http://openplaques.org/contact">email your photo</a> to us stating that you are happy for us to put it on our own Flickr account on your behalf and that you grant anyone in the world the right to re-use the image.</p>    
+  </section>
 
-<div class="panel clearfix"> 
-  <h2>Help, my photos aren't appearing!</h2>
-  <ol><li>check that the licence is Creative Commons, i.e. it shouldn't say "All Rights Reserved"</li>
-    <li>ensure that you haven&apos;t ticked the 'hidden from search' setting. (On Flickr, go to your profile by clicking your username in top right hand corner, do you have "Hide your stuff from public searches" set to "no"?)</li>
-  <li>a brand new Flickr account might not be included in their search immediately. Sometimes it waits until you have posted 5+ images. Enter your photo's url into the box below and we'll see what we can do...</li>
-  <%= form_tag("/photographers", :method => "create") do %>
-    <%= label_tag(:flickr_url, "Flickr photo url:") %>
-    <%= text_field_tag(:flickr_url) %>
-    <%= submit_tag("Search") %>
-  <% end %>
-</div>
-
-<div class="panel clearfix"> 
-  <h2>Help, I really don't understand!</h2>
-  <p>If this all proves too complicated, then you can <a href="http://openplaques.org/contact">email your photo</a> to us stating that you are happy for us to put it on our own Flickr account on your behalf and that you grant anyone in the world the right to re-use the image.</p>
-</div>
-
-<div class="panel clearfix">
-  <p>
-    If you want to hurry the Open Plaques along, just for this plaque, you can <%= button_to "give the automatic search a kick", :controller => :plaques, :action => :flickr_search, :id => @plaque, :class => "button" %>
-  </p>
+    <p>
+      If you want to hurry the Open Plaques along, just for this plaque, you can <%= button_to "give the automatic search a kick", :controller => :plaques, :action => :flickr_search, :id => @plaque, :class => "button secondary_button" %>
+    </p>
 </div>
 
