@@ -2,14 +2,8 @@
 <h1>Unphotographed plaques in <%= link_to @country.name, country_path(@country) %></h1>
 
 <% unless @plaques.nil? %>
-  <p>There <%= pluralize_is_or_are(@plaques.size, "plaque") %> in <%= @country.name  %> that <%= havent_or_hasnt(@plaques.size) %> been photographed yet.</p>
-
-  <% if @plaques.size > 0 %>
-
-  <div id="plaque-map" data-latitude="<%= @mean.latitude %>" data-longitude="<%= @mean.longitude %>"  data-zoom="<%= @zoom %>"></div>
-
-  <% end %>
-
+  <div id="plaque-map" data-latitude="<%= @mean.latitude %>" data-longitude="<%= @mean.longitude %>" data-view="not all"></div>
+  <%= will_paginate @plaques %>
   <%= list(@plaques) %>
-
+  <%= will_paginate @plaques %>
 <% end %>

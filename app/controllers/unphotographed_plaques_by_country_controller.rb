@@ -2,7 +2,7 @@ class UnphotographedPlaquesByCountryController < ApplicationController
 
   def show
     @country = Country.find_by_alpha2!(params[:country_id])
-    @plaques = @country.plaques.unphotographed
+    @plaques = @country.plaques.unphotographed.paginate(:page => params[:page], :per_page => 100)
     @mean = help.find_mean(@plaques)
     respond_to do |format|
       format.html

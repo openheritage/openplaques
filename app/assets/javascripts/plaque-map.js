@@ -116,7 +116,7 @@ function initmap() {
       } else if (data_path) {
         var url = data_path;
       } else {
-        var url = document.location + '.json';
+	    var url = document.location.href.replace(/\?.*/,'') + '.json';
       }
 
       map.addLayer(mapquest);
