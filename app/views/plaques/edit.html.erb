@@ -14,7 +14,7 @@
 
     <%= link_to "Edit geolocation", edit_plaque_geolocation_path(@plaque), {:class => :edit, :title => "Edit geolocation"} %>
 
-    <%= link_to "Edit location", edit_plaque_location_path(@plaque), {:class => :edit, :title => "Edit location"} %>
+    <%= link_to "Edit location", edit_location_path(@plaque.location), {:class => :edit, :title => "Edit location"} %>
 
     <%= link_to "Edit erected date", edit_plaque_erected_path(@plaque), {:class => :edit, :title => "Edit organisation"} %>
 
