@@ -9,7 +9,7 @@
   <% end %>
 
   <h1 property="dc:title rdfs:label foaf:name" about="#this"><%= h @organisation.name %> plaques</h1>
-  <p>This organisation predominantly erect <%= most_prevelant_colour(@organisation) %> plaques</p>
+  <p>This organisation generally erects <%= most_prevelant_colour(@organisation) %> plaques</p>
   <%= content_tag("p", link_to(h(@organisation.website),@organisation.website), {:rel => "foaf:homepage vcard:url"}) unless @organisation.website.blank? %>
 </div>
 
