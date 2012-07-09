@@ -102,48 +102,15 @@
       <%= render "plaque_details" %>
     </section>
 
-  <% elsif @plaque.photos.size < 0 %>
-  
-    <div class="plaque_image plaque_single_image">
-      <% photo = @plaque.main_photo %>
-      <%= link_to(image_tag(photo.file_url, {:alt => "Photo of plaque", :rel => "foaf:depiction"}), photo.url) %>
-      <div id="photo_information" class="clearfix">
-        <p class="photo_credit">Photographed by
-        <% if photo.photographer_url %>
-          <%= link_to(photo.photographer, photo.photographer_url) %>
-        <% else %>
-          <%= photo.photographer %>.
-        <% end %></p>
-        <p class="photo_licence"><%= link_to(photo.licence.name, photo.licence.url) %></p>
-      </div>
-    </div>
-
-    <section id="plaque_identifier" class="plaque_info_panel">
-
-      <%= render "plaque_header" %>
-
-      <% if @plaque.geolocated? %>
-        <%= image_tag(google_maps_path(@plaque.latitude, @plaque.longitude, {:zoom => 16, :styles =>
-        {
-          :road => {:all => {:lightness => "30"} },
-          "road.arterial" => {:all => {:hue => "0x003bff"} },
-          :poi => {:all => {:visibility => :simplified} },
-          :landscape => {:all => {:hue => "0x003bff"} }
-		}
-          }
-        )) %>
-      <% end %>
-
-      <%= render "plaque_details" %>
-      <% # render "contributor_details" %>
-
-    </section>
-
   <% else %>
 
       <div class="plaque_image plaque_multiple_images">
         <% first_photo = @plaque.main_photo %>
         <%= link_to(image_tag(first_photo.file_url, {:id => "primary_image", :alt => "Photo of plaque", :rel => "foaf:depiction"}), first_photo.url) %>
+        <div id="photo_information" >
+          <p class="photo_credit">Photographed by <% if first_photo.photographer_url %><%= link_to(first_photo.photographer, first_photo.photographer_url) %><% else %><%= first_photo.photographer %>.<% end %></p>
+          <p class="photo_licence"><%= link_to(first_photo.licence.name, first_photo.licence.url) %></p>
+        </div>
         <div id="secondary_images">
           <% @plaque.photos.detail_order.each do |image| %>
             <%= link_to(image_tag(image.file_url, {:alt => "Photo of plaque", :rel => "foaf:depiction"}), image.url) unless image == first_photo %>
