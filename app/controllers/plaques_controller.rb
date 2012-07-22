@@ -203,7 +203,6 @@ class PlaquesController < ApplicationController
         end
       end
     end
-
     if params[:plaque] && params[:plaque][:colour_id]
       @colour = Colour.find(params[:plaque][:colour_id])
       if @plaque.colour_id != @colour.id
@@ -227,10 +226,17 @@ class PlaquesController < ApplicationController
   # DELETE /plaques/1.xml
   def destroy
     @plaque.destroy
-
     respond_to do |format|
       format.html { redirect_to(plaques_url) }
       format.xml  { head :ok }
+    end
+  end
+  
+  def edit
+    @plaque = Plaque.find(params[:id])
+    if @plaque.location.blank?
+      @plaque.location = Location.new(:name => "?")
+      @plaque.save
     end
   end
 

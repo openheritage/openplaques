@@ -29,7 +29,6 @@ class Plaque < ActiveRecord::Base
 
   belongs_to :location, :counter_cache => true
   belongs_to :colour, :counter_cache => true
-#  belongs_to :organisation, :counter_cache => true
   belongs_to :plaque_erected_year, :counter_cache => true
   belongs_to :user, :counter_cache => true
   belongs_to :language, :counter_cache => true
@@ -39,7 +38,6 @@ class Plaque < ActiveRecord::Base
   has_one :pick
 
   has_many :personal_connections
-#  has_many :verbs, :through => :personal_connections
   has_many :photos, :inverse_of => :plaque
   has_many :sponsorships
   has_many :organisations, :through => :sponsorships
@@ -387,7 +385,7 @@ class Plaque < ActiveRecord::Base
         also << plaque unless plaque == self
       end
     end
-	also
+	  also
   end
 
   def to_s
