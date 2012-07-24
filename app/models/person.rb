@@ -130,12 +130,12 @@ class Person < ActiveRecord::Base
   end
 
   def type
-  return "person" if person?
-  return "animal" if animal?
-  return "thing" if thing?
-  return "group" if group?
-  return "place" if place?
-  return "?"
+    return "person" if person?
+    return "animal" if animal?
+    return "thing" if thing?
+    return "group" if group?
+    return "place" if place?
+    return "?"
   end
 
   def born_in
