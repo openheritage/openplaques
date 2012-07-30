@@ -22,9 +22,6 @@ class Person < ActiveRecord::Base
 
   validates_presence_of :name
 
-  validates_uniqueness_of :wikipedia_url, :allow_nil => true, :allow_blank => true
-  validates_uniqueness_of :dbpedia_uri, :allow_nil => true, :allow_blank => true
-
   has_many :roles, :through => :personal_roles
   has_many :personal_roles
   has_many :personal_connections
