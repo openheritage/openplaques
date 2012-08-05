@@ -11,6 +11,8 @@
 # === Associations
 # * Country - country in which the area falls geographically or administratively.
 # * Plaques - plaques located in this area.
+require 'curb'
+
 class Area < ActiveRecord::Base
 
   before_validation :make_slug_not_war
@@ -47,6 +49,31 @@ class Area < ActiveRecord::Base
       plaques.geolocated.first.longitude
     else
       nil
+    end
+  end
+
+  def self.find_or_create_by_woeid(woeid)
+    url = "http://where.yahooapis.com/geocode?flags=J&woeid=" + woeid
+    begin
+      ch = Curl::Easy.perform(url) do |curl| 
+        curl.headers["User-Agent"] = "openplaques"
+        curl.verbose = true
+      end
+      parsed_json = JSON.parse(ch.body_str)
+      parsed_json['ResultSet']['Results'].each do |result|
+        city = result['city']
+        if (result['countrycode']=='US' || result['countrycode']=='CA')
+          city += ", "+ result['statecode']
+        end
+        country = Country.find_by_name(result['country'])
+        a = Area.find_or_create_by_name_and_country_id(city, country.id)
+        if (!a.latitude)
+          a.latitude = result['latitude']
+          a.longitude = result['longitude']
+          a.save
+        end
+      end
+    rescue
     end
   end
 
