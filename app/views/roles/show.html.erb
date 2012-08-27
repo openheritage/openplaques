@@ -9,9 +9,12 @@
 </div>
 
 <ol class="results" id="people_results">
-  <% @role.people.each do |person| %>
+  <% @role.people.uniq{|x| x.person_id}.each do |person| %>
     <li class="vcard person" typeof="<%= if @role.person? then "foaf:Person" else "foaf:Agent" end %> vcard:VCard" about="#person">
       <p class="result"> <%= dated_person(person) %></p>
+	  <% person.relationships.each do |relationship| %>
+	    <p><%= relationship.role.name %> of <%= dated_person(relationship.related_person) %></p>
+	  <% end %>
       <p class="count"><%= link_to pluralize(person.plaques.size, "plaque"), person %> in <%= list_of_area_links(person.areas) %></p>
     </li>
   <% end%>

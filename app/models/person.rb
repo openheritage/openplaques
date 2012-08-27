@@ -24,6 +24,7 @@ class Person < ActiveRecord::Base
 
   has_many :roles, :through => :personal_roles
   has_many :personal_roles
+  has_many :relationships, :class_name => "PersonalRole", :conditions => ['related_person_id IS NOT NULL']
   has_many :personal_connections
   has_many :locations, :through => :personal_connections, :uniq => true
   has_many :verbs, :through => :personal_connections
