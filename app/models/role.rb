@@ -81,6 +81,7 @@ class Role < ActiveRecord::Base
   
   def relationship?
     return true if "relationship" == role_type
+    return true if "group" == role_type
     return false
   end
 

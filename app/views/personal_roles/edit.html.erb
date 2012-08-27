@@ -1,21 +1,19 @@
-<h1>Edit personal role</h1>
+<h1><%= link_to dated_person(@personal_role.person), @personal_role.person %></h1>
 
-<p><%= link_to @personal_role.person.name, @personal_role.person %> was a <%= dated_role(@personal_role) %></p>
+<p>was a <%= dated_role(@personal_role) %></p>
 
 
 <%= form_for @personal_role do |f| %>
   <% if @personal_role.role.relationship? %>
     <p>
-      <%= f.collection_select :related_person_id, @people, :id, :name_and_dates, {} , { "style" => "width:400px" } %>	
+      of <%= f.collection_select :related_person_id, @people, :id, :name_and_dates, {} , { "style" => "width:400px" } %>	
     </p>
   <% end %>
   <p>
-    <%= f.label :started_at, "From" %>
+    <%= f.label :started_at, "from" %>
     <%= f.text_field :started_at %>
-  </p>
 
-  <p>
-    <%= f.label :ended_at, "To" %>
+    <%= f.label :ended_at, "to" %>
     <%= f.text_field :ended_at %>
   </p>
 
