@@ -59,19 +59,23 @@ class Area < ActiveRecord::Base
         curl.headers["User-Agent"] = "openplaques"
         curl.verbose = true
       end
-      parsed_json = JSON.parse(ch.body_str)
-      parsed_json['ResultSet']['Results'].each do |result|
+      puts ch.body_str
+      
+      json = JSON.parse(ch.body_str)
+      json['ResultSet']['Results'].each do |result|
         city = result['city']
         if (result['countrycode']=='US' || result['countrycode']=='CA')
           city += ", "+ result['statecode']
         end
         country = Country.find_by_name(result['country'])
         a = Area.find_or_create_by_name_and_country_id(city, country.id)
+        puts "area name is " + a.name
         if (!a.latitude)
           a.latitude = result['latitude']
           a.longitude = result['longitude']
           a.save
         end
+        return a
       end
     rescue
     end
