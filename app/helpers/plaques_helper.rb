@@ -120,6 +120,8 @@ module PlaquesHelper
             @photo.licence = Licence.find_by_url("http://creativecommons.org/licenses/by-sa/2.0/")
           elsif photo.attributes["license"] == "7"
             @photo.licence = Licence.find_by_url("http://www.flickr.com/commons/usage/")
+          elsif photo.attributes["license"] == "0"
+            @photo.licence = Licence.find_by_url("http://en.wikipedia.org/wiki/All_rights_reserved/")
           else
             puts "Couldn't find license"
           end
@@ -146,6 +148,90 @@ module PlaquesHelper
       end
     end
   end
+
+    # pass null to search all photos on Flickr
+    def crawl_flickr(group_id='74191472@N00')
+    
+      key = "86c115028094a06ed5cd19cfe72e8f8b" # FLICKR_KEY
+      content_type = "1" # Photos only
+      flickr_url = "http://api.flickr.com/services/rest/"
+      method = "flickr.photos.search"
+      jez = User.find(2)
+      black = Colour.find_by_name('black')
+      english = Language.find_by_name('English')
+      new_photos_count = 0
+            
+      19.times do |page|
+        puts page.to_s
+        url = flickr_url + "?api_key=" + key + "&method=" + method + "&page=" + page.to_s + "&per_page=5&content_type=" + content_type + "&extras=date_taken,owner_name,license,geo,description"
+        if group_id
+          url += "&group_id=" + group_id
+        end
+        response = open(url)
+        doc = REXML::Document.new(response.read)
+        doc.elements.each('//rsp/photos/photo') do |photo|
+          print "."
+          $stdout.flush
+          @photo = nil
+          file_url = "http://farm" + photo.attributes["farm"] + ".staticflickr.com/" + photo.attributes["server"] + "/" + photo.attributes["id"] + "_" + photo.attributes["secret"] + "_z.jpg"
+          photo_url = "http://www.flickr.com/photos/" + photo.attributes["owner"] + "/" + photo.attributes["id"] + "/"
+          @photo = Photo.find_by_url(photo_url)
+          inscription_is_stub = true
+          if photo.attributes["title"]!=nil
+            subject = photo.attributes["title"].split(",")[0].split("()")[0].rstrip.lstrip + "."
+            inscription = subject
+          end
+          if photo.elements["description"].text != nil && photo.elements["description"].text.length > 50
+            inscription << " " + photo.elements["description"].text
+          end
+          if @photo
+            puts "photo already exists in Open Plaques"
+          else
+            # Plaque find by location and name if already exists.....
+#            32.76696, -94.348526
+#            32.766955, -94.348472
+            # Plaque.find_or_create_by_???
+            @plaque = Plaque.new(:inscription => inscription, :user => jez, :inscription_is_stub => inscription_is_stub, :colour => black, :language => english)
+            @plaque.location = Location.new(:name => 'somewhere in Texas')
+            # the Flickr woeids appear to be at town level, so can only create an area from them
+            woeid = photo.attributes["woeid"]
+            if woeid != nil
+              area = Area.find_or_create_by_woeid(woeid)
+              if area != nil
+                @plaque.location.area = area
+              else
+                puts "error: provided woeid " + woeid + " but got no area back"
+              end
+            end
+            if @plaque
+              @photo = Photo.new
+              @photo.plaque = @plaque
+              @photo.file_url = file_url
+              @photo.url = photo_url
+              @photo.taken_at = photo.attributes["datetaken"]
+              @photo.photographer_url = photo_url = "http://www.flickr.com/photos/" + photo.attributes["owner"] + "/"
+              @photo.photographer = photo.attributes["ownername"]
+              @photo.licence = Licence.find_by_flickr_licence_id(photo.attributes["license"])
+              if photo.attributes["latitude"] != "0" && photo.attributes["longitude"] != "0" && !@plaque.geolocated?
+                @plaque.latitude = photo.attributes["latitude"]
+                @plaque.longitude = photo.attributes["longitude"]
+              end
+              if @plaque.save
+                puts "New plaque and photo added"
+              else
+                puts "Error adding plaque " + @plaque.errors.full_messages.to_s
+              end
+              if @photo.save
+                puts "New photo found and saved"
+              else
+                puts "Error saving photo" + @photo.errors.each_full{|msg| puts msg }
+              end
+            end
+          end
+        end
+      end
+    end
+
 
   def yaml(plaques)
 #    plaques.to_yaml
