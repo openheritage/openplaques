@@ -86,7 +86,7 @@ class PlaquesController < ApplicationController
     set_meta_tags :open_graph => {
       :type  => :website,
       :url   => url_for(:only_path=>false),
-      :image => @plaque.thumbnail_url,
+      :image => @plaque.thumbnail_url.gsub("?width=75",""),
       :title => @plaque.title,
       :description => @plaque.inscription,
     }
