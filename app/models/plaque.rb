@@ -38,7 +38,7 @@ class Plaque < ActiveRecord::Base
   has_one :pick
 
   has_many :personal_connections
-  has_many :photos, :inverse_of => :plaque
+  has_many :photos, :inverse_of => :plaque, :conditions => {:of_a_plaque => true}
   has_many :sponsorships
   has_many :organisations, :through => :sponsorships
 
@@ -126,6 +126,7 @@ class Plaque < ActiveRecord::Base
       ""
     end
   end
+  
   def organisation_name
     if organisation
       organisation.name

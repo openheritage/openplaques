@@ -29,7 +29,7 @@
 
 <div class="panel clearfix">
 
-  <% if @plaque.photos.empty? %>
+  <% if !@plaque.main_photo %>
 <!--TODO: Incorporate streetview imagery -->
     <section id="plaque_no_photos">
         <div class="no_photo">
