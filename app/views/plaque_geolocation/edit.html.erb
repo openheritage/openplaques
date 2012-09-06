@@ -26,6 +26,7 @@
 	<br/>
 	
     <div class="edit_lat_long">
+	  <p><%= label_tag(:streetview_url, "Google Streetview url:") %> <%= text_field_tag(:streetview_url) %></p>
       <p><%= f.label :latitude, "Latitude" %> <%= f.text_field :latitude %> <%= f.label :longitude, "Longitude" %> <%= f.text_field :longitude %> </p>
       <p><%= f.label :is_accurate_geolocation, "Is accurate" %> <%= f.check_box :is_accurate_geolocation %></p>
       <p><%= f.submit "Update", :class => :button  %></p>
