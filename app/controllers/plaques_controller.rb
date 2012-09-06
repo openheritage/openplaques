@@ -193,6 +193,18 @@ class PlaquesController < ApplicationController
   # PUT /plaques/1
   # PUT /plaques/1.xml
   def update
+    if params[:streetview_url]
+	  params[:plaque][:latitude] = params[:streetview_url][/cbll=+([^,]*)/,1]
+	  params[:plaque][:longitude] = params[:streetview_url][/cbll=[\d|.|-]*,+([\d|.|-]*)&/,1]
+	  
+	  puts "**********"
+	  puts "**********"
+	  puts "**********"
+	  puts "**********"
+	  puts params[:plaque][:latitude]
+	  puts params[:plaque][:longitude]
+    end
+
     if params[:location]
       unless @plaque.location && params[:location] == @plaque.location.name
         if @plaque.location && @plaque.location.plaques_count == 1
