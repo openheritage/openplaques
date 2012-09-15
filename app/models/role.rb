@@ -102,6 +102,13 @@ class Role < ActiveRecord::Base
     return true
   end
   
+  def full_name
+    if abbreviated?
+      return abbreviation + " - " + name
+    end
+    return name
+  end
+  
   private
 
     def update_index

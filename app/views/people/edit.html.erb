@@ -40,7 +40,7 @@
   <p>
     <%= form_for @personal_role do |f| %>
       <%= f.hidden_field :person_id, :value => @person.id %>
-      <%= @person.name %> was a <%= f.collection_select :role, @roles, :id, :name %> from <%= f.text_field :started_at %> to <%= f.text_field :ended_at %>
+      <%= @person.name %> was a <%= f.collection_select :role, @roles, :id, :full_name %> from <%= f.text_field :started_at %> to <%= f.text_field :ended_at %>
       <%= f.submit "Add", :class => :button %>
     <% end %>
   </p>
