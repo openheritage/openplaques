@@ -4,6 +4,8 @@
 # * +name+ - The name of the role.
 # * +role_type+ - The classification of the role (see self.types for choice)
 # * +wikipedia_stub+ - url of a relevant Wikipedia page
+# * +index+ - letter indexed on
+# * +abbreviation+ - acronym etc. when a role is commonly abbreviated, especially awards, e.g. Victoria Cross == VC
 #
 # === Associations
 # * +people+ - The people who have been asctibed this role.
@@ -29,7 +31,7 @@ class Role < ActiveRecord::Base
   end
   
   def self.types
-    ["person", "animal", "thing", "group", "place", "relationship"]
+    ["person", "animal", "thing", "group", "place", "relationship", "title", "letters"]
   end
 
   def person?
@@ -84,7 +86,22 @@ class Role < ActiveRecord::Base
     return true if "group" == role_type
     return false
   end
-
+  
+  def used_as_a_prefix?
+    return true if "title" == role_type
+    return false
+  end
+  
+  def used_as_a_suffix?
+    return true if "letters" == role_type
+    return false
+  end
+  
+  def abbreviated?
+    return false if abbreviation.blank?
+    return true
+  end
+  
   private
 
     def update_index

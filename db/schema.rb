@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120419202002) do
+ActiveRecord::Schema.define(:version => 20120910164647) do
 
   create_table "areas", :force => true do |t|
     t.string    "name"
@@ -234,6 +235,7 @@ ActiveRecord::Schema.define(:version => 20120419202002) do
     t.string    "slug"
     t.string    "wikipedia_stub"
     t.string    "role_type"
+    t.string    "abbreviation"
   end
 
   add_index "roles", ["index"], :name => "starts_with"
@@ -269,27 +271,27 @@ ActiveRecord::Schema.define(:version => 20120419202002) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "username",                  :limit => 40
-    t.string   "name",                      :limit => 100
-    t.string   "email",                     :limit => 100
-    t.string   "crypted_password",          :limit => 40
-    t.string   "salt",                      :limit => 40
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.datetime "remember_token_expires_at"
-    t.boolean  "is_admin"
-    t.integer  "plaques_count"
-    t.string   "encrypted_password",        :limit => 128,                    :null => false
-    t.string   "reset_password_token"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                            :default => 0
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.boolean  "is_verified",                              :default => false, :null => false
-    t.boolean  "opted_in",                                 :default => false
-    t.datetime "reset_password_sent_at"
+    t.string    "username",                  :limit => 40
+    t.string    "name",                      :limit => 100
+    t.string    "email",                     :limit => 100
+    t.string    "crypted_password",          :limit => 40
+    t.string    "salt",                      :limit => 40
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.timestamp "remember_token_expires_at"
+    t.boolean   "is_admin"
+    t.integer   "plaques_count"
+    t.string    "encrypted_password",        :limit => 128,                    :null => false
+    t.string    "reset_password_token"
+    t.timestamp "remember_created_at"
+    t.integer   "sign_in_count",                            :default => 0
+    t.timestamp "current_sign_in_at"
+    t.timestamp "last_sign_in_at"
+    t.string    "current_sign_in_ip"
+    t.string    "last_sign_in_ip"
+    t.boolean   "is_verified",                              :default => false, :null => false
+    t.boolean   "opted_in",                                 :default => false
+    t.timestamp "reset_password_sent_at"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

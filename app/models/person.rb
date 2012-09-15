@@ -104,7 +104,7 @@ class Person < ActiveRecord::Base
 
   def person?
     return false if animal? or thing? or group? or place?
-  return true
+    return true
   end
 
   def animal?
@@ -213,17 +213,18 @@ class Person < ActiveRecord::Base
   def as_json(options={})
     # this example ignores the user's options
     super(:only => [:id, :name, :updated_at],
-  :include => {
-    :roles => {:only => [:name]},
-    :personal_connections  => {:only => [:started_at, :ended_at, :plaque_id],
       :include => {
-      :location => {:only => [:id, :name], :include => {:area => {:only => :name, :include => {:country => {:only => [:name, :alpha2]}}}}},
-      :verb =>{:only => [:name]}
-    }
-    }
-  },
-  :methods => [:born_in, :born_at, :died_in, :died_at, :default_wikipedia_url, :default_dbpedia_uri, :surname, :type]
-  )
+        :roles => {:only => [:name]},
+        :personal_connections  => {
+          :only => [:started_at, :ended_at, :plaque_id],
+          :include => {
+            :location => {:only => [:id, :name], :include => {:area => {:only => :name, :include => {:country => {:only => [:name, :alpha2]}}}}},
+              :verb =>{:only => [:name]}
+          }
+        }
+      },
+      :methods => [:born_in, :born_at, :died_in, :died_at, :default_wikipedia_url, :default_dbpedia_uri, :surname, :type]
+    )
   end
 
   def thumbnail_url
@@ -250,6 +251,34 @@ class Person < ActiveRecord::Base
       end
     rescue
     end
+  end
+  
+  def title
+    title = ""
+    roles.each{|role| 
+      if role.used_as_a_prefix? 
+        title += role.name + " " 
+      end
+    }
+    title
+  end
+  
+  def letters
+    letters = ""
+    roles.each{|role| 
+      if role.used_as_a_suffix? 
+        letters += role.abbreviation + " " 
+      end
+    }
+    letters
+  end
+  
+  def full_name
+    fullname = title + name 
+    if !letters.blank?
+      fullname += " " + letters
+    end
+    return fullname
   end
 
   def to_s
