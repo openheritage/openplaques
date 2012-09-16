@@ -31,7 +31,7 @@ class Role < ActiveRecord::Base
   end
   
   def self.types
-    ["person", "animal", "thing", "group", "place", "relationship", "title", "letters"]
+    ["person", "animal", "thing", "group", "place", "relationship", "title", "letters", "military medal"]
   end
 
   def person?
@@ -94,6 +94,7 @@ class Role < ActiveRecord::Base
   
   def used_as_a_suffix?
     return true if "letters" == role_type
+    return true if "military medal" == role_type
     return false
   end
   
