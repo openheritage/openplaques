@@ -256,29 +256,23 @@ class Person < ActiveRecord::Base
   def title
     title = ""
     roles.each{|role| 
-      if role.used_as_a_prefix? 
-        title += role.name + " " 
-      end
+      title += (role.abbreviated? ? role.abbreviation : role.name) + " " if role.used_as_a_prefix?
     }
     title
   end
   
   def letters
     letters = ""
-    roles.each{|role| 
-      if role.used_as_a_suffix? 
-        letters += role.abbreviation + " " 
-      end
+    roles.each{|role|
+      letters += role.abbreviation + " " if role.used_as_a_suffix?
     }
     letters
   end
   
   def full_name
     fullname = title + name 
-    if !letters.blank?
-      fullname += " " + letters
-    end
-    return fullname
+    fullname += " " + letters if !letters.blank?
+    fullname
   end
 
   def to_s
