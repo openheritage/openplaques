@@ -8,7 +8,7 @@
 # * +abbreviation+ - acronym etc. when a role is commonly abbreviated, especially awards, e.g. Victoria Cross == VC
 #
 # === Associations
-# * +people+ - The people who have been asctibed this role.
+# * +people+ - The people who have been ascribed this role.
 class Role < ActiveRecord::Base
 
   before_validation :make_slug_not_war
