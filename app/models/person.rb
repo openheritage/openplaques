@@ -256,6 +256,7 @@ class Person < ActiveRecord::Base
   def title
     title = ""
     roles.each{|role| 
+      title += "Sir " if role.confers_honourific_title?
       title += (role.abbreviated? ? role.abbreviation : role.name) + " " if role.used_as_a_prefix?
     }
     title
