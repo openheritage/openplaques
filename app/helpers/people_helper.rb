@@ -144,7 +144,7 @@ module PeopleHelper
       if options[:links] == :none
         return content_tag("span", person.full_name, {:class => "fn", :property => "rdfs:label foaf:name vcard:fn"}) + dates.html_safe
       else
-        return link_to(person.name, person, {:class => "fn url", :property => "rdfs:label foaf:name vcard:fn", :rel => "foaf:homepage vcard:url"}) + dates.html_safe
+        return link_to(person.full_name, person, {:class => "fn url", :property => "rdfs:label foaf:name vcard:fn", :rel => "foaf:homepage vcard:url"}) + dates.html_safe
       end
     end
 
