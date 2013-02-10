@@ -14,20 +14,12 @@
     <% if @photo.plaque %>
       This is a <%= @photo.shot_name %> photo of <%= link_to @photo.plaque.title, @photo.plaque %>. 
     <% else %>
-      This <%= @photo.shot_name %> photo has not been linked to a plaque yet.
+      This <%= @photo.shot_name %> photo has not been linked to a plaque <% if @photo.of_a_plaque? %>yet<% else %> because it has been flagged as not being of a plaque<% end %>.
     <% end %>
-
-    It was taken <%= content_tag("span", " on " + @photo.taken_at.to_s(:long)) unless @photo.taken_at.blank? %>
-    by <%= link_to @photo.photographer, photographer_url(@photo.photographer.gsub(".","_").gsub("/","_")) if @photo.photographer rescue @photo.photographer %>
-  </p>
-  <p>The image was licenced by its copyright owner under a <%= link_to @photo.licence.name, @photo.licence if @photo.licence %>.</p>
+    taken <%= content_tag("span", " on " + @photo.taken_at.to_s(:long)) unless @photo.taken_at.blank? %>
+    by <%= link_to @photo.photographer, photographer_url(@photo.photographer.gsub(".","_").gsub("/","_")) if @photo.photographer rescue @photo.photographer %> and licenced under a <%= link_to @photo.licence.name, @photo.licence if @photo.licence %>.</p>
 
   <p>Photo url <%= link_to(@photo.file_url, @photo.file_url) %><p>
-  <% if @photo.ping? %>
-  <p>A ping to the image url found it.</p>
-  <% else %>
-    <p>A ping to the image url <strong>did not find it</strong>.</p>
-  <% end %>
 
   <p><%= thumbnail_img(@photo) %></p>
   <p>Thumbnail url <%= link_to(@photo.thumbnail_url, @photo.thumbnail_url) %><p>

@@ -30,7 +30,7 @@ class Photo < ActiveRecord::Base
 
   scope :reverse_detail_order, :order => "shot DESC"
   scope :detail_order, :order => "shot ASC"
-  scope :unassigned, :conditions => ["plaque_id IS NULL"]
+  scope :unassigned, :conditions => ["plaque_id IS NULL AND of_a_plaque = 't'"]
 
   def assign_from_photo_url
     if @photo_url
@@ -50,7 +50,17 @@ class Photo < ActiveRecord::Base
   end
 
   def title
-    "photo № #{id}"
+    title = "photo № #{id}"
+    if plaque
+      title = ""
+      if shot_name
+        title += shot_name
+      else
+        title += "photo"
+      end
+      title += " of " + plaque.title.indefinitize
+    end
+    return title
   end
   
   def shot_name

@@ -6,7 +6,7 @@ class PhotosController < ApplicationController
   before_filter :find_photo, :only => [:destroy, :edit, :show, :update]
 
   def index
-    @photos = Photo.paginate(:page => params[:page], :per_page => 20)
+    @photos = Photo.paginate(:page => params[:page], :per_page => 200)
     respond_to do |format|
       format.html
       format.xml # { render :xml => @photo }
