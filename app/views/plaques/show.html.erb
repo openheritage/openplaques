@@ -1,4 +1,4 @@
-<% content_for :page_title do %><%= @plaque.title %><% end %>
+<% content_for :page_title do %><%= @plaque %><% end %>
 
 <% if current_user && current_user.is_admin? %>
   <section class="admin_panel">
@@ -28,9 +28,7 @@
 </div>
 
 <div class="panel clearfix">
-
   <% if !@plaque.main_photo %>
-<!--TODO: Incorporate streetview imagery -->
     <section id="plaque_no_photos">
         <div class="no_photo">
           <h2>Your photo</h2>
@@ -123,25 +121,12 @@
       </div>
 
     <section id="plaque_identifier" class="plaque_info_panel">
-
         <%= render "plaque_header" %>
-
         <% if @plaque.geolocated? %>
-        <%= image_tag(google_maps_path(@plaque.latitude, @plaque.longitude, {:zoom => 16, :styles =>
-        {
-          :road => {:all => {:lightness => "30"} },
-          "road.arterial" => {:all => {:hue => "0x003bff"} },
-          :poi => {:all => {:visibility => :simplified} },
-          :landscape => {:all => {:hue => "0x003bff"} }
-		}
-          }
-        )) %>
+        	<div id="plaque-map" data-latitude="<%= @plaque.latitude %>" data-longitude="<%= @plaque.longitude %>" class="mini" data-zoom="18" data-view="one"></div>
         <% end %>
-
         <%= render "plaque_details" %>
-        <% #= render "contributor_details" %>
-
-      </section>
+    </section>
 
   <% end %>
 
