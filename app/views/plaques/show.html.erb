@@ -32,6 +32,11 @@
     <section id="plaque_no_photos">
         <div class="no_photo">
           <h2>Your photo</h2>
+<% if @plaque.is_current %>
+          <p>There is no photo linked to this plaque record. It needs someone to hunt it down. Maybe that someone could be you?</p>
+<% else %>
+          <p>There is no photo linked to this plaque record. We don't think that it currently exists so we need someone to hunt down an old photo. Maybe that someone could be you?</p>
+<% end %>
 		  <p><%= link_to "How to add it", plaque_photos_path(@plaque), {:class => :show, :title => "Show photos"} %></p>
         </div>
 
@@ -39,49 +44,7 @@
 
       <div class="no_photo_geo">
 
-        <%= image_tag(google_maps_path(@plaque.latitude, @plaque.longitude, {:width => 245, :height => 250, :zoom => 16, :styles =>
-          {
-            :road =>
-              {:all =>
-                {:lightness => "30"}
-              },
-              "road.arterial" =>
-                {:all =>
-                  {:hue => "0x003bff"}
-                },
-              :poi =>
-                {:all =>
-                  {:visibility => :simplified}
-                },
-              :landscape =>
-                {:all =>
-                  {:hue => "0x003bff"}
-                }
-              }
-            }
-          )) %>
-
-          <%= image_tag(google_maps_path(@plaque.latitude, @plaque.longitude, {:width => 245, :height => 250, :zoom => 10, :styles =>
-            {
-              :road =>
-                {:all =>
-                  {:lightness => "30"}
-                },
-                "road.arterial" =>
-                  {:all =>
-                    {:hue => "0x003bff"}
-                  },
-                :poi =>
-                  {:all =>
-                    {:visibility => :simplified}
-                  },
-                :landscape =>
-                  {:all =>
-                    {:hue => "0x003bff"}
-                  }
-                }
-              }
-            )) %>
+<div id="plaque-map" data-latitude="<%= @plaque.latitude %>" data-longitude="<%= @plaque.longitude %>" class="mini" data-zoom="18" data-view="one"></div>
 
       </div>
 
