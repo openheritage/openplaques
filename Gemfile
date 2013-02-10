@@ -27,6 +27,7 @@ gem 'randumb'
 gem 'meta-tags', :require => 'meta_tags'
 gem 'google-spreadsheet-ruby'
 gem 'rdf'
+gem 'indefinite_article'
 
 gem 'devise'
 
