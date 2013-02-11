@@ -3,13 +3,6 @@ var ajaxRequest;
 var plaques=[];
 var allow_popups=true;
 
-var answer;
-
-var PlaqueIcon = L.Icon.extend({
-    iconUrl: '/assets/images/marker.png',
-    shadowUrl: '/assets/images/marker-shadow.png',
-});
-
 function getXmlHttpObject() {
   if (window.XMLHttpRequest) { return new XMLHttpRequest(); }
   if (window.ActiveXObject)  { return new ActiveXObject("Microsoft.XMLHTTP"); }
@@ -19,25 +12,30 @@ function getXmlHttpObject() {
 function stateChanged() {
   // if AJAX returned a list of markers, add them to the map
   if (ajaxRequest.readyState==4 && ajaxRequest.status==200) {
-    answer = ajaxRequest.responseText;
+    var answer = ajaxRequest.responseText;
 	if (answer.substring(0, 1)=="{") { answer = "["+answer+"]"; } // it is a plaque itself, not an array of plaques
-    var plotlist=JSON.parse(answer);
-    for (i=0;i<plotlist.length;i++) {
-      var plaque = plotlist[i].plaque;
+    var json=JSON.parse(answer);
+    for (i=0;i<json.length;i++) {
+      var plaque = json[i].plaque;
       if (plaques["'#"+plaque.id+"'"]==null) { // add it if it isn't already on the map
-        var latlon = new L.LatLng(plaque.latitude,plaque.longitude, true);
-        var plaque_icon = new PlaqueIcon();
-        var plaque_marker = new L.Marker(latlon, {icon: plaque_icon});
+        var latlon = L.latLng(plaque.latitude,plaque.longitude);
+        var plaque_icon = L.icon({
+          iconUrl: '/assets/images/marker.png',
+          shadowUrl: '/assets/images/marker-shadow.png',
+        });
+        var plaque_marker = L.marker(latlon, {icon: plaque_icon});
         if (plaque.inscription.length > 200) {
           var text = plaque.inscription.substring(0,200) + "...";
         } else {
           var text = plaque.inscription;
         }
         if (allow_popups==true) {
-          plaque_marker.bindPopup('<h3>'+plaque.title+'</h3><p>'+text+'</p><p><a href="http://openplaques.org/plaques/'+plaque.id+'">View on Open Plaques</a></p>');
-        }
-        map.addLayer(plaque_marker);
-        plaques["'#"+plaque.id+"'"]=plaque_marker;
+          plaque_marker.bindPopup('<h3><a href="http://openplaques.org/plaques/'+plaque.id+'">'+plaque.title+'</a></h3><p>'+text+'</p>');
+        } else {
+//		  plaque_marker.clickable=false;
+		}
+        plaque_marker.addTo(map);
+        plaques["'#"+plaque.id+"'"]=plaque;
       }
     }
   }
@@ -63,7 +61,7 @@ function initmap() {
       // alert ("This browser does not support HTTP Request");
       return;
     }
-    map = new L.Map('plaque-map');
+    map = L.map('plaque-map');
 
     var mapquestUrl = 'http://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png',
     subDomains = ['otile1','otile2','otile3','otile4'],
@@ -79,10 +77,10 @@ function initmap() {
     }
 
     if (latitude && longitude) {
-      map.setView(new L.LatLng(parseFloat(latitude),parseFloat(longitude)),zoom_level);
+      map.setView(L.latLng(parseFloat(latitude),parseFloat(longitude)),zoom_level);
     } else {
       // start the map in London
-      map.setView(new L.LatLng(51.54281206119232,-0.16788482666015625),zoom_level);
+      map.setView(L.latLng(51.54281206119232,-0.16788482666015625),zoom_level);
     }
 
     var data_view = plaque_map.attr("data-view");

@@ -69,8 +69,10 @@ class PlaquesController < ApplicationController
 
     respond_with @plaques do |format|
       if params[:data] && params[:data] == "simple"
-        format.json { render :json => @plaques.as_json(:only => [:id, :latitude, :longitude, :inscription], :include => nil, :exclude => [:colour_name]) }
+        format.json { render :json => @plaques.as_json(:only => [:id, :latitude, :longitude, :inscription],
+          :methods => [:title, :colour_name, :machine_tag, :thumbnail_url]) }
       end
+      format.json { render :json => @plaques.as_json }
     end
 
   end
@@ -96,7 +98,7 @@ class PlaquesController < ApplicationController
       format.yaml
       format.xml { render "plaques/index" }
       format.json {
-        render :json => @plaque
+        render :json => @plaque.as_json
       }
     end
   end

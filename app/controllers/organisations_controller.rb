@@ -44,7 +44,7 @@ class OrganisationsController < ApplicationController
       format.osm { render "plaques/index" }
       format.yaml
       format.xml
-      format.json { render :json => @organisation.plaques }
+      format.json { render :json => @organisation.plaques.as_json }
     end
   end
 
