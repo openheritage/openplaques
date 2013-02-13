@@ -4,6 +4,7 @@ class PlaquesController < ApplicationController
   before_filter :authenticate_admin!, :only => :destroy
 
   before_filter :find_plaque, :only => [:show, :parse_inscription, :unparse_inscription, :flickr_search, :flickr_search_all, :update, :destroy, :edit]
+	before_filter :set_cache_header, :only => :index
   after_filter :set_access_control_headers, :only => :index
 
 
@@ -278,4 +279,10 @@ class PlaquesController < ApplicationController
     def set_access_control_headers
       headers['Access-Control-Allow-Origin'] = '*'
     end
+    
+    def set_cache_header
+    	max_age = 1200  # 20 minutes
+    	headers['Cache-Control'] = "public, max-age=#{max_age}"
+    end
+
 end
