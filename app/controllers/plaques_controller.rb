@@ -63,6 +63,8 @@ class PlaquesController < ApplicationController
 
     if params[:data] && params[:data] == "simple"
       @plaques = Plaque.all(:conditions => conditions, :order => "created_at DESC", :limit => limit)
+		elsif params[:data] && params[:data] == "basic"
+      @plaques = Plaque.all(:select => [:id, :latitude, :longitude, :inscription])
     else
       @plaques = Plaque.all(:conditions => conditions, :order => "created_at DESC", :limit => limit, :include => [:language, :organisations, :colour, [:location => [:area => :country]]])
     end
@@ -71,6 +73,11 @@ class PlaquesController < ApplicationController
       if params[:data] && params[:data] == "simple"
         format.json { render :json => @plaques.as_json(:only => [:id, :latitude, :longitude, :inscription],
           :methods => [:title, :colour_name, :machine_tag, :thumbnail_url]) }
+      elsif params[:data] && params[:data] == "basic"
+        format.json { 
+        	render :json => @plaques.as_json(:only => [:id, :latitude, :longitude, :inscription]) 
+        }
+      
       end
       format.json { render :json => @plaques.as_json }
     end
