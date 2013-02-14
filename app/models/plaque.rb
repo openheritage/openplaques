@@ -47,7 +47,7 @@ class Plaque < ActiveRecord::Base
   scope :geolocated, :conditions => ["latitude IS NOT NULL"]
   scope :ungeolocated, :conditions => {:latitude => nil} , :order => "id DESC"
   scope :photographed, :conditions => ["photos_count > 0"]
-  scope :unphotographed, :conditions => {:photos_count => 0} , :order => "id DESC"
+  scope :unphotographed, :conditions => {:photos_count => 0, :is_current => true} , :order => "id DESC"
   scope :coloured, :conditions => ["colour_id IS NOT NULL"]
   scope :photographed_not_coloured, :conditions => ["photos_count > 0 AND colour_id IS NULL"]
   scope :geo_no_location, :conditions => ["latitude IS NOT NULL AND location_id IS NULL"]
