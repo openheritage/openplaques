@@ -39,4 +39,15 @@ class ApplicationController < ActionController::Base
     end
   end
 
+	private
+	
+	  def set_access_control_headers
+      headers['Access-Control-Allow-Origin'] = '*'
+    end
+    
+    def set_cache_header
+    	max_age = 1200  # 20 minutes
+    	headers['Cache-Control'] = "public, max-age=#{max_age}"
+    end
+
 end

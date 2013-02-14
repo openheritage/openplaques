@@ -10,6 +10,7 @@ Openplaques::Application.routes.draw do
     resources :erected_in, :controller => :plaque_erected_years, :as => :plaque_erected_years, :only => [:index, :show]
     resource :all, :controller => :all_plaques, :as => :all_plaques, :only => [:show]
     resource :latest, :as => :latest, :controller => :plaques_latest, :only => [:show]
+    resource :unphotographed, :controller => :unphotographed_plaques, :only => [:show]
   end
 
   # e.g. /map?box=[51.6,-0.3],[51.4,-0.1]
