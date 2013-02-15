@@ -20,10 +20,11 @@ function stateChanged() {
       var plaque = json[i].plaque;
       if (plaques["'#"+plaque.id+"'"]==null) { // add it if it isn't already on the map
         var latlon = L.latLng(plaque.latitude,plaque.longitude);
-        var plaque_icon = L.icon({
-          iconUrl: '/assets/images/marker.png',
-          shadowUrl: '/assets/images/marker-shadow.png',
-        });
+				var plaque_icon = new L.DivIcon({
+					className: 'plaque-marker',
+					html: '',
+					iconSize : 16
+				});
         var plaque_marker = L.marker(latlon, {icon: plaque_icon});
         if (plaque.inscription.length > 200) {
           var text = plaque.inscription.substring(0,200) + "...";
