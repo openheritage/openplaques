@@ -12,7 +12,8 @@ function getXmlHttpObject() {
 function stateChanged() {
   // if AJAX returned a list of markers, add them to the map
   if (ajaxRequest.readyState==4 && ajaxRequest.status==200) {
-    var answer = ajaxRequest.responseText;
+  
+  var answer = ajaxRequest.responseText;
 	if (answer.substring(0, 1)=="{") { answer = "["+answer+"]"; } // it is a plaque itself, not an array of plaques
     var json=JSON.parse(answer);
     for (i=0;i<json.length;i++) {
@@ -95,9 +96,24 @@ function initmap() {
     if (data_view && data_view == "one") {
       allow_popups=false;
     }
+    
+    if (data_view == 'one') {
+    
+			var plaque_icon = new L.DivIcon({
+				className: 'plaque-marker',
+				html: '',
+				iconSize : 16
+			});
 
-    getPlaques(url);
-    map.on('moveend', function() { getPlaques(url) });
+    	L.marker([parseFloat(latitude),parseFloat(longitude)], {
+    		icon: plaque_icon
+    	}).addTo(map);
+    } else {
+	    getPlaques(url);  
+	    map.on('moveend', function() { getPlaques(url) });
+
+    }
+
   }
 }
 
