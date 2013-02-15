@@ -3,3 +3,14 @@
 #plaque-map.full {height: 600px;}
 
 #plaque-map.mini {height: 400px; }
+
+.plaque-marker {
+
+	background: blue;
+	height: 16px;
+	width: 16px;
+	border-radius: 8px;
+	border: 0;
+	opacity: 0.9;
+
+}
