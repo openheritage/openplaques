@@ -6,11 +6,10 @@
 
 .plaque-marker {
 
-	background: blue;
+	background-color: rgba(56, 146, 227, 0.9);
 	height: 16px;
 	width: 16px;
 	border-radius: 8px;
 	border: 0;
-	opacity: 0.9;
 
 }
