@@ -16,16 +16,18 @@ function stateChanged() {
   var answer = ajaxRequest.responseText;
 	if (answer.substring(0, 1)=="{") { answer = "["+answer+"]"; } // it is a plaque itself, not an array of plaques
     var json=JSON.parse(answer);
+    
     for (i=0;i<json.length;i++) {
       var plaque = json[i].plaque;
-      if (plaques["'#"+plaque.id+"'"]==null) { // add it if it isn't already on the map
-        var latlon = L.latLng(plaque.latitude,plaque.longitude);
+      
+      if (plaque.latitude && plaque.longitude) {
+
 				var plaque_icon = new L.DivIcon({
 					className: 'plaque-marker',
 					html: '',
 					iconSize : 16
 				});
-        var plaque_marker = L.marker(latlon, {icon: plaque_icon});
+        var plaque_marker = L.marker([plaque.latitude, plaque.longitude], {icon: plaque_icon});
         if (plaque.inscription.length > 200) {
           var text = plaque.inscription.substring(0,200) + "...";
         } else {
@@ -33,11 +35,8 @@ function stateChanged() {
         }
         if (allow_popups==true) {
           plaque_marker.bindPopup('<h3><a href="http://openplaques.org/plaques/'+plaque.id+'">'+plaque.title+'</a></h3><p>'+text+'</p>');
-        } else {
-//		  plaque_marker.clickable=false;
-		}
-        plaque_marker.addTo(map);
-        plaques["'#"+plaque.id+"'"]=plaque;
+        }
+				plaque_marker.addTo(map);
       }
     }
   }
@@ -45,13 +44,9 @@ function stateChanged() {
 
 // request the marker info with AJAX for the current bounds
 function getPlaques(url) {
-  var bounds=map.getBounds();
-  var minll=bounds.getSouthWest(), maxll=bounds.getNorthEast();
-  //  bounding box call, e.g. http://openplaques.org/plaques.json?box=[51.5482,-0.1617],[51.5282,-0.1217]
-  var msg = url + '?box=['+maxll.lat+','+minll.lng+'],['+minll.lat+','+maxll.lng+']&limit=10000&data=simple';
   ajaxRequest=getXmlHttpObject();
   ajaxRequest.onreadystatechange = stateChanged;
-  ajaxRequest.open('GET', msg, true);
+  ajaxRequest.open('GET', url, true);
   ajaxRequest.send(null);
 }
 
@@ -111,8 +106,6 @@ function initmap() {
     	}).addTo(map);
     } else {
 	    getPlaques(url);  
-	    map.on('moveend', function() { getPlaques(url) });
-
     }
 
   }
