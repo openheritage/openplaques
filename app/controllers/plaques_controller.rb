@@ -35,9 +35,9 @@ class PlaquesController < ApplicationController
     conditions = {}
 
     # Bounding-box query
-    if !params["box"].blank?
+    if params[:box]
       # TODO: Should really do some validation here...
-      coords = params["box"][1,params["box"].length-2].split("],[")
+      coords = params[:box][1,params[:box].length-2].split("],[")
       top_left = coords[0].split(",")
       bottom_right = coords[1].split(",")
       conditions[:latitude] = bottom_right[0].to_s..top_left[0].to_s
