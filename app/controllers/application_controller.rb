@@ -6,13 +6,11 @@ class ApplicationController < ActionController::Base
 
   include Exceptions
 
-  layout "v1"
-
   protect_from_forgery
 
   rescue_from(ActiveRecord::RecordNotFound) do
     respond_to do |format|
-      format.html { render :template => "errors/not_found", :status => 404, :layout => "v1", :formats => [:html] }
+      format.html { render :template => "errors/not_found", :status => 404, :formats => [:html] }
       format.json { render :json => {:error => "Not found"}, :status => 404}
       format.xml { render :xml => {:title => "Not found"}, :status => 404}
     end
@@ -38,5 +36,16 @@ class ApplicationController < ActionController::Base
       redirect_to "http://#{APP_DOMAIN}" + request.env['PATH_INFO'], :status => 301
     end
   end
+
+	private
+	
+	  def set_access_control_headers
+      headers['Access-Control-Allow-Origin'] = '*'
+    end
+    
+    def set_cache_header
+    	max_age = 1200  # 20 minutes
+    	headers['Cache-Control'] = "public, max-age=#{max_age}"
+    end
 
 end

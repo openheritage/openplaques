@@ -4,6 +4,7 @@ class PlaquesController < ApplicationController
   before_filter :authenticate_admin!, :only => :destroy
 
   before_filter :find_plaque, :only => [:show, :parse_inscription, :unparse_inscription, :flickr_search, :flickr_search_all, :update, :destroy, :edit]
+	before_filter :set_cache_header, :only => :index
   after_filter :set_access_control_headers, :only => :index
 
 
@@ -63,6 +64,8 @@ class PlaquesController < ApplicationController
 
     if params[:data] && params[:data] == "simple"
       @plaques = Plaque.all(:conditions => conditions, :order => "created_at DESC", :limit => limit)
+		elsif params[:data] && params[:data] == "basic"
+      @plaques = Plaque.all(:select => [:id, :latitude, :longitude, :inscription])
     else
       @plaques = Plaque.all(:conditions => conditions, :order => "created_at DESC", :limit => limit, :include => [:language, :organisations, :colour, [:location => [:area => :country]]])
     end
@@ -71,6 +74,11 @@ class PlaquesController < ApplicationController
       if params[:data] && params[:data] == "simple"
         format.json { render :json => @plaques.as_json(:only => [:id, :latitude, :longitude, :inscription],
           :methods => [:title, :colour_name, :machine_tag, :thumbnail_url]) }
+      elsif params[:data] && params[:data] == "basic"
+        format.json { 
+        	render :json => @plaques.as_json(:only => [:id, :latitude, :longitude, :inscription]) 
+        }
+      
       end
       format.json { render :json => @plaques.as_json }
     end
@@ -268,7 +276,4 @@ class PlaquesController < ApplicationController
       @plaque = Plaque.find(params[:id])
     end
 
-    def set_access_control_headers
-      headers['Access-Control-Allow-Origin'] = '*'
-    end
 end
