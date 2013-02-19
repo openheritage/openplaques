@@ -455,3 +455,63 @@
 	-webkit-border-radius: 2px;
 	        border-radius: 2px;
 	}
+
+
+.leaflet-cluster-anim .leaflet-marker-icon, .leaflet-cluster-anim .leaflet-marker-shadow {
+	-webkit-transition: -webkit-transform 0.25s ease-out, opacity 0.25s ease-in;
+	-moz-transition: -moz-transform 0.25s ease-out, opacity 0.25s ease-in;
+	-o-transition: -o-transform 0.25s ease-out, opacity 0.25s ease-in;
+	transition: transform 0.25s ease-out, opacity 0.25s ease-in;
+	}
+	
+.leaflet-popup-content-wrapper {
+	border-radius: 0;
+}	
+
+.plaque-cluster-marker {
+	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	text-align: center;
+	color: black;
+}
+
+.small {
+	border-radius: 10px; height: 20px;
+	margin-top: -10px; margin-left: 10px;
+	line-height: 20px;
+	background-color: rgba(57, 204, 2,0.8);
+	
+}
+
+.medium {
+	border-radius: 15px; height: 30px;
+	margin-top: -15px; margin-left: 15px;
+	line-height: 30px;
+	background-color: rgba(255, 173,36,0.8);
+
+}
+
+.large {
+	border-radius: 20px; 
+	height: 40px; line-height: 40px;
+	margin-top: -20px; margin-left: 20px;
+	background-color: rgba(215,0,20,0.8);
+}
+
+.inscription {
+	font-size: 16px;
+	font-family: 'Helvetica', Arial, sans-serif;
+	line-height: 24px;
+	margin-bottom: 16px;
+}
+
+.info {
+	font-size: 12px;
+	font-family: 'Helvetica', Arial, sans-serif;
+	color: #B8B8B8;
+}
+
+.link {
+	color: #3892E3;
+}

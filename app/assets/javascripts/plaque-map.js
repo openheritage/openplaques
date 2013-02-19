@@ -2,6 +2,8 @@ var map;
 var ajaxRequest;
 var plaques=[];
 var allow_popups=true;
+var plaque_markers = {};
+
 
 function getXmlHttpObject() {
   if (window.XMLHttpRequest) { return new XMLHttpRequest(); }
@@ -18,17 +20,18 @@ function stateChanged() {
     for (i=0;i<json.length;i++) {
       var plaque = json[i].plaque;
       if (plaque.latitude && plaque.longitude && plaques["'#"+plaque.id+"'"]==null) { // ensure that we never display a plaque more than once
-		var plaque_icon = new L.DivIcon({ className: 'plaque-marker', html: '', iconSize : 16 });
+	
+			var plaque_icon = new L.DivIcon({ className: 'plaque-marker', html: '', iconSize : 16 });
         var plaque_marker = L.marker([plaque.latitude, plaque.longitude], {icon: plaque_icon});
-        if (plaque.inscription.length > 200) {
-          var text = plaque.inscription.substring(0,200) + "...";
-        } else {
-          var text = plaque.inscription;
-        }
+        
         if (allow_popups==true) {
-          plaque_marker.bindPopup('<h3><a href="http://openplaques.org/plaques/'+plaque.id+'">'+plaque.title+'</a></h3><p>'+text+'</p>');
+
+					var plaque_description = '<div class="inscription">' + truncate(plaque.inscription, 255) + '</div><div class="info">' +
+						'<a class="link" href="http://openplaques.org/plaques/' + plaque.id + '">Plaque ' + plaque.id + '</a>';
+
+          plaque_marker.bindPopup(plaque_description);
         }
-		plaque_marker.addTo(map);
+		plaque_markers.addLayer(plaque_marker)
 		plaques["'#"+plaque.id+"'"]=plaque;
       }
     }
@@ -79,17 +82,74 @@ function initmap() {
     } else {
 		var data_path = plaque_map.attr("data-path");
 		if (data_view == "all") {
-		   var url = '/plaques.json?data=simple&limit=1000';
+		   var url = '/plaques.json?data=basic';
 		} else if (data_path) {
 		   var url = data_path;
 		} else {
 		   var url = document.location.href.replace(/\?.*/,'') + '.json?data=simple&limit=1000';
 		}
+		
+		plaque_markers = new L.MarkerClusterGroup({
+			maxClusterRadius : 25,
+			showCoverageOnHover : false,
+			iconCreateFunction: function(cluster) {
+        return new L.DivIcon({ 
+        	html: cluster.getChildCount(), 
+        	className : 'plaque-cluster-marker ' + clusterSize(cluster.getChildCount()), 
+        	iconSize: clusterWidth(cluster.getChildCount())
+        });
+    	}				
+		});
+		
+		map.addLayer(plaque_markers);
+
+		
 	    getPlaques(url);  
-		map.on('moveend', function() { getPlaques(url) });
+
+		if (url === '/plaques.json?data=basic') {
+		} else {		
+			map.on('moveend', function() { getPlaques(url) });
+		}
+
+
 	}
 
   }
+}
+
+
+function clusterSize(number) {
+	
+	if (number < 10) {
+		return 'small';
+	} else if (number < 100) {
+		return 'medium';
+	} else  {
+		return 'large';
+	}
+
+}
+
+function clusterWidth(number) {
+	
+	if (number < 10) {
+		return 20;
+	} else if (number < 100) {
+		return 30;
+	} else  {
+		return 40;
+	}
+
+}
+
+function truncate(string, max_length) {
+
+	if (string.length > max_length) {
+		return string.substring(0, max_length) + '...';
+	} else {
+		return string;
+	}
+
 }
 
 $(document).ready(function() {
