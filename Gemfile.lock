@@ -181,7 +181,7 @@ DEPENDENCIES
   json
   meta-tags
   pg
-  rails (~> 3.2.11)
+  rails (~> 3.2.13)
   randumb
   rdf
   sass-rails (~> 3.2.3)
