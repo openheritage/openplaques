@@ -6,6 +6,7 @@ class CountriesController < ApplicationController
 
   def index
     @countries = Country.all(:order => :name)
+    @countries.sort! { |a,b| b.plaques.size <=> a.plaques.size }
     respond_to do |format|
       format.html
       format.xml
