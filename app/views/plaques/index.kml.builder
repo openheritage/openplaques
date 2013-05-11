@@ -10,7 +10,7 @@ xml.kml(:xmlns=>"http://www.opengis.net/kml/2.2","xmlns:atom"=>"http://www.w3.or
         xml.IconStyle do
           xml.scale "0.5"
           xml.Icon do
-            xml.href root_url + "assets/icon-" + colour + ".png"
+            xml.href "http://openplaques.org/" + "assets/icon-" + colour + ".png"
           end
         end
       end
@@ -18,7 +18,7 @@ xml.kml(:xmlns=>"http://www.opengis.net/kml/2.2","xmlns:atom"=>"http://www.w3.or
     end
 
     for plaque in @plaques
-      kml(plaque, xml)
+      kml(plaque, xml).to_s.gsub!("http://0.0.0.0:3000","http://openplaques.org")
     end
   end
 end
