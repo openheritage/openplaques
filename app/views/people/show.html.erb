@@ -6,12 +6,29 @@
       <%= link_to("Edit this "+@person.type, edit_person_path(@person), {:class => :edit, :title => "Edit this "+@person.type})%>
     </section>
   <% end %>
+
+  <% if @person.parents.size > 0 %><p>
+    <%= 'parent'.pluralize @person.parents.size %>:
+    <% @person.parents.each do |parent| %><%= dated_person parent %><% end %>
+  </p><% end %>
+
   <div class="vcard person" typeof="<%= if (@person.person?) then "foaf:Person" else "foaf:Agent" end %> vcard:VCard" about="#person">
 
     <p><%= image_tag(@person.depiction, :width => "100", :alt => "a depiction of "+@person.name) if @person.depiction %></p>
     <h1><%= dated_person(@person, {:links => :none}) %> <%= roles_list(@person) %></h1>
     
+    <% if @person.issue.size > 0 %>
+    <p><%= 'child'.pluralize @person.issue.size %>: <% @person.issue.each do |issue| %><%= dated_person issue %> <% end %></p>
+    <% end %>
+    <% @person.siblings.each do |sibling| %>
+      Sibling: <%= dated_person sibling %>
+    <% end %>
+    <% if @person.non_family.size > 0 %><p>
+      <% @person.non_family.each do |non_family| %><%= dated_person non_family %> <% end %>
+    </p><% end %>
+
     <p><%= "Died aged" if (@person.person? || @person.thing? || @person.animal?) && @person.dead? %><%= "Closed aged" if @person.place? && @person.dead? %><%= "Aged" if @person.alive? && @person.age%> <%= "c." + @person.age.to_s if @person.age%></p>
+
 
     <table>
     <% @person.plaques.each do |plaque| %>
@@ -29,6 +46,6 @@
     <%= content_tag("p", "Read more about ".html_safe + link_to(@person.name, @person.default_wikipedia_url, :target => '_blank') + " on Wikipedia.".html_safe) unless @person.default_wikipedia_url.blank? %>
   </div>
 
-  <p class="alternate_formats">Data about this person as <%= alternate_link_to "XML", person_path(@person, :xml), :xml %> <%= alternate_link_to "JSON", person_path(@person, :json), :json %> <%= alternate_link_to "KML", person_path(@person, :kml), :kml %>  <%= alternate_link_to "GMAP", "http://maps.google.co.uk/maps?q=" + person_url(@person, :kml), :html %></p>
+  <p class="alternate_formats">Data about this <%= @person.type %> as <%= alternate_link_to "XML", person_path(@person, :xml), :xml %> <%= alternate_link_to "JSON", person_path(@person, :json), :json %> <%= alternate_link_to "KML", person_path(@person, :kml), :kml %>  <%= alternate_link_to "GMAP", "http://maps.google.co.uk/maps?q=" + person_url(@person, :kml), :html %></p>
 
 </div>

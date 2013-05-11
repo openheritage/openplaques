@@ -4,7 +4,7 @@ module PeopleHelper
   def roles_list(person)
     if person.roles.size > 0
       list = [person.type]
-      person.personal_roles.each do |personal_role|
+      person.straight_roles.each do |personal_role|
         list <<  dated_role(personal_role)
       end
       content_tag("p", list.to_sentence.html_safe, {:class => "roles"})
@@ -100,7 +100,6 @@ module PeopleHelper
       person.personal_roles.each do |personal_role|
         roles << dated_role(personal_role)
       end
-
       if roles.size > 0
         return dated_person(person) + ", " + roles.to_sentence.html_safe
       else
@@ -168,13 +167,10 @@ module PeopleHelper
       end
     end
 
-    def connections(person, plaque)
-      person.personal_connections.where(:plaque_id => plaque)
-    end
-
     def verbs(person, plaque)
       verbs = Array.new
-      connections(person, plaque).each do |personal_connection|
+      connections = person.personal_connections.where(:plaque_id => plaque)
+      connections.each do |personal_connection|
         years = ""
         if personal_connection.from != ""
           years += "(" + personal_connection.from
@@ -187,32 +183,32 @@ module PeopleHelper
         end
         verbs << personal_connection.verb.name + " " + years
       end
-      return verbs
+      verbs
     end
 	
 	def age_icon(age)
 	  if age < 3
 	    image_tag("age1.png", {:alt => "first age of man"})
       elsif age < 10
-	    image_tag("age2.png", {:alt => "first age of man"})
+	    image_tag("age2.png", {:alt => "second age of man"})
       elsif age < 20
-	    image_tag("age3.png", {:alt => "first age of man"})
+	    image_tag("age3.png", {:alt => "third age of man"})
       elsif age < 30
-	    image_tag("age4.png", {:alt => "first age of man"})
+	    image_tag("age4.png", {:alt => "fourth age of man"})
       elsif age < 40
-	    image_tag("age5.png", {:alt => "first age of man"})
+	    image_tag("age5.png", {:alt => "fifth age of man"})
       elsif age < 50
-	    image_tag("age6.png", {:alt => "first age of man"})
+	    image_tag("age6.png", {:alt => "sixth age of man"})
       elsif age < 60
-	    image_tag("age7.png", {:alt => "first age of man"})
+	    image_tag("age7.png", {:alt => "seventh age of man"})
       elsif age < 70
-	    image_tag("age8.png", {:alt => "first age of man"})
+	    image_tag("age8.png", {:alt => "eigth age of man"})
       elsif age < 80
-	    image_tag("age9.png", {:alt => "first age of man"})
+	    image_tag("age9.png", {:alt => "ninth age of man"})
       elsif age < 90
-	    image_tag("age10.png", {:alt => "first age of man"})
+	    image_tag("age10.png", {:alt => "tenth age of man"})
       else
-	    image_tag("age11.png", {:alt => "first age of man"})
+	    image_tag("age11.png", {:alt => "eleventh age of man"})
 	  end
 	end
 

@@ -22,12 +22,13 @@ class Person < ActiveRecord::Base
 
   validates_presence_of :name
 
-  has_many :roles, :through => :personal_roles
-  has_many :personal_roles
-  has_many :relationships, :class_name => "PersonalRole", :conditions => ['related_person_id IS NOT NULL']
-  has_many :personal_connections
+  has_many :roles, :through => :personal_roles, :order => 'started_at asc'
+  has_many :personal_roles, :order => 'started_at asc'
+  has_many :relationships, :class_name => "PersonalRole", :conditions => ['related_person_id IS NOT NULL'], :order => 'started_at asc'
+  has_many :straight_roles, :class_name => "PersonalRole", :conditions => ['related_person_id IS NULL'], :order => 'started_at asc'
+  has_many :personal_connections, :order => 'started_at asc'
   has_many :locations, :through => :personal_connections, :uniq => true
-  has_many :verbs, :through => :personal_connections
+#  has_many :verbs, :through => :personal_connections
   has_many :plaques, :through => :personal_connections, :uniq => true
   has_one :birth_connection, :class_name => "PersonalConnection", :conditions => [ 'verb_id in (8,504)']
   has_one :death_connection, :class_name => "PersonalConnection", :conditions => [ 'verb_id in (3,49,161,1108)']
@@ -48,7 +49,6 @@ class Person < ActiveRecord::Base
         areas << location.area unless areas.include?(location.area)
       end
     end
-    return areas
   end
 
   def self.find_or_create_by_name_and_dates(string)
@@ -278,7 +278,39 @@ class Person < ActiveRecord::Base
     fullname += " " + letters if !letters.blank?
     fullname
   end
+  
+  def parents
+    parents = []
+    relationships.each{|relationship|
+      parents << relationship.related_person if relationship.role.name=="son" or relationship.role.name=="daughter"
+    }
+    parents
+  end
 
+  def issue
+    issue = []
+    relationships.each{|relationship|
+      issue << relationship.related_person if relationship.role.name=="father" or relationship.role.name=="mother"
+    }
+    issue.sort! { |a,b| a.born_on <=> b.born_on }
+  end
+  
+  def siblings
+    siblings = []
+    relationships.each{|relationship|
+      siblings << relationship.related_person if relationship.role.name=="brother" or relationship.role.name=="sister"
+    }
+    siblings.sort! { |a,b| a.born_on <=> b.born_on }   
+  end
+  
+  def non_family
+    non_family = []
+    relationships.each{|relationship|
+      non_family << relationship.related_person if relationship.role.name!="brother" and relationship.role.name!="sister" and relationship.role.name!="father" and relationship.role.name!="mother" and relationship.role.name!="son" and relationship.role.name!="daughter"
+    }
+    non_family.sort! { |a,b| a.born_on <=> b.born_on }   
+  end
+  
   def to_s
     self.name
   end
