@@ -142,6 +142,7 @@ class Photo < ActiveRecord::Base
       rescue
       end
       self.file_url = wikimedia_special
+      self.licence = Licence.find_or_create_by_name_and_url("Attribution License", "http://creativecommons.org/licenses/by/3.0/")
     end
   end
   
