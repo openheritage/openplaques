@@ -12,7 +12,7 @@
   <%= content_tag("p", link_to(image_tag(@photo.file_url), @photo.url)) if @photo.file_url %>
   <p>
     <% if @photo.plaque %>
-      This is a <%= @photo.shot_name %> photo of <%= link_to @photo.plaque.title, @photo.plaque %>. 
+      This is a <%= @photo.shot_name %> <%= link_to @photo.title, @photo.plaque %>. 
     <% else %>
       This <%= @photo.shot_name %> photo has not been linked to a plaque <% if @photo.of_a_plaque? %>yet<% else %> because it has been flagged as not being of a plaque<% end %>.
     <% end %>
