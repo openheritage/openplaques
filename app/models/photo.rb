@@ -146,6 +146,14 @@ class Photo < ActiveRecord::Base
     end
   end
   
+  def url
+    "http://openplaques.org" + Rails.application.routes.url_helpers.photo_path(self, :format => :json)
+  end
+  
+  def source_url
+    self.url
+  end
+  
   private
   
     def reset_plaque_photo_count

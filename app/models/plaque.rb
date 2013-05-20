@@ -291,8 +291,8 @@ class Plaque < ActiveRecord::Base
 
     default_options = {:only => [:id, :inscription, :latitude, :longitude, :erected_at, :updated_at],
     :include => {
-      :photos => {:only => [:id,:thumbnail_url]},
-      :organisations => {:only => [:name, :id]},
+      :photos => {:only => [:id], :methods => [:url, :source_url, :thumbnail_url]},
+      :organisations => {:only => [:name], :methods => [:url]},
       :colour => {:only => :name},
       :language => {:only => [:name, :alpha2]},
       :location => {:only => :name,
@@ -387,6 +387,10 @@ class Plaque < ActiveRecord::Base
       end
     end
 	  also
+  end
+
+  def url
+    "http://openplaques.org" + Rails.application.routes.url_helpers.plaque_path(self, :format => :json)
   end
 
   def to_s

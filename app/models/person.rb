@@ -212,18 +212,19 @@ class Person < ActiveRecord::Base
 
   def as_json(options={})
     # this example ignores the user's options
-    super(:only => [:id, :name, :updated_at],
+    super(:only => [:id, :updated_at],
       :include => {
         :roles => {:only => [:name]},
         :personal_connections  => {
-          :only => [:started_at, :ended_at, :plaque_id],
+          :only => [:started_at, :ended_at],
           :include => {
             :location => {:only => [:id, :name], :include => {:area => {:only => :name, :include => {:country => {:only => [:name, :alpha2]}}}}},
-              :verb =>{:only => [:name]}
+              :verb =>{:only => [:name]},
+              :plaque =>{:only => [:id], :methods => [:url]}
           }
         }
       },
-      :methods => [:born_in, :born_at, :died_in, :died_at, :default_wikipedia_url, :default_dbpedia_uri, :surname, :type]
+      :methods => [:full_name, :born_in, :born_at, :died_in, :died_at, :default_wikipedia_url, :default_dbpedia_uri, :surname, :type]
     )
   end
 
@@ -292,7 +293,7 @@ class Person < ActiveRecord::Base
     relationships.each{|relationship|
       issue << relationship.related_person if relationship.role.name=="father" or relationship.role.name=="mother"
     }
-    issue.sort! { |a,b| a.born_on <=> b.born_on }
+    issue.sort! { |a,b| a.born_on||0 <=> b.born_on||0 }
   end
   
   def siblings
@@ -300,7 +301,7 @@ class Person < ActiveRecord::Base
     relationships.each{|relationship|
       siblings << relationship.related_person if relationship.role.name=="brother" or relationship.role.name=="sister"
     }
-    siblings.sort! { |a,b| a.born_on <=> b.born_on }   
+    siblings.sort! { |a,b| a.born_on||0 <=> b.born_on||0 }   
   end
   
   def non_family
@@ -308,7 +309,7 @@ class Person < ActiveRecord::Base
     relationships.each{|relationship|
       non_family << relationship.related_person if relationship.role.name!="brother" and relationship.role.name!="sister" and relationship.role.name!="father" and relationship.role.name!="mother" and relationship.role.name!="son" and relationship.role.name!="daughter"
     }
-    non_family.sort! { |a,b| a.born_on <=> b.born_on }   
+    non_family.sort! { |a,b| a.born_on||0 <=> b.born_on||0 }   
   end
   
   def to_s

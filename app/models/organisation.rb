@@ -33,6 +33,10 @@ class Organisation < ActiveRecord::Base
   def zoom
     6
   end
+  
+  def url
+    "http://openplaques.org" + Rails.application.routes.url_helpers.organisation_path(self, :format=>:json)
+  end
 
   def as_json(options={})
     super(:only => [:name, :id])
