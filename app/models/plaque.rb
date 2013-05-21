@@ -289,19 +289,21 @@ class Plaque < ActiveRecord::Base
   def as_json(options={})
     # This sets default options which are overriden if otherwise specified.
 
-    default_options = {:only => [:id, :inscription, :latitude, :longitude, :erected_at, :updated_at],
+    default_options = {:only => [:inscription, :latitude, :longitude, :erected_at, :updated_at],
     :include => {
-      :photos => {:only => [:id], :methods => [:url, :source_url, :thumbnail_url]},
-      :organisations => {:only => [:name], :methods => [:url]},
+      :photos => {:only => [], :methods => [:uri, :thumbnail_url]},
+      :organisations => {:only => [:name], :methods => [:uri]},
       :colour => {:only => :name},
       :language => {:only => [:name, :alpha2]},
       :location => {:only => :name,
         :include => {
           :area => {:only => :name, :include => {:country => {:only => [:name, :alpha2]}}}
         }
-      }
+      },
+      :people => {:only => [], :methods => [:uri, :full_name]},
+      :see_also => {:only => [], :methods => [:uri]}
     },
-    :methods => [:title, :colour_name, :machine_tag, :geolocated?, :photographed?, :url, :photo_url, :thumbnail_url, :shot_name]
+    :methods => [:uri, :title, :colour_name, :machine_tag, :geolocated?, :photographed?, :photo_url, :thumbnail_url, :shot_name]
     }
 
     if options.size > 0
@@ -389,7 +391,7 @@ class Plaque < ActiveRecord::Base
 	  also
   end
 
-  def url
+  def uri
     "http://openplaques.org" + Rails.application.routes.url_helpers.plaque_path(self, :format => :json)
   end
 

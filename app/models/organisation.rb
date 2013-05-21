@@ -34,8 +34,8 @@ class Organisation < ActiveRecord::Base
     6
   end
   
-  def url
-    "http://openplaques.org" + Rails.application.routes.url_helpers.organisation_path(self, :format=>:json)
+  def uri
+    "http://openplaques.org" + Rails.application.routes.url_helpers.organisation_path(self.slug, :format=>:json)
   end
 
   def as_json(options={})

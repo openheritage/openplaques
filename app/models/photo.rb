@@ -146,12 +146,19 @@ class Photo < ActiveRecord::Base
     end
   end
   
-  def url
-    "http://openplaques.org" + Rails.application.routes.url_helpers.photo_path(self, :format => :json)
+  def as_json(options={})
+    # this example ignores the user's options
+    super(:only => [:file_url, :photographer, :photographer_url, :shot, :url],
+      :include => {
+        :licence => {:only => [:name], :methods => [:uri]},
+        :plaque => {:only => [], :methods => [:uri]}
+      },
+      :methods => [:title, :uri, :thumbnail_url, :shot_name]
+    )
   end
   
-  def source_url
-    self.url
+  def uri
+    "http://openplaques.org" + Rails.application.routes.url_helpers.photo_path(self, :format => :json)
   end
   
   private

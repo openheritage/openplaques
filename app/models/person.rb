@@ -212,15 +212,23 @@ class Person < ActiveRecord::Base
 
   def as_json(options={})
     # this example ignores the user's options
-    super(:only => [:id, :updated_at],
+    super(:only => [:updated_at],
       :include => {
-        :roles => {:only => [:name]},
+        :personal_roles => {
+          :only => [:started_at, :ended_at], 
+          :include => {
+            :role => {:only => [:name], :methods => [:uri]},
+            :related_person => {:only => [], :methods => [:uri, :full_name]}
+          },
+          :methods => [:uri, :from, :to]
+        },
         :personal_connections  => {
           :only => [:started_at, :ended_at],
+          :methods => [],
           :include => {
-            :location => {:only => [:id, :name], :include => {:area => {:only => :name, :include => {:country => {:only => [:name, :alpha2]}}}}},
-              :verb =>{:only => [:name]},
-              :plaque =>{:only => [:id], :methods => [:url]}
+            :location => {:only => [:name], :include => {:area => {:only => :name, :include => {:country => {:only => [:name, :alpha2]}}}}},
+            :verb =>{:only => [:name]},
+            :plaque =>{:only => [], :methods => [:uri]}
           }
         }
       },
@@ -311,7 +319,11 @@ class Person < ActiveRecord::Base
     }
     non_family.sort! { |a,b| a.born_on||0 <=> b.born_on||0 }   
   end
-  
+
+  def uri
+    "http://openplaques.org" + Rails.application.routes.url_helpers.person_path(self, :format => :json)
+  end
+    
   def to_s
     self.name
   end

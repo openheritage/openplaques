@@ -126,6 +126,10 @@ class Role < ActiveRecord::Base
     return name
   end
   
+  def uri
+    "http://openplaques.org" + Rails.application.routes.url_helpers.role_path(self.slug, :format => :json)
+  end
+  
   private
 
     def update_index
