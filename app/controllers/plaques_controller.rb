@@ -8,7 +8,7 @@ class PlaquesController < ApplicationController
   after_filter :set_access_control_headers, :only => :index
 
 
-  respond_to :html, :xml, :json, :kml, :poi, :rss, :csv, :yaml
+  respond_to :html, :xml, :json, :kml, :poi, :rss, :csv
 
   def map
     @plaques = Plaque.find(:all, :conditions => ["latitude IS NOT NULL"])
@@ -87,10 +87,8 @@ class PlaquesController < ApplicationController
 
   # GET /plaques/1
   # GET /plaques/1.kml
-  # GET /plaques/1.yaml
   # GET /plaques/1.xml
   # GET /plaques/1.json
-  # GET /plaques/1.bp
   def show
     @plaques = [@plaque]
     set_meta_tags :open_graph => {
@@ -103,7 +101,6 @@ class PlaquesController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.kml { render "plaques/index" }
-      format.yaml
       format.xml { render "plaques/index" }
       format.json {
         render :json => @plaque.as_json
@@ -124,16 +121,6 @@ class PlaquesController < ApplicationController
     if !current_user
       @user = User.new
     end
-  end
-
-  def parse_inscription
-    @plaque.parse_inscription
-    redirect_to edit_plaque_inscription_path(@plaque)
-  end
-
-  def unparse_inscription
-    @plaque.unparse_inscription
-    redirect_to @plaque
   end
 
   def flickr_search

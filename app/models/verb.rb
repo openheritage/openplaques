@@ -18,8 +18,12 @@ class Verb < ActiveRecord::Base
   has_many :people, :through => :personal_connections
   has_many :locations, :through => :personal_connections
 
-  def find_or_create_by_past_tense_name(verb)
-
+  def past_tense
+    if name =~ /e\Z/
+      return name + "d"
+    else
+      return name + "ed"
+    end
   end
 
   def to_param

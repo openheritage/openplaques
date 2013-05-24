@@ -289,7 +289,7 @@ class Plaque < ActiveRecord::Base
   def as_json(options={})
     # This sets default options which are overriden if otherwise specified.
 
-    default_options = {:only => [:inscription, :latitude, :longitude, :erected_at, :updated_at],
+    default_options = {:only => [:id, :inscription, :latitude, :longitude, :erected_at, :updated_at],
     :include => {
       :photos => {:only => [], :methods => [:uri, :thumbnail_url]},
       :organisations => {:only => [:name], :methods => [:uri]},

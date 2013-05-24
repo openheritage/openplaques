@@ -4,12 +4,4 @@ module VerbsHelper
     url_for(options.merge(:controller => :verbs, :action => :show, :id => verb))
   end
 
-  def past_tense(verb)
-    if verb =~ /e\Z/
-      return verb + "d"
-    else
-      return verb + "ed"
-    end
-  end
-
 end

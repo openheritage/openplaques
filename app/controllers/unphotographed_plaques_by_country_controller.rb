@@ -8,12 +8,10 @@ class UnphotographedPlaquesByCountryController < ApplicationController
       format.html
       format.kml { render "plaques/index" }
       format.osm { render "plaques/index" }
-      format.yaml
       format.xml
       format.json { render :json => @plaques }
     end
   end
-
 
   protected
 

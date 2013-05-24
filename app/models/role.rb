@@ -17,7 +17,6 @@ class Role < ActiveRecord::Base
   validates_format_of :slug, :with => /^[a-z\_]+$/, :message => "can only contain lowercase letters and underscores"
 
   has_many :personal_roles
-
   has_many :people, :through => :personal_roles, :order => :name
 
   before_save :update_index, :filter_name

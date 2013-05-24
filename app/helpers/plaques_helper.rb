@@ -232,33 +232,6 @@ module PlaquesHelper
       end
     end
 
-
-  def yaml(plaques)
-#    plaques.to_yaml
-    s = ""
-    plaques.each do |plaque|
-      s += "plaque" + plaque.id.to_s + ":\r\n"
-      s += "  inscription: " + h(plaque.inscription).gsub(/\r\n/,"") + "\r\n"
-      if plaque.location
-        s+= "  location: " + plaque.location.name + "\r\n"
-      end
-      if plaque.erected_at
-        s+= "  erected_at: " + plaque.erected_at_string + "\r\n"
-      end
-      if !plaque.organisations.empty?
-        s+= "  organisation: " + plaque.organisations.first.name + "\r\n"
-      end
-      unless plaque.notes.blank?
-        s+= "  notes: " + h(plaque.notes).gsub(/\r\n/," ") + "\r\n"
-      end
-      if plaque.colour
-        s+= "  colour: " + plaque.colour.name + "\r\n"
-      end
-      s+= "\r\n"
-    end
-    return s
-  end
-
   def poi(plaque)
     if plaque.geolocated? && plaque.people.size() > 0
     plaque.longitude.to_s + ', ' + plaque.latitude.to_s + ", \"" + plaque.people.collect(&:name).to_sentence + "\"" + "\r\n"
@@ -379,7 +352,6 @@ module PlaquesHelper
             sentence << sub_sentence
           end
 
-
           s << sentence.to_sentence
         end
 
@@ -475,7 +447,7 @@ module PlaquesHelper
   end
 
   def plaque_icon(plaque)
-  if plaque.colour && plaque.colour.slug =~ /(blue|black|yellow|red|white|green)/
+    if plaque.colour && plaque.colour.slug =~ /(blue|black|yellow|red|white|green)/
       image_tag("icon-" + plaque.colour.slug + ".png", :size => "16x16")
     else
       image_tag("icon-blue.png", :size => "16x16")

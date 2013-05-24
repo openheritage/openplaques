@@ -13,7 +13,6 @@ class RolesController < ApplicationController
         @parent = @roles
         render "colours/index"
       }
-      format.yaml
       format.xml
       format.json { render :json => @roles }
     end
@@ -38,7 +37,6 @@ class RolesController < ApplicationController
     respond_to do |format|
       format.html
       format.kml { render "plaques/show" }
-      format.yaml
       format.xml
       format.json { render :json => @role }
     end
