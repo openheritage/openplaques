@@ -1,7 +1,7 @@
 class PhotosController < ApplicationController
 
   before_filter :authenticate_admin!, :only => :destroy
-  before_filter :authenticate_user!, :except => [:index, :show]
+  before_filter :authenticate_user!, :except => [:index, :show, :update]
 
   before_filter :find_photo, :only => [:destroy, :edit, :show, :update]
 
@@ -26,7 +26,7 @@ class PhotosController < ApplicationController
     respond_to do |format|
       if @photo.update_attributes(params[:photo])
         flash[:notice] = 'Photo was successfully updated.'
-        format.html { redirect_to(@photo) }
+        format.html { redirect_to :back }
         format.xml  { head :ok }
       else
         format.html { render "edit" }
