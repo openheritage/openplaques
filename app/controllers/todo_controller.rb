@@ -91,7 +91,43 @@ class TodoController < ApplicationController
       @plaques = Plaque.unphotographed.paginate(:page => params[:page], :per_page => 100)
       render :unphotographed
       
+    when 'microtask'
+      case rand(4)
+      when 0
+        @plaques = Plaque.photographed_not_coloured
+        @plaque = @plaques[rand @plaques.length]
+        if (@plaque)
+          @colours = Colour.find(:all, :order => :name)
+          render 'plaque_colour/edit'
+        end
+      when 1
+        @plaques = Plaque.partial_inscription_photo
+        @plaque = @plaques[rand @plaques.length]
+        if (@plaque)
+          @languages = Language.all(:order => :name)
+          render 'plaque_inscription/edit'
+        end
+      when 2
+        @people = Person.no_role
+        @person = @people[rand @people.length]
+        if (@person)
+          @roles = Role.all(:order => :name)
+          @personal_role = PersonalRole.new
+          @died_on = @person.died_on.year if @person.died_on
+          @born_on = @person.born_on.year if @person.born_on
+          render 'people/edit'
+        end
+      when 3
+        @plaques = Plaque.ungeolocated
+        @plaque = @plaques[rand @plaques.length]
+        @geocodes = Array.new
+        if (@plaque)
+          render 'plaque_geolocation/edit'
+        end
+    end
+      
     else
+      render 'microtask'
       raise ActiveRecord::RecordNotFound
     end
 

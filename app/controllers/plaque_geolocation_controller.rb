@@ -31,9 +31,7 @@ class PlaqueGeolocationController < ApplicationController
       response = open(get_flickr_api_url(params[:plaque_id], true))
       doc = REXML::Document.new(response.read)
       doc.elements.each('//rsp/photos/photo') do |photo|
-#       puts photo.attributes["latitude"]
         if photo.attributes["latitude"] != nil && photo.attributes["latitude"] != "0"
-#         puts photo.attributes["latitude"] +"."+photo.attributes["longitude"]
           geocodes.push [photo.attributes["latitude"], photo.attributes["longitude"], photo.attributes["ownername"]]
         end
       end
