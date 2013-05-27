@@ -327,8 +327,8 @@ class Plaque < ActiveRecord::Base
         first_4_people << pluralize(people.size - 4, "other")
         first_4_people.to_sentence
       elsif people.size > 0
-        people.collect(&:name).to_sentence + " " + (colour_name || 'unknown') + " plaque"
-      elsif colour_name
+        people.collect(&:name).to_sentence + " " + (colour_name || '') + " plaque"
+      elsif colour_name && "unknown"!=colour_name
         colour_name.to_s.capitalize + " plaque № #{id}"
       else
         "plaque № #{id}"
@@ -344,6 +344,7 @@ class Plaque < ActiveRecord::Base
       return photos.detail_order.first
     end
   end
+  
   def main_photo_reverse
     if !photos.empty?
       return photos.reverse_detail_order.first
@@ -365,22 +366,6 @@ class Plaque < ActiveRecord::Base
     end
   end
 
-  # so that old code still works
-  def organisation
-    warn "[DEPRECATION] `organisation` is deprecated.  Please use `organisations.first` or refactor to use the whole organisations collection."
-    organisations[0]
-  end
-
-  # so that old code still works
-  def organisation=(organisation)
-    warn "[DEPRECATION] `organisation=` is deprecated.  Please use `organisations <<` instead."
-
-    if organisation
-      sponsorship = self.sponsorships.new
-      sponsorship.organisation = organisation
-    end
-  end
-  
   def see_also
     also = []
     people.each do |person|
