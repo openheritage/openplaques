@@ -3,37 +3,7 @@ class PersonalRolesController < ApplicationController
   before_filter :authenticate_admin!, :only => :destroy
   before_filter :authenticate_user!
 
-  before_filter :find_personal_role, :only => [:destroy, :update, :edit, :show]
-
-  def index
-    @personal_roles = PersonalRole.find(:all)
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @personal_roles }
-    end
-  end
-
-  # GET /personal_roles/1
-  # GET /personal_roles/1.xml
-  def show
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @personal_role }
-    end
-  end
-
-  # GET /personal_roles/new
-  # GET /personal_roles/new.xml
-  def new
-    @personal_roles = PersonalRole.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @personal_roles }
-    end
-  end
-
+  before_filter :find_personal_role, :only => [:destroy, :update, :edit]
 
   # POST /personal_roles
   # POST /personal_roles.xml
