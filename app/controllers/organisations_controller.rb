@@ -18,7 +18,6 @@ class OrganisationsController < ApplicationController
         @parent = @organisations
         render "plaques/index"
       }
-      format.yaml
       format.xml
       format.json { render :json => @organisations }
     end
@@ -42,7 +41,6 @@ class OrganisationsController < ApplicationController
       format.html
       format.kml { render "plaques/index" }
       format.osm { render "plaques/index" }
-      format.yaml
       format.xml
       format.json { render :json => @organisation.plaques.as_json }
     end
