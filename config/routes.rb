@@ -54,7 +54,9 @@ Openplaques::Application.routes.draw do
   resources :licences, :only => [:index, :show]
 
   # These are the organisations
-  resources :organisations
+  resources :organisations do
+    resource :plaques, :controller => :organisation_plaques, :only => :show
+  end
   resources :sponsorships
 
   # Verbs, roles and their connections to the plaques
@@ -78,6 +80,7 @@ Openplaques::Application.routes.draw do
   end
   resources :people do
     resource :plaques, :controller => :person_plaques, :only => :show
+    resource :roles, :controller => :person_roles, :only => [:show]
   end
 
   # Misc other resources
@@ -85,7 +88,9 @@ Openplaques::Application.routes.draw do
   resources :colours
   resources :series
   resources :todo
-  resources :picks
+  resources :picks do
+    post 'rotate'
+  end
 
   # Convenience paths for search:
   match 'search' => "search#index"

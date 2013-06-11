@@ -23,9 +23,8 @@ class PicksController < ApplicationController
     redirect_to picks_path
   end
 
-  def promote
-    @pick.last_featured = DateTime.now
-    @pick.save
+  def rotate
+    Pick.rotate
   end
 
   def update

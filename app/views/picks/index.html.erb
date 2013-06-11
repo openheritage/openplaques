@@ -5,7 +5,20 @@
   </section>
 
   <h1>Plaque Picks</h1>
-  
+
+  <h2>Today's pick</h2>
+  <% @todays = Pick.todays %>
+  <div>
+    <div class="thumb">
+      <%= link_to thumbnail_img(@todays.plaque), @todays.plaque %>
+    </div>
+    <div><%= link_to @todays.plaque.title, @todays.plaque %><br/>"<%= @todays.description %>" - <%= @todays.proposer %></div>
+
+    <%= form_tag(:controller => "picks", :action => "rotate", :method => "post") do %>
+      <p><%= submit_tag("Rotate") %></p>
+    <% end %>
+  </div>
+
   <% if @picks.size > 0 %>
     <h2>To feature on any day</h2>
     <% @picks.reject{|pick| pick.feature_on != nil}.each do |pick| %>
