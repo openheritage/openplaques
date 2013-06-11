@@ -1,1 +1,1 @@
-rails s
+rails server

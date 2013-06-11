@@ -14,8 +14,7 @@ class AreasController < ApplicationController
         @parent = @areas
         render "plaques/index"
       }
-      format.yaml
-      format.xml # { render :xml => @areas }
+      format.xml
       format.json { render :json => @areas }
     end
   end
@@ -34,9 +33,8 @@ class AreasController < ApplicationController
       format.html
       format.kml { render "plaques/index" }
       format.osm { render "plaques/index" }
-      format.yaml
-      format.xml # { render :xml => @area }
-      format.json { render :json => @area }
+      format.xml
+      format.json { render :json => @area.as_json }
     end
   end
 

@@ -19,7 +19,7 @@ function stateChanged() {
     var json=JSON.parse(answer);
     for (i=0;i<json.length;i++) {
       var plaque = json[i].plaque;
-      if (plaque.latitude && plaque.longitude && plaques["'#"+plaque.uri+"'"]==null) { // ensure that we never display a plaque more than once
+      if (plaque.latitude && plaque.longitude && plaques["'#"+plaque.id+"'"]==null) { // ensure that we never display a plaque more than once
 	
 		var plaque_icon = new L.DivIcon({ className: 'plaque-marker', html: '', iconSize : 16 });
         var plaque_marker = L.marker([plaque.latitude, plaque.longitude], {icon: plaque_icon});
@@ -31,7 +31,7 @@ function stateChanged() {
           plaque_marker.bindPopup(plaque_description);
         }
 		plaque_markers.addLayer(plaque_marker)
-		plaques["'#"+plaque.uri+"'"]=plaque;
+		plaques["'#"+plaque.id+"'"]=plaque;
       }
     }
   }
