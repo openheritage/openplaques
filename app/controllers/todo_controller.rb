@@ -92,7 +92,7 @@ class TodoController < ApplicationController
       render :unphotographed
       
     when 'microtask'
-      case rand(4)
+      case rand(5)
       when 0
         @plaques = Plaque.photographed_not_coloured
         @plaque = @plaques[rand @plaques.length]
@@ -115,7 +115,7 @@ class TodoController < ApplicationController
           @personal_role = PersonalRole.new
           @died_on = @person.died_on.year if @person.died_on
           @born_on = @person.born_on.year if @person.born_on
-          render 'people/edit'
+          render 'people/personal_roles/edit'
         end
       when 3
         @plaques = Plaque.ungeolocated
@@ -123,6 +123,16 @@ class TodoController < ApplicationController
         @geocodes = Array.new
         if (@plaque)
           render 'plaque_geolocation/streetview_edit'
+        end
+      when 4
+        @people = Person.no_dates
+        @person = @people[rand @people.length]
+        @personal_role = PersonalRole.new
+        @died_on = @person.died_on.year if @person.died_on
+        @born_on = @person.born_on.year if @person.born_on
+        if (@person)
+          @roles = Role.all(:order => :name)
+          render 'people/dates/edit'
         end
     end
       
