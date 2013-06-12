@@ -122,13 +122,12 @@ class TodoController < ApplicationController
         @plaque = @plaques[rand @plaques.length]
         @geocodes = Array.new
         if (@plaque)
-          render 'plaque_geolocation/edit'
+          render 'plaque_geolocation/streetview_edit'
         end
     end
       
     else
       render 'microtask'
-      raise ActiveRecord::RecordNotFound
     end
 
   end

@@ -127,6 +127,10 @@ class Plaque < ActiveRecord::Base
     end
   end
   
+  def address
+    location_name.gsub('"', '') + ", " + area_name
+  end
+  
   def organisation_name
     if organisation
       organisation.name
