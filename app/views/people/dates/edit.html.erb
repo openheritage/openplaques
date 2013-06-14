@@ -3,6 +3,11 @@
 <div class="panel">
   <h1>When was <%= link_to @person.name, @person %> born?</h1>
 
+  <p><%= @person.name %> features on plaques...
+    <% @person.plaques.each do |plaque| %>
+      <%= render 'plaques/plaque_minimal', :plaque => plaque %>
+    <% end %>
+  </p>
   <p><a href="<%= wikipedia_url(@person)%>"><%= wikipedia_url(@person)%></a><br/>
   "<%= wikipedia_summary_p(@person) %>"</p>
       
@@ -10,13 +15,4 @@
     <p><%= f.label :born_on, "Born" %> <%= text_field_tag :born_on, @born_on, {:maxlength => "4"} %> <%= f.label :died_on, "Died" %> <%= text_field_tag :died_on, @died_on, {:maxlength => "4"} %></p>
     <p><%= f.submit "Update", :class => :button %></p>
   <% end %>
-</div>
-
-<div class="panel">
-  <p>This person features on plaques with inscriptions...</p>
-    <% @person.plaques.each do |plaque| %>
-      <div class="plaque">
-        <p>"<%= plaque.inscription %>"</p>
-      </div>
-    <% end %>
 </div>

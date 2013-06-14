@@ -3,13 +3,13 @@
 <div class="panel">
 
   <h1>What colour is <%= link_to @plaque.title, @plaque %>?</h1>
-
-  <%= render :partial => "plaques/photos" %>
+  <%= render 'plaques/plaque_minimal', :plaque => @plaque %>
+  <%= render 'plaques/photos' %>
 
   <%= form_for @plaque do |f| %>
     <%= f.label :colour_id, "It's" %>
     <%= f.collection_select :colour_id, @colours, :id, :name, {:include_blank => true} %>
-      <%= f.submit "Save", :class => :button %>
+    <%= f.submit "Save", :class => :button %>
   <% end %>
 
   <% if current_user && current_user.is_admin? %>

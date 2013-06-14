@@ -4,10 +4,11 @@
 
   <h1>Can you see the <%= link_to @plaque.title, @plaque %> in Google Streetview?</h1>
 
-  <%= thumbnail_img(@plaque) %>
+  <%= render 'plaques/plaque_minimal', :plaque => @plaque %>
+
   <%= form_for(@plaque) do |f| %>
 	
-	<p>Find <%= @plaque.address %> on <a href="http://maps.google.co.uk/maps?q=<%= @plaque.location.name if @plaque.location %>,<%= @plaque.area.name if @plaque.area %>&z=18" target="_new">google maps</a></p>
+	<p>Find <%= @plaque.address %> on <a href="http://maps.google.co.uk/maps?q=<%= @plaque.location.name if @plaque.location %>,<%= @plaque.area.name if @plaque.area %>&z=18" target="_new">Google Maps</a></p>
 
 	<br/>
 	

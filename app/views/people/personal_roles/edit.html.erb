@@ -1,16 +1,13 @@
-<% content_for :page_title, "Editing " + @person.name %>
+<% content_for :page_title, "What roles does " + @person.name + "have?"%>
 
 <div class="panel">
   <h1>What roles does <%= link_to @person.name, @person %> have?</h1>
 
-  <p><%= @person.name %> features on plaques with inscriptions...
+  <p><%= @person.name %> features on plaques...
     <% @person.plaques.each do |plaque| %>
-      <div class="plaque">
-        <p>"<%= plaque.inscription %>"</p>
-      </div>
+      <%= render 'plaques/plaque_minimal', :plaque => plaque %>
     <% end %>
-  
-  <p>...from which we can establish that:</p>
+    <br/>...from which we can establish that:</p>
   
   <% @person.personal_roles.each do |personal_role| %>
     <div>

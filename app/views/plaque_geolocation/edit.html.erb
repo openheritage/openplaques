@@ -86,21 +86,6 @@
 			});
 		</script>
 
-    <% if @yahoo_geo %>
-      <p>
-        <a href="http://developer.yahoo.com/maps/rest/V1/geocode.html">Yahoo! Geocoding API</a> says that
-        to a '<%= @yahoo_geo.precision %>' level precision
-        the location "<%= @yahoo_geo.location %>" is:<br/>
-        addr: <%= @yahoo_geo.address %>,
-        city: <%= @yahoo_geo.city %>,
-        state: <%= @yahoo_geo.state %>,
-        zip: <%= @yahoo_geo.zip %>,
-        country: <%= @yahoo_geo.country %><br/>
-        [<%= @yahoo_geo.latitude %>,<%= @yahoo_geo.longitude %>]
-      </p>
-      <%= osm_iframe(@yahoo_geo.latitude.to_f,@yahoo_geo.longitude.to_f) %>
-    <% end %>
-
   <% end %>
 
 </div>

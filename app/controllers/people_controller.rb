@@ -1,7 +1,7 @@
 class PeopleController < ApplicationController
 
   before_filter :authenticate_admin!, :only => :destroy
-  before_filter :authenticate_user!, :except => [:index, :show]
+  before_filter :authenticate_user!, :except => [:index, :show, :update]
 
   before_filter :find_person, :only => [:edit, :update, :destroy]
 
@@ -13,7 +13,6 @@ class PeopleController < ApplicationController
         @parent = @people
         render "plaques/index"
       }
-      format.yaml
       format.xml
       format.json { render :json => @people }
     end
@@ -29,7 +28,6 @@ class PeopleController < ApplicationController
 	  render "plaques/index" }
       format.osm { @plaques = @person.plaques
 	  render "plaques/index" }
-      format.yaml
       format.xml
       format.json { render :json => @person }
     end
@@ -40,7 +38,7 @@ class PeopleController < ApplicationController
   def new
     @person = Person.new
     respond_to do |format|
-      format.html # new.html.erb
+      format.html
       format.xml  { render :xml => @person }
     end
   end
