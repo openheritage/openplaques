@@ -34,6 +34,12 @@ class Organisation < ActiveRecord::Base
     6
   end
   
+  def most_prevelant_colour
+    @plaques = self.plaques
+    most_prevelant_colour = @plaques.map {|i| (i.colour.nil? || i.colour.name) || "" }.group_by {|col| col }.max_by(&:size)
+    @colour = most_prevelant_colour ? most_prevelant_colour.first : ""
+  end
+  
   def uri
     "http://openplaques.org" + Rails.application.routes.url_helpers.organisation_path(self.slug, :format=>:json)
   end

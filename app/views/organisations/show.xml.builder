@@ -10,7 +10,7 @@ xml.openplaques(:uri => organisation_url(@organisation)){
         xml.title plaque.title
         xml.colour plaque.colour_name if plaque.colour_name
         xml.inscription plaque.inscription
-        xml.geo(:reference_system => "WGS84", :latitude => plaque.latitude, :longitude => plaque.longitude)
+        xml.geo(:reference_system => "WGS84", :latitude => plaque.latitude, :longitude => plaque.longitude) if plaque.geolocated?
       }
     end
   }
