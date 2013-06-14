@@ -320,6 +320,18 @@ class Person < ActiveRecord::Base
     }
     non_family.sort! { |a,b| a.born_on||0 <=> b.born_on||0 }   
   end
+  
+  def creation_word
+    if (self.thing?)
+      return "from"
+    elsif (self.group?)
+      return "formed"
+    elsif (self.place?)
+      return "built"
+    else
+      return "born"
+    end
+  end
 
   def uri
     "http://openplaques.org" + Rails.application.routes.url_helpers.person_path(self, :format => :json)

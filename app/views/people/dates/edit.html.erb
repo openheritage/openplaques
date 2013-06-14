@@ -1,7 +1,7 @@
 <% content_for :page_title, "Editing " + @person.name %>
 
 <div class="panel">
-  <h1>When was <%= link_to @person.name, @person %> born?</h1>
+  <h1>When was <%= link_to @person.name, @person %> <%= @person.creation_word %>?</h1>
 
   <p><%= @person.name %> features on plaques...
     <% @person.plaques.each do |plaque| %>
