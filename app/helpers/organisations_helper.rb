@@ -12,12 +12,4 @@ module OrganisationsHelper
     organisation_path(organisation, options.merge!(:only_path => false))
   end
   
-  def org_plaque_icon(organisation)
-	  colour = most_prevelant_colour(organisation)
-	  if colour =~ /(blue|black|yellow|red|white|green)/
-      image_tag("icon-" + colour + ".png", :size => "16x16")
-    else
-      image_tag("icon-blue.png", :size => "16x16")
-    end
-  end
 end
