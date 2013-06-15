@@ -162,6 +162,11 @@ class Person < ActiveRecord::Base
   def alive?
     !dead?
   end
+  
+  def existence_word
+    return "is" if alive?
+    "was"
+  end
 
   def age
     "unknown"
@@ -325,14 +330,36 @@ class Person < ActiveRecord::Base
     if (self.thing?)
       return "from"
     elsif (self.group?)
-      return "formed"
+      return "formed in"
     elsif (self.place?)
-      return "built"
+      return "built in"
     else
-      return "born"
+      return "born in"
     end
   end
-
+  
+  def destruction_word
+    if (self.thing?)
+      return "until"
+    elsif (self.group?)
+      return "ended in"
+    elsif (self.place?)
+      return "closed in"
+    else
+      return "died in"
+    end
+  end
+  
+  def sex_word
+    return "it" if (self.thing? || self.group? || self.place?)
+    "he/she"
+  end
+  
+  def possessive
+    return "its" if (self.thing? || self.group? || self.place?)
+    "his/her"
+  end
+    
   def uri
     "http://openplaques.org" + Rails.application.routes.url_helpers.person_path(self, :format => :json)
   end
