@@ -7,27 +7,15 @@ class PlaquesController < ApplicationController
 	before_filter :set_cache_header, :only => :index
   after_filter :set_access_control_headers, :only => :index
 
-
   respond_to :html, :xml, :json, :kml, :poi, :rss, :csv
-
-  def map
-    @plaques = Plaque.find(:all, :conditions => ["latitude IS NOT NULL"])
-#    @centre = find_mean(@plaques)
-    respond_to do |format|
-      format.html
-      format.rss
-    end
-  end
 
   # box = [52.34,-1.23],[50.00,-1.00]
   # box = top_left, bottom_right
   # e.g. http://0.0.0.0:3000/plaques?box=[52.00,-1],[50.00,0.01]
   # GET /plaques
   # GET /plaques.kml
-  # GET /plaques.yaml
   # GET /plaques.xml
   # GET /plaques.json
-  # GET /plaques.bp
   # GET /plaques.rss
   # GET /plaques.csv
   # GET /plaques.poi
@@ -99,7 +87,7 @@ class PlaquesController < ApplicationController
       :description => @plaque.inscription,
     }
     respond_to do |format|
-      format.html # show.html.erb
+      format.html
       format.kml { render "plaques/index" }
       format.xml { render "plaques/index" }
       format.json {
@@ -142,30 +130,27 @@ class PlaquesController < ApplicationController
       @plaque.user = current_user
     end
 
-    if params[:location] && !params[:location].blank?
-      country = Country.find(params[:plaque][:country].blank? ? 1 : params[:plaque][:country])
-      if params[:area_id] && !params[:area_id].blank?
-        area = Area.find(params[:area_id])
-        raise "ERROR" if area.country_id != country.id and return
-      elsif params[:area] && !params[:area].blank?
-        area = country.areas.find_by_name(params[:area])
-        unless area
-          area = country.areas.find_by_slug(params[:area].rstrip.lstrip.downcase.gsub(" ", "_"))
-        end
-        unless area
-          area = country.areas.create!(:name => params[:area])
-        end
+    country = Country.find(params[:plaque][:country].blank? ? 1 : params[:plaque][:country])
+    if params[:area_id] && !params[:area_id].blank?
+      area = Area.find(params[:area_id])
+      raise "ERROR" if area.country_id != country.id and return
+    elsif params[:area] && !params[:area].blank?
+      area = country.areas.find_by_name(params[:area])
+      unless area
+        area = country.areas.find_by_slug(params[:area].rstrip.lstrip.downcase.gsub(" ", "_"))
       end
-
-      if area
-        location = area.locations.find_by_name(params[:location])
-        unless location
-          location = area.locations.create!(:name => params[:location])
-        end
+      unless area
+        area = country.areas.create!(:name => params[:area])
       end
     end
-
-    @plaque.location = location if location
+    if area
+      if params[:location] && !params[:location].blank?
+        location = area.locations.create!(:name => params[:location])
+      else
+        location = area.locations.create!(:name => "?")
+      end
+      @plaque.location = location if location
+    end
 
     unless params[:organisation_name].empty?
       organisation = Organisation.find_or_create_by_name(params[:organisation_name])
