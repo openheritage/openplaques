@@ -1,8 +1,11 @@
 <% content_for :page_title, "Edit colour of " + @plaque.title %>
 
 <div class="panel">
-
   <h1>What colour is <%= link_to @plaque.title, @plaque %>?</h1>
+  <% if url_for(:only_path => false).include?('microtask') %>
+    <p><%= button_to "Not sure. Give me another one", todo_path('microtask'), :method => :get, :class => :button %></p>
+  <% end %>
+  <br/>
   <%= render 'plaques/plaque_minimal', :plaque => @plaque %>
   <%= render 'plaques/photos' %>
 
@@ -12,8 +15,6 @@
     <%= f.submit "Save", :class => :button %>
   <% end %>
 
-  <% if current_user && current_user.is_admin? %>
-    <%= content_tag("p", "Or ".html_safe + link_to("add a new colour", new_colour_path) + ".") %>
-  <% end %>
+  <%= content_tag("p", "Or ".html_safe + link_to("add a new colour", new_colour_path) + ".") if current_user && current_user.is_admin? %>
 
 </div>

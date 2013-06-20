@@ -1,8 +1,11 @@
 <% content_for :page_title, "Editing " + @person.name %>
 
 <div class="panel">
-  <h1>When was <%= link_to @person.name, @person %> <%= @person.creation_word %>?</h1>
-
+  <h1>What year was <%= link_to @person.name, @person %> <%= @person.creation_word %>?</h1>
+  <% if url_for(:only_path => false).include?('microtask') %>
+    <p><%= button_to "Not sure. Give me another one", todo_path('microtask'), :method => :get, :class => :button %></p>
+  <% end %>
+  <br/>
   <p><%= @person.name %> features on plaques...
     <% @person.plaques.each do |plaque| %>
       <%= render 'plaques/plaque_minimal', :plaque => plaque %>
