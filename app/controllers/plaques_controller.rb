@@ -158,7 +158,7 @@ class PlaquesController < ApplicationController
     end
 
     if @plaque.save
-      PlaqueMailer.new_plaque_email(@plaque).deliver rescue puts "ERROR: mailer didn't work"
+#      PlaqueMailer.new_plaque_email(@plaque).deliver rescue puts "ERROR: mailer didn't work"
       flash[:notice] = "Thanks for adding this plaque."
       redirect_to plaque_path(@plaque)
     else
