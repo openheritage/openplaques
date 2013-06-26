@@ -2,12 +2,17 @@
 # This class represents a photograph of a Plaque.
 #
 # === Attributes
-# * +url+ - The primary webpage for the photo - currently always a Flickr photo page.
+# * +url+ - The primary stable webpage for the photo
 # * +file_url+ - A link to the actual digital photo file.
+# * +thumbnail+ - A link to a thumbnail image if there is one
 # * +photographer+ - The name of the photographer
-# * +photographer_url+ - A link to a webpage for the photographer - currently always a Flickr profile page.
+# * +photographer_url+ - A link to a webpage for the photographer
 # * +shot+ - types of framing technique. One of "extreme close up", "close up", "medium close up", "medium shot", "long shot", "establishing shot"
 # * +of_a_plaque+ - whether this is actually a photo of a plaque (and not, for example, mistakenly labelled on Wikimedia as one)
+# * +subject+ - what we think this is a photo of (used if not linked to a plaque)
+# * +description+ - extra information about what this is a photo of (used if not linked to a plaque)
+# * +longitude+
+# * +latitude+
 #
 # === Associations
 # * Licence - The content licence under which the photo is made available.
@@ -99,6 +104,10 @@ class Photo < ActiveRecord::Base
     url && url.starts_with?("http://commons.wikimedia.org")
   end
   
+  def geograph?
+    url && url.starts_with?("http://www.geograph.org.uk")
+  end  
+  
   def wikimedia_filename
     if (wikimedia?)
       return url[url.index('File:')+5..-1]
@@ -115,6 +124,9 @@ class Photo < ActiveRecord::Base
   end
 
   def thumbnail_url
+    if self.thumbnail?
+      return self.thumbnail
+    end
     if (file_url.ends_with?("_b.jpg") or file_url.ends_with?("_z.jpg") or file_url.ends_with?("_z.jpg?zz=1") or file_url.ends_with?("_m.jpg") or file_url.ends_with?("_o.jpg"))
 	    return file_url.gsub("b.jpg", "s.jpg").gsub("z.jpg?zz=1", "s.jpg").gsub("z.jpg", "s.jpg").gsub("m.jpg", "s.jpg").gsub("o.jpg", "s.jpg")
 	  end
@@ -128,9 +140,9 @@ class Photo < ActiveRecord::Base
     # http://commons.wikimedia.org/wiki/File:George_Dance_plaque.JPG
     # http://commons.wikimedia.org/wiki/File:Abney1.jpg
     if (wikimedia?)   
-      url = "http://commons.wikimedia.org/w/api.php?action=query&iiprop=url|user&prop=imageinfo&format=json&titles=File:"+wikimedia_filename
+      query_url = "http://commons.wikimedia.org/w/api.php?action=query&iiprop=url|user&prop=imageinfo&format=json&titles=File:"+wikimedia_filename
       begin
-        ch = Curl::Easy.perform(url) do |curl| 
+        ch = Curl::Easy.perform(query_url) do |curl| 
           curl.headers["User-Agent"] = "openplaques"
           curl.verbose = true
         end
@@ -144,6 +156,28 @@ class Photo < ActiveRecord::Base
       self.file_url = wikimedia_special
       self.licence = Licence.find_or_create_by_name_and_url("Attribution License", "http://creativecommons.org/licenses/by/3.0/")
     end
+    
+    if (geograph?)   
+      query_url = "http://api.geograph.org.uk/api/oembed?&&url=" + self.url + "&output=json"
+      begin
+        ch = Curl::Easy.perform(query_url) do |curl| 
+          curl.headers["User-Agent"] = "openplaques"
+          curl.verbose = true
+        end
+        parsed_json = JSON.parse(ch.body_str)
+        puts parsed_json
+        self.photographer = parsed_json['author_name']
+        self.photographer_url = parsed_json['author_url']
+        self.thumbnail = parsed_json['thumbnail_url']
+        self.file_url = parsed_json['url']
+        self.licence = Licence.find_by_url(parsed_json['license_url'])
+        self.subject = parsed_json['title']
+        self.description = parsed_json['description']
+        self.latitude = parsed_json['geo']['lat']
+        self.longitude = parsed_json['geo']['long']
+      rescue
+      end
+    end
   end
   
   def as_json(options={})
@@ -153,7 +187,7 @@ class Photo < ActiveRecord::Base
         :licence => {:only => [:name], :methods => [:uri]},
         :plaque => {:only => [], :methods => [:uri]}
       },
-      :methods => [:title, :uri, :thumbnail_url, :shot_name]
+      :methods => [:title, :uri, :thumbnail, :shot_name]
     )
   end
   

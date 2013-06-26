@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120910164647) do
+ActiveRecord::Schema.define(:version => 20130626173814) do
 
   create_table "areas", :force => true do |t|
     t.string    "name"
@@ -158,18 +158,23 @@ ActiveRecord::Schema.define(:version => 20120910164647) do
   add_index "personal_roles", ["role_id"], :name => "index_personal_roles_on_role_id"
 
   create_table "photos", :force => true do |t|
-    t.integer   "user_id"
-    t.string    "photographer"
-    t.string    "url"
-    t.integer   "plaque_id"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.string    "file_url"
-    t.integer   "licence_id"
-    t.string    "photographer_url"
-    t.timestamp "taken_at"
-    t.string    "shot"
-    t.boolean   "of_a_plaque",      :default => true
+    t.integer  "user_id"
+    t.string   "photographer"
+    t.string   "url"
+    t.integer  "plaque_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "file_url"
+    t.integer  "licence_id"
+    t.string   "photographer_url"
+    t.datetime "taken_at"
+    t.string   "shot"
+    t.boolean  "of_a_plaque",      :default => true
+    t.string   "latitude"
+    t.string   "longitude"
+    t.string   "subject"
+    t.string   "description"
+    t.string   "thumbnail"
   end
 
   add_index "photos", ["licence_id"], :name => "index_photos_on_licence_id"

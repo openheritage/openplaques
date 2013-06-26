@@ -23,6 +23,9 @@
 
   <p><%= thumbnail_img(@photo) %></p>
   <p>Thumbnail url <%= link_to(@photo.thumbnail_url, @photo.thumbnail_url) %><p>
+	
+  <p>This may be about <%= @photo.subject %></p>
+  <p>More details are: <%= @photo.description %></p>
 
 </div>
 
