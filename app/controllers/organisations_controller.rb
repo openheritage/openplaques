@@ -35,7 +35,7 @@ class OrganisationsController < ApplicationController
       redirect_to(organisation_path(@organisation.slug), :status => :moved_permanently) and return
     end
     @plaques = @organisation.plaques
-    @mean = help.find_mean(@organisation.plaques)
+    @mean = help.find_mean(@plaques)
     @zoom = 10
     respond_to do |format|
       format.html
