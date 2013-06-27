@@ -30,9 +30,22 @@
 
   <section id="where_do_they_come_from" class="inside_panel">
 	<h2>Where do all these photos come from?</h2>
-    <p>We don&apos;t store photos on Open Plaques, instead we link to stable, open sources namely Flickr and Wikimedia Commons.
+    <p>We don&apos;t store photos on Open Plaques, instead we link to stable, open sources namely <a href="http://www.flickr.com/">Flickr</a>, <a href="http://commons.wikimedia.org/">Wikimedia Commons</a> and <a href="http://www.geograph.org.uk/">Geograph</a>.
 	We connect and add context to existing resources on the web instead of trying to own it all ourselves.
-    All the images are from Creative Commons Licenced sources and as such we attribute them to the copyright holder.</p>
+    All the images are from <a href="http://creativecommons.org/">Creative Commons</a> licenced sources and as such we attribute them to the copyright holder.</p>
+  </section>
+
+  <section id="using_geograph" class="inside_panel">
+    <p><img src="http://www.geograph.org.uk/templates/basic/img/logo.gif"/></p>
+    <h2>I found a photo of this plaque on Geograph...</h2>
+    <p>
+    <% @photo = Photo.new %>
+    <%= form_for @photo do |f| %>
+      <%= f.label(:url, "The Geograph photo page url is") %> <%= f.text_field :url %>
+      <%= f.hidden_field :plaque_id, :value => @plaque.id %>
+      <%= submit_tag("Add it", :class=>'button secondary_button') %>
+    <% end %>
+    </p>
   </section>
   
   <section id="how_to_add_photo" class="inside_panel">

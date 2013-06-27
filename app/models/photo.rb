@@ -106,7 +106,14 @@ class Photo < ActiveRecord::Base
   
   def geograph?
     url && url.starts_with?("http://www.geograph.org.uk")
-  end  
+  end
+  
+  def source
+    return "Flickr" if flickr?
+    return "Wikimedia Commons" if wikimedia?
+    return "Geograph" if geograph?
+    return "the web"
+  end
   
   def wikimedia_filename
     if (wikimedia?)
