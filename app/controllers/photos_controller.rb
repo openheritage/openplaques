@@ -44,10 +44,10 @@ class PhotosController < ApplicationController
     @photo = Photo.new(params[:photo])
     @photo.wikimedia_data
     if @photo.save
-      redirect_to photo_path(@photo)
+      redirect_to :back # photo_path(@photo)
     else
       @licences = Licence.all(:order => :name)
-      render :new
+      redirect_to :back
     end
   end
 

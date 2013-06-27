@@ -26,12 +26,14 @@ class Photo < ActiveRecord::Base
   belongs_to :user
 
   validates_presence_of :file_url
-
+  validates_uniqueness_of :file_url, :message => "photo already exists in Open Plaques"
+  
   attr_accessor :photo_url, :accept_cc_by_licence
 
   after_initialize :assign_from_photo_url
   before_validation :assign_licence_if_cc_by_accepted
   after_update :reset_plaque_photo_count
+  after_save :geolocate_plaque
 
   scope :reverse_detail_order, :order => "shot DESC"
   scope :detail_order, :order => "shot ASC"
@@ -211,4 +213,12 @@ class Photo < ActiveRecord::Base
       end
     end
     
+    def geolocate_plaque
+      if plaque && self.longitude && self.latitude && !plaque.geolocated?
+        plaque.longitude = self.longitude
+        plaque.latitude = self.latitude
+        plaque.save
+      end  
+      return true      
+    end
 end
