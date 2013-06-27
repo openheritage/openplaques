@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130626173814) do
+ActiveRecord::Schema.define(:version => 20130627071721) do
 
   create_table "areas", :force => true do |t|
     t.string    "name"
@@ -169,11 +169,11 @@ ActiveRecord::Schema.define(:version => 20130626173814) do
     t.string   "photographer_url"
     t.datetime "taken_at"
     t.string   "shot"
-    t.boolean  "of_a_plaque",      :default => true
+    t.boolean  "of_a_plaque",                     :default => true
     t.string   "latitude"
     t.string   "longitude"
     t.string   "subject"
-    t.string   "description"
+    t.text     "description",      :limit => 255
     t.string   "thumbnail"
   end
 
