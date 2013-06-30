@@ -11,15 +11,14 @@ class PhotographersController < ApplicationController
 
   def show
     @photographer = Photographer.new
-    @photographer.id = params[:id]
-    @photos = Photo.find(:all, :conditions => {:photographer => @photographer.id})
-    if @photos.length == 0
-      @photographer.id = params[:id].gsub(/\_/,'.')
-      @photos = Photo.find(:all, :conditions => {:photographer => @photographer.id})
-    end
-    @photographer.photos = @photos
+    @photographer.id = params[:id].gsub(/\_/,'.')
+
     respond_to do |format|
       format.html
+      format.kml { 
+        @plaques = @photographer.plaques
+        render "plaques/index"
+      }
       format.xml
       format.json { render :json => @photographer }
     end
@@ -32,9 +31,8 @@ class PhotographersController < ApplicationController
     # photographer isn't an actual object, but we can search a named Flickr user's photos
     # which is useful, because it finds more than is in the public search
     @photographer = params[:flickr_url]
-	@photographer.gsub!('http://www.flickr.com/photos/','')
-	@photographer.gsub!(/\/.*/,'')
-	puts 'xxxxx' + @photographer
+    @photographer.gsub!('http://www.flickr.com/photos/','')
+    @photographer.gsub!(/\/.*/,'')
     help.find_photo_by_machinetag(nil, @photographer)
     redirect_to photographers_path
   end
@@ -54,6 +52,19 @@ class PhotographersController < ApplicationController
       attr_accessor :id
       attr_accessor :photos
       attr_accessor :url
+      
+      def photos
+        return Photo.find(:all, :conditions => {:photographer => self.id})
+      end
+      
+      def plaques
+        plaque_list = []
+        photos.each do |photo|
+          plaque_list << photo.plaque if photo.linked?
+        end
+        return plaque_list
+      end
+
     end
 
 end

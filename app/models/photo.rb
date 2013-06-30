@@ -189,6 +189,10 @@ class Photo < ActiveRecord::Base
     end
   end
   
+  def linked?
+    !(plaque.nil?)
+  end
+  
   def as_json(options={})
     # this example ignores the user's options
     super(:only => [:file_url, :photographer, :photographer_url, :shot, :url],
@@ -196,7 +200,7 @@ class Photo < ActiveRecord::Base
         :licence => {:only => [:name], :methods => [:uri]},
         :plaque => {:only => [], :methods => [:uri]}
       },
-      :methods => [:title, :uri, :thumbnail, :shot_name]
+      :methods => [:title, :uri, :thumbnail, :shot_name, :source]
     )
   end
   
