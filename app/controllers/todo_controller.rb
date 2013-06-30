@@ -31,115 +31,129 @@ class TodoController < ApplicationController
 
     case params[:id]
 
-    when 'colours_from_photos'
-      @plaques = Plaque.photographed_not_coloured.paginate(:page => params[:page], :per_page => 100)
-      render :colours_from_photos
+      when 'colours_from_photos'
+        @plaques = Plaque.photographed_not_coloured.paginate(:page => params[:page], :per_page => 100)
+        render :colours_from_photos
 
-    when 'locations_from_geolocations'
-      @plaques = Plaque.geo_no_location.paginate(:page => params[:page], :per_page => 100)
-      render :locations_from_geolocations
+      when 'locations_from_geolocations'
+        @plaques = Plaque.geo_no_location.paginate(:page => params[:page], :per_page => 100)
+        render :locations_from_geolocations
 
-    when 'areas_from_locations'
-      @locations = Location.no_area
-      render :areas_from_locations
+      when 'areas_from_locations'
+        @locations = Location.no_area
+        render :areas_from_locations
 
-    when 'plaques_to_add'
-      @plaques_to_add = TodoItem.to_add
-      render :plaques_to_add
+      when 'plaques_to_add'
+        @plaques_to_add = TodoItem.to_add
+        render :plaques_to_add
 
-    when 'lists_to_datacapture'
-      @lists_to_datacapture = TodoItem.to_datacapture
-      render :lists_to_datacapture
+      when 'lists_to_datacapture'
+        @lists_to_datacapture = TodoItem.to_datacapture
+        render :lists_to_datacapture
 
-    when 'no_connection'
-      @plaques = Plaque.no_connection.paginate(:page => params[:page], :per_page => 100)
-      render :no_connection
+      when 'no_connection'
+        @plaques = Plaque.no_connection.paginate(:page => params[:page], :per_page => 100)
+        render :no_connection
 
-    when 'partial_inscription'
-      @plaques = Plaque.partial_inscription.paginate(:page => params[:page], :per_page => 100)
-      render :partial_inscription
+      when 'partial_inscription'
+        @plaques = Plaque.partial_inscription.paginate(:page => params[:page], :per_page => 100)
+        render :partial_inscription
 
-    when 'partial_inscription_photo'
-      @plaques = Plaque.partial_inscription_photo.paginate(:page => params[:page], :per_page => 100)
-      render :partial_inscription_photo
+      when 'partial_inscription_photo'
+        @plaques = Plaque.partial_inscription_photo.paginate(:page => params[:page], :per_page => 100)
+        render :partial_inscription_photo
 
-    when 'detailed_address_no_geo'
-      @plaques = Plaque.detailed_address_no_geo.paginate(:page => params[:page], :per_page => 100)
-      render :detailed_address_no_geo
+      when 'detailed_address_no_geo'
+        @plaques = Plaque.detailed_address_no_geo.paginate(:page => params[:page], :per_page => 100)
+        render :detailed_address_no_geo
 
-    when 'fetch_from_flickr'
-      flash[:notice] = pluralize(fetch_todo_items, 'photo') + ' added to the list.'
-      redirect_to "/todo/plaques_to_add"
+      when 'fetch_from_flickr'
+        flash[:notice] = pluralize(fetch_todo_items, 'photo') + ' added to the list.'
+        redirect_to "/todo/plaques_to_add"
 
-    when 'no_roles'
-      @people = Person.no_role.paginate(:page => params[:page], :per_page => 100)
-      render :no_roles
+      when 'no_roles'
+        @people = Person.no_role.paginate(:page => params[:page], :per_page => 100)
+        render :no_roles
 
-    when 'needs_geolocating'
-      @plaques = Plaque.ungeolocated.paginate(:page => params[:page], :per_page => 100)
-      render :detailed_address_no_geo
+      when 'needs_geolocating'
+        @plaques = Plaque.ungeolocated.paginate(:page => params[:page], :per_page => 100)
+        render :detailed_address_no_geo
 
-    when 'needs_description'
-      @plaques = Plaque.no_description.paginate(:page => params[:page], :per_page => 100)
-      render :needs_description
+      when 'needs_description'
+        @plaques = Plaque.no_description.paginate(:page => params[:page], :per_page => 100)
+        render :needs_description
 
-    when 'unassigned_photo'
-      @photos = Photo.unassigned.paginate(:page => params[:page], :per_page => 100)
-      render :unassigned_photo
+      when 'unassigned_photo'
+        @photos = Photo.unassigned.paginate(:page => params[:page], :per_page => 100)
+        render :unassigned_photo
 
-    when 'unphotographed'
-      @plaques = Plaque.unphotographed.paginate(:page => params[:page], :per_page => 100)
-      render :unphotographed
+      when 'unphotographed'
+        @plaques = Plaque.unphotographed.paginate(:page => params[:page], :per_page => 100)
+        render :unphotographed
       
-    when 'microtask'
-      case rand(5)
-      when 0
-        @plaques = Plaque.photographed_not_coloured
-        @plaque = @plaques[rand @plaques.length]
-        if (@plaque)
-          @colours = Colour.find(:all, :order => :name)
-          render 'plaque_colour/edit'
+      when 'microtask'
+        case rand(6)
+          when 0
+            puts 'photographed_not_coloured'
+            @plaques = Plaque.photographed_not_coloured
+            @plaque = @plaques[rand @plaques.length]
+            if (@plaque)
+              @colours = Colour.find(:all, :order => :name)
+              render 'plaque_colour/edit' and return
+            end
+          when 1
+            puts 'partial_inscription_photo'
+            @plaques = Plaque.partial_inscription_photo
+            @plaque = @plaques[rand @plaques.length]
+            if (@plaque)
+              @languages = Language.all(:order => :name)
+              render 'plaque_inscription/edit' and return
+            end
+          when 2
+            puts 'no_role'
+            @people = Person.no_role
+            @person = @people[rand @people.length]
+            if (@person)
+              @roles = Role.all(:order => :name)
+              @personal_role = PersonalRole.new
+              @died_on = @person.died_on.year if @person.died_on
+              @born_on = @person.born_on.year if @person.born_on
+              render 'people/personal_roles/edit' and return
+            end
+          when 3
+            puts 'ungeolocated'
+            @plaques = Plaque.ungeolocated
+            @plaque = @plaques[rand @plaques.length]
+            @geocodes = Array.new
+            if (@plaque)
+              render 'plaque_geolocation/streetview_edit' and return
+            end
+          when 4
+            puts 'no_dates'
+            @people = Person.no_dates
+            @person = @people[rand @people.length]
+            @personal_role = PersonalRole.new
+            @died_on = @person.died_on.year if @person.died_on
+            @born_on = @person.born_on.year if @person.born_on
+            if (@person)
+              @roles = Role.all(:order => :name)
+              render 'people/dates/edit' and return
+            end
+          when 5
+            puts 'unassigned photo'
+            @photos = Photo.unassigned
+            @photo = @photos[rand @photos.length]
+            if (@photo)
+              render 'photos/show' and return
+            end
+            
         end
-      when 1
-        @plaques = Plaque.partial_inscription_photo
-        @plaque = @plaques[rand @plaques.length]
-        if (@plaque)
-          @languages = Language.all(:order => :name)
-          render 'plaque_inscription/edit'
-        end
-      when 2
-        @people = Person.no_role
-        @person = @people[rand @people.length]
-        if (@person)
-          @roles = Role.all(:order => :name)
-          @personal_role = PersonalRole.new
-          @died_on = @person.died_on.year if @person.died_on
-          @born_on = @person.born_on.year if @person.born_on
-          render 'people/personal_roles/edit'
-        end
-      when 3
-        @plaques = Plaque.ungeolocated
-        @plaque = @plaques[rand @plaques.length]
-        @geocodes = Array.new
-        if (@plaque)
-          render 'plaque_geolocation/streetview_edit'
-        end
-      when 4
-        @people = Person.no_dates
-        @person = @people[rand @people.length]
-        @personal_role = PersonalRole.new
-        @died_on = @person.died_on.year if @person.died_on
-        @born_on = @person.born_on.year if @person.born_on
-        if (@person)
-          @roles = Role.all(:order => :name)
-          render 'people/dates/edit'
-        end
+        redirect_to todo_path and return
+        
+      else
+        puts 'what to do?'
     end
-      
-    else
-      render 'microtask'
-    end
-
+    
   end
 
   def new
