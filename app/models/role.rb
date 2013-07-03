@@ -30,7 +30,7 @@ class Role < ActiveRecord::Base
   end
   
   def self.types
-    ["person", "animal", "thing", "group", "place", "relationship", "title", "letters", "military medal"]
+    ["person", "animal", "thing", "group", "place", "relationship", "parent", "spouse", "child", "title", "letters", "military medal"]
   end
 
   def person?
@@ -82,6 +82,9 @@ class Role < ActiveRecord::Base
   
   def relationship?
     return true if "relationship" == role_type
+    return true if "parent" == role_type
+    return true if "spouse" == role_type
+    return true if "child" == role_type
     return true if "group" == role_type
     return false
   end
