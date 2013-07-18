@@ -8,8 +8,7 @@
   <% end %>
 
   <% if @person.parents.size > 0 %><p>
-    <%= 'parent'.pluralize @person.parents.size %>:
-    <% @person.parents.each do |parent| %><%= dated_person parent %><% end %>
+    <%= 'parent'.pluralize @person.parents.size %>: <% @person.parents.each do |parent| %><%= dated_person parent %><% end %>
   </p><% end %>
 
   <div class="vcard person" typeof="<%= if (@person.person?) then "foaf:Person" else "foaf:Agent" end %> vcard:VCard" about="#person">
@@ -29,7 +28,13 @@
 
     <p><%= "Died aged" if (@person.person? || @person.thing? || @person.animal?) && @person.dead? %><%= "Closed aged" if @person.place? && @person.dead? %><%= "Aged" if @person.alive? && @person.age%> <%= "c." + @person.age.to_s if @person.age%></p>
 
+    <%= simple_format(@person.introduction) if @person.introduction %>
 
+    <% if @person.plaques.size > 0 %>
+      <h2>Is commemorated where he/she/it...</h2>
+    <% else %>
+      <h2>Is not commemorated on any plaques in our database (yet)</h2>
+    <% end %>
     <table>
     <% @person.plaques.each do |plaque| %>
       <tr>
