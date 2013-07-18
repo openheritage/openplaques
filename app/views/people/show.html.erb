@@ -7,14 +7,9 @@
     </section>
   <% end %>
 
-<<<<<<< HEAD
-  <% if @person.parents.size > 0 %><p>
-    <%= 'parent'.pluralize @person.parents.size %>: <% @person.parents.each do |parent| %><%= dated_person parent %><% end %>
-=======
   <% if @person.parental_relationships.size > 0 %><p>
     <%= 'parent'.pluralize @person.parental_relationships.size %>:
     <% @person.parental_relationships.each do |parental_relationship| %><%= dated_person parental_relationship.related_person %> <% end %>
->>>>>>> 59ac216cd94f36ebc8e45bc6867bc63a74706e90
   </p><% end %>
 
   <div class="vcard person" typeof="<%= if (@person.person?) then "foaf:Person" else "foaf:Agent" end %> vcard:VCard" about="#person">
