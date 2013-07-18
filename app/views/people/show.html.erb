@@ -7,8 +7,14 @@
     </section>
   <% end %>
 
+<<<<<<< HEAD
   <% if @person.parents.size > 0 %><p>
     <%= 'parent'.pluralize @person.parents.size %>: <% @person.parents.each do |parent| %><%= dated_person parent %><% end %>
+=======
+  <% if @person.parental_relationships.size > 0 %><p>
+    <%= 'parent'.pluralize @person.parental_relationships.size %>:
+    <% @person.parental_relationships.each do |parental_relationship| %><%= dated_person parental_relationship.related_person %> <% end %>
+>>>>>>> 59ac216cd94f36ebc8e45bc6867bc63a74706e90
   </p><% end %>
 
   <div class="vcard person" typeof="<%= if (@person.person?) then "foaf:Person" else "foaf:Agent" end %> vcard:VCard" about="#person">
@@ -16,15 +22,35 @@
     <p><%= image_tag(@person.depiction, :width => "100", :alt => "a depiction of "+@person.name) if @person.depiction %></p>
     <h1><%= dated_person(@person, {:links => :none}) %> <%= roles_list(@person) %></h1>
     
+    <% if @person.spousal_relationships.size > 0 %>
+      <p>
+        <% @person.spousal_relationships.each_with_index do |relationship, index| %>
+          <%= relationship.role.name %> of <%= dated_person relationship.related_person %>
+          <% if index == @person.spousal_relationships.size - 2 %>and<% elsif index != @person.spousal_relationships.size - 1 %>,<% end %>
+        <% end %>
+      </p>
+    <% end %>
+
     <% if @person.issue.size > 0 %>
-    <p><%= 'child'.pluralize @person.issue.size %>: <% @person.issue.each do |issue| %><%= dated_person issue %> <% end %></p>
+      <p><%= 'child'.pluralize @person.issue.size %>: <% @person.issue.each do |issue| %><%= dated_person issue %> <% end %></p>
     <% end %>
-    <% @person.siblings.each do |sibling| %>
-      Sibling: <%= dated_person sibling %>
+
+    <% if @person.siblings.size > 0 %>
+      <p>
+        <%= 'sibling'.pluralize @person.siblings.size %>:
+        <% @person.siblings.each_with_index do |sibling, index| %>
+          <%= dated_person sibling %><% if index == @person.siblings.size - 2 %> and<% elsif index != @person.siblings.size - 1 %>,<% end %>
+        <% end %>
+      </p>
     <% end %>
-    <% if @person.non_family.size > 0 %><p>
-      <% @person.non_family.each do |non_family| %><%= dated_person non_family %> <% end %>
-    </p><% end %>
+
+    <% if @person.non_family_relationships.size > 0 %>
+      <p>
+        <% @person.non_family_relationships.each_with_index do |relationship, index| %>
+          <%= relationship.role.name %> of <%= dated_person relationship.related_person %><% if index == @person.non_family_relationships.size - 2 %> and<% elsif index != @person.non_family_relationships.size - 1 %>,<% end %>
+        <% end %>
+      </p>
+    <% end %>
 
     <p><%= "Died aged" if (@person.person? || @person.thing? || @person.animal?) && @person.dead? %><%= "Closed aged" if @person.place? && @person.dead? %><%= "Aged" if @person.alive? && @person.age%> <%= "c." + @person.age.to_s if @person.age%></p>
 

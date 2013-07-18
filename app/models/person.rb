@@ -294,10 +294,10 @@ class Person < ActiveRecord::Base
     fullname
   end
   
-  def parents
+  def parental_relationships
     parents = []
     relationships.each{|relationship|
-      parents << relationship.related_person if relationship.role.name=="son" or relationship.role.name=="daughter"
+      parents << relationship if relationship.role.name=="son" or relationship.role.name=="daughter"
     }
     parents
   end
@@ -318,12 +318,20 @@ class Person < ActiveRecord::Base
     siblings.sort! { |a,b| a.born_on||0 <=> b.born_on||0 }   
   end
   
-  def non_family
+  def spousal_relationships
+    spouses = []
+    relationships.each{|relationship|
+      spouses << relationship if relationship.role.name=="wife" or relationship.role.name=="husband"
+    }
+    spouses 
+  end
+  
+  def non_family_relationships
     non_family = []
     relationships.each{|relationship|
-      non_family << relationship.related_person if relationship.role.name!="brother" and relationship.role.name!="sister" and relationship.role.name!="father" and relationship.role.name!="mother" and relationship.role.name!="son" and relationship.role.name!="daughter"
+      non_family << relationship if relationship.role.name!="husband" and relationship.role.name!="wife" and relationship.role.name!="brother" and relationship.role.name!="sister" and relationship.role.name!="father" and relationship.role.name!="mother" and relationship.role.name!="son" and relationship.role.name!="daughter"
     }
-    non_family.sort! { |a,b| a.born_on||0 <=> b.born_on||0 }   
+    non_family 
   end
   
   def creation_word
