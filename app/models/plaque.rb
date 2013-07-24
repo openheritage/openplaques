@@ -12,6 +12,8 @@
 # * +latitude+ - The latitude of the plaque's location (as a decimal in WSG-84 projection). Optional.
 # * +longitude+ - The longitude of the plaque's location (as a decimal in WSG-84 projection). Optional.
 # * +notes+ - A general purpose notes field for internal admin and data-collection purposes.
+# * +is_current+ - Whether the plaque is currently on display (or has it been stolen!)
+# * +inscription_in_english+ - Manual translation
 #
 # === Associations
 # * Location - The location where the plaque is (or was) installed. Optional.
