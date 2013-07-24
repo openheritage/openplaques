@@ -14,7 +14,7 @@
 
   <div class="vcard person" typeof="<%= if (@person.person?) then "foaf:Person" else "foaf:Agent" end %> vcard:VCard" about="#person">
 
-    <p><%= image_tag(@person.depiction, :width => "100", :alt => "a depiction of "+@person.name) if @person.depiction %></p>
+    <p><%= thumbnail_img(@person) %></p>
     <h1><%= dated_person(@person, {:links => :none}) %> <%= roles_list(@person) %></h1>
     
     <% if @person.spousal_relationships.size > 0 %>

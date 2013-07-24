@@ -6,9 +6,9 @@
     <% if @plaque.photos.size < 1 %>
       <p>We don't have a photo of this plaque yet. You could be the first!</p>
     <% else %>
-      <p>We can display multiple photos of each plaque, so you don&apos;t have to be the first.<p>
+      <p>We display multiple photos of each plaque, so you don&apos;t have to be the first.<p>
     <% end %>
-    <p>We like close-ups as well as long-shots of the building that set the scene. The closest shot will be displayed as the primary image.</p>
+    <p>We like close-ups as well as long-shots that set the scene. The closest shot will be used as the main image so that people can read the words.</p>
     <%= content_tag("ul", :class => "photographer_photos clearfix") do %>
       <% @plaque.photos.detail_order.each_with_index do |photo, i| %>
         <li <% if i==0 %>class="primary"<% end %>>
@@ -29,10 +29,10 @@
   </section>
 
   <section id="where_do_they_come_from" class="inside_panel">
-	<h2>Where do all these photos come from?</h2>
-    <p>We don&apos;t store photos on Open Plaques, instead we link to stable, open sources namely <a href="http://www.flickr.com/">Flickr</a>, <a href="http://commons.wikimedia.org/">Wikimedia Commons</a> and <a href="http://www.geograph.org.uk/">Geograph</a>.
-	We connect and add context to existing resources on the web instead of trying to own it all ourselves.
-    All the images are from <a href="http://creativecommons.org/">Creative Commons</a> licenced sources and as such we attribute them to the copyright holder.</p>
+	<h2>Where do these photos come from?</h2>
+    <p>We don&apos;t store photos ourselves, we only link to them. Open plaques connects and adds context to existing resources on the web instead of trying to own it all ourselves.
+	We use stable, open sources namely <a href="http://www.flickr.com/">Flickr</a>, <a href="http://commons.wikimedia.org/">Wikimedia Commons</a> and <a href="http://www.geograph.org.uk/">Geograph</a>.
+    All the images are <a href="http://creativecommons.org/">Creative Commons</a> licenced and as such we attribute them to the copyright holder.</p>
   </section>
 
   <section id="using_geograph" class="inside_panel">
@@ -41,7 +41,23 @@
     <p>
     <% @photo = Photo.new %>
     <%= form_for @photo do |f| %>
-      <%= f.label(:url, "The Geograph photo page url is") %> <%= f.text_field :url %>
+      <%= f.label(:url, "The photo page url is") %> <%= f.text_field :url %>
+      <%= f.hidden_field :plaque_id, :value => @plaque.id %> Please
+      <%= submit_tag("Add it", :class=>'button secondary_button') %> to Open Plaques
+    <% end %>
+    </p>
+  </section>
+
+  <section id="using_wikimedia" class="inside_panel">
+    <p><img src="http://upload.wikimedia.org/wikipedia/commons/7/79/Wiki-commons.png"/></p>
+    <h2>I found, or would like to add, a photo of this plaque on Wikimedia Commons...</h2>
+    <p>A great place to donate your image to the world is <a href="http://commons.wikimedia.org/">Wikimedia Commons</a>.
+	It is free, fairly easy to use, and your image will live forever (probably) as part of the awesome Wikipedia platform.
+	When you are done, paste the page url in here and Open Plaques will link to the photo.</p>
+    <p>
+    <% @photo = Photo.new %>
+    <%= form_for @photo do |f| %>
+      <%= f.label(:url, "The Wikimedia photo page url is") %> <%= f.text_field :url %>
       <%= f.hidden_field :plaque_id, :value => @plaque.id %>
       <%= submit_tag("Add it", :class=>'button secondary_button') %>
     <% end %>
@@ -49,7 +65,7 @@
   </section>
   
   <section id="how_to_add_photo" class="inside_panel">
-    <h2>How to add your photo</h2>
+    <h2>I'd like to add my photo via Flickr</h2>
     <ol><li>put it on <a href="http://www.flickr.com/" target="new">Flickr</a> (for free)</li>
     <li>give it a Creative Commons licence</li>
     <li>tag it <strong><%= @plaque.machine_tag %></strong></li>
@@ -58,20 +74,19 @@
     <li>it should now appear in the Flickr search of <a href="http://www.flickr.com/search/?q=<%= @plaque.machine_tag %>&m=machinetags&l=cc&content_type=1" target="new">photos tagged '<%= @plaque.machine_tag %>'</a></li>
     <li>wait for 24 hours and our servers should automatically find it and display it on our site</li>
     </ol>   
-  </section>
 
-  <section id="troubleshooting_photos" class="inside_panel">
+    <br/>
     <h2>I did that, but my photo hasn&apos;t appeared!</h2>
     <p>Paste the url of the photo here and we will try to sort it out <%= form_tag("/photographers", :method => "create") do %>
       <%= label_tag(:flickr_url, "Flickr photo url:") %>
       <%= text_field_tag(:flickr_url) %>
       <%= submit_tag("Search", :class=>'button secondary_button') %>
     <% end %></p>
-  </section>
 
-  <section id="troubleshooting_photos2" class="inside_panel">
+    <br/>
     <h2>Nope, still not working</h2>
-    <ol><li>still not there? Does your photo appear in the Flickr search of <a href="http://www.flickr.com/search/?q=<%= @plaque.machine_tag %>&m=machinetags&l=cc&content_type=1" target="new">photos tagged '<%= @plaque.machine_tag %>'</a>?</li>
+    <ol><li>still not there?</li>
+	<li>Does your photo appear in the Flickr search of <a href="http://www.flickr.com/search/?q=<%= @plaque.machine_tag %>&m=machinetags&l=cc&content_type=1" target="new">photos tagged '<%= @plaque.machine_tag %>'</a>?</li>
     <li>if not, check that the licence is Creative Commons, i.e. it shouldn&apos;t say "All Rights Reserved"</li>
     <li>also, ensure that you haven&apos;t ticked the &apos;hidden from search&apos; setting. (On Flickr, go to your profile by clicking your username in top right hand corner, do you have "Hide your stuff from public searches" set to "no"?)</li>
     <li>a brand new Flickr account might not be included in their search immediately. Sometimes it waits until you have posted 5+ images. Enter your photo&apos;s url into the box below and we'll see what we can do...</li>

@@ -9,21 +9,23 @@ module PhotosHelper
     return desc.html_safe
   end
 
-  def thumbnail_img(thing)
+  def thumbnail_img(thing, decorations = nil)
+    #puts "thing is " + thing.to_s
     desc = ""
     begin
       begin
         if thing.thumbnail_url
-          desc += "<img src=\""+thing.thumbnail_url+"\" width=\"75\" height=\"75\"/>"
+          desc += image_tag(thing.thumbnail_url, :size => "75x75")
         else
-          desc += "<img src=\""+thing.file_url+"\" width=\"75\" height=\"75\"/>"
+          desc += image_tag(thing.file_url, :size => "75x75")
         end
       rescue
+        #puts thing.to_s + " doesn't have a thumbnail"
         begin
-          # not a photo, is it a plaque?
+          #puts thing.to_s + " isn't a photo, is it something with a main photo?"
           desc += thumbnail_img(thing.main_photo)
         rescue
-          ## it wasn't even a plaque, is it something that links to a plaque?
+          #puts "does " + thing.to_s + " link to a plaque then?"
           desc += thumbnail_img(thing.plaque)
         end
       end

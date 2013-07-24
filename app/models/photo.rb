@@ -24,6 +24,7 @@ class Photo < ActiveRecord::Base
   belongs_to :plaque, :counter_cache => true
   belongs_to :licence, :counter_cache => true
   belongs_to :user
+  belongs_to :person
 
   validates_presence_of :file_url
   validates_uniqueness_of :file_url, :message => "photo already exists in Open Plaques"
@@ -57,6 +58,12 @@ class Photo < ActiveRecord::Base
   end
 
   def title
+    if self.plaque
+      return "a photo of a " + self.plaque.to_s
+    end
+    if self.person
+      return "a photo of " + self.person.to_s
+    end
     title = "photo № #{id}"
     if plaque
       title = ""
@@ -206,6 +213,10 @@ class Photo < ActiveRecord::Base
   
   def uri
     "http://openplaques.org" + Rails.application.routes.url_helpers.photo_path(self, :format => :json)
+  end
+  
+  def to_s
+    self.title
   end
   
   private

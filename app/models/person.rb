@@ -17,6 +17,7 @@ require 'rdf/ntriples'
 # * Roles - roles associated with this person (eg 'carpenter').
 # * Locations - locations associated with this person (via plaques).
 # * Verbs - verbs associated with this person (via plaques).
+# * Depiction - image showing the person (via photos)
 
 class Person < ActiveRecord::Base
 
@@ -32,8 +33,9 @@ class Person < ActiveRecord::Base
   has_many :plaques, :through => :personal_connections, :uniq => true
   has_one :birth_connection, :class_name => "PersonalConnection", :conditions => [ 'verb_id in (8,504)']
   has_one :death_connection, :class_name => "PersonalConnection", :conditions => [ 'verb_id in (3,49,161,1108)']
+  has_one :main_photo, :class_name => "Photo"
 
-  attr_accessor :depiction, :abstract, :comment # dbpedia fields
+  attr_accessor :abstract, :comment # dbpedia fields
 
   before_save :update_index
 
@@ -242,7 +244,7 @@ class Person < ActiveRecord::Base
     )
   end
 
-  def thumbnail_url
+  def default_thumbnail_url
     return "/assets/NoPersonSqr.png"
   end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130627071721) do
+ActiveRecord::Schema.define(:version => 20130721141934) do
 
   create_table "areas", :force => true do |t|
     t.string    "name"
@@ -105,21 +105,21 @@ ActiveRecord::Schema.define(:version => 20130627071721) do
   end
 
   create_table "people", :force => true do |t|
-    t.string    "name"
-    t.date      "born_on"
-    t.date      "died_on"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.integer   "personal_connections_count"
-    t.integer   "personal_roles_count"
-    t.string    "index"
-    t.boolean   "born_on_is_circa"
-    t.boolean   "died_on_is_circa"
-    t.string    "wikipedia_url"
-    t.string    "dbpedia_uri"
-    t.string    "wikipedia_paras"
-    t.string    "surname_starts_with"
-    t.text      "introduction"
+    t.string   "name"
+    t.date     "born_on"
+    t.date     "died_on"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "personal_connections_count"
+    t.integer  "personal_roles_count"
+    t.string   "index"
+    t.boolean  "born_on_is_circa"
+    t.boolean  "died_on_is_circa"
+    t.string   "wikipedia_url"
+    t.string   "dbpedia_uri"
+    t.string   "wikipedia_paras"
+    t.string   "surname_starts_with"
+    t.text     "introduction"
   end
 
   add_index "people", ["born_on", "died_on"], :name => "born_and_died"
@@ -175,6 +175,7 @@ ActiveRecord::Schema.define(:version => 20130627071721) do
     t.string   "subject"
     t.text     "description",      :limit => 255
     t.string   "thumbnail"
+    t.integer  "person_id"
   end
 
   add_index "photos", ["licence_id"], :name => "index_photos_on_licence_id"
