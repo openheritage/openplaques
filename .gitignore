@@ -5,6 +5,5 @@ doc/guides
 db/*.sqlite3
 log/*.log
 tmp/
-config/database.yml
 .DS_Store
 *.jn

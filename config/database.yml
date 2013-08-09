@@ -1,0 +1,4 @@
+test:
+  adapter: postgresql
+  database: openplaques_test
+  username: postgres
