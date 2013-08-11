@@ -52,7 +52,7 @@
     <%= simple_format(@person.introduction) if @person.introduction %>
 
     <% if @person.plaques.size > 0 %>
-      <h2>Is commemorated where he/she/it...</h2>
+      <h2>Is commemorated where <%= @person.sex_word %>...</h2>
     <% else %>
       <h2>Is not commemorated on any plaques in our database (yet)</h2>
     <% end %>

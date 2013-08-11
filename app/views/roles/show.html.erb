@@ -9,15 +9,15 @@
 </div>
 
 <ol class="results" id="people_results">
-  <% @role.people.uniq{|x| x.person_id}.each do |person| %>
-    <li class="vcard person" typeof="<%= if @role.person? then "foaf:Person" else "foaf:Agent" end %> vcard:VCard" about="#person">
-      <p class="result"> <%= dated_person(person) %></p>
-	  <% person.relationships.each do |relationship| %>
+  <% for personal_role in @role.personal_roles %>
+    <li class="vcard person" typeof="<%= if personal_role.person.person? then "foaf:Person" else "foaf:Agent" end %> vcard:VCard" about="#person">
+      <p class="result"><b><%= personal_role.date_range %></b> <%= dated_person(personal_role.person) %></p>
+	  <% personal_role.person.relationships.each do |relationship| %>
 	    <p><%= relationship.role.name %> of <%= dated_person(relationship.related_person) %></p>
 	  <% end %>
-      <p class="count"><%= link_to pluralize(person.plaques.size, "plaque"), person %> in <%= list_of_area_links(person.areas) %></p>
-    </li>
-  <% end%>
+      <p class="count"><%= link_to pluralize(personal_role.person.plaques.size, "plaque"), personal_role.person %> in <%= list_of_area_links(personal_role.person.areas) %></p>
+    </li>	
+  <% end %>
   
   <% if @role.people.size == 0 %>
     <li>
