@@ -16,7 +16,7 @@ gem "airbrake"
 
 group :development, :test do
   gem 'sqlite3'
-  gem "shoulda"
+#  gem "shoulda"
 end
 
 
@@ -28,7 +28,7 @@ gem 'meta-tags', :require => 'meta_tags'
 gem 'google-spreadsheet-ruby'
 gem 'rdf'
 gem 'indefinite_article'
-
+gem 'sanitize'
 gem 'devise'
 
 

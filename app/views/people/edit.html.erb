@@ -19,9 +19,10 @@
     <%= f.text_area :introduction, :cols => 80, :rows => 15 %>
 
     <p>The <%= f.label :wikipedia_url %> <%= f.text_field :wikipedia_url %> overrides the default generated one if it's incorrect. Set it to blank if there is no Wikipedia page.</p>
+    <%= content_tag("p", "Read more about ".html_safe + link_to(@person.name, @person.default_wikipedia_url, :target => '_blank') + " on Wikipedia.".html_safe) unless @person.default_wikipedia_url.blank? %>
     <p><%= f.label :wikipedia_paras %> <%= f.text_field :wikipedia_paras %> e.g. "[1,4,5]", "1,2" or "2 4 7"<br/>
-      I think that details appear on Wikipedia at <a href="<%= wikipedia_url(@person)%>"><%= wikipedia_url(@person)%></a><br/>
-      "<%= wikipedia_summary_p(@person) %>"</p>
+      <br/>
+      "<%= wikipedia_summary(@person.default_wikipedia_url) %>"</p>
     <p><%= f.label :dbpedia_uri %> <%= f.text_field :dbpedia_uri %></p>
     <p><%= f.submit "Update", :class => :button %></p>
   <% end %>

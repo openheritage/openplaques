@@ -1,4 +1,7 @@
 # -*- encoding : utf-8 -*-
+require 'nokogiri'
+require 'sanitize'
+
 module PeopleHelper
 
   def roles_list(person)
@@ -48,30 +51,19 @@ module PeopleHelper
     end
   end
 
-  def wikipedia_url(person)
-    person.default_wikipedia_url
-  end
-
   def dbpedia_url(person)
     unless person.dbpedia_url.empty?
       dbpedia_url
     else
-      wikipedia_url(person).gsub(/[a-zA-Z]{0,2}\.wikipedia\.org\/wiki\//, "dbpedia.org/resource/")
-    end
-  end
-
-  def wikipedia_summary_p(person)
-    if person.wikipedia_paras && person.wikipedia_paras > ""
-      return wikipedia_summary_each(wikipedia_url(person), person.wikipedia_paras)
-    else
-      return wikipedia_summary(wikipedia_url(person))
+      person.default_wikipedia_url.gsub(/[a-zA-Z]{0,2}\.wikipedia\.org\/wiki\//, "dbpedia.org/resource/")
     end
   end
 
   # select the very first html paragraph
   def wikipedia_summary(url)
-    doc = Hpricot open(url)
-    return doc.at("p").to_html.gsub(/<\/?[^>]*>/, "")
+    doc = Nokogiri::HTML(open(url))
+    first_para_html = doc.search('//p').first.to_s # .gsub(/<\/?[^>]*>/, "")
+    return Sanitize.clean(first_para_html)
     rescue Exception
     return nil
   end
