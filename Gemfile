@@ -16,7 +16,7 @@ gem "airbrake"
 
 group :development, :test do
   gem 'sqlite3'
-#  gem "shoulda"
+  gem "shoulda"
 end
 
 
