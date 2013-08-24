@@ -36,7 +36,7 @@ class Organisation < ActiveRecord::Base
   end
   
   def find_centre
-    if (@latitude == nil && @longitude == nil)
+    if (self.latitude == nil && self.longitude == nil)
       @mean = find_mean(self.plaques)
       self.latitude = @mean.latitude
       self.longitude = @mean.longitude
