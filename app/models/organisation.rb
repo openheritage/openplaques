@@ -5,11 +5,13 @@
 # * +name+ - The official name of the organisation
 # * +slug+ - An identifier for the organisation, usually equivalent to its name in lower case, with spaces replaced by underscores. Used in URLs.
 # * +description+ - A textual description
+# * +latitude+ - Mean location of plaques
+# * +longitude+ - Mean location of plaques
 # === Associations
 # * Plaques - plaques erected by this organisation.
 class Organisation < ActiveRecord::Base
 
-  before_validation :make_slug_not_war
+  before_validation :make_slug_not_war, :find_centre
   validates_presence_of :name, :slug
   validates_uniqueness_of :slug
 
@@ -21,23 +23,24 @@ class Organisation < ActiveRecord::Base
   scope :most_plaques_order, order("plaques_count DESC")
 
   include ApplicationHelper
-  
-  def latitude
-    52
-  end
-  
-  def longitude
-    0
-  end
+  include PlaquesHelper
   
   def zoom
-    6
+    10
   end
   
   def most_prevelant_colour
     @plaques = self.plaques
     most_prevelant_colour = @plaques.map {|i| (i.colour.nil? || i.colour.name) || "" }.group_by {|col| col }.max_by(&:size)
     @colour = most_prevelant_colour ? most_prevelant_colour.first : ""
+  end
+  
+  def find_centre
+    if (@latitude == nil && @longitude == nil)
+      @mean = find_mean(self.plaques)
+      self.latitude = @mean.latitude
+      self.longitude = @mean.longitude
+    end
   end
   
   def uri

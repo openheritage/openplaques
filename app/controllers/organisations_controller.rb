@@ -2,7 +2,6 @@ class OrganisationsController < ApplicationController
 
   before_filter :authenticate_admin!, :only => :destroy
   before_filter :authenticate_user!, :except => [:index, :show]
-
   before_filter :find_organisation, :only => [:edit, :update]
 
   def index
@@ -36,8 +35,7 @@ class OrganisationsController < ApplicationController
     end
     @sponsorships = @organisation.sponsorships.paginate(:page => params[:page], :per_page => 50)
     @mean = @organisation
-#    @mean = help.find_mean(@plaques)
-    @zoom = 10
+    @zoom = @organisation.zoom
     respond_to do |format|
       format.html
       format.kml {
@@ -62,7 +60,6 @@ class OrganisationsController < ApplicationController
 
   def create
     @organisation = Organisation.new(params[:organisation])
-
     if @organisation.save
       redirect_to organisation_path(@organisation.slug)
     else
@@ -72,7 +69,6 @@ class OrganisationsController < ApplicationController
 
   def update
     old_slug = @organisation.slug
-
     if @organisation.update_attributes(params[:organisation])
       flash[:notice] = 'Updates to organisation saved.'
       redirect_to organisation_path(@organisation.slug)
@@ -80,7 +76,6 @@ class OrganisationsController < ApplicationController
       @organisation.slug = old_slug
       render "edit"
     end
-
   end
 
   protected

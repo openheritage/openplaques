@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130721141934) do
+ActiveRecord::Schema.define(:version => 20130824112330) do
 
   create_table "areas", :force => true do |t|
     t.string    "name"
@@ -94,6 +94,8 @@ ActiveRecord::Schema.define(:version => 20130721141934) do
     t.string    "slug"
     t.text      "description"
     t.integer   "sponsorships_count", :default => 0
+    t.float     "latitude"
+    t.float     "longitude"
   end
 
   create_table "pages", :force => true do |t|
@@ -105,21 +107,21 @@ ActiveRecord::Schema.define(:version => 20130721141934) do
   end
 
   create_table "people", :force => true do |t|
-    t.string   "name"
-    t.date     "born_on"
-    t.date     "died_on"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "personal_connections_count"
-    t.integer  "personal_roles_count"
-    t.string   "index"
-    t.boolean  "born_on_is_circa"
-    t.boolean  "died_on_is_circa"
-    t.string   "wikipedia_url"
-    t.string   "dbpedia_uri"
-    t.string   "wikipedia_paras"
-    t.string   "surname_starts_with"
-    t.text     "introduction"
+    t.string    "name"
+    t.date      "born_on"
+    t.date      "died_on"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.integer   "personal_connections_count"
+    t.integer   "personal_roles_count"
+    t.string    "index"
+    t.boolean   "born_on_is_circa"
+    t.boolean   "died_on_is_circa"
+    t.string    "wikipedia_url"
+    t.string    "dbpedia_uri"
+    t.string    "wikipedia_paras"
+    t.string    "surname_starts_with"
+    t.text      "introduction"
   end
 
   add_index "people", ["born_on", "died_on"], :name => "born_and_died"
@@ -158,24 +160,24 @@ ActiveRecord::Schema.define(:version => 20130721141934) do
   add_index "personal_roles", ["role_id"], :name => "index_personal_roles_on_role_id"
 
   create_table "photos", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "photographer"
-    t.string   "url"
-    t.integer  "plaque_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "file_url"
-    t.integer  "licence_id"
-    t.string   "photographer_url"
-    t.datetime "taken_at"
-    t.string   "shot"
-    t.boolean  "of_a_plaque",                     :default => true
-    t.string   "latitude"
-    t.string   "longitude"
-    t.string   "subject"
-    t.text     "description",      :limit => 255
-    t.string   "thumbnail"
-    t.integer  "person_id"
+    t.integer   "user_id"
+    t.string    "photographer"
+    t.string    "url"
+    t.integer   "plaque_id"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.string    "file_url"
+    t.integer   "licence_id"
+    t.string    "photographer_url"
+    t.timestamp "taken_at"
+    t.string    "shot"
+    t.boolean   "of_a_plaque",      :default => true
+    t.string    "latitude"
+    t.string    "longitude"
+    t.string    "subject"
+    t.text      "description"
+    t.string    "thumbnail"
+    t.integer   "person_id"
   end
 
   add_index "photos", ["licence_id"], :name => "index_photos_on_licence_id"
