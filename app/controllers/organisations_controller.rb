@@ -47,9 +47,29 @@ class OrganisationsController < ApplicationController
         render "plaques/index" 
       }
       format.xml
-      format.json { 
-        @plaques = @organisation.plaques
-        render :json => @organisation.plaques.as_json
+      format.json {
+        conditions = {}
+
+        # Bounding-box query
+        if params[:box]
+          # TODO: Should really do some validation here...
+          coords = params[:box][1,params[:box].length-2].split("],[")
+          top_left = coords[0].split(",")
+          bottom_right = coords[1].split(",")
+          conditions[:latitude] = bottom_right[0].to_s..top_left[0].to_s
+          conditions[:longitude] = top_left[1].to_s..bottom_right[1].to_s
+        end
+        if params[:limit] && params[:limit].to_i <= 2000
+          limit = params[:limit]
+        elsif params[:limit]
+          limit = 2000
+        else
+          limit = 20
+        end
+        @plaques = Plaque.all(:conditions => conditions, :order => "created_at DESC", :limit => limit)
+        render :json => @plaques.as_json(:only => [:id, :latitude, :longitude, :inscription],
+          :methods => [:title, :colour_name, :machine_tag, :thumbnail_url])
+#        render :json => @organisation.sponsorships(:conditions => conditions, :limit => limit).as_json
       }
     end
   end
