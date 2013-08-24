@@ -1,7 +1,7 @@
 <table class="section_details" cellspacing="0" summary="Plaque details for #<%= plaque.id %>">
   <tr>
     <td><%= thumbnail_img plaque %></td>
-    <td><%= plaque.inscription %></td>
+    <td><%= plaque.inscription_preferably_in_english %></td>
     <td><%= location_if_known plaque %></td>
     <% if !plaque.is_current %>
       <td>As far as we know, it is not currently on display</td>

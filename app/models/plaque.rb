@@ -381,6 +381,11 @@ class Plaque < ActiveRecord::Base
     end
 	  also
   end
+  
+  def inscription_preferably_in_english
+    return inscription_in_english if inscription_in_english
+    return inscription
+  end
 
   def uri
     "http://openplaques.org" + Rails.application.routes.url_helpers.plaque_path(self, :format => :json)

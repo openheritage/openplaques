@@ -11,8 +11,8 @@
       <%= render 'plaques/plaque_minimal', :plaque => plaque %>
     <% end %>
   </p>
-  <p><a href="<%= wikipedia_url(@person)%>"><%= wikipedia_url(@person)%></a><br/>
-  "<%= wikipedia_summary_p(@person) %>"</p>
+  <p><a href="<%= @person.wikipedia_url %>"><%= @person.wikipedia_url %></a><br/>
+  "<%= wikipedia_summary(@person.wikipedia_url) %>"</p>
       
   <%= form_for @person do |f| %>
     <p><%= f.label :born_on, "Born" %> <%= text_field_tag :born_on, @born_on, {:maxlength => "4"} %> <%= f.label :died_on, "Died" %> <%= text_field_tag :died_on, @died_on, {:maxlength => "4"} %></p>
