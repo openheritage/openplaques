@@ -34,15 +34,25 @@ class OrganisationsController < ApplicationController
       @organisation = Organisation.find(params[:id])
       redirect_to(organisation_path(@organisation.slug), :status => :moved_permanently) and return
     end
-    @plaques = @organisation.plaques
-    @mean = help.find_mean(@plaques)
+    @sponsorships = @organisation.sponsorships.paginate(:page => params[:page], :per_page => 50)
+    @mean = @organisation
+#    @mean = help.find_mean(@plaques)
     @zoom = 10
     respond_to do |format|
       format.html
-      format.kml { render "plaques/index" }
-      format.osm { render "plaques/index" }
+      format.kml {
+        @plaques = @organisation.plaques
+        render "plaques/index"
+      }
+      format.osm { 
+        @plaques = @organisation.plaques
+        render "plaques/index" 
+      }
       format.xml
-      format.json { render :json => @organisation.plaques.as_json }
+      format.json { 
+        @plaques = @organisation.plaques
+        render :json => @organisation.plaques.as_json
+      }
     end
   end
 

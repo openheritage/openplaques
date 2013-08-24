@@ -217,11 +217,22 @@ module ApplicationHelper
             content_tag("td", roles_list(thing))
           )
         rescue
-          @listy << content_tag("tr",
-            content_tag("td", thumbnail_img(thing), :class => :photo)  +
-            content_tag("td", thing.to_s) +
-            content_tag("td", "** not sure what this object is (or something threw an error) **")
-          )
+          begin
+            # could be a something that has a plaque, like a sponsorship
+            thing = thing.plaque
+            @listy << content_tag("tr",
+              content_tag("td", link_to(thumbnail_img(thing), plaque_path(thing)), :class => :photo)  +
+              content_tag("td", link_to(thing.to_s, plaque_path(thing))) +
+              content_tag("td", new_linked_inscription(thing)),
+              args.merge!(:id => thing.machine_tag.html_safe)
+            )            
+          rescue
+            @listy << content_tag("tr",
+              content_tag("td", thumbnail_img(thing), :class => :photo)  +
+              content_tag("td", thing.to_s) +
+              content_tag("td", "** not sure what this object is (or something threw an error) **")
+            )
+          end
         end
       end
     end

@@ -9,14 +9,19 @@
   <% end %>
 
   <h1 property="dc:title rdfs:label foaf:name" about="#this"><%= h @organisation.name %> plaques</h1>
-  <p>This organisation generally erects <%= @organisation.most_prevelant_colour %> plaques</p>
   <%= content_tag("p", link_to(h(@organisation.website),@organisation.website), {:rel => "foaf:homepage vcard:url"}) unless @organisation.website.blank? %>
 </div>
 
 <div id="organisation_info" typeof="foaf:Organization">
   <%= simple_format(@organisation.description) if @organisation.description %>
   <div id="plaque-map" data-latitude="<%= @mean.latitude %>" data-longitude="<%= @mean.longitude %>" class="full" data-zoom="<%= @zoom %>"></div>
-  <%= list(@plaques) %>
+
+  <%= will_paginate @sponsorships %>
+
+  <%= list(@sponsorships) %>
+
+  <%= will_paginate @sponsorships %>
+
 </div>
 
 <p class="alternate_formats">Data about <%= @organisation %> as <%= alternate_link_to "XML", organisation_path(@organisation, :format => :xml), :xml %> <%= alternate_link_to "JSON", organisation_path(@organisation, :format => :json), :json %> <%= alternate_link_to "KML", organisation_path(@organisation, :format => :kml), :kml %> <%= alternate_link_to "GMAP", "http://maps.google.co.uk/maps?q=" + organisation_url(@organisation, :format => :kml), :html %></p>
