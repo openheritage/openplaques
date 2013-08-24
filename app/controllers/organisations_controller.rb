@@ -66,7 +66,7 @@ class OrganisationsController < ApplicationController
         else
           limit = 20
         end
-        @plaques = Plaque.all(:conditions => conditions, :order => "created_at DESC", :limit => limit)
+        @plaques = Plaque.joins(:sponsorships).where('sponsorships.organisation_id' => @organisation.id).all(:conditions => conditions, :order => "created_at DESC", :limit => limit)
         render :json => @plaques.as_json(:only => [:id, :latitude, :longitude, :inscription],
           :methods => [:title, :colour_name, :machine_tag, :thumbnail_url])
 #        render :json => @organisation.sponsorships(:conditions => conditions, :limit => limit).as_json
