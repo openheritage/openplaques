@@ -2,7 +2,8 @@
 <h1>Unphotographed plaques in <%= link_to @area.name, area_path(@area) %></h1>
 
 <% unless @plaques.nil? %>
-  <div id="plaque-map" data-latitude="<%= @area.latitude_or_default %>" data-longitude="<%= @area.longitude_or_default %>" data-view="not all"></div>
+  <div id="plaque-map" data-latitude="<%= @area.latitude %>" data-longitude="<%= @area.longitude %>" data-view="not all"></div>
+
   <%= will_paginate @plaques %>
   <%= list(@plaques) %>
   <%= will_paginate @plaques %>
