@@ -7,15 +7,18 @@
 # === Attributes
 # * +name+ - the area's common name (not neccessarily 'official')
 # * +slug+ - an identifier used in URLs. Normally a lower-cased version of name, with spaces replaced by underscores
+# * +latitude+ - Mean location of plaques
+# * +longitude+ - Mean location of plaques
 #
 # === Associations
 # * Country - country in which the area falls geographically or administratively.
-# * Plaques - plaques located in this area.
+# * Locations - places that are in this are
+# * Plaques - plaques located in this area (via locations).
 require 'curb'
 
 class Area < ActiveRecord::Base
 
-  before_validation :make_slug_not_war
+  before_validation :make_slug_not_war, :find_centre
   validates_presence_of :name, :slug, :country_id
   validates_uniqueness_of :slug, :scope => :country_id
   validates_format_of :slug, :with => /^[a-z\_]+$/, :message => "can only contain lowercase letters and underscores"
@@ -27,31 +30,20 @@ class Area < ActiveRecord::Base
   has_many :plaques, :through => :locations
 
   include ApplicationHelper
-
+  include PlaquesHelper
+  
   def as_json(options={})
     {:label => name, :value => name, :id => id, :country_id => country.id, :country_name => country.name}
   end
 
-  def latitude_or_default
-    if !latitude.blank?
-      latitude
-    elsif plaques.geolocated.first
-      plaques.geolocated.first.latitude
-    else
-      nil
+  def find_centre
+    if (self.latitude == nil && self.longitude == nil)
+      @mean = find_mean(self.plaques.geolocated)
+      self.latitude = @mean.latitude
+      self.longitude = @mean.longitude
     end
   end
-
-  def longitude_or_default
-    if !longitude.blank?
-      longitude
-    elsif plaques.geolocated.first
-      plaques.geolocated.first.longitude
-    else
-      nil
-    end
-  end
-
+  
   def self.find_or_create_by_woeid(woeid)
     url = "http://where.yahooapis.com/geocode?flags=J&woeid=" + woeid
     begin

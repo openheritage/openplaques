@@ -3,14 +3,15 @@
   <% if current_user && current_user.is_admin? %>
   <section class="admin_panel">
     <%= link_to("Edit this area", edit_area_path(@area), {:class => :edit, :title => "Edit this area"})%>
-    <%= link_to("Add a plaque", new_plaque_path(), {:class => :edit, :title => "Add a plaque"})%>
   </section>
   <% end %>
 
   <%= link_to(@area.country.name, @area.country) if @area.country %>
   <h1><%= @area.name %></h1>
 
-  <div id="plaque-map" data-latitude="<%= @area.latitude_or_default %>" data-longitude="<%= @area.longitude_or_default %>" data-view="all"></div>
+  <% if @area.latitude %>
+    <div id="plaque-map" data-latitude="<%= @area.latitude %>" data-longitude="<%= @area.longitude %>" data-view="all"></div>
+  <% end %>
 
   <%= will_paginate @plaques %>
 

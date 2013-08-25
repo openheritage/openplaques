@@ -254,20 +254,6 @@ module PlaquesHelper
     url_for(:controller => "PersonalConnections", :action => :new, :plaque_id => plaque.id)
   end
 
-  def plaque_organisation_links(plaque)
-
-    plaque_organisations = plaque.organisations
-
-    if plaque_organisations.size > 0
-      links = plaque.organisations.collect do |organisation|
-        link_to(h(organisation.name), organisation)
-      end
-      links.to_sentence
-    else
-      "an unknown organisation".html_safe
-    end
-  end
-
   def erected_date(plaque)
     if plaque.erected_at?
       if plaque.erected_at.day == 1 && plaque.erected_at.month == 1
