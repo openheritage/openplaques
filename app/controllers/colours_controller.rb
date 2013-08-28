@@ -11,7 +11,6 @@ class ColoursController < ApplicationController
       format.html
       format.kml { render "plaques/index"}
       format.osm { render "plaques/index"}
-      format.yaml
       format.xml { render :xml => @colours }
       format.json { render :json => @colours }
     end
@@ -26,13 +25,11 @@ class ColoursController < ApplicationController
     end
 
     @plaques = @colour.plaques.includes(:personal_connections => :person, :location => [:area => :country]).paginate(:page => params[:page], :per_page => 20)
-#      @centre = find_mean(@plaques)
-    @zoom = 9
+
     respond_to do |format|
       format.html
       format.kml { render "plaques/index" }
       format.osm { render "plaques/index" }
-      format.yaml
       format.xml  { render :xml => @colour }
       format.json { render :json => @colour }
     end

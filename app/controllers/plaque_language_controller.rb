@@ -5,5 +5,4 @@ class PlaqueLanguageController < ApplicationController
     @languages = Language.all(:order => :name)
   end
 
-
 end

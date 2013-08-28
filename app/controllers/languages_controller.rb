@@ -12,11 +12,6 @@ class LanguagesController < ApplicationController
       @language = Language.find(params[:id])
       redirect_to(language_url(@language.alpha2), :status => :moved_permanently) and return
     end
-
-      @plaques = @language.plaques
-#      @centre = find_mean(@plaques)
-      @zoom = 11
-
   end
 
   def index

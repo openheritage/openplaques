@@ -17,7 +17,6 @@ class SeriesController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.kml { render "plaques/index" }
-      format.yaml
       format.xml { render "plaques/index" }
       format.json {
         render :json => @series.plaques

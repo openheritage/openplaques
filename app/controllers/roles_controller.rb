@@ -22,7 +22,6 @@ class RolesController < ApplicationController
   # GET /roles/artist.xml
   def show
     @related_roles = @role.related_roles
-
     for person in @role.people
       if person # a role record may exist that no longer has a person joined to it
         if (@plaques == nil)
@@ -32,7 +31,6 @@ class RolesController < ApplicationController
         end
       end
     end
-    #@centre = find_mean(@plaques)
     @zoom = 7
     respond_to do |format|
       format.html
@@ -46,7 +44,6 @@ class RolesController < ApplicationController
   # GET /roles/new.xml
   def new
     @role = Role.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @role }
@@ -57,7 +54,6 @@ class RolesController < ApplicationController
   # POST /roles.xml
   def create
     @role = Role.new(params[:role])
-
     respond_to do |format|
       if @role.save
         flash[:notice] = 'Role was successfully created.'
@@ -89,7 +85,6 @@ class RolesController < ApplicationController
   # DELETE /roles/1.xml
   def destroy
     @role.destroy
-
     respond_to do |format|
       format.html { redirect_to(roles_url) }
       format.xml  { head :ok }

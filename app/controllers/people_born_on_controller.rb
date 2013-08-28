@@ -10,7 +10,6 @@ class PeopleBornOnController < ApplicationController
     respond_to do |format|
       format.html
       format.kml { render "plaques/show" }
-      format.yaml
       format.xml { render :xml => @people }
       format.json { render :json => @people }
     end
