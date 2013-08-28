@@ -445,11 +445,13 @@ module PlaquesHelper
     connections = plaque.personal_connections.all(:select => "personal_connections.person_id", :group => "personal_connections.person_id")
     if connections.size > 0
       connections.each do |connection|
-        if inscription.index(connection.person.name) != nil
-          inscription = inscription.gsub(connection.person.name, link_to(connection.person.name, person_path(connection.person))).html_safe
-        elsif (connection.person.name.rindex(" "))
-          search_for = connection.person.name[0,connection.person.name.rindex(" ")]
-          inscription = inscription.gsub(search_for, link_to(search_for, person_path(connection.person))).html_safe if search_for
+        if connection.person
+          if inscription.index(connection.person.name) != nil
+            inscription = inscription.gsub(connection.person.name, link_to(connection.person.name, person_path(connection.person))).html_safe
+          elsif (connection.person.name.rindex(" "))
+            search_for = connection.person.name[0,connection.person.name.rindex(" ")]
+            inscription = inscription.gsub(search_for, link_to(search_for, person_path(connection.person))).html_safe if search_for
+          end
         end
       end
     end
