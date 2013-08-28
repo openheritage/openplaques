@@ -9,8 +9,6 @@
 
   <h1>Plaques in <%= @country.name %></h1>
 
-  <!-- div id="plaque-map" data-latitude="<%= @country.latitude %>" data-longitude="<%= @country.longitude %>"  data-zoom="<%= @country.zoom %>"></div -->
-
   <%= pluralize @country.plaques.size, "plaque" %>
 
   <%= content_tag("ol", :class => "results one_destination_results", :id => "people_results") do %>
