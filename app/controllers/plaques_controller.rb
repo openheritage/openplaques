@@ -226,7 +226,6 @@ class PlaquesController < ApplicationController
   end
   
   def edit
-    @plaque = Plaque.find(params[:id])
     if @plaque.location.blank?
       @plaque.location = Location.new(:name => "?")
       @plaque.save
