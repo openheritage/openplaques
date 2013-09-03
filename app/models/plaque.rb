@@ -58,6 +58,7 @@ class Plaque < ActiveRecord::Base
   scope :no_description, where("description = '' OR description IS NULL")
   scope :partial_inscription, :conditions => {:inscription_is_stub => true } , :order => "id DESC"
   scope :partial_inscription_photo, :conditions => {:photos_count => 1..99999, :inscription_is_stub => true} , :order => "id DESC"
+  scope :no_english_version, :conditions => ["language_id > 1 AND inscription_is_stub = 0 AND inscription_in_english IS NULL"]
 
   attr_accessor :country, :other_colour_id
 

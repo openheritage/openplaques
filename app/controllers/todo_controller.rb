@@ -86,13 +86,13 @@ class TodoController < ApplicationController
       when 'unassigned_photo'
         @photos = Photo.unassigned.paginate(:page => params[:page], :per_page => 100)
         render :unassigned_photo
-
+        
       when 'unphotographed'
-        @plaques = Plaque.unphotographed.paginate(:page => params[:page], :per_page => 100)
-        render :unphotographed
+          @plaques = Plaque.unphotographed.paginate(:page => params[:page], :per_page => 100)
+          render :unphotographed
       
       when 'microtask'
-        case rand(6)
+        case rand(7)
           when 0
             puts 'photographed_not_coloured'
             @plaques = Plaque.photographed_not_coloured
@@ -145,6 +145,13 @@ class TodoController < ApplicationController
             @photo = @photos[rand @photos.length]
             if (@photo)
               render 'photos/show' and return
+            end
+          when 6
+            puts 'no English version'
+            @plaques = Plaque.no_english_version
+            @plaque = @plaques[rand @plaques.length]
+            if (@plaque)
+              render 'plaque_inscription/edit' and return
             end
             
         end
