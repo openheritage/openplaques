@@ -13,7 +13,7 @@
 	  <p>thumbnail_url <%= @photo.thumbnail_url %></p>
     <%= content_tag("p", "Taken on " + @photo.taken_at.to_s(:long)) unless @photo.taken_at.blank? %>
     <p><%= f.label :photographer %> <%= f.text_field :photographer %> <%= content_tag("span", link_to(@photo.photographer, photographer_url(@photo.photographer.gsub(".","_").gsub("/","_")))) if @photo.photographer %></p>
-    <p><%= f.label :photographer_url %> <%= f.text_field :photographer_url, :size => 80 %></p>
+    <p><%= f.label :photographer_url %> <%= f.text_field :photographer_url, :size => 80 %><%= link_to(@photo.photographer_url, @photo.photographer_url) %></p>
     <p>The image was licenced by its copyright owner under an <%= f.collection_select :licence_id, @licences, :id, :name, {:include_blank => true} %></p>
     <p>It depicts plaque number <%= f.text_field :plaque_id, :maxlength => "5" %> <%= link_to(@photo.plaque, @photo.plaque) if @photo.plaque %></p>
     <p>It depicts person number <%= f.text_field :person_id, :maxlength => "5" %> <%= link_to(@photo.person, @photo.person) if @photo.person %></p>
