@@ -18,6 +18,8 @@
 # * Licence - The content licence under which the photo is made available.
 # * Plaque - the featured in the photo.
 require 'curb'
+require 'nokogiri'
+require 'sanitize'
 
 class Photo < ActiveRecord::Base
 
@@ -155,20 +157,33 @@ class Photo < ActiveRecord::Base
   def wikimedia_data
     # http://commons.wikimedia.org/wiki/File:George_Dance_plaque.JPG
     # http://commons.wikimedia.org/wiki/File:Abney1.jpg
-    if (wikimedia?)   
-      query_url = "http://commons.wikimedia.org/w/api.php?action=query&iiprop=url|user&prop=imageinfo&format=json&titles=File:"+wikimedia_filename
-      begin
-        ch = Curl::Easy.perform(query_url) do |curl| 
-          curl.headers["User-Agent"] = "openplaques"
-          curl.verbose = true
-        end
-        parsed_json = JSON.parse(ch.body_str)
-        parsed_json['query']['pages'].each do |page, pageInfo|
-          self.photographer = pageInfo['imageinfo'][0]['user']
-        end
-        self.photographer_url = "http://commons.wikimedia.org/wiki/User:"+photographer.gsub(' ','_')
-      rescue
+    if (wikimedia?)
+#      query_url = "http://commons.wikimedia.org/w/api.php?action=query&iiprop=url|user&prop=imageinfo&format=json&titles=File:"+wikimedia_filename
+#      begin
+#        ch = Curl::Easy.perform(query_url) do |curl| 
+#          curl.headers["User-Agent"] = "openplaques"
+#          curl.verbose = true
+#        end
+#        parsed_json = JSON.parse(ch.body_str)
+#        parsed_json['query']['pages'].each do |page, pageInfo|
+#          self.photographer = pageInfo['imageinfo'][0]['user']
+#        end
+#        self.photographer_url = "http://commons.wikimedia.org/wiki/User:"+photographer.gsub(' ','_')
+#      rescue
+#      end
+      
+      doc = Nokogiri::HTML(open("http://commons.wikimedia.org/wiki/File:"+wikimedia_filename))
+      doc.xpath('//td[@class="description"]').each do |v|
+        self.subject = Sanitize.clean(v.content)
       end
+      doc.xpath('//tr[td/@id="fileinfotpl_aut"]/td/a').each do |v|
+        self.photographer = v.content
+      end
+      doc.xpath('//tr[td/@id="fileinfotpl_aut"]/td/a/@href').each do |v|
+        self.photographer_url = v.content
+        self.photographer_url = "http://commons.wikimedia.org" + v.content if v.content.start_with?('/')
+      end
+      
       self.file_url = wikimedia_special
       self.licence = Licence.find_or_create_by_name_and_url("Attribution License", "http://creativecommons.org/licenses/by/3.0/")
     end
