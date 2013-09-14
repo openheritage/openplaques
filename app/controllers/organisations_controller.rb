@@ -48,6 +48,10 @@ class OrganisationsController < ApplicationController
       }
       format.xml
       format.json {
+      if request.env["HTTP_USER_AGENT"].include? "bot"
+        puts "** rejecting a bot call to json by "+env["HTTP_USER_AGENT"]
+        render :json => {:error => "no-bots"}.to_json, :status => 406
+      else
         conditions = {}
 
         # Bounding-box query
@@ -70,6 +74,7 @@ class OrganisationsController < ApplicationController
         render :json => @plaques.as_json(:only => [:id, :latitude, :longitude, :inscription],
           :methods => [:title, :colour_name, :machine_tag, :thumbnail_url])
 #        render :json => @organisation.sponsorships(:conditions => conditions, :limit => limit).as_json
+      end
       }
     end
   end

@@ -6,20 +6,14 @@ class PeopleController < ApplicationController
   before_filter :find_person, :only => [:edit, :update, :destroy]
 
   def index
-    @people = Person.find(:all)
-    respond_to do |format|
-      format.html { redirect_to(:controller => :people_by_index, :action => "show", :id => "a") }
-      format.kml {
-        @parent = @people
-        render "plaques/index"
-      }
-      format.xml
-      format.json { render :json => @people }
-    end
+    redirect_to(:controller => :people_by_index, :action => "show", :id => "a")
   end
 
   # GET /people/1
+  # GET /people/1.kml
+  # GET /people/1.osm
   # GET /people/1.xml
+  # GET /people/1.json
   def show
     @person = Person.find(params[:id], :include => {:personal_roles => :role})
     respond_to do |format|
@@ -29,7 +23,14 @@ class PeopleController < ApplicationController
       format.osm { @plaques = @person.plaques
 	  render "plaques/index" }
       format.xml
-      format.json { render :json => @person }
+      format.json {
+        if request.env["HTTP_USER_AGENT"].include? "bot"
+          puts "** rejecting a bot call to json by "+env["HTTP_USER_AGENT"]
+          render :json => {:error => "no-bots"}.to_json, :status => 406
+        else
+          render :json => @person
+        end
+      }
     end
   end
 
