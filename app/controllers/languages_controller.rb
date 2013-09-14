@@ -1,18 +1,9 @@
 class LanguagesController < ApplicationController
 
   before_filter :authenticate_admin!, :only => :destroy
-  before_filter :authenticate_user!, :except => [:index, :show]
+  before_filter :authenticate_user!, :except => [:index]
 
   before_filter :find_language, :only => [:edit, :update]
-
-  def show
-    begin
-      @language = Language.find_by_alpha2!(params[:id])
-    rescue
-      @language = Language.find(params[:id])
-      redirect_to(language_url(@language.alpha2), :status => :moved_permanently) and return
-    end
-  end
 
   def index
     @languages = Language.all
@@ -24,15 +15,13 @@ class LanguagesController < ApplicationController
 
   def create
     @language = Language.new(params[:language])
-
-    if @language.save
-      redirect_to language_path(@language.alpha2)
-    end
+    @language.save
+    redirect_to languages_path
   end
 
   def update
     if @language.update_attributes(params[:language])
-      redirect_to language_path(@language)
+      redirect_to languages_path
     else
       render :edit
     end
