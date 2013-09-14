@@ -31,7 +31,6 @@ class Plaque < ActiveRecord::Base
 
   belongs_to :location, :counter_cache => true
   belongs_to :colour, :counter_cache => true
-  belongs_to :plaque_erected_year, :counter_cache => true
   belongs_to :user, :counter_cache => true
   belongs_to :language, :counter_cache => true
   belongs_to :series, :counter_cache => true
@@ -44,7 +43,7 @@ class Plaque < ActiveRecord::Base
   has_many :sponsorships
   has_many :organisations, :through => :sponsorships
 
-  before_save :set_erected_year, :use_other_colour_id
+  before_save :use_other_colour_id
 
   scope :geolocated, :conditions => ["latitude IS NOT NULL"]
   scope :ungeolocated, :conditions => {:latitude => nil} , :order => "id DESC"
@@ -387,6 +386,12 @@ class Plaque < ActiveRecord::Base
     return inscription_in_english if inscription_in_english
     return inscription
   end
+  
+  def erected?
+    return false if erected_at? && erected_at.year > Date.today.year
+    return false if erected_at? &&erected_at.day!=1 && erected_at.month!=1 && erected_at > Date.today
+    true
+  end
 
   def uri
     "http://openplaques.org" + Rails.application.routes.url_helpers.plaque_path(self, :format => :json)
@@ -404,10 +409,4 @@ class Plaque < ActiveRecord::Base
       end
     end
 
-    def set_erected_year
-      if erected_at?
-        plaque_erected_year = PlaqueErectedYear.find_or_create_by_name(erected_at.year.to_s)
-        self.plaque_erected_year = plaque_erected_year
-      end
-    end
 end

@@ -455,9 +455,8 @@ module PlaquesHelper
         end
       end
     end
-  if plaque.inscription_is_stub
-    inscription += " [full inscription unknown]"
-  end
+    inscription += " [full inscription unknown]" if plaque.inscription_is_stub
+    inscription += " [has not been erected yet]" if !@plaque.erected? 
     return inscription
   end
 
