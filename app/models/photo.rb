@@ -176,12 +176,13 @@ class Photo < ActiveRecord::Base
       doc.xpath('//td[@class="description"]').each do |v|
         self.subject = Sanitize.clean(v.content)
       end
-      doc.xpath('//tr[td/@id="fileinfotpl_aut"]/td/a').each do |v|
-        self.photographer = v.content
+      doc.xpath('//tr[td/@id="fileinfotpl_aut"]/td').each do |v|
+        self.photographer = Sanitize.clean(v.content)
       end
       doc.xpath('//tr[td/@id="fileinfotpl_aut"]/td/a/@href').each do |v|
-        self.photographer_url = v.content
-        self.photographer_url = "http://commons.wikimedia.org" + v.content if v.content.start_with?('/')
+        value = v.content
+        self.photographer_url = value
+        self.photographer_url = "http://commons.wikimedia.org" + value if value.start_with?('/')
       end
       
       self.file_url = wikimedia_special
