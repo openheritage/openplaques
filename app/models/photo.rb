@@ -112,6 +112,7 @@ class Photo < ActiveRecord::Base
   
   def wikimedia?
     url.gsub!("http://en.wikipedia.org/","http://commons.wikimedia.org/")
+    url.gsub!("https","http")
     url && url.starts_with?("http://commons.wikimedia.org")
   end
   
@@ -171,6 +172,8 @@ class Photo < ActiveRecord::Base
 #        self.photographer_url = "http://commons.wikimedia.org/wiki/User:"+photographer.gsub(' ','_')
 #      rescue
 #      end
+
+      puts "from Wikimedia"
       
       doc = Nokogiri::HTML(open("http://commons.wikimedia.org/wiki/File:"+wikimedia_filename))
       doc.xpath('//td[@class="description"]').each do |v|
