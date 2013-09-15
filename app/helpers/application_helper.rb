@@ -208,7 +208,8 @@ module ApplicationHelper
           extras,
           args.merge!(:id => thing.machine_tag.html_safe)
         )
-      rescue
+      rescue => ex
+#        puts "#{ex.backtrace}: #{ex.message} (#{ex.class})"
         # maybe it is a person
         begin
           @listy << content_tag("tr",
