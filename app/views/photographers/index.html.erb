@@ -8,16 +8,16 @@
   <p>Open Plaques links to photographs on the internet taken by <%= pluralize(@photographers.size, "different photographer") %>. These images are held on Flickr, Wikimedia Commons, and Geograph. They are all licenced with permissive <a href="http://creativecommons.org/">Creative Commons</a> licences meaning that the owner has declared via a copyright notice that other people may reuse their photograph.</p>
 
   <p>The top 50 are:</p>
-  <canvas id="myCanvas" width="1000" height="1000">
+  <canvas id="myCanvas" width="1000" height="1000"></canvas>
+
   <ol>
     <% for photographer in @photographers.sort_by { |p| 1 - p[1] } %>
       <% if photographer[0] != nil %>
         <li><%= link_to(photographer[0], photographer_url(photographer[0].gsub(/\./,'_').gsub('/','_'))) rescue photographer[0] %> - <%= pluralize(photographer[1], "photo") %></li>
       <% end %>
     <% end %>
-  </ol>
+ </ol>
 </div>
-</canvas>
 
 <p class="alternate_formats">Data about photographers as <%= alternate_link_to "JSON", photographers_path(:json), :json %></p>
 
