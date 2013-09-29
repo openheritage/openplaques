@@ -1,21 +1,19 @@
 <div class="panel">
   <h1>Edit connection for <%= link_to @plaque.title, @plaque %></h1>
   
-  <p>From this plaque&apos;s inscription of <strong>"<%= @plaque.inscription %>"</strong> we can establish the following:</p>
+  <p>From the plaque inscription <strong>"<%= @plaque.inscription_preferably_in_english %>"</strong> we can establish that:</p>
 
   <%= form_for @personal_connection, :url => plaque_connection_path(@plaque, @personal_connection) do |f| %>
     <p>
-      <%= f.label :person_id, "Person" %>:
       <%= f.collection_select :person_id, @people, :id, :name_and_dates %>
       <%= link_to("Add person", new_person_path) %>
     </p>
     <p>
-      <%= f.label :verb_id, "Verb" %>
       <%= f.collection_select :verb_id, @verbs, :id, :name %>
       <%= link_to("Add verb", new_verb_path) %>
     </p>
     <p>
-      <%= f.label :location_id, "Location" %>
+      <%= f.label :location_id, "At" %>
       <%= f.collection_select :location_id, @locations, :id, :name %>
     </p>
     <p>
