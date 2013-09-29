@@ -383,7 +383,7 @@ class Plaque < ActiveRecord::Base
   end
   
   def inscription_preferably_in_english
-    return inscription_in_english if inscription_in_english
+    return inscription_in_english if inscription_in_english && inscription_in_english > ""
     return inscription
   end
   

@@ -1,10 +1,14 @@
 <table class="section_details" cellspacing="0" summary="Plaque details for #<%= plaque.id %>">
   <tr>
-    <td><%= thumbnail_img plaque %></td>
-    <td><%= plaque.inscription_preferably_in_english %></td>
-    <td><%= location_if_known plaque %></td>
+    <td><%= link_to(thumbnail_img(plaque), plaque_path(plaque)) %></td>
+    <td>"<%= plaque.inscription_preferably_in_english %>"</td>
+    <% if @person %>
+      <td><%= verbs(@person,plaque).to_sentence.html_safe %> at <%= plaque.location.name + ", " + plaque.area.name if plaque.location and plaque.area %><%= plaque.location.name if plaque.location and !plaque.area %></td>
+    <% else %>
+      <td><%= location_if_known plaque %></td>
+    <% end %>
     <% if !plaque.is_current %>
       <td>As far as we know, it is not currently on display</td>
-    <% end %>  
+    <% end %>
   </tr>
 </table>

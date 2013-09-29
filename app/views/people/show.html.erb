@@ -58,13 +58,7 @@
     <% end %>
     <table>
     <% @person.plaques.each do |plaque| %>
-      <tr>
-        <td><%= link_to(thumbnail_img(plaque), plaque_path(plaque)) %></td>
-        <td><%= verbs(@person,plaque).to_sentence.html_safe %> at <%= link_to plaque.location.name + ", " + plaque.area.name, plaque if plaque.location and plaque.area %><%= link_to plaque.location.name, plaque if plaque.location and !plaque.area %></td>
-        <td>"<%= plaque.inscription %>"
-          <% if !plaque.is_current %><br/><em>As far as we know, it is not currently on display</em><% end %>
-        </td>
-      </tr>
+      <%= render 'plaques/plaque_minimal', :plaque => plaque %>
     <% end %>
     </table>
     
