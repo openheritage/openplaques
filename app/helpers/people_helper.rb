@@ -17,15 +17,7 @@ module PeopleHelper
   def dated_role(personal_role)
     r = ""
     if personal_role.ordinal
-      if personal_role.ordinal == 1 
-        r += "first "
-      end
-      if personal_role.ordinal == 2
-        r += "second "
-      end
-      if personal_role.ordinal == 3 
-        r += "third "
-      end
+      r += personal_role.ordinal.ordinalize + " "
     end
     r += link_to(personal_role.role.name, role_path(personal_role.role), :class => "role")
     if personal_role.related_person
