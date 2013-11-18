@@ -1,7 +1,7 @@
 <div class="panel">
   <h1>Edit connection for <%= link_to @plaque.title, @plaque %></h1>
   
-  <p>From the plaque inscription <strong>"<%= @plaque.inscription_preferably_in_english %>"</strong> we can establish that:</p>
+  <p>From <%= render 'plaques/plaque_minimal', :plaque => @plaque %> we can establish that</p>
 
   <%= form_for @personal_connection, :url => plaque_connection_path(@plaque, @personal_connection) do |f| %>
     <p>
