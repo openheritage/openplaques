@@ -82,7 +82,7 @@ class PlaquesController < ApplicationController
     set_meta_tags :open_graph => {
       :type  => :website,
       :url   => url_for(:only_path=>false),
-      :image => @plaque.thumbnail_url ? @plaque.thumbnail_url.gsub("?width=75","") : view_context.root_url[0...-1] + view_context.image_path("openplaques-icon.png"),
+      :image => @plaque.main_photo ? @plaque.main_photo.file_url : view_context.root_url[0...-1] + view_context.image_path("openplaques-icon.png"),
       :title => @plaque.title,
       :description => @plaque.inscription,
     }
@@ -93,6 +93,7 @@ class PlaquesController < ApplicationController
       format.json {
         render :json => @plaque.as_json
       }
+      format.csv { render "plaques/index" }
     end
   end
 
