@@ -71,7 +71,7 @@ class PersonalRolesController < ApplicationController
       end
     end
 
-    if @personal_role.update_attributes(:started_at => started_at, :ended_at => ended_at, :related_person => related_person)
+    if @personal_role.update_attributes(:started_at => started_at, :ended_at => ended_at, :related_person => related_person, :ordinal => params[:personal_role][:ordinal])
       redirect_to(edit_person_path(@personal_role.person))
     else
       render :edit

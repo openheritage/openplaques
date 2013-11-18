@@ -5,6 +5,7 @@
 # * Related Person - optional related person for special roles like 'wife' or 'mother'
 # * Started_at
 # * Ended_at
+# * Ordinal - whether they were the first, second, third, or not stated
 class PersonalRole < ActiveRecord::Base
 
   validates_presence_of :role_id, :person_id

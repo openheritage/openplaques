@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130824112330) do
+ActiveRecord::Schema.define(:version => 20131118195451) do
 
   create_table "areas", :force => true do |t|
     t.string    "name"
@@ -153,6 +153,7 @@ ActiveRecord::Schema.define(:version => 20130824112330) do
     t.date      "started_at"
     t.date      "ended_at"
     t.integer   "related_person_id"
+    t.integer   "ordinal"
   end
 
   add_index "personal_roles", ["person_id"], :name => "index_personal_roles_on_person_id"

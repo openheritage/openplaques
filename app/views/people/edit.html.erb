@@ -39,7 +39,7 @@
   <p>...from which we can establish that:</p>
   <% @person.personal_roles.each do |personal_role| %>
     <div>
-      <%= @person.name %> <%= @person.existence_word %> a <%= dated_role(personal_role) %> <%= link_to "Edit", edit_personal_role_path(personal_role) %>
+      <%= @person.name %> <%= @person.existence_word %> a <%= dated_role(personal_role).html_safe %> <%= link_to "Edit", edit_personal_role_path(personal_role) %>
       <%= button_to "Delete", personal_role, :method => :delete, :class => :button%>
     </div>
   <% end %>
