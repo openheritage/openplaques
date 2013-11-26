@@ -37,7 +37,7 @@ class Area < ActiveRecord::Base
   end
 
   def find_centre
-    if (self.latitude == nil && self.longitude == nil)
+    if (self.latitude == nil && self.longitude == nil || self.latitude == 51.475 && self.longitude == 0)
       @mean = find_mean(self.plaques.geolocated)
       self.latitude = @mean.latitude
       self.longitude = @mean.longitude
