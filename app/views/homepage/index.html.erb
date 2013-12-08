@@ -1,4 +1,9 @@
 <% content_for :page_title, "Open Plaques - linking historical people and places" %>
+
+<% if Rails.env == 'development' %>
+  <%= render 'development_message' %>
+<% end %>
+
 <div class="panel clearfix">
 
   <div id="homepage_content">

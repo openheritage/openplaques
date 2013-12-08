@@ -1,7 +1,7 @@
 Openplaques::Application.routes.draw do
 
   devise_for :users
-  resources :users, :only => [:index, :show]
+  resources :users, :only => [:index, :show, :new, :create]
 
   # This site is designed to be RESTful, so most of the routes are defined here as resources.
 

@@ -33,6 +33,8 @@
     <%= content_tag("div", "This is a staging version of Open Plaques with out-of-date data. ".html_safe + link_to("Visit the live site", "http://www.openplaques.org".html_safe) + "", :class => "staging") if ::Rails.env == "staging" %>
     <%= content_tag("div", "Development environment!", :class => "development") if ::Rails.env == "development" %>
 
+    <%= yield :site_message %>
+
     <header>
 
       <div class="container">
@@ -90,9 +92,9 @@
     </header>
     <div id="content">
 
-    <% if notice %>
+    <% if flash[:notice] %>
       <div class="flash_notice">
-        <p><%= notice %></p>
+        <p><%= flash[:notice] %></p>
       </div>
     <% end %>
 
