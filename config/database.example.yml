@@ -4,28 +4,23 @@
 # config/ directory to run this application. 
 
 # You can copy the contents of this file to get you started.
-# It uses the SQLite database type (which is super-simple).
-
-# SQLite version 3.x
-#   gem install sqlite3-ruby (not necessary on OS X Leopard)
+#
+# This specifies the database type as PostGres, which is recommended, as this
+# is what Open Plaques uses in production.
+#
+# Postgres can be installed in a variety of ways. For OSX, the easiest is to install
+# this app: http://postgresapp.com
+#
+# Alternatively, you can try using a different database type, such as SQLite3.
+# These *should* mostly work, but you may experience some errors where the database
+# differs from PostGres.
+#
 development:
-  adapter: sqlite3
-  database: db/development.sqlite3
-  pool: 5
-  timeout: 5000
-
-# Warning: The database defined as "test" will be erased and
-# re-generated from your development database when you run "rake".
-# Do not set this db to the same as development or production.
-test:
-  adapter: sqlite3
-  database: db/test.sqlite3
-  pool: 5
-  timeout: 5000
-
-# This is an example of using MySQL instead of SQLite:
-production:
-  adapter: mysql
+  adapter: postgresql
   database: openplaques
-  username: 
-  password: 
+  encoding: unicode  
+
+test:
+  adapter: postgresql
+  database: openplaques_test
+  encoding: unicode
