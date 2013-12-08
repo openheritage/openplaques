@@ -1,4 +1,9 @@
+development:
+  adapter: postgresql
+  database: openplaques
+  encoding: unicode  
+
 test:
   adapter: postgresql
   database: openplaques_test
-  username: postgres
+  encoding: unicode
