@@ -8,10 +8,10 @@ gem "rails", "~> 3.2.13"
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
 gem 'pg'
-gem 'thin'
+gem 'unicorn'
 
 gem "airbrake"
-
+gem 'foreman'
 
 group :development, :test do
   gem 'sqlite3'
