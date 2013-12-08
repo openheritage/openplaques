@@ -31,8 +31,13 @@ module Openplaques
     # Don't initialize on precompile as this doesn't work with Heroku
     config.assets.initialize_on_precompile = false
 
-
     # --- MISC ---
+
+    # Set secret tokens from environment variables. In development, these can be specified
+    # in the file .env (see example.env).
+    config.secret_token = ENV['SECRET_TOKEN']
+    config.secret_key_base = ENV['SECRET_KEY_BASE']
+
 
     # Set default time zone to be London (GMT/BST)
     config.time_zone = 'London'
