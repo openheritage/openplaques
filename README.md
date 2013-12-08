@@ -25,7 +25,8 @@ To run the website, you will need to do the following first:
 1. Copy `database.example.yml` to `database.yml` in the `config/` folder. If you're using PostGres, you can leave it as it is – just make sure that you’ve created a local database called `openplaques` which doesn't require a username or password. You should also create a second database called `openplaques_test` in order to run the tests. If for some reason you can’t use PostGres, you can edit the file to specify a MySQL or SQLite3 connection.
 2. From the command line, run `bundle install` to install a few required ruby gems.
 3. From the command line, run `bundle exec rake db:setup` in order to set up your database and setup initial data.
-4. From the command line, run `bundle exec rails server` in order to start the web server (Mongrel will be used by default). You should then be able to see the website at `http://0.0.0.0:3000` (or whichever URL is specified at the command line).
+4. Copy the config file example.env to .env (on a command line this can be done with `cp example.env .env`).
+5. From the command line, run `foreman start` in order to start the web server. You should then be able to see the website at `http://0.0.0.0:3000` (or whichever URL is specified at the command line).
 
 Making Contributions
 --------------------
