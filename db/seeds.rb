@@ -20,6 +20,13 @@
     ]
   )
 
+  colours = Colour.create(
+    [
+      {:name => "Blue", :slug => "blue"},
+      {:name => "Black", :slug => "black"},
+      {:name => "Red", :slug => "red"}
+    ]
+  )
 
   countries = Country.create(
     [

@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
   before_filter :authenticate_admin!, :except => [:new, :create]
   
-  unless Rails.env == 'development' && User.count == 0
+  unless Rails.env == 'development'
     before_filter :authenticate_admin!, :only => [:new, :create]
   end
 
