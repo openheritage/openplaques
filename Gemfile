@@ -18,6 +18,7 @@ group :development, :test do
   gem "shoulda"
 end
 
+gem 'rails_12factor'
 
 gem 'json'
 gem 'curb'
