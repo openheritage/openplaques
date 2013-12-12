@@ -108,6 +108,8 @@ Openplaques::Application.routes.draw do
   resource :contribute, :controller => :pages, :id => "contribute", :as => "contribute", :only => :show
   resource :explore, :controller => :explore, :only => :show
 
+  resource :stats, :controller => :stats, :only => :show
+
   # Generic resource for all pages
   resources :pages
 
