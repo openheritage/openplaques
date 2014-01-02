@@ -12,7 +12,7 @@ class SeriesController < ApplicationController
 
   def show
     @series = Series.find(params[:id])
-    @plaques = @series.plaques
+    @plaques = @series.plaques.paginate(:page => params[:page], :per_page => 20)
     @mean = help.find_mean(@plaques)
     respond_to do |format|
       format.html # show.html.erb
