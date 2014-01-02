@@ -1,20 +1,11 @@
-<h1><%= link_to dated_person(@personal_role.person), @personal_role.person %></h1>
-
-<p>was a <%= dated_role(@personal_role) %></p>
-
+<%= render 'people/minimal', :person => @personal_role.person %>
 
 <%= form_for @personal_role do |f| %>
-  <% if @personal_role.role.relationship? %>
-    <p>
-      of <%= f.collection_select :related_person_id, @people, :id, :name_and_dates, {} , { "style" => "width:400px" } %>	
-    </p>
-  <% end %>
-  <p>
-    <%= f.label :started_at, "from" %>
-    <%= f.text_field :started_at %>
-
-    <%= f.label :ended_at, "to" %>
-    <%= f.text_field :ended_at %>
+  <p>was a <%= link_to @personal_role.role.name, @personal_role.role %>
+  <% if @personal_role.role.relationship? %>of <%= f.collection_select :related_person_id, @people, :id, :name_and_dates, {} , { "style" => "width:400px" } %><% end %>
+  <br/>
+    <%= f.label :started_at, "from" %> <%= f.text_field :started_at %>
+    <%= f.label :ended_at, "to" %> <%= f.text_field :ended_at %>
   </p>
 
   <p>
@@ -22,5 +13,5 @@
     <%= f.text_field :ordinal %>
   </p>
 
-  <p><%= f.submit "Save" %></p>
+  <p><%= f.submit "Save", :class => :button %></p>
 <% end %>
