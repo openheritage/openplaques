@@ -1,17 +1,13 @@
 class SeriesController < ApplicationController
 
   before_filter :authenticate_admin!, :only => :destroy
+  before_filter :find, :only => [:show, :edit, :update]
 
   def index
     @series = Series.all
   end
-  
-  def edit
-    @series = Series.find(params[:id])
-  end  
 
   def show
-    @series = Series.find(params[:id])
     @plaques = @series.plaques.paginate(:page => params[:page], :per_page => 20)
     @mean = help.find_mean(@plaques)
     respond_to do |format|
@@ -51,5 +47,11 @@ class SeriesController < ApplicationController
     include Singleton
     include PlaquesHelper
   end
+  
+  protected
+
+    def find
+      @series = Series.find(params[:id])
+    end
   
 end

@@ -3,7 +3,7 @@ class RolesController < ApplicationController
   before_filter :authenticate_admin!, :only => :destroy
   before_filter :authenticate_user!, :except => [:index, :show]
 
-  before_filter :find_role, :only => [:show, :edit, :update, :destroy]
+  before_filter :find, :only => [:show, :edit, :update]
 
   def index
     respond_to do |format|
@@ -81,19 +81,9 @@ class RolesController < ApplicationController
     end
   end
 
-  # DELETE /roles/1
-  # DELETE /roles/1.xml
-  def destroy
-    @role.destroy
-    respond_to do |format|
-      format.html { redirect_to(roles_url) }
-      format.xml  { head :ok }
-    end
-  end
-
   protected
 
-    def find_role
+    def find
       @role = Role.find_by_slug!(params[:id])
     end
 
