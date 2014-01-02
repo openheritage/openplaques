@@ -12,7 +12,7 @@
    <% if @plaque.series %>
      <tr>
        <th>Series</th>
-       <td><%= link_to @plaque.series.name, @plaque.series %></td>
+       <td><%= link_to @plaque.series.name, @plaque.series %><% if @plaque.series_ref? %> (<%= @plaque.series_ref %>)<% end %></td>
      </tr>
    <% end %>
    <tr>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131118195451) do
+ActiveRecord::Schema.define(:version => 20140102135735) do
 
   create_table "areas", :force => true do |t|
     t.string    "name"
@@ -227,6 +227,7 @@ ActiveRecord::Schema.define(:version => 20131118195451) do
     t.boolean   "is_accurate_geolocation",    :default => true
     t.boolean   "is_current",                 :default => true
     t.text      "inscription_in_english"
+    t.string    "series_ref"
   end
 
   add_index "plaques", ["colour_id"], :name => "index_plaques_on_colour_id"
