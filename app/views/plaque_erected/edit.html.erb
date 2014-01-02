@@ -4,6 +4,8 @@
 
   <h1>Edit organisation for <%= link_to @plaque.title, @plaque %></h1>
 
+  <%= render 'plaques/plaque_minimal', :plaque => @plaque %>
+
   <%= render "plaques/photos" %>
 
   <%= form_for(@plaque) do |f| %>
