@@ -1,4 +1,4 @@
-Number, Inscription, Organisation, Erected date, Language, Colour, Location, Area, Country, Co-ordinates
+Number,Inscription,Erected date,Language,Colour,Location,Area,Country,Co-ordinates
 <%- @plaques.each do |plaque| -%>
-<%= plaque.to_csv %>
+<%= plaque.to_csv.html_safe %>
 <%- end -%>
