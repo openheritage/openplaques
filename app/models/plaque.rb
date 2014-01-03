@@ -86,7 +86,7 @@ class Plaque < ActiveRecord::Base
   end
 
   def to_csv
-   [id, inscription_csv, organisation_name, erected_at_string, language_name, colour_name.to_s, location_name, area_name, country_name, '\"' + coordinates + '\"'].join(",")
+   [id, inscription_csv, erected_at_string, language_name, colour_name.to_s, location_name, area_name, country_name, '"' + coordinates + '"'].join(",")
   end
 
   def inscription_csv

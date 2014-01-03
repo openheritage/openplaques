@@ -92,7 +92,7 @@ class TodoController < ApplicationController
           render :unphotographed
       
       when 'microtask'
-        case rand(7)
+        case 5 # rand(7)
           when 0
             puts 'photographed_not_coloured'
             @plaques = Plaque.photographed_not_coloured
@@ -144,7 +144,11 @@ class TodoController < ApplicationController
             @photos = Photo.unassigned
             @photo = @photos[rand @photos.length]
             if (@photo)
-              render 'photos/show' and return
+              #    if @photo.unnassigned?
+                    @plaques = [Plaque.find(100)]
+              #    end
+              @licences = Licence.all(:order => :name)
+              render 'photos/plaque/edit' and return
             end
           when 6
             puts 'no English version'

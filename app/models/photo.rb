@@ -41,6 +41,7 @@ class Photo < ActiveRecord::Base
   scope :reverse_detail_order, :order => "shot DESC"
   scope :detail_order, :order => "shot ASC"
   scope :unassigned, :conditions => ["plaque_id IS NULL AND of_a_plaque = 't'"]
+  scope :undecided, :conditions => ["plaque_id IS NULL AND of_a_plaque IS NULL"]
 
   def assign_from_photo_url
     if @photo_url
@@ -128,9 +129,7 @@ class Photo < ActiveRecord::Base
   end
   
   def wikimedia_filename
-    if (wikimedia?)
-      return url[url.index('File:')+5..-1]
-    end
+    return url[url.index('File:')+5..-1] if wikimedia?
     return ""
   end
   
@@ -143,14 +142,12 @@ class Photo < ActiveRecord::Base
   end
 
   def thumbnail_url
-    if self.thumbnail?
-      return self.thumbnail
-    end
+    return self.thumbnail if self.thumbnail?
     if (file_url.ends_with?("_b.jpg") or file_url.ends_with?("_z.jpg") or file_url.ends_with?("_z.jpg?zz=1") or file_url.ends_with?("_m.jpg") or file_url.ends_with?("_o.jpg"))
-	    return file_url.gsub("b.jpg", "s.jpg").gsub("z.jpg?zz=1", "s.jpg").gsub("z.jpg", "s.jpg").gsub("m.jpg", "s.jpg").gsub("o.jpg", "s.jpg")
-	  end
-	  if (wikimedia?)
-	    return "http://commons.wikimedia.org/wiki/Special:FilePath/"+wikimedia_filename+"?width=75"
+      return file_url.gsub("b.jpg", "s.jpg").gsub("z.jpg?zz=1", "s.jpg").gsub("z.jpg", "s.jpg").gsub("m.jpg", "s.jpg").gsub("o.jpg", "s.jpg")
+    end
+    if (wikimedia?)
+      return "http://commons.wikimedia.org/wiki/Special:FilePath/"+wikimedia_filename+"?width=75"
     end
   end
   
@@ -172,9 +169,6 @@ class Photo < ActiveRecord::Base
 #        self.photographer_url = "http://commons.wikimedia.org/wiki/User:"+photographer.gsub(' ','_')
 #      rescue
 #      end
-
-      puts "from Wikimedia"
-      
       doc = Nokogiri::HTML(open("http://commons.wikimedia.org/wiki/File:"+wikimedia_filename))
       doc.xpath('//td[@class="description"]').each do |v|
         self.subject = Sanitize.clean(v.content)
@@ -187,11 +181,9 @@ class Photo < ActiveRecord::Base
         self.photographer_url = value
         self.photographer_url = "http://commons.wikimedia.org" + value if value.start_with?('/')
       end
-      
       self.file_url = wikimedia_special
       self.licence = Licence.find_or_create_by_name_and_url("Attribution License", "http://creativecommons.org/licenses/by/3.0/")
     end
-    
     if (geograph?)   
       query_url = "http://api.geograph.org.uk/api/oembed?&&url=" + self.url + "&output=json"
       begin
