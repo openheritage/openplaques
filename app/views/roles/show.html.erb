@@ -13,7 +13,7 @@
 <ol class="results" id="people_results">
   <% for personal_role in @role.personal_roles %>
     <li class="vcard person" typeof="<%= if personal_role.person.person? then "foaf:Person" else "foaf:Agent" end %> vcard:VCard" about="#person">
-      <p class="result"><b><%= personal_role.date_range %></b> <%= dated_person(personal_role.person) %></p>
+      <p class="result"><b><%= personal_role.ordinal.ordinalize + " " if personal_role.ordinal %></b><%= dated_person(personal_role.person) %> <%= personal_role.date_range %></b></p>
       <% personal_role.person.relationships.each do |relationship| %>
         <p><%= relationship.role.name %> of <%= dated_person(relationship.related_person) %></p>
       <% end %>
