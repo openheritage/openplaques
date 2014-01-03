@@ -29,6 +29,23 @@
 
 </div>
 
+<section id="using_wikimedia" class="inside_panel">
+  <p><img src="http://upload.wikimedia.org/wikipedia/commons/7/79/Wiki-commons.png"/></p>
+  <h2>I found, or would like to add, a photo of this person on Wikimedia Commons...</h2>
+  <p>A great place to donate your image to the world is <a href="http://commons.wikimedia.org/">Wikimedia Commons</a>.
+	It is free, fairly easy to use, and your image will live forever (probably) as part of the awesome Wikipedia platform.
+	When you are done, paste the page url in here and Open Plaques will link to the photo.</p>
+  <p>
+  <% @photo = Photo.new %>
+  <%= form_for @photo do |f| %>
+    <%= f.label(:url, "The Wikimedia photo page url is") %> <%= f.text_field :url %>
+    <%= f.hidden_field :person_id, :value => @person.id %>
+    <%= f.hidden_field :of_a_plaque, :value => false %>
+    <%= submit_tag("Add it", :class=>'button secondary_button') %>
+  <% end %>
+  </p>
+</section>
+
 <div class="panel">
   <h1><%= @person.possessive %> roles</h1>
 
