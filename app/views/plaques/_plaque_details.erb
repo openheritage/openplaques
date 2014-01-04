@@ -51,7 +51,7 @@
      <th><%= pluralize_word(@plaque.people.size, "Subject") %></th>
      <td>
        <% @plaque.people.each do |person| %>
-         <span class="vcard"><%= dated_person(person) %></span><br/>
+         <%= render 'people/minimal', :person => person %><br/>
        <% end %>
        <% if @plaque.people.size == 0 %>
          None identified yet
