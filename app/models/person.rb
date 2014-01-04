@@ -276,7 +276,7 @@ class Person < ActiveRecord::Base
     roles.each{|role|
       # TODO a clergyman or Commonwealth citizen does not get called 'Sir'
       sir = "Sir " if role.confers_honourific_title?
-      title += (role.abbreviated? ? role.abbreviation : role.name) + " " if role.used_as_a_prefix?
+      title += (role.abbreviated? ? role.abbreviation : role.name) + " " if role.used_as_a_prefix? and !title.include?(role.abbreviated? ? role.abbreviation : role.name)
     }
     title += sir
     title

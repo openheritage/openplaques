@@ -31,7 +31,7 @@ class Role < ActiveRecord::Base
   end
   
   def self.types
-    ["person", "animal", "thing", "group", "place", "relationship", "parent", "spouse", "child", "title", "letters", "military medal"]
+    ["person", "animal", "thing", "group", "place", "relationship", "parent", "spouse", "child", "title", "letters", "military medal", "clergy"]
   end
 
   def person?
