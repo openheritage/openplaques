@@ -1,0 +1,11 @@
+<div class="series">
+  <div class="tile">
+  <%= link_to(series.name, series_path(series), :class=>'name') %>
+  <%= content_tag("span", series.description, :class=>'description') %>
+  </div>
+  <br/>
+  <% series.plaques.photographed.limit(10).each do |plaque| %>
+    <%= render "plaques/tile", :plaque => plaque %>
+  <% end %>
+</div>
+<br style="clear: both;"/>

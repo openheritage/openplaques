@@ -4,11 +4,11 @@ class SeriesController < ApplicationController
   before_filter :find, :only => [:show, :edit, :update]
 
   def index
-    @series = Series.all
+    @series = Series.all(:order => :name)
   end
 
   def show
-    @plaques = @series.plaques.paginate(:page => params[:page], :per_page => 20)
+    @plaques = @series.plaques.paginate(:page => params[:page], :per_page => 20).all(:order => 'series_ref ASC')
     @mean = help.find_mean(@plaques)
     respond_to do |format|
       format.html # show.html.erb
