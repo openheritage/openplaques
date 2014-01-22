@@ -8,7 +8,7 @@ class SeriesController < ApplicationController
   end
 
   def show
-    @plaques = @series.plaques.paginate(:page => params[:page], :per_page => 20).all(:order => 'series_ref ASC')
+    @plaques = @series.plaques.paginate(:page => params[:page], :per_page => 20, :order => 'series_ref ASC') # Postgres -> NULLS LAST
     @mean = help.find_mean(@plaques)
     respond_to do |format|
       format.html # show.html.erb
