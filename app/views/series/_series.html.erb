@@ -1,9 +1,9 @@
 <div class="series">
   <div class="tile">
-    <%= link_to(series.name, series_path(series), :class=>'name') %>
+    <%= content_tag("span", link_to(series.name, series_path(series)), :class=>'name') %>
     <%= content_tag("span", series.description, :class=>'description') %>
   </div>
   <br/>
-  <%= render :partial "plaques/tile", series.plaques.photographed.limit(10) %>
+  <%= render partial: 'plaques/tile', collection: series.plaques.photographed.limit(10), as: :plaque %>
 </div>
 <br style="clear: both;"/>
