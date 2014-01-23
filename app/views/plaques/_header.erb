@@ -1,0 +1,8 @@
+<div class="header clearfix">
+   <h1>Plaque <abbr title="number">№</abbr> <%= @plaque.id %></h1>
+
+   <div class="like_button">
+     <iframe src="http://www.facebook.com/plugins/like.php?href=<%= plaque_path(@plaque, :only_path => false) %>&amp;layout=button_count&amp;show_faces=false&amp;width=90&amp;action=like&amp;font&amp;colorscheme=light&amp;height=35" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:75px; height:20px; text-align:right;" allowTransparency="true"></iframe>
+   </div>
+
+</div>

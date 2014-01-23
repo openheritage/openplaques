@@ -1,21 +1,6 @@
 <div class="plaque_info_panel" summary="Plaque details for #<%= plaque.id %>" id="plaque_<%= plaque.id %>">
-  <%= content_tag('h1', plaque.inscription_preferably_in_english, :class => 'inscription')%>
-
-  <%= render "plaques/tile", :plaque => plaque %>
-
-  <div class="inside_panel">
-    <% if @person %>
-      <div><%= verbs(@person,plaque).to_sentence.html_safe %> at <%= plaque.location.name + ", " + plaque.area.name if plaque.location and plaque.area %><%= plaque.location.name if plaque.location and !plaque.area %></div>
-    <% else %>
-      <%= content_tag('div', location_if_known(plaque) ) %>
-    <% end %>
-    <%= content_tag('div', 'As far as we know, it is not currently on display' ) unless plaque.is_current %>
-
-    <% connections = plaque.personal_connections.all(:select => "personal_connections.person_id", :group => "personal_connections.person_id") %>
-    <% connections.each do |connection| %>
-      <%= render connection.person if connection.person %>
-    <% end %>
-    <%= content_tag('div', 'Series : ' + plaque.series.name+' ['+plaque.series_ref+']', :class => 'reference' ) if plaque.series_ref %>
-  </div>
+  <%= render 'plaques/tile', :plaque => plaque %>
+  <%= content_tag('h1', plaque.inscription_preferably_in_english, :class => 'inscription') %>
+  <%= render 'plaques/details', :plaque => plaque %>
 </div>
 <br style="clear: both;"/>
