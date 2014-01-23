@@ -5,7 +5,7 @@
 
   <p>The plaque at this location is...
     <% @location.plaques.each do |plaque| %>
-      <%= render 'plaques/plaque_minimal', :plaque => plaque %>
+      <%= render 'plaques/minimal', :plaque => plaque %>
     <% end %>
   </p>
 </div>

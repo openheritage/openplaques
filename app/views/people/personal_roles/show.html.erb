@@ -3,7 +3,7 @@
 <div class="panel">
   <p>This person features on plaques with inscriptions...
     <% @person.plaques.each do |plaque| %>
-      <%= render 'plaques/plaque_minimal', :plaque => plaque %>
+      <%= render 'plaques/minimal', :plaque => plaque %>
     <% end %>
   </p>
   <p>...from which we can establish that:</p>

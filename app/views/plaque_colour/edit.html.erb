@@ -6,7 +6,7 @@
     <p><%= button_to "Not sure. Give me another one", todo_path('microtask'), :method => :get, :class => :button %></p>
   <% end %>
   <br/>
-  <%= render 'plaques/plaque_minimal', :plaque => @plaque %>
+  <%= render 'plaques/minimal', :plaque => @plaque %>
   <%= render 'plaques/photos' %>
 
   <%= form_for @plaque do |f| %>

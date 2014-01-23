@@ -1,7 +1,7 @@
 <div class="panel">
   <h1>Connections for the <%= link_to @plaque.title, @plaque %></h1>
 
-  <p>From <%= render 'plaques/plaque_minimal', :plaque => @plaque %> we can establish that</p>
+  <p>From <%= render 'plaques/minimal', :plaque => @plaque %> we can establish that</p>
 
   <ul><% @plaque.personal_connections.all.each do |pc| %><li><%= link_to pc.person.name, person_path(pc.person) if pc.person %> <%= pc.verb.name if pc.verb %>
     <%= "at " + pc.location.full_address if pc.location %>

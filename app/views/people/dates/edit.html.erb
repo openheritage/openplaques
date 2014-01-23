@@ -8,7 +8,7 @@
   <br/>
   <p><%= @person.name %> features on plaques...
     <% @person.plaques.each do |plaque| %>
-      <%= render 'plaques/plaque_minimal', :plaque => plaque %>
+      <%= render 'plaques/minimal', :plaque => plaque %>
     <% end %>
   </p>
   <p><a href="<%= @person.wikipedia_url %>"><%= @person.wikipedia_url %></a><br/>

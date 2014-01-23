@@ -4,28 +4,19 @@
 
   <h1>Edit organisation for <%= link_to @plaque.title, @plaque %></h1>
 
-  <%= render 'plaques/plaque_minimal', :plaque => @plaque %>
-
+  <%= render 'plaques/minimal', :plaque => @plaque %>
   <%= render "plaques/photos" %>
 
   <%= form_for(@plaque) do |f| %>
-
     <div>
       <%= f.label :erected_at_string, "Erected in" %>: <%= f.text_field :erected_at_string, {:include_blank => true} %>
-      
       <br/>
-      
       <%= f.label :organisation_id, "part of the series" %> <%= f.collection_select :series_id, @series, :id, :name, {:include_blank => true} %> 
-  
       <br/>
-      
       <%= f.label :series_ref, "series refence" %>: <%= f.text_field :series_ref, {:include_blank => true} %>
-      
       <br/>
-
       <%= f.submit "Update", :class => :button %>
     </div>
-
   <% end %>
 
   <%= content_tag("p", link_to("Add new organisation", new_organisation_path)) if current_user %>

@@ -6,7 +6,7 @@
     <p><%= button_to "Not sure. Give me another one", todo_path('microtask'), :method => :get, :class => :button %></p>
   <% end %>
   <br/>
-  <%= render 'plaques/plaque_minimal', :plaque => @plaque %>
+  <%= render 'plaques/minimal', :plaque => @plaque %>
 
   <%= form_for(@plaque) do |f| %>
 	<p>Find <%= @plaque.address %> on <a href="http://maps.google.co.uk/maps?q=<%= @plaque.location.name if @plaque.location %>,<%= @plaque.area.name if @plaque.area %>&z=18" target="_new">Google Maps</a>, move around until the plaque is in front of you, click on the link button to copy the Streetview url and paste it in below. If you are sure that it is more-or-less the right address but cannot actually see it then you can still tell us.</p>
