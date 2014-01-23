@@ -58,7 +58,7 @@
     <% end %>
     <table>
     <% @person.plaques.each do |plaque| %>
-      <%= render 'plaques/plaque_minimal', :plaque => plaque %>
+      <%= render 'plaques/_minimal', :plaque => plaque %>
     <% end %>
     </table>
     
