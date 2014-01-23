@@ -7,19 +7,20 @@
    <% end %>
    <tr>
      <th><% if plaque.erected? %>Erected<% else %>To be erected<% end %></th>
-     <td><%= erected_information plaque %></td>
+     <td>
+       <%= erected_information plaque %>
+       <% if plaque.series %>
+         as part of the <%= link_to plaque.series.name, plaque.series %> series
+         <%= content_tag(:span, ' ('+plaque.series_ref+')' ) if plaque.series_ref? %>
+       <% end %>
+     </td>
    </tr>
-   <% if plaque.series %>
-     <tr>
-       <th>Series</th>
-       <td><%= link_to plaque.series.name, plaque.series %><% if plaque.series_ref? %> (<%= plaque.series_ref %>)<% end %></td>
-     </tr>
-   <% end %>
+
    <tr>
      <th>Language</th>
      <td>
       <% if plaque.language_name %>
-        <%= content_tag("span", plaque.language_name, {:property => "dc:language", :content => plaque.language_alpha2, :datatype => "xsd:language"}) %>
+        <%= content_tag(:span, plaque.language_name, {:property => "dc:language", :content => plaque.language_alpha2, :datatype => "xsd:language"}) %>
       <% else %>
         Unknown
       <% end %>
