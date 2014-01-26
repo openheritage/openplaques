@@ -1,3 +1,8 @@
+<% begin %>
+  <% plaque.inscription %>
+<% rescue %>
+  <% plaque = plaque.plaque %>
+<% end %>
 <div class="plaque_info_panel" summary="Plaque details for #<%= plaque.id %>" id="plaque_<%= plaque.id %>">
   <%= render 'plaques/tile', :plaque => plaque %>
   <%= content_tag('h1', new_linked_inscription(plaque), :class => 'inscription') %>
