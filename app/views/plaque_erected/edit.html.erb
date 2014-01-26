@@ -3,7 +3,7 @@
 <div class="panel">
   <h1>Edit organisation for <%= link_to @plaque.title, @plaque %></h1>
   <%= render 'plaques/minimal', :plaque => @plaque %>
-  <%= render @plaque.main_photo %>
+  <%= render @plaque.main_photo if @plaque.main_photo %>
   <br style="clear: both;">
   <%= form_for(@plaque) do |f| %>
     <div>

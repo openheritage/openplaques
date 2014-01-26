@@ -4,7 +4,7 @@
   <h1>What does <%= link_to("plaque \#" + @plaque.id.to_s, @plaque)%> say?</h1>
   <p><%= button_to "Not sure. Give me another one", todo_path('microtask'), :method => :get, :class => :button %></p>
   <br/>
-  <%= render @plaque.main_photo %>
+  <%= render @plaque.main_photo if @plaque.main_photo  %>
 </div>
 
 <%= form_for(@plaque) do |f| %>
