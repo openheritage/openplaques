@@ -369,13 +369,25 @@ class Person < ActiveRecord::Base
     end
   end
   
-  def sex_word
+  def personal_pronoun
     return "it" if (self.thing? || self.group? || self.place?)
+    relationships.each{|relationship|
+        return "she" if (relationship.role.name=="wife" or relationship.role.name=="sister" or relationship.role.name=="mother" or relationship.role.name=="daughter")
+      }
+    relationships.each{|relationship|
+        return "he" # if (relationship.role.name=="husband" or relationship.role.name=="brother" or relationship.role.name=="father" or relationship.role.name=="son")
+      }
     "he/she"
   end
   
   def possessive
     return "its" if (self.thing? || self.group? || self.place?)
+    relationships.each{|relationship|
+        return "her" if (relationship.role.name=="wife" or relationship.role.name=="sister" or relationship.role.name=="mother" or relationship.role.name=="daughter")
+      }
+    relationships.each{|relationship|
+        return "his" # if (relationship.role.name=="husband" or relationship.role.name=="brother" or relationship.role.name=="father" or relationship.role.name=="son")
+      }
     "his/her"
   end
     
