@@ -1,1 +1,4 @@
-<span class="vcard"><%= thumbnail_img(person) + "<br/>".html_safe if person.main_photo %><%= dated_person(person) %></span>
+<span class="vcard">
+  <%= thumbnail_img(person) + "<br/>".html_safe if person.main_photo %>
+  <%= dated_person(person) %>
+</span>

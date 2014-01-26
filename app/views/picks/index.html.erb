@@ -1,43 +1,13 @@
 <% content_for :page_title, "Plaque picks" %>
-<div class="panel clearfix">
-  <section class="admin_panel">
-    <%= link_to("Add a new pick", new_pick_path, {:class => :edit, :title => "Add a new pick"})%>
-  </section>
 
+<%= content_tag(:section, link_to("Add a new pick", new_pick_path, {:class => :edit, :title => "Add a new pick"}), :class => :admin_panel) %>
+
+<div class="panel">
   <h1>Plaque Picks</h1>
-
   <h2>Today's pick</h2>
-  <% @todays = Pick.todays %>
-  <div>
-    <div class="thumb">
-      <%= link_to thumbnail_img(@todays.plaque), @todays.plaque %>
-    </div>
-    <div><%= link_to @todays.plaque.title, @todays.plaque %><br/>"<%= @todays.description %>" - <%= @todays.proposer %></div>
-
-    <%= form_tag(:controller => "picks", :action => "rotate", :method => "post") do %>
-      <p><%= submit_tag("Rotate") %></p>
-    <% end %>
-  </div>
-
-  <% if @picks.size > 0 %>
-    <h2>To feature on any day</h2>
-    <% @picks.reject{|pick| pick.feature_on != nil}.each do |pick| %>
-      <div style="float: left;"><%= link_to thumbnail_img(pick), pick_path(pick) %></div> 
-      <div><%= link_to(pick.plaque.title, pick_path(pick)) %> "<%= pick.description %>" proposed by <%= pick.proposer %> has been featured <%= pluralize(pick.featured_count, "time") %>.
-      </div>
-      <div style="clear: left;"/>
-    <% end %>
-    <h2>To feature (only) on a specific date</h2>
-    <% @picks.reject{|pick| pick.feature_on == nil}.sort_by{|pick| pick[:feature_on]}.each do |pick| %>
-      <div style="float: left;"><%= link_to thumbnail_img(pick), pick_path(pick) %></div> 
-      <div><%= link_to(pick.plaque.title, pick_path(pick)) %> "<%= pick.description %>" proposed by <%= pick.proposer %> has been featured <%= pluralize(pick.featured_count, "time") %>.
-      It would be great to specifically feature it on <%= pick.feature_on.strftime('%d/%m/%Y') %>
-      </div>
-      <div style="clear: left;"/>
-    <% end %>
-  <% else %>
-    <p>There aren't any yet.</p>
-  <% end %>
-
+  <%= render Pick.todays %>
+  <h2>Other picks</h2>
+  <%= render partial: 'picks/minimal', collection: @picks, as: :pick %>
+  <div style="clear: both;"/>
 </div>
-<div class="panel clearfix"/>
+<div class="clearfix"/>

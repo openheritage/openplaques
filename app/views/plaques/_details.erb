@@ -9,22 +9,12 @@
      <th><% if plaque.erected? %>Erected<% else %>To be erected<% end %></th>
      <td>
        <%= erected_information plaque %>
-       <% if plaque.series %>
-         as part of the <%= link_to plaque.series.name, plaque.series %> series
-         <%= content_tag(:span, ' ('+plaque.series_ref+')' ) if plaque.series_ref? %>
-       <% end %>
+       <% if plaque.series %>as <% if plaque.series_ref? %>#<%= content_tag(:span, plaque.series_ref )%><% else %>part<% end %> of the <%= link_to plaque.series.name, plaque.series %> series<% end %>
      </td>
    </tr>
-
    <tr>
      <th>Language</th>
-     <td>
-      <% if plaque.language_name %>
-        <%= content_tag(:span, plaque.language_name, {:property => "dc:language", :content => plaque.language_alpha2, :datatype => "xsd:language"}) %>
-      <% else %>
-        Unknown
-      <% end %>
-    </td>
+     <td><%= render plaque.language %></td>
    </tr>
    <tr>
      <th>Colour</th>
@@ -68,9 +58,7 @@
    <% if !plaque.see_also.empty? %>
      <tr>
         <th>See also...</th>
-        <td>
-          <%= render partial: 'plaques/tile', collection: plaque.see_also, as: :plaque %>
-        </td>
+        <td><%= render partial: 'plaques/tile', collection: plaque.see_also, as: :plaque %></td>
      </tr>
    <% end %>   
  </table>

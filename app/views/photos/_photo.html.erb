@@ -1,0 +1,11 @@
+<div class="plaque_image">
+  <% if photo.plaque %>
+    <%= content_tag(:p, link_to(image_tag(photo.file_url, {:alt => "Photo of " + photo.plaque.to_s, :rel => "foaf:depiction"}), photo.url)) if photo.file_url %>
+  <% elsif photo.person %>
+    <%= content_tag(:p, link_to(image_tag(photo.file_url, {:alt => "Photo of " + photo.person.to_s, :rel => "foaf:depiction"}), photo.url)) if photo.file_url %>
+  <% else %>
+    <%= content_tag(:p, link_to(image_tag(photo.file_url, {:alt => "Photo"}), photo.url)) if photo.file_url %>
+  <% end %>
+  <p class="photo_credit"><%= link_to(photo.source, photo.file_url) %> photographed by <%= link_to photo.photographer, photographer_url(photo.photographer.gsub(".","_").gsub("/","_")) if photo.photographer rescue photo.photographer %></p>
+  <p class="photo_licence"><%= link_to photo.licence.name, photo.licence if photo.licence %></p>
+</div>

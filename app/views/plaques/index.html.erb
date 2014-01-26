@@ -1,17 +1,6 @@
 <% content_for :page_title, "Historical plaques - recently added" %>
 
 <div class="panel">
-  <% if current_user && current_user.is_admin? %>
-    <section class="admin_panel">
-	   <%= link_to("Add a plaque", new_plaque_path(), {:class => :edit, :title => "Add a plaque"})%>
-    </section>
-  <% end %>
-  <h1>Plaques</h1>
-
-  <% if @plaques.size > 0 %>
-    <p>Recently added plaques:</p>
-    <%= list(@plaques) %>
-  <% else %>
-    <p>No plaques yet.</p>
-  <% end %>
+  <h1>Recently added plaques</h1>
+  <%= render @plaques %>
 </div>
