@@ -1,10 +1,8 @@
-<div class="plaque_info_panel">
+<div class="inside_panel">
   <div class="header">
     <%= content_tag("span", link_to(series.name, series_path(series)), :class=>'name') %>
     <%= content_tag("span", series.description, :class=>'description') %>
   </div>
-  <div class="inside_panel">
-    <%= render partial: 'plaques/tile', collection: series.plaques.photographed.limit(10), as: :plaque %>
-  </div>
+  <%= render partial: 'plaques/tile', collection: series.plaques.photographed.limit(10), as: :plaque %>
+  <br style="clear: both;"/>
 </div>
-<br class="clearfix:after"/>

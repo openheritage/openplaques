@@ -1,14 +1,10 @@
-<table class="section_details" cellspacing="0" summary="Plaque details for #<%= plaque.id %>">
-  <tr>
-    <td><%= link_to(thumbnail_img(plaque), plaque_path(plaque)) %></td>
-    <td>"<%= plaque.inscription_preferably_in_english %>"</td>
-    <% if @person %>
-      <td><%= verbs(@person,plaque).to_sentence.html_safe %> at <%= plaque.location.name + ", " + plaque.area.name if plaque.location and plaque.area %><%= plaque.location.name if plaque.location and !plaque.area %></td>
-    <% else %>
-      <td><%= location_if_known plaque %></td>
-    <% end %>
-    <% if !plaque.is_current %>
-      <td>As far as we know, it is not currently on display</td>
-    <% end %>
-  </tr>
-</table>
+<% begin %>
+  <% plaque.inscription %>
+<% rescue %>
+  <% plaque = plaque.plaque %>
+<% end %>
+<div class="inside_panel" summary="Plaque details for #<%= plaque.id %>" id="plaque_<%= plaque.id %>">
+  <%= render 'plaques/tile', :plaque => plaque %>
+  <%= content_tag('h1', new_linked_inscription(plaque), :class => 'inscription') %>
+  <div><%= plaque.location.name + ", " + plaque.area.name if plaque.location and plaque.area %><%= plaque.location.name if plaque.location and !plaque.area %>. <% 'As far as we know, it is not currently on display.' if !plaque.is_current %><% if @person %> where <%= @person.personal_pronoun %> <%= verbs(@person,plaque).to_sentence.html_safe %><% end %></div>
+</div>
