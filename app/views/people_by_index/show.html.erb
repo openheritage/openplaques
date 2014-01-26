@@ -15,7 +15,7 @@
 <%= content_tag("ol", :class => "results", :id => "people_results") do %>
   <% @people.each do |person| %>
     <li>
-      <p class="result"><%= link_to person.full_name, person %> <%= person.dates %></p>
+      <p class="result"><%= render person %></p>
       <p class="count"><%= pluralize(person.personal_connections.size, "plaque") %></p>
     </li>
   <% end %>

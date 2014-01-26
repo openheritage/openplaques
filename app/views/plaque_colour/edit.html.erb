@@ -6,15 +6,12 @@
     <p><%= button_to "Not sure. Give me another one", todo_path('microtask'), :method => :get, :class => :button %></p>
   <% end %>
   <br/>
-  <%= render 'plaques/minimal', :plaque => @plaque %>
-  <%= render 'plaques/photos' %>
-
+  <%= render @plaque.photos %>
+  <br style="clear: both;" />
   <%= form_for @plaque do |f| %>
     <%= f.label :colour_id, "It's" %>
     <%= f.collection_select :colour_id, @colours, :id, :name, {:include_blank => true} %>
     <%= f.submit "Save", :class => :button %>
   <% end %>
-
   <%= content_tag("p", "Or ".html_safe + link_to("add a new colour", new_colour_path) + ".") if current_user && current_user.is_admin? %>
-
 </div>

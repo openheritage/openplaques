@@ -1,12 +1,10 @@
 <% content_for :page_title, "Edit erected information for plaque \#" + @plaque.id.to_s %>
 
 <div class="panel">
-
   <h1>Edit organisation for <%= link_to @plaque.title, @plaque %></h1>
-
   <%= render 'plaques/minimal', :plaque => @plaque %>
-  <%= render "plaques/photos" %>
-
+  <%= render @plaque.main_photo %>
+  <br style="clear: both;">
   <%= form_for(@plaque) do |f| %>
     <div>
       <%= f.label :erected_at_string, "Erected in" %>: <%= f.text_field :erected_at_string, {:include_blank => true} %>
@@ -18,7 +16,5 @@
       <%= f.submit "Update", :class => :button %>
     </div>
   <% end %>
-
   <%= content_tag("p", link_to("Add new organisation", new_organisation_path)) if current_user %>
-  
 </div>
