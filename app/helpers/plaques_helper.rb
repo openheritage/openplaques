@@ -289,64 +289,7 @@ module PlaquesHelper
       return content_tag("p", "by ".html_safe + content_tag("span", "unknown".html_safe, :class => :unknown))
     end
   end
-
-    def linked_inscription(plaque)
-      if plaque.personal_connections.size > 0
-        s = []
-        locations = []
-        plaque.personal_connections.each do |pc|
-          locations << pc.location
-        end
-
-        locations.uniq!
-        locations.each do |location|
-          people = []
-          sentence = []
-          plaque.personal_connections.each do |pc|
-            if pc.location == location
-              people << pc.person
-            end
-          end
-          people.uniq!
-
-          people.each do |person|
-            sub_sentence = []
-            verbs = []
-            plaque.personal_connections.each do |pc|
-              if pc.person == person && pc.location == location
-                sub_sub_sentence = link_to(pc.verb.name, pc.verb)
-  #              sub_sub_sentence += " from "+ pc.started_at.year.to_s + " to " + pc.ended_at.year.to_s if pc.started_at && pc.ended_at
-                verbs << sub_sub_sentence
-              end
-            end
-            ss = content_tag("span",dated_roled_person(person), {:class => "vcard"}) + ", ".html_safe + verbs.to_sentence.html_safe + " "
-            if location == plaque.location
-              ss += link_to("here".html_safe, location)
-            elsif location == nil
-              # huh? maybe it only has an area?
-            else
-              ss += link_to(location.name, location)
-            end
-
-            plaque.personal_connections.each do |pc|
-              if pc.person == person && pc.location == location
-                ss += " from ".html_safe + pc.started_at.year.to_s + " to ".html_safe + pc.ended_at.year.to_s if pc.started_at? && pc.ended_at?
-              end
-            end
-
-            sub_sentence << ss
-            sentence << sub_sentence
-          end
-
-          s << sentence.to_sentence
-        end
-
-        return (s.to_sentence + ".".html_safe).html_safe
-      else
-        return plaque.inscription
-      end
-    end
-
+  
   def geolocation_if_known(plaque)
     if plaque.geolocated?
       geo_microformat(plaque)
