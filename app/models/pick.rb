@@ -31,7 +31,7 @@ class Pick < ActiveRecord::Base
     @todays = Pick.find(:first, :conditions => ["feature_on > ? and feature_on < ?", (Date.today - 1.day).strftime + " 23:59:59 UTC" , (Date.today + 1.day).strftime + " 00:00:00 UTC"])
     if @todays.nil?
       # get the least featured, ignoring already featured this week or one destined for a particular day
-      @todays = Pick.find(:first, :conditions => ["feature_on isnull and (last_featured isnull or last_featured < ?)", Date.today - 1.week], :order => "featured_count ASC")
+      @todays = Pick.find(:first, :conditions => ["last_featured isnull or last_featured < ?", Date.today - 1.week], :order => "featured_count ASC")
     end
     if @todays
       # great, you chose one, so make it today's pick
