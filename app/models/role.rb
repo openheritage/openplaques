@@ -136,8 +136,9 @@ class Role < ActiveRecord::Base
     return true if "Empress" == name
     return true if "Empress of India" == name
     return true if "Lady" == name
-    return true if "Woman Police Constable" == name
     return true if "Queen" == name
+    return true if "Woman Police Constable" == name
+    return true if name.start_with?("Viscountess")
     false
   end
 
