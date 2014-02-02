@@ -6,5 +6,5 @@
 <div class="inside_panel" summary="Plaque details for #<%= plaque.id %>" id="plaque_<%= plaque.id %>">
   <%= render 'plaques/tile', :plaque => plaque %>
   <%= content_tag('h1', new_linked_inscription(plaque), :class => 'inscription') %>
-  <div><%= plaque.location.name + ", " + plaque.area.name if plaque.location and plaque.area %><%= plaque.location.name if plaque.location and !plaque.area %>. <% 'As far as we know, it is not currently on display.' if !plaque.is_current %><% if @person %> where <%= @person.personal_pronoun %> <%= verbs(@person,plaque).to_sentence.html_safe %><% end %></div>
+  <div><%= render plaque.location %><% if @person %> where <%= @person.personal_pronoun %> <%= verbs(@person,plaque).to_sentence.html_safe %><% end %><% '. As far as we know, it is not currently on display.' if !plaque.is_current %></div>
 </div>

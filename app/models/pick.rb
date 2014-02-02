@@ -43,5 +43,9 @@ class Pick < ActiveRecord::Base
       @todays.save
     end    
   end
+
+  def title
+    "Pick #" + self.id.to_s + " " + self.plaque.title
+  end
   
 end

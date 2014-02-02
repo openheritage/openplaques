@@ -10,11 +10,10 @@ module LocationsHelper
 
   def address(location)
     if location.area
-      return (location.name + ", " + link_to(location.area.name, location.area)).html_safe
+      return (location.name + ", " + location.area.name + "," + location.country.to_s)
     else
       link_to location.name, location
     end
   end
-
 
 end
