@@ -133,10 +133,11 @@ class Role < ActiveRecord::Base
     return true if "Dame" == name
     return true if "Dame Commander of the Most Excellent Order of the British Empire" == name
     return true if "Dame Commander of the Royal Victorian Order" == name
-    return true if "Queen" == name
     return true if "Empress" == name
     return true if "Empress of India" == name
+    return true if "Lady" == name
     return true if "Woman Police Constable" == name
+    return true if "Queen" == name
     false
   end
 

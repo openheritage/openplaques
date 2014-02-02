@@ -383,19 +383,21 @@ class Person < ActiveRecord::Base
   def female?
     return true if roles.any?{|role| role.female?}
     return true if self.name.start_with?(
-      "Abigail","Adelaide","Anna","Anne","Annie","Antoinette",
+      "Abigail","Adelaide","Ada","Anna","Anne","Annie","Antoinette",
       "Beatriz",
       "Caroline","Charlotte",
+      "Deborah","Diana",
       "Elizabeth",
       "Gladys",
-      "Jane","Janet","Jeanne",
+      "Hattie",
+      "Jane","Janet","Jeanne","Julia",
       "Kathleen",
       "Lidia","Louisa",
-      "Mabel","Margery","Marianne","Mary","Mercy",
+      "Mabel","Margery","Marianne","Mary","May","Mercy",
       "Paloma",
       "Rachel","Roberta",
       "Susanna",
-      "Victoria")
+      "Victoria","Violet")
     false
   end
   
