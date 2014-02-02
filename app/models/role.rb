@@ -124,8 +124,19 @@ class Role < ActiveRecord::Base
 
   def female?
     return true if "woman" == role_type
+    return true if "wife" == name
+    return true if "sister" == name
+    return true if "half-sister" == name
+    return true if "daughter" == name
+    return true if "mother" == name
     return true if "Baroness" == name
     return true if "Dame" == name
+    return true if "Dame Commander of the Most Excellent Order of the British Empire" == name
+    return true if "Dame Commander of the Royal Victorian Order" == name
+    return true if "Queen" == name
+    return true if "Empress" == name
+    return true if "Empress of India" == name
+    return true if "Woman Police Constable" == name
     false
   end
 

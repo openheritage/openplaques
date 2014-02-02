@@ -324,7 +324,7 @@ class Person < ActiveRecord::Base
   def siblings
     siblings = []
     relationships.each{|relationship|
-      siblings << relationship.related_person if relationship.role.name=="brother" or relationship.role.name=="sister"
+      siblings << relationship.related_person if relationship.role.name=="brother" or relationship.role.name=="sister" or relationship.role.name=="half-brother" or relationship.role.name=="half-sister"
     }
     siblings.sort! { |a,b| a.born_on||0 <=> b.born_on||0 }   
   end
@@ -340,7 +340,7 @@ class Person < ActiveRecord::Base
   def non_family_relationships
     non_family = []
     relationships.each{|relationship|
-      non_family << relationship if relationship.role.name!="husband" and relationship.role.name!="wife" and relationship.role.name!="brother" and relationship.role.name!="sister" and relationship.role.name!="father" and relationship.role.name!="mother" and relationship.role.name!="son" and relationship.role.name!="daughter"
+      non_family << relationship if relationship.role.name!="husband" and relationship.role.name!="wife" and relationship.role.name!="brother" and relationship.role.name!="sister" and relationship.role.name!="half-brother" and relationship.role.name!="half-sister" and relationship.role.name!="father" and relationship.role.name!="mother" and relationship.role.name!="son" and relationship.role.name!="daughter"
     }
     non_family 
   end
@@ -370,10 +370,10 @@ class Person < ActiveRecord::Base
   end
   
   def personal_pronoun
-    return 'it' if (self.thing? || self.group? || self.place?)
-    return 'he' if self.male?
-    return 'she' if self.female?
-    'he/she'
+    return "it" if (self.thing? || self.group? || self.place?)
+    return "he" if self.male?
+    return "she" if self.female?
+    "he/she"
   end
 
   def male?
