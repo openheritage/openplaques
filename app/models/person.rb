@@ -377,12 +377,26 @@ class Person < ActiveRecord::Base
   end
 
   def male?
-    return false if roles.any?{|role| role.female?}
-    true
+    !self.female?
   end
 
   def female?
-    !self.male?
+    return true if roles.any?{|role| role.female?}
+    return true if self.name.start_with?(
+      "Abigail","Adelaide","Anna","Anne","Annie","Antoinette",
+      "Beatriz",
+      "Caroline","Charlotte",
+      "Elizabeth",
+      "Gladys",
+      "Jane","Janet","Jeanne",
+      "Kathleen",
+      "Lidia","Louisa",
+      "Mabel","Margery","Marianne","Mary","Mercy",
+      "Paloma",
+      "Rachel","Roberta",
+      "Susanna",
+      "Victoria")
+    false
   end
   
   def possessive
