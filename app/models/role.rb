@@ -31,7 +31,7 @@ class Role < ActiveRecord::Base
   end
   
   def self.types
-    ["person", "animal", "thing", "group", "place", "relationship", "parent", "spouse", "child", "title", "letters", "military medal", "clergy"]
+    ["person", "man", "woman", "animal", "thing", "group", "place", "relationship", "parent", "spouse", "child", "title", "letters", "military medal", "clergy"]
   end
 
   def person?
@@ -121,12 +121,21 @@ class Role < ActiveRecord::Base
     return true if "Knight Grand Cross of the Order of the British Empire" == name
     false
   end
+
+  def female?
+    return true if "woman" == role_type
+    return true if "Baroness" == name
+    return true if "Dame" == name
+    false
+  end
+
+  def male?
+    !self.female?
+  end
   
   def full_name
-    if abbreviated?
-      return abbreviation + " - " + name
-    end
-    return name
+    return abbreviation + " - " + name if abbreviated?
+    name
   end
   
   def uri
