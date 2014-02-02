@@ -7,20 +7,16 @@ class VerbsController < ApplicationController
     @verbs = Verb.find(:all, :conditions => "personal_connections_count > 0", :order => :name)
     respond_to do |format|
       format.html
-      format.xml # { render :xml => @verbs }
+      format.xml
       format.json { render :json => @verbs }
     end
   end
 
   def show
-    begin
-      @verb = Verb.find_by_name!(params[:id])
-      @verb = Verb.find(params[:id])
-      redirect_to verb_path(@verb) and return
-    end
+    @verb = Verb.find_by_name(params[:id])
     respond_to do |format|
       format.html
-      format.xml # { render :xml => @verb }
+      format.xml
       format.json { render :json => @verb }
     end
   end
@@ -31,7 +27,6 @@ class VerbsController < ApplicationController
 
   def create
     @verb = Verb.new(params[:verb])
-
     if @verb.save
       redirect_to verb_path(@verb)
     else
