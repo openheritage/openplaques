@@ -1,7 +1,7 @@
 <% content_for :page_title, "Blue plaques for people who " + @verb.name %>
 
 <div class="panel">
-  <h1>Blue plaques for people who '<%= @verb.name %>'</h1>
+  <h1><%= pluralize @verb.personal_connections.count, 'person' %> '<%= @verb.name %>'</h1>
   <%= render @verb.personal_connections %>
 </div>
 
