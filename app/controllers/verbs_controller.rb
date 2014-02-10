@@ -34,4 +34,11 @@ class VerbsController < ApplicationController
     end
   end
 
+  # DELETE /verbs/1
+  def destroy
+    @verb = Verb.find params[:id]
+    @verb.destroy
+    redirect_to verbs_path
+  end
+
 end
