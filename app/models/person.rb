@@ -386,7 +386,7 @@ class Person < ActiveRecord::Base
       "Abigail","Adelaide","Ada","Agnes","Alice","Amelia","Anna","Anne","Annie","Antoinette",
       "Beatriz",
       "Caroline","Charlotte","Constance",
-      "Deborah","Diana",
+      "Deborah","Diana","Dolly","Dorothea",
       "Elizabeth","Emma",
       "Florence",
       "Georgia","Georgina","Gladys",
@@ -399,7 +399,7 @@ class Person < ActiveRecord::Base
       "Paloma",
       "Rachel","Roberta","Rosa","Rose",
       "Sally","Susanna",
-      "Victoria","Violet",
+      "Victoria","Violet","Virginia",
       "Winifred")
     false
   end

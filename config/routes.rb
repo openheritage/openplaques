@@ -88,9 +88,7 @@ Openplaques::Application.routes.draw do
   resources :colours
   resources :series
   resources :todo
-  resources :picks do
-    post 'rotate'
-  end
+  resources :picks
 
   # Convenience paths for search:
   match 'search' => "search#index"
