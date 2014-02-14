@@ -1,8 +1,9 @@
 <% content_for :page_title, "Edit " + @location.name %>
+
+<%= render 'plaques/edit_bar', :plaque => @location.plaques.first %>
+
 <div class="panel clearfix">
-
-  <h1>Edit location <%= link_to @location.name, @location %></h1>
-
+  <h1>Edit location <%= link_to @location.full_address, @location %></h1>
   <p>The plaque at this location is...
     <% @location.plaques.each do |plaque| %>
       <%= render 'plaques/minimal', :plaque => plaque %>
@@ -11,8 +12,7 @@
 </div>
 
 <div class="panel clearfix">
-
-  <%= form_for(@location) do |f| %>
+  <%= form_for @location do |f| %>
     <p>
       <%= f.text_field :name %>
       <% if @areas.size > 0 %>
@@ -29,5 +29,4 @@
   </p>
   <br/>
   <p><%= button_to "Delete location", location_path(@location), {:method => :delete, :class => :button} if current_user.try(:is_admin?) %></p>
-
 </div>

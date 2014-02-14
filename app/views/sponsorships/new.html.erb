@@ -1,7 +1,9 @@
 <% content_for :page_title, "Edit sponsor information for plaque \#" + @plaque.id.to_s %>
 
+<%= render 'plaques/edit_bar', :plaque => @plaque %>
+
 <div class="panel">
-  <h1>Sponsors of <%= link_to @plaque.title, @plaque %></h1>
+  <h1>Which organisations were involved in erecting this plaque?</h1>
   <%= render @plaque %>
   <div>
     <% @plaque.sponsorships.all.each do |sponsorship| %>

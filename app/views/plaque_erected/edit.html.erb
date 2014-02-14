@@ -1,7 +1,8 @@
-<% content_for :page_title, "Edit erected information for plaque \#" + @plaque.id.to_s %>
+<% content_for :page_title, "Edit series information for plaque \#" + @plaque.id.to_s %>
+
+<%= render 'plaques/edit_bar', :plaque => @plaque %>
 
 <div class="panel">
-  <h1>Edit organisation for <%= link_to @plaque.title, @plaque %></h1>
   <%= render 'plaques/minimal', :plaque => @plaque %>
   <%= render @plaque.main_photo if @plaque.main_photo %>
   <br style="clear: both;">
@@ -11,10 +12,10 @@
       <br/>
       <%= f.label :organisation_id, "part of the series" %> <%= f.collection_select :series_id, @series, :id, :name, {:include_blank => true} %> 
       <br/>
-      <%= f.label :series_ref, "series reference" %>: <%= f.text_field :series_ref, {:include_blank => true} %>
+      <%= f.label :series_ref, "series reference" %>: <%= f.text_field :series_ref, {:include_blank => true} %> <%= content_tag("p", link_to("Add new series", new_series_path)) if current_user %>
       <br/>
       <%= f.submit "Update", :class => :button %>
     </div>
   <% end %>
-  <%= content_tag("p", link_to("Add new organisation", new_organisation_path)) if current_user %>
+  
 </div>
