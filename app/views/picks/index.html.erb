@@ -4,8 +4,10 @@
 
 <div class="panel">
   <h1>Plaque Picks</h1>
-  <h2>Today's pick</h2>
+  <p>These are our all-time favourite plaques. The weird and the wonderful, the odd and the personal.</p>
+  <p>The Open Plaques server rotates these 'picks' on the home page as 'Plaque of the day'. If you have a favourite then please suggest it to us with a reason why.</p>
+  <h2>Plaque of the day</h2>
   <%= render Pick.todays %>
-  <h2>Other picks</h2>
+  <h2>Other favourites</h2>
   <%= render partial: 'picks/minimal', collection: @picks, as: :pick %>
 </div>
