@@ -2,9 +2,11 @@ class SponsorshipsController < ApplicationController
 
   before_filter :authenticate_admin!, :only => :destroy
 
-  before_filter :find_plaque, :only => [:new]
+  before_filter :find_plaque, :only => [:new, :index]
   before_filter :find_sponsorship, :only => [:destroy]
-  before_filter :list_organisations, :only => [:new]
+  before_filter :list_organisations, :only => [:new, :index]
+
+  respond_to :json
 
   def destroy
     @sponsorship.destroy
@@ -13,6 +15,7 @@ class SponsorshipsController < ApplicationController
 
   def new
     @sponsorship = @plaque.sponsorships.new
+    render 'plaques/sponsorships/new'
   end
 
   def create
@@ -20,6 +23,18 @@ class SponsorshipsController < ApplicationController
     @sponsorship = @plaque.sponsorships.new(params[:sponsorship])
     @sponsorship.save
     redirect_to :back
+  end
+
+  def index
+    respond_to do |format|
+      format.html {
+        @sponsorship = @plaque.sponsorships.new
+        render 'plaques/sponsorships/new'
+      }
+      format.json {
+        render :json => @plaque.sponsorships.as_json
+      }
+    end    
   end
 
   protected

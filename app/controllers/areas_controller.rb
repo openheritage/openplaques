@@ -31,7 +31,10 @@ class AreasController < ApplicationController
     end
     respond_to do |format|
       format.html
-      format.kml { render "plaques/index" }
+      format.kml { 
+        @plaques = @area.plaques.all
+        render "plaques/index"
+      }
       format.osm { render "plaques/index" }
       format.xml
       format.json { render :json => @area.as_json }

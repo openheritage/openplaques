@@ -1,17 +1,7 @@
-<% content_for :page_title, "plaque pick" %>
+<% content_for :page_title, "plaque pick " + @pick.id.to_s %>
 
 <%= content_tag(:section, link_to("Edit this pick", edit_pick_path(@pick), {:class => :edit, :title => "Edit this pick"}), :class => :admin_panel) if current_user && current_user.is_admin? %>
 
 <div class="panel">
-  <%= render @pick.plaque %>
-  <p>"<%= @pick.description %>" proposed by <%= @pick.proposer %>
-    <% if @pick.last_featured %>
-      has been featured plaque of the day <%= pluralize(@pick.featured_count, "time") %><% if @pick.featured_count > 1 %> and was last featured<% end %> on <%= @pick.last_featured.strftime('%d/%m/%Y') %>
-    <% else %>
-      has not been displayed as plaque of the day yet
-    <% end %>.
-  </p>
-  <% if @pick.feature_on %>
-    <p>It would be great to feature it on <%= @pick.feature_on.strftime('%d/%m/%Y') %>.</p>
-  <% end %>
+  <%= render @pick %>
 </div>

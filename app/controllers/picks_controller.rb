@@ -1,9 +1,14 @@
 class PicksController < ApplicationController
 
   before_filter :find_pick, :only => [:edit, :update, :show, :destroy]
-
+  respond_to :json
+  
   def index
     @picks = Pick.all
+    respond_to do |format|
+      format.html
+      format.json { render :json => @picks }
+    end
   end
 
   def new
@@ -21,10 +26,6 @@ class PicksController < ApplicationController
   def destroy
     @pick.destroy
     redirect_to picks_path
-  end
-
-  def rotate
-    Pick.rotate
   end
 
   def update
