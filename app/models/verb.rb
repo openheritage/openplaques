@@ -14,19 +14,23 @@ class Verb < ActiveRecord::Base
   validates_uniqueness_of :name
 
   has_many :personal_connections
-  has_many :plaques, :through => :personal_connections
   has_many :people, :through => :personal_connections
-  has_many :locations, :through => :personal_connections
-
-  def past_tense
-    if name =~ /e\Z/
-      return name + "d"
-    else
-      return name + "ed"
-    end
-  end
 
   def to_param
-    "#{name.gsub('.', '-')}"
+    "#{name.gsub('.', '_').gsub(' ', '_')}"
+  end
+
+  def uri
+    "http://openplaques.org" + Rails.application.routes.url_helpers.verb_path(self, :format => :json)
+  end
+
+  def as_json(options={})
+    # this ignores the user's options
+    super(:only => [:name],
+      :include => {
+        :people => {:only => [:name], :methods => [:uri]}
+      },
+      :methods => [:uri]
+    )
   end
 end

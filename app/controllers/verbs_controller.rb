@@ -13,7 +13,7 @@ class VerbsController < ApplicationController
   end
 
   def show
-    @verb = Verb.find_by_name(params[:id])
+    @verb = Verb.find_by_name(params[:id].gsub('_',' '))
     respond_to do |format|
       format.html
       format.xml
