@@ -48,7 +48,7 @@ class Organisation < ActiveRecord::Base
   end
 
   def as_json(options={})
-    super(:only => [:name, :id])
+    super(:only => :name,:methods => :uri)
   end
   
   def to_param
