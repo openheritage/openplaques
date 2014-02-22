@@ -48,7 +48,7 @@
     <%= simple_format(@person.introduction) if @person.introduction %>
 
     <% if @person.plaques.size > 0 %>
-      <h2>Is commemorated with a plaque at...</h2>
+      <h2>Commemorated on <%= @person.plaques.size %> <%= 'plaque'.pluralize @person.plaques.size %></h2>
     <% else %>
       <h2>Is not commemorated on any plaques in our database (yet)</h2>
     <% end %>
