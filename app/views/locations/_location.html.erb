@@ -1,1 +1,1 @@
-<%= location.name %><% if location.area %>, <%= location.area.name  %>, <%= location.country.name %><% end %>
+<%= location.name %><% if location.area %>, <%= link_to(location.area.name, area_path(location.area)) %>, <%= location.country.name %><% end %>
