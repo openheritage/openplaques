@@ -13,35 +13,36 @@
 class Pick < ActiveRecord::Base
 
   belongs_to :plaque
-  
+
+  scope :current, :conditions => ["last_featured > ? and last_featured < ?", (Date.today - 1.day).strftime + " 23:59:59 UTC" , (Date.today + 1.day).strftime + " 00:00:00 UTC"], :order => "last_featured DESC"
+  scope :never_been_featured, :conditions => ["last_featured isnull or featured_count = 0 or featured_count isnull"]
+  scope :preferably_today, :conditions => ["feature_on > ? and feature_on < ?", (Date.today - 1.day).strftime + " 23:59:59 UTC" , (Date.today + 1.day).strftime + " 00:00:00 UTC"], :order => "featured_count ASC"
+  scope :least_featured, :conditions => ["last_featured < ?", Date.today - 1.week], :order => "featured_count ASC"
+
   validates_presence_of :plaque_id
   validates_uniqueness_of :plaque_id
   
   def self.todays
-    # use today's plaque if one has already been chosen
-    # avoid picking a pick set for a future date
-    @todays = Pick.find(:first, :conditions => ["last_featured > ? and last_featured < ?", (Date.today - 1.day).strftime + " 23:59:59 UTC" , (Date.today + 1.day).strftime + " 00:00:00 UTC"], :order => "last_featured DESC")   
+    @todays = Pick.current.first
     self.rotate unless @todays
-    @todays = Pick.find(:first, :conditions => ["last_featured > ? and last_featured < ?", (Date.today - 1.day).strftime + " 23:59:59 UTC" , (Date.today + 1.day).strftime + " 00:00:00 UTC"], :order => "last_featured DESC")   
-    return @todays
+    @todays = Pick.current.first
   end
   
   def self.rotate
-    # see if one would particularly like to be displayed today, e.g. because it's the subject's birthday
-    @todays = Pick.find(:first, :conditions => ["feature_on > ? and feature_on < ?", (Date.today - 1.day).strftime + " 23:59:59 UTC" , (Date.today + 1.day).strftime + " 00:00:00 UTC"])
-    if @todays.nil?
-      # get the least featured, ignoring already featured this week or one destined for a particular day
-      @todays = Pick.find(:first, :conditions => ["last_featured isnull or last_featured < ?", Date.today - 1.week], :order => "featured_count ASC")
-    end
+    @todays = Pick.preferably_today.first
+    @todays = Pick.never_been_featured.first if @todays.nil?
+    @todays = Pick.least_featured.first if @todays.nil?
     if @todays
       # great, you chose one, so make it today's pick
-      @todays.last_featured = DateTime.now
-      if @todays.featured_count == nil
-        @todays.featured_count = 0
-      end
-      @todays.featured_count = @todays.featured_count + 1
+      @todays.choose
       @todays.save
     end    
+  end
+
+  def choose
+    self.last_featured = DateTime.now
+    self.featured_count = 0 if self.featured_count == nil
+    self.featured_count = self.featured_count + 1
   end
 
   def title
