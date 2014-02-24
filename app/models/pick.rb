@@ -33,7 +33,6 @@ class Pick < ActiveRecord::Base
     @todays = Pick.never_been_featured.first if @todays.nil?
     @todays = Pick.least_featured.first if @todays.nil?
     if @todays
-      # great, you chose one, so make it today's pick
       @todays.choose
       @todays.save
     end    
