@@ -78,6 +78,9 @@ class AreasController < ApplicationController
 
     def find_area
       @area = @country.areas.find_by_slug!(params[:id])
+      if (!@area.geolocated? && @area.plaques.geolocated.size > 3)
+        @area.save
+      end
     end
 
 end

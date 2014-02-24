@@ -37,11 +37,15 @@ class Area < ActiveRecord::Base
   end
 
   def find_centre
-    if (self.latitude == nil && self.longitude == nil || self.latitude == 51.475 && self.longitude == 0)
+    if !geolocated?
       @mean = find_mean(self.plaques.geolocated)
       self.latitude = @mean.latitude
       self.longitude = @mean.longitude
     end
+  end
+
+  def geolocated?
+    return !(self.latitude == nil && self.longitude == nil || self.latitude == 51.475 && self.longitude == 0)
   end
   
   def self.find_or_create_by_woeid(woeid)

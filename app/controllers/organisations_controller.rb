@@ -107,6 +107,9 @@ class OrganisationsController < ApplicationController
 
     def find_organisation
       @organisation = Organisation.find_by_slug!(params[:id])
+      if (!@organisation.geolocated? && @organisation.plaques.geolocated.size > 3)
+        @organisation.save
+      end
     end
 
     def help
