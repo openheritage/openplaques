@@ -198,8 +198,8 @@ class Photo < ActiveRecord::Base
         self.thumbnail = parsed_json['thumbnail_url']
         self.file_url = parsed_json['url']
         self.licence = Licence.find_by_url(parsed_json['license_url'])
-        self.subject = parsed_json['title']
-        self.description = parsed_json['description']
+        self.subject = parsed_json['title'][0,255]
+        self.description = parsed_json['description'][0,255]
         self.latitude = parsed_json['geo']['lat']
         self.longitude = parsed_json['geo']['long']
       rescue
