@@ -171,7 +171,7 @@ class Photo < ActiveRecord::Base
 #      end
       doc = Nokogiri::HTML(open("http://commons.wikimedia.org/wiki/File:"+wikimedia_filename))
       doc.xpath('//td[@class="description"]').each do |v|
-        self.subject = Sanitize.clean(v.content)
+        self.subject = Sanitize.clean(v.content)[0,255]
       end
       doc.xpath('//tr[td/@id="fileinfotpl_aut"]/td').each do |v|
         self.photographer = Sanitize.clean(v.content)
