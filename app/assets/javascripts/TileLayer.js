@@ -48,7 +48,7 @@ L.TileLayer.Ajax = L.TileLayer.extend({
 
 L.TileLayer.GeoJSON = L.TileLayer.Ajax.extend({
     // Store each GeometryCollection's layer by key, if options.unique function is present
-    _keyLayers: {},
+//    _keyLayers: {},
 
     initialize: function (url, options, geojsonOptions) {
         L.TileLayer.Ajax.prototype.initialize.call(this, url, options);
@@ -68,7 +68,7 @@ L.TileLayer.GeoJSON = L.TileLayer.Ajax.extend({
 
     _reset: function () {
         this.geojsonLayer.clearLayers();
-        this._keyLayers = {};
+ //       this._keyLayers = {};
         L.TileLayer.Ajax.prototype._reset.apply(this, arguments);
     },
 
@@ -84,10 +84,6 @@ L.TileLayer.GeoJSON = L.TileLayer.Ajax.extend({
     },
 
     // Add a geojson object from a tile to the GeoJSON layer
-    // * If the options.unique function is specified, merge geometries into GeometryCollections
-    // grouped by the key returned by options.unique(feature) for each GeoJSON feature
-    // * If options.clipTiles is set, and the browser is using SVG, perform SVG clipping on each
-    // tile's GeometryCollection 
     addTileData: function (geojson, tilePoint) {
         var features = L.Util.isArray(geojson) ? geojson : geojson.features, i, len, feature;
 
@@ -103,8 +99,6 @@ L.TileLayer.GeoJSON = L.TileLayer.Ajax.extend({
 
         var options = this.geojsonLayer.options;
 
-        if (options.filter && !options.filter(geojson)) { return; }
-
         var parentLayer = this.geojsonLayer;
         var incomingLayer = null;
         try {
@@ -113,14 +107,15 @@ L.TileLayer.GeoJSON = L.TileLayer.Ajax.extend({
         catch (e) {
             return this;
         }
+
         incomingLayer.feature = L.marker(geojson.geometry.coordinates);
         incomingLayer.defaultOptions = incomingLayer.options;
 
         this.geojsonLayer.resetStyle(incomingLayer);
-
         if (options.onEachFeature) {
             options.onEachFeature(geojson, incomingLayer);
         }
+
         parentLayer.addLayer(incomingLayer);
 
         return this;
