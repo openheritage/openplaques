@@ -9,9 +9,9 @@ class PlaquesController < ApplicationController
 
   respond_to :html, :xml, :json, :kml, :poi, :rss, :csv
 
-  # box = [52.34,-1.23],[50.00,-1.00]
   # box = top_left, bottom_right
   # e.g. http://0.0.0.0:3000/plaques?box=[52.00,-1],[50.00,0.01]
+  # or map tile http://0.0.0.0:3000/plaques/12/2046/1374.json to match http://a.tile.openstreetmap.org/12/2046/1374.png
   # GET /plaques
   # GET /plaques.kml
   # GET /plaques.xml
@@ -22,8 +22,20 @@ class PlaquesController < ApplicationController
   def index
     conditions = {}
 
-    # Bounding-box query
-    if params[:box]
+    zoom = params[:zoom].to_i
+
+    if zoom > 0
+      x = params[:x].to_i
+      y = params[:y].to_i
+      top_left = get_lat_lng_for_number(zoom, x, y)
+      bottom_right = get_lat_lng_for_number(zoom, x + 1, y + 1)
+      lat_min = bottom_right[:lat_deg].to_s
+      lat_max = top_left[:lat_deg].to_s
+      lon_min = bottom_right[:lng_deg].to_s
+      lon_max = top_left[:lng_deg].to_s
+      conditions[:latitude] = lat_min..lat_max
+      conditions[:longitude] = lon_max..lon_min
+    elsif params[:box]
       # TODO: Should really do some validation here...
       coords = params[:box][1,params[:box].length-2].split("],[")
       top_left = coords[0].split(",")
@@ -32,13 +44,12 @@ class PlaquesController < ApplicationController
       conditions[:longitude] = top_left[1].to_s..bottom_right[1].to_s
     end
 
-    # Since query
     if params[:since]
       since = DateTime.parse(params[:since])
       now = DateTime.now
       if since && since < now
         since = since + 1.second
-        conditions[:updated_at] = since..DateTime.now
+        conditions[:updated_at] = since..now
       end
     end
 
@@ -50,27 +61,44 @@ class PlaquesController < ApplicationController
       limit = 20
     end
 
-    if params[:data] && params[:data] == "simple"
+    zoom = params[:zoom].to_i
+    x = params[:x].to_i
+    y = params[:y].to_i
+
+    if zoom > 0
+      top_left = get_lat_lng_for_number(zoom, x, y)
+      bottom_right = get_lat_lng_for_number(zoom, x + 1, y + 1)
+      conditions = {}
+      lat_min = bottom_right[:lat_deg].to_s
+      lat_max = top_left[:lat_deg].to_s
+      lon_min = bottom_right[:lng_deg].to_s
+      lon_max = top_left[:lng_deg].to_s
+      conditions[:latitude] = lat_min..lat_max
+      conditions[:longitude] = lon_max..lon_min
+      @plaques = Plaque.where(:latitude => conditions[:latitude], :longitude => conditions[:longitude])
+    elsif params[:data] && params[:data] == "simple"
       @plaques = Plaque.all(:conditions => conditions, :order => "created_at DESC", :limit => limit)
-		elsif params[:data] && params[:data] == "basic"
+    elsif params[:data] && params[:data] == "basic"
       @plaques = Plaque.all(:select => [:id, :latitude, :longitude, :inscription])
     else
       @plaques = Plaque.all(:conditions => conditions, :order => "created_at DESC", :limit => limit, :include => [:language, :organisations, :colour, [:location => [:area => :country]]])
     end
 
     respond_with @plaques do |format|
-      if params[:data] && params[:data] == "simple"
-        format.json { render :json => @plaques.as_json(:only => [:id, :latitude, :longitude, :inscription],
-          :methods => [:title, :colour_name, :machine_tag, :thumbnail_url]) }
-      elsif params[:data] && params[:data] == "basic"
-        format.json { 
-        	render :json => @plaques.as_json(:only => [:id, :latitude, :longitude, :inscription]) 
-        }
-      
-      end
-      format.json { render :json => @plaques.as_json }
+      format.json {
+        if params[:data] && params[:data] == "simple"
+          render :json => @plaques.as_json(:only => [:id, :latitude, :longitude, :inscription],
+            :methods => [:title, :colour_name, :machine_tag, :thumbnail_url])
+        elsif params[:data] && params[:data] == "basic"
+          render :json => @plaques.as_json(:only => [:id, :latitude, :longitude, :inscription]) 
+        else
+          render :json => { 
+            type: 'FeatureCollection',
+            features: @plaques.as_json
+          }
+        end
+      }
     end
-
   end
 
   # GET /plaques/1
@@ -248,4 +276,19 @@ class PlaquesController < ApplicationController
       @plaque = Plaque.find(params[:id])
     end
 
+    def get_lat_lng_for_number(zoom, xtile, ytile)
+      n = 2.0 ** zoom
+      lon_deg = xtile / n * 360.0 - 180.0
+      lat_rad = Math::atan(Math::sinh(Math::PI * (1 - 2 * ytile / n)))
+      lat_deg = 180.0 * (lat_rad / Math::PI)
+      {:lat_deg => lat_deg, :lng_deg => lon_deg}
+    end
+
+    def get_tile_number(lat_deg, lng_deg, zoom)
+      lat_rad = lat_deg/180 * Math::PI
+      n = 2.0 ** zoom
+      x = ((lng_deg + 180.0) / 360.0 * n).to_i
+      y = ((1.0 - Math::log(Math::tan(lat_rad) + (1 / Math::cos(lat_rad))) / Math::PI) / 2.0 * n).to_i
+      {:x => x, :y =>y}
+    end
 end

@@ -295,7 +295,7 @@ class Plaque < ActiveRecord::Base
   def as_json(options={})
     # This sets default options which are overriden if otherwise specified.
 
-    default_options = {:only => [:id, :inscription, :latitude, :longitude, :erected_at, :updated_at],
+    default_options = {:only => [:id, :inscription, :erected_at, :updated_at],
     :include => {
       :photos => {:only => [], :methods => [:uri, :thumbnail_url]},
       :organisations => {:only => [:name], :methods => [:uri]},
@@ -312,11 +312,32 @@ class Plaque < ActiveRecord::Base
     :methods => [:uri, :title, :colour_name, :machine_tag, :geolocated?, :photographed?, :photo_url, :thumbnail_url, :shot_name]
     }
 
-    if options.size > 0
-      super(options)
-    else
-      super(default_options)
-    end
+    {
+      type: 'Feature',
+      geometry: {
+        type: 'Point',
+          coordinates: [self.longitude, self.latitude]
+      },
+      properties: 
+        if options.size > 0
+          super(options)
+        else
+          super(default_options)
+        end
+    }
+      
+    
+  end
+
+  def as_geojson()
+    {
+      type: 'Feature',
+        geometry: {
+          type: 'Point',
+          coordinates: [self.longitude, self.latitude]
+        },
+      properties: as_json
+    }
   end
 
   def machine_tag
