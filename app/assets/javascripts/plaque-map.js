@@ -104,7 +104,7 @@ function initmap() {
             var plaque_description = '<div class="inscription">' + truncate(plaque.inscription, 255) + '</div><div class="info">' +
             '<a class="link" href="http://openplaques.org/plaques/' + plaque.id + '">Plaque ' + plaque.id + '</a>';
             layer.bindPopup(plaque_description);
-            var plaque_icon = new L.DivIcon({ className: 'plaque-marker-yellow', html: '', iconSize : 16 });
+            var plaque_icon = new L.DivIcon({ className: 'plaque-marker', html: '', iconSize : 16 });
             layer.setIcon(plaque_icon);      
           }
         }
