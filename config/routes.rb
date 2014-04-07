@@ -12,6 +12,7 @@ Openplaques::Application.routes.draw do
     resource :unphotographed, :controller => :unphotographed_plaques, :only => :show
   end
 
+  match 'plaques/:zoom/:x/:y' => 'plaques#index'
   resources :plaques do
     member do
       post 'parse_inscription'
@@ -31,7 +32,7 @@ Openplaques::Application.routes.draw do
     resources :sponsorships
   end
 
-  resource :areas, :controller => :all_areas, :only => :show
+#  resource :areas, :controller => :all_areas, :only => :show
   resources :places, :controller => :countries, :as => :countries do
     resource :unphotographed, :controller => :unphotographed_plaques_by_country, :only => :show
     resources :areas do
@@ -40,7 +41,7 @@ Openplaques::Application.routes.draw do
     end
   end
   resources :locations, :only => [:show, :index, :edit, :update, :destroy]
-
+ 
   resources :photos
   resources :photographers, :as => :photographers, :only => [:create, :index, :show, :new]
   resources :licences, :only => [:index, :show]
