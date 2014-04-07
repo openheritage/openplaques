@@ -103,7 +103,7 @@ function initmap() {
   		   var url = document.location.href.replace(/\?.*/,'') + '.json?data=simple&limit=1000';
   		}
 
-      var geojsonURL = 'http://0.0.0.0:3000/plaques/{z}/{x}/{y}.json';
+      var geojsonURL = '/plaques/{z}/{x}/{y}.json';
       var geojsonTileLayer = new L.TileLayer.GeoJSON(geojsonURL, 
       {
         clipTiles: false
