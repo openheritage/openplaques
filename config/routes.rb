@@ -12,7 +12,6 @@ Openplaques::Application.routes.draw do
     resource :unphotographed, :controller => :unphotographed_plaques, :only => :show
   end
 
-  match 'plaques/:zoom/:x/:y' => 'plaques#index'
   resources :plaques do
     member do
       post 'parse_inscription'
@@ -31,6 +30,8 @@ Openplaques::Application.routes.draw do
     resource :photos, :controller => :plaque_photos, :only => :show
     resources :sponsorships
   end
+  # map tiles are numbered using the convention at http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames
+  match 'plaques/:zoom/:x/:y' => 'plaques#index', :constraints => { :zoom => /\d{2}/, :x => /\d+/, :y => /\d+/ }
 
 #  resource :areas, :controller => :all_areas, :only => :show
   resources :places, :controller => :countries, :as => :countries do
