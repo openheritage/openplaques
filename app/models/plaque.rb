@@ -70,7 +70,6 @@ class Plaque < ActiveRecord::Base
   include ApplicationHelper, ActionView::Helpers::TextHelper
 
   def user_attributes=(user_attributes)
-
     if user_attributes.has_key?("email")
       user = User.find_by_email(user_attributes["email"])
       if user
@@ -78,11 +77,9 @@ class Plaque < ActiveRecord::Base
         self.user = user
       end
     end
-
     if !user
       build_user(user_attributes)
     end
-
   end
 
   def to_csv
@@ -325,8 +322,6 @@ class Plaque < ActiveRecord::Base
           super(default_options)
         end
     }
-      
-    
   end
 
   def as_geojson()
@@ -414,6 +409,28 @@ class Plaque < ActiveRecord::Base
     true
   end
 
+  def Plaque.tile(zoom, xtile, ytile)
+    top_left = get_lat_lng_for_number(zoom, xtile, ytile)
+    bottom_right = get_lat_lng_for_number(zoom, xtile + 1, ytile + 1)
+    lat_min = bottom_right[:lat_deg].to_s
+    lat_max = top_left[:lat_deg].to_s
+    lon_min = bottom_right[:lng_deg].to_s
+    lon_max = top_left[:lng_deg].to_s
+    latitude = lat_min..lat_max
+    longitude = lon_max..lon_min
+    tile = "tile_number_" + zoom.to_s + "_" + xtile.to_s + "_" + ytile.to_s
+    puts ""
+    puts ""
+    puts ""
+    puts "****** " + tile
+    puts ""
+    puts ""
+    puts ""
+    Rails.cache.fetch(tile, :expires_in => 5.minutes) do
+      Plaque.where(:latitude => latitude, :longitude => longitude)
+    end
+  end
+
   def uri
     "http://openplaques.org" + Rails.application.routes.url_helpers.plaque_path(self, :format => :json)
   end
@@ -428,6 +445,24 @@ class Plaque < ActiveRecord::Base
       if !colour && other_colour_id
         self.colour_id = other_colour_id
       end
+    end
+
+    # from OpenStreetMap documentation
+    def Plaque.get_lat_lng_for_number(zoom, xtile, ytile)
+      n = 2.0 ** zoom
+      lon_deg = xtile / n * 360.0 - 180.0
+      lat_rad = Math::atan(Math::sinh(Math::PI * (1 - 2 * ytile / n)))
+      lat_deg = 180.0 * (lat_rad / Math::PI)
+      {:lat_deg => lat_deg, :lng_deg => lon_deg}
+    end
+
+    # from OpenStreetMap documentation
+    def Plaque.get_tile_number(lat_deg, lng_deg, zoom)
+      lat_rad = lat_deg/180 * Math::PI
+      n = 2.0 ** zoom
+      x = ((lng_deg + 180.0) / 360.0 * n).to_i
+      y = ((1.0 - Math::log(Math::tan(lat_rad) + (1 / Math::cos(lat_rad))) / Math::PI) / 2.0 * n).to_i
+      {:x => x, :y =>y}
     end
 
 end

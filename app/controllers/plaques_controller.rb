@@ -4,8 +4,8 @@ class PlaquesController < ApplicationController
   before_filter :authenticate_admin!, :only => :destroy
 
   before_filter :find_plaque, :only => [:show, :parse_inscription, :unparse_inscription, :flickr_search, :flickr_search_all, :update, :destroy, :edit]
-	before_filter :set_cache_header, :only => :index
-  after_filter :set_access_control_headers, :only => :index
+#	before_filter :set_cache_header, :only => :index
+#  after_filter :set_access_control_headers, :only => :index
 
   respond_to :html, :xml, :json, :kml, :poi, :rss, :csv
 
@@ -22,20 +22,7 @@ class PlaquesController < ApplicationController
   def index
     conditions = {}
 
-    zoom = params[:zoom].to_i
-
-    if zoom > 0
-      x = params[:x].to_i
-      y = params[:y].to_i
-      top_left = get_lat_lng_for_number(zoom, x, y)
-      bottom_right = get_lat_lng_for_number(zoom, x + 1, y + 1)
-      lat_min = bottom_right[:lat_deg].to_s
-      lat_max = top_left[:lat_deg].to_s
-      lon_min = bottom_right[:lng_deg].to_s
-      lon_max = top_left[:lng_deg].to_s
-      conditions[:latitude] = lat_min..lat_max
-      conditions[:longitude] = lon_max..lon_min
-    elsif params[:box]
+    if params[:box]
       # TODO: Should really do some validation here...
       coords = params[:box][1,params[:box].length-2].split("],[")
       top_left = coords[0].split(",")
@@ -62,20 +49,10 @@ class PlaquesController < ApplicationController
     end
 
     zoom = params[:zoom].to_i
-    x = params[:x].to_i
-    y = params[:y].to_i
-
     if zoom > 0
-      top_left = get_lat_lng_for_number(zoom, x, y)
-      bottom_right = get_lat_lng_for_number(zoom, x + 1, y + 1)
-      conditions = {}
-      lat_min = bottom_right[:lat_deg].to_s
-      lat_max = top_left[:lat_deg].to_s
-      lon_min = bottom_right[:lng_deg].to_s
-      lon_max = top_left[:lng_deg].to_s
-      conditions[:latitude] = lat_min..lat_max
-      conditions[:longitude] = lon_max..lon_min
-      @plaques = Plaque.where(:latitude => conditions[:latitude], :longitude => conditions[:longitude])
+      x = params[:x].to_i
+      y = params[:y].to_i
+      @plaques = Plaque.tile(zoom, x, y)
     elsif params[:data] && params[:data] == "simple"
       @plaques = Plaque.all(:conditions => conditions, :order => "created_at DESC", :limit => limit)
     elsif params[:data] && params[:data] == "basic"
@@ -276,19 +253,4 @@ class PlaquesController < ApplicationController
       @plaque = Plaque.find(params[:id])
     end
 
-    def get_lat_lng_for_number(zoom, xtile, ytile)
-      n = 2.0 ** zoom
-      lon_deg = xtile / n * 360.0 - 180.0
-      lat_rad = Math::atan(Math::sinh(Math::PI * (1 - 2 * ytile / n)))
-      lat_deg = 180.0 * (lat_rad / Math::PI)
-      {:lat_deg => lat_deg, :lng_deg => lon_deg}
-    end
-
-    def get_tile_number(lat_deg, lng_deg, zoom)
-      lat_rad = lat_deg/180 * Math::PI
-      n = 2.0 ** zoom
-      x = ((lng_deg + 180.0) / 360.0 * n).to_i
-      y = ((1.0 - Math::log(Math::tan(lat_rad) + (1 / Math::cos(lat_rad))) / Math::PI) / 2.0 * n).to_i
-      {:x => x, :y =>y}
-    end
 end
