@@ -5,42 +5,63 @@ var allow_popups=true;
 var plaque_markers = {};
 
 
-function getXmlHttpObject() {
+function getXmlHttpObject()
+{
   if (window.XMLHttpRequest) { return new XMLHttpRequest(); }
   if (window.ActiveXObject)  { return new ActiveXObject("Microsoft.XMLHTTP"); }
   return null;
 }
 
-function stateChanged() {
-  // if AJAX returned a list of markers, add them to the map
+function addPlaque(geojson)
+{
+  var features = L.Util.isArray(geojson) ? geojson : geojson.features, i, len, feature;
+  if (features)
+  {
+    for (i = 0, len = features.length; i < len; i++)
+    {
+      feature = features[i];
+      if (feature.geometries || feature.geometry || feature.features || feature.coordinates)
+      {
+        this.addPlaque(features[i]);
+      }
+    }
+    return this;
+  }
+
+  if (geojson.geometry && geojson.properties && geojson.properties.plaque)
+  {
+    var geometry = geojson.geometry;
+    var plaque = geojson.properties.plaque;
+    if (plaques["'#"+plaque.id+"'"]==null)
+    {
+      var plaque_icon = new L.DivIcon({ className: 'plaque-marker', html: '', iconSize : 16 });
+      var plaque_marker = L.marker([plaque.latitude, plaque.longitude], {icon: plaque_icon});
+      if (allow_popups==true)
+      {
+        var plaque_description = '<div class="inscription">' + truncate(plaque.inscription, 255) + '</div><div class="info">' +
+          '<a class="link" href="http://openplaques.org/plaques/' + plaque.id + '">Plaque ' + plaque.id + '</a>';
+        plaque_marker.bindPopup(plaque_description);
+      }
+      clusterer.addLayer(plaque_marker)
+      plaques["'#"+plaque.id+"'"]=plaque;
+    }
+  }
+}
+
+function stateChanged()
+{
   if (ajaxRequest.readyState==4 && ajaxRequest.status==200)
   {
     var answer = ajaxRequest.responseText;
-    if (answer.substring(0, 1)=="{") { answer = "["+answer+"]"; } // it is a plaque itself, not an array of plaques
     var json=JSON.parse(answer);
-    for (i=0;i<json.length;i++)
-    {
-      var plaque = json[i].plaque;
-      if (plaque.latitude && plaque.longitude && plaques["'#"+plaque.id+"'"]==null)
-      { // ensure that we never display a plaque more than once
-        var plaque_icon = new L.DivIcon({ className: 'plaque-marker', html: '', iconSize : 16 });
-        var plaque_marker = L.marker([plaque.latitude, plaque.longitude], {icon: plaque_icon});
-        if (allow_popups==true)
-        {
-				  var plaque_description = '<div class="inscription">' + truncate(plaque.inscription, 255) + '</div><div class="info">' +
-          '<a class="link" href="http://openplaques.org/plaques/' + plaque.id + '">Plaque ' + plaque.id + '</a>';
-          plaque_marker.bindPopup(plaque_description);
-        }
-        clusterer.addLayer(plaque_marker)
-        plaques["'#"+plaque.id+"'"]=plaque;
-      }
-    }
+    addPlaque(json);
   }
 }
 
 var msg;
 // request the marker info with AJAX for the current bounds
-function getPlaques(url) {
+function getPlaques(url)
+{
   var bounds=map.getBounds();
   var minll=bounds.getSouthWest(), maxll=bounds.getNorthEast();
   //  bounding box call, e.g. http://openplaques.org/plaques.json?box=[51.5482,-0.1617],[51.5282,-0.1217]
@@ -51,9 +72,11 @@ function getPlaques(url) {
   ajaxRequest.send(null);
 }
 
-function initmap() {
+function initmap()
+{
   var plaque_map = $("#plaque-map");
-  if (plaque_map) {
+  if (plaque_map)
+  {
     map = L.map('plaque-map');
 
     // basemap
@@ -64,81 +87,92 @@ function initmap() {
     map.addLayer(mapquest);
 
     var latitude = plaque_map.attr("data-latitude"), longitude = plaque_map.attr("data-longitude"), zoom = plaque_map.attr("data-zoom");
-    if (zoom) {
+    if (zoom)
+    {
       var zoom_level = parseInt(zoom);
-    } else {
+    } 
+    else
+    {
       var zoom_level = 14;
     }
 
-    if (latitude && longitude) {
+    if (latitude && longitude)
+    {
       map.setView(L.latLng(parseFloat(latitude),parseFloat(longitude)),zoom_level);
-    } else {
+    }
+    else
+    {
       // start the map in London
       map.setView(L.latLng(51.54281206119232,-0.16788482666015625),zoom_level);
     }
 
-    clusterer = new L.MarkerClusterGroup({
+    clusterer = new L.MarkerClusterGroup(
+    {
       maxClusterRadius : 25,
       showCoverageOnHover : false,
-      iconCreateFunction: function(cluster) {
-        return new L.DivIcon({ 
+      iconCreateFunction: function(cluster)
+      {
+        return new L.DivIcon(
+        { 
           html: cluster.getChildCount(), 
           className : 'plaque-cluster-marker ' + clusterSize(cluster.getChildCount()), 
           iconSize: clusterWidth(cluster.getChildCount())
         });
       }
     });
+    map.addLayer(clusterer);
 
     var data_view = plaque_map.attr("data-view");
-    if (data_view == "one") {
+    if (data_view == "one")
+    {
   		var plaque_icon = new L.DivIcon({ className: 'plaque-marker', html: '', iconSize : 16 });
-      	L.marker([parseFloat(latitude),parseFloat(longitude)], { icon: plaque_icon }).addTo(map);
-    } else {
+      L.marker([parseFloat(latitude),parseFloat(longitude)], { icon: plaque_icon }).addTo(map);
+    }
+    else
+    {
   		var data_path = plaque_map.attr("data-path");
-  		if (data_view == "all") {
-  		   var url = '/plaques.json?data=basic';
-  		} else if (data_path) {
-  		   var url = data_path;
-  		} else {
-  		   var url = document.location.href.replace(/\?.*/,'') + '.json?data=simple&limit=1000';
-  		}
-
-      var geojsonURL = '/plaques/{z}/{x}/{y}.json';
-      var geojsonTileLayer = new L.TileLayer.GeoJSON(geojsonURL, 
+  		if (data_view == "all")
       {
-        clipTiles: false
-      },
-      {
-        onEachFeature: function(feature, layer){
-          if (feature.properties && feature.properties.plaque) {
-            var plaque = feature.properties.plaque;
-            var plaque_description = '<div class="inscription">' + truncate(plaque.inscription, 255) + '</div><div class="info">' +
-            '<a class="link" href="http://openplaques.org/plaques/' + plaque.id + '">Plaque ' + plaque.id + '</a>';
-            layer.bindPopup(plaque_description);
-            var plaque_icon = new L.DivIcon({ className: 'plaque-marker', html: '', iconSize : 16 });
-            layer.setIcon(plaque_icon);
-            if (plaques["'#"+plaque.id+"'"]==null){
-              plaques["'#"+plaque.id+"'"]=plaque;
-              clusterer.addLayer(layer);
+        var geojsonURL = '/plaques/{z}/{x}/{y}.json';
+        var geojsonTileLayer = new L.TileLayer.GeoJSON(geojsonURL, 
+          {
+            clipTiles: false
+          },
+          {
+            onEachFeature: function(feature, layer)
+            {
+              if (feature.properties && feature.properties.plaque)
+              {
+                var plaque = feature.properties.plaque;
+                var plaque_description = '<div class="inscription">' + truncate(plaque.inscription, 255) + '</div><div class="info">' +
+                '<a class="link" href="http://openplaques.org/plaques/' + plaque.id + '">Plaque ' + plaque.id + '</a>';
+                layer.bindPopup(plaque_description);
+                var plaque_icon = new L.DivIcon({ className: 'plaque-marker', html: '', iconSize : 16 });
+                layer.setIcon(plaque_icon);
+                if (plaques["'#"+plaque.id+"'"]==null)
+                {
+                  plaques["'#"+plaque.id+"'"]=plaque;
+                  clusterer.addLayer(layer);
+                }
+              }
             }
           }
-        }
-      }
-    );
-		
-    map.addLayer(geojsonTileLayer);
-		map.addLayer(clusterer);
-		
-//	    getPlaques(url);  
-
-		if (url === '/plaques.json?data=basic') {
-		} else {		
-//			map.on('moveend', function() { getPlaques(url) });
-		}
-
-
-	}
-
+        );
+        map.addLayer(geojsonTileLayer);
+  		}
+      else if (data_path)
+      {
+  		   var url = data_path;
+         getPlaques(url); 
+         map.on('moveend', function() { getPlaques(url) });
+  		}
+      else
+      {
+  		   var url = document.location.href.replace(/\?.*/,'') + '.json?data=simple&limit=1000';
+         getPlaques(url);
+         map.on('moveend', function() { getPlaques(url) });
+  		}
+	  }
   }
 }
 

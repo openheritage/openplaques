@@ -1,24 +1,18 @@
 <% content_for :page_title, "Historical plaques in " + @area.name + ", " + @area.country.name %>
 <div class="panel clearfix">
   <% if current_user && current_user.is_admin? %>
-  <section class="admin_panel">
-    <%= link_to("Edit this area", edit_area_path(@area), {:class => :edit, :title => "Edit this area"})%>
-  </section>
+    <section class="admin_panel">
+      <%= link_to("Edit this area", edit_area_path(@area), {:class => :edit, :title => "Edit this area"})%>
+    </section>
   <% end %>
-
   <%= link_to(@area.country.name, @area.country) if @area.country %>
   <h1><%= @area.name %></h1>
-
   <% if @area.latitude %>
     <div id="plaque-map" data-latitude="<%= @area.latitude %>" data-longitude="<%= @area.longitude %>" data-view="all"></div>
   <% end %>
-
   <%= will_paginate @plaques %>
-
   <%= list(@plaques) %>
-
   <%= will_paginate @plaques %>
-
 </div>
 
 <div class="panel clearfix">

@@ -3,8 +3,10 @@ L.TileLayer.Ajax = L.TileLayer.extend({
     _requests: [],
     _addTile: function (tilePoint) {
         var tile = { datum: null, processed: false };
+        console.log("original " + this.getTileUrl(tilePoint));
+        zoom = this._map._zoom;
         this._tiles[tilePoint.x + ':' + tilePoint.y] = tile;
-        this._loadTile(tile, tilePoint);
+        this._loadTile(zoom, tile, tilePoint);
     },
     // XMLHttpRequest handler; closure over the XHR object, the layer, and the tile
     _xhrHandler: function (req, layer, tile, tilePoint) {
@@ -22,14 +24,55 @@ L.TileLayer.Ajax = L.TileLayer.extend({
         };
     },
     // Load the requested tile via AJAX
-    _loadTile: function (tile, tilePoint) {
-        this._adjustTilePoint(tilePoint);
-        var layer = this;
-        var req = new XMLHttpRequest();
-        this._requests.push(req);
-        req.onreadystatechange = this._xhrHandler(req, layer, tile, tilePoint);
-        req.open('GET', this.getTileUrl(tilePoint), true);
-        req.send();
+    _loadTile: function (zoom, tile, tilePoint) {
+//        this._adjustTilePoint(tilePoint);
+
+        console.log("_loadTile("+zoom+", "+tile+", "+tilePoint+")");
+
+        if (zoom < 14) { // maximum zoom level
+            console.log(zoom + " " + tilePoint.x + " " + tilePoint.y);
+            tempX = tilePoint.x * 2;
+            tempY = tilePoint.y * 2;
+            newZoom = zoom + 1;
+            console.log(newZoom + " " + tempX + " " + tempY);
+
+            tilePoint1 = tilePoint.clone();
+            tilePoint1.x = tempX;
+            tilePoint1.y = tempY;
+            console.log(newZoom + " " + tilePoint1.x + " " + tilePoint1.y);
+
+            this._tiles[tilePoint1.x + ':' + tilePoint1.y] = tile;
+            this._loadTile(zoom + 1, tile, tilePoint1);
+
+            tilePoint2 = tilePoint.clone();
+            tilePoint2.x = tempX + 1;
+            tilePoint2.y = tempY;
+            this._tiles[tilePoint2.x + ':' + tilePoint2.y] = tile;
+            this._loadTile(zoom + 1, tile, tilePoint2);
+
+            tilePoint3 = tilePoint.clone();
+            tilePoint3.x = tempX;
+            tilePoint3.y = tempY + 1;
+            this._tiles[tilePoint3.x + ':' + tilePoint3.y] = tile;
+            this._loadTile(zoom + 1, tile, tilePoint3);
+
+            tilePoint4 = tilePoint.clone();
+            tilePoint4.x = tempX + 1;
+            tilePoint4.y = tempY + 1;
+            this._tiles[tilePoint4.x + ':' + tilePoint4.y] = tile;
+            this._loadTile(zoom + 1, tile, tilePoint4);
+        } else {
+            originalZoom = this._map._zoom;
+//            json_url = this.getTileUrl(tilePoint).replace("plaques/"+originalZoom+"/","plaques/"+zoom+"/");
+            json_url = "/plaques/"+zoom+"/"+tilePoint.x+"/"+tilePoint.y+".json";
+            console.log("b " + json_url);
+            var layer = this;
+            var req = new XMLHttpRequest();
+            this._requests.push(req);
+            req.onreadystatechange = this._xhrHandler(req, layer, tile, tilePoint);
+            req.open('GET', json_url, true);
+            req.send();
+        }
     },
     _reset: function () {
         L.TileLayer.prototype._reset.apply(this, arguments);
@@ -68,17 +111,14 @@ L.TileLayer.GeoJSON = L.TileLayer.Ajax.extend({
 
     _reset: function () {
         this.geojsonLayer.clearLayers();
- //       this._keyLayers = {};
         L.TileLayer.Ajax.prototype._reset.apply(this, arguments);
     },
 
-    // Recurse LayerGroups and call func() on L.Path layer instances
     _recurseLayerUntilPath: function (func, layer) {
         if (layer instanceof L.Path) {
             func(layer);
         }
         else if (layer instanceof L.LayerGroup) {
-            // Recurse each child layer
             layer.getLayers().forEach(this._recurseLayerUntilPath.bind(this, func), this);
         }
     },
@@ -86,7 +126,6 @@ L.TileLayer.GeoJSON = L.TileLayer.Ajax.extend({
     // Add a geojson object from a tile to the GeoJSON layer
     addTileData: function (geojson, tilePoint) {
         var features = L.Util.isArray(geojson) ? geojson : geojson.features, i, len, feature;
-
         if (features) {
             for (i = 0, len = features.length; i < len; i++) {
                 feature = features[i];
@@ -96,9 +135,7 @@ L.TileLayer.GeoJSON = L.TileLayer.Ajax.extend({
             }
             return this;
         }
-
         var options = this.geojsonLayer.options;
-
         var parentLayer = this.geojsonLayer;
         var incomingLayer = null;
         try {
@@ -107,17 +144,13 @@ L.TileLayer.GeoJSON = L.TileLayer.Ajax.extend({
         catch (e) {
             return this;
         }
-
         incomingLayer.feature = L.marker(geojson.geometry.coordinates);
         incomingLayer.defaultOptions = incomingLayer.options;
-
         this.geojsonLayer.resetStyle(incomingLayer);
         if (options.onEachFeature) {
             options.onEachFeature(geojson, incomingLayer);
         }
-
         parentLayer.addLayer(incomingLayer);
-
         return this;
     },
 

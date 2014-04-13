@@ -1,4 +1,4 @@
-<% content_for :page_title, "#{@organisation.name} #{@colour_label} plaques" %>
+<% content_for :page_title, "#{@organisation.name} plaques" %>
 
 <%= content_tag(:section, link_to("Edit this organisation", edit_organisation_path(@organisation), {:class => :edit, :title => "Edit this organisation"}), :class => :admin_panel) if current_user && current_user.is_admin? %>
 
