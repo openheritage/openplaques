@@ -1,11 +1,11 @@
 // Load data tiles from an AJAX data source
 L.TileLayer.Ajax = L.TileLayer.extend({
     _requests: [],
+    _cache: [],
     _addTile: function (tilePoint) {
         var tile = { datum: null, processed: false };
-        console.log("original " + this.getTileUrl(tilePoint));
+        console.log("map requests " + this.getTileUrl(tilePoint));
         zoom = this._map._zoom;
-        this._tiles[tilePoint.x + ':' + tilePoint.y] = tile;
         this._loadTile(zoom, tile, tilePoint);
     },
     // XMLHttpRequest handler; closure over the XHR object, the layer, and the tile
@@ -25,53 +25,60 @@ L.TileLayer.Ajax = L.TileLayer.extend({
     },
     // Load the requested tile via AJAX
     _loadTile: function (zoom, tile, tilePoint) {
-//        this._adjustTilePoint(tilePoint);
+        this._adjustTilePoint(tilePoint);
 
-        console.log("_loadTile("+zoom+", "+tile+", "+tilePoint+")");
-
-        if (zoom < 14) { // maximum zoom level
-            console.log(zoom + " " + tilePoint.x + " " + tilePoint.y);
+        if (zoom < 14) {
+            // we are zoomed out to a level where the map tile covers a large geographic area == a big sql query
+            // replace map tile call with equivalent calls of one zoom level higher == 4 quadrants x,y x+1,y x+1,y+1 x,y+1
             tempX = tilePoint.x * 2;
             tempY = tilePoint.y * 2;
-            newZoom = zoom + 1;
-            console.log(newZoom + " " + tempX + " " + tempY);
 
             tilePoint1 = tilePoint.clone();
             tilePoint1.x = tempX;
             tilePoint1.y = tempY;
-            console.log(newZoom + " " + tilePoint1.x + " " + tilePoint1.y);
-
-            this._tiles[tilePoint1.x + ':' + tilePoint1.y] = tile;
             this._loadTile(zoom + 1, tile, tilePoint1);
 
             tilePoint2 = tilePoint.clone();
             tilePoint2.x = tempX + 1;
             tilePoint2.y = tempY;
-            this._tiles[tilePoint2.x + ':' + tilePoint2.y] = tile;
             this._loadTile(zoom + 1, tile, tilePoint2);
 
             tilePoint3 = tilePoint.clone();
             tilePoint3.x = tempX;
             tilePoint3.y = tempY + 1;
-            this._tiles[tilePoint3.x + ':' + tilePoint3.y] = tile;
             this._loadTile(zoom + 1, tile, tilePoint3);
 
             tilePoint4 = tilePoint.clone();
             tilePoint4.x = tempX + 1;
             tilePoint4.y = tempY + 1;
-            this._tiles[tilePoint4.x + ':' + tilePoint4.y] = tile;
             this._loadTile(zoom + 1, tile, tilePoint4);
-        } else {
-            originalZoom = this._map._zoom;
+        } 
+        else if (zoom > 14)
+        {
+            tempX = Math.round(tilePoint.x / 2);
+            tempY = Math.round(tilePoint.y / 2);
+            tilePoint5 = tilePoint.clone();
+            tilePoint5.x = tempX;
+            tilePoint5.y = tempY;
+            this._loadTile(zoom - 1, tile, tilePoint5);
+        }
+        else
+        {
+//            originalZoom = this._map._zoom;
 //            json_url = this.getTileUrl(tilePoint).replace("plaques/"+originalZoom+"/","plaques/"+zoom+"/");
             json_url = "/plaques/"+zoom+"/"+tilePoint.x+"/"+tilePoint.y+".json";
-            console.log("b " + json_url);
-            var layer = this;
-            var req = new XMLHttpRequest();
-            this._requests.push(req);
-            req.onreadystatechange = this._xhrHandler(req, layer, tile, tilePoint);
-            req.open('GET', json_url, true);
-            req.send();
+            if (null == this._cache[json_url])
+            {
+                this._cache[json_url] = true;
+                console.log("call " + json_url);
+                var layer = this;
+                var req = new XMLHttpRequest();
+                this._requests.push(req);
+                req.onreadystatechange = this._xhrHandler(req, layer, tile, tilePoint);
+                req.open('GET', json_url, true);
+                req.send();
+                console.log(this._cache);
+            } else { console.log(json_url + " found in cache"); }
         }
     },
     _reset: function () {
@@ -90,8 +97,6 @@ L.TileLayer.Ajax = L.TileLayer.extend({
 
 
 L.TileLayer.GeoJSON = L.TileLayer.Ajax.extend({
-    // Store each GeometryCollection's layer by key, if options.unique function is present
-//    _keyLayers: {},
 
     initialize: function (url, options, geojsonOptions) {
         L.TileLayer.Ajax.prototype.initialize.call(this, url, options);
