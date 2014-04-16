@@ -324,14 +324,14 @@ class Plaque < ActiveRecord::Base
     }
   end
 
-  def as_geojson()
+  def as_geojson(options={})
     {
       type: 'Feature',
         geometry: {
           type: 'Point',
           coordinates: [self.longitude, self.latitude]
         },
-      properties: as_json
+      properties: as_json(options)
     }
   end
 
@@ -422,7 +422,7 @@ class Plaque < ActiveRecord::Base
     puts ""
     puts ""
     puts ""
-    puts "****** " + tile
+    puts "****** load tile " + tile
     puts ""
     puts ""
     puts ""

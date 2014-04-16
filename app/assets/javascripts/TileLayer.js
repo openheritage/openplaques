@@ -4,12 +4,12 @@ L.TileLayer.Ajax = L.TileLayer.extend({
     _cache: [],
     _addTile: function (tilePoint) {
         var tile = { datum: null, processed: false };
-        console.log("map requests " + this.getTileUrl(tilePoint));
+        console.log("map requested " + this.getTileUrl(tilePoint));
         zoom = this._map._zoom;
         this._loadTile(zoom, tile, tilePoint);
     },
     // XMLHttpRequest handler; closure over the XHR object, the layer, and the tile
-    _xhrHandler: function (req, layer, tile, tilePoint) {
+    _xhrHandler: function (req, layer, tile) {
         return function () {
             if (req.readyState !== 4) {
                 return;
@@ -17,50 +17,57 @@ L.TileLayer.Ajax = L.TileLayer.extend({
             var s = req.status;
             if ((s >= 200 && s < 300) || s === 304) {
                 tile.datum = JSON.parse(req.responseText);
-                layer._tileLoaded(tile, tilePoint);
+                layer._tileLoaded(tile);
             } else {
-                layer._tileLoaded(tile, tilePoint);
+                layer._tileLoaded(tile);
             }
         };
     },
     // Load the requested tile via AJAX
     _loadTile: function (zoom, tile, tilePoint) {
-        this._adjustTilePoint(tilePoint);
+//        this._adjustTilePoint(tilePoint);
 
         if (zoom < 14) {
             // we are zoomed out to a level where the map tile covers a large geographic area == a big sql query
             // replace map tile call with equivalent calls of one zoom level higher == 4 quadrants x,y x+1,y x+1,y+1 x,y+1
-            tempX = tilePoint.x * 2;
-            tempY = tilePoint.y * 2;
+            var tempX = tilePoint.x * 2;
+            var tempY = tilePoint.y * 2;
+            var newZoom = zoom + 1;
 
             tilePoint1 = tilePoint.clone();
             tilePoint1.x = tempX;
             tilePoint1.y = tempY;
-            this._loadTile(zoom + 1, tile, tilePoint1);
+            tile1 = { datum: null, processed: false };
+            this._loadTile(newZoom, tile1, tilePoint1);
 
             tilePoint2 = tilePoint.clone();
             tilePoint2.x = tempX + 1;
             tilePoint2.y = tempY;
-            this._loadTile(zoom + 1, tile, tilePoint2);
+            tile2 = { datum: null, processed: false };
+            this._loadTile(newZoom, tile2, tilePoint2);
 
             tilePoint3 = tilePoint.clone();
             tilePoint3.x = tempX;
             tilePoint3.y = tempY + 1;
-            this._loadTile(zoom + 1, tile, tilePoint3);
+            tile3 = { datum: null, processed: false };
+            this._loadTile(newZoom, tile3, tilePoint3);
 
             tilePoint4 = tilePoint.clone();
             tilePoint4.x = tempX + 1;
             tilePoint4.y = tempY + 1;
-            this._loadTile(zoom + 1, tile, tilePoint4);
+            tile4 = { datum: null, processed: false };
+            this._loadTile(newZoom, tile4, tilePoint4);
         } 
         else if (zoom > 14)
         {
-            tempX = Math.round(tilePoint.x / 2);
-            tempY = Math.round(tilePoint.y / 2);
+            var tempX = Math.round(tilePoint.x / 2);
+            var tempY = Math.round(tilePoint.y / 2);
+            var newZoom = zoom - 1;
             tilePoint5 = tilePoint.clone();
             tilePoint5.x = tempX;
             tilePoint5.y = tempY;
-            this._loadTile(zoom - 1, tile, tilePoint5);
+            tile5 = { datum: null, processed: false };
+            this._loadTile(newZoom, tile5, tilePoint5);
         }
         else
         {
@@ -74,11 +81,10 @@ L.TileLayer.Ajax = L.TileLayer.extend({
                 var layer = this;
                 var req = new XMLHttpRequest();
                 this._requests.push(req);
-                req.onreadystatechange = this._xhrHandler(req, layer, tile, tilePoint);
+                req.onreadystatechange = this._xhrHandler(req, layer, tile);
                 req.open('GET', json_url, true);
                 req.send();
-                console.log(this._cache);
-            } else { console.log(json_url + " found in cache"); }
+            } // else { console.log(json_url + " found in cache"); }
         }
     },
     _reset: function () {
@@ -129,13 +135,13 @@ L.TileLayer.GeoJSON = L.TileLayer.Ajax.extend({
     },
 
     // Add a geojson object from a tile to the GeoJSON layer
-    addTileData: function (geojson, tilePoint) {
+    addTileData: function (geojson) {
         var features = L.Util.isArray(geojson) ? geojson : geojson.features, i, len, feature;
         if (features) {
             for (i = 0, len = features.length; i < len; i++) {
                 feature = features[i];
                 if (feature.geometries || feature.geometry || feature.features || feature.coordinates) {
-                    this.addTileData(features[i], tilePoint);
+                    this.addTileData(features[i]);
                 }
             }
             return this;
@@ -159,9 +165,9 @@ L.TileLayer.GeoJSON = L.TileLayer.Ajax.extend({
         return this;
     },
 
-    _tileLoaded: function (tile, tilePoint) {
+    _tileLoaded: function (tile) {
         L.TileLayer.Ajax.prototype._tileLoaded.apply(this, arguments);
         if (tile.datum === null) { return null; }
-        this.addTileData(tile.datum, tilePoint);
+        this.addTileData(tile.datum);
     }
 });

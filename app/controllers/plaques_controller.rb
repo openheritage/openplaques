@@ -71,7 +71,7 @@ class PlaquesController < ApplicationController
         else
           render :json => { 
             type: 'FeatureCollection',
-            features: @plaques.as_json
+            features: @plaques.as_json({:only => [:id, :latitude, :longitude, :inscription]})
           }
         end
       }
