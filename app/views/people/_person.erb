@@ -1,4 +1,4 @@
-<span class="vcard">
-  <%= thumbnail_img(person) + "<br/>".html_safe if person.main_photo %>
+<div class="inside_panel vcard">
+  <%= content_tag("div", link_to(thumbnail_img(person), person_path(person)), :class=>'tile') if person.main_photo %>
   <%= dated_person(person) %>
-</span>
+</div>

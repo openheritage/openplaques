@@ -11,7 +11,7 @@
     <div id="plaque-map" data-latitude="<%= @area.latitude %>" data-longitude="<%= @area.longitude %>" data-view="all"></div>
   <% end %>
   <%= will_paginate @plaques %>
-  <%= render partial: 'plaques/minimal', collection: @plaques, as: :plaque  %>
+  <%= render @plaques %>
   <%= will_paginate @plaques %>
 </div>
 

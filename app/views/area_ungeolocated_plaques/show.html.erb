@@ -2,5 +2,5 @@
 
 <% unless @plaques.nil? %>
   <p>There <%= pluralize_is_or_are(@plaques.size, "plaque") %> in this area that <%= havent_or_hasnt(@plaques.size) %> been geolocated yet.</p>
-  <%= render partial: 'plaques/minimal', collection: @plaques, as: :plaque  %>
+  <%= render @plaques %>
 <% end %>
