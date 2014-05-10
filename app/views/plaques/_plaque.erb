@@ -6,6 +6,9 @@
 <div class="plaque_info_panel" summary="Plaque details for #<%= plaque.id %>" id="plaque_<%= plaque.id %>">
   <%= render 'plaques/tile', :plaque => plaque %>
   <%= content_tag('h1', new_linked_inscription(plaque), :class => 'inscription') %>
+  <% if plaque.foreign? && plaque.inscription_in_english  %>
+    <%= content_tag('h1', plaque.inscription_in_english, :class => 'inscription') %>
+  <% end %>
   <%= render 'plaques/details', :plaque => plaque %>
 </div>
 <br style="clear: both;"/>
