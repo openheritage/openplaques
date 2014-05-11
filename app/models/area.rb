@@ -45,7 +45,7 @@ class Area < ActiveRecord::Base
   end
 
   def geolocated?
-    return !(self.latitude == nil && self.longitude == nil || self.latitude == 51.475 && self.longitude == 0)
+    return !(self.latitude == nil || self.longitude == nil || self.latitude == 51.475 && self.longitude == 0)
   end
   
   def self.find_or_create_by_woeid(woeid)

@@ -25,10 +25,7 @@ class AreasController < ApplicationController
 
   def show
     @plaques = @area.plaques.paginate(:page => params[:page], :per_page => 100)
-    if @plaques
-      #  @centre = find_mean(@plaques)
-      @zoom = 11
-    end
+    @zoom = 11
     respond_to do |format|
       format.html
       format.kml { 
@@ -78,8 +75,9 @@ class AreasController < ApplicationController
 
     def find_area
       @area = @country.areas.find_by_slug!(params[:id])
-      if (!@area.geolocated? && @area.plaques.geolocated.size > 3)
-        @area.save
+      if !@area.geolocated?
+        @area.find_centre
+        @area.save if (@area.plaques.geolocated.size > 3)
       end
     end
 
