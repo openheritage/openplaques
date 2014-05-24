@@ -6,7 +6,7 @@
   <h1>Edit location <%= link_to @location.full_address, @location %></h1>
   <p>The plaque at this location is...
     <% @location.plaques.each do |plaque| %>
-      <%= render 'plaques/minimal', :plaque => plaque %>
+      <%= render plaque %>
     <% end %>
   </p>
 </div>
