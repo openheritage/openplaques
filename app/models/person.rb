@@ -281,6 +281,10 @@ class Person < ActiveRecord::Base
     title += sir unless clergy?
     title
   end
+
+  def titled?
+    title != ""
+  end
   
   def clergy?
     roles.each do |role|
