@@ -405,22 +405,27 @@ module PlaquesHelper
           end
           matched = true if inscription.index(search_for) != nil
 
-          if (!matched && nameparts.length == 3)
-            search_for = nameparts.first + " " + nameparts[1][0,1] + ". " + nameparts.last # Joseph A. Hansom
+          if (!matched && nameparts.length > 2)
+            search_for = nameparts.first + " " + nameparts.second[0,1] + ". " + nameparts.last # Joseph A. Hansom
           end
           matched = true if inscription.index(search_for) != nil
 
-          if (!matched && nameparts.length >= 2)
+          if (!matched && nameparts.length > 1)
             search_for = nameparts.first + " " + nameparts.last # Joseph Hansom
           end
           matched = true if inscription.index(search_for) != nil
 
-          if (!matched && nameparts.length == 3)
-            search_for = nameparts.first[0,1] + ". " + nameparts.second[0,1] + ". " + nameparts.last # J. A. Hansom
+          if (!matched && nameparts.length > 1)
+            search_for = ""
+            nameparts.each_with_index do |namepart, index|
+              puts index
+              search_for += namepart[0,1] + ". " if index != nameparts.length - 1
+              search_for += namepart if index == nameparts.length - 1 # J. A. Hansom, J. R. R. Tolkien
+            end
           end
           matched = true if inscription.index(search_for) != nil
 
-          if (!matched && nameparts.length >= 2)
+          if (!matched && nameparts.length > 1)
             search_for = nameparts.first[0,1] + ". " + nameparts.last # J. Hansom
           end
           matched = true if inscription.index(search_for) != nil
