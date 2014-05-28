@@ -106,28 +106,23 @@ class Person < ActiveRecord::Base
   end
 
   def person?
-    return false if animal? or thing? or group? or place?
-    return true
+    !(animal? or thing? or group? or place?)
   end
 
   def animal?
-    false
-    true if roles.any?{|role| role.animal?}
+    roles.any?{|role| role.animal?}
   end
 
   def thing?
-    false
-    true if roles.any?{|role| role.thing?}
+    roles.any?{|role| role.thing?}
   end
 
   def group?
-    false
-    true if roles.any?{|role| role.group?}
+    roles.any?{|role| role.group?}
   end
 
   def place?
-    false
-    true if roles.any?{|role| role.place?}
+    roles.any?{|role| role.place?}
   end
 
   def type
@@ -287,11 +282,7 @@ class Person < ActiveRecord::Base
   end
   
   def clergy?
-    roles.each do |role|
-      if role.type=="clergy"
-        return true
-      end
-    end
+    return true if roles.any? { |role| role.type=="clergy"}
     false
   end
   
@@ -350,27 +341,17 @@ class Person < ActiveRecord::Base
   end
   
   def creation_word
-    if (self.thing?)
-      return "from"
-    elsif (self.group?)
-      return "formed in"
-    elsif (self.place?)
-      return "built in"
-    else
-      return "born in"
-    end
+    return "from" if (self.thing?)
+    return "formed in" if (self.group?)
+    return "built in" if (self.place?)
+    "born in"
   end
   
   def destruction_word
-    if (self.thing?)
-      return "until"
-    elsif (self.group?)
-      return "ended in"
-    elsif (self.place?)
-      return "closed in"
-    else
-      return "died in"
-    end
+    return "until" if self.thing?
+    return "ended in" if self.group?
+    return "closed in" if self.place?
+    "died in"
   end
   
   def personal_pronoun
