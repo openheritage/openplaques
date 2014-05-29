@@ -29,7 +29,6 @@ class Person < ActiveRecord::Base
   has_many :straight_roles, :class_name => "PersonalRole", :conditions => ['related_person_id IS NULL'], :order => 'started_at asc'
   has_many :personal_connections, :order => 'started_at asc'
   has_many :locations, :through => :personal_connections, :uniq => true
-#  has_many :verbs, :through => :personal_connections
   has_many :plaques, :through => :personal_connections, :uniq => true
   has_one :birth_connection, :class_name => "PersonalConnection", :conditions => [ 'verb_id in (8,504)']
   has_one :death_connection, :class_name => "PersonalConnection", :conditions => [ 'verb_id in (3,49,161,1108)']
@@ -76,10 +75,8 @@ class Person < ActiveRecord::Base
   end
 
   def self.find_or_create_by_name_and_dates_and_roles(string)
-
     name_dates_roles_regex = /\A(.*\s#{DATE_RANGE_REGEX}),?\s?(.*)?\Z/
     name_roles_re = /\A([A-Z][a-zA-Z\.,]+(\s(([A-Z][a-z]+|[A-Z]\.|de))|\,\sEarl\sof\s[A-Z][a-z]+)*)((\s|,\s)(.*?))?\Z/
-
     if string =~ name_dates_roles_regex
       person = find_or_create_by_name_and_dates(string[name_dates_roles_regex, 1])
       person.find_or_create_roles(string[name_dates_roles_regex, 2])
@@ -213,32 +210,6 @@ class Person < ActiveRecord::Base
     self.name[self.name.downcase.rindex(" " + self.surname_starts_with.downcase) ? self.name.downcase.rindex(" " + self.surname_starts_with.downcase) + 1: 0,self.name.size]
   end
 
-  def as_json(options={})
-    # this example ignores the user's options
-    super(:only => [:updated_at],
-      :include => {
-        :personal_roles => {
-          :only => [:started_at, :ended_at], 
-          :include => {
-            :role => {:only => [:name], :methods => [:uri]},
-            :related_person => {:only => [], :methods => [:uri, :full_name]}
-          },
-          :methods => [:uri, :from, :to]
-        },
-        :personal_connections  => {
-          :only => [:started_at, :ended_at],
-          :methods => [],
-          :include => {
-            :location => {:only => [:name], :include => {:area => {:only => :name, :include => {:country => {:only => [:name, :alpha2]}}}}},
-            :verb =>{:only => [:name]},
-            :plaque =>{:only => [], :methods => [:uri]}
-          }
-        }
-      },
-      :methods => [:full_name, :born_in, :born_at, :died_in, :died_at, :default_wikipedia_url, :default_dbpedia_uri, :surname, :type]
-    )
-  end
-
   def default_thumbnail_url
     return "/assets/NoPersonSqr.png"
   end
@@ -368,11 +339,11 @@ class Person < ActiveRecord::Base
   def female?
     return true if roles.any?{|role| role.female?}
     return true if self.name.start_with?(
-      "Abigail","Adelaide","Ada","Agnes","Alice","Amelia","Anastasia","Anna","Anne","Annie","Antoinette",
+      "Abigail","Adelaide","Ada","Agnes","Alice","Alison","Amelia","Anastasia","Anna","Anne","Annie","Antoinette",
       "Beatriz",
       "Caroline","Charlotte","Constance",
-      "Deborah","Diana","Dolly","Dorothea",
-      "Elizabeth","Emma",
+      "Deborah","Diana","Dolly","Doris","Dorothea",
+      "Elizabeth","Ellen","Emma",
       "Florence",
       "Georgia","Georgina","Gladys",
       "Hattie",
@@ -381,12 +352,19 @@ class Person < ActiveRecord::Base
       "Letitia", "Lidia","Louisa",
       "Mabel","Margery","Marianne","Mary","May","Mercy",
       "Nancy, Nelly",
-      "Paloma",
+      "Paloma","Priscilla",
       "Rachel","Roberta","Rosa","Rose",
       "Sally","Susanna",
+      "Ursula",
       "Victoria","Violet","Virginia",
-      "Winifred")
+      "Wilhelmina","Winifred")
     false
+  end
+
+  def sex
+    return "female" if female?
+    return "object" if (self.thing? || self.group? || self.place?)
+    "male"
   end
   
   def possessive
@@ -402,6 +380,31 @@ class Person < ActiveRecord::Base
     
   def to_s
     self.name
+  end
+
+  def as_json(options={})
+    # this example ignores the user's options
+    super(:only => [],
+      :include => {
+        :personal_roles => {
+          :only => [:started_at, :ended_at], 
+          :include => {
+            :role => {:only => :name, :methods => :uri},
+            :related_person => {:only => [], :methods => [:uri, :full_name]}
+          },
+          :methods => [:uri, :from, :to]
+        },
+        :personal_connections  => {
+          :only => [:started_at, :ended_at],
+          :include => {
+            :verb =>{:only => :name},
+            :location => {:only => :name, :include => {:area => {:only => :name, :methods => :uri, :include => {:country => {:only => [:name, :alpha2]}}}}},
+            :plaque =>{:only => [], :methods => :uri}
+          }
+        }
+      },
+      :methods => [:uri, :full_name, :surname, :born_in, :born_at, :died_in, :died_at, :type, :sex, :default_wikipedia_url, :default_dbpedia_uri]
+    )
   end
 
   private
