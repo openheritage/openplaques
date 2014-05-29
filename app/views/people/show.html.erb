@@ -10,7 +10,7 @@
 
   <div class="vcard person" typeof="<%= if (@person.person?) then "foaf:Person" else "foaf:Agent" end %> vcard:VCard" about="#person">
 
-    <p><%= thumbnail_img(@person) %></p>
+    <%= content_tag(:p, thumbnail_img(@person)) if @person.main_photo %>
     <h1><%= dated_person(@person, {:links => :none}) %> <%= roles_list(@person) %></h1>
     
     <% if @person.spousal_relationships.size > 0 %>
@@ -47,19 +47,16 @@
 
     <%= simple_format(@person.introduction) if @person.introduction %>
 
+    <%= content_tag("p", "Read more on ".html_safe + link_to("Wikipedia", @person.default_wikipedia_url, :target => '_blank')) unless @person.default_wikipedia_url.blank? %>
+
     <% if @person.plaques.size > 0 %>
       <h2>Commemorated on <%= @person.plaques.size %> <%= 'plaque'.pluralize @person.plaques.size %></h2>
     <% else %>
       <h2>Is not commemorated on any plaques in our database (yet)</h2>
     <% end %>
-    <table>
     <% @person.plaques.each do |plaque| %>
       <%= render 'plaques/minimal', :plaque => plaque %>
     <% end %>
-    </table>
-    
-    <br/>
-    <%= content_tag("p", "Read more about ".html_safe + link_to(@person.name, @person.default_wikipedia_url, :target => '_blank') + " on Wikipedia.".html_safe) unless @person.default_wikipedia_url.blank? %>
   </div>
 
   <p class="alternate_formats">Data about this <%= @person.type %> as <%= alternate_link_to "XML", person_path(@person, :xml), :xml %> <%= alternate_link_to "JSON", person_path(@person, :json), :json %> <%= alternate_link_to "KML", person_path(@person, :kml), :kml %>  <%= alternate_link_to "GMAP", "http://maps.google.co.uk/maps?q=" + person_url(@person, :kml), :html %></p>
