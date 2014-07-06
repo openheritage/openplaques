@@ -347,7 +347,7 @@ class Person < ActiveRecord::Base
       "Florence",
       "Georgia","Georgina","Gladys",
       "Hattie",
-      "Jane","Janet","Jeanne","Julia",
+      "Jane","Janet","Jacqueline","Jeanne","Julia",
       "Kate","Kathleen",
       "Letitia", "Lidia","Louisa",
       "Mabel","Margery","Marianne","Mary","May","Mercy",
