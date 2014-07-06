@@ -66,7 +66,7 @@ module PlaquesHelper
       machine_tag_key += plaque.id.to_s
     end
 
-    flickr_url = "http://api.flickr.com/services/rest/"
+    flickr_url = "https://api.flickr.com/services/rest/"
     method = "flickr.photos.search"
     license = "1,2,3,4,5,6,7" # All the CC licencses that allow commercial re-use
 
@@ -154,7 +154,7 @@ module PlaquesHelper
     
       key = "86c115028094a06ed5cd19cfe72e8f8b" # FLICKR_KEY
       content_type = "1" # Photos only
-      flickr_url = "http://api.flickr.com/services/rest/"
+      flickr_url = "https://api.flickr.com/services/rest/"
       method = "flickr.photos.search"
       jez = User.find(2)
       black = Colour.find_by_name('black')
