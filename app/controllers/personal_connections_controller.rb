@@ -84,6 +84,7 @@ class PersonalConnectionsController < ApplicationController
     def list_people_and_verbs
       @people = Person.all(:order => :name, :select => 'id, name, born_on, died_on')
       @verbs = Verb.all(:order => :name, :select => 'id, name' )
+      @common_verbs = Verb.common
     end
 
 end

@@ -15,6 +15,8 @@ class PersonalConnection < ActiveRecord::Base
   belongs_to :location, :counter_cache => true
   belongs_to :plaque, :counter_cache => true
 
+  attr_accessor :other_verb_id
+
   def from
     if (verb.id == 8 or verb.id == 504)
       return person.born_in.to_s
