@@ -26,7 +26,7 @@ namespace "photos" do
     content_type = "1" # Photos only
     machine_tag_key = "openplaques:id"
 
-    flickr_url = "http://api.flickr.com/services/rest/"
+    flickr_url = "https://api.flickr.com/services/rest/"
     method = "flickr.photos.search"
     license = "1,2,3,4,5,6,7" # All the CC licencses that allow commercial re-use
 
