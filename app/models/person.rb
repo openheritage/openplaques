@@ -403,7 +403,7 @@ class Person < ActiveRecord::Base
           }
         }
       },
-      :methods => [:uri, :full_name, :surname, :born_in, :born_at, :died_in, :died_at, :type, :sex, :default_wikipedia_url, :default_dbpedia_uri]
+      :methods => [:uri, :full_name, :surname, :born_in, :born_at, :died_in, :died_at, :type, :sex, :wikipedia_url, :dbpedia_uri]
     )
   end
 
