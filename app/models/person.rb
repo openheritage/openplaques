@@ -383,27 +383,32 @@ class Person < ActiveRecord::Base
   end
 
   def as_json(options={})
-    # this example ignores the user's options
     super(:only => [],
       :include => {
+        :main_photo => {:only => [], :methods => :uri},
         :personal_roles => {
-          :only => [:started_at, :ended_at], 
+          :only => [], 
           :include => {
-            :role => {:only => :name, :methods => :uri},
+            :role => {:only => :name},
             :related_person => {:only => [], :methods => [:uri, :full_name]}
           },
-          :methods => [:uri, :from, :to]
+          :methods => [:uri]
         },
         :personal_connections  => {
-          :only => [:started_at, :ended_at],
+          :only => [],
           :include => {
-            :verb =>{:only => :name},
-            :location => {:only => :name, :include => {:area => {:only => :name, :methods => :uri, :include => {:country => {:only => [:name, :alpha2]}}}}},
-            :plaque =>{:only => [], :methods => :uri}
-          }
+            :verb => {:only => :name},
+            :location => {
+              :only => :name, :include => {:area => {:only => :name, :methods => :uri, :include => {:country => {:only => [:name, :alpha2]}}}}},
+            :plaque => {
+              :only => [], 
+              :methods => :uri
+            }
+          }, 
+          :methods => [:uri, :from, :to]
         }
       },
-      :methods => [:uri, :full_name, :surname, :born_in, :born_at, :died_in, :died_at, :type, :sex, :default_wikipedia_url, :default_dbpedia_uri]
+      :methods => [:uri, :name_and_dates, :full_name, :surname, :born_in, :born_at, :died_in, :died_at, :type, :sex, :default_wikipedia_url, :default_dbpedia_uri]
     )
   end
 

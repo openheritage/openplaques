@@ -85,4 +85,8 @@ class Area < ActiveRecord::Base
     name
   end
 
+  def uri
+    "http://openplaques.org" + Rails.application.routes.url_helpers.country_area_path(self.country, self, :format => :json)
+  end
+
 end

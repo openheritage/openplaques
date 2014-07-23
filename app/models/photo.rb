@@ -81,15 +81,13 @@ class Photo < ActiveRecord::Base
   end
   
   def shot_name
-    if shot
-      return shot[3,shot.length]
-    end
+    return nil if shot = ''
+    return shot[3,shot.length] if shot
   end
   
   def shot_order
-    if shot
-      return shot[0,1]
-    end
+    return shot[0,1] if shot && shot != ''
+    6
   end
 
   def self.shots
