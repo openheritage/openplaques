@@ -408,7 +408,7 @@ class Person < ActiveRecord::Base
           :methods => [:uri, :from, :to]
         }
       },
-      :methods => [:uri, :name_and_dates, :full_name, :surname, :born_in, :born_at, :died_in, :died_at, :type, :sex, :wikipedia_url, :default_wikipedia_url, :default_dbpedia_uri]
+      :methods => [:uri, :name_and_dates, :full_name, :surname, :born_in, :born_at, :died_in, :died_at, :type, :sex, :wikipedia_url, :dbpedia_uri, :default_wikipedia_url, :default_dbpedia_uri]
     )
   end
 
