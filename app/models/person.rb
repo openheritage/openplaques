@@ -385,28 +385,30 @@ class Person < ActiveRecord::Base
   def as_json(options={})
     super(:only => [],
       :include => {
-        :main_photo => {:only => [], :methods => :uri},
+#        :main_photo => {:only => [], :methods => :uri},
         :personal_roles => {
           :only => [], 
           :include => {
             :role => {:only => :name},
-            :related_person => {:only => [], :methods => [:uri, :full_name]}
-          },
-          :methods => [:uri]
-        },
-        :personal_connections  => {
-          :only => [],
-          :include => {
-            :verb => {:only => :name},
-            :location => {
-              :only => :name, :include => {:area => {:only => :name, :methods => :uri, :include => {:country => {:only => [:name, :alpha2]}}}}},
-            :plaque => {
-              :only => [], 
-              :methods => :uri
+            :related_person => {
+              :only => [], :methods => [:uri, :full_name]
             }
           }, 
-          :methods => [:uri, :from, :to]
+          :methods => [:uri]
         }
+ #       :personal_connections  => {
+ #         :only => [],
+ #         :include => {
+ #           :verb => {:only => :name},
+ #           :location => {
+ #             :only => :name, :include => {:area => {:only => :name, :methods => :uri, :include => {:country => {:only => [:name, :alpha2]}}}}},
+ #           :plaque => {
+ #             :only => [], 
+ #             :methods => :uri
+ #           }
+ #         }, 
+ #         :methods => [:uri, :from, :to]
+ #       }
       },
       :methods => [:uri, :name_and_dates, :full_name, :surname, :born_in, :born_at, :died_in, :died_at, :type, :sex, :wikipedia_url, :dbpedia_uri, :default_wikipedia_url, :default_dbpedia_uri]
     )

@@ -81,7 +81,7 @@ class Photo < ActiveRecord::Base
   end
   
   def shot_name
-    return nil if shot = ''
+    return nil if shot == ''
     return shot[3,shot.length] if shot
   end
   
