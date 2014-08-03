@@ -28,6 +28,7 @@ Openplaques::Application.routes.draw do
     resource :language, :controller => :plaque_language, :only => :edit
     resources :connections, :controller => "PersonalConnections", :as => :connections
     resource :photos, :controller => :plaque_photos, :only => :show
+    resource :talk, :controller => :plaque_talk, :only => :create
     resources :sponsorships
   end
   # map tiles are numbered using the convention at http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames
