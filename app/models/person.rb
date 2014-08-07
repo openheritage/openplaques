@@ -350,7 +350,7 @@ class Person < ActiveRecord::Base
       "Jane","Janet","Jacqueline","Jeanne","Julia",
       "Kate","Kathleen",
       "Letitia", "Lidia","Louisa",
-      "Mabel","Margery","Marianne","Mary","May","Mercy",
+      "Mabel","Margaret","Margery","Marianne","Mary","May","Mercy",
       "Nancy, Nelly",
       "Paloma","Priscilla",
       "Rachel","Roberta","Rosa","Rose",
