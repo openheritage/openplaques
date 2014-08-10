@@ -341,7 +341,7 @@ class Person < ActiveRecord::Base
     return true if self.name.start_with?(
       "Abigail","Adelaide","Ada","Agnes","Alice","Alison","Amelia","Anastasia","Anna","Anne","Annie","Antoinette",
       "Beatriz",
-      "Caroline","Charlotte","Constance",
+      "Caroline","Charlotte","Clara","Constance",
       "Deborah","Diana","Dolly","Doris","Dorothea",
       "Elizabeth","Ellen","Emma",
       "Florence",
