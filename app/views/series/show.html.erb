@@ -4,6 +4,6 @@
   <p><%= @series.description %></p>
   <div id="plaque-map" data-latitude="<%= @mean.latitude %>" data-longitude="<%= @mean.longitude %>" class="full" data-zoom="8"></div>
   <%= will_paginate @plaques %>
-  <%= render partial: 'plaques/minimal', collection: @plaques, as: :plaque  %>
+  <%= render @plaques %>
   <%= will_paginate @plaques %>
 </div>
