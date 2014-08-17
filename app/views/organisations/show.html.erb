@@ -11,7 +11,7 @@
   <%= simple_format(@organisation.description) if @organisation.description %>
   <div id="plaque-map" data-latitude="<%= @mean.latitude %>" data-longitude="<%= @mean.longitude %>" class="full" data-zoom="<%= @zoom %>"></div>
   <%= will_paginate @sponsorships %>
-  <%= render partial: 'plaques/minimal', collection: @sponsorships, as: :plaque %>
+  <%= render partial: 'plaques/plaque', collection: @sponsorships, as: :plaque %>
   <%= will_paginate @sponsorships %>
 </div>
 
