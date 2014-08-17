@@ -3,7 +3,7 @@
 <%= render 'plaques/edit_bar', :plaque => @plaque %>
 
 <div class="panel">
-  <h1>Geocoding '<%= render @plaque.location %>'</h1>
+  <h1>Where is this plaque?</h1>
   <%= form_for(@plaque) do |f| %>
     <% unless @plaque.geolocated? || @geocodes.length == 0%>
       <p>
@@ -14,13 +14,16 @@
       </p>
     <% end %>
     <br/>
-    <p>Find on <a href="http://maps.google.com/maps?q=<%= @plaque.location.full_address %>&z=18" target="_new">Google Maps</a></p>
+    <p>Our goal is to accurately locate all plaques through real-life evidence. We do not use geocoding software as the results are inaccurate and it will taint the openness of our data. It is okay to plot an approximate position, but please be sure to flag it as uncertain.</p>
+    <br/>
+    <p>Find <%= render @plaque.location %> <a href="http://maps.google.com/maps?q=<%= @plaque.location.full_address %>&z=18" target="_new">Google Maps</a></p>
     <div class="edit_lat_long">
       <p><%= label_tag(:streetview_url, "Google Streetview url:") %> <%= text_field_tag(:streetview_url, ' ', size: 100) %></p>
       <p><%= f.label :latitude %> <%= f.text_field :latitude %> <%= f.label :longitude %> <%= f.text_field :longitude %> </p>
-      <p><%= f.label :is_accurate_geolocation %> <%= f.check_box :is_accurate_geolocation %></p>
+      <p>I'm certain that this location is accurate because it was located from a geocoded photo, or I have seen this plaque in Google Streetview/real life <%= f.check_box :is_accurate_geolocation %></p>
       <p><%= f.submit "Update", :class => :button  %></p>
     </div>
+    <p>You can drag and drop the blue dot to refine the position.</p>
     <div id="map" style="height: 400px; width: 100%; margin-top: 15px;"></div>
     <script>
       var map = null;
