@@ -488,6 +488,14 @@ module PlaquesHelper
     end
   end
 
+  def geolocation_from(url)
+    # https://www.google.com/maps/place/ulitsa+Goncharova,+48,+Ulyanovsk,+Ulyanovskaya+oblast',+Russia,+432011/@54.319775,48.39987,17z/data=!3m1!4b1!4m2!3m1!1s0x415d37692250ea21:0xeab69349916c0171
+    p = Point.new
+    p.latitude = url[/@+([^,]*)/,1]
+    p.longitude = url[/@[\d|.|-]*,+([\d|.|-]*)/,1]
+    return p
+  end
+
   class Point
     attr_accessor :precision
     attr_accessor :latitude
