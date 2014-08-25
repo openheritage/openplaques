@@ -181,10 +181,12 @@ class PlaquesController < ApplicationController
   # PUT /plaques/1
   # PUT /plaques/1.xml
   def update
-    point = help.geolocation_from params[:streetview_url]
-    if !point.latitude.blank? && !point.longitude.blank?
-      params[:plaque][:latitude] = point.latitude
-      params[:plaque][:longitude] = point.longitude
+    if (params[:streetview_url])
+      point = help.geolocation_from params[:streetview_url]
+      if !point.latitude.blank? && !point.longitude.blank?
+        params[:plaque][:latitude] = point.latitude
+        params[:plaque][:longitude] = point.longitude
+      end
     end
 
     if params[:location]
