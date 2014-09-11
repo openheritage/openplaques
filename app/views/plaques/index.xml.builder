@@ -4,6 +4,7 @@ xml.openplaques(){
       
       xml.plaque(:uri => plaque_url(plaque), :machine_tag => plaque.machine_tag, :created_at => plaque.created_at.xmlschema, :updated_at => plaque.updated_at.xmlschema){
         xml.title plaque.title
+        xml.subjects plaque.subjects
         if plaque.colour
           xml.colour plaque.colour_name
         end
@@ -12,7 +13,7 @@ xml.openplaques(){
           xml.linked new_linked_inscription(plaque) if new_linked_inscription(plaque) != plaque.inscription
         }
         if plaque.geolocated?
-          xml.geo(:reference_system => "WGS84", :latitude => plaque.latitude, :longitude => plaque.longitude)
+          xml.geo(:reference_system => "WGS84", :latitude => plaque.latitude, :longitude => plaque.longitude, :is_accurate => plaque.is_accurate_geolocation)
         end
         if plaque.location or plaque.geolocated?
           xml.location {
@@ -56,17 +57,23 @@ xml.openplaques(){
             xml.webpage(:uri => photo.url)
             xml.fullsize(:uri => photo.file_url)
             xml.thumbnail(:uri => photo.thumbnail_url)
-            xml.photographer(:uri => photo.photographer_url) { 
-              xml.text! photo.photographer
+            xml.photographer(:uri => photo.photographer_url) {
+              begin
+                xml.text! photo.photographer
+              rescue
+                xml.text! 'unknown'
+              end
             }
             if photo.shot_name
               xml.shot(:order => photo.shot_order) {
                 xml.text! photo.shot_name
               }
             end
-            xml.licence(:uri => photo.licence.url) {
-              xml.text! photo.licence.name
-            }
+            if photo.licence
+              xml.licence(:uri => photo.licence.url) {
+                xml.text! photo.licence.name
+              }
+            end
             xml.plaque(:uri => plaque_url(photo.plaque)) if photo.plaque
           }
         end

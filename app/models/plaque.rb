@@ -58,6 +58,7 @@ class Plaque < ActiveRecord::Base
   scope :partial_inscription, :conditions => {:inscription_is_stub => true } , :order => "id DESC"
   scope :partial_inscription_photo, :conditions => {:photos_count => 1..99999, :inscription_is_stub => true} , :order => "id DESC"
   scope :no_english_version, :conditions => ["language_id > 1 AND inscription_is_stub = 0 AND inscription_in_english IS NULL"]
+  
 
   attr_accessor :country, :other_colour_id
 
@@ -289,6 +290,27 @@ class Plaque < ActiveRecord::Base
     return people.uniq
   end
 
+  def subjects
+    number_of_subjects = 3
+    if people.size == number_of_subjects + 1
+      first_people = []
+      people.first(number_of_subjects - 1).each do |person|
+        first_people << person[:name]
+      end
+      first_people << pluralize(people.size - number_of_subjects + 1, "other")
+      first_people.to_sentence     
+    elsif people.size > number_of_subjects
+      first_4_people = []
+      people.first(number_of_subjects).each do |person|
+        first_4_people << person[:name]
+      end
+      first_4_people << pluralize(people.size - number_of_subjects, "other")
+      first_4_people.to_sentence
+    elsif people.size > 0
+      people.collect(&:name).to_sentence
+    end
+  end
+
   def as_json(options={})
     # This sets default options which are overriden if otherwise specified.
 
@@ -306,14 +328,15 @@ class Plaque < ActiveRecord::Base
       :people => {:only => [], :methods => [:uri, :full_name]},
       :see_also => {:only => [], :methods => [:uri]}
     },
-    :methods => [:uri, :title, :colour_name, :machine_tag, :geolocated?, :photographed?, :photo_url, :thumbnail_url, :shot_name]
+    :methods => [:uri, :title, :subjects, :colour_name, :machine_tag, :geolocated?, :photographed?, :photo_url, :thumbnail_url, :shot_name]
     }
 
     {
       type: 'Feature',
       geometry: {
         type: 'Point',
-          coordinates: [self.longitude, self.latitude]
+        coordinates: [self.longitude, self.latitude],
+        is_accurate: self.is_accurate_geolocation
       },
       properties: 
         if options.size > 0
