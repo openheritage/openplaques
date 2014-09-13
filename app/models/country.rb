@@ -2,20 +2,20 @@
 # === Attributes
 # * +name+ - the country's common name (not necessarily its official one).
 # * +alpha2+ - 2-letter code as defined by the ISO standard. Used in URLs.
+# * +dbpedia_uri+ - uri to link to DBPedia record
 #
 # === Associations
-# * Plaques - plaques which are located in this country.
 # * Areas - areas located in this country.
-# * Locations - locations within this country.
+#
+# === Indirect Associations
+# * Plaques - plaques which are located in this country.
 class Country < ActiveRecord::Base
 
   validates_presence_of :name, :alpha2
-  validates_uniqueness_of :name   # Unlikely that we'll get two countries with the same name...
-  validates_uniqueness_of :alpha2
+  validates_uniqueness_of :name, :alpha2
   validates_format_of :alpha2, :with => /^[a-z]{2}$/, :message => "must be a 2 letter code"
 
   has_many :areas
-  has_many :locations, :through => :areas
   has_many :plaques, :through => :locations
 
   def latitude
@@ -35,12 +35,20 @@ class Country < ActiveRecord::Base
     alpha2
   end
 
+  def uri
+    "http://openplaques.org" + Rails.application.routes.url_helpers.country_path(self, :format => :json)
+  end
+
   def to_s
     name
   end
 
   def as_json(options={})
-    super(options.merge(:only => [:alpha2, :name, :areas_count, :dbpedia_uri]))
+    super(options.merge(
+      :only => [:name, :uri, :dbpedia_uri],
+      :include => { :areas => {:only => [:name], :methods => :uri}},
+      :methods => [:uri]
+    ))
   end
 
 end
