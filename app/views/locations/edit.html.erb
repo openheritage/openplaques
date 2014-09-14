@@ -5,9 +5,7 @@
 <div class="panel clearfix">
   <h1>Edit location <%= link_to @location.full_address, @location %></h1>
   <p>The plaque at this location is...
-    <% @location.plaques.each do |plaque| %>
-      <%= render plaque %>
-    <% end %>
+    <%= render @location.plaques %>
   </p>
 </div>
 
