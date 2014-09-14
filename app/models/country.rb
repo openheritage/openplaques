@@ -8,7 +8,9 @@
 # * Areas - areas located in this country.
 #
 # === Indirect Associations
+# * Locations - addresses which are located in this country.
 # * Plaques - plaques which are located in this country.
+
 class Country < ActiveRecord::Base
 
   validates_presence_of :name, :alpha2
@@ -16,6 +18,7 @@ class Country < ActiveRecord::Base
   validates_format_of :alpha2, :with => /^[a-z]{2}$/, :message => "must be a 2 letter code"
 
   has_many :areas
+  has_many :locations, :through => :areas
   has_many :plaques, :through => :locations
 
   def latitude

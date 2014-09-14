@@ -33,7 +33,30 @@ class Area < ActiveRecord::Base
   include PlaquesHelper
   
   def as_json(options={})
-    {:label => name, :value => name, :id => id, :country_id => country.id, :country_name => country.name}
+    default_options = {
+      :only => :name,
+      :include => { 
+        :country => {
+          :only => :name,
+          :methods => :uri
+        }
+      },
+      :methods => [:uri, :plaques_uri]
+    }
+
+    {
+      type: 'Feature',
+      geometry: {
+        type: 'Point',
+        coordinates: [self.longitude, self.latitude]
+      },
+      properties: 
+        if options.size > 0
+          super(options)
+        else
+          super(default_options)
+        end
+    }
   end
 
   def find_centre
@@ -87,6 +110,10 @@ class Area < ActiveRecord::Base
 
   def uri
     "http://openplaques.org" + Rails.application.routes.url_helpers.country_area_path(self.country, self, :format => :json)
+  end
+
+  def plaques_uri
+    "http://openplaques.org" + Rails.application.routes.url_helpers.country_area_plaques_path(self.country, self, :format => :json)
   end
 
 end

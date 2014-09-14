@@ -1,17 +1,24 @@
 class CountryPlaquesController < ApplicationController
 
   before_filter :find_country, :only => [:show]
-  respond_to :json
+  respond_to :html, :kml, :osm, :xml, :json
 
   def show
-    @plaques = @country.plaques
+    if (params[:id] && params[:id]=='unphotographed')
+      @plaques = @country.plaques.unphotographed
+    elsif (params[:id] && params[:id]=='current')
+      @plaques = @country.plaques.current
+    elsif (params[:id] && params[:id]=='ungeolocated')
+      @plaques = @country.plaques.ungeolocated
+    else
+      @plaques = @country.plaques
+    end
     respond_with @plaques do |format|
       format.html { render @plaques }
-      format.json { render :json => @plaques.as_json(
-        :only => [:id, :latitude, :longitude, :inscription],
-        :methods => [:title, :uri, :colour_name]
-        ) 
-      }
+      format.kml { render "plaques/index" }
+      format.osm { render "plaques/index" }
+      format.xml
+      format.json { render :json => @plaques.as_json() }
     end
   end
 

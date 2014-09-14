@@ -45,6 +45,7 @@ class Plaque < ActiveRecord::Base
 
   before_save :use_other_colour_id
 
+  scope :current, :conditions => {:is_current => true} , :order => "id DESC"
   scope :geolocated, :conditions => ["latitude IS NOT NULL"]
   scope :ungeolocated, :conditions => {:latitude => nil} , :order => "id DESC"
   scope :photographed, :conditions => ["photos_count > 0"]
@@ -59,7 +60,6 @@ class Plaque < ActiveRecord::Base
   scope :partial_inscription_photo, :conditions => {:photos_count => 1..99999, :inscription_is_stub => true} , :order => "id DESC"
   scope :no_english_version, :conditions => ["language_id > 1 AND inscription_is_stub = 0 AND inscription_in_english IS NULL"]
   
-
   attr_accessor :country, :other_colour_id
 
   delegate :name, :to => :colour, :prefix => true, :allow_nil => true
@@ -312,28 +312,68 @@ class Plaque < ActiveRecord::Base
   end
 
   def as_json(options={})
-    # This sets default options which are overriden if otherwise specified.
-
-    default_options = {:only => [:id, :inscription, :erected_at, :updated_at],
-    :include => {
-      :photos => {:only => [], :methods => [:uri, :thumbnail_url]},
-      :organisations => {:only => [:name], :methods => [:uri]},
-      :colour => {:only => :name},
-      :language => {:only => [:name, :alpha2]},
-      :location => {:only => :name,
-        :include => {
-          :area => {:only => :name, :include => {:country => {:only => [:name, :alpha2]}}}
+    default_options = 
+    {
+      :only => [:id, :inscription, :erected_at, :is_current, :updated_at],
+      :include =>
+      {
+        :photos => 
+        {
+          :only => [], 
+          :methods => [:uri, :thumbnail_url]
+        },
+        :organisations =>
+        {
+          :only => [:name],
+          :methods => [:uri]
+        },
+        :colour =>
+        {
+          :only => :name
+        },
+        :language =>
+        {
+          :only => [:name, :alpha2]
+        },
+        :location => 
+        {
+          :only => :name,
+          :include => 
+          {
+            :area => 
+            {
+              :only => :name, 
+              :include => 
+              {
+                :country => 
+                {
+                  :only => [:name, :alpha2],
+                  :methods => :uri
+                }
+              },
+              :methods => :uri
+            }
+          }
+        },
+        :people => 
+        {
+          :only => [], 
+          :methods => [:uri, :full_name]
+        },
+        :see_also => 
+        {
+          :only => [],
+          :methods => [:uri]
         }
       },
-      :people => {:only => [], :methods => [:uri, :full_name]},
-      :see_also => {:only => [], :methods => [:uri]}
-    },
-    :methods => [:uri, :title, :subjects, :colour_name, :machine_tag, :geolocated?, :photographed?, :photo_url, :thumbnail_url, :shot_name]
+      :methods => [:uri, :title, :subjects, :colour_name, :machine_tag, :geolocated?, :photographed?, :photo_url, :thumbnail_url, :shot_name]
     }
 
+    # use a geojson format wrapper
     {
       type: 'Feature',
-      geometry: {
+      geometry: 
+      {
         type: 'Point',
         coordinates: [self.longitude, self.latitude],
         is_accurate: self.is_accurate_geolocation
@@ -344,17 +384,6 @@ class Plaque < ActiveRecord::Base
         else
           super(default_options)
         end
-    }
-  end
-
-  def as_geojson(options={})
-    {
-      type: 'Feature',
-        geometry: {
-          type: 'Point',
-          coordinates: [self.longitude, self.latitude]
-        },
-      properties: as_json(options)
     }
   end
 
@@ -442,13 +471,6 @@ class Plaque < ActiveRecord::Base
     latitude = lat_min..lat_max
     longitude = lon_max..lon_min
     tile = "tile_number_" + zoom.to_s + "_" + xtile.to_s + "_" + ytile.to_s
-    puts ""
-    puts ""
-    puts ""
-    puts "****** load tile " + tile
-    puts ""
-    puts ""
-    puts ""
     Rails.cache.fetch(tile, :expires_in => 5.minutes) do
       Plaque.where(:latitude => latitude, :longitude => longitude)
     end

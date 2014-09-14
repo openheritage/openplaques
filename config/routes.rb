@@ -9,7 +9,6 @@ Openplaques::Application.routes.draw do
   scope "/plaques" do
     resources :erected_in, :controller => :plaque_erected_years, :as => :plaque_erected_years, :only => [:index, :show]
     resource :latest, :as => :latest, :controller => :plaques_latest, :only => :show
-    resource :unphotographed, :controller => :unphotographed_plaques, :only => :show
   end
 
   resources :plaques do
@@ -34,19 +33,15 @@ Openplaques::Application.routes.draw do
   # map tiles are numbered using the convention at http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames
   match 'plaques/:zoom/:x/:y' => 'plaques#index', :constraints => { :zoom => /\d{2}/, :x => /\d+/, :y => /\d+/ }
 
-  resources :areas, :controller => :all_areas, :only => :show do
-    resource :plaques, :controller => :area_plaques, :only => :show
-  end
-
   resources :places, :controller => :countries, :as => :countries do
-    resource :plaques, :controller => :country_plaques, :only => :show
-    resource :unphotographed, :controller => :unphotographed_plaques_by_country, :only => :show
+    resources :plaques, :controller => :country_plaques, :only => :show
     resources :areas do
+      resource :plaques, :controller => :area_plaques, :only => :show
       resource :unphotographed, :controller => :unphotographed_plaques_by_area, :only => :show
       resource :ungeolocated, :controller => :area_ungeolocated_plaques, :only => :show
     end
   end
-  resources :locations, :only => [:show, :index, :edit, :update, :destroy]
+  resources :locations, :only => [:show, :edit, :update, :destroy]
  
   resources :photos
   resources :photographers, :as => :photographers, :only => [:create, :index, :show, :new]
