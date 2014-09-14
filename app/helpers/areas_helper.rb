@@ -21,7 +21,7 @@ module AreasHelper
   end
 
   def area_unphotographed_path(area, options = {})
-    url_for(options.merge(:controller => :unphotographed_plaques_by_area, :action => :show, :area_id => area.slug, :country_id => area.country.alpha2))
+    url_for(options.merge(:controller => :area_plaques, :action => :show, :country_id => area.country.alpha2, :area_id => area.slug, :id => :unphotographed))
   end
 
   def list_of_area_links(areas)

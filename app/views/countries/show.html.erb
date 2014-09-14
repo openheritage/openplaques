@@ -3,14 +3,15 @@
 <div class="panel clearfix">
   <% if current_user && current_user.is_admin? %>
     <section class="admin_panel">
-      <%= link_to("Add new area in " + @country.name, new_country_area_path(@country.alpha2), {:class => :edit, :title => "Add new area in " + @country.name})%>
+      <%= link_to("Add a new area", new_country_area_path(@country.alpha2), {:class => :edit, :title => "Add new area to " + @country.name})%>
     </section>
   <% end %>
 
-  <h1>Plaques in <%= @country.name %></h1>
+  <h1><%= @country.name %></h1>
 
-  <%= pluralize @country.plaques.size, "plaque" %>
+  <p>We have <%= pluralize @country.plaques.size, "plaque record" %> in <%= @country.name %></p>
 
+  <h2>In <%= pluralize @country.areas.size, "area" %></h2>
   <%= content_tag("ol", :class => "results one_destination_results", :id => "people_results") do %>
     <% @areas.each do |area| %>
       <%= content_tag("li") do %>
@@ -20,10 +21,6 @@
       <% end %>
     <% end %>
   <% end unless @areas.size <=0 %>
-
-  <%= content_tag("p") do %>
-    See <%= link_to "unphotographed plaques", country_unphotographed_path(@country) %>.
-  <% end %>
 
   <p class="alternate_formats">Data about <%= @country %> as <%= alternate_link_to "XML", country_path(@country, :xml), :xml %> <%= alternate_link_to "JSON", country_path(@country, :json), :json %> <%= alternate_link_to "KML", country_path(@country, :kml), :kml %>  <%= alternate_link_to "GMAP", "http://maps.google.co.uk/maps?q=" + country_url(@country, :kml), :html %></p>
 </div>
