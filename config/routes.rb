@@ -42,7 +42,8 @@ Openplaques::Application.routes.draw do
     end
   end
   resources :locations, :only => [:show, :edit, :update, :destroy]
- 
+  resource :areas, :controller => :all_areas, :only => :show
+
   resources :photos
   resources :photographers, :as => :photographers, :only => [:create, :index, :show, :new]
   resources :licences, :only => [:index, :show]
