@@ -33,15 +33,19 @@ class Area < ActiveRecord::Base
   include PlaquesHelper
   
   def as_json(options={})
+    {:label => name, :value => name, :id => id, :country_id => country.id, :country_name => country.name}
+  end
+
+  def as_json_new(options={})
     default_options = {
       :only => :name,
       :include => { 
         :country => {
-          :only => :name,
+          :only => [:id, :name],
           :methods => :uri
         }
       },
-      :methods => [:uri, :plaques_uri]
+      :methods => [:id, :uri, :plaques_uri]
     }
 
     {
