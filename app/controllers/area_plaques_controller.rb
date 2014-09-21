@@ -14,7 +14,7 @@ class AreaPlaquesController < ApplicationController
       @plaques = @area.plaques.ungeolocated.paginate(:page => params[:page], :per_page => 50)
       @display = 'ungeolocated'
     else
-      @plaques = @area.plaques.paginate(:page => params[:page], :per_page => 10)
+      @plaques = @area.plaques.paginate(:page => params[:page], :per_page => 50)
     end
     respond_with @plaques do |format|
       format.html
