@@ -1,0 +1,25 @@
+<% content_for :page_title, "Unphotographed plaques in " + @area.name + ", " + @area.country.name %>
+<div class="panel clearfix">
+  <% if current_user && current_user.is_admin? %>
+    <section class="admin_panel">
+      <%= link_to("Edit this area", edit_area_path(@area), {:class => :edit, :title => "Edit this area"})%>
+    </section>
+  <% end %>
+  <%= link_to(@area.country.name, @area.country) if @area.country %>
+  <h1><%= @area.name %> (Unphotographed)</h1>
+  <p>See <%= link_to "all plaques", area_path(@area) %>
+  <% if current_user && current_user.is_admin? %>
+    or <%= link_to "ungeolocated plaques", {:controller => :area_ungeolocated_plaques, :country_id => @area.country.alpha2, :area_id => @area.slug, :action => :show} %>
+  <% end %>
+  </p>
+  <% if @area.latitude %>
+    <div id="plaque-map" data-latitude="<%= @area.latitude %>" data-longitude="<%= @area.longitude %>" data-view="unphotographed"></div>
+  <% end %>
+  <%= will_paginate @plaques %>
+  <%= render @plaques %>
+  <%= will_paginate @plaques %>
+</div>
+
+<div class="panel clearfix">
+  <p class="alternate_formats">Data about <%= @area %> plaques as <%= alternate_link_to "XML", area_plaques_path(@area, :xml), :xml %> <%= alternate_link_to "JSON", area_plaques_path(@area, :json), :json %> <%= alternate_link_to "KML", area_plaques_path(@area, :kml), :kml %>  <%= alternate_link_to "GMAP", "http://maps.google.co.uk/maps?q=" + area_plaques_url(@area, :kml), :html %></p>
+</div>
