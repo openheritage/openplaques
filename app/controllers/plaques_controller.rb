@@ -22,8 +22,9 @@ class PlaquesController < ApplicationController
   def index
     conditions = {}
 
+    puts "**** hello ****"
+
     if params[:box]
-      # TODO: Should really do some validation here...
       coords = params[:box][1,params[:box].length-2].split("],[")
       top_left = coords[0].split(",")
       bottom_right = coords[1].split(",")
@@ -48,16 +49,25 @@ class PlaquesController < ApplicationController
       limit = 20
     end
 
+    select = "all"
+    select = "unphotographed" if params[:id] == "unphotographed"
+
+    puts "select " + select + " plaques"
+
     zoom = params[:zoom].to_i
     if zoom > 0
+      puts "asking for a tile of data"
       x = params[:x].to_i
       y = params[:y].to_i
-      @plaques = Plaque.tile(zoom, x, y)
+      @plaques = Plaque.tile(zoom, x, y, select)
     elsif params[:data] && params[:data] == "simple"
+      puts "asking for simple data"
       @plaques = Plaque.all(:conditions => conditions, :order => "created_at DESC", :limit => limit)
     elsif params[:data] && params[:data] == "basic"
+      puts "asking for basic data"
       @plaques = Plaque.all(:select => [:id, :latitude, :longitude, :inscription])
     else
+      puts "asking for all data"
       @plaques = Plaque.all(:conditions => conditions, :order => "created_at DESC", :limit => limit, :include => [:language, :organisations, :colour, [:location => [:area => :country]]])
     end
 

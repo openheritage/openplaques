@@ -5,18 +5,19 @@ class AreaPlaquesController < ApplicationController
 
   def show
     if (params[:id] && params[:id]=='unphotographed')
-      @plaques = @area.plaques.unphotographed
+      @plaques = @area.plaques.unphotographed.paginate(:page => params[:page], :per_page => 50)
     elsif (params[:id] && params[:id]=='current')
-      @plaques = @area.plaques.current
+      @plaques = @area.plaques.current.paginate(:page => params[:page], :per_page => 50)
     elsif (params[:id] && params[:id]=='ungeolocated')
-      @plaques = @area.plaques.ungeolocated
+      @plaques = @area.plaques.ungeolocated.paginate(:page => params[:page], :per_page => 50)
     else
-      @plaques = @area.plaques
+      @plaques = @area.plaques.paginate(:page => params[:page], :per_page => 10)
     end
     respond_with @plaques do |format|
-      format.html { render @plaques }
+      format.html
       format.kml { render "plaques/index" }
       format.osm { render "plaques/index" }
+      format.xml
       format.json { render :json => @plaques.as_json() }
     end
   end

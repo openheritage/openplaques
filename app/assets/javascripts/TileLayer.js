@@ -4,7 +4,6 @@ L.TileLayer.Ajax = L.TileLayer.extend({
     _cache: [],
     _addTile: function (tilePoint) {
         var tile = { datum: null, processed: false };
-        console.log("map requested " + this.getTileUrl(tilePoint));
         zoom = this._map._zoom;
         this._loadTile(zoom, tile, tilePoint);
     },
@@ -25,11 +24,12 @@ L.TileLayer.Ajax = L.TileLayer.extend({
     },
     // Load the requested tile via AJAX
     _loadTile: function (zoom, tile, tilePoint) {
-//        this._adjustTilePoint(tilePoint);
-
         if (zoom < 14) {
-            // we are zoomed out to a level where the map tile covers a large geographic area == a big sql query
-            // replace map tile call with equivalent calls of one zoom level higher == 4 quadrants x,y x+1,y x+1,y+1 x,y+1
+            // zoomed out to a level where the map tile covers a large geographic area
+            // this could lead to a long-running sql query
+            // splitting the map tile call into the equivalent of zooming in one level
+            // 4 quadrants -> top-left, top-right, bottom-right, bottom-left
+            // this will recurse until zoomed in sufficiently
             var tempX = tilePoint.x * 2;
             var tempY = tilePoint.y * 2;
             var newZoom = zoom + 1;
@@ -60,6 +60,8 @@ L.TileLayer.Ajax = L.TileLayer.extend({
         } 
         else if (zoom > 14)
         {
+            // zoomed in to too fine a detail
+            // we will hit the cache more often if all calls are at the same zoom number
             var tempX = Math.round(tilePoint.x / 2);
             var tempY = Math.round(tilePoint.y / 2);
             var newZoom = zoom - 1;
@@ -71,20 +73,18 @@ L.TileLayer.Ajax = L.TileLayer.extend({
         }
         else
         {
-//            originalZoom = this._map._zoom;
-//            json_url = this.getTileUrl(tilePoint).replace("plaques/"+originalZoom+"/","plaques/"+zoom+"/");
-            json_url = "/plaques/"+zoom+"/"+tilePoint.x+"/"+tilePoint.y+".json";
+            json_url = this.getTileUrl(tilePoint);
+            json_url = json_url.replace(/tiles\/([\d]*)/, 'tiles/14')
             if (null == this._cache[json_url])
             {
                 this._cache[json_url] = true;
-                console.log("call " + json_url);
                 var layer = this;
                 var req = new XMLHttpRequest();
                 this._requests.push(req);
                 req.onreadystatechange = this._xhrHandler(req, layer, tile);
                 req.open('GET', json_url, true);
                 req.send();
-            } // else { console.log(json_url + " found in cache"); }
+            }
         }
     },
     _reset: function () {

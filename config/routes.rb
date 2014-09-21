@@ -31,14 +31,15 @@ Openplaques::Application.routes.draw do
     resources :sponsorships
   end
   # map tiles are numbered using the convention at http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames
-  match 'plaques/:zoom/:x/:y' => 'plaques#index', :constraints => { :zoom => /\d{2}/, :x => /\d+/, :y => /\d+/ }
+  match 'plaques/tiles/:zoom/:x/:y' => 'plaques#index', :constraints => { :zoom => /\d{2}/, :x => /\d+/, :y => /\d+/ }
+  match 'plaques/unphotographed/tiles/:zoom/:x/:y' => 'plaques#index', :id => 'unphotographed', :constraints => { :zoom => /\d{2}/, :x => /\d+/, :y => /\d+/ }
 
   resources :places, :controller => :countries, :as => :countries do
     resources :plaques, :controller => :country_plaques, :only => :show
     resources :areas do
       resource :plaques, :controller => :area_plaques, :only => :show
-      resource :unphotographed, :controller => :unphotographed_plaques_by_area, :only => :show
-      resource :ungeolocated, :controller => :area_ungeolocated_plaques, :only => :show
+      resource :unphotographed, :controller => :area_plaques, :id => 'unphotographed', :only => :show
+#      resource :ungeolocated, :controller => :area_plaques, :id => 'ungeolocated', :only => :show
     end
   end
   resources :locations, :only => [:show, :edit, :update, :destroy]
@@ -51,6 +52,7 @@ Openplaques::Application.routes.draw do
 
   resources :organisations do
     resource :plaques, :controller => :organisation_plaques, :only => :show
+    match 'plaques/tiles/:zoom/:x/:y' => 'organisation_plaques#show', :constraints => { :zoom => /\d{2}/, :x => /\d+/, :y => /\d+/ }
   end
   resources :sponsorships
 

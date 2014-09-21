@@ -131,9 +131,14 @@ function initmap()
     else
     {
   		var data_path = plaque_map.attr("data-path");
+      var geojsonURL = "/plaques/tiles/{z}/{x}/{y}.json";
+      if (data_view == "unphotographed") {
+        geojsonURL = "/plaques/unphotographed/tiles/{z}/{x}/{y}.json";
+        data_view = "all"
+      };
   		if (data_view == "all")
       {
-        var geojsonURL = '/plaques/{z}/{x}/{y}.json';
+ //       console.log(geojsonURL);
         var geojsonTileLayer = new L.TileLayer.GeoJSON(geojsonURL, 
           {
             clipTiles: false

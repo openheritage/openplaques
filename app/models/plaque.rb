@@ -461,7 +461,7 @@ class Plaque < ActiveRecord::Base
     true
   end
 
-  def Plaque.tile(zoom, xtile, ytile)
+  def Plaque.tile(zoom, xtile, ytile, options)
     top_left = get_lat_lng_for_number(zoom, xtile, ytile)
     bottom_right = get_lat_lng_for_number(zoom, xtile + 1, ytile + 1)
     lat_min = bottom_right[:lat_deg].to_s
@@ -470,9 +470,16 @@ class Plaque < ActiveRecord::Base
     lon_max = top_left[:lng_deg].to_s
     latitude = lat_min..lat_max
     longitude = lon_max..lon_min
-    tile = "tile_number_" + zoom.to_s + "_" + xtile.to_s + "_" + ytile.to_s
+    tile = "/plaques/" 
+    tile+= options + "/" if options != 'all'
+    tile+= "tiles" + "/" + zoom.to_s + "/" + xtile.to_s + "/" + ytile.to_s
+    puts "Rails query " + tile
     Rails.cache.fetch(tile, :expires_in => 5.minutes) do
-      Plaque.where(:latitude => latitude, :longitude => longitude)
+      if options == "unphotographed"
+        Plaque.unphotographed.where(:latitude => latitude, :longitude => longitude)
+      else
+        Plaque.where(:latitude => latitude, :longitude => longitude)
+      end
     end
   end
 
