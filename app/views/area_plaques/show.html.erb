@@ -6,14 +6,17 @@
     </section>
   <% end %>
   <%= link_to(@area.country.name, @area.country) if @area.country %>
-  <h1><%= @area.name %> (Unphotographed)</h1>
+  <h1><%= @area.name %> (<%= @display %>)</h1>
   <p>See <%= link_to "all plaques", area_path(@area) %>
-  <% if current_user && current_user.is_admin? %>
-    or <%= link_to "ungeolocated plaques", {:controller => :area_ungeolocated_plaques, :country_id => @area.country.alpha2, :area_id => @area.slug, :action => :show} %>
+  <% if @display!='unphotographed' %>
+    or <%= link_to "unphotographed plaques", area_unphotographed_path(@area) %>
+  <% end %>  
+  <% if current_user && current_user.is_admin? && @display!='ungeolocated' %>
+    or <%= link_to "ungeolocated plaques", area_ungeolocated_path(@area) %>
   <% end %>
   </p>
-  <% if @area.latitude %>
-    <div id="plaque-map" data-latitude="<%= @area.latitude %>" data-longitude="<%= @area.longitude %>" data-view="unphotographed"></div>
+  <% if @area.latitude && @display!='ungeolocated' %>
+    <div id="plaque-map" data-latitude="<%= @area.latitude %>" data-longitude="<%= @area.longitude %>" data-view="<%= @display %>"></div>
   <% end %>
   <%= will_paginate @plaques %>
   <%= render @plaques %>

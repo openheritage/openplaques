@@ -9,7 +9,7 @@
   <h1><%= @area.name %></h1>
   <p>See <%= link_to "unphotographed plaques", area_unphotographed_path(@area) %>
   <% if current_user && current_user.is_admin? %>
-    or <%= link_to "ungeolocated plaques", {:controller => :area_ungeolocated_plaques, :country_id => @area.country.alpha2, :area_id => @area.slug, :action => :show} %>
+    or <%= link_to "ungeolocated plaques", area_ungeolocated_path(@area) %>
   <% end %>
   </p>
   <% if @area.latitude %>
