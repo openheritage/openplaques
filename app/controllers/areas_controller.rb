@@ -34,7 +34,7 @@ class AreasController < ApplicationController
       }
       format.osm { render "plaques/index" }
       format.xml
-      format.json { render :json => @area.as_json }
+      format.json { render :json => @area.as_json_new({}) }
     end
   end
 

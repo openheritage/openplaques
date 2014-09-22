@@ -33,9 +33,14 @@ class Area < ActiveRecord::Base
   include PlaquesHelper
   
   def as_json(options={})
-    {:label => name, :value => name, :id => id, :country_id => country.id, :country_name => country.name}
+    if options.size > 0
+      super(options)
+    else
+      {:label => name, :value => name, :id => id, :country_id => country.id, :country_name => country.name}
+    end
   end
 
+  # cannot use this yet as the plaque.new screen relies on a short format
   def as_json_new(options={})
     default_options = {
       :only => :name,
@@ -56,9 +61,11 @@ class Area < ActiveRecord::Base
       },
       properties: 
         if options.size > 0
-          super(options)
+#          super(options)
+          as_json(options)
         else
-          super(default_options)
+#          super(default_options)
+          as_json(default_options)
         end
     }
   end
