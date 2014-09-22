@@ -46,11 +46,11 @@ class Area < ActiveRecord::Base
       :only => :name,
       :include => { 
         :country => {
-          :only => [:id, :name],
+          :only => [:name],
           :methods => :uri
         }
       },
-      :methods => [:id, :uri, :plaques_uri]
+      :methods => [:uri, :plaques_uri]
     }
 
     {
