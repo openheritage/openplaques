@@ -6,15 +6,31 @@ class AreaPlaquesController < ApplicationController
   def show
     @display = 'all'
     if (params[:id] && params[:id]=='unphotographed')
-      @plaques = @area.plaques.unphotographed.paginate(:page => params[:page], :per_page => 50)
+      if request.format == 'json' or request.format == 'xml'
+        @plaques = @area.plaques.unphotographed
+      else
+        @plaques = @area.plaques.unphotographed.paginate(:page => params[:page], :per_page => 50)
+      end
       @display = 'unphotographed'
     elsif (params[:id] && params[:id]=='current')
-      @plaques = @area.plaques.current.paginate(:page => params[:page], :per_page => 50)
+      if request.format == 'json' or request.format == 'xml'
+        @plaques = @area.plaques.current
+      else
+        @plaques = @area.plaques.current.paginate(:page => params[:page], :per_page => 50)
+      end
     elsif (params[:id] && params[:id]=='ungeolocated')
-      @plaques = @area.plaques.ungeolocated.paginate(:page => params[:page], :per_page => 50)
+      if request.format == 'json' or request.format == 'xml'
+        @plaques = @area.plaques.ungeolocated
+      else
+        @plaques = @area.plaques.ungeolocated.paginate(:page => params[:page], :per_page => 50)
+      end
       @display = 'ungeolocated'
     else
-      @plaques = @area.plaques.paginate(:page => params[:page], :per_page => 50)
+      if request.format == 'json' or request.format == 'xml'
+        @plaques = @area.plaques
+      else
+        @plaques = @area.plaques.paginate(:page => params[:page], :per_page => 50)
+      end
     end
     respond_with @plaques do |format|
       format.html
