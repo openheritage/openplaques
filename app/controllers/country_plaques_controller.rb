@@ -36,7 +36,7 @@ class CountryPlaquesController < ApplicationController
       format.html
       format.kml { render "plaques/index" }
       format.osm { render "plaques/index" }
-      format.xml
+      format.xml { render "plaques/index" }
       format.json { render :json => @plaques.as_json() }
     end
   end
