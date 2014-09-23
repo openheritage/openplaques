@@ -10,7 +10,7 @@ class CountriesController < ApplicationController
     respond_to do |format|
       format.html
       format.xml
-      format.json { render :json => @countries }
+      format.json { render :json => @countries.as_json }
     end
   end
 
@@ -38,7 +38,7 @@ class CountriesController < ApplicationController
     respond_to do |format|
       format.html
       format.xml
-      format.json { render :json => @country }
+      format.json { render :json => @country.as_json }
       format.kml { render "plaques/index" }
       format.osm { render "plaques/index" }
       format.csv { render "plaques/index" }

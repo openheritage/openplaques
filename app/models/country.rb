@@ -21,12 +21,29 @@ class Country < ActiveRecord::Base
   has_many :locations, :through => :areas
   has_many :plaques, :through => :locations
 
+  @@latitude = nil
+  @@longitude = nil
+
+  include PlaquesHelper
+
+  def find_centre
+    if !geolocated?
+      @mean = find_mean(self.areas)
+      @@latitude = @mean.latitude
+      @@longitude = @mean.longitude
+    end
+  end
+
+  def geolocated?
+    return !(@@latitude == nil || @@longitude == nil || @@latitude == 51.475 && @@longitude == 0)
+  end
+
   def latitude
-    52
+    @@latitude
   end
 
   def longitude
-    0
+    @@longitude
   end
 
   def zoom
@@ -47,11 +64,25 @@ class Country < ActiveRecord::Base
   end
 
   def as_json(options={})
-    super(options.merge(
+    find_centre
+    default_options = {
       :only => [:name, :uri, :dbpedia_uri],
       :include => { :areas => {:only => [:name], :methods => :uri}},
       :methods => [:uri]
-    ))
+    }
+    {
+      type: 'Feature',
+      geometry: {
+        type: 'Point',
+        coordinates: [@@longitude, @@latitude]
+      },
+      properties: 
+        if options.size > 0
+          super(options)
+        else
+          super(default_options)
+        end
+    }
   end
 
 end
