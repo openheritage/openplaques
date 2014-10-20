@@ -148,6 +148,7 @@ class PlaquesController < ApplicationController
 
     # early intervention to reject spam messages
     raise "ERROR" if params[:plaque][:inscription].include? "http"
+    raise "ERROR" if params[:plaque][:inscription].include? "href"
 
     country = Country.find(params[:plaque][:country].blank? ? 1 : params[:plaque][:country])
     if params[:area_id] && !params[:area_id].blank?
