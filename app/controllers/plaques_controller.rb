@@ -146,6 +146,9 @@ class PlaquesController < ApplicationController
       @plaque.user = current_user
     end
 
+    # early intervention to reject spam messages
+    raise "ERROR" if params[:plaque][:inscription].include? "http"
+
     country = Country.find(params[:plaque][:country].blank? ? 1 : params[:plaque][:country])
     if params[:area_id] && !params[:area_id].blank?
       area = Area.find(params[:area_id])
