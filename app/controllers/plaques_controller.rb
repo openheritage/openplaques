@@ -1,6 +1,6 @@
 class PlaquesController < ApplicationController
 
-  before_filter :authenticate_user!, :only => [:edit, :new]
+  before_filter :authenticate_user!, :only => :edit
   before_filter :authenticate_admin!, :only => :destroy
 
   before_filter :find_plaque, :only => [:show, :parse_inscription, :unparse_inscription, :flickr_search, :flickr_search_all, :update, :destroy, :edit]
@@ -149,7 +149,7 @@ class PlaquesController < ApplicationController
     # early intervention to reject spam messages
     raise "ERROR" if params[:plaque][:inscription].include? "http"
     raise "ERROR" if params[:plaque][:inscription].include? "href"
-#    raise "ERROR" if params[:plaque][:area] == "New York" # && params[:plaque][:country].blank?
+    redirect_to(plaques_url)  if params[:area] == "New York" && params[:plaque][:country] != "13"
 
     country = Country.find(params[:plaque][:country].blank? ? 1 : params[:plaque][:country])
     if params[:area_id] && !params[:area_id].blank?
